@@ -1,0 +1,12 @@
+{
+  "webPath": "../../web",
+  "sanityApiPath": "app/utils/sanity-api",
+  "generatedTypesFile": "sanity.types.ts",
+  "extendedTypesFile": "sanity-expanded.types.ts",
+  "fieldTypeOverrides": {
+    "Project": {
+      "contributions": "Array<ContributionExpanded> | null",
+      "media": "Array<NonNullable<Project['media']>[number] extends infer M ? M extends { _type: 'video' } ? Omit<M, 'video'> & { video?: { asset?: { playbackId?: string; data?: { aspect_ratio?: string; duration?: number } } | null } | null } : M : never> | null"
+    }
+  }
+}
