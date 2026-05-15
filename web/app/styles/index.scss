@@ -1,0 +1,14 @@
+// Global SCSS entry point
+// Add component and template styles here
+@use "variables";
+@use "typography";
+@use "layout";
+@use "components/header";
+@use "components/nav";
+@use "components/footer";
+@use "design-system/all";
+@use "design-system/btn";
+@use "design-system/cards";
+@use "components/ui/embla-slider";
+
+@use "templates/exhibition";

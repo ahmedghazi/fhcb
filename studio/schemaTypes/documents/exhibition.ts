@@ -3,6 +3,7 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import {LuGalleryHorizontal} from 'react-icons/lu'
 import slug from '../fields/slug'
 import modulesList from '../objects/modules/modulesList'
+import imageFields from '../misc/imageFields'
 
 export default defineType({
   type: 'document',
@@ -49,6 +50,8 @@ export default defineType({
       name: 'imageCover',
       type: 'image',
       title: 'Image clef',
+      fields: imageFields,
+
       description: 'Visible sur les pages de liste (largeur 1400px)',
       group: 'editorial',
     }),
@@ -93,12 +96,7 @@ export default defineType({
       of: [
         {
           type: 'reference',
-          to: [
-            {type: 'pageModulaire'},
-            {type: 'event'},
-            {type: 'exhibition'},
-            {type: 'product'},
-          ],
+          to: [{type: 'pageModulaire'}, {type: 'event'}, {type: 'exhibition'}, {type: 'product'}],
         },
       ],
       group: 'editorial',
@@ -116,7 +114,7 @@ export default defineType({
       // console.log(images)
       return {
         title: title,
-        subtitle: subtitle,
+        subtitle: `/exhibition/${subtitle}`,
         media: image,
       }
     },

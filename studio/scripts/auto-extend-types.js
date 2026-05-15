@@ -54,14 +54,14 @@ function findProjectStructure() {
 
   for (const structure of possibleStructures) {
     const webPath = path.resolve(currentDir, structure.web)
-    const sanityTypesPath = path.join(webPath, 'app/utils/sanity-api/sanity.types.ts')
+    const sanityTypesPath = path.join(webPath, 'app/sanity-api/types/sanity.types.ts')
 
     if (fs.existsSync(sanityTypesPath)) {
       console.log(`✅ Found structure: web="${structure.web}"`)
       return {
         webRoot: webPath,
         sanityTypesPath,
-        extendedTypesPath: path.join(webPath, 'app/utils/sanity-api/sanity-extend.types.ts'),
+        extendedTypesPath: path.join(webPath, 'app/sanity-api/types/sanity-extend.types.ts'),
         structure,
         fieldTypeOverrides: {},
         fromConfig: false,
@@ -200,6 +200,38 @@ function containsDirectReference(fieldText, refTypeName) {
 }
 
 /**
+ * For a document type block, return names of top-level fields that are inline image
+ * objects (i.e. contain `asset?: SanityImageAssetReference` at their first level).
+ * These need `asset` expanded to `SanityImageAsset`.
+ */
+function findImageFields(typeBlock) {
+  const fields = extractTopLevelFields(typeBlock)
+  const result = []
+
+  for (const field of fields) {
+    // Strip nested braces to check the first-level content only
+    let firstLevel = ''
+    let depth = 0
+    let inField = false
+    for (const ch of field) {
+      if (ch === '{') { depth++; inField = true; continue }
+      else if (ch === '}') { depth--; continue }
+      if (depth === 1) firstLevel += ch
+    }
+    if (!inField) continue
+    if (!firstLevel.includes('asset?: SanityImageAssetReference')) continue
+
+    const nameMatch = field.match(/^\s*(\w+)\??:/)
+    if (!nameMatch) continue
+    const fieldName = nameMatch[1]
+    if (fieldName.startsWith('_')) continue
+    result.push(fieldName)
+  }
+
+  return result
+}
+
+/**
  * For a document type block, return all fields that contain a direct reference type.
  * Each result: { fieldName, targetTypeName, isArray }
  */
@@ -265,15 +297,12 @@ function topoSort(expandedMap) {
  * - Extra fields from `fieldTypeOverrides[typeName]` are appended and
  *   their field names are added to the Omit list.
  */
-function generateExpandedType(typeName, refFields, expandedTypeNames, fieldTypeOverrides) {
+function generateExpandedType(typeName, refFields, imageFields, expandedTypeNames, fieldTypeOverrides) {
   const overrides = fieldTypeOverrides[typeName] || {}
   const overrideFieldNames = Object.keys(overrides)
 
-  // Omit both ref fields and overridden fields (deduplicated)
-  const omitSet = new Set([
-    ...refFields.map((f) => f.fieldName),
-    ...overrideFieldNames,
-  ])
+  // Omit ref fields, image fields, and overridden fields (deduplicated)
+  const omitSet = new Set([...refFields.map((f) => f.fieldName), ...imageFields, ...overrideFieldNames])
   const omitKeys = [...omitSet].map((k) => `'${k}'`).join(' | ')
 
   // Ref fields: use TargetTypeExpanded when available
@@ -285,12 +314,17 @@ function generateExpandedType(typeName, refFields, expandedTypeNames, fieldTypeO
     return `  ${f.fieldName}?: ${resolvedType} | null`
   })
 
+  // Image fields: expand asset from SanityImageAssetReference → SanityImageAsset
+  const imageFieldLines = imageFields.map((fieldName) =>
+    `  ${fieldName}?: (Omit<NonNullable<NonNullable<${typeName}>['${fieldName}']>, 'asset'> & { asset?: SanityImageAsset | null }) | null`
+  )
+
   // Override fields (project-specific, from typegen.config.json)
   const overrideLines = overrideFieldNames.map((fieldName) => {
     return `  ${fieldName}?: ${overrides[fieldName]}`
   })
 
-  const expandedFields = [...refFieldLines, ...overrideLines].join(';\n')
+  const expandedFields = [...refFieldLines, ...imageFieldLines, ...overrideLines].join(';\n')
 
   return (
     `export type ${typeName}Expanded = Omit<${typeName}, ${omitKeys}> & {\n` +
@@ -312,47 +346,53 @@ function generateExtendedTypes(content, meta) {
 
   const documentTypeNames = findDocumentTypeNames(content)
 
-  // Build map: typeName → refFields (only types that have reference fields)
+  // Build map: typeName → { refFields, imageFields }
   const expandedMap = new Map()
   for (const typeName of documentTypeNames) {
     const typeBlock = extractObjectTypeBlock(content, typeName)
     if (!typeBlock) continue
     const refFields = findReferenceFields(typeBlock, referenceTypes)
-    if (refFields.length > 0) {
-      expandedMap.set(typeName, refFields)
+    const imageFields = findImageFields(typeBlock)
+    if (refFields.length > 0 || imageFields.length > 0) {
+      expandedMap.set(typeName, {refFields, imageFields})
     }
   }
 
-  // Also include types referenced in fieldTypeOverrides that might not have ref fields
+  // Also include types referenced in fieldTypeOverrides that might not have ref/image fields
   for (const typeName of Object.keys(meta.fieldTypeOverrides)) {
     if (!expandedMap.has(typeName)) {
-      expandedMap.set(typeName, [])
+      expandedMap.set(typeName, {refFields: [], imageFields: []})
     }
   }
 
   if (expandedMap.size === 0) {
-    throw new Error('No document types with reference fields found. Nothing to generate.')
+    throw new Error('No document types with reference or image fields found. Nothing to generate.')
   }
 
   const expandedTypeNames = new Set(expandedMap.keys())
 
-  // Sort by dependency order
-  const sortedTypeNames = topoSort(expandedMap)
+  // Sort by dependency order (topoSort only needs refFields for ordering)
+  const refOnlyMap = new Map([...expandedMap].map(([k, v]) => [k, v.refFields]))
+  const sortedTypeNames = topoSort(refOnlyMap)
 
   // Collect needed imports
   const neededImports = new Set()
-  for (const [typeName, refFields] of expandedMap) {
+  let hasImageFields = false
+  for (const [typeName, {refFields, imageFields}] of expandedMap) {
     neededImports.add(typeName)
     for (const f of refFields) neededImports.add(f.targetTypeName)
+    if (imageFields.length > 0) hasImageFields = true
   }
+  if (hasImageFields) neededImports.add('SanityImageAsset')
 
   // Log
-  console.log('🔎 Scanning for reference fields...')
+  console.log('🔎 Scanning for reference and image fields...')
   for (const typeName of sortedTypeNames) {
-    const refFields = expandedMap.get(typeName)
+    const {refFields, imageFields} = expandedMap.get(typeName)
     const overrideFields = Object.keys(meta.fieldTypeOverrides[typeName] || {})
     const allFields = [
       ...refFields.map((f) => (f.isArray ? `${f.fieldName}[]` : f.fieldName)),
+      ...imageFields.map((f) => `${f} (image)`),
       ...overrideFields.map((f) => `${f} (override)`),
     ]
     console.log(`  ✓ ${typeName}Expanded  [${allFields.join(', ')}]`)
@@ -360,14 +400,16 @@ function generateExtendedTypes(content, meta) {
 
   // Generate type definitions
   const typeDefs = sortedTypeNames
-    .map((typeName) =>
-      generateExpandedType(
+    .map((typeName) => {
+      const {refFields, imageFields} = expandedMap.get(typeName)
+      return generateExpandedType(
         typeName,
-        expandedMap.get(typeName),
+        refFields,
+        imageFields,
         expandedTypeNames,
         meta.fieldTypeOverrides,
-      ),
-    )
+      )
+    })
     .join('\n\n')
 
   const importLine = `import type {\n  ${[...neededImports].join(',\n  ')}\n} from './sanity.types'`
@@ -419,7 +461,7 @@ try {
   console.error('❌ Error generating extended types:', error.message)
   console.log('\n💡 Troubleshooting:')
   console.log('   1. Make sure you have run: sanity typegen generate')
-  console.log('   2. Check that your web folder contains: app/utils/sanity-api/sanity.types.ts')
+  console.log('   2. Check that your web folder contains: app/sanity-api/types/sanity.types.ts')
   console.log('   3. Create a typegen.config.json file in the scripts folder for custom paths')
   console.log('   4. Verify your project structure matches one of the supported patterns:')
   console.log('      - studio/scripts -> web (../../web)')

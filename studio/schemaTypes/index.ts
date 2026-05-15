@@ -2,7 +2,7 @@ import pageModulaire from './documents/pageModulaire'
 import artist from './documents/artist'
 import event from './documents/event'
 import exposition from './documents/exhibition'
-import library from './documents/library'
+import library from './singletons/library'
 import product from './documents/product'
 import tag from './documents/tag'
 import settings from './singletons/settings'
@@ -27,7 +27,7 @@ import video from './objects/video'
 import imagesUI from './objects/modules/imagesUI'
 import textUI from './objects/modules/textUI'
 import videoUI from './objects/modules/videoUI'
-import imageTextUI from './objects/modules/imageTextUI'
+import textImageUI from './objects/modules/textImageUI'
 import textSidebarUI from './objects/modules/textSidebarUI'
 import listItem from './objects/modules/listItem'
 import listUI from './objects/modules/listUI'
@@ -38,6 +38,9 @@ import programmeUI from './objects/modules/programmeUI'
 
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
+import imageInGrid from './objects/imageInGrid'
+import blockquote from './objects/blockquote'
+import embed from './objects/embed'
 
 export const schemaTypes = [
   settings,
@@ -55,11 +58,14 @@ export const schemaTypes = [
 
   seoSchema,
   blockContent,
+  blockquote,
+  embed,
   linkExternal,
   linkInternal,
   linkIcon,
   contactLinkItem,
   video,
+  imageInGrid,
   cta,
   keyVal,
   messageContextuel,
@@ -68,7 +74,7 @@ export const schemaTypes = [
   imagesUI,
   textUI,
   videoUI,
-  imageTextUI,
+  textImageUI,
   textSidebarUI,
   listItem,
   listUI,

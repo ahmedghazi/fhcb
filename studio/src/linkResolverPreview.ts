@@ -1,6 +1,4 @@
 import {defineLocations, PresentationPluginOptions} from 'sanity/presentation'
-import exposition from '../schemaTypes/documents/exhibition'
-// import pageModulaire from '../schemaTypes/documents/pageModulaire'
 
 export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
   locations: {
@@ -26,7 +24,7 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
     artist: defineLocations({
       // Select one or more fields
       select: {
-        title: 'title.fr',
+        title: 'name',
         slug: 'slug.current',
       },
       // Those fields are available in the resolve callback function
@@ -71,7 +69,7 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         ],
       }),
     }),
-    produit: defineLocations({
+    product: defineLocations({
       // Select one or more fields
       select: {
         title: 'title.fr',
@@ -82,7 +80,7 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         locations: [
           {
             title: doc?.title || 'Untitled',
-            href: `/produit/${doc?.slug}`,
+            href: `/product/${doc?.slug}`,
           },
         ],
       }),

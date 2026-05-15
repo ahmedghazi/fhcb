@@ -8,6 +8,7 @@ import modulesList from '../objects/modules/modulesList'
 import {StackIcon} from '@sanity/icons'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
+import imageFields from '../misc/imageFields'
 
 export default defineType({
   name: 'pageModulaire',
@@ -68,6 +69,7 @@ export default defineType({
       type: 'image',
       title: 'Image de couverture',
       options: {hotspot: true},
+      fields: imageFields,
       group: 'editorial',
     }),
 
@@ -95,12 +97,7 @@ export default defineType({
       of: [
         {
           type: 'reference',
-          to: [
-            {type: 'pageModulaire'},
-            {type: 'event'},
-            {type: 'exhibition'},
-            {type: 'product'},
-          ],
+          to: [{type: 'pageModulaire'}, {type: 'event'}, {type: 'exhibition'}, {type: 'product'}],
         },
       ],
       group: 'editorial',

@@ -1,0 +1,29 @@
+button.btn,
+a.btn {
+  border-radius: var(--radius-sm);
+  padding: 0em 1em;
+  height: 2.31em;
+  line-height: 2.31em;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  background-color: var(--color-white);
+  display: block;
+  text-align: center;
+  width: 100%;
+  &--secondary {
+    background-color: var(--color-white-0_5);
+  }
+}
+.btn-library,
+.btn-tickets {
+  background-color: var(--color-white);
+  color: var(--color-secondary);
+  font-size: var(--text-lg);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  padding: 0.3em 0.6em;
+  text-transform: uppercase;
+}
+.btn-tickets {
+  border-radius: 2.77em; /* = 50px (50 / 18 = 2.77) */
+}

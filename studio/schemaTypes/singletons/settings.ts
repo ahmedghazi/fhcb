@@ -1,5 +1,6 @@
 import {CogIcon} from '@sanity/icons'
 import {defineType, defineField} from 'sanity'
+import linkInternalTypes from '../misc/linkInternalTypes'
 
 export default defineType({
   name: 'settings',
@@ -8,21 +9,21 @@ export default defineType({
   icon: CogIcon,
   groups: [
     {
-      default: true,
-      name: 'bandeau',
-      title: 'Bandeau contextuel',
-    },
-    {
       name: 'seo',
       title: 'Default SEO',
     },
     {
+      default: true,
       name: 'header',
       title: 'Header',
     },
     {
       name: 'footer',
       title: 'Footer',
+    },
+    {
+      name: 'bandeau',
+      title: 'Bandeau contextuel',
     },
     {
       name: 'misc',
@@ -35,67 +36,12 @@ export default defineType({
   ],
   fields: [
     defineField({
-      name: 'bandeauContextuel',
-      title: 'Bandeau contextuel',
-      type: 'object',
-      group: 'bandeau',
-      fields: [
-        defineField({
-          name: 'display',
-          title: 'Afficher',
-          type: 'boolean',
-        }),
-        defineField({
-          name: 'text',
-          title: 'Texte',
-          type: 'localeString',
-        }),
-        defineField({
-          name: 'link',
-          title: 'Lien interne',
-          type: 'linkInternal',
-        }),
-        defineField({
-          name: 'linkExternal',
-          title: 'Lien externe',
-          type: 'linkExternal',
-        }),
-        defineField({
-          name: 'dateExpiration',
-          title: "Date d'expiration",
-          type: 'date',
-        }),
-      ],
-    }),
-
-    // defineField({
-    //   name: 'seo',
-    //   title: 'Defauly SEO',
-    //   type: 'seo',
-    //   group: 'seo',
-    // }),
-    defineField({
       name: 'siteName',
       title: 'Nom du site',
       type: 'string',
       group: 'header',
     }),
-    // defineField({
-    //   name: 'description',
-    //   title: 'Description',
-    //   type: 'localeBlockContent',
-    //   description: "Visible en page d'accueil header",
-    //   group: 'header',
-    // }),
-    // defineField({
-    //   name: 'logo',
-    //   title: 'Logo',
-    //   type: 'image',
-    //   options: {
-    //     accept: 'image/svg+xml',
-    //   },
-    //   group: 'header',
-    // }),
+
     defineField({
       name: 'navPrimary',
       title: 'Naviguation Primary',
@@ -119,6 +65,25 @@ export default defineType({
           type: 'linkIcon',
         },
       ],
+      group: 'header',
+    }),
+    defineField({
+      name: 'btnTickets',
+      title: 'Bouton billeterie',
+      type: 'linkExternal',
+      group: 'header',
+    }),
+    defineField({
+      name: 'btnLibrary',
+      title: 'Bouton librairie',
+      type: 'linkInternal',
+      group: 'header',
+    }),
+    defineField({
+      name: 'mostSearched',
+      title: 'Résultats de recherche mis en avant',
+      type: 'array',
+      of: [{type: 'reference', to: linkInternalTypes}],
       group: 'header',
     }),
     defineField({
@@ -165,6 +130,40 @@ export default defineType({
       title: 'Message newsletter',
       type: 'localeText',
       group: 'footer',
+    }),
+
+    defineField({
+      name: 'bandeauContextuel',
+      title: 'Bandeau contextuel',
+      type: 'object',
+      group: 'bandeau',
+      fields: [
+        defineField({
+          name: 'display',
+          title: 'Afficher',
+          type: 'boolean',
+        }),
+        defineField({
+          name: 'text',
+          title: 'Texte',
+          type: 'localeString',
+        }),
+        defineField({
+          name: 'link',
+          title: 'Lien interne',
+          type: 'linkInternal',
+        }),
+        defineField({
+          name: 'linkExternal',
+          title: 'Lien externe',
+          type: 'linkExternal',
+        }),
+        defineField({
+          name: 'dateExpiration',
+          title: "Date d'expiration",
+          type: 'date',
+        }),
+      ],
     }),
 
     defineField({

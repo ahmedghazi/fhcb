@@ -1,0 +1,47 @@
+.nav-modal {
+  position: fixed;
+  inset: 0;
+  padding: var(--spacing-lg);
+  padding-top: var(--header-h);
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  z-index: 0;
+  height: 100dvh;
+  overflow-y: auto;
+  .inner {
+    height: 100%;
+    position: relative;
+  }
+  .imageCover {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  aside {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}
+nav {
+  flex: 2;
+  padding: 0 var(--spacing-lg);
+  ul.menu {
+    display: flex;
+    justify-content: space-between;
+    li.has-submenu {
+      & > a {
+        pointer-events: none;
+      }
+      &:hover {
+        .sub-menu {
+          display: block;
+        }
+      }
+    }
+    .sub-menu {
+      position: absolute;
+      display: none;
+    }
+  }
+}

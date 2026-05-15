@@ -7,54 +7,26 @@ export default defineField({
   type: 'object',
   icon: BiImages,
   initialValue: {
-    colSize: 2,
+    gridSize: 4,
   },
   fields: [
     defineField({
       name: 'title',
       type: 'string',
     }),
-    defineField({
-      name: 'colSize',
-      type: 'number',
-      description: 'Number of columns (1-2) on a 2 columns grid',
-    }),
+
     defineField({
       name: 'gridSize',
       type: 'number',
-      initialValue: 4,
+      title: 'Taille de la grille',
+      description: "Nombre d'éléments par ligne",
     }),
     defineField({
       name: 'items',
       type: 'array',
       of: [
         {
-          type: 'image',
-          preview: {
-            select: {
-              title: 'caption',
-              subtitle: 'colSize',
-            },
-            prepare({title, subtitle}) {
-              return {
-                title: title || '',
-                subtitle: subtitle ? `${subtitle} colonnes` : '',
-              }
-            },
-          },
-          fields: [
-            defineField({
-              name: 'caption',
-              title: 'Caption',
-              type: 'string',
-            }),
-            defineField({
-              name: 'colSize',
-              title: 'Colunn size',
-              type: 'number',
-              description: 'in a 6 column grid (ex: 1, 2, 3)',
-            }),
-          ],
+          type: 'imageInGrid',
         },
       ],
     }),
@@ -62,11 +34,12 @@ export default defineField({
 
   preview: {
     select: {
-      image: 'items.0.asset',
+      image: 'items.0',
       title: 'title',
     },
     prepare(selection) {
       const {title, image} = selection
+      console.log({title, image})
       return {
         title: title ? title : 'Images UI',
         subtitle: 'Image(s) UI',

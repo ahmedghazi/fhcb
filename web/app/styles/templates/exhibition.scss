@@ -1,0 +1,11 @@
+.template--exhibition {
+  .hero-exhibition {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    .hero__header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}

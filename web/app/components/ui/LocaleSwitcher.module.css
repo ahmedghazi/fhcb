@@ -1,0 +1,9 @@
+.ul {
+  display: flex;
+  gap: 0.4rem;
+}
+.button {
+  &:global(.is-active) {
+    text-decoration: underline;
+  }
+}

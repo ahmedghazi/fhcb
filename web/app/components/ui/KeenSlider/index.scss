@@ -1,0 +1,19 @@
+.keen-slider {
+  &__controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    svg {
+      cursor: pointer;
+      &:hover {
+        circle {
+          stroke: var(--color-secondary);
+        }
+        path {
+          fill: var(--color-secondary);
+        }
+      }
+    }
+  }
+}

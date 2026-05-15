@@ -1,0 +1,10 @@
+@use "../variables";
+
+footer {
+  padding: var(--spacing-md);
+  background-color: var(--color-primary);
+  color: var(--color);
+
+  @media all and (max-width: variables.$md) {
+  }
+}

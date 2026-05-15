@@ -1,5 +1,6 @@
 // import {FiImage} from 'react-icons/fi'
 import {defineField} from 'sanity'
+import {baseLanguage} from '../locale/supportedLanguages'
 
 export default defineField({
   name: 'keyVal',
@@ -9,12 +10,12 @@ export default defineField({
     defineField({
       name: 'key',
       type: 'localeString',
-      title: 'Key',
+      title: 'Titre',
     }),
     defineField({
       name: 'val',
-      type: 'localeString',
-      title: 'Value',
+      type: 'localeText',
+      title: 'Text',
     }),
     defineField({
       name: 'text',
@@ -23,4 +24,10 @@ export default defineField({
       hidden: true,
     }),
   ],
+  preview: {
+    select: {
+      title: `key.${baseLanguage}`,
+      subtitle: `val.${baseLanguage}`,
+    },
+  },
 })

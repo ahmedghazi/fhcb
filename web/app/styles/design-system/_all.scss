@@ -1,0 +1,17 @@
+.page-header {
+  text-align: center;
+  padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+}
+
+figure {
+  figcaption {
+    text-align: right;
+    padding: 0.4em 0;
+    .caption {
+      font-style: italic;
+    }
+    .c-credits {
+      opacity: 0.5;
+    }
+  }
+}

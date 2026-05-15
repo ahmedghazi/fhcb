@@ -3,6 +3,7 @@ import modulesList from '../objects/modules/modulesList'
 import {baseLanguage} from '../locale/supportedLanguages'
 import {IoPersonOutline} from 'react-icons/io5'
 import slug from '../fields/slug'
+import imageFields from '../misc/imageFields'
 
 export default defineType({
   type: 'document',
@@ -51,6 +52,8 @@ export default defineType({
       type: 'image',
       title: 'Image de couverture',
       options: {hotspot: true},
+      fields: imageFields,
+
       group: 'editorial',
     }),
 

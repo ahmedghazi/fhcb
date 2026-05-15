@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
 import {FaShopify} from 'react-icons/fa'
 import slug from '../fields/slug'
+import imageFields from '../misc/imageFields'
 
 export default defineType({
   type: 'document',
@@ -37,6 +38,8 @@ export default defineType({
       type: 'image',
       title: 'Image clef',
       description: 'Visible sur les pages de liste (largeur 1400px)',
+      fields: imageFields,
+
       group: 'editorial',
     }),
 

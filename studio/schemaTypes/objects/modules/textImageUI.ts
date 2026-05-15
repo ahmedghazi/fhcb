@@ -1,20 +1,25 @@
 import {defineField} from 'sanity'
 import {baseLanguage} from '../../locale/supportedLanguages'
 import {MdOutlineImage} from 'react-icons/md'
+import imageFields from '../../misc/imageFields'
 
 export default defineField({
-  name: 'imageTextUI',
-  title: 'Image + Texte UI',
+  name: 'textImageUI',
+  title: 'Texte + Image UI',
   type: 'object',
   icon: MdOutlineImage,
+  initialValue: {
+    direction: 'left',
+  },
   fields: [
     defineField({
       name: 'image',
       type: 'image',
       title: 'Image',
       options: {hotspot: true},
+      fields: imageFields,
     }),
-    defineField({name: 'text', type: 'localeString', title: 'Texte'}),
+    defineField({name: 'text', type: 'localeBlockContent', title: 'Texte'}),
     defineField({
       name: 'direction',
       type: 'string',
@@ -35,9 +40,11 @@ export default defineField({
     },
     prepare(selection) {
       const {text, image} = selection
+      // ici afficher la première phrase du blockContent
+      const firstParagraph = text?.[0]?.children?.[0]?.text || ''
       return {
-        title: text || 'Image + Texte UI',
-        subtitle: 'Image + Texte UI',
+        title: firstParagraph || 'Texte + Image UI',
+        subtitle: 'Texte + Image UI',
         media: image,
       }
     },

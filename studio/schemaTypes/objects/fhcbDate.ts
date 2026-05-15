@@ -24,6 +24,12 @@ export default defineField({
         dateFormat: 'DD/MM/YYYY',
       },
     }),
+    defineField({
+      type: 'string',
+      name: 'heure',
+      title: 'Heure',
+      description: 'Ex: 19h, 14h30 — affiché uniquement si "Au" est vide',
+    }),
   ],
   preview: {
     select: {

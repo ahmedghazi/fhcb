@@ -1,0 +1,131 @@
+.card {
+  border-radius: var(--radius);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-xs);
+  gap: var(--spacing-xs);
+  line-height: 1;
+  &--l1a {
+    .card__figure {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  &--l1b {
+    figure {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+  }
+  &--l1c {
+    &:hover .card__footer .btns {
+      display: flex;
+    }
+    .card__footer .btns {
+      display: none;
+    }
+  }
+  &--l2 {
+    .card__figure {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  &--l3 {
+    .card__header__figure {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: var(--spacing-xs);
+    }
+
+    .card__header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card__figure {
+      img {
+        width: 100%;
+      }
+    }
+  }
+  &--l4 {
+    // display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    .card__header__footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--spacing-xs);
+    }
+    .card__header__footer {
+      // flex: 2;
+    }
+    .card__figure {
+      img {
+        // min-height: 34rem;
+      }
+    }
+  }
+  &--product {
+    background-color: var(--color-beige);
+  }
+  &--pret,
+  &--exhibition {
+    background-color: var(--color-bleu);
+  }
+  &--visites {
+    background-color: var(--color-jaune);
+  }
+  &--event {
+    background-color: var(--color-vert);
+  }
+  &--artist {
+    background-color: var(--color-rose-50);
+  }
+  &--is-landscape {
+    .card__header {
+      grid-column: span 5;
+    }
+    .card__figure {
+      grid-column: span 7;
+    }
+  }
+  &--is-portrait {
+    .card__header {
+      grid-column: span 7;
+    }
+    .card__figure {
+      grid-column: span 5;
+    }
+  }
+  h2 {
+    line-height: 1;
+  }
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    .card__tag {
+      text-transform: uppercase;
+      text-decoration: underline;
+    }
+  }
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    .btns {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+  }
+}

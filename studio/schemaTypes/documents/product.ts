@@ -3,6 +3,7 @@ import modulesList from '../objects/modules/modulesList'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {BiLogoShopify} from 'react-icons/bi'
+import imageFields from '../misc/imageFields'
 
 export default defineType({
   type: 'document',
@@ -14,6 +15,14 @@ export default defineType({
       default: true,
       name: 'editorial',
       title: 'Editorial',
+    },
+    {
+      name: 'metas',
+      title: 'metas',
+    },
+    {
+      name: 'shop',
+      title: 'shop',
     },
     {
       name: 'seo',
@@ -35,6 +44,20 @@ export default defineType({
     slug,
 
     defineField({
+      name: 'prix',
+      type: 'string',
+      title: 'Prix',
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'qty',
+      type: 'number',
+      title: 'Quantité',
+      group: 'shop',
+    }),
+
+    defineField({
       name: 'artist',
       title: 'Artiste',
       type: 'reference',
@@ -53,35 +76,32 @@ export default defineType({
       name: 'editeur',
       type: 'string',
       title: 'Éditeur',
-      group: 'editorial',
+      group: 'metas',
     }),
 
     defineField({
-      name: 'langue',
-      type: 'string',
-      title: 'Langue',
-      group: 'editorial',
+      name: 'languages',
+      type: 'array',
+      of: [{type: 'string'}],
+      title: 'Langues',
+      group: 'metas',
     }),
 
     defineField({
-      name: 'prix',
-      type: 'string',
-      title: 'Prix',
-      group: 'editorial',
+      name: 'publicationDate',
+      type: 'date',
+      title: 'Date de parution',
+      group: 'metas',
     }),
 
     defineField({
-      name: 'qty',
-      type: 'number',
-      title: 'Quantité',
-      group: 'editorial',
-    }),
-
-    defineField({
-      name: 'year',
-      type: 'string',
-      title: 'Année',
-      group: 'editorial',
+      name: 'metas',
+      title: 'fiche technique',
+      description: 'liste titre + text',
+      type: 'array',
+      of: [{type: 'keyVal'}],
+      // description: 'fiche technique',
+      group: 'metas',
     }),
 
     defineField({
@@ -103,6 +123,8 @@ export default defineType({
       title: 'Image clef',
       description: 'Visible on liste pages, project cards (largeur 1400px)',
       options: {hotspot: true},
+      fields: imageFields,
+
       group: 'editorial',
     }),
 
@@ -118,15 +140,6 @@ export default defineType({
       name: 'chapo',
       title: 'Chapo',
       type: 'localeBlockContent',
-      group: 'editorial',
-    }),
-
-    defineField({
-      name: 'metas',
-      title: 'fiche technique',
-      type: 'array',
-      of: [{type: 'keyVal'}],
-      // description: 'fiche technique',
       group: 'editorial',
     }),
 
@@ -153,12 +166,7 @@ export default defineType({
       of: [
         {
           type: 'reference',
-          to: [
-            {type: 'pageModulaire'},
-            {type: 'event'},
-            {type: 'exhibition'},
-            {type: 'product'},
-          ],
+          to: [{type: 'pageModulaire'}, {type: 'event'}, {type: 'exhibition'}, {type: 'product'}],
         },
       ],
       group: 'editorial',
@@ -184,7 +192,7 @@ export default defineType({
       // console.log(images)
       return {
         title: title,
-        subtitle: `/project/${slug.current}`,
+        subtitle: `/product/${slug.current}`,
         media: image,
       }
     },

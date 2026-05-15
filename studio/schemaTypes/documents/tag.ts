@@ -20,6 +20,7 @@ export default defineType({
       name: 'title',
       title: 'Titre',
       type: 'localeString',
+      group: 'editorial',
     }),
     slug,
   ],

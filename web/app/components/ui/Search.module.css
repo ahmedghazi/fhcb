@@ -1,0 +1,28 @@
+.search {
+  position: relative;
+  z-index: 0;
+}
+.toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transform: translateY(0.2em);
+  svg {
+    width: 24px;
+    height: 20px;
+    path {
+      fill: none;
+    }
+  }
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-secondary);
+  padding: var(--spacing-lg);
+  padding-top: var(--header-h);
+  color: white;
+  z-index: 0;
+}

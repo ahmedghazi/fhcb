@@ -1,10 +1,11 @@
 // import supportedLanguages from "../locale/supportedLanguages";
 import {defineField} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
-import linkIntternalTypes from '../misc/linkIntternalTypes'
+import linkInternalTypes from '../misc/linkInternalTypes'
+// import linkInternalTypes from '../misc/linkInternalTypes'
 
 export default defineField({
-  title: 'Link Internal',
+  title: 'Lien interne',
   name: 'linkInternal',
   type: 'object',
   preview: {
@@ -27,8 +28,31 @@ export default defineField({
     defineField({
       name: 'link',
       type: 'reference',
+      title: 'Lien',
       weak: true,
-      to: linkIntternalTypes,
+      to: linkInternalTypes,
+    }),
+    defineField({
+      name: 'withSubmenu',
+      type: 'boolean',
+      title: 'Avec sous menu',
+    }),
+    defineField({
+      name: 'subMenu',
+      title: 'Sous menu',
+      type: 'array',
+      of: [
+        {
+          type: 'linkInternal',
+        },
+        {
+          type: 'linkExternal',
+        },
+      ],
+      hidden: ({document, parent, value}) => {
+        console.log(parent)
+        return !parent?.withSubmenu
+      },
     }),
   ],
 })

@@ -16,23 +16,23 @@ export default defineField({
       name: 'title',
       type: 'localeString',
     }),
-    defineField({
-      name: 'colSize',
-      type: 'number',
-      description: 'Number of columns (1-2) on a 2 columns grid',
-    }),
-    defineField({
-      name: 'look',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Normal', value: 'normal'},
-          {title: '2 colonnes', value: 'columns'},
-          {title: 'LG', value: 'text-lg'},
-          {title: 'LG Centered', value: 'text-lg text-center'},
-        ],
-      },
-    }),
+    // defineField({
+    //   name: 'colSize',
+    //   type: 'number',
+    //   description: 'Number of columns (1-2) on a 2 columns grid',
+    // }),
+    // defineField({
+    //   name: 'look',
+    //   type: 'string',
+    //   options: {
+    //     list: [
+    //       {title: 'Normal', value: 'normal'},
+    //       {title: '2 colonnes', value: 'columns'},
+    //       {title: 'LG', value: 'text-lg'},
+    //       {title: 'LG Centered', value: 'text-lg text-center'},
+    //     ],
+    //   },
+    // }),
     defineField({
       name: 'text',
       type: 'localeBlockContent',

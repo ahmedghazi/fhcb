@@ -1,0 +1,76 @@
+@use "../variables";
+
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  z-index: 50;
+  transition:
+    transform 0.2s var(--cubic),
+    opacity 0.2s var(--cubic);
+  color: var(--color-secondary);
+  a,
+  button {
+    color: var(--color-secondary);
+  }
+  svg path {
+    fill: var(--color-secondary);
+  }
+  .header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    .header__meta-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      .meta-nav {
+        display: flex;
+      }
+    }
+  }
+  .header__logo {
+    svg {
+      width: 123px;
+    }
+  }
+  &.is-up {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  &.is-bottom {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+
+  @media all and (min-width: variables.$md) {
+  }
+
+  @media all and (max-width: variables.$md) {
+  }
+}
+
+body.nav-open {
+  overflow: hidden;
+  header {
+    background-color: var(--color-secondary);
+    a,
+    button {
+      color: white;
+    }
+    svg path {
+      fill: white;
+    }
+    .header__inner > * {
+      z-index: 1;
+      position: relative;
+    }
+    .search {
+      z-index: 0;
+    }
+  }
+}

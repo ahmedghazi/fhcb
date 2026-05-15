@@ -1,0 +1,206 @@
+body {
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: 1.4;
+  // line-height: 1.2;
+  // letter-spacing: 0.02rem;
+  // text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  // font-size: 14px;
+}
+@media all and (min-width: 1080px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media all and (min-width: 1920px) {
+  html {
+    font-size: 1vw;
+  }
+}
+
+a,
+a[aria-current="page"] {
+  text-decoration: none;
+  &:hover,
+  &.is-active,
+  &.is-current-page {
+    color: var(--color-hover);
+  }
+}
+button {
+  cursor: pointer;
+}
+
+/* Text elements */
+p,
+.text p {
+  margin-bottom: 1em;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:empty {
+    display: none;
+  }
+  a {
+    text-decoration: underline;
+  }
+  br {
+    // display: none;
+  }
+}
+.text {
+  font-size: var(--text-xl);
+  p {
+    max-width: 41rem;
+    margin: 0 auto;
+    &.c-chapo {
+      max-width: 60rem;
+    }
+  }
+  .blockquote {
+    margin-bottom: 1em;
+  }
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@layer components {
+  /* =====================
+     HEADINGS
+  ===================== */
+  .c-h1 {
+    /* 80px */
+    font-size: var(--text-7xl);
+    line-height: var(--leading-7xl);
+    font-weight: 500;
+  }
+
+  .c-h1-lg {
+    /* 95px */
+    font-size: var(--text-8xl);
+    line-height: var(--leading-7xl);
+    font-weight: 500;
+  }
+
+  .c-h1_5,
+  .c-h1-alt {
+    /* 70px */
+    font-size: var(--text-6xl);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .c-h2 {
+    /* 40px */
+    font-size: var(--text-5xl);
+    font-weight: 500;
+  }
+
+  .c-h3 {
+    /* 17px */
+    font-size: var(--text-md);
+    line-height: var(--leading-2xl);
+    font-weight: 600;
+  }
+
+  .c-h4 {
+    /* 17px */
+    font-size: var(--text-md);
+    line-height: var(--leading-2xl);
+  }
+
+  /* =====================
+     BODY / EDITORIAL
+  ===================== */
+  .c-chapo {
+    /* 25px */
+    font-size: var(--text-3xl);
+    line-height: var(--leading-5xl);
+  }
+
+  .c-quote {
+    /* 38px */
+    font-size: var(--text-4xl);
+    line-height: var(--leading-6xl);
+  }
+
+  .c-body {
+    /* 20px */
+    font-size: var(--text-xl);
+    line-height: var(--leading-3xl);
+  }
+
+  .c-body-sm {
+    /* 18px */
+    font-size: var(--text-lg);
+    line-height: var(--leading-xl);
+  }
+
+  .c-body-xs {
+    /* 15px */
+    font-size: var(--text-base);
+    line-height: var(--leading-sm);
+  }
+
+  /* =====================
+     UI
+  ===================== */
+  .c-btn {
+    /* 13px */
+    font-size: var(--text-sm);
+    line-height: var(--leading-md);
+  }
+
+  .c-filter {
+    /* 13px */
+    font-size: var(--text-sm);
+    line-height: var(--leading-md);
+  }
+
+  .c-tag {
+    /* 11px */
+    font-size: var(--text-2xs);
+    line-height: var(--leading-lg);
+  }
+
+  /* =====================
+     MÉDIA / LÉGENDES
+  ===================== */
+  .c-caption {
+    /* 12px */
+    font-size: var(--text-xs);
+    line-height: var(--leading-xs);
+  }
+
+  .c-credits {
+    /* 11px */
+    font-size: var(--text-2xs);
+    line-height: var(--leading-xs);
+  }
+
+  /* =====================
+     CARDS / PAGES SPÉCIFIQUES
+  ===================== */
+  .c-card-title {
+    /* 21px */
+    font-size: var(--text-2xl);
+    line-height: var(--leading-2xl);
+  }
+
+  .c-title-expo {
+    /* 25px */
+    font-size: var(--text-3xl);
+    line-height: var(--leading-4xl);
+    font-weight: 200;
+    font-style: italic;
+  }
+}

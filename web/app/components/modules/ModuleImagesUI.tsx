@@ -1,0 +1,51 @@
+"use client";
+import React from "react";
+import Figure from "@/app/components/ui/Figure";
+import useLocale from "@/app/context/LocaleContext";
+import { ImageInGrid, ImagesUI } from "@/app/sanity-api/types/sanity.types";
+import clsx from "clsx";
+import { _localizeField } from "@/app/sanity-api/utils";
+
+type Props = {
+  input: ImagesUI;
+};
+
+const ModuleImagesUI = ({ input }: Props) => {
+  const { locale } = useLocale();
+
+  return (
+    <section className='module module--images-ui'>
+      <div className='module__inner'>
+        {input.title && <h2 className='module__title'>{input.title}</h2>}
+        {input.items && (
+          <div
+            className={clsx("grid gap-gutter", {
+              "md:grid-cols-4": input.gridSize === 4,
+              "md:grid-cols-3": input.gridSize === 3,
+              "md:grid-cols-2": input.gridSize === 2,
+            })}>
+            {input.items.map((item: ImageInGrid, i: number) => (
+              <div
+                key={i}
+                className={clsx(
+                  "module__image-item",
+                  `md:col-span-${item.colSize}`,
+                )}>
+                {item.image?.asset && (
+                  <Figure
+                    asset={item.image.asset}
+                    caption={_localizeField(item.image.caption)}
+                    alt={_localizeField(item.image.alt)}
+                    author={item.image.author}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default ModuleImagesUI;

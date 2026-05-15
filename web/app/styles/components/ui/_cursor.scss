@@ -1,0 +1,43 @@
+#cursor{
+    $cursorWidth: 10px;
+    height: $cursorWidth;
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    cursor: none;
+    backface-visibility: hidden;
+    mix-blend-mode: difference;
+    left: 50%; top: 50%;
+    will-change: left, top;
+    transition: transform .2s;
+    svg{
+      vertical-align: top;
+    }
+    // &:before{
+    //     content: "";
+    //     position: absolute;
+    //     top: 3px;
+    //     width: $cursorWidth/2;
+    //     height: $cursorWidth - 6px;
+    //     position: absolute;
+    //     background: black;
+    //     opacity: 0;
+    // }
+
+    .inner{
+        cursor: none;
+        opacity: 1;
+        
+        // transform-origin: center;
+        
+    }
+    &.is-anchor{
+      transform: scale(1.1)
+    }
+
+}
+
+
+@media all and (max-width:$md){
+    #cursor{display: none}
+}

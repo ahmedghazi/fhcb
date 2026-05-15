@@ -1,7 +1,7 @@
 import {defineField} from 'sanity'
 
 export default defineField({
-  title: 'Link External',
+  title: 'Lien Externe',
   name: 'linkExternal',
   type: 'object',
   preview: {
@@ -23,9 +23,8 @@ export default defineField({
     }),
     defineField({
       name: 'link',
-      title: 'Link',
+      title: 'Lien',
       type: 'string',
     }),
-
   ],
 })

@@ -2,7 +2,7 @@ export default [
   {type: 'textUI'},
   {type: 'imagesUI'},
   {type: 'videoUI'},
-  {type: 'imageTextUI'},
+  {type: 'textImageUI'},
   {type: 'textSidebarUI'},
   {type: 'listUI'},
   {type: 'listsUI'},

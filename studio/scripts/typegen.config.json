@@ -1,6 +1,6 @@
 {
   "webPath": "../../web",
-  "sanityApiPath": "app/utils/sanity-api",
+  "sanityApiPath": "app/sanity-api/types",
   "generatedTypesFile": "sanity.types.ts",
   "extendedTypesFile": "sanity-expanded.types.ts",
   "fieldTypeOverrides": {

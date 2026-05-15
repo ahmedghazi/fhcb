@@ -1,6 +1,7 @@
 import {FiImage} from 'react-icons/fi'
 import {baseLanguage} from '../locale/supportedLanguages'
 import {defineField} from 'sanity'
+import imageFields from '../misc/imageFields'
 
 export default defineField({
   name: 'figure',
@@ -30,16 +31,7 @@ export default defineField({
       options: {
         hotspot: true,
       },
-      fields: [
-        // {name: 'title', title: 'Title', type: 'string'},
-        {name: 'alt', title: 'Alt Description', type: 'string'},
-        // {name: 'attribution', title: 'Attribution', type: 'string'}
-      ],
-    }),
-    defineField({
-      name: 'caption',
-      title: 'Caption',
-      type: 'string',
+      fields: imageFields,
     }),
   ],
 })

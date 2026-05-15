@@ -7,7 +7,7 @@ export default defineField({
   type: 'object',
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
-    defineField({name: 'content', type: 'localeString', title: 'Contenu'}),
+    defineField({name: 'content', type: 'localeText', title: 'Contenu'}),
     defineField({name: 'link', type: 'linkInternal', title: 'Lien interne'}),
     defineField({name: 'linkExternal', type: 'linkExternal', title: 'Lien externe'}),
   ],

@@ -1,0 +1,10 @@
+.page-home {
+  .module-image {
+    .gatsby-image-wrapper {
+      height: 100vh;
+      img {
+        object-fit: cover !important;
+      }
+    }
+  }
+}
