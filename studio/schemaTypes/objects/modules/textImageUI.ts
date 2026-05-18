@@ -17,7 +17,7 @@ export default defineField({
       type: 'image',
       title: 'Image',
       options: {hotspot: true},
-      fields: imageFields,
+      // fields: imageFields,
     }),
     defineField({name: 'text', type: 'localeBlockContent', title: 'Texte'}),
     defineField({

@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
 import Figure from "@/app/components/ui/Figure";
-import useLocale from "@/app/context/LocaleContext";
-import { ImageInGrid, ImagesUI } from "@/app/sanity-api/types/sanity.types";
+import {
+  ImageInGridExpanded,
+  ImagesUIExpanded,
+} from "@/app/sanity-api/types/sanity-expanded.types";
 import clsx from "clsx";
 import { _localizeField } from "@/app/sanity-api/utils";
 
 type Props = {
-  input: ImagesUI;
+  input: ImagesUIExpanded;
 };
 
 const ModuleImagesUI = ({ input }: Props) => {
-  const { locale } = useLocale();
-
   return (
     <section className='module module--images-ui'>
       <div className='module__inner'>
@@ -24,7 +24,7 @@ const ModuleImagesUI = ({ input }: Props) => {
               "md:grid-cols-3": input.gridSize === 3,
               "md:grid-cols-2": input.gridSize === 2,
             })}>
-            {input.items.map((item: ImageInGrid, i: number) => (
+            {input.items.map((item: ImageInGridExpanded, i: number) => (
               <div
                 key={i}
                 className={clsx(
@@ -34,9 +34,10 @@ const ModuleImagesUI = ({ input }: Props) => {
                 {item.image?.asset && (
                   <Figure
                     asset={item.image.asset}
-                    caption={_localizeField(item.image.caption)}
-                    alt={_localizeField(item.image.alt)}
-                    author={item.image.author}
+                    caption={_localizeField(item.image.asset?.title) || ""}
+                    alt={_localizeField(item.image.asset?.altText)}
+                    author={_localizeField(item.image.asset?.description)}
+                    copyright={_localizeField(item.image.asset?.creditLine)}
                   />
                 )}
               </div>

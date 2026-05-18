@@ -8,13 +8,14 @@ export default {
     {
       title: 'Traduction',
       name: 'translations',
-      options: {collapsible: true, collapsed: true},
+      options: {collapsible: true, collapsed: false},
     },
   ],
   fields: supportedLanguages.map((lang) => ({
     title: lang.title,
     name: lang.id,
     type: 'text',
+    rows: 3,
     fieldset: lang.isDefault ? null : 'translations',
   })),
 }

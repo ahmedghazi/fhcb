@@ -1,0 +1,11 @@
+.sidebar {
+  &__item {
+    border-bottom: var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  figure {
+    margin-top: 1rem;
+    max-width: 10rem;
+  }
+}

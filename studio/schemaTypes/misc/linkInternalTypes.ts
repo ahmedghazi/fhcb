@@ -5,4 +5,5 @@ export default [
   {type: 'product'},
   {type: 'event'},
   {type: 'library'},
+  {type: 'programme'},
 ]

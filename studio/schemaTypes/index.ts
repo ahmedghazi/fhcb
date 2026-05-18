@@ -41,6 +41,11 @@ import fhcbDate from './objects/fhcbDate'
 import imageInGrid from './objects/imageInGrid'
 import blockquote from './objects/blockquote'
 import embed from './objects/embed'
+import keyValGroup from './objects/keyValGroup'
+import programme from './documents/programme'
+import partenaire from './documents/partenaire'
+import article from './documents/article'
+import sidebarGenerique from './objects/sidebarGenerique'
 
 export const schemaTypes = [
   settings,
@@ -51,6 +56,9 @@ export const schemaTypes = [
   library,
   product,
   tag,
+  programme,
+  partenaire,
+  article,
 
   localeString,
   localeText,
@@ -68,8 +76,10 @@ export const schemaTypes = [
   imageInGrid,
   cta,
   keyVal,
+  keyValGroup,
   messageContextuel,
   fhcbDate,
+  sidebarGenerique,
 
   imagesUI,
   textUI,

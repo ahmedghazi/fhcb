@@ -1,8 +1,9 @@
 import { PortableTextComponents } from "@portabletext/react";
 import Link from "next/link";
-import { _linkResolver } from "./utils";
+import { _linkResolver, _localizeField } from "./utils";
 import Figure from "../components/ui/Figure";
 import Embed from "../components/ui/Embed";
+import { KeyVal } from "./types/sanity.types";
 
 const portableTextComponents: PortableTextComponents = {
   block: {
@@ -23,6 +24,25 @@ const portableTextComponents: PortableTextComponents = {
         <div className='blockquote'>
           <blockquote className='c-quote'>{text}</blockquote>
           {author && <span className='c-caption'>{author}</span>}
+        </div>
+      );
+    },
+    keyValGroup: ({ value }) => {
+      const { title, items } = value;
+      return (
+        <div className='key-val-group'>
+          {title && (
+            <h3 className='c-tag underline'>{_localizeField(title)}</h3>
+          )}
+          {items?.map((item: KeyVal, i: number) => (
+            <div key={i}>
+              <div className=''>{_localizeField(item.key)}</div>
+              <div className='c-body--tight'>{_localizeField(item.val)}</div>
+              {item.image && item.image.asset && (
+                <Figure asset={item.image.asset} />
+              )}
+            </div>
+          ))}
         </div>
       );
     },

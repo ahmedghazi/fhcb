@@ -7,8 +7,8 @@ import imageFields from '../misc/imageFields'
 
 export default defineType({
   type: 'document',
-  name: 'artist',
-  title: 'Artist',
+  name: 'partenaire',
+  title: 'Partenaire',
   icon: IoPersonOutline,
   groups: [
     {
@@ -16,21 +16,19 @@ export default defineType({
       name: 'editorial',
       title: 'Editorial',
     },
-    {
-      name: 'seo',
-      title: 'SEO',
-    },
   ],
   fields: [
-    defineField({
-      name: 'seo',
-      type: 'seo',
-      group: 'seo',
-    }),
     defineField({
       name: 'name',
       type: 'string',
       title: 'Nom',
+      description: 'Visible seulement en backoffice',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'text',
+      type: 'localeText',
+      title: 'Mention partenariale',
       group: 'editorial',
     }),
     defineField({
@@ -56,15 +54,6 @@ export default defineType({
 
       group: 'editorial',
     }),
-
-    defineField({
-      name: 'modules',
-      title: 'Modules',
-      description: 'Zone de contenu Modulaire (images, textes, embed)',
-      type: 'array',
-      of: modulesList,
-      group: 'editorial',
-    }),
   ],
 
   preview: {
@@ -78,7 +67,7 @@ export default defineType({
       // console.log(images)
       return {
         title: title,
-        subtitle: `/artist/${slug.current}`,
+        subtitle: `/partenaire/${slug.current}`,
         media: image,
       }
     },

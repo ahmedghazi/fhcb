@@ -48,7 +48,7 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         locations: [
           {
             title: doc?.title || 'Untitled',
-            href: `/exposition/${doc?.slug}`,
+            href: `/exhibition/${doc?.slug}`,
           },
         ],
       }),

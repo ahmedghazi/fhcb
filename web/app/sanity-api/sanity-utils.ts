@@ -7,8 +7,9 @@ export function urlFor(source: any, maxWidth: number = 2000): any {
   if (!source) {
     return "/placeholder.png";
   }
+  // return source.assetId;
   return imageBuilder
-    ?.image(source)
+    ?.image(source._id)
     .width(maxWidth)
     .auto("format")
     .fit("max")

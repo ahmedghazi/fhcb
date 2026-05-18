@@ -10,6 +10,24 @@
         margin-bottom: var(--spacing-gutter);
       }
     }
+    &--text-image-ui {
+      &--reverse {
+        .module__image {
+          order: 2;
+        }
+        .module__text {
+          order: 1;
+        }
+      }
+    }
+    &--text-sidebar-ui {
+      .module__inner {
+        border-top: var(--border);
+        padding-top: var(--spacing-md);
+      }
+      .module__text {
+      }
+    }
     &--list-ui {
       margin-bottom: var(--spacing-sm);
       h3,

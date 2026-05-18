@@ -6,9 +6,9 @@ import slug from '../fields/slug'
 import {SiElasticstack} from 'react-icons/si'
 
 export default defineType({
-  name: 'pageModulaire',
+  name: 'programme',
   type: 'document',
-  title: 'Page Modulaire',
+  title: 'Programme',
   icon: SiElasticstack,
   groups: [
     {
@@ -46,12 +46,6 @@ export default defineType({
     }),
 
     defineField({
-      name: 'homePage',
-      type: 'boolean',
-      title: "Page d'accueil",
-      group: 'editorial',
-    }),
-    defineField({
       name: 'title',
       type: 'localeString',
       title: 'Titre',
@@ -71,33 +65,36 @@ export default defineType({
     }),
 
     defineField({
-      name: 'tags',
-      title: 'Tags',
-      type: 'array',
-      of: [{type: 'reference', to: [{type: 'tag'}]}],
+      name: 'items',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Expositions', value: 'expositions'},
+          {title: 'Événements', value: 'evenements'},
+          {title: 'Hors les murs', value: 'hors-les-murs'},
+        ],
+      },
       group: 'editorial',
     }),
+    // defineField({
+    //   name: 'items',
+    //   title: 'Items',
+    //   type: 'array',
+    //   of: [{type: 'reference', to: [{type: 'exhibition'}, {type: 'event'}]}],
+    //   group: 'editorial',
+    // }),
 
-    defineField({
-      name: 'modules',
-      title: 'Modules',
-      description: 'Zone de contenu Modulaire (images, textes, embed)',
-      type: 'array',
-      of: modulesList,
-      group: 'editorial',
-    }),
-
-    defineField({
-      name: 'rebonds',
-      title: 'Rebonds',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{type: 'pageModulaire'}, {type: 'event'}, {type: 'exhibition'}, {type: 'product'}],
-        },
-      ],
-      group: 'editorial',
-    }),
+    // defineField({
+    //   name: 'rebonds',
+    //   title: 'Rebonds',
+    //   type: 'array',
+    //   of: [
+    //     {
+    //       type: 'reference',
+    //       to: [{type: 'pageModulaire'}, {type: 'event'}, {type: 'exhibition'}, {type: 'product'}],
+    //     },
+    //   ],
+    //   group: 'editorial',
+    // }),
   ],
 })

@@ -125,6 +125,9 @@ export default defineType({
       type: 'blockquote',
     }),
     defineArrayMember({
+      type: 'keyValGroup',
+    }),
+    defineArrayMember({
       type: 'image',
       options: {hotspot: true},
     }),

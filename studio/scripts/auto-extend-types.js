@@ -257,11 +257,39 @@ function findReferenceFields(typeBlock, referenceTypes) {
   return result
 }
 
+/**
+ * For a type block, find fields whose type string directly references a type name
+ * that has an expanded version. Catches inline intersections like
+ * `Array<{ _key: string } & ImageInGrid>` where `ImageInGrid` → `ImageInGridExpanded`.
+ */
+function findInlineTypeRefs(typeBlock, expandedTypeNames) {
+  const fields = extractTopLevelFields(typeBlock)
+  const result = []
+
+  for (const field of fields) {
+    const nameMatch = field.match(/^\s*(\w+)\??:/)
+    if (!nameMatch) continue
+    const fieldName = nameMatch[1]
+    if (fieldName.startsWith('_')) continue
+
+    for (const typeName of expandedTypeNames) {
+      const pattern = new RegExp(`\\b${typeName}\\b`)
+      if (pattern.test(field)) {
+        const typeStr = field.replace(/^\s*\w+\??\s*:\s*/, '').trim()
+        result.push({fieldName, typeName, typeStr})
+        break
+      }
+    }
+  }
+
+  return result
+}
+
 // ─── Topological sort ────────────────────────────────────────────────────────
 
 /**
  * Sort expanded types so that dependencies come before dependents.
- * e.g. ContributionExpanded before ProjectExpanded (since Project.contributions → Contribution)
+ * Considers both reference fields and inline type refs.
  */
 function topoSort(expandedMap) {
   const expandedTypeNames = new Set(expandedMap.keys())
@@ -271,11 +299,12 @@ function topoSort(expandedMap) {
   function visit(typeName) {
     if (visited.has(typeName)) return
     visited.add(typeName)
-    const refFields = expandedMap.get(typeName) || []
-    for (const f of refFields) {
-      if (expandedTypeNames.has(f.targetTypeName)) {
-        visit(f.targetTypeName)
-      }
+    const entry = expandedMap.get(typeName) || {}
+    for (const f of (entry.refFields || [])) {
+      if (expandedTypeNames.has(f.targetTypeName)) visit(f.targetTypeName)
+    }
+    for (const f of (entry.inlineRefFields || [])) {
+      if (expandedTypeNames.has(f.typeName)) visit(f.typeName)
     }
     sorted.push(typeName)
   }
@@ -290,19 +319,27 @@ function topoSort(expandedMap) {
 // ─── Code generation ──────────────────────────────────────────────────────────
 
 /**
- * Generate the `XxxExpanded` type for one document type.
+ * Generate the `XxxExpanded` type for one document or object type.
  *
  * - Reference fields pointing to a type that itself has an Expanded variant
  *   automatically use `TargetTypeExpanded` instead of `TargetType`.
- * - Extra fields from `fieldTypeOverrides[typeName]` are appended and
- *   their field names are added to the Omit list.
+ * - Inline ref fields (e.g. `Array<{ _key: string } & ImageInGrid>`) have
+ *   `TypeName` replaced with `TypeNameExpanded` in the type string.
+ * - Image asset fields use `SanityImageAssetFull` (which adds `creditLine`
+ *   and other standard fields that TypeGen may omit).
+ * - Extra fields from `fieldTypeOverrides[typeName]` are appended.
  */
-function generateExpandedType(typeName, refFields, imageFields, expandedTypeNames, fieldTypeOverrides) {
+function generateExpandedType(typeName, refFields, imageFields, inlineRefFields, expandedTypeNames, fieldTypeOverrides, referenceTypes) {
   const overrides = fieldTypeOverrides[typeName] || {}
   const overrideFieldNames = Object.keys(overrides)
 
-  // Omit ref fields, image fields, and overridden fields (deduplicated)
-  const omitSet = new Set([...refFields.map((f) => f.fieldName), ...imageFields, ...overrideFieldNames])
+  // Omit ref fields, image fields, inline ref fields, and overridden fields (deduplicated)
+  const omitSet = new Set([
+    ...refFields.map((f) => f.fieldName),
+    ...imageFields,
+    ...(inlineRefFields || []).map((f) => f.fieldName),
+    ...overrideFieldNames,
+  ])
   const omitKeys = [...omitSet].map((k) => `'${k}'`).join(' | ')
 
   // Ref fields: use TargetTypeExpanded when available
@@ -314,17 +351,37 @@ function generateExpandedType(typeName, refFields, imageFields, expandedTypeName
     return `  ${f.fieldName}?: ${resolvedType} | null`
   })
 
-  // Image fields: expand asset from SanityImageAssetReference → SanityImageAsset
+  // Image fields: expand asset → SanityImageAssetFull (includes creditLine + other built-in fields)
   const imageFieldLines = imageFields.map((fieldName) =>
-    `  ${fieldName}?: (Omit<NonNullable<NonNullable<${typeName}>['${fieldName}']>, 'asset'> & { asset?: SanityImageAsset | null }) | null`
+    `  ${fieldName}?: (Omit<NonNullable<NonNullable<${typeName}>['${fieldName}']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null`
   )
+
+  // Inline ref fields: replace TypeName with TypeNameExpanded in the type string,
+  // and also replace any *Reference types with their expanded target (e.g. PartenaireReference → PartenaireExpanded)
+  // This handles mixed arrays like Array<({ _key } & KeyVal) | ({ _key } & PartenaireReference)>
+  // where the GROQ query uses []-> to dereference references.
+  const inlineRefFieldLines = (inlineRefFields || []).map(({fieldName, typeName: refTypeName, typeStr}) => {
+    let expandedTypeStr = typeStr.replace(
+      new RegExp(`\\b${refTypeName}\\b`, 'g'),
+      `${refTypeName}Expanded`,
+    )
+    for (const [refType, targetType] of Object.entries(referenceTypes || {})) {
+      if (expandedTypeNames.has(targetType)) {
+        expandedTypeStr = expandedTypeStr.replace(
+          new RegExp(`\\b${refType}\\b`, 'g'),
+          `${targetType}Expanded`,
+        )
+      }
+    }
+    return `  ${fieldName}?: ${expandedTypeStr} | null`
+  })
 
   // Override fields (project-specific, from typegen.config.json)
   const overrideLines = overrideFieldNames.map((fieldName) => {
     return `  ${fieldName}?: ${overrides[fieldName]}`
   })
 
-  const expandedFields = [...refFieldLines, ...imageFieldLines, ...overrideLines].join(';\n')
+  const expandedFields = [...refFieldLines, ...imageFieldLines, ...inlineRefFieldLines, ...overrideLines].join(';\n')
 
   return (
     `export type ${typeName}Expanded = Omit<${typeName}, ${omitKeys}> & {\n` +
@@ -361,7 +418,7 @@ function generateExtendedTypes(content, meta) {
   // Also include types referenced in fieldTypeOverrides that might not have ref/image fields
   for (const typeName of Object.keys(meta.fieldTypeOverrides)) {
     if (!expandedMap.has(typeName)) {
-      expandedMap.set(typeName, {refFields: [], imageFields: []})
+      expandedMap.set(typeName, {refFields: [], imageFields: [], inlineRefFields: []})
     }
   }
 
@@ -369,11 +426,34 @@ function generateExtendedTypes(content, meta) {
     throw new Error('No document types with reference or image fields found. Nothing to generate.')
   }
 
+  // Second pass (iterative): expand non-document object types that either have direct
+  // image fields or reference an already-expanded type via inline intersection.
+  let moreFound = true
+  while (moreFound) {
+    moreFound = false
+    const currentExpandedNames = new Set(expandedMap.keys())
+    const objPattern = /export type (\w+)\s*=\s*\{/g
+    let m
+    while ((m = objPattern.exec(content)) !== null) {
+      const typeName = m[1]
+      if (expandedMap.has(typeName)) continue
+      const typeBlock = extractObjectTypeBlock(content, typeName)
+      if (!typeBlock) continue
+      if (typeBlock.includes('_id: string') && typeBlock.includes('_createdAt: string')) continue
+
+      const imageFields = findImageFields(typeBlock)
+      const inlineRefFields = findInlineTypeRefs(typeBlock, currentExpandedNames)
+      if (imageFields.length > 0 || inlineRefFields.length > 0) {
+        expandedMap.set(typeName, {refFields: [], imageFields, inlineRefFields})
+        moreFound = true
+      }
+    }
+  }
+
   const expandedTypeNames = new Set(expandedMap.keys())
 
-  // Sort by dependency order (topoSort only needs refFields for ordering)
-  const refOnlyMap = new Map([...expandedMap].map(([k, v]) => [k, v.refFields]))
-  const sortedTypeNames = topoSort(refOnlyMap)
+  // Sort by dependency order
+  const sortedTypeNames = topoSort(expandedMap)
 
   // Collect needed imports
   const neededImports = new Set()
@@ -388,11 +468,12 @@ function generateExtendedTypes(content, meta) {
   // Log
   console.log('🔎 Scanning for reference and image fields...')
   for (const typeName of sortedTypeNames) {
-    const {refFields, imageFields} = expandedMap.get(typeName)
+    const {refFields, imageFields, inlineRefFields} = expandedMap.get(typeName)
     const overrideFields = Object.keys(meta.fieldTypeOverrides[typeName] || {})
     const allFields = [
       ...refFields.map((f) => (f.isArray ? `${f.fieldName}[]` : f.fieldName)),
       ...imageFields.map((f) => `${f} (image)`),
+      ...(inlineRefFields || []).map((f) => `${f.fieldName} (inline-ref)`),
       ...overrideFields.map((f) => `${f} (override)`),
     ]
     console.log(`  ✓ ${typeName}Expanded  [${allFields.join(', ')}]`)
@@ -401,18 +482,25 @@ function generateExtendedTypes(content, meta) {
   // Generate type definitions
   const typeDefs = sortedTypeNames
     .map((typeName) => {
-      const {refFields, imageFields} = expandedMap.get(typeName)
+      const {refFields, imageFields, inlineRefFields} = expandedMap.get(typeName)
       return generateExpandedType(
         typeName,
         refFields,
         imageFields,
+        inlineRefFields || [],
         expandedTypeNames,
         meta.fieldTypeOverrides,
+        referenceTypes,
       )
     })
     .join('\n\n')
 
   const importLine = `import type {\n  ${[...neededImports].join(',\n  ')}\n} from './sanity.types'`
+
+  // SanityImageAsset extended with standard built-in fields that TypeGen may omit
+  const sanityImageAssetFull = hasImageFields
+    ? `export type SanityImageAssetFull = SanityImageAsset & {\n  creditLine?: string;\n};\n`
+    : ''
 
   return (
     `// AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY\n` +
@@ -422,6 +510,8 @@ function generateExtendedTypes(content, meta) {
     `// Detection method: ${meta.fromConfig ? 'configuration file' : 'auto-detection'}\n` +
     `\n` +
     `${importLine}\n` +
+    `\n` +
+    `${sanityImageAssetFull}` +
     `\n` +
     `${typeDefs}\n`
   )

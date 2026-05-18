@@ -1,33 +1,41 @@
 // import {FiImage} from 'react-icons/fi'
 import {defineField} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
+import {FaListOl} from 'react-icons/fa'
 
 export default defineField({
   name: 'keyVal',
-  title: 'Key Value',
+  title: 'Image + Titre + Texte',
   type: 'object',
+  icon: FaListOl,
   fields: [
     defineField({
-      name: 'key',
+      name: 'title',
       type: 'localeString',
       title: 'Titre',
     }),
     defineField({
-      name: 'val',
-      type: 'localeText',
-      title: 'Text',
+      name: 'image',
+      type: 'image',
     }),
     defineField({
       name: 'text',
-      type: 'localeBlockContent',
-      title: 'Text',
-      hidden: true,
+      type: 'localeText',
+      title: 'Texte',
     }),
+
+    // defineField({
+    //   name: 'text',
+    //   type: 'localeBlockContent',
+    //   title: 'Text',
+    //   hidden: true,
+    // }),
   ],
   preview: {
     select: {
-      title: `key.${baseLanguage}`,
-      subtitle: `val.${baseLanguage}`,
+      title: `title.${baseLanguage}`,
+      subtitle: `text.${baseLanguage}`,
+      media: 'image',
     },
   },
 })

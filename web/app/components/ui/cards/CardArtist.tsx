@@ -22,6 +22,7 @@ const CardArtist = ({ input }: Props) => {
         <h2 className='card__title c-h2'>{name}</h2>
       </div>
       <div className='card__figure'>
+        {/* <pre>{JSON.stringify(imageCover, null, 2)}</pre> */}
         <Figure asset={imageCover?.asset} />
       </div>
       <div className='card__footer'>

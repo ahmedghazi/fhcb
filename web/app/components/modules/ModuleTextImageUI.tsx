@@ -6,39 +6,40 @@ import Figure from "@/app/components/ui/Figure";
 import useLocale from "@/app/context/LocaleContext";
 import clsx from "clsx";
 import { _localizeField } from "@/app/sanity-api/utils";
-import { TextImageUI } from "@/app/sanity-api/types/sanity.types";
+import { TextImageUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 
 type Props = {
-  input: TextImageUI;
+  input: TextImageUIExpanded;
 };
 
 const ModuleTextImageUI = ({ input }: Props) => {
-  const { locale } = useLocale();
-  const text = input.text?.[locale as "fr" | "en"] || input.text?.fr;
-
+  const { image, text, direction } = input;
+  const localizedText = _localizeField(text);
   return (
     <section
       className={clsx(
         "module module--text-image-ui",
-        input.direction === "right" && "module--text-image-ui--reverse",
+        direction === "right" && "module--text-image-ui--reverse",
       )}>
       <div className='module__inner'>
         <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter'>
-          {input.image?.asset && (
+          {image?.asset && (
             <div className='module__image md:col-span-5'>
               <Figure
-                asset={input.image.asset}
-                caption={_localizeField(input.image.caption)}
-                alt={_localizeField(input.image.alt)}
-                author={input.image.author}
-                copyright={input.image.copyright || ""}
+                asset={image.asset}
+                caption={image.asset?.title || ""}
+                alt={image.asset?.altText}
+                author={image.asset?.description}
+                copyright={image.asset?.creditLine}
               />
-              {/* <pre>{JSON.stringify(input.image, null, 2)}</pre> */}
             </div>
           )}
-          {text && (
+          {localizedText && (
             <div className='module__text text md:col-span-6'>
-              <PortableText value={text} components={portableTextComponents} />
+              <PortableText
+                value={localizedText}
+                components={portableTextComponents}
+              />
             </div>
           )}
         </div>

@@ -7,8 +7,8 @@ import imageFields from '../misc/imageFields'
 
 export default defineType({
   type: 'document',
-  name: 'artist',
-  title: 'Artist',
+  name: 'article',
+  title: 'Article',
   icon: IoPersonOutline,
   groups: [
     {
@@ -28,9 +28,10 @@ export default defineType({
       group: 'seo',
     }),
     defineField({
-      name: 'name',
-      type: 'string',
-      title: 'Nom',
+      name: 'title',
+      type: 'localeString',
+      title: 'Titre',
+      description: 'Le nom de la page',
       group: 'editorial',
     }),
     defineField({
@@ -69,7 +70,7 @@ export default defineType({
 
   preview: {
     select: {
-      title: `name`,
+      title: `title.${baseLanguage}`,
       slug: 'slug',
       image: 'imageCover',
     },
@@ -78,7 +79,7 @@ export default defineType({
       // console.log(images)
       return {
         title: title,
-        subtitle: `/artist/${slug.current}`,
+        subtitle: `/article/${slug.current}`,
         media: image,
       }
     },

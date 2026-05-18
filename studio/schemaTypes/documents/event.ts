@@ -38,8 +38,7 @@ export default defineType({
       name: 'imageCover',
       type: 'image',
       title: 'Image clef',
-      fields: imageFields,
-
+      // fields: imageFields,
       description: 'Visible sur les pages de liste (largeur 1400px)',
       group: 'editorial',
     }),

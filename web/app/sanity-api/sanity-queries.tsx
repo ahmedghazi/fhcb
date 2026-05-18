@@ -1,6 +1,13 @@
 import { groq } from "next-sanity";
 import { sanityFetch } from "./sanity.client";
-import { linkInternal, linkInternalWithImage, modules, seo } from "./fragments";
+import {
+  image,
+  imageAsset,
+  linkInternal,
+  linkInternalWithImage,
+  modules,
+  seo,
+} from "./fragments";
 
 /*****************************************************************************************************
  * SETTINGS
@@ -123,6 +130,9 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     ...,
     seo{
       ${seo}
+    },
+    imageCover{
+      ${imageAsset}
     },
     artists[]->{
       name

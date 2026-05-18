@@ -1,7 +1,61 @@
 export const seo = `
   ...,
   metaImage{
-    asset->
+    asset->{
+      url
+    }
+  }
+`;
+
+export const imageAsset = `
+  asset->{
+    _id,
+    assetId,
+    title,
+    altText,
+    description,
+    creditLine,
+    metadata {
+      lqip,
+      dimensions {
+        width,
+        height,
+      }
+    }
+  }
+`;
+
+const blockContentMarkDefs = `
+markDefs[]{
+  ...,
+  _type == "linkInternal" => {
+    ...,
+    reference->
+  }
+}
+`;
+const blockcontentKeyValGroup = `
+  _type == "keyValGroup" => {
+      ...,
+      items[]{
+        ...,
+        image{
+          ${imageAsset}
+        }
+      }
+    }
+`;
+export const blockContent = `
+  ...,
+  fr[]{
+    ...,
+     ${blockContentMarkDefs},
+     ${blockcontentKeyValGroup}
+  },
+  en[]{
+    ...,
+    ${blockContentMarkDefs},
+    ${blockcontentKeyValGroup}
   }
 `;
 
@@ -19,47 +73,15 @@ export const linkInternalWithImage = `
     _type,
     slug,
     imageCover{
-      asset->
+      ${imageAsset}
     }
   }
-`;
-
-export const blockContent = `
-  ...,
-  fr[]{
-    ...,
-    markDefs[] {
-      ...,
-      _type == "linkInternal" => {
-        ...,
-        reference->,
-      },
-    }
-  },
-  en[]{
-    ...,
-    markDefs[] {
-      ...,
-      _type == "linkInternal" => {
-        ...,
-        reference->,
-      },
-    }
-  }
-`;
-
-export const image = `
-  asset->,
-  caption,
-  alt,
-  author,
-  copyright
 `;
 
 export const imageInGrid = `
   ...,
   image{
-    ${image}
+    ${imageAsset}
   }
 `;
 
@@ -101,7 +123,7 @@ export const textImageUI = `
   _type == "textImageUI" => {
     ...,
     image{
-      ${image}
+      ${imageAsset}
     },
     text{
       ${blockContent}
@@ -116,8 +138,20 @@ export const textSidebarUI = `
     text{
       ${blockContent}
     },
-    sidebar[]{
-      ${blockContent}
+    sidebar{
+      commissariat,
+      coProduction[]->{
+        ...,
+        imageCover{
+          ${imageAsset}
+        }
+      },
+      partenaires[]->{
+        ...,
+        imageCover{
+          ${imageAsset}
+        }
+      }
     }
   }
 `;
@@ -143,12 +177,14 @@ export const listsUI = `
   }
 `;
 
-const cardRef = `
+const cardRefModulaire = `
   _type,
   _id,
   "title": coalesce(title, name),
   slug,
-  "imageCover": coalesce(imageCover, image){ asset-> }
+  "imageCover": coalesce(imageCover, image){
+    ${imageAsset}
+  },
 `;
 
 const cardRefExhibition = `
@@ -156,7 +192,9 @@ const cardRefExhibition = `
   _id,
   "title": coalesce(title, name),
   slug,
-  "imageCover": coalesce(imageCover, image){ asset-> },
+  "imageCover": coalesce(imageCover, image){
+    ${imageAsset}
+  },
   dates,
   artists[]->{
     name
@@ -168,7 +206,9 @@ const cardRefProduct = `
   _id,
   title,
   slug,
-  "imageCover": coalesce(imageCover, image){ asset-> },
+  "imageCover": coalesce(imageCover, image){
+    ${imageAsset}
+  },
   prix,
   tags[]->{
     title
@@ -178,6 +218,17 @@ const cardRefProduct = `
   }
 `;
 
+const cardRefArtist = `
+  _type,
+  _id,
+  name,
+  slug,
+  "imageCover": coalesce(imageCover, image){
+    ${imageAsset}
+  },
+
+`;
+
 const cardTypes = `
   _type == "exhibition" => {
     ${cardRefExhibition}
@@ -185,9 +236,12 @@ const cardTypes = `
   _type == "product" => {
     ${cardRefProduct}
   },
-  _type == "page" => {
-    ${cardRef}
+  _type == "pageModulaire" => {
+    ${cardRefModulaire}
   },
+  _type == "artist" => {
+    ${cardRefArtist}
+  }
 `;
 
 export const sliderCardUI = `
@@ -233,7 +287,9 @@ export const programmeUI = `
       _id,
       title,
       slug,
-      "image": coalesce(imageCover, image){ asset-> },
+      "imageCover": coalesce(imageCover, image){
+        ${imageAsset}
+      },
       dateStart,
       dateEnd,
       dates

@@ -12,7 +12,10 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
   }
 
   return ![
+    'articles',
+    'partenaire',
     'artist',
+    'programme',
     'exposition',
     'produit',
     'pageModulaire',
@@ -52,11 +55,17 @@ export const structure = (S: any) =>
       S.divider(),
 
       S.listItem()
+        .title('Programme')
+        .schemaType('programme')
+        .child(S.documentTypeList('programme')),
+
+      S.listItem()
         .title('Expostions')
         .schemaType('exhibition')
         .child(S.documentTypeList('exhibition')),
 
       S.listItem().title('Événements').schemaType('event').child(S.documentTypeList('event')),
+
       S.divider(),
 
       S.listItem()
@@ -65,6 +74,15 @@ export const structure = (S: any) =>
         .child(S.editor().title('Librairie').schemaType('library').documentId('library')),
 
       S.listItem().title('Produits').schemaType('product').child(S.documentTypeList('product')),
+      S.divider(),
+
+      S.listItem().title('Articles').schemaType('article').child(S.documentTypeList('article')),
+      S.divider(),
+
+      S.listItem()
+        .title('Partenaires')
+        .schemaType('partenaire')
+        .child(S.documentTypeList('partenaire')),
       S.divider(),
 
       S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),

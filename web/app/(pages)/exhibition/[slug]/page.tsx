@@ -54,7 +54,6 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--exhibition'
       data-template='exhibition'
       data-slug={data.slug?.current || ""}>
-      {/* <PageHeader h1={data.title} /> */}
       <HeroExhibition input={data as ExhibitionExpanded} />
       <ContentModulaire input={data} />
     </div>

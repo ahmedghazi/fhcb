@@ -18,7 +18,13 @@ const HeroExhibition = ({ input }: Props) => {
       <div className='container-fluid'>
         <div className='grid md:grid-cols-2 gap-gutter'>
           <div className='hero__figure'>
-            <Figure asset={imageCover?.asset} />
+            <Figure
+              asset={imageCover?.asset}
+              caption={_localizeField(imageCover?.asset?.title || "")}
+              alt={_localizeField(imageCover?.asset?.altText)}
+              author={_localizeField(imageCover?.asset?.description)}
+              copyright={_localizeField(imageCover?.asset?.creditLine)}
+            />
           </div>
           <div className='hero__header'>
             <div className='top'>

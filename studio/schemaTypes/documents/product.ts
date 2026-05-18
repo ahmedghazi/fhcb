@@ -4,6 +4,7 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {BiLogoShopify} from 'react-icons/bi'
 import imageFields from '../misc/imageFields'
+import {mediaField} from 'sanity-plugin-media'
 
 export default defineType({
   type: 'document',
@@ -123,7 +124,8 @@ export default defineType({
       title: 'Image clef',
       description: 'Visible on liste pages, project cards (largeur 1400px)',
       options: {hotspot: true},
-      fields: imageFields,
+      mediaTags: ['product'],
+      // fields: imageFields,
 
       group: 'editorial',
     }),

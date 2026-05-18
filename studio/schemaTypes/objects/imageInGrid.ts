@@ -14,14 +14,14 @@ export default defineField({
   preview: {
     select: {
       media: 'image',
-      title: `caption`,
+      title: `image.title`,
     },
     prepare(selection) {
       const {media, title} = selection
       return {
         title: title,
         media: media,
-        subtitle: 'Figure',
+        subtitle: 'Image In Grid',
       }
     },
   },
@@ -34,7 +34,7 @@ export default defineField({
       options: {
         hotspot: true,
       },
-      fields: imageFields,
+      // fields: imageFields,
     }),
     // defineField({
     //   name: 'caption',

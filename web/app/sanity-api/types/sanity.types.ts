@@ -111,7 +111,7 @@ export type ListUI = {
 export type ListItem = {
   _type: "listItem";
   title?: LocaleString;
-  content?: LocaleString;
+  content?: LocaleText;
   link?: LinkInternal;
   linkExternal?: LinkExternal;
 };
@@ -119,11 +119,7 @@ export type ListItem = {
 export type TextSidebarUI = {
   _type: "textSidebarUI";
   text?: LocaleBlockContent;
-  sidebar?: Array<
-    {
-      _key: string;
-    } & LocaleBlockContent
-  >;
+  sidebar?: SidebarGenerique;
 };
 
 export type SanityImageAssetReference = {
@@ -140,10 +136,6 @@ export type TextImageUI = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   text?: LocaleBlockContent;
@@ -169,6 +161,38 @@ export type ImagesUI = {
     {
       _key: string;
     } & ImageInGrid
+  >;
+};
+
+export type PartenaireReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "partenaire";
+};
+
+export type SidebarGenerique = {
+  _type: "sidebarGenerique";
+  commissariat?: Array<
+    {
+      _key: string;
+    } & KeyVal
+  >;
+  coProduction?: Array<
+    | ({
+        _key: string;
+      } & KeyVal)
+    | ({
+        _key: string;
+      } & PartenaireReference)
+  >;
+  partenaires?: Array<
+    | ({
+        _key: string;
+      } & KeyVal)
+    | ({
+        _key: string;
+      } & PartenaireReference)
   >;
 };
 
@@ -199,11 +223,30 @@ export type LocaleText = {
   en?: string;
 };
 
+export type KeyValGroup = {
+  _type: "keyValGroup";
+  title?: LocaleString;
+  items?: Array<
+    | ({
+        _key: string;
+      } & KeyVal)
+    | ({
+        _key: string;
+      } & PartenaireReference)
+  >;
+};
+
 export type KeyVal = {
   _type: "keyVal";
-  key?: LocaleString;
-  val?: LocaleText;
-  text?: LocaleBlockContent;
+  title?: LocaleString;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  text?: LocaleText;
 };
 
 export type ImageInGrid = {
@@ -213,10 +256,6 @@ export type ImageInGrid = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   colSize?: number;
@@ -264,6 +303,13 @@ export type LibraryReference = {
   [internalGroqTypeReferenceTo]?: "library";
 };
 
+export type ProgrammeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "programme";
+};
+
 export type LinkInternal = {
   _type: "linkInternal";
   label?: LocaleString;
@@ -273,7 +319,8 @@ export type LinkInternal = {
     | ExhibitionReference
     | ProductReference
     | EventReference
-    | LibraryReference;
+    | LibraryReference
+    | ProgrammeReference;
   withSubmenu?: boolean;
   subMenu?: Array<
     | ({
@@ -330,7 +377,8 @@ export type BlockContent = Array<
               | ExhibitionReference
               | ProductReference
               | EventReference
-              | LibraryReference;
+              | LibraryReference
+              | ProgrammeReference;
             _type: "linkInternal";
             _key: string;
           }
@@ -347,6 +395,9 @@ export type BlockContent = Array<
   | ({
       _key: string;
     } & Blockquote)
+  | ({
+      _key: string;
+    } & KeyValGroup)
   | {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -383,6 +434,96 @@ export type LocaleString = {
   _type: "localeString";
   fr?: string;
   en?: string;
+};
+
+export type Article = {
+  _id: string;
+  _type: "article";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo?: Seo;
+  title?: LocaleString;
+  slug?: Slug;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  modules?: Array<
+    | ({
+        _key: string;
+      } & TextUI)
+    | ({
+        _key: string;
+      } & ImagesUI)
+    | ({
+        _key: string;
+      } & VideoUI)
+    | ({
+        _key: string;
+      } & TextImageUI)
+    | ({
+        _key: string;
+      } & TextSidebarUI)
+    | ({
+        _key: string;
+      } & ListUI)
+    | ({
+        _key: string;
+      } & ListsUI)
+    | ({
+        _key: string;
+      } & SliderCardUI)
+    | ({
+        _key: string;
+      } & GridCardUI)
+    | ({
+        _key: string;
+      } & ProgrammeUI)
+  >;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type Partenaire = {
+  _id: string;
+  _type: "partenaire";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  text?: LocaleText;
+  slug?: Slug;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type Tag = {
@@ -424,6 +565,7 @@ export type Settings = {
     | ProductReference
     | EventReference
     | LibraryReference
+    | ProgrammeReference
   >;
   navSecondary?: Array<
     | ({
@@ -471,10 +613,6 @@ export type PageModulaire = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   tags?: Array<
@@ -536,10 +674,6 @@ export type Artist = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   modules?: Array<
@@ -590,12 +724,13 @@ export type Exhibition = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
+  links?: Array<
+    {
+      _key: string;
+    } & LinkExternal
+  >;
   artists?: Array<
     {
       _key: string;
@@ -682,10 +817,6 @@ export type Product = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   images?: Array<{
@@ -738,22 +869,6 @@ export type Product = {
   >;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
 export type Event = {
   _id: string;
   _type: "event";
@@ -768,10 +883,6 @@ export type Event = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   artists?: Array<
@@ -841,6 +952,25 @@ export type MuxVideo = {
   asset?: MuxVideoAssetReference;
 };
 
+export type Programme = {
+  _id: string;
+  _type: "programme";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo?: Seo;
+  title?: LocaleString;
+  slug?: Slug;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  items?: "expositions" | "evenements" | "hors-les-murs";
+};
+
 export type Library = {
   _id: string;
   _type: "library";
@@ -876,12 +1006,6 @@ export type Library = {
       _key: string;
     } & ProductReference
   >;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type Color = {
@@ -1132,16 +1256,20 @@ export type AllSanitySchemaTypes =
   | VideoUI
   | TextUI
   | ImagesUI
+  | PartenaireReference
+  | SidebarGenerique
   | FhcbDate
   | MessageContextuel
   | Cta
   | LocaleText
+  | KeyValGroup
   | KeyVal
   | ImageInGrid
   | Video
   | ContactLinkItem
   | LinkIcon
   | LibraryReference
+  | ProgrammeReference
   | LinkInternal
   | LinkExternal
   | Embed
@@ -1150,6 +1278,11 @@ export type AllSanitySchemaTypes =
   | Seo
   | LocaleBlockContent
   | LocaleString
+  | Article
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
+  | Partenaire
   | Tag
   | Settings
   | TagReference
@@ -1157,13 +1290,11 @@ export type AllSanitySchemaTypes =
   | Artist
   | Exhibition
   | Product
-  | SanityImageCrop
-  | SanityImageHotspot
   | Event
   | MuxVideoAssetReference
   | MuxVideo
+  | Programme
   | Library
-  | Slug
   | Color
   | RgbaColor
   | HsvaColor
@@ -1186,7 +1317,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: SETTINGS_QUERY
-// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{    ...,    _type == 'linkInternal' => {         ...,  link->{    _type,    slug,    imageCover{      asset->    }  },      subMenu[]{        ...,        _type == 'linkInternal' => {            ...,  link->{    _type,    slug,    imageCover{      asset->    }  },        }      }    },  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  navSocial[]{    ...  },  navSecondary[]{    ...,    _type == 'linkInternal' => {        ...,  link->{    _type,    slug  }    },  },  siteDescription{    ...  },  baseline{    ...  },}
+// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{    ...,    _type == 'linkInternal' => {         ...,  link->{    _type,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    }  },      subMenu[]{        ...,        _type == 'linkInternal' => {            ...,  link->{    _type,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    }  },        }      }    },  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  navSocial[]{    ...  },  navSecondary[]{    ...,    _type == 'linkInternal' => {        ...,  link->{    _type,    slug  }    },  },  siteDescription{    ...  },  baseline{    ...  },}
 export type SETTINGS_QUERY_RESULT = {
   _id: string;
   _type: "settings";
@@ -1212,25 +1343,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1240,25 +1364,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1268,25 +1385,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1296,25 +1406,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1324,25 +1427,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1352,25 +1448,39 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "programme";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1394,25 +1504,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        _type: "sanity.imageAsset";
-                        _createdAt: string;
-                        _updatedAt: string;
-                        _rev: string;
-                        originalFilename?: string;
-                        label?: string;
-                        title?: string;
-                        description?: string;
-                        altText?: string;
-                        sha1hash?: string;
-                        extension?: string;
-                        mimeType?: string;
-                        size?: number;
-                        assetId?: string;
-                        uploadId?: string;
-                        path?: string;
-                        url?: string;
-                        metadata?: SanityImageMetadata;
-                        source?: SanityAssetSourceData;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1422,25 +1525,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        _type: "sanity.imageAsset";
-                        _createdAt: string;
-                        _updatedAt: string;
-                        _rev: string;
-                        originalFilename?: string;
-                        label?: string;
-                        title?: string;
-                        description?: string;
-                        altText?: string;
-                        sha1hash?: string;
-                        extension?: string;
-                        mimeType?: string;
-                        size?: number;
-                        assetId?: string;
-                        uploadId?: string;
-                        path?: string;
-                        url?: string;
-                        metadata?: SanityImageMetadata;
-                        source?: SanityAssetSourceData;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1450,25 +1546,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        _type: "sanity.imageAsset";
-                        _createdAt: string;
-                        _updatedAt: string;
-                        _rev: string;
-                        originalFilename?: string;
-                        label?: string;
-                        title?: string;
-                        description?: string;
-                        altText?: string;
-                        sha1hash?: string;
-                        extension?: string;
-                        mimeType?: string;
-                        size?: number;
-                        assetId?: string;
-                        uploadId?: string;
-                        path?: string;
-                        url?: string;
-                        metadata?: SanityImageMetadata;
-                        source?: SanityAssetSourceData;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1478,25 +1567,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        _type: "sanity.imageAsset";
-                        _createdAt: string;
-                        _updatedAt: string;
-                        _rev: string;
-                        originalFilename?: string;
-                        label?: string;
-                        title?: string;
-                        description?: string;
-                        altText?: string;
-                        sha1hash?: string;
-                        extension?: string;
-                        mimeType?: string;
-                        size?: number;
-                        assetId?: string;
-                        uploadId?: string;
-                        path?: string;
-                        url?: string;
-                        metadata?: SanityImageMetadata;
-                        source?: SanityAssetSourceData;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1506,25 +1588,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        _type: "sanity.imageAsset";
-                        _createdAt: string;
-                        _updatedAt: string;
-                        _rev: string;
-                        originalFilename?: string;
-                        label?: string;
-                        title?: string;
-                        description?: string;
-                        altText?: string;
-                        sha1hash?: string;
-                        extension?: string;
-                        mimeType?: string;
-                        size?: number;
-                        assetId?: string;
-                        uploadId?: string;
-                        path?: string;
-                        url?: string;
-                        metadata?: SanityImageMetadata;
-                        source?: SanityAssetSourceData;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1534,25 +1609,39 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        _type: "sanity.imageAsset";
-                        _createdAt: string;
-                        _updatedAt: string;
-                        _rev: string;
-                        originalFilename?: string;
-                        label?: string;
-                        title?: string;
-                        description?: string;
-                        altText?: string;
-                        sha1hash?: string;
-                        extension?: string;
-                        mimeType?: string;
-                        size?: number;
-                        assetId?: string;
-                        uploadId?: string;
-                        path?: string;
-                        url?: string;
-                        metadata?: SanityImageMetadata;
-                        source?: SanityAssetSourceData;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "programme";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1616,6 +1705,10 @@ export type SETTINGS_QUERY_RESULT = {
           _type: "product";
           slug: Slug | null;
         }
+      | {
+          _type: "programme";
+          slug: Slug | null;
+        }
       | null;
     withSubmenu?: boolean;
     subMenu?: Array<
@@ -1634,6 +1727,7 @@ export type SETTINGS_QUERY_RESULT = {
     | LibraryReference
     | PageModulaireReference
     | ProductReference
+    | ProgrammeReference
   >;
   navSecondary: Array<
     | {
@@ -1669,6 +1763,10 @@ export type SETTINGS_QUERY_RESULT = {
             }
           | {
               _type: "product";
+              slug: Slug | null;
+            }
+          | {
+              _type: "programme";
               slug: Slug | null;
             }
           | null;
@@ -1709,7 +1807,7 @@ export type SETTINGS_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: HOME_QUERY
-// Query: *[_type == "pageModulaire" && homePage == true][0]{  ...,  seo{      ...,  metaImage{    asset->  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->,  caption,  alt,  author,  copyright  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->,  caption,  alt,  author,  copyright    },    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    },    sidebar[]{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "page" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> }  },    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "page" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> }  },    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "image": coalesce(imageCover, image){ asset-> },      dateStart,      dateEnd,      dates    }  }  }}
+// Query: *[_type == "pageModulaire" && homePage == true][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }  }}
 export type HOME_QUERY_RESULT = {
   _id: string;
   _type: "pageModulaire";
@@ -1722,26 +1820,7 @@ export type HOME_QUERY_RESULT = {
     metaDescription?: string;
     metaImage: {
       asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
+        url: string | null;
       } | null;
     } | null;
   } | null;
@@ -1753,10 +1832,6 @@ export type HOME_QUERY_RESULT = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   tags?: Array<
@@ -1781,19 +1856,25 @@ export type HOME_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              name?: string;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -1841,10 +1922,6 @@ export type HOME_QUERY_RESULT = {
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
                 _type: "image";
               };
               artists?: Array<
@@ -1913,27 +1990,25 @@ export type HOME_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
               artists: Array<{
                 name: string | null;
               }> | null;
@@ -1994,19 +2069,25 @@ export type HOME_QUERY_RESULT = {
               _rev: string;
               seo?: Seo;
               homePage?: boolean;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               tags?: Array<
                 {
                   _key: string;
@@ -2080,25 +2161,18 @@ export type HOME_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               images?: Array<{
@@ -2168,30 +2242,19 @@ export type HOME_QUERY_RESULT = {
           image: {
             asset: {
               _id: string;
-              _type: "sanity.imageAsset";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              originalFilename?: string;
-              label?: string;
-              title?: string;
-              description?: string;
-              altText?: string;
-              sha1hash?: string;
-              extension?: string;
-              mimeType?: string;
-              size?: number;
-              assetId?: string;
-              uploadId?: string;
-              path?: string;
-              url?: string;
-              metadata?: SanityImageMetadata;
-              source?: SanityAssetSourceData;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
             } | null;
-            caption: LocaleString | null;
-            alt: LocaleString | null;
-            author: string | null;
-            copyright: string | null;
           } | null;
           colSize?: number;
         }> | null;
@@ -2220,7 +2283,7 @@ export type HOME_QUERY_RESULT = {
           _key: string;
           _type: "listItem";
           title?: LocaleString;
-          content?: LocaleString;
+          content?: LocaleText;
           link?: LinkInternal;
           linkExternal?: LinkExternal;
         }> | null;
@@ -2244,28 +2307,21 @@ export type HOME_QUERY_RESULT = {
               _id: string;
               title: LocaleString | null;
               slug: Slug | null;
-              image: {
+              imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               dateStart: null;
@@ -2281,28 +2337,21 @@ export type HOME_QUERY_RESULT = {
               _id: string;
               title: LocaleString | null;
               slug: Slug | null;
-              image: {
+              imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               dateStart: null;
@@ -2338,10 +2387,6 @@ export type HOME_QUERY_RESULT = {
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
                 _type: "image";
               };
               artists?: Array<
@@ -2410,27 +2455,25 @@ export type HOME_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
               artists: Array<{
                 name: string | null;
               }> | null;
@@ -2491,19 +2534,25 @@ export type HOME_QUERY_RESULT = {
               _rev: string;
               seo?: Seo;
               homePage?: boolean;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               tags?: Array<
                 {
                   _key: string;
@@ -2577,25 +2626,18 @@ export type HOME_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               images?: Array<{
@@ -2660,30 +2702,19 @@ export type HOME_QUERY_RESULT = {
         image: {
           asset: {
             _id: string;
-            _type: "sanity.imageAsset";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            originalFilename?: string;
-            label?: string;
-            title?: string;
-            description?: string;
-            altText?: string;
-            sha1hash?: string;
-            extension?: string;
-            mimeType?: string;
-            size?: number;
-            assetId?: string;
-            uploadId?: string;
-            path?: string;
-            url?: string;
-            metadata?: SanityImageMetadata;
-            source?: SanityAssetSourceData;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
           } | null;
-          caption: LocaleString | null;
-          alt: LocaleString | null;
-          author: string | null;
-          copyright: string | null;
         } | null;
         text: {
           _type: "localeBlockContent";
@@ -2719,10 +2750,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -2772,10 +2799,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -2846,12 +2869,13 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -2957,10 +2981,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -3038,10 +3058,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -3093,6 +3109,27 @@ export type HOME_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -3132,6 +3169,44 @@ export type HOME_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -3167,10 +3242,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -3220,10 +3291,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -3294,12 +3361,13 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -3405,10 +3473,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -3486,10 +3550,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -3541,6 +3601,27 @@ export type HOME_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -3580,6 +3661,44 @@ export type HOME_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -3623,10 +3742,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -3676,10 +3791,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -3750,12 +3861,13 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -3861,10 +3973,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -3942,10 +4050,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -3997,6 +4101,27 @@ export type HOME_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -4036,6 +4161,44 @@ export type HOME_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -4071,10 +4234,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -4124,10 +4283,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -4198,12 +4353,13 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -4309,10 +4465,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -4390,10 +4542,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -4445,6 +4593,27 @@ export type HOME_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -4484,910 +4653,109 @@ export type HOME_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
         } | null;
-        sidebar: Array<{
-          _key: string;
-          _type: "localeBlockContent";
-          fr: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
+        sidebar: {
+          commissariat: Array<
+            {
+              _key: string;
+            } & KeyVal
           > | null;
-          en: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-          > | null;
-        }> | null;
+          coProduction: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+          partenaires: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+        } | null;
       }
     | {
         _key: string;
@@ -5431,10 +4799,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -5484,10 +4848,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -5558,12 +4918,13 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -5669,10 +5030,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -5750,10 +5107,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -5805,6 +5158,27 @@ export type HOME_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -5844,6 +5218,44 @@ export type HOME_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -5879,10 +5291,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -5932,10 +5340,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -6006,12 +5410,13 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -6117,10 +5522,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -6198,10 +5599,6 @@ export type HOME_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -6253,6 +5650,27 @@ export type HOME_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -6292,6 +5710,44 @@ export type HOME_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -6343,7 +5799,7 @@ export type HOME_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: PAGE_MODULAIRE_QUERY
-// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->,  caption,  alt,  author,  copyright  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->,  caption,  alt,  author,  copyright    },    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    },    sidebar[]{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "page" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> }  },    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "page" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> }  },    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "image": coalesce(imageCover, image){ asset-> },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
 export type PAGE_MODULAIRE_QUERY_RESULT = {
   _id: string;
   _type: "pageModulaire";
@@ -6356,26 +5812,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
     metaDescription?: string;
     metaImage: {
       asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
+        url: string | null;
       } | null;
     } | null;
   } | null;
@@ -6387,10 +5824,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   tags?: Array<
@@ -6415,19 +5848,25 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              name?: string;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -6475,10 +5914,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
                 _type: "image";
               };
               artists?: Array<
@@ -6547,27 +5982,25 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
               artists: Array<{
                 name: string | null;
               }> | null;
@@ -6628,19 +6061,25 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _rev: string;
               seo?: Seo;
               homePage?: boolean;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               tags?: Array<
                 {
                   _key: string;
@@ -6714,25 +6153,18 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               images?: Array<{
@@ -6802,30 +6234,19 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
           image: {
             asset: {
               _id: string;
-              _type: "sanity.imageAsset";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              originalFilename?: string;
-              label?: string;
-              title?: string;
-              description?: string;
-              altText?: string;
-              sha1hash?: string;
-              extension?: string;
-              mimeType?: string;
-              size?: number;
-              assetId?: string;
-              uploadId?: string;
-              path?: string;
-              url?: string;
-              metadata?: SanityImageMetadata;
-              source?: SanityAssetSourceData;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
             } | null;
-            caption: LocaleString | null;
-            alt: LocaleString | null;
-            author: string | null;
-            copyright: string | null;
           } | null;
           colSize?: number;
         }> | null;
@@ -6854,7 +6275,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
           _key: string;
           _type: "listItem";
           title?: LocaleString;
-          content?: LocaleString;
+          content?: LocaleText;
           link?: LinkInternal;
           linkExternal?: LinkExternal;
         }> | null;
@@ -6878,28 +6299,21 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _id: string;
               title: LocaleString | null;
               slug: Slug | null;
-              image: {
+              imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               dateStart: null;
@@ -6915,28 +6329,21 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _id: string;
               title: LocaleString | null;
               slug: Slug | null;
-              image: {
+              imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               dateStart: null;
@@ -6972,10 +6379,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
                 _type: "image";
               };
               artists?: Array<
@@ -7044,27 +6447,25 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
               artists: Array<{
                 name: string | null;
               }> | null;
@@ -7125,19 +6526,25 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _rev: string;
               seo?: Seo;
               homePage?: boolean;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               tags?: Array<
                 {
                   _key: string;
@@ -7211,25 +6618,18 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               images?: Array<{
@@ -7294,30 +6694,19 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
         image: {
           asset: {
             _id: string;
-            _type: "sanity.imageAsset";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            originalFilename?: string;
-            label?: string;
-            title?: string;
-            description?: string;
-            altText?: string;
-            sha1hash?: string;
-            extension?: string;
-            mimeType?: string;
-            size?: number;
-            assetId?: string;
-            uploadId?: string;
-            path?: string;
-            url?: string;
-            metadata?: SanityImageMetadata;
-            source?: SanityAssetSourceData;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
           } | null;
-          caption: LocaleString | null;
-          alt: LocaleString | null;
-          author: string | null;
-          copyright: string | null;
         } | null;
         text: {
           _type: "localeBlockContent";
@@ -7353,10 +6742,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -7406,10 +6791,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -7480,12 +6861,13 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -7591,10 +6973,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -7672,10 +7050,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -7727,6 +7101,27 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -7766,6 +7161,44 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -7801,10 +7234,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -7854,10 +7283,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -7928,12 +7353,13 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -8039,10 +7465,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -8120,10 +7542,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -8175,6 +7593,27 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -8214,6 +7653,44 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -8257,10 +7734,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -8310,10 +7783,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -8384,12 +7853,13 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -8495,10 +7965,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -8576,10 +8042,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -8631,6 +8093,27 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -8670,6 +8153,44 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -8705,10 +8226,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -8758,10 +8275,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -8832,12 +8345,13 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -8943,10 +8457,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -9024,10 +8534,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -9079,6 +8585,27 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -9118,910 +8645,109 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
         } | null;
-        sidebar: Array<{
-          _key: string;
-          _type: "localeBlockContent";
-          fr: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
+        sidebar: {
+          commissariat: Array<
+            {
+              _key: string;
+            } & KeyVal
           > | null;
-          en: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-          > | null;
-        }> | null;
+          coProduction: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+          partenaires: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+        } | null;
       }
     | {
         _key: string;
@@ -10065,10 +8791,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -10118,10 +8840,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -10192,12 +8910,13 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -10303,10 +9022,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -10384,10 +9099,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -10439,6 +9150,27 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -10478,6 +9210,44 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -10513,10 +9283,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -10566,10 +9332,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -10640,12 +9402,13 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -10751,10 +9514,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -10832,10 +9591,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -10887,6 +9642,27 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -10926,6 +9702,44 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -10977,7 +9791,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: ARTIST_QUERY
-// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->,  caption,  alt,  author,  copyright  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->,  caption,  alt,  author,  copyright    },    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    },    sidebar[]{        ...,  fr[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  },  en[]{    ...,    markDefs[] {      ...,      _type == "linkInternal" => {        ...,        reference->,      },    }  }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "page" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> }  },    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){ asset-> },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "page" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){ asset-> }  },    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "image": coalesce(imageCover, image){ asset-> },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
 export type ARTIST_QUERY_RESULT = {
   _id: string;
   _type: "artist";
@@ -10990,26 +9804,7 @@ export type ARTIST_QUERY_RESULT = {
     metaDescription?: string;
     metaImage: {
       asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
+        url: string | null;
       } | null;
     } | null;
   } | null;
@@ -11020,10 +9815,6 @@ export type ARTIST_QUERY_RESULT = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   modules: Array<
@@ -11043,19 +9834,25 @@ export type ARTIST_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              name?: string;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -11103,10 +9900,6 @@ export type ARTIST_QUERY_RESULT = {
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
                 _type: "image";
               };
               artists?: Array<
@@ -11175,27 +9968,25 @@ export type ARTIST_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
               artists: Array<{
                 name: string | null;
               }> | null;
@@ -11256,19 +10047,25 @@ export type ARTIST_QUERY_RESULT = {
               _rev: string;
               seo?: Seo;
               homePage?: boolean;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               tags?: Array<
                 {
                   _key: string;
@@ -11342,25 +10139,18 @@ export type ARTIST_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               images?: Array<{
@@ -11430,30 +10220,19 @@ export type ARTIST_QUERY_RESULT = {
           image: {
             asset: {
               _id: string;
-              _type: "sanity.imageAsset";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              originalFilename?: string;
-              label?: string;
-              title?: string;
-              description?: string;
-              altText?: string;
-              sha1hash?: string;
-              extension?: string;
-              mimeType?: string;
-              size?: number;
-              assetId?: string;
-              uploadId?: string;
-              path?: string;
-              url?: string;
-              metadata?: SanityImageMetadata;
-              source?: SanityAssetSourceData;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
             } | null;
-            caption: LocaleString | null;
-            alt: LocaleString | null;
-            author: string | null;
-            copyright: string | null;
           } | null;
           colSize?: number;
         }> | null;
@@ -11482,7 +10261,7 @@ export type ARTIST_QUERY_RESULT = {
           _key: string;
           _type: "listItem";
           title?: LocaleString;
-          content?: LocaleString;
+          content?: LocaleText;
           link?: LinkInternal;
           linkExternal?: LinkExternal;
         }> | null;
@@ -11506,28 +10285,21 @@ export type ARTIST_QUERY_RESULT = {
               _id: string;
               title: LocaleString | null;
               slug: Slug | null;
-              image: {
+              imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               dateStart: null;
@@ -11543,28 +10315,21 @@ export type ARTIST_QUERY_RESULT = {
               _id: string;
               title: LocaleString | null;
               slug: Slug | null;
-              image: {
+              imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               dateStart: null;
@@ -11600,10 +10365,6 @@ export type ARTIST_QUERY_RESULT = {
                 media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
                 _type: "image";
               };
               artists?: Array<
@@ -11672,27 +10433,25 @@ export type ARTIST_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
               artists: Array<{
                 name: string | null;
               }> | null;
@@ -11753,19 +10512,25 @@ export type ARTIST_QUERY_RESULT = {
               _rev: string;
               seo?: Seo;
               homePage?: boolean;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                caption?: LocaleString;
-                alt?: LocaleString;
-                author?: string;
-                copyright?: string;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
               tags?: Array<
                 {
                   _key: string;
@@ -11839,25 +10604,18 @@ export type ARTIST_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
               images?: Array<{
@@ -11922,30 +10680,19 @@ export type ARTIST_QUERY_RESULT = {
         image: {
           asset: {
             _id: string;
-            _type: "sanity.imageAsset";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            originalFilename?: string;
-            label?: string;
-            title?: string;
-            description?: string;
-            altText?: string;
-            sha1hash?: string;
-            extension?: string;
-            mimeType?: string;
-            size?: number;
-            assetId?: string;
-            uploadId?: string;
-            path?: string;
-            url?: string;
-            metadata?: SanityImageMetadata;
-            source?: SanityAssetSourceData;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
           } | null;
-          caption: LocaleString | null;
-          alt: LocaleString | null;
-          author: string | null;
-          copyright: string | null;
         } | null;
         text: {
           _type: "localeBlockContent";
@@ -11981,10 +10728,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -12034,10 +10777,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -12108,12 +10847,13 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -12219,10 +10959,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -12300,10 +11036,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -12355,6 +11087,27 @@ export type ARTIST_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -12394,6 +11147,44 @@ export type ARTIST_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -12429,10 +11220,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -12482,10 +11269,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -12556,12 +11339,13 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -12667,10 +11451,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -12748,10 +11528,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -12803,6 +11579,27 @@ export type ARTIST_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -12842,6 +11639,44 @@ export type ARTIST_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -12885,10 +11720,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -12938,10 +11769,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -13012,12 +11839,13 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -13123,10 +11951,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -13204,10 +12028,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -13259,6 +12079,27 @@ export type ARTIST_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -13298,6 +12139,44 @@ export type ARTIST_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -13333,10 +12212,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -13386,10 +12261,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -13460,12 +12331,13 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -13571,10 +12443,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -13652,10 +12520,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -13707,6 +12571,27 @@ export type ARTIST_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -13746,910 +12631,109 @@ export type ARTIST_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
         } | null;
-        sidebar: Array<{
-          _key: string;
-          _type: "localeBlockContent";
-          fr: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
+        sidebar: {
+          commissariat: Array<
+            {
+              _key: string;
+            } & KeyVal
           > | null;
-          en: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-          > | null;
-        }> | null;
+          coProduction: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+          partenaires: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+        } | null;
       }
     | {
         _key: string;
@@ -14693,10 +12777,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -14746,10 +12826,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -14820,12 +12896,13 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -14931,10 +13008,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -15012,10 +13085,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -15067,6 +13136,27 @@ export type ARTIST_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -15106,6 +13196,44 @@ export type ARTIST_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -15141,10 +13269,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             modules?: Array<
@@ -15194,10 +13318,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             artists?: Array<
@@ -15268,12 +13388,13 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
                             artists?: Array<
                               {
                                 _key: string;
@@ -15379,10 +13500,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             tags?: Array<
@@ -15460,10 +13577,6 @@ export type ARTIST_QUERY_RESULT = {
                               media?: unknown;
                               hotspot?: SanityImageHotspot;
                               crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
                               _type: "image";
                             };
                             images?: Array<{
@@ -15515,6 +13628,27 @@ export type ARTIST_QUERY_RESULT = {
                               | ProductReference
                             >;
                           }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
                         | null;
                       _type: "linkInternal";
                       _key: string;
@@ -15554,6 +13688,44 @@ export type ARTIST_QUERY_RESULT = {
                 crop?: SanityImageCrop;
                 _type: "image";
                 _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
                 markDefs: null;
               }
           > | null;
@@ -15598,8 +13770,4022 @@ export type ARTIST_QUERY_RESULT = {
 } | null;
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
+// Variable: EXPHIBITION_QUERY
+// Query: *[_type == "exhibition" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    artists[]->{      name    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
+export type EXPHIBITION_QUERY_RESULT = {
+  _id: string;
+  _type: "exhibition";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo: {
+    _type: "seo";
+    metaTitle?: string;
+    metaDescription?: string;
+    metaImage: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  } | null;
+  title?: LocaleString;
+  slug?: Slug;
+  imageCover: {
+    asset: {
+      _id: string;
+      assetId: string | null;
+      title: string | null;
+      altText: string | null;
+      description: string | null;
+      creditLine: null;
+      metadata: {
+        lqip: string | null;
+        dimensions: {
+          width: number | null;
+          height: number | null;
+        } | null;
+      } | null;
+    } | null;
+  } | null;
+  links?: Array<
+    {
+      _key: string;
+    } & LinkExternal
+  >;
+  artists: Array<{
+    name: string | null;
+  }> | null;
+  dates?: Array<
+    {
+      _key: string;
+    } & FhcbDate
+  >;
+  tags?: Array<
+    {
+      _key: string;
+    } & TagReference
+  >;
+  modules: Array<
+    | {
+        _key: string;
+        _type: "gridCardUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        items: Array<
+          | {
+              _id: string;
+              _type: "artist";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
+              _type: "event";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title?: LocaleString;
+              slug?: Slug;
+              imageCover?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              artists?: Array<
+                {
+                  _key: string;
+                } & ArtistReference
+              >;
+              dates?: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              >;
+              tags?: Array<
+                {
+                  _key: string;
+                } & TagReference
+              >;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+          | {
+              _id: string;
+              _type: "exhibition";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
+              artists: Array<{
+                name: string | null;
+              }> | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags?: Array<
+                {
+                  _key: string;
+                } & TagReference
+              >;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+          | {
+              _id: string;
+              _type: "pageModulaire";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              homePage?: boolean;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags?: Array<
+                {
+                  _key: string;
+                } & TagReference
+              >;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+          | {
+              _id: string;
+              _type: "product";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              prix: string | null;
+              qty?: number;
+              artist: {
+                name: string | null;
+              } | null;
+              subTitle?: string;
+              editeur?: string;
+              languages?: Array<string>;
+              publicationDate?: string;
+              metas?: Array<
+                {
+                  _key: string;
+                } & KeyVal
+              >;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              images?: Array<{
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }>;
+              chapo?: LocaleBlockContent;
+              text?: LocaleBlockContent;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+        > | null;
+        cta: {
+          _type: "cta";
+          internal?: LinkInternal;
+          external?: LinkExternal;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "imagesUI";
+        title: string | null;
+        gridSize?: number;
+        items: Array<{
+          _key: string;
+          _type: "imageInGrid";
+          image: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          colSize?: number;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "listsUI";
+        items: Array<{
+          _key: string;
+          _type: "listUI";
+          title?: LocaleString;
+          items?: Array<
+            {
+              _key: string;
+            } & ListItem
+          >;
+          cta?: Cta;
+        }> | null;
+        cta?: Cta;
+      }
+    | {
+        _key: string;
+        _type: "listUI";
+        title?: LocaleString;
+        items: Array<{
+          _key: string;
+          _type: "listItem";
+          title?: LocaleString;
+          content?: LocaleText;
+          link?: LinkInternal;
+          linkExternal?: LinkExternal;
+        }> | null;
+        cta: {
+          _type: "cta";
+          internal?: LinkInternal;
+          external?: LinkExternal;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "programmeUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        items: Array<
+          | {
+              _type: "event";
+              _id: string;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              dateStart: null;
+              dateEnd: null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+            }
+          | {
+              _type: "exhibition";
+              _id: string;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              dateStart: null;
+              dateEnd: null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+            }
+        > | null;
+      }
+    | {
+        _key: string;
+        _type: "sliderCardUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        items: Array<
+          | {
+              _id: string;
+              _type: "event";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title?: LocaleString;
+              slug?: Slug;
+              imageCover?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              artists?: Array<
+                {
+                  _key: string;
+                } & ArtistReference
+              >;
+              dates?: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              >;
+              tags?: Array<
+                {
+                  _key: string;
+                } & TagReference
+              >;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+          | {
+              _id: string;
+              _type: "exhibition";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              links?: Array<
+                {
+                  _key: string;
+                } & LinkExternal
+              >;
+              artists: Array<{
+                name: string | null;
+              }> | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags?: Array<
+                {
+                  _key: string;
+                } & TagReference
+              >;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+          | {
+              _id: string;
+              _type: "pageModulaire";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              homePage?: boolean;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags?: Array<
+                {
+                  _key: string;
+                } & TagReference
+              >;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+          | {
+              _id: string;
+              _type: "product";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              prix: string | null;
+              qty?: number;
+              artist: {
+                name: string | null;
+              } | null;
+              subTitle?: string;
+              editeur?: string;
+              languages?: Array<string>;
+              publicationDate?: string;
+              metas?: Array<
+                {
+                  _key: string;
+                } & KeyVal
+              >;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              images?: Array<{
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }>;
+              chapo?: LocaleBlockContent;
+              text?: LocaleBlockContent;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | EventReference
+                | ExhibitionReference
+                | PageModulaireReference
+                | ProductReference
+              >;
+            }
+        > | null;
+        cta: {
+          _type: "cta";
+          internal?: LinkInternal;
+          external?: LinkExternal;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "textImageUI";
+        image: {
+          asset: {
+            _id: string;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        text: {
+          _type: "localeBlockContent";
+          fr: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            homePage?: boolean;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+          en: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            homePage?: boolean;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+        } | null;
+        direction: "left" | "right" | null;
+      }
+    | {
+        _key: string;
+        _type: "textSidebarUI";
+        text: {
+          _type: "localeBlockContent";
+          fr: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            homePage?: boolean;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+          en: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            homePage?: boolean;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+        } | null;
+        sidebar: {
+          commissariat: Array<
+            {
+              _key: string;
+            } & KeyVal
+          > | null;
+          coProduction: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+          partenaires: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "textUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        text: {
+          _type: "localeBlockContent";
+          fr: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            homePage?: boolean;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+          en: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            homePage?: boolean;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "evenements"
+                              | "expositions"
+                              | "hors-les-murs";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "videoUI";
+        video: {
+          _type: "video";
+          caption?: LocaleString;
+          video?: MuxVideo;
+          placeholder: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+          } | null;
+          aspectRatio?: string;
+          colSize?: number;
+        } | null;
+      }
+  > | null;
+  rebonds?: ArrayOf<
+    | EventReference
+    | ExhibitionReference
+    | PageModulaireReference
+    | ProductReference
+  >;
+} | null;
+
+// Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: ALLPAGE_MODULAIRE_QUERY
-// Query: *[_type == "pageModulaire"]{  ...,  seo{      ...,  metaImage{    asset->  }  },}
+// Query: *[_type == "pageModulaire"]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },}
 export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
   _id: string;
   _type: "pageModulaire";
@@ -15612,26 +17798,7 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
     metaDescription?: string;
     metaImage: {
       asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
+        url: string | null;
       } | null;
     } | null;
   } | null;
@@ -15643,10 +17810,6 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
     _type: "image";
   };
   tags?: Array<
@@ -15698,10 +17861,11 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"settings\"][0]{\n  ...,\n  navPrimary[]{\n    ...,\n    _type == 'linkInternal' => {\n       \n  ...,\n  link->{\n    _type,\n    slug,\n    imageCover{\n      asset->\n    }\n  }\n,\n\n      subMenu[]{\n        ...,\n        _type == 'linkInternal' => {\n          \n  ...,\n  link->{\n    _type,\n    slug,\n    imageCover{\n      asset->\n    }\n  }\n,\n        }\n      }\n    },\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  navSocial[]{\n    ...\n  },\n  navSecondary[]{\n    ...,\n    _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n    },\n  },\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n}": SETTINGS_QUERY_RESULT;
-    '*[_type == "pageModulaire" && homePage == true][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->,\n  caption,\n  alt,\n  author,\n  copyright\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->,\n  caption,\n  alt,\n  author,\n  copyright\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    },\n    sidebar[]{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "page" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> }\n\n  },\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "page" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> }\n\n  },\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "image": coalesce(imageCover, image){ asset-> },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
-    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->,\n  caption,\n  alt,\n  author,\n  copyright\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->,\n  caption,\n  alt,\n  author,\n  copyright\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    },\n    sidebar[]{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "page" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> }\n\n  },\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "page" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> }\n\n  },\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "image": coalesce(imageCover, image){ asset-> },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
-    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->,\n  caption,\n  alt,\n  author,\n  copyright\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->,\n  caption,\n  alt,\n  author,\n  copyright\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    },\n    sidebar[]{\n      \n  ...,\n  fr[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  },\n  en[]{\n    ...,\n    markDefs[] {\n      ...,\n      _type == "linkInternal" => {\n        ...,\n        reference->,\n      },\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "page" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> }\n\n  },\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "page" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){ asset-> }\n\n  },\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "image": coalesce(imageCover, image){ asset-> },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
-    '*[_type == "pageModulaire"]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->\n  }\n\n  },\n}': ALLPAGE_MODULAIRE_QUERY_RESULT;
+    "*[_type == \"settings\"][0]{\n  ...,\n  navPrimary[]{\n    ...,\n    _type == 'linkInternal' => {\n       \n  ...,\n  link->{\n    _type,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    }\n  }\n,\n\n      subMenu[]{\n        ...,\n        _type == 'linkInternal' => {\n          \n  ...,\n  link->{\n    _type,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    }\n  }\n,\n        }\n      }\n    },\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  navSocial[]{\n    ...\n  },\n  navSecondary[]{\n    ...,\n    _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n    },\n  },\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n}": SETTINGS_QUERY_RESULT;
+    '*[_type == "pageModulaire" && homePage == true][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
+    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
+    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
+    '*[_type == "exhibition" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    artists[]->{\n      name\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': EXPHIBITION_QUERY_RESULT;
+    '*[_type == "pageModulaire"]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n}': ALLPAGE_MODULAIRE_QUERY_RESULT;
   }
 }
