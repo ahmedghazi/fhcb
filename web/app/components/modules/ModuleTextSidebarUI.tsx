@@ -9,6 +9,7 @@ import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 import useLocale from "@/app/context/LocaleContext";
 import { _localizeField } from "@/app/sanity-api/utils";
 import Sidebar from "../ui/Sidebar";
+import { SidebarGeneriqueExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 
 type Props = {
   input: TextSidebarUI;
@@ -23,7 +24,7 @@ const ModuleTextSidebarUI = ({ input }: Props) => {
         <div className='grid md:grid-cols-12 gap-gutter'>
           {sidebar && (
             <div className='md:col-span-3 modile__aside'>
-              <Sidebar input={sidebar} />
+              <Sidebar input={sidebar as SidebarGeneriqueExpanded} />
             </div>
           )}
 

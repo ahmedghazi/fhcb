@@ -1,4 +1,7 @@
 .sidebar {
+  h3 {
+    text-transform: uppercase;
+  }
   &__item {
     border-bottom: var(--border);
     padding-bottom: 1rem;

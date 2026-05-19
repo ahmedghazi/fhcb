@@ -7,76 +7,61 @@ import {
   _localizeField,
   _localizeText,
 } from "@/app/sanity-api/utils";
-import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import {
+  ProductExpanded,
+  SanityImageAssetFull,
+} from "@/app/sanity-api/types/sanity-expanded.types";
 import { Link } from "next-view-transitions";
+import CardInnerSM from "./CardInnerSM";
+import CardInnerMD from "./CardInnerMD";
 
 type Props = {
   input: ProductExpanded;
-  look?: "l1a" | "l3";
+  // look?: "l1a" | "l3";
+  size?: "sm" | "md" | "lg";
 };
 
-const CardProduct = ({ input, look = "l1a" }: Props) => {
+const CardProduct = ({ input, size = "md" }: Props) => {
   const { _type, title, artist, imageCover, prix, tags } = input;
   const tagsList = tags?.map((tag) => _localizeField(tag.title)).join(", ");
 
-  const isLandscapeOrPortrait =
-    (imageCover?.asset?.metadata?.dimensions?.aspectRatio ?? 0) >= 1
-      ? "is-landscape"
-      : "is-portrait";
+  const isLandscape =
+    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+
   return (
     <div
       className={clsx(
-        "card",
-        `card--${look}`,
-        look === "l3" && "md:col-span-2",
-        `card--${_type}`,
-        `card--${isLandscapeOrPortrait}`,
+        "card card--product",
+        `card--${size}`,
+        size === "md" && "md:col-span-2",
+        isLandscape && `card--is-landscape`,
+        !isLandscape && "card--is-portrait",
       )}>
-      {look === "l1a" && (
-        <>
-          <div className='card__header'>
-            <div className='card__tag c-tag'>{tagsList}</div>
-            <h2 className='card__title c-h2'>{artist?.name}</h2>
-            <div className='card__subtitle c-h3'>{_localizeField(title)}</div>
-          </div>
-          <div className='card__figure'>
-            <Figure asset={imageCover?.asset} />
-          </div>
-        </>
+      {size === "sm" && (
+        <CardInnerSM
+          _type={_type}
+          tags={tagsList || ""}
+          title={artist?.name || ""}
+          subtitle={_localizeField(title)}
+          info={prix ? `${prix}€` : ""}
+          imageCover={imageCover?.asset as SanityImageAssetFull}
+          linkPrimary={_linkResolver(input)}
+          linkPrimaryLabel={_localizeText("discover")}
+        />
       )}
-      {look === "l3" && (
-        <>
-          <div className='card__header__figure'>
-            <div className='card__header'>
-              <div className='top'>
-                <div className='card__tag c-tag'>{"item.tag"}</div>
-                <h2 className='card__title c-h2'>{artist?.name}</h2>
-
-                <div className='card__subtitle c-h3'>
-                  {_localizeField(title)}
-                </div>
-              </div>
-
-              <div className='bottom'>
-                {prix && <div className='card__info c-body-xs'>{prix}€</div>}
-              </div>
-            </div>
-            <div className='card__figure'>
-              <Figure asset={imageCover?.asset} />
-            </div>
-          </div>
-        </>
+      {size === "md" && (
+        <CardInnerMD
+          _type={_type}
+          tags={tagsList || ""}
+          title={artist?.name || ""}
+          subtitle={_localizeField(title)}
+          info={prix ? `${prix}€` : ""}
+          imageCover={imageCover?.asset as SanityImageAssetFull}
+          linkPrimary={_linkResolver(input)}
+          linkPrimaryLabel={_localizeText("discover")}
+        />
       )}
-      <div className='card__footer'>
-        {look === "l1a" && <div className='card__info c-body-xs'>{prix}€</div>}
-        <div className='btns'>
-          {/* <button className='btn btn--primary'>Bouton primary</button> */}
-          <Link href={_linkResolver(input)} className='btn btn--primary'>
-            {_localizeText("discover")}
-          </Link>
-          <button className='btn btn--secondary'>Bouton secondary</button>
-        </div>
-      </div>
     </div>
   );
 };

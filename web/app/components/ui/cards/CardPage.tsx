@@ -8,34 +8,58 @@ import {
   _localizeText,
 } from "@/app/sanity-api/utils";
 import Link from "next/link";
+import CardInnerSM from "./CardInnerSM";
+import {
+  PageModulaireExpanded,
+  SanityImageAssetFull,
+} from "@/app/sanity-api/types/sanity-expanded.types";
+import CardInnerMD from "./CardInnerMD";
 
 type Props = {
-  input: PageModulaire;
+  input: PageModulaireExpanded;
+  size?: "sm" | "md" | "lg";
 };
 
-const CardPage = ({ input }: Props) => {
+const CardPage = ({ input, size = "md" }: Props) => {
+  const { _type, title, tags, imageCover } = input;
+  const tagsList = tags?.map((tag) => _localizeField(tag.title)).join(", ");
+  const isLandscape =
+    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return (
     <div
-      className={clsx("card card--l1a", input._type && `card--${input._type}`)}>
-      <div className='card__header'>
-        <div className='card__tag c-tag'>{"input.tag"}</div>
-        <h2 className='card__title c-h2'>{_localizeField(input.title)}</h2>
+      className={clsx(
+        "card card--page",
+        `card--${size}`,
 
-        <div className='card__subtitle c-h3'>{"input.subtitle"}</div>
-      </div>
-      <div className='card__figure'>
-        <Figure asset={input.imageCover?.asset} />
-      </div>
-      <div className='card__footer'>
-        <div className='card__info c-body-xs'>{"input.infos"}</div>
-        <div className='btns'>
-          <Link href={_linkResolver(input)} className='btn btn--primary'>
-            {_localizeText("discover")}
-          </Link>
-          {/* <button className='btn btn--primary'>Bouton primary</button>
-          <button className='btn btn--secondary'>Bouton secondary</button> */}
-        </div>
-      </div>
+        size === "md" && "md:col-span-2",
+        isLandscape && `card--is-landscape`,
+        !isLandscape && "card--is-portrait",
+      )}>
+      {size === "sm" && (
+        <CardInnerSM
+          _type={_type}
+          tags={tagsList || ""}
+          title={_localizeField(input.title)}
+          // subtitle={_localizeField(title)}
+          info={"infos"}
+          imageCover={imageCover?.asset as SanityImageAssetFull}
+          linkPrimary={_linkResolver(input)}
+          linkPrimaryLabel={_localizeText("discover")}
+        />
+      )}
+      {size === "md" && (
+        <CardInnerMD
+          _type={_type}
+          tags={tagsList || ""}
+          title={_localizeField(input.title)}
+          // subtitle={_localizeField(title)}
+          info={"infos"}
+          imageCover={imageCover?.asset as SanityImageAssetFull}
+          linkPrimary={_linkResolver(input)}
+          linkPrimaryLabel={_localizeText("discover")}
+        />
+      )}
     </div>
   );
 };

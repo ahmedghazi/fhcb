@@ -263,7 +263,8 @@ export type ImageInGrid = {
 
 export type Video = {
   _type: "video";
-  caption?: LocaleString;
+  title?: LocaleString;
+  embedUrl?: string;
   video?: MuxVideo;
   placeholder?: {
     asset?: SanityImageAssetReference;
@@ -272,8 +273,6 @@ export type Video = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  aspectRatio?: string;
-  colSize?: number;
 };
 
 export type ContactLinkItem = {
@@ -885,6 +884,8 @@ export type Event = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  subTitle?: LocaleText;
+  description?: LocaleText;
   artists?: Array<
     {
       _key: string;
@@ -968,7 +969,12 @@ export type Programme = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  items?: "expositions" | "evenements" | "hors-les-murs";
+  items?:
+    | "exhibitions-current"
+    | "exhibitions-futur"
+    | "exhibitions-out-of-the-box"
+    | "events"
+    | "guided-tours";
 };
 
 export type Library = {
@@ -1317,7 +1323,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: SETTINGS_QUERY
-// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{    ...,    _type == 'linkInternal' => {         ...,  link->{    _type,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    }  },      subMenu[]{        ...,        _type == 'linkInternal' => {            ...,  link->{    _type,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    }  },        }      }    },  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  navSocial[]{    ...  },  navSecondary[]{    ...,    _type == 'linkInternal' => {        ...,  link->{    _type,    slug  }    },  },  siteDescription{    ...  },  baseline{    ...  },}
+// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{    ...,    _type == 'linkInternal' => {         ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      asset->{        _id      }    },  },      subMenu[]{        ...,        _type == 'linkInternal' => {            ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      asset->{        _id      }    },  },        }      }    },  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  navSocial[]{    ...  },  navSecondary[]{    ...,    _type == 'linkInternal' => {        ...,  link->{    _type,    slug  }    },  },  siteDescription{    ...  },  baseline{    ...  },}
 export type SETTINGS_QUERY_RESULT = {
   _id: string;
   _type: "settings";
@@ -1343,18 +1349,6 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
                 } | null;
               } | null;
             }
@@ -1364,18 +1358,6 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
                 } | null;
               } | null;
             }
@@ -1385,18 +1367,6 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
                 } | null;
               } | null;
             }
@@ -1406,18 +1376,6 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
                 } | null;
               } | null;
             }
@@ -1427,18 +1385,6 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
                 } | null;
               } | null;
             }
@@ -1448,18 +1394,6 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
                 } | null;
               } | null;
             }
@@ -1469,18 +1403,6 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
                 } | null;
               } | null;
             }
@@ -1504,18 +1426,6 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        assetId: string | null;
-                        title: string | null;
-                        altText: string | null;
-                        description: string | null;
-                        creditLine: null;
-                        metadata: {
-                          lqip: string | null;
-                          dimensions: {
-                            width: number | null;
-                            height: number | null;
-                          } | null;
-                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1525,18 +1435,6 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        assetId: string | null;
-                        title: string | null;
-                        altText: string | null;
-                        description: string | null;
-                        creditLine: null;
-                        metadata: {
-                          lqip: string | null;
-                          dimensions: {
-                            width: number | null;
-                            height: number | null;
-                          } | null;
-                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1546,18 +1444,6 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        assetId: string | null;
-                        title: string | null;
-                        altText: string | null;
-                        description: string | null;
-                        creditLine: null;
-                        metadata: {
-                          lqip: string | null;
-                          dimensions: {
-                            width: number | null;
-                            height: number | null;
-                          } | null;
-                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1567,18 +1453,6 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        assetId: string | null;
-                        title: string | null;
-                        altText: string | null;
-                        description: string | null;
-                        creditLine: null;
-                        metadata: {
-                          lqip: string | null;
-                          dimensions: {
-                            width: number | null;
-                            height: number | null;
-                          } | null;
-                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1588,18 +1462,6 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        assetId: string | null;
-                        title: string | null;
-                        altText: string | null;
-                        description: string | null;
-                        creditLine: null;
-                        metadata: {
-                          lqip: string | null;
-                          dimensions: {
-                            width: number | null;
-                            height: number | null;
-                          } | null;
-                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1609,18 +1471,6 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        assetId: string | null;
-                        title: string | null;
-                        altText: string | null;
-                        description: string | null;
-                        creditLine: null;
-                        metadata: {
-                          lqip: string | null;
-                          dimensions: {
-                            width: number | null;
-                            height: number | null;
-                          } | null;
-                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1630,18 +1480,6 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
-                        assetId: string | null;
-                        title: string | null;
-                        altText: string | null;
-                        description: string | null;
-                        creditLine: null;
-                        metadata: {
-                          lqip: string | null;
-                          dimensions: {
-                            width: number | null;
-                            height: number | null;
-                          } | null;
-                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1807,7 +1645,7 @@ export type SETTINGS_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: HOME_QUERY
-// Query: *[_type == "pageModulaire" && homePage == true][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }  }}
+// Query: *[_type == "pageModulaire" && homePage == true][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }  }}
 export type HOME_QUERY_RESULT = {
   _id: string;
   _type: "pageModulaire";
@@ -1915,30 +1753,40 @@ export type HOME_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -1977,6 +1825,7 @@ export type HOME_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -2380,30 +2229,40 @@ export type HOME_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -2442,6 +2301,7 @@ export type HOME_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -2801,6 +2661,8 @@ export type HOME_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -3126,9 +2988,11 @@ export type HOME_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -3293,6 +3157,8 @@ export type HOME_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -3618,9 +3484,11 @@ export type HOME_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -3793,6 +3661,8 @@ export type HOME_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -4118,9 +3988,11 @@ export type HOME_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -4285,6 +4157,8 @@ export type HOME_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -4610,9 +4484,11 @@ export type HOME_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -4850,6 +4726,8 @@ export type HOME_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -5175,9 +5053,11 @@ export type HOME_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -5342,6 +5222,8 @@ export type HOME_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -5667,9 +5549,11 @@ export type HOME_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -5758,7 +5642,8 @@ export type HOME_QUERY_RESULT = {
         _type: "videoUI";
         video: {
           _type: "video";
-          caption?: LocaleString;
+          title?: LocaleString;
+          embedUrl?: string;
           video?: MuxVideo;
           placeholder: {
             asset: {
@@ -5784,8 +5669,6 @@ export type HOME_QUERY_RESULT = {
               source?: SanityAssetSourceData;
             } | null;
           } | null;
-          aspectRatio?: string;
-          colSize?: number;
         } | null;
       }
   > | null;
@@ -5799,7 +5682,7 @@ export type HOME_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: PAGE_MODULAIRE_QUERY
-// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
 export type PAGE_MODULAIRE_QUERY_RESULT = {
   _id: string;
   _type: "pageModulaire";
@@ -5907,30 +5790,40 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -5969,6 +5862,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -6372,30 +6266,40 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -6434,6 +6338,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -6793,6 +6698,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -7118,9 +7025,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -7285,6 +7194,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -7610,9 +7521,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -7785,6 +7698,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -8110,9 +8025,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -8277,6 +8194,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -8602,9 +8521,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -8842,6 +8763,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -9167,9 +9090,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -9334,6 +9259,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -9659,9 +9586,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -9750,7 +9679,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
         _type: "videoUI";
         video: {
           _type: "video";
-          caption?: LocaleString;
+          title?: LocaleString;
+          embedUrl?: string;
           video?: MuxVideo;
           placeholder: {
             asset: {
@@ -9776,8 +9706,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               source?: SanityAssetSourceData;
             } | null;
           } | null;
-          aspectRatio?: string;
-          colSize?: number;
         } | null;
       }
   > | null;
@@ -9791,7 +9719,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: ARTIST_QUERY
-// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
 export type ARTIST_QUERY_RESULT = {
   _id: string;
   _type: "artist";
@@ -9893,30 +9821,40 @@ export type ARTIST_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -9955,6 +9893,7 @@ export type ARTIST_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -10358,30 +10297,40 @@ export type ARTIST_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -10420,6 +10369,7 @@ export type ARTIST_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -10779,6 +10729,8 @@ export type ARTIST_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -11104,9 +11056,11 @@ export type ARTIST_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -11271,6 +11225,8 @@ export type ARTIST_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -11596,9 +11552,11 @@ export type ARTIST_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -11771,6 +11729,8 @@ export type ARTIST_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -12096,9 +12056,11 @@ export type ARTIST_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -12263,6 +12225,8 @@ export type ARTIST_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -12588,9 +12552,11 @@ export type ARTIST_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -12828,6 +12794,8 @@ export type ARTIST_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -13153,9 +13121,11 @@ export type ARTIST_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -13320,6 +13290,8 @@ export type ARTIST_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -13645,9 +13617,11 @@ export type ARTIST_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -13736,7 +13710,8 @@ export type ARTIST_QUERY_RESULT = {
         _type: "videoUI";
         video: {
           _type: "video";
-          caption?: LocaleString;
+          title?: LocaleString;
+          embedUrl?: string;
           video?: MuxVideo;
           placeholder: {
             asset: {
@@ -13762,8 +13737,6 @@ export type ARTIST_QUERY_RESULT = {
               source?: SanityAssetSourceData;
             } | null;
           } | null;
-          aspectRatio?: string;
-          colSize?: number;
         } | null;
       }
   > | null;
@@ -13771,7 +13744,7 @@ export type ARTIST_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: EXPHIBITION_QUERY
-// Query: *[_type == "exhibition" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    artists[]->{      name    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "exhibition" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    artists[]->{      name    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
 export type EXPHIBITION_QUERY_RESULT = {
   _id: string;
   _type: "exhibition";
@@ -13901,30 +13874,40 @@ export type EXPHIBITION_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -13963,6 +13946,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -14366,30 +14350,40 @@ export type EXPHIBITION_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              title?: LocaleString;
-              slug?: Slug;
-              imageCover?: {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
               artists?: Array<
                 {
                   _key: string;
                 } & ArtistReference
               >;
-              dates?: Array<
+              dates: Array<
                 {
                   _key: string;
                 } & FhcbDate
-              >;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -14428,6 +14422,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | PageModulaireReference
                 | ProductReference
               >;
+              descripption: null;
             }
           | {
               _id: string;
@@ -14787,6 +14782,8 @@ export type EXPHIBITION_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -15112,9 +15109,11 @@ export type EXPHIBITION_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -15279,6 +15278,8 @@ export type EXPHIBITION_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -15604,9 +15605,11 @@ export type EXPHIBITION_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -15779,6 +15782,8 @@ export type EXPHIBITION_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -16104,9 +16109,11 @@ export type EXPHIBITION_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -16271,6 +16278,8 @@ export type EXPHIBITION_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -16596,9 +16605,11 @@ export type EXPHIBITION_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -16836,6 +16847,8 @@ export type EXPHIBITION_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -17161,9 +17174,11 @@ export type EXPHIBITION_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -17328,6 +17343,8 @@ export type EXPHIBITION_QUERY_RESULT = {
                               crop?: SanityImageCrop;
                               _type: "image";
                             };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
                             artists?: Array<
                               {
                                 _key: string;
@@ -17653,9 +17670,11 @@ export type EXPHIBITION_QUERY_RESULT = {
                               _type: "image";
                             };
                             items?:
-                              | "evenements"
-                              | "expositions"
-                              | "hors-les-murs";
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
                           }
                         | null;
                       _type: "linkInternal";
@@ -17744,7 +17763,8 @@ export type EXPHIBITION_QUERY_RESULT = {
         _type: "videoUI";
         video: {
           _type: "video";
-          caption?: LocaleString;
+          title?: LocaleString;
+          embedUrl?: string;
           video?: MuxVideo;
           placeholder: {
             asset: {
@@ -17770,8 +17790,6 @@ export type EXPHIBITION_QUERY_RESULT = {
               source?: SanityAssetSourceData;
             } | null;
           } | null;
-          aspectRatio?: string;
-          colSize?: number;
         } | null;
       }
   > | null;
@@ -17781,6 +17799,109 @@ export type EXPHIBITION_QUERY_RESULT = {
     | PageModulaireReference
     | ProductReference
   >;
+} | null;
+
+// Source: ../web/app/sanity-api/sanity-queries.tsx
+// Variable: PROGRAMME_QUERY
+// Query: *[_type == "programme" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    items,    "resolvedItems": select(      items == "exhibitions-current" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) <= dateTime(now()) && dateTime(dates[-1].au) >= dateTime(now())] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "exhibitions-futur" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) > dateTime(now())] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && defined(dates) && dateTime(dates[-1].au) < dateTime(now())] | order(dates[-1].au desc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }      },      items == "guided-tours" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }      },      []    )  }
+export type PROGRAMME_QUERY_RESULT = {
+  _id: string;
+  _type: "programme";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo: {
+    _type: "seo";
+    metaTitle?: string;
+    metaDescription?: string;
+    metaImage: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  } | null;
+  title?: LocaleString;
+  slug?: Slug;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  items:
+    | "events"
+    | "exhibitions-current"
+    | "exhibitions-futur"
+    | "exhibitions-out-of-the-box"
+    | "guided-tours"
+    | null;
+  resolvedItems:
+    | Array<{
+        _type: "event";
+        _id: string;
+        title: LocaleString | null;
+        subTitle: LocaleText | null;
+        slug: Slug | null;
+        imageCover: {
+          asset: {
+            _id: string;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        dates: Array<
+          {
+            _key: string;
+          } & FhcbDate
+        > | null;
+        descripption: null;
+        tags: Array<{
+          title: LocaleString | null;
+        }> | null;
+      }>
+    | Array<{
+        _type: "exhibition";
+        _id: string;
+        title: LocaleString | null;
+        slug: Slug | null;
+        imageCover: {
+          asset: {
+            _id: string;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        dates: Array<
+          {
+            _key: string;
+          } & FhcbDate
+        > | null;
+        artists: Array<{
+          name: string | null;
+        }> | null;
+      }>
+    | Array<never>;
 } | null;
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
@@ -17861,11 +17982,12 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"settings\"][0]{\n  ...,\n  navPrimary[]{\n    ...,\n    _type == 'linkInternal' => {\n       \n  ...,\n  link->{\n    _type,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    }\n  }\n,\n\n      subMenu[]{\n        ...,\n        _type == 'linkInternal' => {\n          \n  ...,\n  link->{\n    _type,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    }\n  }\n,\n        }\n      }\n    },\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  navSocial[]{\n    ...\n  },\n  navSecondary[]{\n    ...,\n    _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n    },\n  },\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n}": SETTINGS_QUERY_RESULT;
-    '*[_type == "pageModulaire" && homePage == true][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
-    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
-    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
-    '*[_type == "exhibition" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    artists[]->{\n      name\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': EXPHIBITION_QUERY_RESULT;
+    "*[_type == \"settings\"][0]{\n  ...,\n  navPrimary[]{\n    ...,\n    _type == 'linkInternal' => {\n       \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      asset->{\n        _id\n      }\n    },\n  }\n,\n\n      subMenu[]{\n        ...,\n        _type == 'linkInternal' => {\n          \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      asset->{\n        _id\n      }\n    },\n  }\n,\n        }\n      }\n    },\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  navSocial[]{\n    ...\n  },\n  navSecondary[]{\n    ...,\n    _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n    },\n  },\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n}": SETTINGS_QUERY_RESULT;
+    '*[_type == "pageModulaire" && homePage == true][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
+    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
+    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
+    '*[_type == "exhibition" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    artists[]->{\n      name\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': EXPHIBITION_QUERY_RESULT;
+    '*[_type == "programme" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    items,\n    "resolvedItems": select(\n      items == "exhibitions-current" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) <= dateTime(now()) && dateTime(dates[-1].au) >= dateTime(now())] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "exhibitions-futur" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) > dateTime(now())] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && defined(dates) && dateTime(dates[-1].au) < dateTime(now())] | order(dates[-1].au desc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n      },\n      items == "guided-tours" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n      },\n      []\n    )\n  }': PROGRAMME_QUERY_RESULT;
     '*[_type == "pageModulaire"]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n}': ALLPAGE_MODULAIRE_QUERY_RESULT;
   }
 }

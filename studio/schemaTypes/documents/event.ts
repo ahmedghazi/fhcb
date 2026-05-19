@@ -44,6 +44,17 @@ export default defineType({
     }),
 
     defineField({
+      name: 'subTitle',
+      title: 'Sous titre',
+      type: 'localeText',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'description',
+      type: 'localeText',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'artists',
       title: 'Artistes',
       type: 'array',

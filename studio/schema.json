@@ -1248,11 +1248,18 @@
             "value": "video"
           }
         },
-        "caption": {
+        "title": {
           "type": "objectAttribute",
           "value": {
             "type": "inline",
             "name": "localeString"
+          },
+          "optional": true
+        },
+        "embedUrl": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         },
@@ -1308,20 +1315,6 @@
                 }
               }
             }
-          },
-          "optional": true
-        },
-        "aspectRatio": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "colSize": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
           },
           "optional": true
         }
@@ -4668,6 +4661,22 @@
         },
         "optional": true
       },
+      "subTitle": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeText"
+        },
+        "optional": true
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeText"
+        },
+        "optional": true
+      },
       "artists": {
         "type": "objectAttribute",
         "value": {
@@ -5093,15 +5102,23 @@
           "of": [
             {
               "type": "string",
-              "value": "expositions"
+              "value": "exhibitions-current"
             },
             {
               "type": "string",
-              "value": "evenements"
+              "value": "exhibitions-futur"
             },
             {
               "type": "string",
-              "value": "hors-les-murs"
+              "value": "exhibitions-out-of-the-box"
+            },
+            {
+              "type": "string",
+              "value": "events"
+            },
+            {
+              "type": "string",
+              "value": "guided-tours"
             }
           ]
         },

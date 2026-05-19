@@ -12,13 +12,11 @@ const NavModal = ({ settings }: Props) => {
   const { modalType, currentMenuItem } = useHeader();
   return (
     <div className='nav-modal'>
-      {/* {JSON.stringify(currentMenuItem)} */}
-      {modalType}
       <div className='inner'>
         <aside>aside</aside>
         {currentMenuItem?.imageCover && (
           <div className='imageCover'>
-            <Figure asset={currentMenuItem.imageCover} />
+            <Figure asset={currentMenuItem.imageCover.asset} />
           </div>
         )}
 

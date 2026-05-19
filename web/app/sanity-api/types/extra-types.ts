@@ -1,3 +1,4 @@
+import { EventExpanded, ExhibitionExpanded } from "./sanity-expanded.types";
 import {
   Artist,
   Exhibition,
@@ -8,6 +9,7 @@ import {
   ListUI,
   PageModulaire,
   Product,
+  Programme,
   ProgrammeUI,
   SliderCardUI,
   TextImageUI,
@@ -69,4 +71,8 @@ export interface ModulesList {
         _key: string;
       } & ProgrammeUI)
   >;
+}
+
+export interface ProgrammeExtend extends Programme {
+  resolvedItems?: (ExhibitionExpanded | EventExpanded)[];
 }

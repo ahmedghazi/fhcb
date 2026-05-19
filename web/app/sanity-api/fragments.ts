@@ -72,11 +72,20 @@ export const linkInternalWithImage = `
   link->{
     _type,
     slug,
-    imageCover{
-      ${imageAsset}
-    }
+    "imageCover": coalesce(imageCover, image){
+      asset->{
+        _id
+      }
+    },
   }
 `;
+
+/**
+     // imageCover{
+    //   // ${imageAsset}
+    //   asset->_id
+    // }
+ */
 
 export const imageInGrid = `
   ...,
@@ -187,12 +196,12 @@ const cardRefModulaire = `
   },
 `;
 
-const cardRefExhibition = `
+export const cardRefExhibition = `
   _type,
   _id,
-  "title": coalesce(title, name),
+    title,
   slug,
-  "imageCover": coalesce(imageCover, image){
+  imageCover{
     ${imageAsset}
   },
   dates,
@@ -200,7 +209,21 @@ const cardRefExhibition = `
     name
   }
 `;
-
+export const cardRefEvent = `
+  _type,
+  _id,
+  title,
+  subTitle,
+  slug,
+  imageCover{
+    ${imageAsset}
+  },
+  dates,
+  descripption,
+  tags[]->{
+    title
+  }
+`;
 const cardRefProduct = `
   _type,
   _id,
@@ -241,6 +264,9 @@ const cardTypes = `
   },
   _type == "artist" => {
     ${cardRefArtist}
+  },
+  _type == "event" => {
+    ${cardRefEvent}
   }
 `;
 

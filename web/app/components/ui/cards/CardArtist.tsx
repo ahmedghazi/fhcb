@@ -3,37 +3,49 @@ import clsx from "clsx";
 import React from "react";
 import Figure from "../Figure";
 import { Link } from "next-view-transitions";
-import { _linkResolver, _localizeText } from "@/app/sanity-api/utils";
+import {
+  _linkResolver,
+  _localizeField,
+  _localizeText,
+} from "@/app/sanity-api/utils";
+import CardInnerMD from "./CardInnerMD";
+import {
+  ArtistExpanded,
+  SanityImageAssetFull,
+} from "@/app/sanity-api/types/sanity-expanded.types";
 
 type Props = {
-  input: Artist;
+  input: ArtistExpanded;
+  size?: "md" | "lg";
 };
 
-const CardArtist = ({ input }: Props) => {
+const CardArtist = ({ input, size = "md" }: Props) => {
   const { _type, name, imageCover } = input;
+  const isLandscape =
+    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return (
     <div
       className={clsx(
-        "card card--l2 md:col-span-2",
-        _type && `card--${_type}`,
+        "card card--artist",
+        `card--${size}`,
+        size === "md" && "md:col-span-2",
+        isLandscape && `card--is-landscape`,
+        !isLandscape && "card--is-portrait",
+        "self-start",
       )}>
-      <div className='card__header'>
-        <div className='card__tag c-tag'>{_type}</div>
-        <h2 className='card__title c-h2'>{name}</h2>
-      </div>
-      <div className='card__figure'>
-        {/* <pre>{JSON.stringify(imageCover, null, 2)}</pre> */}
-        <Figure asset={imageCover?.asset} />
-      </div>
-      <div className='card__footer'>
-        <div className='btns'>
-          {/* <button className='btn btn--primary'>Bouton primary</button> */}
-          <Link href={_linkResolver(input)} className='btn btn--primary'>
-            {_localizeText("discoverTheArtist")}
-          </Link>
-          {/* <button className='btn btn--secondary'>Bouton secondary</button> */}
-        </div>
-      </div>
+      {size === "md" && (
+        <CardInnerMD
+          _type={_type}
+          tags={"ARTIST"}
+          title={name || ""}
+          // subtitle={_localizeField(title)}
+          // info={"infos"}
+          imageCover={imageCover?.asset as SanityImageAssetFull}
+          linkPrimary={_linkResolver(input)}
+          linkPrimaryLabel={_localizeText("discover")}
+        />
+      )}
     </div>
   );
 };

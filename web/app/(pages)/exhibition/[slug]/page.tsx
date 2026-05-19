@@ -10,7 +10,7 @@ import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
-import HeroExhibition from "@/app/components/HeroExhibition";
+import ExhibitionHero from "@/app/components/ExhibitionHero";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 
 type Params = Promise<{ slug: string }>;
@@ -54,7 +54,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--exhibition'
       data-template='exhibition'
       data-slug={data.slug?.current || ""}>
-      <HeroExhibition input={data as ExhibitionExpanded} />
+      <ExhibitionHero input={data as ExhibitionExpanded} />
       <ContentModulaire input={data} />
     </div>
   );

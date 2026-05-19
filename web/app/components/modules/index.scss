@@ -55,12 +55,36 @@
         &__slide {
           min-width: var(--gridder-1);
           max-width: var(--gridder-1);
-          &:has(.card--exhibition),
-          &:has(.card--pret) {
+          &:has(.card--md) {
             min-width: var(--gridder-2);
             max-width: var(--gridder-2);
           }
         }
+      }
+    }
+    &--video-ui {
+      &:hover .logo-fhcb svg path {
+        fill: var(--color-secondary);
+      }
+      .module__inner {
+        position: relative;
+      }
+      .logo-fhcb {
+        position: absolute;
+        left: var(--spacing-lg);
+        top: var(--spacing-lg);
+        max-width: calc(var(--spacing-lg) * 2);
+        svg {
+          width: 100%;
+          height: 100%;
+          aspect-ratio: 321 / 154;
+          path {
+            fill: white;
+          }
+        }
+      }
+      .react-player__shadow {
+        background-color: var(--color-secondary);
       }
     }
   }

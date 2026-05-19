@@ -3,10 +3,12 @@ import { sanityFetch } from "./sanity.client";
 import {
   image,
   imageAsset,
+  cardRefExhibition,
   linkInternal,
   linkInternalWithImage,
   modules,
   seo,
+  cardRefEvent,
 } from "./fragments";
 
 /*****************************************************************************************************
@@ -146,6 +148,43 @@ export async function getExhibition(slug: string): Promise<any> {
   return sanityFetch({
     query: EXPHIBITION_QUERY,
     tags: ["exhibition"],
+    qParams: { slug },
+  });
+}
+
+/*****************************************************************************************************
+ * PROGRAMME
+ */
+export const PROGRAMME_QUERY = groq`*[_type == "programme" && slug.current == $slug][0]{
+    ...,
+    seo{
+      ${seo}
+    },
+    items,
+    "resolvedItems": select(
+      items == "exhibitions-current" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) <= dateTime(now()) && dateTime(dates[-1].au) >= dateTime(now())] | order(dates[0].du asc) {
+        ${cardRefExhibition}
+      },
+      items == "exhibitions-futur" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) > dateTime(now())] | order(dates[0].du asc) {
+        ${cardRefExhibition}
+      },
+      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && defined(dates) && dateTime(dates[-1].au) < dateTime(now())] | order(dates[-1].au desc) {
+        ${cardRefExhibition}
+      },
+      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {
+        ${cardRefEvent}
+      },
+      items == "guided-tours" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {
+        ${cardRefEvent}
+      },
+      []
+    )
+  }`;
+
+export async function getProgramme(slug: string): Promise<any> {
+  return sanityFetch({
+    query: PROGRAMME_QUERY,
+    tags: ["programme"],
     qParams: { slug },
   });
 }

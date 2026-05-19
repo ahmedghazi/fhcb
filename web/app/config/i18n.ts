@@ -21,6 +21,8 @@ const i18n = {
     discover: "Découvrir",
     discoverTheArtist: "Découvrir l'artiste",
     discoverTheExhibition: "Découvrir l'exposition",
+    currentExhibition: "Exposition en cours",
+    pastExhibition: "Exposition passée",
   },
   en: {
     default: false,
@@ -44,6 +46,8 @@ const i18n = {
     discover: "Discover",
     discoverTheArtist: "Discover the artist",
     discoverTheExhibition: "Discover the exhibition",
+    currentExhibition: "Current exhibition",
+    pastExhibition: "Past exhibition",
   },
 };
 

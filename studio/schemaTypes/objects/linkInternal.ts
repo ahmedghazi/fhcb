@@ -11,11 +11,16 @@ export default defineField({
   preview: {
     select: {
       label: `label.${baseLanguage}`,
+      _type: 'link._type',
+      withSubmenu: 'withSubmenu',
     },
     prepare(selection) {
-      const {label} = selection
+      const {label, _type, withSubmenu} = selection
+      console.log(label, _type)
       return {
         title: label,
+        subtitle: withSubmenu ? 'Avec sous-menu' : _type,
+        // subtitle: link._type,
         // subtitle: "test",
       }
     },

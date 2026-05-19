@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-05-18T15:20:32.036Z
+// Generated on: 2026-05-19T13:55:19.211Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
@@ -21,6 +21,7 @@ import type {
   PAGE_MODULAIRE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
   EXPHIBITION_QUERY_RESULT,
+  PROGRAMME_QUERY_RESULT,
   Project,
   TextImageUI,
   KeyVal,
@@ -119,6 +120,10 @@ export type ARTIST_QUERY_RESULTExpanded = Omit<ARTIST_QUERY_RESULT, 'imageCover'
 export type EXPHIBITION_QUERY_RESULTExpanded = Omit<EXPHIBITION_QUERY_RESULT, 'tags' | 'rebonds'> & {
   tags?: Array<Tag> | null;
   rebonds?: ExhibitionExpanded | null;
+};
+
+export type PROGRAMME_QUERY_RESULTExpanded = Omit<PROGRAMME_QUERY_RESULT, 'imageCover'> & {
+  imageCover?: (Omit<NonNullable<NonNullable<PROGRAMME_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type ProjectExpanded = Omit<Project, 'contributions' | 'media'> & {

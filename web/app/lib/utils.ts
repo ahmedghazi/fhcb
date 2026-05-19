@@ -12,7 +12,12 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const ordinalFr = (day: number) => (day === 1 ? "1er" : String(day));
 
 const prEn = new Intl.PluralRules("en", { type: "ordinal" });
-const suffixesEn: Record<string, string> = { one: "st", two: "nd", few: "rd", other: "th" };
+const suffixesEn: Record<string, string> = {
+  one: "st",
+  two: "nd",
+  few: "rd",
+  other: "th",
+};
 const ordinalEn = (day: number) => `${day}${suffixesEn[prEn.select(day)]}`;
 
 const ordinal = (day: number, locale: string) =>
@@ -31,7 +36,10 @@ type Simple = { type: "simple"; date: string };
 
 export type FhcbDateFormatted = DifferentYears | SameYear | WithTime | Simple;
 
-export const _fhcbDates = (dates: FhcbDate, locale = "fr"): FhcbDateFormatted => {
+export const _fhcbDates = (
+  dates: FhcbDate,
+  locale = "fr",
+): FhcbDateFormatted => {
   const { du, au, heure } = dates as FhcbDate & { heure?: string };
   const bcp47 = toBcp47(locale);
 
@@ -73,4 +81,12 @@ export const _fhcbDates = (dates: FhcbDate, locale = "fr"): FhcbDateFormatted =>
     au: `${ordinal(auDate.getDate(), locale)} ${monthName(auDate, bcp47)}`,
     year: auYear,
   };
+};
+
+export const _isCurrentExhibition = (dates: FhcbDate[]): boolean => {
+  return dates.some((date) => date?.au && new Date(date.au) > new Date());
+};
+
+export const _isFuturExhibition = (dates: FhcbDate[]): boolean => {
+  return dates.some((date) => date?.du && new Date(date.du) > new Date());
 };

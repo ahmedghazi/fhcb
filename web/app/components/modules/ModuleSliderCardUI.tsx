@@ -24,17 +24,21 @@ const ModuleSliderCardUI = ({ input }: Props) => {
         {items && (
           <KeenSlider>
             {items.map((item: PostTypes, index) => (
-              <div key={`${item && item._id}-${index}`} className='keen-slider__slide'>
+              <div
+                key={`${item && item._id}-${index}`}
+                className='keen-slider__slide'>
                 {item && item._type === "product" && (
-                  <CardProduct input={item} />
+                  <CardProduct input={item} size='md' />
                 )}
                 {item && item._type === "pageModulaire" && (
-                  <CardPage input={item} />
+                  <CardPage input={item} size='md' />
                 )}
                 {item && item._type === "artist" && <CardArtist input={item} />}
-                {item && item._type === "event" && <CardEvent input={item} />}
+                {item && item._type === "event" && (
+                  <CardEvent input={item} size='md' />
+                )}
                 {item && item._type === "exhibition" && (
-                  <CardExhibition input={item} />
+                  <CardExhibition input={item} size='md' />
                 )}
               </div>
             ))}

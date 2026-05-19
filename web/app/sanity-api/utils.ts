@@ -15,6 +15,8 @@ export const _linkResolver = (
   if (!node || !node._type || (node._type === "pageModulaire" && node.homePage))
     return "/";
   switch (node._type) {
+    case "programme":
+      return `/programme/${node.slug?.current}`;
     case "exhibition":
       return `/exhibition/${node.slug?.current}`;
     case "event":

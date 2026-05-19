@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
-import { VideoUI } from "@/app/sanity-api/types/sanity.types";
 import ReactPlayer from "react-player";
+import { VideoUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import LogoFHCB from "../LogoFHCB";
 
 type Props = {
-  input: VideoUI;
+  input: VideoUIExpanded;
 };
 
 const ModuleVideoUI = ({ input }: Props) => {
@@ -13,16 +14,18 @@ const ModuleVideoUI = ({ input }: Props) => {
   return (
     <section className='module module--video-ui'>
       <div className='module__inner'>
-        {video?.url && (
+        {video?.embedUrl && (
           <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
             <ReactPlayer
-              src={video.url}
-              controls={true}
+              src={video.embedUrl}
+              light={video.placeholder?.asset?.url}
+              // controls={false}
               style={{ width: "100%", height: "100%" }}
             />
           </div>
         )}
-        {video?.muxAsset && (
+        {/* <LogoFHCB type='icon' /> */}
+        {/* {video?.muxAsset && (
           <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
             <ReactPlayer
               src={`https://stream.mux.com/${video.muxAsset.playbackId}.m3u8`}
@@ -30,7 +33,7 @@ const ModuleVideoUI = ({ input }: Props) => {
               style={{ width: "100%", height: "100%" }}
             />
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );

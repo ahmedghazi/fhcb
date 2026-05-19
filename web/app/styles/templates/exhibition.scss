@@ -1,11 +1,19 @@
 .template--exhibition {
-  .hero-exhibition {
+  .exhibition-hero {
     margin-bottom: var(--spacing-lg);
     padding-bottom: var(--spacing-md);
     .hero__header {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+    img {
+      max-height: calc(
+        var(--vh) * 100 - calc(var(--header-h) + var(--spacing-md))
+      );
+      width: 100%;
+      object-fit: contain;
+      object-position: left;
     }
   }
 }

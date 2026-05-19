@@ -28,16 +28,18 @@ const ModuleGridCardUI = ({ input }: Props) => {
           <div className='grid md:grid-cols-4 items-start- gap-gutter'>
             {input.items.map((item: PostTypes, index: number) => (
               <Fragment key={`${item && item._id}-${index}`}>
+                {item && item._type === "exhibition" && (
+                  <CardExhibition input={item} size='sm' />
+                )}
                 {item && item._type === "product" && (
-                  <CardProduct input={item} />
+                  <CardProduct input={item} size='sm' />
                 )}
                 {item && item._type === "pageModulaire" && (
-                  <CardPage input={item} />
+                  <CardPage input={item} size='sm' />
                 )}
                 {item && item._type === "artist" && <CardArtist input={item} />}
-                {item && item._type === "event" && <CardEvent input={item} />}
-                {item && item._type === "exhibition" && (
-                  <CardExhibition input={item} />
+                {item && item._type === "event" && (
+                  <CardEvent input={item} size='sm' />
                 )}
               </Fragment>
             ))}

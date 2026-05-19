@@ -1,5 +1,84 @@
 #!/usr/bin/env node
 
+/**
+ * auto-extend-types.js
+ * ====================
+ *
+ * RÔLE
+ * ----
+ * Sanity TypeGen génère `sanity.types.ts` à partir du schéma, mais les champs image
+ * restent typés avec `SanityImageAssetReference` (juste un `_ref`) et les champs
+ * référence restent des `*Reference` non-résolus. Ce script génère
+ * `sanity-expanded.types.ts` qui étend ces types pour refléter ce que renvoient
+ * réellement les requêtes GROQ une fois les assets et références résolus.
+ *
+ * Exemple :
+ *   `imageCover?: { asset?: SanityImageAssetReference }`
+ *   →  `imageCover?: { asset?: SanityImageAssetFull | null } | null`
+ *
+ *   `coProduction?: Array<KeyVal | PartenaireReference>`
+ *   →  `coProduction?: Array<KeyValExpanded | PartenaireExpanded> | null`
+ *
+ * UTILISATION
+ * -----------
+ *   npm run typegen          # depuis le dossier studio/
+ *   node scripts/auto-extend-types.js   # directement (nécessite sanity.types.ts à jour)
+ *
+ * Le script est automatiquement enchaîné après `sanity typegen generate` via le
+ * script npm `typegen` défini dans studio/package.json.
+ *
+ * CONFIGURATION
+ * -------------
+ * Le script lit `studio/scripts/typegen.config.json` s'il existe :
+ *
+ *   {
+ *     "webPath": "../../web",
+ *     "sanityApiPath": "app/sanity-api/types",
+ *     "generatedTypesFile": "sanity.types.ts",
+ *     "extendedTypesFile": "sanity-expanded.types.ts",
+ *     "fieldTypeOverrides": {
+ *       "Project": {
+ *         "contributions": "ContributionExpanded[] | null",
+ *         "media": "MediaExpanded | null"
+ *       }
+ *     }
+ *   }
+ *
+ * Sans ce fichier, la structure du projet est détectée automatiquement en testant
+ * plusieurs chemins relatifs standards (../../web, ../web, etc.).
+ *
+ * `fieldTypeOverrides` permet d'injecter manuellement des types pour des champs
+ * dont la forme réelle ne peut pas être inférée automatiquement (ex. unions complexes,
+ * types issus de plugins tiers).
+ *
+ * ALGORITHME
+ * ----------
+ * 1. Parse `sanity.types.ts` avec du text-scanning (pas d'AST) pour trouver :
+ *    - Les types `*Reference` et le document qu'ils pointent
+ *    - Les types document (ceux qui ont `_id` et `_createdAt`)
+ *    - Les champs image inline (ceux qui contiennent `asset?: SanityImageAssetReference`)
+ *
+ * 2. Premier pass — types document :
+ *    Crée `XxxExpanded` pour chaque type document qui a des champs image ou référence.
+ *
+ * 3. Second pass — types objet non-document (itératif) :
+ *    Détecte les types objet qui contiennent des champs image ou qui référencent en
+ *    inline un type déjà étendu (ex. `Array<{ _key: string } & KeyVal>`).
+ *    Répète jusqu'à ce qu'aucun nouveau type ne soit trouvé (propagation en profondeur).
+ *
+ * 4. Tri topologique :
+ *    Ordonne les types générés pour que les dépendances apparaissent avant les types
+ *    qui les utilisent.
+ *
+ * 5. Génère le fichier final avec les imports nécessaires et les définitions de types.
+ *
+ * FICHIER GÉNÉRÉ
+ * --------------
+ * Ne pas éditer `sanity-expanded.types.ts` manuellement — il est écrasé à chaque
+ * `npm run typegen`. Pour des ajustements ponctuels, utiliser `fieldTypeOverrides`
+ * dans `typegen.config.json`.
+ */
+
 const fs = require('fs')
 const path = require('path')
 
@@ -80,6 +159,29 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+function isDocumentTypeBlock(block) {
+  return block.includes('_id: string') && block.includes('_createdAt: string')
+}
+
+// Keeps only depth-0 characters (outside all `{}` blocks).
+// Used to detect type names that appear directly in a field, not inside an inline object literal.
+function stripNestedBraces(str) {
+  let result = ''
+  let depth = 0
+  for (const ch of str) {
+    if (ch === '{') depth++
+    else if (ch === '}') depth--
+    else if (depth === 0) result += ch
+  }
+  return result
+}
+
+// Returns the leading field name, or null if the field is internal (`_`-prefixed).
+function getFieldName(field) {
+  const m = field.match(/^\s*(\w+)\??:/)
+  return m && !m[1].startsWith('_') ? m[1] : null
+}
+
 /**
  * Find all `*Reference` types and the document type they point to.
  * Returns e.g. { "ClientReference": "Client", "PersonReference": "Person" }
@@ -98,11 +200,19 @@ function findReferenceTypes(content) {
 /**
  * Extract the full `export type Name = { ... }` block using brace counting.
  * Returns null if the type is not an object type (e.g. union or array).
+ * Results are cached since content is immutable within a single run.
  */
+const _typeBlockCache = new Map()
+
 function extractObjectTypeBlock(content, typeName) {
+  if (_typeBlockCache.has(typeName)) return _typeBlockCache.get(typeName)
+
   const startPattern = new RegExp(`export type ${typeName}\\s*=\\s*\\{`)
   const match = startPattern.exec(content)
-  if (!match) return null
+  if (!match) {
+    _typeBlockCache.set(typeName, null)
+    return null
+  }
 
   let depth = 0
   let i = match.index + match[0].length - 1
@@ -111,9 +221,14 @@ function extractObjectTypeBlock(content, typeName) {
     if (content[i] === '{') depth++
     else if (content[i] === '}') {
       depth--
-      if (depth === 0) return content.slice(match.index, i + 1)
+      if (depth === 0) {
+        const result = content.slice(match.index, i + 1)
+        _typeBlockCache.set(typeName, result)
+        return result
+      }
     }
   }
+  _typeBlockCache.set(typeName, null)
   return null
 }
 
@@ -127,9 +242,7 @@ function findDocumentTypeNames(content) {
   while ((m = pattern.exec(content)) !== null) {
     const name = m[1]
     const block = extractObjectTypeBlock(content, name)
-    if (block && block.includes('_id: string') && block.includes('_createdAt: string')) {
-      names.push(name)
-    }
+    if (block && isDocumentTypeBlock(block)) names.push(name)
   }
   return names
 }
@@ -181,7 +294,6 @@ function extractTopLevelFields(typeBlock) {
 
 /**
  * Check whether `refTypeName` appears in `fieldText` outside of any `{ }` block.
- * This prevents matching references nested inside inline object types.
  *
  * Example:
  *   "client?: ClientReference"                        → true  for ClientReference
@@ -189,42 +301,30 @@ function extractTopLevelFields(typeBlock) {
  *   "contributions?: Array<{ service?: SvcRef; … }>" → false for SvcRef (inside braces)
  */
 function containsDirectReference(fieldText, refTypeName) {
-  let stripped = ''
-  let depth = 0
-  for (const ch of fieldText) {
-    if (ch === '{') depth++
-    else if (ch === '}') depth--
-    else if (depth === 0) stripped += ch
-  }
-  return stripped.includes(refTypeName)
+  return stripNestedBraces(fieldText).includes(refTypeName)
 }
 
 /**
- * For a document type block, return names of top-level fields that are inline image
- * objects (i.e. contain `asset?: SanityImageAssetReference` at their first level).
- * These need `asset` expanded to `SanityImageAsset`.
+ * For a type block, return names of top-level fields that are inline image objects
+ * (i.e. contain `asset?: SanityImageAssetReference` at their first level).
  */
 function findImageFields(typeBlock) {
-  const fields = extractTopLevelFields(typeBlock)
   const result = []
 
-  for (const field of fields) {
-    // Strip nested braces to check the first-level content only
+  for (const field of extractTopLevelFields(typeBlock)) {
+    const fieldName = getFieldName(field)
+    if (!fieldName) continue
+
+    // Collect depth-1 characters (inside the outermost `{}`) to inspect the first object level only.
     let firstLevel = ''
     let depth = 0
-    let inField = false
     for (const ch of field) {
-      if (ch === '{') { depth++; inField = true; continue }
-      else if (ch === '}') { depth--; continue }
-      if (depth === 1) firstLevel += ch
+      if (ch === '{') depth++
+      else if (ch === '}') depth--
+      else if (depth === 1) firstLevel += ch
     }
-    if (!inField) continue
     if (!firstLevel.includes('asset?: SanityImageAssetReference')) continue
 
-    const nameMatch = field.match(/^\s*(\w+)\??:/)
-    if (!nameMatch) continue
-    const fieldName = nameMatch[1]
-    if (fieldName.startsWith('_')) continue
     result.push(fieldName)
   }
 
@@ -236,18 +336,14 @@ function findImageFields(typeBlock) {
  * Each result: { fieldName, targetTypeName, isArray }
  */
 function findReferenceFields(typeBlock, referenceTypes) {
-  const fields = extractTopLevelFields(typeBlock)
   const result = []
 
-  for (const field of fields) {
+  for (const field of extractTopLevelFields(typeBlock)) {
+    const fieldName = getFieldName(field)
+    if (!fieldName) continue
+
     for (const [refTypeName, targetTypeName] of Object.entries(referenceTypes)) {
       if (!containsDirectReference(field, refTypeName)) continue
-
-      const nameMatch = field.match(/^\s*(\w+)\??:/)
-      if (!nameMatch) continue
-      const fieldName = nameMatch[1]
-      if (fieldName.startsWith('_')) continue
-
       const isArray = /Array\s*</.test(field)
       result.push({fieldName, targetTypeName, isArray})
       break
@@ -261,19 +357,17 @@ function findReferenceFields(typeBlock, referenceTypes) {
  * For a type block, find fields whose type string directly references a type name
  * that has an expanded version. Catches inline intersections like
  * `Array<{ _key: string } & ImageInGrid>` where `ImageInGrid` → `ImageInGridExpanded`.
+ *
+ * @param {Map<string, RegExp>} expandedPatterns - pre-compiled word-boundary patterns per type name
  */
-function findInlineTypeRefs(typeBlock, expandedTypeNames) {
-  const fields = extractTopLevelFields(typeBlock)
+function findInlineTypeRefs(typeBlock, expandedPatterns) {
   const result = []
 
-  for (const field of fields) {
-    const nameMatch = field.match(/^\s*(\w+)\??:/)
-    if (!nameMatch) continue
-    const fieldName = nameMatch[1]
-    if (fieldName.startsWith('_')) continue
+  for (const field of extractTopLevelFields(typeBlock)) {
+    const fieldName = getFieldName(field)
+    if (!fieldName) continue
 
-    for (const typeName of expandedTypeNames) {
-      const pattern = new RegExp(`\\b${typeName}\\b`)
+    for (const [typeName, pattern] of expandedPatterns) {
       if (pattern.test(field)) {
         const typeStr = field.replace(/^\s*\w+\??\s*:\s*/, '').trim()
         result.push({fieldName, typeName, typeStr})
@@ -299,19 +393,17 @@ function topoSort(expandedMap) {
   function visit(typeName) {
     if (visited.has(typeName)) return
     visited.add(typeName)
-    const entry = expandedMap.get(typeName) || {}
-    for (const f of (entry.refFields || [])) {
+    const {refFields, inlineRefFields} = expandedMap.get(typeName)
+    for (const f of refFields) {
       if (expandedTypeNames.has(f.targetTypeName)) visit(f.targetTypeName)
     }
-    for (const f of (entry.inlineRefFields || [])) {
+    for (const f of inlineRefFields) {
       if (expandedTypeNames.has(f.typeName)) visit(f.typeName)
     }
     sorted.push(typeName)
   }
 
-  for (const typeName of expandedMap.keys()) {
-    visit(typeName)
-  }
+  for (const typeName of expandedMap.keys()) visit(typeName)
 
   return sorted
 }
@@ -328,21 +420,29 @@ function topoSort(expandedMap) {
  * - Image asset fields use `SanityImageAssetFull` (which adds `creditLine`
  *   and other standard fields that TypeGen may omit).
  * - Extra fields from `fieldTypeOverrides[typeName]` are appended.
+ *
+ * @param {object} ctx
+ * @param {string} ctx.typeName
+ * @param {Array} ctx.refFields
+ * @param {string[]} ctx.imageFields
+ * @param {Array} ctx.inlineRefFields
+ * @param {Set<string>} ctx.expandedTypeNames
+ * @param {object} ctx.fieldTypeOverrides
+ * @param {Array<{pattern: RegExp, replacement: string}>} ctx.refTypeReplacements
  */
-function generateExpandedType(typeName, refFields, imageFields, inlineRefFields, expandedTypeNames, fieldTypeOverrides, referenceTypes) {
+function generateExpandedType({typeName, refFields, imageFields, inlineRefFields, expandedTypeNames, fieldTypeOverrides, refTypeReplacements}) {
   const overrides = fieldTypeOverrides[typeName] || {}
   const overrideFieldNames = Object.keys(overrides)
 
-  // Omit ref fields, image fields, inline ref fields, and overridden fields (deduplicated)
   const omitSet = new Set([
     ...refFields.map((f) => f.fieldName),
     ...imageFields,
-    ...(inlineRefFields || []).map((f) => f.fieldName),
+    ...inlineRefFields.map((f) => f.fieldName),
     ...overrideFieldNames,
   ])
   const omitKeys = [...omitSet].map((k) => `'${k}'`).join(' | ')
 
-  // Ref fields: use TargetTypeExpanded when available
+  // Use TargetTypeExpanded when the target itself has an expanded version
   const refFieldLines = refFields.map((f) => {
     const targetName = expandedTypeNames.has(f.targetTypeName)
       ? `${f.targetTypeName}Expanded`
@@ -351,35 +451,26 @@ function generateExpandedType(typeName, refFields, imageFields, inlineRefFields,
     return `  ${f.fieldName}?: ${resolvedType} | null`
   })
 
-  // Image fields: expand asset → SanityImageAssetFull (includes creditLine + other built-in fields)
+  // Expand asset → SanityImageAssetFull (adds creditLine + other built-in fields TypeGen omits)
   const imageFieldLines = imageFields.map((fieldName) =>
     `  ${fieldName}?: (Omit<NonNullable<NonNullable<${typeName}>['${fieldName}']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null`
   )
 
-  // Inline ref fields: replace TypeName with TypeNameExpanded in the type string,
-  // and also replace any *Reference types with their expanded target (e.g. PartenaireReference → PartenaireExpanded)
-  // This handles mixed arrays like Array<({ _key } & KeyVal) | ({ _key } & PartenaireReference)>
-  // where the GROQ query uses []-> to dereference references.
-  const inlineRefFieldLines = (inlineRefFields || []).map(({fieldName, typeName: refTypeName, typeStr}) => {
+  // Replace TypeName → TypeNameExpanded, and *Reference → *TargetExpanded for dereferenced arrays
+  const inlineRefFieldLines = inlineRefFields.map(({fieldName, typeName: refTypeName, typeStr}) => {
     let expandedTypeStr = typeStr.replace(
       new RegExp(`\\b${refTypeName}\\b`, 'g'),
       `${refTypeName}Expanded`,
     )
-    for (const [refType, targetType] of Object.entries(referenceTypes || {})) {
-      if (expandedTypeNames.has(targetType)) {
-        expandedTypeStr = expandedTypeStr.replace(
-          new RegExp(`\\b${refType}\\b`, 'g'),
-          `${targetType}Expanded`,
-        )
-      }
+    for (const {pattern, replacement} of refTypeReplacements) {
+      expandedTypeStr = expandedTypeStr.replace(pattern, replacement)
     }
     return `  ${fieldName}?: ${expandedTypeStr} | null`
   })
 
-  // Override fields (project-specific, from typegen.config.json)
-  const overrideLines = overrideFieldNames.map((fieldName) => {
-    return `  ${fieldName}?: ${overrides[fieldName]}`
-  })
+  const overrideLines = overrideFieldNames.map((fieldName) =>
+    `  ${fieldName}?: ${overrides[fieldName]}`
+  )
 
   const expandedFields = [...refFieldLines, ...imageFieldLines, ...inlineRefFieldLines, ...overrideLines].join(';\n')
 
@@ -403,7 +494,7 @@ function generateExtendedTypes(content, meta) {
 
   const documentTypeNames = findDocumentTypeNames(content)
 
-  // Build map: typeName → { refFields, imageFields }
+  // First pass: document types with reference or image fields
   const expandedMap = new Map()
   for (const typeName of documentTypeNames) {
     const typeBlock = extractObjectTypeBlock(content, typeName)
@@ -411,11 +502,10 @@ function generateExtendedTypes(content, meta) {
     const refFields = findReferenceFields(typeBlock, referenceTypes)
     const imageFields = findImageFields(typeBlock)
     if (refFields.length > 0 || imageFields.length > 0) {
-      expandedMap.set(typeName, {refFields, imageFields})
+      expandedMap.set(typeName, {refFields, imageFields, inlineRefFields: []})
     }
   }
 
-  // Also include types referenced in fieldTypeOverrides that might not have ref/image fields
   for (const typeName of Object.keys(meta.fieldTypeOverrides)) {
     if (!expandedMap.has(typeName)) {
       expandedMap.set(typeName, {refFields: [], imageFields: [], inlineRefFields: []})
@@ -426,23 +516,37 @@ function generateExtendedTypes(content, meta) {
     throw new Error('No document types with reference or image fields found. Nothing to generate.')
   }
 
-  // Second pass (iterative): expand non-document object types that either have direct
-  // image fields or reference an already-expanded type via inline intersection.
-  let moreFound = true
-  while (moreFound) {
-    moreFound = false
-    const currentExpandedNames = new Set(expandedMap.keys())
+  // Second pass: non-document object types with image fields or inline refs to already-expanded types.
+  // Candidate blocks are built once to avoid re-scanning the full file on each iteration.
+  const candidateBlocks = new Map()
+  {
     const objPattern = /export type (\w+)\s*=\s*\{/g
     let m
     while ((m = objPattern.exec(content)) !== null) {
       const typeName = m[1]
       if (expandedMap.has(typeName)) continue
       const typeBlock = extractObjectTypeBlock(content, typeName)
-      if (!typeBlock) continue
-      if (typeBlock.includes('_id: string') && typeBlock.includes('_createdAt: string')) continue
+      if (!typeBlock || isDocumentTypeBlock(typeBlock)) continue
+      candidateBlocks.set(typeName, typeBlock)
+    }
+  }
 
+  // Patterns are compiled incrementally as new types are promoted to expandedMap.
+  const compiledPatterns = new Map()
+
+  let moreFound = true
+  while (moreFound) {
+    moreFound = false
+    for (const name of expandedMap.keys()) {
+      if (!compiledPatterns.has(name)) compiledPatterns.set(name, new RegExp(`\\b${name}\\b`))
+    }
+    for (const [typeName, typeBlock] of candidateBlocks) {
+      if (expandedMap.has(typeName)) {
+        candidateBlocks.delete(typeName)
+        continue
+      }
       const imageFields = findImageFields(typeBlock)
-      const inlineRefFields = findInlineTypeRefs(typeBlock, currentExpandedNames)
+      const inlineRefFields = findInlineTypeRefs(typeBlock, compiledPatterns)
       if (imageFields.length > 0 || inlineRefFields.length > 0) {
         expandedMap.set(typeName, {refFields: [], imageFields, inlineRefFields})
         moreFound = true
@@ -451,11 +555,18 @@ function generateExtendedTypes(content, meta) {
   }
 
   const expandedTypeNames = new Set(expandedMap.keys())
-
-  // Sort by dependency order
   const sortedTypeNames = topoSort(expandedMap)
 
-  // Collect needed imports
+  // Pre-filter to reference types whose target has an expanded version, and pre-compile patterns.
+  // These are used when expanding mixed arrays like Array<KeyVal | PartenaireReference> where
+  // the GROQ query uses []-> to dereference references into their full document shape.
+  const refTypeReplacements = Object.entries(referenceTypes)
+    .filter(([, targetType]) => expandedTypeNames.has(targetType))
+    .map(([refType, targetType]) => ({
+      pattern: new RegExp(`\\b${refType}\\b`, 'g'),
+      replacement: `${targetType}Expanded`,
+    }))
+
   const neededImports = new Set()
   let hasImageFields = false
   for (const [typeName, {refFields, imageFields}] of expandedMap) {
@@ -465,7 +576,6 @@ function generateExtendedTypes(content, meta) {
   }
   if (hasImageFields) neededImports.add('SanityImageAsset')
 
-  // Log
   console.log('🔎 Scanning for reference and image fields...')
   for (const typeName of sortedTypeNames) {
     const {refFields, imageFields, inlineRefFields} = expandedMap.get(typeName)
@@ -473,31 +583,29 @@ function generateExtendedTypes(content, meta) {
     const allFields = [
       ...refFields.map((f) => (f.isArray ? `${f.fieldName}[]` : f.fieldName)),
       ...imageFields.map((f) => `${f} (image)`),
-      ...(inlineRefFields || []).map((f) => `${f.fieldName} (inline-ref)`),
+      ...inlineRefFields.map((f) => `${f.fieldName} (inline-ref)`),
       ...overrideFields.map((f) => `${f} (override)`),
     ]
     console.log(`  ✓ ${typeName}Expanded  [${allFields.join(', ')}]`)
   }
 
-  // Generate type definitions
   const typeDefs = sortedTypeNames
     .map((typeName) => {
       const {refFields, imageFields, inlineRefFields} = expandedMap.get(typeName)
-      return generateExpandedType(
+      return generateExpandedType({
         typeName,
         refFields,
         imageFields,
-        inlineRefFields || [],
+        inlineRefFields,
         expandedTypeNames,
-        meta.fieldTypeOverrides,
-        referenceTypes,
-      )
+        fieldTypeOverrides: meta.fieldTypeOverrides,
+        refTypeReplacements,
+      })
     })
     .join('\n\n')
 
   const importLine = `import type {\n  ${[...neededImports].join(',\n  ')}\n} from './sanity.types'`
 
-  // SanityImageAsset extended with standard built-in fields that TypeGen may omit
   const sanityImageAssetFull = hasImageFields
     ? `export type SanityImageAssetFull = SanityImageAsset & {\n  creditLine?: string;\n};\n`
     : ''

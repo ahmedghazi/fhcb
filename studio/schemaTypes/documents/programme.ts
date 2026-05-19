@@ -60,7 +60,6 @@ export default defineType({
       type: 'image',
       title: 'Image de couverture',
       options: {hotspot: true},
-      // fields: imageFields,
       group: 'editorial',
     }),
 
@@ -69,32 +68,14 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Expositions', value: 'expositions'},
-          {title: 'Événements', value: 'evenements'},
-          {title: 'Hors les murs', value: 'hors-les-murs'},
+          {title: 'Expositions en cours', value: 'exhibitions-current'},
+          {title: 'Expositions à venir', value: 'exhibitions-futur'},
+          {title: 'Expositions hors-les-murs', value: 'exhibitions-out-of-the-box'},
+          {title: 'Événements', value: 'events'},
+          {title: 'Visites commentées', value: 'guided-tours'},
         ],
       },
       group: 'editorial',
     }),
-    // defineField({
-    //   name: 'items',
-    //   title: 'Items',
-    //   type: 'array',
-    //   of: [{type: 'reference', to: [{type: 'exhibition'}, {type: 'event'}]}],
-    //   group: 'editorial',
-    // }),
-
-    // defineField({
-    //   name: 'rebonds',
-    //   title: 'Rebonds',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'reference',
-    //       to: [{type: 'pageModulaire'}, {type: 'event'}, {type: 'exhibition'}, {type: 'product'}],
-    //     },
-    //   ],
-    //   group: 'editorial',
-    // }),
   ],
 })

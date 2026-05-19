@@ -29,7 +29,7 @@ const Sidebar = ({ input }: Props) => {
       )}
       {input.coProduction && (
         <div className='sidebar__item sidebar__coproduction'>
-          <h3 className='c-tag underline'>Coproduction</h3>
+          <h3 className='c-tag underline'>Co-production</h3>
           <ul>
             {input.coProduction.map((item, i) => (
               <li key={i}>

@@ -1,20 +1,27 @@
 "use client";
 import React from "react";
-import { Exhibition } from "../sanity-api/types/sanity.types";
-import { _localizeField } from "../sanity-api/utils";
+import { Exhibition, FhcbDate } from "../sanity-api/types/sanity.types";
+import { _localizeField, _localizeText } from "../sanity-api/utils";
 import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
 import FHCBDates from "./ui/FHCBDates";
 import Figure from "./ui/Figure";
+import clsx from "clsx";
+import { _isCurrentExhibition } from "../lib/utils";
 
 type Props = {
   input: ExhibitionExpanded;
 };
 
-const HeroExhibition = ({ input }: Props) => {
+const ExhibitionHero = ({ input }: Props) => {
   const { title, artists, imageCover, dates } = input;
   const artistList = artists?.map((artist) => artist.name).join(", ");
+  const isCurrentExhibition = _isCurrentExhibition(dates || []);
   return (
-    <section className='hero-exhibition bg-mauve'>
+    <section
+      className={clsx(
+        "exhibition-hero bg-mauve",
+        isCurrentExhibition && "exhibition-hero--is-current",
+      )}>
       <div className='container-fluid'>
         <div className='grid md:grid-cols-2 gap-gutter'>
           <div className='hero__figure'>
@@ -28,7 +35,10 @@ const HeroExhibition = ({ input }: Props) => {
           </div>
           <div className='hero__header'>
             <div className='top'>
-              <div className='hero__tag c-tag'>{"item.tag"}</div>
+              <div className='card__tag c-tag'>
+                {isCurrentExhibition && _localizeText("currentExhibition")}
+                {!isCurrentExhibition && _localizeText("pastExhibition")}
+              </div>
               <h2 className='hero__title c-h1'>{artistList}</h2>
               <div className='hero__subtitle c-title-expo'>
                 {_localizeField(title)}
@@ -49,4 +59,4 @@ const HeroExhibition = ({ input }: Props) => {
   );
 };
 
-export default HeroExhibition;
+export default ExhibitionHero;

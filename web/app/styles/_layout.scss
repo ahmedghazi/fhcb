@@ -44,9 +44,10 @@ main {
   z-index: 1;
   .template {
     padding-top: var(--header-h);
+    padding-bottom: var(--header-h);
     &--exhibition {
       padding-top: 0;
-      section.hero-exhibition {
+      section.exhibition-hero {
         padding-top: var(--header-h);
       }
     }

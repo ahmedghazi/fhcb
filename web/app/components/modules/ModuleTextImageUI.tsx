@@ -25,12 +25,19 @@ const ModuleTextImageUI = ({ input }: Props) => {
         <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter'>
           {image?.asset && (
             <div className='module__image md:col-span-5'>
-              <Figure
+              {/* <Figure
                 asset={image.asset}
                 caption={image.asset?.title || ""}
                 alt={image.asset?.altText}
                 author={image.asset?.description}
                 copyright={image.asset?.creditLine}
+              /> */}
+              <Figure
+                asset={image.asset}
+                caption={_localizeField(image.asset?.title) || ""}
+                alt={_localizeField(image.asset?.altText)}
+                author={_localizeField(image.asset?.description)}
+                copyright={_localizeField(image.asset?.creditLine)}
               />
             </div>
           )}
