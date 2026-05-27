@@ -10,6 +10,7 @@ type Props = {
   title: string;
   subtitle?: string;
   info?: string;
+  infoNode?: React.ReactNode;
   imageCover: SanityImageAssetFull;
   linkPrimary: string;
   linkPrimaryLabel: string;
@@ -21,6 +22,7 @@ const CardInnerMD = ({
   title,
   subtitle,
   info,
+  infoNode,
   imageCover,
   linkPrimary,
   linkPrimaryLabel,
@@ -43,6 +45,7 @@ const CardInnerMD = ({
           </div>
           <div className='card__footer'>
             {info && <div className='card__info c-body-xs'>{info}</div>}
+            {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
             <div className='btns'>
               <Link href={linkPrimary} className='btn btn--primary'>
                 {linkPrimaryLabel}

@@ -10,7 +10,11 @@ import {
 import FHCBDates from "../FHCBDates";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import Link from "next/link";
-import { _isCurrentExhibition, _isFuturExhibition } from "@/app/lib/utils";
+import {
+  _isCurrentExhibition,
+  _isFuturExhibition,
+  _isPastExhibition,
+} from "@/app/lib/utils";
 
 type Props = {
   input: ExhibitionExpanded;
@@ -24,6 +28,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
 
+  const isPastExhibition = _isPastExhibition(dates || []);
   const isCurrentExhibition = _isCurrentExhibition(dates || []);
   const isFuturExhibition = _isFuturExhibition(dates || []);
   return (
@@ -35,12 +40,19 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
         size === "lg" && "md:col-span-4",
         isLandscape && `card--is-landscape`,
         !isLandscape && "card--is-portrait",
+        isPastExhibition && "card--is-past",
         isCurrentExhibition && "card--is-current",
         isFuturExhibition && "card--is-futur",
         "self-start ",
       )}>
-      {/* <div>{imageCover?.asset?.metadata?.dimensions?.width}</div>
-      <div>{imageCover?.asset?.metadata?.dimensions?.height}</div> */}
+      {isPastExhibition && (
+        <PastCardExhibition
+          input={input}
+          artistList={artistList}
+          isLandscape={isLandscape}
+          size={size}
+        />
+      )}
       {isCurrentExhibition && (
         <CurrentCardExhibition
           input={input}
@@ -49,8 +61,8 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
           size={size}
         />
       )}
-      {!isCurrentExhibition && (
-        <PastCardExhibition
+      {isFuturExhibition && (
+        <FuturCardExhibition
           input={input}
           artistList={artistList}
           isLandscape={isLandscape}
@@ -261,6 +273,124 @@ const PastCardExhibition = ({
             </div>
           </div>
           <div className='md:col-span-8'>
+            <div className='card__media'>
+              <Figure asset={imageCover?.asset} />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const FuturCardExhibition = ({
+  input,
+  artistList,
+  isLandscape,
+  size,
+}: CardInnerProps) => {
+  const { title, imageCover, dates } = input;
+
+  return (
+    <div className='card__inner'>
+      {size === "sm" && (
+        <>
+          <div className='card__header'>
+            <div className='card__tag c-tag'>
+              {_localizeText("futurExhibition")}
+            </div>
+            {artistList && <h2 className='card__title c-h2'>{artistList}</h2>}
+            <div className='card__subtitle c-h3'>{_localizeField(title)}</div>
+          </div>
+          <div className='card__media'>
+            <Figure asset={imageCover?.asset} />
+          </div>
+          <div className='card__footer'>
+            {dates && (
+              <div className='card__info'>
+                <FHCBDates input={dates} />
+              </div>
+            )}
+            <div className='btns'>
+              <Link href={_linkResolver(input)} className='btn btn--primary'>
+                {_localizeText("discoverTheExhibition")}
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
+      {size === "md" && (
+        <div className='grid md:grid-cols-12 gap-xs'>
+          <div className='md:col-span-4'>
+            <div className='card__body'>
+              <div className='card__header'>
+                <div className='card__tag c-tag'>
+                  {_localizeText("currentExhibition")}
+                </div>
+                {artistList && (
+                  <h2 className='card__title c-h2'>{artistList}</h2>
+                )}
+                <div className='card__subtitle c-h3'>
+                  {_localizeField(title)}
+                </div>
+              </div>
+              <div className='card__footer'>
+                {dates && (
+                  <div className='card__info'>
+                    <FHCBDates input={dates} />
+                  </div>
+                )}
+
+                <div className='btns'>
+                  <Link
+                    href={_linkResolver(input)}
+                    className='btn btn--primary'>
+                    {_localizeText("discoverTheExhibition")}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='md:col-span-8'>
+            <div className='card__media'>
+              <Figure asset={imageCover?.asset} />
+            </div>
+          </div>
+        </div>
+      )}
+      {size === "lg" && (
+        <div className='grid md:grid-cols-12 gap-xs'>
+          <div className={clsx("md:col-span-4", isLandscape && "order-2")}>
+            <div className='card__body'>
+              <div className='card__header'>
+                <div className='card__tag c-tag'>
+                  {_localizeText("currentExhibition")}
+                </div>
+                {artistList && (
+                  <h2 className='card__title c-h2'>{artistList}</h2>
+                )}
+                <div className='card__subtitle c-h3'>
+                  {_localizeField(title)}
+                </div>
+              </div>
+              <div className='card__footer'>
+                {dates && (
+                  <div className='card__info'>
+                    <FHCBDates input={dates} />
+                  </div>
+                )}
+
+                <div className='btns'>
+                  <Link
+                    href={_linkResolver(input)}
+                    className='btn btn--primary'>
+                    {_localizeText("discoverTheExhibition")}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={clsx("md:col-span-8", isLandscape && "order-1")}>
             <div className='card__media'>
               <Figure asset={imageCover?.asset} />
             </div>

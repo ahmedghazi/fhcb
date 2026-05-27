@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
     "product",
     "artist",
     "pageModulaire",
+    "imageImages",
   ];
 
   const query = `*[_type in $postTypes
@@ -29,15 +30,22 @@ export async function POST(request: NextRequest) {
     && (
       title.fr match $s + "*"
       || title.en match $s + "*"
-      || name match $s + "*"
       || text[].children[].text match $s + "*"
+      || name match $s + "*"
+      || tags[]->title match $s + "*"
+      || artists[]->name match $s + "*"
       )
     ]
     {
-      _type, slug, title, imageCover{
+      _type,
+      slug,
+      title,
+      name,
+      imageCover{
         ...,
         asset->
-      }
+      },
+      dates
     } | order(_createdAt desc)
     `;
 

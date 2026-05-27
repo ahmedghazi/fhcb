@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
-import { PageModulaire } from "@/app/sanity-api/types/sanity.types";
+import { PAGE_MODULAIRE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 
 type Params = Promise<{ slug: string }>;
 
@@ -36,14 +36,14 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
   const { isEnabled } = await draftMode();
   const { slug } = await params;
 
-  let data: PageModulaire;
+  let data: PAGE_MODULAIRE_QUERY_RESULT;
   if (isEnabled) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
       PAGE_MODULAIRE_QUERY,
       { slug },
     );
   } else {
-    data = (await getPageModulaire(slug)) as PageModulaire;
+    data = (await getPageModulaire(slug)) as PAGE_MODULAIRE_QUERY_RESULT;
   }
 
   if (!data) return notFound();

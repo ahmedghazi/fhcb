@@ -116,12 +116,13 @@ export default defineType({
       title: `title.${baseLanguage}`,
       subtitle: 'slug.current',
       image: 'imageCover',
+      tags: `tags.0.title.${baseLanguage}`,
     },
     prepare(selection) {
-      const {title, subtitle, image} = selection
+      const {title, subtitle, image, tags} = selection
       // console.log(images)
       return {
-        title: title,
+        title: `${title} [${tags}]`,
         subtitle: `/exhibition/${subtitle}`,
         media: image,
       }

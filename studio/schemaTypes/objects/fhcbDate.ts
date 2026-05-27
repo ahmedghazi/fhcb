@@ -9,7 +9,7 @@ export default defineField({
 
   fields: [
     defineField({
-      type: 'datetime',
+      type: 'date',
       name: 'du',
       title: 'Du',
       options: {
@@ -17,7 +17,7 @@ export default defineField({
       },
     }),
     defineField({
-      type: 'datetime',
+      type: 'date',
       name: 'au',
       title: 'Au',
       options: {
@@ -25,10 +25,23 @@ export default defineField({
       },
     }),
     defineField({
+      name: 'withTime',
+      title: 'Avec heure',
+      type: 'boolean',
+    }),
+    defineField({
       type: 'string',
-      name: 'heure',
-      title: 'Heure',
-      description: 'Ex: 19h, 14h30 — affiché uniquement si "Au" est vide',
+      name: 'timeStart',
+      title: 'Heure de début',
+      description: 'Ex: 19h',
+      hidden: ({parent}) => !parent?.withTime,
+    }),
+    defineField({
+      type: 'string',
+      name: 'timeEnd',
+      title: 'Heure de fin (optionnel)',
+      description: 'Ex: 23h',
+      hidden: ({parent}) => !parent?.withTime,
     }),
   ],
   preview: {
@@ -38,8 +51,7 @@ export default defineField({
     },
     prepare(selection) {
       const {du, au} = selection
-      const fmt = (d: string | undefined) =>
-        d ? new Date(d).toLocaleDateString('fr-FR') : '?'
+      const fmt = (d: string | undefined) => (d ? new Date(d).toLocaleDateString('fr-FR') : '?')
       return {
         title: `${fmt(du)} - ${fmt(au)}`,
       }

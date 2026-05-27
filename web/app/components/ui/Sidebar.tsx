@@ -8,13 +8,14 @@ type Props = {
 };
 
 const Sidebar = ({ input }: Props) => {
+  const { commissariat, coProduction, partenaires, keyVal } = input;
   return (
     <aside className='sidebar'>
-      {input.commissariat && (
+      {commissariat && (
         <div className='sidebar__item sidebar__commissariat'>
           <h3 className='c-tag underline'>{_localizeText("commissariat")}</h3>
           <ul>
-            {input.commissariat.map((item, i) => (
+            {commissariat.map((item, i) => (
               <li key={i}>
                 {item.title && <div>{_localizeField(item.title) || ""}</div>}
                 {item.text && (
@@ -27,11 +28,11 @@ const Sidebar = ({ input }: Props) => {
           </ul>
         </div>
       )}
-      {input.coProduction && (
+      {coProduction && (
         <div className='sidebar__item sidebar__coproduction'>
           <h3 className='c-tag underline'>Co-production</h3>
           <ul>
-            {input.coProduction.map((item, i) => (
+            {coProduction.map((item, i) => (
               <li key={i}>
                 <div className='c-body--tight'>{_localizeField(item.text)}</div>
                 {item._type === "partenaire" &&
@@ -44,11 +45,11 @@ const Sidebar = ({ input }: Props) => {
           </ul>
         </div>
       )}
-      {input.partenaires && (
+      {partenaires && (
         <div className='sidebar__item sidebar__partenaires'>
           <h3 className='c-tag underline'>Partenaires</h3>
           <ul>
-            {input.partenaires.map((item, i) => (
+            {partenaires.map((item, i) => (
               <li key={i}>
                 <div className='c-body--tight'>{_localizeField(item.text)}</div>
                 {item._type === "partenaire" &&
@@ -56,6 +57,23 @@ const Sidebar = ({ input }: Props) => {
                   item.imageCover.asset && (
                     <Figure asset={item.imageCover.asset} />
                   )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {keyVal && (
+        <div className='sidebar__item sidebar__keyVal'>
+          {/* <h3 className='c-tag underline'>{_localizeText("keyVal")}</h3> */}
+          <ul>
+            {keyVal.map((item, i) => (
+              <li key={i}>
+                {item.title && <div>{_localizeField(item.title) || ""}</div>}
+                {item.text && (
+                  <div className='c-body--tight'>
+                    {_localizeField(item.text) || ""}
+                  </div>
+                )}
               </li>
             ))}
           </ul>

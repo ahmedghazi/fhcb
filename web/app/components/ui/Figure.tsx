@@ -1,5 +1,6 @@
 import website from "@/app/config/website";
 import { urlFor } from "@/app/sanity-api/sanity-utils";
+import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
 
@@ -20,8 +21,15 @@ const Figure = ({
   author,
   copyright,
 }: Props) => {
+  const isLandscape =
+    asset?.metadata?.dimensions?.width > asset?.metadata?.dimensions?.height;
   return (
-    <figure>
+    <figure
+      className={clsx(
+        "figure",
+        isLandscape && "figure--is-landscape",
+        !isLandscape && "figure--is-portrait",
+      )}>
       <Image
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}

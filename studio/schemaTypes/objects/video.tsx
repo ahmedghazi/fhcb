@@ -62,7 +62,7 @@ export default {
       name: 'placeholder',
       type: 'image',
       title: 'Vignette',
-      description: 'Vignette',
+      description: 'Vignette, https://www.get-youtube-thumbnail.com/',
       // hidden: true,
       // hidden: ({parent, document}) => {
       //   console.log(parent, document)

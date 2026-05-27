@@ -46,26 +46,13 @@ export default defineType({
     }),
 
     defineField({
-      name: 'presentation',
-      title: 'Présentation courte',
-      type: 'localeBlockContent',
-      group: 'editorial',
-    }),
-    defineField({
-      name: 'featuredProjects',
-      title: 'Projets à la une',
+      name: 'modules',
+      title: 'Modules',
+      description: 'Zone de contenu Modulaire (actu, mise en acant, newsletter)',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'project'}]}],
+      of: [{type: 'newsCardUI'}, {type: 'featuredCardsUI'}],
       group: 'editorial',
     }),
-    // defineField({
-    //   name: 'modules',
-    //   title: 'Modules',
-    //   description: 'Zone de contenu Modulaire (images, textes, embed)',
-    //   type: 'array',
-    //   of: modulesList,
-    //   group: 'editorial',
-    // }),
   ],
   preview: {
     prepare() {

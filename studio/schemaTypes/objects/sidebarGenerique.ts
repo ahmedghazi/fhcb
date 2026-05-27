@@ -28,6 +28,12 @@ export default defineType({
       type: 'array',
       of: [{type: 'keyVal'}, {type: 'reference', to: [{type: 'partenaire'}]}],
     }),
+    defineField({
+      name: 'keyVal',
+      title: 'titre + texte',
+      type: 'array',
+      of: [{type: 'keyVal'}],
+    }),
   ],
   preview: {
     select: {

@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
-import { Artist } from "@/app/sanity-api/types/sanity.types";
+import { ARTIST_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 
 type Params = Promise<{ slug: string }>;
 
@@ -21,7 +21,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const data = await getArtist(slug);
   return {
-    title: `${data?.seo?.metaTitle || data?.title?.fr || ""}`,
+    title: `${data?.seo?.metaTitle || data?.name || ""}`,
     description: data?.seo?.metaDescription,
     openGraph: {
       images: data?.seo?.metaImage?.asset?.url || website.image,
@@ -33,14 +33,14 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
   const { isEnabled } = await draftMode();
   const { slug } = await params;
 
-  let data: Artist;
+  let data: ARTIST_QUERY_RESULT;
   if (isEnabled) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
       ARTIST_QUERY,
       { slug },
     );
   } else {
-    data = (await getArtist(slug)) as Artist;
+    data = (await getArtist(slug)) as ARTIST_QUERY_RESULT;
   }
 
   if (!data) return notFound();

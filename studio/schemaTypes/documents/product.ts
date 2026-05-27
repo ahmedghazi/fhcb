@@ -3,8 +3,6 @@ import modulesList from '../objects/modules/modulesList'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {BiLogoShopify} from 'react-icons/bi'
-import imageFields from '../misc/imageFields'
-import {mediaField} from 'sanity-plugin-media'
 
 export default defineType({
   type: 'document',

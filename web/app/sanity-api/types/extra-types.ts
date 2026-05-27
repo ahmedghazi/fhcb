@@ -1,22 +1,35 @@
-import { EventExpanded, ExhibitionExpanded } from "./sanity-expanded.types";
+import {
+  EventExpanded,
+  ExhibitionExpanded,
+  ImagesUIExpanded,
+  VideoUIExpanded,
+  TextImageUIExpanded,
+} from "./sanity-expanded.types";
 import {
   Artist,
   Exhibition,
+  FeaturedCardsUI,
   GridCardUI,
-  ImagesUI,
   Library,
   ListsUI,
   ListUI,
+  LocaleString,
+  NewsCardUI,
   PageModulaire,
   Product,
   Programme,
   ProgrammeUI,
+  Slug,
   SliderCardUI,
-  TextImageUI,
   TextSidebarUI,
   TextUI,
-  VideoUI,
 } from "./sanity.types";
+
+export type MostSearchedItem = {
+  _type: string;
+  slug?: Slug | null;
+  title?: LocaleString | null;
+};
 
 export type PostTypes =
   | PageModulaire
@@ -28,15 +41,17 @@ export type PostTypes =
   | any;
 export type ModuleType =
   | TextUI
-  | ImagesUI
-  | VideoUI
-  | TextImageUI
+  | ImagesUIExpanded
+  | VideoUIExpanded
+  | TextImageUIExpanded
   | TextSidebarUI
   | ListUI
   | ListsUI
   | SliderCardUI
   | GridCardUI
-  | ProgrammeUI;
+  | ProgrammeUI
+  | FeaturedCardsUI
+  | NewsCardUI;
 
 export interface ModulesList {
   modules?: Array<
@@ -45,13 +60,13 @@ export interface ModulesList {
       } & TextUI)
     | ({
         _key: string;
-      } & ImagesUI)
+      } & ImagesUIExpanded)
     | ({
         _key: string;
-      } & VideoUI)
+      } & VideoUIExpanded)
     | ({
         _key: string;
-      } & TextImageUI)
+      } & TextImageUIExpanded)
     | ({
         _key: string;
       } & TextSidebarUI)
@@ -70,6 +85,12 @@ export interface ModulesList {
     | ({
         _key: string;
       } & ProgrammeUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
   >;
 }
 

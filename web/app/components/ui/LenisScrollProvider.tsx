@@ -14,6 +14,7 @@ const LenisScrollProvider = ({ children }: LenisScrollProviderProps) => {
 
   useEffect(() => {
     const token = subscribe("TOGGLE_SCROLL", (_e: any, on: boolean) => {
+      console.log(_e, on);
       if (on) {
         lenis?.start();
         document.body.style.overflow = "auto";

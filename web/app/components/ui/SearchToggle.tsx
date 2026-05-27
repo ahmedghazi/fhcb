@@ -2,17 +2,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { _linkResolver } from "@/app/sanity-api/utils";
 import { usePathname } from "next/navigation";
-
 import clsx from "clsx";
-
-import { Settings } from "@/app/sanity-api/types/sanity.types";
-import styles from "./Search.module.css";
 import useHeader from "@/app/context/HeaderContext";
+import styles from "./Search.module.css";
 
-type Props = {
-  settings: Settings;
-};
-const Search = ({ settings }: Props) => {
+const SearchToggle = () => {
   const [active, setActive] = useState<boolean>(false);
 
   const pathname = usePathname();
@@ -48,8 +42,19 @@ const Search = ({ settings }: Props) => {
   }, [pathname]);
 
   return (
-    <div className={clsx(styles.search, "search", active ? "is-active" : "")}>
-      <button className={styles.toggle} onClick={() => setActive(!active)}>
+    <div
+      className={clsx(
+        styles.search,
+        "search-toggle",
+        active ? "is-active" : "",
+      )}>
+      <button
+        className={styles.toggle}
+        // onMouseLeave={() => dispatchModalType(null)}
+        onMouseEnter={() => {
+          dispatchModalType("search");
+        }}
+        onClick={() => setActive(!active)}>
         <svg
           width='24'
           height='20'
@@ -69,4 +74,4 @@ const Search = ({ settings }: Props) => {
   );
 };
 
-export default Search;
+export default SearchToggle;

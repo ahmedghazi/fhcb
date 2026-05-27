@@ -1,10 +1,11 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-05-19T13:55:19.211Z
+// Generated on: 2026-05-27T15:08:07.668Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
 
 import type {
+  ImageImages,
   Article,
   Partenaire,
   Settings,
@@ -16,13 +17,11 @@ import type {
   Event,
   Programme,
   Library,
-  SETTINGS_QUERY_RESULT,
-  HOME_QUERY_RESULT,
   PAGE_MODULAIRE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
   EXPHIBITION_QUERY_RESULT,
   PROGRAMME_QUERY_RESULT,
-  Project,
+  IMAGE_IMAGES_QUERY_RESULT,
   TextImageUI,
   KeyVal,
   ImageInGrid,
@@ -40,6 +39,11 @@ import type {
 
 export type SanityImageAssetFull = SanityImageAsset & {
   creditLine?: string;
+};
+
+export type ImageImagesExpanded = Omit<ImageImages, 'rebonds' | 'imageCover'> & {
+  rebonds?: Array<ImageImagesExpanded> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type ArticleExpanded = Omit<Article, 'imageCover'> & {
@@ -97,16 +101,6 @@ export type LibraryExpanded = Omit<Library, 'miseEnAvant' | 'sliderSelection' | 
   imageCover?: (Omit<NonNullable<NonNullable<Library>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type SETTINGS_QUERY_RESULTExpanded = Omit<SETTINGS_QUERY_RESULT, 'mostSearched'> & {
-  mostSearched?: ExhibitionExpanded | null;
-};
-
-export type HOME_QUERY_RESULTExpanded = Omit<HOME_QUERY_RESULT, 'tags' | 'rebonds' | 'imageCover'> & {
-  tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<HOME_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
-};
-
 export type PAGE_MODULAIRE_QUERY_RESULTExpanded = Omit<PAGE_MODULAIRE_QUERY_RESULT, 'tags' | 'rebonds' | 'imageCover'> & {
   tags?: Array<Tag> | null;
   rebonds?: ExhibitionExpanded | null;
@@ -126,9 +120,8 @@ export type PROGRAMME_QUERY_RESULTExpanded = Omit<PROGRAMME_QUERY_RESULT, 'image
   imageCover?: (Omit<NonNullable<NonNullable<PROGRAMME_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type ProjectExpanded = Omit<Project, 'contributions' | 'media'> & {
-  contributions?: Array<ContributionExpanded> | null;
-  media?: Array<NonNullable<Project['media']>[number] extends infer M ? M extends { _type: 'video' } ? Omit<M, 'video'> & { video?: { asset?: { playbackId?: string; data?: { aspect_ratio?: string; duration?: number } } | null } | null } : M : never> | null;
+export type IMAGE_IMAGES_QUERY_RESULTExpanded = Omit<IMAGE_IMAGES_QUERY_RESULT, 'imageCover'> & {
+  imageCover?: (Omit<NonNullable<NonNullable<IMAGE_IMAGES_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type TextImageUIExpanded = Omit<TextImageUI, 'image'> & {
@@ -171,7 +164,7 @@ export type ImagesUIExpanded = Omit<ImagesUI, 'items'> & {
   > | null;
 };
 
-export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | 'coProduction' | 'partenaires'> & {
+export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | 'coProduction' | 'partenaires' | 'keyVal'> & {
   commissariat?: Array<
     {
       _key: string;
@@ -192,6 +185,11 @@ export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | '
     | ({
         _key: string;
       } & PartenaireExpanded)
+  > | null;
+  keyVal?: Array<
+    {
+      _key: string;
+    } & KeyValExpanded
   > | null;
 };
 

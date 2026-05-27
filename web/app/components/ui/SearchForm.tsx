@@ -1,16 +1,20 @@
+import { SETTINGS_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import {
-  Artist,
-  Exhibition,
-  PageModulaire,
-  Product,
-  Settings,
-} from "@/app/sanity-api/types/sanity.types";
-import { _linkResolver } from "@/app/sanity-api/utils";
-import React, { useRef, useState } from "react";
-import { PostTypes } from "@/app/sanity-api/types/extra-types";
+  _linkResolver,
+  _localizeField,
+  _localizeText,
+} from "@/app/sanity-api/utils";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  MostSearchedItem,
+  PostTypes,
+} from "@/app/sanity-api/types/extra-types";
 import CardArtist from "./cards/CardArtist";
 import CardExhibition from "./cards/CardExhibition";
 import CardProduct from "./cards/CardProduct";
+import styles from "./Search.module.css";
+import Link from "next/link";
+import CardImageImages from "./cards/CardImageImages";
 
 type SearchResultItemProps = {
   input: PostTypes;
@@ -18,28 +22,38 @@ type SearchResultItemProps = {
 
 const SearchResultItem = ({ input }: SearchResultItemProps) => {
   if (input._type === "artist") {
-    return <CardArtist input={input} />;
+    return <CardArtist input={input} size='sm' />;
   }
   if (input._type === "exhibition") {
-    return <CardExhibition input={input} />;
+    return <CardExhibition input={input} size='sm' />;
   }
   if (input._type === "product") {
-    return <CardProduct input={input} />;
+    return <CardProduct input={input} size='sm' />;
   }
-  return <div>Other</div>;
+  if (input._type === "imageImages") {
+    return <CardImageImages input={input} size='sm' />;
+  }
+  return "";
 };
 
 type Props = {
-  settings: Settings;
+  settings: NonNullable<SETTINGS_QUERY_RESULT>;
 };
 
 const SearchForm = ({ settings }: Props) => {
   const [status, setStatus] = useState<string>("");
   const [term, setTerm] = useState<string>("");
   const [searchResult, setSearchResult] = useState<Array<any>>([]);
-  const initialPlaceholder = "RECHERCHER";
+  const initialPlaceholder = "Exposition, artiste, événement...";
   const [placeholder, setPlaceholder] = useState<string>(initialPlaceholder);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { mostSearched } = settings;
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const getButtonMsg = () => {
     switch (status) {
@@ -47,15 +61,15 @@ const SearchForm = ({ settings }: Props) => {
         return "...";
 
       case "error":
-        return "ERROR";
+        return _localizeText("error");
       default:
-        return "OK";
+        return _localizeText("search");
     }
   };
 
   const _handleSearch = async () => {
     const body = { s: term };
-    // console.log(body);
+    console.log(body);
     // return;
     setStatus("searching");
     document.body.classList.add("is-fetching");
@@ -95,16 +109,15 @@ const SearchForm = ({ settings }: Props) => {
   };
 
   return (
-    <div className='search-form'>
+    <div className={styles.searchForm}>
       <form className='search' onSubmit={_handleSubmit}>
-        <div className='form '>
+        <div className='inner '>
           <input
             type='search'
             size={10}
             placeholder={placeholder}
             name='term'
-            // onChange={changeHandler}
-            onInput={changeHandler}
+            onChange={changeHandler}
             value={term}
             id='s'
             className='flex-2'
@@ -112,32 +125,44 @@ const SearchForm = ({ settings }: Props) => {
             onFocus={() => setPlaceholder("")}
             onBlur={() => setPlaceholder(initialPlaceholder)}
           />
-          {term !== "" && (
-            <button
-              disabled={status === "searching" || status === "success"}
-              type='submit'
-              aria-label='submit'
-              className={""}>
-              <span>{getButtonMsg()}</span>
-            </button>
-          )}
+          <button
+            className='btn'
+            disabled={
+              status === "searching" || status === "success" || term === ""
+            }
+            type='submit'
+            aria-label='submit'>
+            <span>{getButtonMsg()}</span>
+          </button>
         </div>
       </form>
-      <div className='mostsSearched'>mostsSearched here</div>
-      {searchResult && searchResult.length > 0 && (
-        <div className='search--modal'>
-          {/* <button
-                className='btn-close text-lg'
-                onClick={() => setOpen(false)}>
-                ×
-              </button> */}
+      {mostSearched && searchResult.length === 0 && (
+        <div className={styles.mostSearched}>
+          <h2 className='c-quote'>{_localizeText("mostSearched")}</h2>
+          <ul className=''>
+            {(mostSearched as unknown as MostSearchedItem[]).map((item, i) => (
+              <li key={i}>
+                <Link href={_linkResolver(item)}>
+                  {_localizeField(item.title)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {searchResult && (
+        <div className={styles.searchResults}>
           <div className='inner'>
             <div className='body'>
-              <div className='featured'>featured search results</div>
               <div className='grid md:grid-cols-4 gap-gutter'>
-                {searchResult.map((item, i) => (
+                {searchResult?.map((item, i) => (
                   <SearchResultItem input={item} key={i} />
                 ))}
+                {searchResult.length === 0 && term && (
+                  <div className='col-span-full'>
+                    <p>{_localizeText("noResults")}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -28,6 +28,13 @@ export default defineType({
       group: 'seo',
     }),
     defineField({
+      name: 'index',
+      type: 'string',
+      title: 'Index',
+      description: 'réservé au event avec le tag Feuilletage',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'localeString',
@@ -105,14 +112,15 @@ export default defineType({
     select: {
       title: `title.${baseLanguage}`,
       slug: 'slug',
-      date: 'date',
+      date: 'dates.0.du',
+      index: 'index',
       image: 'imageCover',
     },
     prepare(selection) {
-      const {title, slug, date, image} = selection
+      const {title, slug, date, image, index} = selection
       // console.log(images)
       return {
-        title: title,
+        title: `${index ? `#${index} ` : ''}${title}`,
         subtitle: `/event/${slug.current} - ${date}`,
         media: image,
       }

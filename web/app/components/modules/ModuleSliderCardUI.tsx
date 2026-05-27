@@ -9,6 +9,7 @@ import CardArtist from "../ui/cards/CardArtist";
 import CardEvent from "../ui/cards/CardEvent";
 import CardExhibition from "../ui/cards/CardExhibition";
 import KeenSlider from "../ui/KeenSlider";
+import CardImageImages from "../ui/cards/CardImageImages";
 
 type Props = {
   input: SliderCardUI;
@@ -39,6 +40,9 @@ const ModuleSliderCardUI = ({ input }: Props) => {
                 )}
                 {item && item._type === "exhibition" && (
                   <CardExhibition input={item} size='md' />
+                )}
+                {item && item._type === "imageImages" && (
+                  <CardImageImages input={item} />
                 )}
               </div>
             ))}

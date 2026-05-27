@@ -2,7 +2,7 @@
 
 header {
   position: fixed;
-  width: 100%;
+  width: 100dvw;
   top: 0;
   left: 0;
   padding: var(--spacing-sm) var(--spacing-lg);
@@ -58,12 +58,16 @@ body.nav-open {
   overflow: hidden;
   header {
     background-color: var(--color-secondary);
-    a,
-    button {
+    nav a,
+    .locale-switcher button,
+    .nav-modal a {
       color: white;
     }
-    svg path {
+    .header__logo svg path {
       fill: white;
+    }
+    .search-toggle button svg path {
+      stroke: white;
     }
     .header__inner > * {
       z-index: 1;

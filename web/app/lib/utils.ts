@@ -29,29 +29,38 @@ const monthName = (date: Date, bcp47: string) =>
 const weekdayName = (date: Date, bcp47: string) =>
   cap(date.toLocaleDateString(bcp47, { weekday: "long" }));
 
-type DifferentYears = { type: "different-years"; du: string; au: string };
-type SameYear = { type: "same-year"; du: string; au: string; year: number };
-type WithTime = { type: "with-time"; date: string; heure: string };
+type DifferentYears = { type: "different-years"; du: string; au: string; timeStart?: string; timeEnd?: string };
+type SameYear = { type: "same-year"; du: string; au: string; year: number; timeStart?: string; timeEnd?: string };
+type WithTime = { type: "with-time"; date: string; timeStart: string; timeEnd?: string };
 type Simple = { type: "simple"; date: string };
 
 export type FhcbDateFormatted = DifferentYears | SameYear | WithTime | Simple;
+
+type FhcbDateExtended = FhcbDate & {
+  withTime?: boolean;
+  timeStart?: string;
+  timeEnd?: string;
+};
+
+// Sanity `type: 'date'` stores YYYY-MM-DD — append T00:00:00 to avoid UTC offset shift
+const parseDate = (d: string) => new Date(`${d}T00:00:00`);
 
 export const _fhcbDates = (
   dates: FhcbDate,
   locale = "fr",
 ): FhcbDateFormatted => {
-  const { du, au, heure } = dates as FhcbDate & { heure?: string };
+  const { du, au, withTime, timeStart, timeEnd } = dates as FhcbDateExtended;
   const bcp47 = toBcp47(locale);
 
   if (!du) return { type: "simple", date: "" };
 
-  const duDate = new Date(du);
+  const duDate = parseDate(du);
   const duYear = duDate.getFullYear();
 
   // Single date with time
-  if (!au && heure) {
+  if (!au && withTime && timeStart) {
     const date = `${weekdayName(duDate, bcp47)} ${ordinal(duDate.getDate(), locale)} ${monthName(duDate, bcp47)} ${duYear}`;
-    return { type: "with-time", date, heure };
+    return { type: "with-time", date, timeStart, ...(timeEnd ? { timeEnd } : {}) };
   }
 
   // Single date, no time
@@ -62,8 +71,11 @@ export const _fhcbDates = (
     };
   }
 
-  const auDate = new Date(au);
+  const auDate = parseDate(au);
   const auYear = auDate.getFullYear();
+  const timeProps = withTime && timeStart
+    ? { timeStart, ...(timeEnd ? { timeEnd } : {}) }
+    : {};
 
   // Range spanning different years
   if (duYear !== auYear) {
@@ -71,6 +83,7 @@ export const _fhcbDates = (
       type: "different-years",
       du: `${ordinal(duDate.getDate(), locale)} ${monthName(duDate, bcp47)}. ${duYear}`,
       au: `${ordinal(auDate.getDate(), locale)} ${monthName(auDate, bcp47)} ${auYear}`,
+      ...timeProps,
     };
   }
 
@@ -80,13 +93,24 @@ export const _fhcbDates = (
     du: `${ordinal(duDate.getDate(), locale)} ${monthName(duDate, bcp47)}`,
     au: `${ordinal(auDate.getDate(), locale)} ${monthName(auDate, bcp47)}`,
     year: auYear,
+    ...timeProps,
   };
 };
 
+export const _isPastExhibition = (dates: FhcbDate[]): boolean => {
+  return dates.every((date) => date?.au && new Date(date.au) < new Date());
+};
+
 export const _isCurrentExhibition = (dates: FhcbDate[]): boolean => {
-  return dates.some((date) => date?.au && new Date(date.au) > new Date());
+  return dates.some(
+    (date) =>
+      date?.du &&
+      new Date(date.du) <= new Date() &&
+      date?.au &&
+      new Date(date.au) >= new Date(),
+  );
 };
 
 export const _isFuturExhibition = (dates: FhcbDate[]): boolean => {
-  return dates.some((date) => date?.du && new Date(date.du) > new Date());
+  return dates.every((date) => date?.du && new Date(date.du) > new Date());
 };

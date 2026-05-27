@@ -1,6 +1,6 @@
 import { SanityImageAssetFull } from "@/app/sanity-api/types/sanity-expanded.types";
 import clsx from "clsx";
-import React from "react";
+import React, { ReactNode } from "react";
 import Figure from "../Figure";
 import { Link } from "next-view-transitions";
 
@@ -10,6 +10,7 @@ type Props = {
   title: string;
   subtitle?: string;
   info?: string;
+  infoNode?: ReactNode;
   imageCover: SanityImageAssetFull;
   linkPrimary: string;
   linkPrimaryLabel: string;
@@ -21,6 +22,7 @@ const CardInnerSM = ({
   title,
   subtitle,
   info,
+  infoNode,
   imageCover,
   linkPrimary,
   linkPrimaryLabel,
@@ -32,11 +34,14 @@ const CardInnerSM = ({
         <h2 className='card__title c-h2'>{title}</h2>
         {subtitle && <div className='card__subtitle c-h3'>{subtitle}</div>}
       </div>
-      <div className='card__media'>
-        <Figure asset={imageCover} />
-      </div>
+      {imageCover && (
+        <div className='card__media'>
+          <Figure asset={imageCover} />
+        </div>
+      )}
       <div className='card__footer'>
         {info && <div className='card__info c-body-xs'>{info}</div>}
+        {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
         <div className='btns'>
           <Link href={linkPrimary} className='btn btn--primary'>
             {linkPrimaryLabel}

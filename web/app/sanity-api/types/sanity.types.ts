@@ -28,6 +28,23 @@ export type ExhibitionReference = {
   [internalGroqTypeReferenceTo]?: "exhibition";
 };
 
+export type FeaturedCardsUI = {
+  _type: "featuredCardsUI";
+  title?: string;
+  gridSize?: number;
+  items?: Array<
+    {
+      _key: string;
+    } & ExhibitionReference
+  >;
+};
+
+export type NewsCardUI = {
+  _type: "newsCardUI";
+  title?: LocaleString;
+  gridSize?: number;
+};
+
 export type EventReference = {
   _ref: string;
   _type: "reference";
@@ -62,6 +79,13 @@ export type ArtistReference = {
   [internalGroqTypeReferenceTo]?: "artist";
 };
 
+export type ImageImagesReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "imageImages";
+};
+
 export type GridCardUI = {
   _type: "gridCardUI";
   title?: LocaleString;
@@ -71,6 +95,7 @@ export type GridCardUI = {
     | EventReference
     | ExhibitionReference
     | ArtistReference
+    | ImageImagesReference
   >;
   cta?: Cta;
 };
@@ -83,6 +108,7 @@ export type SliderCardUI = {
     | ProductReference
     | EventReference
     | ExhibitionReference
+    | ImageImagesReference
   >;
   cta?: Cta;
 };
@@ -194,13 +220,20 @@ export type SidebarGenerique = {
         _key: string;
       } & PartenaireReference)
   >;
+  keyVal?: Array<
+    {
+      _key: string;
+    } & KeyVal
+  >;
 };
 
 export type FhcbDate = {
   _type: "fhcbDate";
   du?: string;
   au?: string;
-  heure?: string;
+  withTime?: boolean;
+  timeStart?: string;
+  timeEnd?: string;
 };
 
 export type MessageContextuel = {
@@ -435,6 +468,56 @@ export type LocaleString = {
   en?: string;
 };
 
+export type ImageImages = {
+  _id: string;
+  _type: "imageImages";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo?: Seo;
+  index?: string;
+  title?: LocaleString;
+  slug?: Slug;
+  speaker?: string;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  video?: Video;
+  modules?: Array<
+    | ({
+        _key: string;
+      } & ImagesUI)
+    | ({
+        _key: string;
+      } & TextSidebarUI)
+  >;
+  rebonds?: Array<
+    {
+      _key: string;
+    } & ImageImagesReference
+  >;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type Article = {
   _id: string;
   _type: "article";
@@ -482,29 +565,13 @@ export type Article = {
     | ({
         _key: string;
       } & ProgrammeUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
   >;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type Partenaire = {
@@ -525,6 +592,12 @@ export type Partenaire = {
   };
 };
 
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type Tag = {
   _id: string;
   _type: "tag";
@@ -533,6 +606,25 @@ export type Tag = {
   _rev: string;
   title?: LocaleString;
   slug?: Slug;
+};
+
+export type Home = {
+  _id: string;
+  _type: "home";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo?: Seo;
+  title?: LocaleString;
+  slug?: Slug;
+  modules?: Array<
+    | ({
+        _key: string;
+      } & NewsCardUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
+  >;
 };
 
 export type Settings = {
@@ -549,11 +641,6 @@ export type Settings = {
     | ({
         _key: string;
       } & LinkExternal)
-  >;
-  navSocial?: Array<
-    {
-      _key: string;
-    } & LinkIcon
   >;
   btnTickets?: LinkExternal;
   btnLibrary?: LinkInternal;
@@ -574,6 +661,36 @@ export type Settings = {
         _key: string;
       } & LinkExternal)
   >;
+  navTertiary?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
+  navQuaternary?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
+  navLegals?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
+  navSocial?: Array<
+    {
+      _key: string;
+    } & LinkIcon
+  >;
+  adressAndOpeningHours?: LocaleBlockContent;
   siteDescription?: LocaleBlockContent;
   baseline?: LocaleBlockContent;
   contact?: string;
@@ -604,7 +721,6 @@ export type PageModulaire = {
   _updatedAt: string;
   _rev: string;
   seo?: Seo;
-  homePage?: boolean;
   title?: LocaleString;
   slug?: Slug;
   imageCover?: {
@@ -650,6 +766,12 @@ export type PageModulaire = {
     | ({
         _key: string;
       } & ProgrammeUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -706,6 +828,12 @@ export type Artist = {
     | ({
         _key: string;
       } & ProgrammeUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
   >;
 };
 
@@ -776,6 +904,12 @@ export type Exhibition = {
     | ({
         _key: string;
       } & ProgrammeUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -859,6 +993,12 @@ export type Product = {
     | ({
         _key: string;
       } & ProgrammeUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -875,6 +1015,7 @@ export type Event = {
   _updatedAt: string;
   _rev: string;
   seo?: Seo;
+  index?: string;
   title?: LocaleString;
   slug?: Slug;
   imageCover?: {
@@ -932,6 +1073,12 @@ export type Event = {
     | ({
         _key: string;
       } & ProgrammeUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
+    | ({
+        _key: string;
+      } & FeaturedCardsUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -1246,11 +1393,14 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | ExhibitionReference
+  | FeaturedCardsUI
+  | NewsCardUI
   | EventReference
   | ProgrammeUI
   | PageModulaireReference
   | ProductReference
   | ArtistReference
+  | ImageImagesReference
   | GridCardUI
   | SliderCardUI
   | ListsUI
@@ -1284,12 +1434,14 @@ export type AllSanitySchemaTypes =
   | Seo
   | LocaleBlockContent
   | LocaleString
-  | Article
+  | ImageImages
   | SanityImageCrop
   | SanityImageHotspot
-  | Slug
+  | Article
   | Partenaire
+  | Slug
   | Tag
+  | Home
   | Settings
   | TagReference
   | PageModulaire
@@ -1323,7 +1475,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: SETTINGS_QUERY
-// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{    ...,    _type == 'linkInternal' => {         ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      asset->{        _id      }    },  },      subMenu[]{        ...,        _type == 'linkInternal' => {            ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      asset->{        _id      }    },  },        }      }    },  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  navSocial[]{    ...  },  navSecondary[]{    ...,    _type == 'linkInternal' => {        ...,  link->{    _type,    slug  }    },  },  siteDescription{    ...  },  baseline{    ...  },}
+// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{     ...,  _type == 'linkInternal' => {        ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },      }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navSecondary[]{      ...,  _type == 'linkInternal' => {        ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },      }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navTertiary[]{      ...,  _type == 'linkInternal' => {        ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },      }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navQuaternary[]{      ...,  _type == 'linkInternal' => {        ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },      }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navLegals[]{      ...,  _type == 'linkInternal' => {        ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },      }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navSocial[]{      ...,  _type == 'linkInternal' => {        ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    "imageCover": coalesce(imageCover, image){      // asset->{      //   _id      // }        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },  },      }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  mostSearched[]->{    _type,    slug,    "title": coalesce(title, name)  },  siteDescription{    ...  },  baseline{    ...  },}
 export type SETTINGS_QUERY_RESULT = {
   _id: string;
   _type: "settings";
@@ -1349,6 +1501,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1358,6 +1522,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1367,6 +1543,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1376,6 +1564,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1385,6 +1585,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1394,6 +1606,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1403,6 +1627,18 @@ export type SETTINGS_QUERY_RESULT = {
               imageCover: {
                 asset: {
                   _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
                 } | null;
               } | null;
             }
@@ -1426,6 +1662,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1435,6 +1683,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1444,6 +1704,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1453,6 +1725,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1462,6 +1746,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1471,6 +1767,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1480,6 +1788,18 @@ export type SETTINGS_QUERY_RESULT = {
                     imageCover: {
                       asset: {
                         _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
                       } | null;
                     } | null;
                   }
@@ -1497,19 +1817,6 @@ export type SETTINGS_QUERY_RESULT = {
         > | null;
       }
   > | null;
-  navSocial: Array<{
-    _key: string;
-    _type: "linkIcon";
-    label?: string;
-    link?: string;
-    icon?: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  }> | null;
   btnTickets: {
     _type: "linkExternal";
     label?: string;
@@ -1558,15 +1865,43 @@ export type SETTINGS_QUERY_RESULT = {
         } & LinkInternal)
     >;
   } | null;
-  mostSearched?: ArrayOf<
-    | ArtistReference
-    | EventReference
-    | ExhibitionReference
-    | LibraryReference
-    | PageModulaireReference
-    | ProductReference
-    | ProgrammeReference
-  >;
+  mostSearched: Array<
+    | {
+        _type: "artist";
+        slug: Slug | null;
+        title: string | null;
+      }
+    | {
+        _type: "event";
+        slug: Slug | null;
+        title: LocaleString | null;
+      }
+    | {
+        _type: "exhibition";
+        slug: Slug | null;
+        title: LocaleString | null;
+      }
+    | {
+        _type: "library";
+        slug: Slug | null;
+        title: LocaleString | null;
+      }
+    | {
+        _type: "pageModulaire";
+        slug: Slug | null;
+        title: LocaleString | null;
+      }
+    | {
+        _type: "product";
+        slug: Slug | null;
+        title: LocaleString | null;
+      }
+    | {
+        _type: "programme";
+        slug: Slug | null;
+        title: LocaleString | null;
+      }
+  > | null;
   navSecondary: Array<
     | {
         _key: string;
@@ -1582,43 +1917,1340 @@ export type SETTINGS_QUERY_RESULT = {
           | {
               _type: "artist";
               slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
             }
           | {
               _type: "event";
               slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
             }
           | {
               _type: "exhibition";
               slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
             }
           | {
               _type: "library";
               slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
             }
           | {
               _type: "pageModulaire";
               slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
             }
           | {
               _type: "product";
               slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
             }
           | {
               _type: "programme";
               slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
             }
           | null;
         withSubmenu?: boolean;
-        subMenu?: Array<
-          | ({
+        subMenu: Array<
+          | {
               _key: string;
-            } & LinkExternal)
-          | ({
+              _type: "linkExternal";
+              label?: string;
+              link?: string;
+            }
+          | {
               _key: string;
-            } & LinkInternal)
-        >;
+              _type: "linkInternal";
+              label?: LocaleString;
+              link:
+                | {
+                    _type: "artist";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "event";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "exhibition";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "library";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "pageModulaire";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "product";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "programme";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | null;
+              withSubmenu?: boolean;
+              subMenu?: Array<
+                | ({
+                    _key: string;
+                  } & LinkExternal)
+                | ({
+                    _key: string;
+                  } & LinkInternal)
+              >;
+            }
+        > | null;
       }
   > | null;
+  navTertiary: Array<
+    | {
+        _key: string;
+        _type: "linkExternal";
+        label?: string;
+        link?: string;
+      }
+    | {
+        _key: string;
+        _type: "linkInternal";
+        label?: LocaleString;
+        link:
+          | {
+              _type: "artist";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "event";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "exhibition";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "library";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "pageModulaire";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "product";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "programme";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | null;
+        withSubmenu?: boolean;
+        subMenu: Array<
+          | {
+              _key: string;
+              _type: "linkExternal";
+              label?: string;
+              link?: string;
+            }
+          | {
+              _key: string;
+              _type: "linkInternal";
+              label?: LocaleString;
+              link:
+                | {
+                    _type: "artist";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "event";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "exhibition";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "library";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "pageModulaire";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "product";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "programme";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | null;
+              withSubmenu?: boolean;
+              subMenu?: Array<
+                | ({
+                    _key: string;
+                  } & LinkExternal)
+                | ({
+                    _key: string;
+                  } & LinkInternal)
+              >;
+            }
+        > | null;
+      }
+  > | null;
+  navQuaternary: Array<
+    | {
+        _key: string;
+        _type: "linkExternal";
+        label?: string;
+        link?: string;
+      }
+    | {
+        _key: string;
+        _type: "linkInternal";
+        label?: LocaleString;
+        link:
+          | {
+              _type: "artist";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "event";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "exhibition";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "library";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "pageModulaire";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "product";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "programme";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | null;
+        withSubmenu?: boolean;
+        subMenu: Array<
+          | {
+              _key: string;
+              _type: "linkExternal";
+              label?: string;
+              link?: string;
+            }
+          | {
+              _key: string;
+              _type: "linkInternal";
+              label?: LocaleString;
+              link:
+                | {
+                    _type: "artist";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "event";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "exhibition";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "library";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "pageModulaire";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "product";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "programme";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | null;
+              withSubmenu?: boolean;
+              subMenu?: Array<
+                | ({
+                    _key: string;
+                  } & LinkExternal)
+                | ({
+                    _key: string;
+                  } & LinkInternal)
+              >;
+            }
+        > | null;
+      }
+  > | null;
+  navLegals: Array<
+    | {
+        _key: string;
+        _type: "linkExternal";
+        label?: string;
+        link?: string;
+      }
+    | {
+        _key: string;
+        _type: "linkInternal";
+        label?: LocaleString;
+        link:
+          | {
+              _type: "artist";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "event";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "exhibition";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "library";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "pageModulaire";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "product";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | {
+              _type: "programme";
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            }
+          | null;
+        withSubmenu?: boolean;
+        subMenu: Array<
+          | {
+              _key: string;
+              _type: "linkExternal";
+              label?: string;
+              link?: string;
+            }
+          | {
+              _key: string;
+              _type: "linkInternal";
+              label?: LocaleString;
+              link:
+                | {
+                    _type: "artist";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "event";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "exhibition";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "library";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "pageModulaire";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "product";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | {
+                    _type: "programme";
+                    slug: Slug | null;
+                    imageCover: {
+                      asset: {
+                        _id: string;
+                        assetId: string | null;
+                        title: string | null;
+                        altText: string | null;
+                        description: string | null;
+                        creditLine: null;
+                        metadata: {
+                          lqip: string | null;
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                  }
+                | null;
+              withSubmenu?: boolean;
+              subMenu?: Array<
+                | ({
+                    _key: string;
+                  } & LinkExternal)
+                | ({
+                    _key: string;
+                  } & LinkInternal)
+              >;
+            }
+        > | null;
+      }
+  > | null;
+  navSocial: Array<{
+    _key: string;
+    _type: "linkIcon";
+    label?: string;
+    link?: string;
+    icon: {
+      asset: {
+        _id: string;
+        url: string | null;
+      } | null;
+    } | null;
+  }> | null;
+  adressAndOpeningHours?: LocaleBlockContent;
   siteDescription: {
     _type: "localeBlockContent";
     fr?: BlockContent;
@@ -1645,10 +3277,10 @@ export type SETTINGS_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: HOME_QUERY
-// Query: *[_type == "pageModulaire" && homePage == true][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }  }}
+// Query: *[_type == "home"][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    }  }  }}
 export type HOME_QUERY_RESULT = {
   _id: string;
-  _type: "pageModulaire";
+  _type: "home";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -1662,433 +3294,20 @@ export type HOME_QUERY_RESULT = {
       } | null;
     } | null;
   } | null;
-  homePage: true;
   title?: LocaleString;
   slug?: Slug;
-  imageCover?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  tags?: Array<
-    {
-      _key: string;
-    } & TagReference
-  >;
   modules: Array<
     | {
         _key: string;
-        _type: "gridCardUI";
-        title: {
-          _type: "localeString";
-          fr?: string;
-          en?: string;
-        } | null;
-        items: Array<
-          | {
-              _id: string;
-              _type: "artist";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              name: string | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-            }
-          | {
-              _id: string;
-              _type: "event";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              subTitle: LocaleText | null;
-              description?: LocaleText;
-              artists?: Array<
-                {
-                  _key: string;
-                } & ArtistReference
-              >;
-              dates: Array<
-                {
-                  _key: string;
-                } & FhcbDate
-              > | null;
-              tags: Array<{
-                title: LocaleString | null;
-              }> | null;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-              descripption: null;
-            }
-          | {
-              _id: string;
-              _type: "exhibition";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              links?: Array<
-                {
-                  _key: string;
-                } & LinkExternal
-              >;
-              artists: Array<{
-                name: string | null;
-              }> | null;
-              dates: Array<
-                {
-                  _key: string;
-                } & FhcbDate
-              > | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-            }
-          | {
-              _id: string;
-              _type: "pageModulaire";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              homePage?: boolean;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-            }
-          | {
-              _id: string;
-              _type: "product";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              title: LocaleString | null;
-              slug: Slug | null;
-              prix: string | null;
-              qty?: number;
-              artist: {
-                name: string | null;
-              } | null;
-              subTitle?: string;
-              editeur?: string;
-              languages?: Array<string>;
-              publicationDate?: string;
-              metas?: Array<
-                {
-                  _key: string;
-                } & KeyVal
-              >;
-              tags: Array<{
-                title: LocaleString | null;
-              }> | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              images?: Array<{
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-              }>;
-              chapo?: LocaleBlockContent;
-              text?: LocaleBlockContent;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-            }
-        > | null;
-        cta: {
-          _type: "cta";
-          internal?: LinkInternal;
-          external?: LinkExternal;
-        } | null;
-      }
-    | {
-        _key: string;
-        _type: "imagesUI";
+        _type: "featuredCardsUI";
         title: string | null;
-        gridSize?: number;
+        gridSize: number | null;
         items: Array<{
-          _key: string;
-          _type: "imageInGrid";
-          image: {
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
             asset: {
               _id: string;
               assetId: string | null;
@@ -2105,3584 +3324,127 @@ export type HOME_QUERY_RESULT = {
               } | null;
             } | null;
           } | null;
-          colSize?: number;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "listsUI";
-        items: Array<{
-          _key: string;
-          _type: "listUI";
-          title?: LocaleString;
-          items?: Array<
+          dates: Array<
             {
               _key: string;
-            } & ListItem
-          >;
-          cta?: Cta;
-        }> | null;
-        cta?: Cta;
-      }
-    | {
-        _key: string;
-        _type: "listUI";
-        title?: LocaleString;
-        items: Array<{
-          _key: string;
-          _type: "listItem";
-          title?: LocaleString;
-          content?: LocaleText;
-          link?: LinkInternal;
-          linkExternal?: LinkExternal;
-        }> | null;
-        cta: {
-          _type: "cta";
-          internal?: LinkInternal;
-          external?: LinkExternal;
-        } | null;
-      }
-    | {
-        _key: string;
-        _type: "programmeUI";
-        title: {
-          _type: "localeString";
-          fr?: string;
-          en?: string;
-        } | null;
-        items: Array<
-          | {
-              _type: "event";
-              _id: string;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              dateStart: null;
-              dateEnd: null;
-              dates: Array<
-                {
-                  _key: string;
-                } & FhcbDate
-              > | null;
-            }
-          | {
-              _type: "exhibition";
-              _id: string;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              dateStart: null;
-              dateEnd: null;
-              dates: Array<
-                {
-                  _key: string;
-                } & FhcbDate
-              > | null;
-            }
-        > | null;
-      }
-    | {
-        _key: string;
-        _type: "sliderCardUI";
-        title: {
-          _type: "localeString";
-          fr?: string;
-          en?: string;
-        } | null;
-        items: Array<
-          | {
-              _id: string;
-              _type: "event";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              subTitle: LocaleText | null;
-              description?: LocaleText;
-              artists?: Array<
-                {
-                  _key: string;
-                } & ArtistReference
-              >;
-              dates: Array<
-                {
-                  _key: string;
-                } & FhcbDate
-              > | null;
-              tags: Array<{
-                title: LocaleString | null;
-              }> | null;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-              descripption: null;
-            }
-          | {
-              _id: string;
-              _type: "exhibition";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              links?: Array<
-                {
-                  _key: string;
-                } & LinkExternal
-              >;
-              artists: Array<{
-                name: string | null;
-              }> | null;
-              dates: Array<
-                {
-                  _key: string;
-                } & FhcbDate
-              > | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-            }
-          | {
-              _id: string;
-              _type: "pageModulaire";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              homePage?: boolean;
-              title: LocaleString | null;
-              slug: Slug | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-            }
-          | {
-              _id: string;
-              _type: "product";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              seo?: Seo;
-              title: LocaleString | null;
-              slug: Slug | null;
-              prix: string | null;
-              qty?: number;
-              artist: {
-                name: string | null;
-              } | null;
-              subTitle?: string;
-              editeur?: string;
-              languages?: Array<string>;
-              publicationDate?: string;
-              metas?: Array<
-                {
-                  _key: string;
-                } & KeyVal
-              >;
-              tags: Array<{
-                title: LocaleString | null;
-              }> | null;
-              imageCover: {
-                asset: {
-                  _id: string;
-                  assetId: string | null;
-                  title: string | null;
-                  altText: string | null;
-                  description: string | null;
-                  creditLine: null;
-                  metadata: {
-                    lqip: string | null;
-                    dimensions: {
-                      width: number | null;
-                      height: number | null;
-                    } | null;
-                  } | null;
-                } | null;
-              } | null;
-              images?: Array<{
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-              }>;
-              chapo?: LocaleBlockContent;
-              text?: LocaleBlockContent;
-              modules?: Array<
-                | ({
-                    _key: string;
-                  } & GridCardUI)
-                | ({
-                    _key: string;
-                  } & ImagesUI)
-                | ({
-                    _key: string;
-                  } & ListsUI)
-                | ({
-                    _key: string;
-                  } & ListUI)
-                | ({
-                    _key: string;
-                  } & ProgrammeUI)
-                | ({
-                    _key: string;
-                  } & SliderCardUI)
-                | ({
-                    _key: string;
-                  } & TextImageUI)
-                | ({
-                    _key: string;
-                  } & TextSidebarUI)
-                | ({
-                    _key: string;
-                  } & TextUI)
-                | ({
-                    _key: string;
-                  } & VideoUI)
-              >;
-              rebonds?: ArrayOf<
-                | EventReference
-                | ExhibitionReference
-                | PageModulaireReference
-                | ProductReference
-              >;
-            }
-        > | null;
-        cta: {
-          _type: "cta";
-          internal?: LinkInternal;
-          external?: LinkExternal;
-        } | null;
-      }
-    | {
-        _key: string;
-        _type: "textImageUI";
-        image: {
-          asset: {
-            _id: string;
-            assetId: string | null;
-            title: string | null;
-            altText: string | null;
-            description: string | null;
-            creditLine: null;
-            metadata: {
-              lqip: string | null;
-              dimensions: {
-                width: number | null;
-                height: number | null;
-              } | null;
-            } | null;
-          } | null;
-        } | null;
-        text: {
-          _type: "localeBlockContent";
-          fr: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            subTitle?: LocaleText;
-                            description?: LocaleText;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            links?: Array<
-                              {
-                                _key: string;
-                              } & LinkExternal
-                            >;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "programme";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            items?:
-                              | "events"
-                              | "exhibitions-current"
-                              | "exhibitions-futur"
-                              | "exhibitions-out-of-the-box"
-                              | "guided-tours";
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "keyValGroup";
-                title?: LocaleString;
-                items: Array<
-                  | {
-                      _key: string;
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      image: null;
-                    }
-                  | {
-                      _key: string;
-                      _type: "keyVal";
-                      title?: LocaleString;
-                      image: {
-                        asset: {
-                          _id: string;
-                          assetId: string | null;
-                          title: string | null;
-                          altText: string | null;
-                          description: string | null;
-                          creditLine: null;
-                          metadata: {
-                            lqip: string | null;
-                            dimensions: {
-                              width: number | null;
-                              height: number | null;
-                            } | null;
-                          } | null;
-                        } | null;
-                      } | null;
-                      text?: LocaleText;
-                    }
-                > | null;
-                markDefs: null;
-              }
+            } & FhcbDate
           > | null;
-          en: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            subTitle?: LocaleText;
-                            description?: LocaleText;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            links?: Array<
-                              {
-                                _key: string;
-                              } & LinkExternal
-                            >;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "programme";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            items?:
-                              | "events"
-                              | "exhibitions-current"
-                              | "exhibitions-futur"
-                              | "exhibitions-out-of-the-box"
-                              | "guided-tours";
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "keyValGroup";
-                title?: LocaleString;
-                items: Array<
-                  | {
-                      _key: string;
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      image: null;
-                    }
-                  | {
-                      _key: string;
-                      _type: "keyVal";
-                      title?: LocaleString;
-                      image: {
-                        asset: {
-                          _id: string;
-                          assetId: string | null;
-                          title: string | null;
-                          altText: string | null;
-                          description: string | null;
-                          creditLine: null;
-                          metadata: {
-                            lqip: string | null;
-                            dimensions: {
-                              width: number | null;
-                              height: number | null;
-                            } | null;
-                          } | null;
-                        } | null;
-                      } | null;
-                      text?: LocaleText;
-                    }
-                > | null;
-                markDefs: null;
-              }
-          > | null;
-        } | null;
-        direction: "left" | "right" | null;
-      }
-    | {
-        _key: string;
-        _type: "textSidebarUI";
-        text: {
-          _type: "localeBlockContent";
-          fr: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            subTitle?: LocaleText;
-                            description?: LocaleText;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            links?: Array<
-                              {
-                                _key: string;
-                              } & LinkExternal
-                            >;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "programme";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            items?:
-                              | "events"
-                              | "exhibitions-current"
-                              | "exhibitions-futur"
-                              | "exhibitions-out-of-the-box"
-                              | "guided-tours";
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "keyValGroup";
-                title?: LocaleString;
-                items: Array<
-                  | {
-                      _key: string;
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      image: null;
-                    }
-                  | {
-                      _key: string;
-                      _type: "keyVal";
-                      title?: LocaleString;
-                      image: {
-                        asset: {
-                          _id: string;
-                          assetId: string | null;
-                          title: string | null;
-                          altText: string | null;
-                          description: string | null;
-                          creditLine: null;
-                          metadata: {
-                            lqip: string | null;
-                            dimensions: {
-                              width: number | null;
-                              height: number | null;
-                            } | null;
-                          } | null;
-                        } | null;
-                      } | null;
-                      text?: LocaleText;
-                    }
-                > | null;
-                markDefs: null;
-              }
-          > | null;
-          en: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            subTitle?: LocaleText;
-                            description?: LocaleText;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            links?: Array<
-                              {
-                                _key: string;
-                              } & LinkExternal
-                            >;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "programme";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            items?:
-                              | "events"
-                              | "exhibitions-current"
-                              | "exhibitions-futur"
-                              | "exhibitions-out-of-the-box"
-                              | "guided-tours";
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "keyValGroup";
-                title?: LocaleString;
-                items: Array<
-                  | {
-                      _key: string;
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      image: null;
-                    }
-                  | {
-                      _key: string;
-                      _type: "keyVal";
-                      title?: LocaleString;
-                      image: {
-                        asset: {
-                          _id: string;
-                          assetId: string | null;
-                          title: string | null;
-                          altText: string | null;
-                          description: string | null;
-                          creditLine: null;
-                          metadata: {
-                            lqip: string | null;
-                            dimensions: {
-                              width: number | null;
-                              height: number | null;
-                            } | null;
-                          } | null;
-                        } | null;
-                      } | null;
-                      text?: LocaleText;
-                    }
-                > | null;
-                markDefs: null;
-              }
-          > | null;
-        } | null;
-        sidebar: {
-          commissariat: Array<
-            {
-              _key: string;
-            } & KeyVal
-          > | null;
-          coProduction: Array<null | {
-            _id: string;
-            _type: "partenaire";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            text?: LocaleText;
-            slug?: Slug;
-            imageCover: {
-              asset: {
-                _id: string;
-                assetId: string | null;
-                title: string | null;
-                altText: string | null;
-                description: string | null;
-                creditLine: null;
-                metadata: {
-                  lqip: string | null;
-                  dimensions: {
-                    width: number | null;
-                    height: number | null;
-                  } | null;
-                } | null;
-              } | null;
-            } | null;
+          artists: Array<{
+            name: string | null;
           }> | null;
-          partenaires: Array<null | {
-            _id: string;
-            _type: "partenaire";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            text?: LocaleText;
-            slug?: Slug;
-            imageCover: {
-              asset: {
-                _id: string;
-                assetId: string | null;
-                title: string | null;
-                altText: string | null;
-                description: string | null;
-                creditLine: null;
-                metadata: {
-                  lqip: string | null;
-                  dimensions: {
-                    width: number | null;
-                    height: number | null;
-                  } | null;
-                } | null;
-              } | null;
-            } | null;
-          }> | null;
-        } | null;
+        }>;
       }
     | {
         _key: string;
-        _type: "textUI";
+        _type: "newsCardUI";
         title: {
           _type: "localeString";
           fr?: string;
           en?: string;
         } | null;
-        text: {
-          _type: "localeBlockContent";
-          fr: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            subTitle?: LocaleText;
-                            description?: LocaleText;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            links?: Array<
-                              {
-                                _key: string;
-                              } & LinkExternal
-                            >;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "programme";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            items?:
-                              | "events"
-                              | "exhibitions-current"
-                              | "exhibitions-futur"
-                              | "exhibitions-out-of-the-box"
-                              | "guided-tours";
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "keyValGroup";
-                title?: LocaleString;
-                items: Array<
-                  | {
-                      _key: string;
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      image: null;
-                    }
-                  | {
-                      _key: string;
-                      _type: "keyVal";
-                      title?: LocaleString;
-                      image: {
-                        asset: {
-                          _id: string;
-                          assetId: string | null;
-                          title: string | null;
-                          altText: string | null;
-                          description: string | null;
-                          creditLine: null;
-                          metadata: {
-                            lqip: string | null;
-                            dimensions: {
-                              width: number | null;
-                              height: number | null;
-                            } | null;
-                          } | null;
-                        } | null;
-                      } | null;
-                      text?: LocaleText;
-                    }
-                > | null;
-                markDefs: null;
-              }
-          > | null;
-          en: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "c-chapo" | "normal";
-                listItem?: "bullet";
-                markDefs: Array<
-                  | {
-                      href?: string;
-                      _type: "linkExternal";
-                      _key: string;
-                    }
-                  | {
-                      reference:
-                        | {
-                            _id: string;
-                            _type: "artist";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            name?: string;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "event";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            subTitle?: LocaleText;
-                            description?: LocaleText;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "exhibition";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            links?: Array<
-                              {
-                                _key: string;
-                              } & LinkExternal
-                            >;
-                            artists?: Array<
-                              {
-                                _key: string;
-                              } & ArtistReference
-                            >;
-                            dates?: Array<
-                              {
-                                _key: string;
-                              } & FhcbDate
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "library";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              caption?: LocaleString;
-                              alt?: LocaleString;
-                              author?: string;
-                              copyright?: string;
-                              _type: "image";
-                            };
-                            miseEnAvant?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            sliderSelection?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                            items?: Array<
-                              {
-                                _key: string;
-                              } & ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "pageModulaire";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            homePage?: boolean;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "product";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            prix?: string;
-                            qty?: number;
-                            artist?: ArtistReference;
-                            subTitle?: string;
-                            editeur?: string;
-                            languages?: Array<string>;
-                            publicationDate?: string;
-                            metas?: Array<
-                              {
-                                _key: string;
-                              } & KeyVal
-                            >;
-                            tags?: Array<
-                              {
-                                _key: string;
-                              } & TagReference
-                            >;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            images?: Array<{
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                              _key: string;
-                            }>;
-                            chapo?: LocaleBlockContent;
-                            text?: LocaleBlockContent;
-                            modules?: Array<
-                              | ({
-                                  _key: string;
-                                } & GridCardUI)
-                              | ({
-                                  _key: string;
-                                } & ImagesUI)
-                              | ({
-                                  _key: string;
-                                } & ListsUI)
-                              | ({
-                                  _key: string;
-                                } & ListUI)
-                              | ({
-                                  _key: string;
-                                } & ProgrammeUI)
-                              | ({
-                                  _key: string;
-                                } & SliderCardUI)
-                              | ({
-                                  _key: string;
-                                } & TextImageUI)
-                              | ({
-                                  _key: string;
-                                } & TextSidebarUI)
-                              | ({
-                                  _key: string;
-                                } & TextUI)
-                              | ({
-                                  _key: string;
-                                } & VideoUI)
-                            >;
-                            rebonds?: ArrayOf<
-                              | EventReference
-                              | ExhibitionReference
-                              | PageModulaireReference
-                              | ProductReference
-                            >;
-                          }
-                        | {
-                            _id: string;
-                            _type: "programme";
-                            _createdAt: string;
-                            _updatedAt: string;
-                            _rev: string;
-                            seo?: Seo;
-                            title?: LocaleString;
-                            slug?: Slug;
-                            imageCover?: {
-                              asset?: SanityImageAssetReference;
-                              media?: unknown;
-                              hotspot?: SanityImageHotspot;
-                              crop?: SanityImageCrop;
-                              _type: "image";
-                            };
-                            items?:
-                              | "events"
-                              | "exhibitions-current"
-                              | "exhibitions-futur"
-                              | "exhibitions-out-of-the-box"
-                              | "guided-tours";
-                          }
-                        | null;
-                      _type: "linkInternal";
-                      _key: string;
-                    }
-                > | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                _key: string;
-                _type: "blockquote";
-                text?: string;
-                author?: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "embed";
-                title?: LocaleString;
-                placeholder?: {
-                  asset?: SanityImageAssetReference;
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  _type: "image";
-                };
-                url?: string;
-                iframe?: string;
-                aspectRatio?: string;
-                markDefs: null;
-              }
-            | {
-                asset?: SanityImageAssetReference;
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-                _key: string;
-                markDefs: null;
-              }
-            | {
-                _key: string;
-                _type: "keyValGroup";
-                title?: LocaleString;
-                items: Array<
-                  | {
-                      _key: string;
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      image: null;
-                    }
-                  | {
-                      _key: string;
-                      _type: "keyVal";
-                      title?: LocaleString;
-                      image: {
-                        asset: {
-                          _id: string;
-                          assetId: string | null;
-                          title: string | null;
-                          altText: string | null;
-                          description: string | null;
-                          creditLine: null;
-                          metadata: {
-                            lqip: string | null;
-                            dimensions: {
-                              width: number | null;
-                              height: number | null;
-                            } | null;
-                          } | null;
-                        } | null;
-                      } | null;
-                      text?: LocaleText;
-                    }
-                > | null;
-                markDefs: null;
-              }
-          > | null;
-        } | null;
-      }
-    | {
-        _key: string;
-        _type: "videoUI";
-        video: {
-          _type: "video";
-          title?: LocaleString;
-          embedUrl?: string;
-          video?: MuxVideo;
-          placeholder: {
+        gridSize: number | null;
+        exhibitions: Array<{
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
             asset: {
               _id: string;
-              _type: "sanity.imageAsset";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              originalFilename?: string;
-              label?: string;
-              title?: string;
-              description?: string;
-              altText?: string;
-              sha1hash?: string;
-              extension?: string;
-              mimeType?: string;
-              size?: number;
-              assetId?: string;
-              uploadId?: string;
-              path?: string;
-              url?: string;
-              metadata?: SanityImageMetadata;
-              source?: SanityAssetSourceData;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
             } | null;
           } | null;
-        } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          artists: Array<{
+            name: string | null;
+          }> | null;
+        }>;
+        events: Array<{
+          _type: "event";
+          _id: string;
+          title: LocaleString | null;
+          subTitle: LocaleText | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          descripption: null;
+          tags: Array<{
+            title: LocaleString | null;
+            slug: Slug | null;
+          }> | null;
+        }>;
+        product: Array<{
+          _type: "product";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          prix: string | null;
+          tags: Array<{
+            title: LocaleString | null;
+          }> | null;
+          artist: {
+            name: string | null;
+          } | null;
+        }>;
       }
   > | null;
-  rebonds?: ArrayOf<
-    | EventReference
-    | ExhibitionReference
-    | PageModulaireReference
-    | ProductReference
-  >;
 } | null;
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: PAGE_MODULAIRE_QUERY
-// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    }  }    }  }
 export type PAGE_MODULAIRE_QUERY_RESULT = {
   _id: string;
   _type: "pageModulaire";
@@ -5699,7 +3461,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
       } | null;
     } | null;
   } | null;
-  homePage?: boolean;
   title?: LocaleString;
   slug?: Slug;
   imageCover?: {
@@ -5715,6 +3476,43 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
     } & TagReference
   >;
   modules: Array<
+    | {
+        _key: string;
+        _type: "featuredCardsUI";
+        title: string | null;
+        gridSize: number | null;
+        items: Array<{
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          artists: Array<{
+            name: string | null;
+          }> | null;
+        }>;
+      }
     | {
         _key: string;
         _type: "gridCardUI";
@@ -5753,6 +3551,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -5763,6 +3564,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -5790,6 +3594,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              index?: string;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -5823,8 +3628,12 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               > | null;
               tags: Array<{
                 title: LocaleString | null;
+                slug: Slug | null;
               }> | null;
               modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -5837,6 +3646,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -5911,6 +3723,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -5921,6 +3736,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -5949,12 +3767,54 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "imageImages";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              index: string | null;
+              title: LocaleString | null;
+              slug: Slug | null;
+              speaker: string | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video: Video | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+              >;
+              rebonds?: Array<
+                {
+                  _key: string;
+                } & ImageImagesReference
+              >;
+            }
+          | {
+              _id: string;
               _type: "pageModulaire";
               _createdAt: string;
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              homePage?: boolean;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -5982,6 +3842,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -5992,6 +3855,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -6074,6 +3940,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -6084,6 +3953,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -6181,6 +4053,111 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "newsCardUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        gridSize: number | null;
+        exhibitions: Array<{
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          artists: Array<{
+            name: string | null;
+          }> | null;
+        }>;
+        events: Array<{
+          _type: "event";
+          _id: string;
+          title: LocaleString | null;
+          subTitle: LocaleText | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          descripption: null;
+          tags: Array<{
+            title: LocaleString | null;
+            slug: Slug | null;
+          }> | null;
+        }>;
+        product: Array<{
+          _type: "product";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          prix: string | null;
+          tags: Array<{
+            title: LocaleString | null;
+          }> | null;
+          artist: {
+            name: string | null;
+          } | null;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "programmeUI";
         title: {
           _type: "localeString";
@@ -6266,6 +4243,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              index?: string;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -6299,8 +4277,12 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               > | null;
               tags: Array<{
                 title: LocaleString | null;
+                slug: Slug | null;
               }> | null;
               modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -6313,6 +4295,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -6387,6 +4372,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -6397,6 +4385,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -6425,12 +4416,54 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "imageImages";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              index: string | null;
+              title: LocaleString | null;
+              slug: Slug | null;
+              speaker: string | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video: Video | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+              >;
+              rebonds?: Array<
+                {
+                  _key: string;
+                } & ImageImagesReference
+              >;
+            }
+          | {
+              _id: string;
               _type: "pageModulaire";
               _createdAt: string;
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              homePage?: boolean;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -6458,6 +4491,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -6468,6 +4504,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -6550,6 +4589,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -6560,6 +4602,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -6652,6 +4697,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -6662,6 +4710,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -6689,6 +4740,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -6718,6 +4770,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -6728,6 +4783,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -6793,6 +4851,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -6803,6 +4864,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -6872,7 +4936,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -6890,6 +4953,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -6900,6 +4966,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -6972,6 +5041,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -6982,6 +5054,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7148,6 +5223,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7158,6 +5236,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7185,6 +5266,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -7214,6 +5296,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7224,6 +5309,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7289,6 +5377,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7299,6 +5390,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7368,7 +5462,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -7386,6 +5479,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7396,6 +5492,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7468,6 +5567,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7478,6 +5580,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7652,6 +5757,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7662,6 +5770,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7689,6 +5800,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -7718,6 +5830,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7728,6 +5843,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7793,6 +5911,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7803,6 +5924,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7872,7 +5996,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -7890,6 +6013,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7900,6 +6026,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -7972,6 +6101,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -7982,6 +6114,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8148,6 +6283,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8158,6 +6296,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8185,6 +6326,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -8214,6 +6356,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8224,6 +6369,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8289,6 +6437,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8299,6 +6450,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8368,7 +6522,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -8386,6 +6539,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8396,6 +6552,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8468,6 +6627,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8478,6 +6640,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8668,6 +6833,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               } | null;
             } | null;
           }> | null;
+          keyVal: Array<
+            {
+              _key: string;
+            } & KeyVal
+          > | null;
         } | null;
       }
     | {
@@ -8717,6 +6887,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8727,6 +6900,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8754,6 +6930,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -8783,6 +6960,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8793,6 +6973,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8858,6 +7041,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8868,6 +7054,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -8937,7 +7126,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -8955,6 +7143,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8965,6 +7156,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -9037,6 +7231,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9047,6 +7244,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -9213,6 +7413,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9223,6 +7426,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -9250,6 +7456,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -9279,6 +7486,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9289,6 +7499,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -9354,6 +7567,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9364,6 +7580,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -9433,7 +7652,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -9451,6 +7669,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9461,6 +7682,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -9533,6 +7757,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9543,6 +7770,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -9719,7 +7949,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: ARTIST_QUERY
-// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    }  }    }  }
 export type ARTIST_QUERY_RESULT = {
   _id: string;
   _type: "artist";
@@ -9746,6 +7976,43 @@ export type ARTIST_QUERY_RESULT = {
     _type: "image";
   };
   modules: Array<
+    | {
+        _key: string;
+        _type: "featuredCardsUI";
+        title: string | null;
+        gridSize: number | null;
+        items: Array<{
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          artists: Array<{
+            name: string | null;
+          }> | null;
+        }>;
+      }
     | {
         _key: string;
         _type: "gridCardUI";
@@ -9784,6 +8051,9 @@ export type ARTIST_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -9794,6 +8064,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -9821,6 +8094,7 @@ export type ARTIST_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              index?: string;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -9854,8 +8128,12 @@ export type ARTIST_QUERY_RESULT = {
               > | null;
               tags: Array<{
                 title: LocaleString | null;
+                slug: Slug | null;
               }> | null;
               modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -9868,6 +8146,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -9942,6 +8223,9 @@ export type ARTIST_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -9952,6 +8236,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -9980,12 +8267,54 @@ export type ARTIST_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "imageImages";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              index: string | null;
+              title: LocaleString | null;
+              slug: Slug | null;
+              speaker: string | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video: Video | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+              >;
+              rebonds?: Array<
+                {
+                  _key: string;
+                } & ImageImagesReference
+              >;
+            }
+          | {
+              _id: string;
               _type: "pageModulaire";
               _createdAt: string;
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              homePage?: boolean;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -10013,6 +8342,9 @@ export type ARTIST_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -10023,6 +8355,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -10105,6 +8440,9 @@ export type ARTIST_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -10115,6 +8453,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -10212,6 +8553,111 @@ export type ARTIST_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "newsCardUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        gridSize: number | null;
+        exhibitions: Array<{
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          artists: Array<{
+            name: string | null;
+          }> | null;
+        }>;
+        events: Array<{
+          _type: "event";
+          _id: string;
+          title: LocaleString | null;
+          subTitle: LocaleText | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          descripption: null;
+          tags: Array<{
+            title: LocaleString | null;
+            slug: Slug | null;
+          }> | null;
+        }>;
+        product: Array<{
+          _type: "product";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          prix: string | null;
+          tags: Array<{
+            title: LocaleString | null;
+          }> | null;
+          artist: {
+            name: string | null;
+          } | null;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "programmeUI";
         title: {
           _type: "localeString";
@@ -10297,6 +8743,7 @@ export type ARTIST_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              index?: string;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -10330,8 +8777,12 @@ export type ARTIST_QUERY_RESULT = {
               > | null;
               tags: Array<{
                 title: LocaleString | null;
+                slug: Slug | null;
               }> | null;
               modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -10344,6 +8795,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -10418,6 +8872,9 @@ export type ARTIST_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -10428,6 +8885,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -10456,12 +8916,54 @@ export type ARTIST_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "imageImages";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              index: string | null;
+              title: LocaleString | null;
+              slug: Slug | null;
+              speaker: string | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video: Video | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+              >;
+              rebonds?: Array<
+                {
+                  _key: string;
+                } & ImageImagesReference
+              >;
+            }
+          | {
+              _id: string;
               _type: "pageModulaire";
               _createdAt: string;
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              homePage?: boolean;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -10489,6 +8991,9 @@ export type ARTIST_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -10499,6 +9004,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -10581,6 +9089,9 @@ export type ARTIST_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -10591,6 +9102,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -10683,6 +9197,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10693,6 +9210,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -10720,6 +9240,7 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -10749,6 +9270,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10759,6 +9283,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -10824,6 +9351,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10834,6 +9364,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -10903,7 +9436,6 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -10921,6 +9453,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10931,6 +9466,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11003,6 +9541,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11013,6 +9554,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11179,6 +9723,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11189,6 +9736,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11216,6 +9766,7 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -11245,6 +9796,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11255,6 +9809,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11320,6 +9877,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11330,6 +9890,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11399,7 +9962,6 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -11417,6 +9979,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11427,6 +9992,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11499,6 +10067,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11509,6 +10080,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11683,6 +10257,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11693,6 +10270,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11720,6 +10300,7 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -11749,6 +10330,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11759,6 +10343,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11824,6 +10411,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11834,6 +10424,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -11903,7 +10496,6 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -11921,6 +10513,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11931,6 +10526,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12003,6 +10601,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12013,6 +10614,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12179,6 +10783,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12189,6 +10796,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12216,6 +10826,7 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -12245,6 +10856,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12255,6 +10869,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12320,6 +10937,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12330,6 +10950,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12399,7 +11022,6 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -12417,6 +11039,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12427,6 +11052,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12499,6 +11127,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12509,6 +11140,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12699,6 +11333,11 @@ export type ARTIST_QUERY_RESULT = {
               } | null;
             } | null;
           }> | null;
+          keyVal: Array<
+            {
+              _key: string;
+            } & KeyVal
+          > | null;
         } | null;
       }
     | {
@@ -12748,6 +11387,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12758,6 +11400,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12785,6 +11430,7 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -12814,6 +11460,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12824,6 +11473,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12889,6 +11541,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12899,6 +11554,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -12968,7 +11626,6 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -12986,6 +11643,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12996,6 +11656,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -13068,6 +11731,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13078,6 +11744,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -13244,6 +11913,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13254,6 +11926,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -13281,6 +11956,7 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -13310,6 +11986,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13320,6 +11999,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -13385,6 +12067,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13395,6 +12080,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -13464,7 +12152,6 @@ export type ARTIST_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -13482,6 +12169,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13492,6 +12182,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -13564,6 +12257,9 @@ export type ARTIST_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13574,6 +12270,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -13744,7 +12443,7 @@ export type ARTIST_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: EXPHIBITION_QUERY
-// Query: *[_type == "exhibition" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    artists[]->{      name    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  }    }  }
+// Query: *[_type == "exhibition" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    artists[]->{      name    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    }  }    }  }
 export type EXPHIBITION_QUERY_RESULT = {
   _id: string;
   _type: "exhibition";
@@ -13801,6 +12500,43 @@ export type EXPHIBITION_QUERY_RESULT = {
   modules: Array<
     | {
         _key: string;
+        _type: "featuredCardsUI";
+        title: string | null;
+        gridSize: number | null;
+        items: Array<{
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          artists: Array<{
+            name: string | null;
+          }> | null;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -13837,6 +12573,9 @@ export type EXPHIBITION_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -13847,6 +12586,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -13874,6 +12616,7 @@ export type EXPHIBITION_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              index?: string;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -13907,8 +12650,12 @@ export type EXPHIBITION_QUERY_RESULT = {
               > | null;
               tags: Array<{
                 title: LocaleString | null;
+                slug: Slug | null;
               }> | null;
               modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -13921,6 +12668,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -13995,6 +12745,9 @@ export type EXPHIBITION_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14005,6 +12758,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -14033,12 +12789,54 @@ export type EXPHIBITION_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "imageImages";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              index: string | null;
+              title: LocaleString | null;
+              slug: Slug | null;
+              speaker: string | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video: Video | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+              >;
+              rebonds?: Array<
+                {
+                  _key: string;
+                } & ImageImagesReference
+              >;
+            }
+          | {
+              _id: string;
               _type: "pageModulaire";
               _createdAt: string;
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              homePage?: boolean;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -14066,6 +12864,9 @@ export type EXPHIBITION_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14076,6 +12877,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -14158,6 +12962,9 @@ export type EXPHIBITION_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14168,6 +12975,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -14265,6 +13075,111 @@ export type EXPHIBITION_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "newsCardUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        gridSize: number | null;
+        exhibitions: Array<{
+          _type: "exhibition";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          artists: Array<{
+            name: string | null;
+          }> | null;
+        }>;
+        events: Array<{
+          _type: "event";
+          _id: string;
+          title: LocaleString | null;
+          subTitle: LocaleText | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          dates: Array<
+            {
+              _key: string;
+            } & FhcbDate
+          > | null;
+          descripption: null;
+          tags: Array<{
+            title: LocaleString | null;
+            slug: Slug | null;
+          }> | null;
+        }>;
+        product: Array<{
+          _type: "product";
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+          imageCover: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          prix: string | null;
+          tags: Array<{
+            title: LocaleString | null;
+          }> | null;
+          artist: {
+            name: string | null;
+          } | null;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "programmeUI";
         title: {
           _type: "localeString";
@@ -14350,6 +13265,7 @@ export type EXPHIBITION_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              index?: string;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -14383,8 +13299,12 @@ export type EXPHIBITION_QUERY_RESULT = {
               > | null;
               tags: Array<{
                 title: LocaleString | null;
+                slug: Slug | null;
               }> | null;
               modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -14397,6 +13317,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -14471,6 +13394,9 @@ export type EXPHIBITION_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14481,6 +13407,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -14509,12 +13438,54 @@ export type EXPHIBITION_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "imageImages";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              index: string | null;
+              title: LocaleString | null;
+              slug: Slug | null;
+              speaker: string | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video: Video | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+              >;
+              rebonds?: Array<
+                {
+                  _key: string;
+                } & ImageImagesReference
+              >;
+            }
+          | {
+              _id: string;
               _type: "pageModulaire";
               _createdAt: string;
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
-              homePage?: boolean;
               title: LocaleString | null;
               slug: Slug | null;
               imageCover: {
@@ -14542,6 +13513,9 @@ export type EXPHIBITION_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14552,6 +13526,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -14634,6 +13611,9 @@ export type EXPHIBITION_QUERY_RESULT = {
               modules?: Array<
                 | ({
                     _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14644,6 +13624,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
                 | ({
                     _key: string;
                   } & ProgrammeUI)
@@ -14736,6 +13719,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -14746,6 +13732,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -14773,6 +13762,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -14802,6 +13792,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -14812,6 +13805,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -14877,6 +13873,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -14887,6 +13886,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -14956,7 +13958,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -14974,6 +13975,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -14984,6 +13988,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15056,6 +14063,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15066,6 +14076,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15232,6 +14245,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15242,6 +14258,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15269,6 +14288,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -15298,6 +14318,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15308,6 +14331,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15373,6 +14399,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15383,6 +14412,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15452,7 +14484,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -15470,6 +14501,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15480,6 +14514,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15552,6 +14589,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15562,6 +14602,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15736,6 +14779,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15746,6 +14792,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15773,6 +14822,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -15802,6 +14852,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15812,6 +14865,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15877,6 +14933,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15887,6 +14946,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -15956,7 +15018,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -15974,6 +15035,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -15984,6 +15048,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16056,6 +15123,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16066,6 +15136,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16232,6 +15305,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16242,6 +15318,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16269,6 +15348,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -16298,6 +15378,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16308,6 +15391,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16373,6 +15459,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16383,6 +15472,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16452,7 +15544,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -16470,6 +15561,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16480,6 +15574,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16552,6 +15649,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16562,6 +15662,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16752,6 +15855,11 @@ export type EXPHIBITION_QUERY_RESULT = {
               } | null;
             } | null;
           }> | null;
+          keyVal: Array<
+            {
+              _key: string;
+            } & KeyVal
+          > | null;
         } | null;
       }
     | {
@@ -16801,6 +15909,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16811,6 +15922,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16838,6 +15952,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -16867,6 +15982,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16877,6 +15995,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -16942,6 +16063,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16952,6 +16076,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17021,7 +16148,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -17039,6 +16165,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17049,6 +16178,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17121,6 +16253,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17131,6 +16266,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17297,6 +16435,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17307,6 +16448,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17334,6 +16478,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
+                            index?: string;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -17363,6 +16508,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17373,6 +16521,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17438,6 +16589,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17448,6 +16602,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17517,7 +16674,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                             _updatedAt: string;
                             _rev: string;
                             seo?: Seo;
-                            homePage?: boolean;
                             title?: LocaleString;
                             slug?: Slug;
                             imageCover?: {
@@ -17535,6 +16691,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17545,6 +16704,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17617,6 +16779,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                             modules?: Array<
                               | ({
                                   _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17627,6 +16792,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
                               | ({
                                   _key: string;
                                 } & ProgrammeUI)
@@ -17803,7 +16971,7 @@ export type EXPHIBITION_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: PROGRAMME_QUERY
-// Query: *[_type == "programme" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    items,    "resolvedItems": select(      items == "exhibitions-current" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) <= dateTime(now()) && dateTime(dates[-1].au) >= dateTime(now())] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "exhibitions-futur" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) > dateTime(now())] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && defined(dates) && dateTime(dates[-1].au) < dateTime(now())] | order(dates[-1].au desc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }      },      items == "guided-tours" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title  }      },      []    )  }
+// Query: *[_type == "programme" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    items,    "resolvedItems": select(      items == "exhibitions-past" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-passee"]._id]) > 0] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "exhibitions-current" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "exhibitions-futur" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "hors-les-murs"]._id]) > 0] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }      },      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }      },      items == "guided-tours" => *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }      },      []    )  }
 export type PROGRAMME_QUERY_RESULT = {
   _id: string;
   _type: "programme";
@@ -17868,6 +17036,7 @@ export type PROGRAMME_QUERY_RESULT = {
         descripption: null;
         tags: Array<{
           title: LocaleString | null;
+          slug: Slug | null;
         }> | null;
       }>
     | Array<{
@@ -17923,7 +17092,6 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
       } | null;
     } | null;
   } | null;
-  homePage?: boolean;
   title?: LocaleString;
   slug?: Slug;
   imageCover?: {
@@ -17941,6 +17109,9 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
   modules?: Array<
     | ({
         _key: string;
+      } & FeaturedCardsUI)
+    | ({
+        _key: string;
       } & GridCardUI)
     | ({
         _key: string;
@@ -17951,6 +17122,9 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
     | ({
         _key: string;
       } & ListUI)
+    | ({
+        _key: string;
+      } & NewsCardUI)
     | ({
         _key: string;
       } & ProgrammeUI)
@@ -17978,16 +17152,1231 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
   >;
 }>;
 
+// Source: ../web/app/sanity-api/sanity-queries.tsx
+// Variable: IMAGE_IMAGES_QUERY
+// Query: *[_type == "imageImages" && slug.current == $slug][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    name  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  tags[]->{    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    }  }  },  rebonds[]->{      _type,  _id,  index,  title,  slug,  speaker,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },}
+export type IMAGE_IMAGES_QUERY_RESULT = {
+  _id: string;
+  _type: "imageImages";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo: {
+    _type: "seo";
+    metaTitle?: string;
+    metaDescription?: string;
+    metaImage: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  } | null;
+  index?: string;
+  title?: LocaleString;
+  slug?: Slug;
+  speaker?: string;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  video?: Video;
+  modules: Array<
+    | {
+        _key: string;
+        _type: "imagesUI";
+        title: string | null;
+        gridSize?: number;
+        items: Array<{
+          _key: string;
+          _type: "imageInGrid";
+          image: {
+            asset: {
+              _id: string;
+              assetId: string | null;
+              title: string | null;
+              altText: string | null;
+              description: string | null;
+              creditLine: null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+          colSize?: number;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "textSidebarUI";
+        text: {
+          _type: "localeBlockContent";
+          fr: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            index?: string;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+          en: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            index?: string;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            prix?: string;
+                            qty?: number;
+                            artist?: ArtistReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            chapo?: LocaleBlockContent;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "guided-tours";
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+        } | null;
+        sidebar: {
+          commissariat: Array<
+            {
+              _key: string;
+            } & KeyVal
+          > | null;
+          coProduction: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+          partenaires: Array<null | {
+            _id: string;
+            _type: "partenaire";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            text?: LocaleText;
+            slug?: Slug;
+            imageCover: {
+              asset: {
+                _id: string;
+                assetId: string | null;
+                title: string | null;
+                altText: string | null;
+                description: string | null;
+                creditLine: null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }> | null;
+          keyVal: Array<
+            {
+              _key: string;
+            } & KeyVal
+          > | null;
+        } | null;
+      }
+  > | null;
+  rebonds: Array<{
+    _type: "imageImages";
+    _id: string;
+    index: string | null;
+    title: LocaleString | null;
+    slug: Slug | null;
+    speaker: string | null;
+    imageCover: {
+      asset: {
+        _id: string;
+        assetId: string | null;
+        title: string | null;
+        altText: string | null;
+        description: string | null;
+        creditLine: null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+    } | null;
+    video: Video | null;
+  }> | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"settings\"][0]{\n  ...,\n  navPrimary[]{\n    ...,\n    _type == 'linkInternal' => {\n       \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      asset->{\n        _id\n      }\n    },\n  }\n,\n\n      subMenu[]{\n        ...,\n        _type == 'linkInternal' => {\n          \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      asset->{\n        _id\n      }\n    },\n  }\n,\n        }\n      }\n    },\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  navSocial[]{\n    ...\n  },\n  navSecondary[]{\n    ...,\n    _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n    },\n  },\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n}": SETTINGS_QUERY_RESULT;
-    '*[_type == "pageModulaire" && homePage == true][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
-    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
-    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
-    '*[_type == "exhibition" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    artists[]->{\n      name\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n\n\n    }\n  }': EXPHIBITION_QUERY_RESULT;
-    '*[_type == "programme" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    items,\n    "resolvedItems": select(\n      items == "exhibitions-current" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) <= dateTime(now()) && dateTime(dates[-1].au) >= dateTime(now())] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "exhibitions-futur" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) > dateTime(now())] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && defined(dates) && dateTime(dates[-1].au) < dateTime(now())] | order(dates[-1].au desc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n      },\n      items == "guided-tours" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title\n  }\n\n      },\n      []\n    )\n  }': PROGRAMME_QUERY_RESULT;
+    "*[_type == \"settings\"][0]{\n  ...,\n  navPrimary[]{\n   \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSecondary[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navTertiary[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navQuaternary[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navLegals[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSocial[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  mostSearched[]->{\n    _type,\n    slug,\n    \"title\": coalesce(title, name)\n  },\n\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n}": SETTINGS_QUERY_RESULT;
+    '\n*[_type == "home"][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
+    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    }\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
+    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
+    '*[_type == "exhibition" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    artists[]->{\n      name\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    }\n  }\n\n\n    }\n  }': EXPHIBITION_QUERY_RESULT;
+    '*[_type == "programme" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    items,\n    "resolvedItems": select(\n      items == "exhibitions-past" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-passee"]._id]) > 0] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "exhibitions-current" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "exhibitions-futur" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "hors-les-murs"]._id]) > 0] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n      },\n      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n      },\n      items == "guided-tours" => *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n      },\n      []\n    )\n  }': PROGRAMME_QUERY_RESULT;
     '*[_type == "pageModulaire"]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n}': ALLPAGE_MODULAIRE_QUERY_RESULT;
+    '*[_type == "imageImages" && slug.current == $slug][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    name\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    }\n  }\n\n\n  },\n  rebonds[]->{\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  speaker,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n}': IMAGE_IMAGES_QUERY_RESULT;
   }
 }

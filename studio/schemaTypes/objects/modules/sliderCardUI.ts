@@ -21,6 +21,7 @@ export default defineField({
             {type: 'product'},
             {type: 'event'},
             {type: 'exhibition'},
+            {type: 'imageImages'},
           ],
         },
       ],

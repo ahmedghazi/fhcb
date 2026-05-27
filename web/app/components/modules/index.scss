@@ -2,6 +2,26 @@
   width: 100%;
   section.module {
     margin-bottom: var(--spacing-gutter);
+    &--featured-cards-ui {
+      .card--is-landscape {
+        grid-column: span 2 / span 2;
+        .card__inner {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          .card__body {
+            min-height: 100%;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+    &--news-card-ui {
+      .module__title {
+        margin-bottom: var(--spacing-gutter);
+        text-align: center;
+      }
+    }
     &--text-ui {
       h2 {
         padding-left: 1em;

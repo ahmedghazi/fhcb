@@ -27,6 +27,8 @@ export const _linkResolver = (
       return `/${node.slug?.current}`;
     case "product":
       return `/product/${node.slug?.current}`;
+    case "imageImages":
+      return `/image-images/${node.slug?.current}`;
 
     default:
       return `/${node.slug?.current}`;
@@ -42,5 +44,6 @@ export const _localizeText = (text: string) => {
 export const _localizeField = (field: any) => {
   const { locale } = useLocale();
   if (!field) return "";
+  if (typeof field === "string") return field;
   return field[locale] ? field[locale] : field["fr"];
 };

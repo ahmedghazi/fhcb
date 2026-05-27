@@ -10,8 +10,15 @@ a.btn {
   display: block;
   text-align: center;
   width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   &--secondary {
     background-color: var(--color-white-0_5);
+  }
+  &--accent {
+    background-color: var(--color-accent);
+    color: var(--color-white);
   }
 }
 .btn-library,

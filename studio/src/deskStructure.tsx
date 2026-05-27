@@ -12,17 +12,19 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
   }
 
   return ![
-    'articles',
+    'article',
     'partenaire',
     'artist',
     'programme',
-    'exposition',
-    'produit',
     'pageModulaire',
+    'exhibition',
     'event',
     'product',
+    'home',
+    'library',
     'tag',
     'settings',
+    'feuilletage',
     'media.tag',
     'mux.videoAsset',
   ].includes(id)
@@ -42,6 +44,13 @@ export const structure = (S: any) =>
             .documentId('settings'),
         ),
       S.divider(),
+
+      S.listItem().title("Page d'accueil").schemaType('home').child(
+        S.editor()
+          // .title('Réglages (header, footer, ...)')
+          .schemaType('home')
+          .documentId('home'),
+      ),
 
       S.listItem()
         .title('Pages')
@@ -77,6 +86,12 @@ export const structure = (S: any) =>
       S.divider(),
 
       S.listItem().title('Articles').schemaType('article').child(S.documentTypeList('article')),
+      S.divider(),
+      S.listItem()
+        .title('Une images des Images')
+        .schemaType('imageImages')
+        .child(S.documentTypeList('imageImages')),
+
       S.divider(),
 
       S.listItem()

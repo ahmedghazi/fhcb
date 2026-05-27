@@ -56,17 +56,7 @@ export default defineType({
       ],
       group: 'header',
     }),
-    defineField({
-      name: 'navSocial',
-      title: 'Naviguation Social',
-      type: 'array',
-      of: [
-        {
-          type: 'linkIcon',
-        },
-      ],
-      group: 'header',
-    }),
+
     defineField({
       name: 'btnTickets',
       title: 'Bouton billeterie',
@@ -86,9 +76,10 @@ export default defineType({
       of: [{type: 'reference', to: linkInternalTypes}],
       group: 'header',
     }),
+
     defineField({
       name: 'navSecondary',
-      title: 'Naviguation Secondary',
+      title: 'Naviguation Secondaire',
       type: 'array',
       of: [
         {
@@ -98,6 +89,66 @@ export default defineType({
           type: 'linkExternal',
         },
       ],
+      group: 'footer',
+    }),
+    defineField({
+      name: 'navTertiary',
+      title: 'Naviguation Tertiaire',
+      type: 'array',
+      of: [
+        {
+          type: 'linkInternal',
+        },
+        {
+          type: 'linkExternal',
+        },
+      ],
+      group: 'footer',
+    }),
+    defineField({
+      name: 'navQuaternary',
+      title: 'Naviguation Quaternaire',
+      type: 'array',
+      of: [
+        {
+          type: 'linkInternal',
+        },
+        {
+          type: 'linkExternal',
+        },
+      ],
+      group: 'footer',
+    }),
+    defineField({
+      name: 'navLegals',
+      title: 'Naviguation Légales',
+      description: 'Liens vers les pages Politique de confidentialité, Mentions légales, Cookies',
+      type: 'array',
+      of: [
+        {
+          type: 'linkInternal',
+        },
+        {
+          type: 'linkExternal',
+        },
+      ],
+      group: 'footer',
+    }),
+    defineField({
+      name: 'navSocial',
+      title: 'Naviguation Social',
+      type: 'array',
+      of: [
+        {
+          type: 'linkIcon',
+        },
+      ],
+      group: 'footer',
+    }),
+    defineField({
+      name: 'adressAndOpeningHours',
+      title: "Adresse et heures d'ouverture",
+      type: 'localeBlockContent',
       group: 'footer',
     }),
 

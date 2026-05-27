@@ -6,6 +6,7 @@
 @use "components/header";
 @use "components/nav";
 @use "components/footer";
+@use "components/related";
 @use "design-system/all";
 @use "design-system/btn";
 @use "design-system/cards";
@@ -13,3 +14,4 @@
 @use "components/ui/sidebar";
 
 @use "templates/exhibition";
+@use "templates/image-images";

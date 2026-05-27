@@ -1,7 +1,6 @@
 import { groq } from "next-sanity";
 import { sanityFetch } from "./sanity.client";
 import {
-  image,
   imageAsset,
   cardRefExhibition,
   linkInternal,
@@ -9,7 +8,18 @@ import {
   modules,
   seo,
   cardRefEvent,
+  cardRefImageImages,
+  nav,
 } from "./fragments";
+import {
+  ARTIST_QUERY_RESULT,
+  EXPHIBITION_QUERY_RESULT,
+  HOME_QUERY_RESULT,
+  IMAGE_IMAGES_QUERY_RESULT,
+  PAGE_MODULAIRE_QUERY_RESULT,
+  PROGRAMME_QUERY_RESULT,
+  SETTINGS_QUERY_RESULT,
+} from "./types/sanity.types";
 
 /*****************************************************************************************************
  * SETTINGS
@@ -17,17 +27,22 @@ import {
 export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
   ...,
   navPrimary[]{
-    ...,
-    _type == 'linkInternal' => {
-       ${linkInternalWithImage},
-
-      subMenu[]{
-        ...,
-        _type == 'linkInternal' => {
-          ${linkInternalWithImage},
-        }
-      }
-    },
+   ${nav}
+  },
+  navSecondary[]{
+    ${nav}
+  },
+  navTertiary[]{
+    ${nav}
+  },
+  navQuaternary[]{
+    ${nav}
+  },
+  navLegals[]{
+    ${nav}
+  },
+  navSocial[]{
+    ${nav}
   },
   btnLibrary{
     ...,
@@ -39,15 +54,12 @@ export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
   btnTickets{
     ...
   },
-  navSocial[]{
-    ...
+  mostSearched[]->{
+    _type,
+    slug,
+    "title": coalesce(title, name)
   },
-  navSecondary[]{
-    ...,
-    _type == 'linkInternal' => {
-      ${linkInternal}
-    },
-  },
+
   siteDescription{
     ...
   },
@@ -56,7 +68,7 @@ export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
   },
 }`;
 
-export async function getSettings(): Promise<any> {
+export async function getSettings(): Promise<SETTINGS_QUERY_RESULT> {
   return sanityFetch({
     query: SETTINGS_QUERY,
     tags: ["settings"],
@@ -66,7 +78,8 @@ export async function getSettings(): Promise<any> {
 /*****************************************************************************************************
  * Home
  */
-export const HOME_QUERY = groq`*[_type == "pageModulaire" && homePage == true][0]{
+export const HOME_QUERY = groq`
+*[_type == "home"][0]{
   ...,
   seo{
     ${seo}
@@ -76,7 +89,7 @@ export const HOME_QUERY = groq`*[_type == "pageModulaire" && homePage == true][0
   }
 }`;
 
-export async function getHome(): Promise<any> {
+export async function getHome(): Promise<HOME_QUERY_RESULT> {
   return sanityFetch({
     query: HOME_QUERY,
     tags: ["home"],
@@ -96,7 +109,9 @@ export const PAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire" && slug.curr
     }
   }`;
 
-export async function getPageModulaire(slug: string): Promise<any> {
+export async function getPageModulaire(
+  slug: string,
+): Promise<PAGE_MODULAIRE_QUERY_RESULT> {
   return sanityFetch({
     query: PAGE_MODULAIRE_QUERY,
     tags: ["pageModulaire"],
@@ -117,7 +132,7 @@ export const ARTIST_QUERY = groq`*[_type == "artist" && slug.current == $slug][0
     }
   }`;
 
-export async function getArtist(slug: string): Promise<any> {
+export async function getArtist(slug: string): Promise<ARTIST_QUERY_RESULT> {
   return sanityFetch({
     query: ARTIST_QUERY,
     tags: ["artist"],
@@ -144,7 +159,9 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     }
   }`;
 
-export async function getExhibition(slug: string): Promise<any> {
+export async function getExhibition(
+  slug: string,
+): Promise<EXPHIBITION_QUERY_RESULT> {
   return sanityFetch({
     query: EXPHIBITION_QUERY,
     tags: ["exhibition"],
@@ -162,26 +179,31 @@ export const PROGRAMME_QUERY = groq`*[_type == "programme" && slug.current == $s
     },
     items,
     "resolvedItems": select(
-      items == "exhibitions-current" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) <= dateTime(now()) && dateTime(dates[-1].au) >= dateTime(now())] | order(dates[0].du asc) {
+      items == "exhibitions-past" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-passee"]._id]) > 0] | order(dates[0].du asc) {
         ${cardRefExhibition}
       },
-      items == "exhibitions-futur" => *[_type == "exhibition" && defined(dates[0]) && dateTime(dates[0].du) > dateTime(now())] | order(dates[0].du asc) {
+      items == "exhibitions-current" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {
         ${cardRefExhibition}
       },
-      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && defined(dates) && dateTime(dates[-1].au) < dateTime(now())] | order(dates[-1].au desc) {
+      items == "exhibitions-futur" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
+        ${cardRefExhibition}
+      },
+      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "hors-les-murs"]._id]) > 0] | order(dates[0].du asc) {
         ${cardRefExhibition}
       },
       items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {
         ${cardRefEvent}
       },
-      items == "guided-tours" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {
+      items == "guided-tours" => *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(coalesce(dates[0].du, _createdAt) asc) {
         ${cardRefEvent}
       },
       []
     )
   }`;
 
-export async function getProgramme(slug: string): Promise<any> {
+export async function getProgramme(
+  slug: string,
+): Promise<PROGRAMME_QUERY_RESULT> {
   return sanityFetch({
     query: PROGRAMME_QUERY,
     tags: ["programme"],
@@ -203,5 +225,39 @@ export async function getAllPagesModulaire(): Promise<any[]> {
   return sanityFetch({
     query: ALLPAGE_MODULAIRE_QUERY,
     tags: ["pageModulaire"],
+  });
+}
+
+/*****************************************************************************************************
+ * ALL PAGES (for sitemap)
+ */
+export const IMAGE_IMAGES_QUERY = groq`*[_type == "imageImages" && slug.current == $slug][0]{
+  ...,
+  seo{
+    ${seo}
+  },
+  modules[]{
+    ${modules}
+  },
+  rebonds[]->{
+    ${cardRefImageImages}
+  },
+}`;
+/*
+ "prevPage": *[_type == "imageImages" && index < ^.index] | order(index desc) [0]{
+   ${cardRefImageImages}
+ },
+ "nextPage": *[_type == "imageImages" && index > ^.index] | order(index asc) [0]{
+   ${cardRefImageImages}
+ }
+*/
+
+export async function getImageImages(
+  slug: string,
+): Promise<IMAGE_IMAGES_QUERY_RESULT> {
+  return sanityFetch({
+    query: IMAGE_IMAGES_QUERY,
+    tags: ["imageImages"],
+    qParams: { slug },
   });
 }

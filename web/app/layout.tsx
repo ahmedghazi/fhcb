@@ -97,7 +97,7 @@ export default async function RootLayout({
                   </HeaderContextProvider>
                   <main>{children}</main>
                   <Footer settings={settings} />
-                  <Cursor color='black' size={20} />
+                  {/* <Cursor color='black' size={20} /> */}
                   {isEnabled && <VisualEditing zIndex={1000} />}
                 </PageContextProvider>
               </LocaleContextProvider>

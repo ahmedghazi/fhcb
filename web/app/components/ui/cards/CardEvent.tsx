@@ -15,6 +15,7 @@ import {
 import CardInnerSM from "./CardInnerSM";
 import CardInnerMD from "./CardInnerMD";
 import CardInnerLG from "./CardInnerLG";
+import FHCBDates from "../FHCBDates";
 
 type Props = {
   input: EventExpanded;
@@ -30,15 +31,18 @@ type Props = {
  *
  */
 const CardEvent = ({ input, size = "md" }: Props) => {
-  const { _type, title, subTitle, description, tags, imageCover } = input;
-  const tagsList = tags
+  const { _type, title, subTitle, description, tags, imageCover, dates } =
+    input;
+  const tagsClassList = tags
+    ?.map((tag: Tag) => `card--${tag.slug?.current}`)
+    .join(" ");
+  const tagsTitleList = tags
     ?.map((tag: Tag) => tag.title)
     .map(_localizeField)
     .join(", ");
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
-
   return (
     <div
       className={clsx(
@@ -48,14 +52,16 @@ const CardEvent = ({ input, size = "md" }: Props) => {
         size === "lg" && "md:col-span-4",
         isLandscape && `card--is-landscape`,
         !isLandscape && "card--is-portrait",
+        tagsClassList,
       )}>
       {size === "sm" && (
         <CardInnerSM
           _type={_type}
-          tags={tagsList || ""}
+          tags={tagsTitleList || ""}
           title={_localizeField(title) || ""}
           subtitle={_localizeField(subTitle)}
           info={_localizeField(description)}
+          infoNode={dates ? <FHCBDates input={dates} /> : null}
           imageCover={imageCover?.asset as SanityImageAssetFull}
           linkPrimary={_linkResolver(input)}
           linkPrimaryLabel={_localizeText("discover")}
@@ -64,10 +70,11 @@ const CardEvent = ({ input, size = "md" }: Props) => {
       {size === "md" && (
         <CardInnerMD
           _type={_type}
-          tags={tagsList || ""}
+          tags={tagsTitleList || ""}
           title={_localizeField(title) || ""}
           subtitle={_localizeField(subTitle)}
           info={_localizeField(description)}
+          infoNode={dates ? <FHCBDates input={dates} /> : null}
           imageCover={imageCover?.asset as SanityImageAssetFull}
           linkPrimary={_linkResolver(input)}
           linkPrimaryLabel={_localizeText("discover")}
@@ -76,7 +83,7 @@ const CardEvent = ({ input, size = "md" }: Props) => {
       {size === "lg" && (
         <CardInnerLG
           _type={_type}
-          tags={tagsList || ""}
+          tags={tagsTitleList || ""}
           title={_localizeField(title) || ""}
           subtitle={_localizeField(subTitle)}
           info={_localizeField(description)}

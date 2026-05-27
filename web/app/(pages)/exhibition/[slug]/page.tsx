@@ -5,7 +5,7 @@ import {
   EXPHIBITION_QUERY,
   getExhibition,
 } from "@/app/sanity-api/sanity-queries";
-import { Exhibition } from "@/app/sanity-api/types/sanity.types";
+import { EXPHIBITION_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
@@ -37,14 +37,14 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
   const { isEnabled } = await draftMode();
   const { slug } = await params;
 
-  let data: Exhibition;
+  let data: EXPHIBITION_QUERY_RESULT;
   if (isEnabled) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
       EXPHIBITION_QUERY,
       { slug },
     );
   } else {
-    data = (await getExhibition(slug)) as Exhibition;
+    data = (await getExhibition(slug)) as EXPHIBITION_QUERY_RESULT;
   }
 
   if (!data) return notFound();
@@ -54,7 +54,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--exhibition'
       data-template='exhibition'
       data-slug={data.slug?.current || ""}>
-      <ExhibitionHero input={data as ExhibitionExpanded} />
+      <ExhibitionHero input={data as unknown as ExhibitionExpanded} />
       <ContentModulaire input={data} />
     </div>
   );

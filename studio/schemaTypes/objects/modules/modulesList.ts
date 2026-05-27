@@ -9,4 +9,6 @@ export default [
   {type: 'sliderCardUI'},
   {type: 'gridCardUI'},
   {type: 'programmeUI'},
+  {type: 'newsCardUI'},
+  {type: 'featuredCardsUI'},
 ]

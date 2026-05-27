@@ -5,24 +5,27 @@ import { usePathname } from "next/navigation";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
 import useLocale from "../context/LocaleContext";
 import LogoFHCB from "./LogoFHCB";
-import { Settings } from "../sanity-api/types/sanity.types";
+import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 import Nav from "./Nav";
 import LocalesSwitcher from "./ui/LocaleSwitcher";
-import Search from "./ui/Search";
+import SearchToggle from "./ui/SearchToggle";
 import NavModal from "./NavModal";
 import useHeader from "../context/HeaderContext";
+import clsx from "clsx";
 
 type Props = {
-  settings: Settings;
+  settings: SETTINGS_QUERY_RESULT;
 };
 
 const Header = ({ settings }: Props) => {
   const pathname = usePathname();
   const { modalType } = useHeader();
 
+  if (!settings) return null;
+
   return (
-    <header className='header'>
-      {modalType && <NavModal settings={settings} />}
+    <header className={clsx("header", modalType && "is-modal-open")}>
+      <NavModal settings={settings} />
       <div className='header__inner'>
         <div className='header__logo'>
           <Link href='/'>
@@ -30,9 +33,9 @@ const Header = ({ settings }: Props) => {
           </Link>
         </div>
 
-        <Nav navPrimary={settings.navPrimary} />
+        <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
         <div className='header__meta-nav'>
-          <Search settings={settings} />
+          <SearchToggle />
           <LocalesSwitcher />
           <ul className='meta-nav'>
             {settings.btnLibrary && (

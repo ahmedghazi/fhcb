@@ -6,7 +6,7 @@ import ContentModulaire from "./components/ContentModulaire";
 import { getHome, HOME_QUERY } from "./sanity-api/sanity-queries";
 import { getClient } from "./sanity-api/sanity.client";
 import DS from "./components/DS";
-import { PageModulaire } from "./sanity-api/types/sanity.types";
+import { HOME_QUERY_RESULT } from "./sanity-api/types/sanity.types";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getHome();
@@ -22,13 +22,13 @@ export async function generateMetadata(): Promise<Metadata> {
 const HomePage = async function Page() {
   const { isEnabled } = await draftMode();
 
-  let data: PageModulaire;
+  let data: HOME_QUERY_RESULT;
   if (isEnabled) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
       HOME_QUERY,
     );
   } else {
-    data = (await getHome()) as PageModulaire;
+    data = await getHome();
   }
 
   // if (!data) return notFound();

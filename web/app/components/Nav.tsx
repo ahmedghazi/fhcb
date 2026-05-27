@@ -7,18 +7,14 @@ import {
 import clsx from "clsx";
 import Link from "next/link";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
-import useHeader from "../context/HeaderContext";
+import useHeader, { NavMenuItem } from "../context/HeaderContext";
 
 const NavItem = ({ item }: { item: LinkInternal | LinkExternal }) => {
   const { dispatchCurrentMenuItem } = useHeader();
 
   if (item._type === "linkInternal") {
     return (
-      <Link
-        href={_linkResolver(item.link)}
-        className=''
-        onMouseLeave={() => dispatchCurrentMenuItem(null)}
-        onMouseEnter={() => dispatchCurrentMenuItem(item.link)}>
+      <Link href={_linkResolver(item.link)}>
         <div className=''>{_localizeField(item.label)}</div>
       </Link>
     );
@@ -48,6 +44,8 @@ type Props = {
 };
 
 const Nav = ({ navPrimary }: Props) => {
+  const { dispatchCurrentMenuItem, dispatchModalType } = useHeader();
+
   return (
     <nav>
       <ul className='menu'>
@@ -56,13 +54,29 @@ const Nav = ({ navPrimary }: Props) => {
             key={i}
             className={clsx(
               item._type === "linkInternal" && item.subMenu && "has-submenu",
-            )}>
+            )}
+            onMouseLeave={() => dispatchCurrentMenuItem(null)}
+            onMouseEnter={() => {
+              if (item._type === "linkInternal" && item.link) {
+                dispatchCurrentMenuItem(item.link as unknown as NavMenuItem);
+              } else {
+                dispatchModalType("menu");
+              }
+            }}>
             <NavItem item={item} />
 
             {item._type === "linkInternal" && item.subMenu && (
               <ul className='sub-menu'>
                 {item.subMenu.map((subItem, i) => (
-                  <li key={i} className=''>
+                  <li
+                    key={i}
+                    className=''
+                    onMouseLeave={() => dispatchCurrentMenuItem(null)}
+                    onMouseEnter={() => {
+                      if (subItem._type === "linkInternal" && subItem.link) {
+                        dispatchCurrentMenuItem(subItem.link as unknown as NavMenuItem);
+                      }
+                    }}>
                     <NavItem item={subItem} />
                   </li>
                 ))}

@@ -22,6 +22,7 @@ export default defineField({
             {type: 'event'},
             {type: 'exhibition'},
             {type: 'artist'},
+            {type: 'imageImages'},
           ],
         },
       ],

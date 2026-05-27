@@ -12,7 +12,6 @@ export default defineField({
     defineField({
       name: 'sidebar',
       title: 'Sidebar (générique)',
-      // type: 'localeBlockContent',
       type: 'sidebarGenerique',
     }),
   ],

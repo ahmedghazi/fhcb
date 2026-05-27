@@ -73,10 +73,34 @@ export const linkInternalWithImage = `
     _type,
     slug,
     "imageCover": coalesce(imageCover, image){
-      asset->{
-        _id
-      }
+      // asset->{
+      //   _id
+      // }
+      ${imageAsset}
     },
+  }
+`;
+
+export const nav = `
+  ...,
+  _type == 'linkInternal' => {
+      ${linkInternalWithImage},
+
+    subMenu[]{
+      ...,
+      _type == 'linkInternal' => {
+        ${linkInternalWithImage},
+      }
+    }
+  },
+  _type == 'linkIcon' => {
+    ...,
+    icon{
+      asset->{
+        _id,
+        url
+      }
+    }
   }
 `;
 
@@ -160,7 +184,8 @@ export const textSidebarUI = `
         imageCover{
           ${imageAsset}
         }
-      }
+      },
+      keyVal
     }
   }
 `;
@@ -221,10 +246,11 @@ export const cardRefEvent = `
   dates,
   descripption,
   tags[]->{
-    title
+    title,
+    slug
   }
 `;
-const cardRefProduct = `
+export const cardRefProduct = `
   _type,
   _id,
   title,
@@ -249,7 +275,19 @@ const cardRefArtist = `
   "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
+`;
 
+export const cardRefImageImages = `
+  _type,
+  _id,
+  index,
+  title,
+  slug,
+  speaker,
+  "imageCover": coalesce(imageCover, image){
+    ${imageAsset}
+  },
+  video
 `;
 
 const cardTypes = `
@@ -267,6 +305,9 @@ const cardTypes = `
   },
   _type == "event" => {
     ${cardRefEvent}
+  },
+  _type == "imageImages" => {
+    ${cardRefImageImages}
   }
 `;
 
@@ -323,6 +364,36 @@ export const programmeUI = `
   }
 `;
 
+export const featuredCardsUI = `
+  _type == "featuredCardsUI" => {
+    ...,
+    title,
+    gridSize,
+    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {
+      ${cardRefExhibition}
+    }
+  }
+`;
+
+export const newsCardUI = `
+  _type == "newsCardUI" => {
+    ...,
+    title{
+      ...
+    },
+    gridSize,
+    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
+      ${cardRefExhibition}
+    },
+    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {
+      ${cardRefEvent}
+    },
+    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {
+      ${cardRefProduct}
+    }
+  }
+`;
+
 export const modules = `
   ...,
   ${textUI},
@@ -334,5 +405,7 @@ export const modules = `
   ${listsUI},
   ${sliderCardUI},
   ${gridCardUI},
-  ${programmeUI}
+  ${programmeUI},
+  ${featuredCardsUI},
+  ${newsCardUI}
 `;

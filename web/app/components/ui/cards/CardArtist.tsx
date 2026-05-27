@@ -13,10 +13,11 @@ import {
   ArtistExpanded,
   SanityImageAssetFull,
 } from "@/app/sanity-api/types/sanity-expanded.types";
+import CardInnerSM from "./CardInnerSM";
 
 type Props = {
   input: ArtistExpanded;
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
 };
 
 const CardArtist = ({ input, size = "md" }: Props) => {
@@ -34,6 +35,17 @@ const CardArtist = ({ input, size = "md" }: Props) => {
         !isLandscape && "card--is-portrait",
         "self-start",
       )}>
+      {size === "sm" && (
+        <CardInnerSM
+          _type={_type}
+          tags={"ARTIST"}
+          title={name || ""}
+          imageCover={imageCover?.asset as SanityImageAssetFull}
+          linkPrimary={_linkResolver(input)}
+          linkPrimaryLabel={_localizeText("discover")}
+        />
+      )}
+
       {size === "md" && (
         <CardInnerMD
           _type={_type}

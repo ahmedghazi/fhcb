@@ -25,14 +25,13 @@ export default defineType({
     select: {
       title: `title.${baseLanguage}`,
       slug: 'slug',
-      homePage: 'homePage',
       media: 'imageCover',
     },
     prepare(selection) {
-      const {title, slug, homePage, media} = selection
+      const {title, slug, media} = selection
       return {
         title: title,
-        subtitle: homePage ? "Page d'accueil" : `/${slug.current}`,
+        subtitle: `/${slug.current}`,
         media: media,
       }
     },
@@ -45,12 +44,6 @@ export default defineType({
       group: 'seo',
     }),
 
-    defineField({
-      name: 'homePage',
-      type: 'boolean',
-      title: "Page d'accueil",
-      group: 'editorial',
-    }),
     defineField({
       name: 'title',
       type: 'localeString',

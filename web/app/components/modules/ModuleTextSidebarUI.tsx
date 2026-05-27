@@ -17,7 +17,6 @@ type Props = {
 
 const ModuleTextSidebarUI = ({ input }: Props) => {
   const { text, sidebar } = input;
-  console.log(sidebar);
   return (
     <section className='module module--text-sidebar-ui'>
       <div className='module__inner'>
