@@ -11,4 +11,7 @@ export default [
   {type: 'programmeUI'},
   {type: 'newsCardUI'},
   {type: 'featuredCardsUI'},
+  {type: 'listFeuilletageUI'},
+  {type: 'listImageImages'},
+  {type: 'listSerieThematiqueUI'},
 ]

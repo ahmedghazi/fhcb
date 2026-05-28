@@ -6,9 +6,9 @@ cards simili document
 
 - # ajouter le liens tickets dans exhibition
 - afficher le bouton ticket sur cardExhibition
-- feuilltages
-- articles
-- Une image des images
+- # feuilltages
+- # articles
+- # Une image des images
 - # ajouter typologie partenaire (nom, logo, mention (fr/en))
 - # sidebar
 - # expo/event tags
@@ -19,9 +19,9 @@ cards simili document
 - # fix header (img)
 - fix header interractions
 - header aside
-- search scroll
+- # search scroll
 - # search open focus input
-- footer
+- # footer
 - # card size (props)
 - # home mise en avant basé sur la catégorie
 
@@ -30,10 +30,14 @@ cards simili document
 
 - updates doc icons
 - # image images
-- event > feuilletage
+- # feuilletage
+- # single page feuilletage
+
 - sync shopify
 - catalog
 - product page
+- programme expo/event vide => message
+- rebonds page
 
 # modules
 
@@ -44,9 +48,9 @@ cards simili document
 
 # idées
 
-exhibitions status (en coures, passée): mettre en place un cron qui met à jour le status des expositions chaque jours
+# exhibitions status (en coures, passée): mettre en place un cron qui met à jour le status des expositions chaque jours
 
-- home appeler les expos actuelles. Ainsi pas de query post mount
+- # home appeler les expos actuelles. Ainsi pas de query post mount
 
 # questions
 

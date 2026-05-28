@@ -1,4 +1,5 @@
 import {defineLocations, PresentationPluginOptions} from 'sanity/presentation'
+import feuilletage from '../schemaTypes/documents/feuilletage'
 
 export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
   locations: {
@@ -36,7 +37,22 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         ],
       }),
     }),
-
+    article: defineLocations({
+      // Select one or more fields
+      select: {
+        title: 'title.fr',
+        slug: 'slug.current',
+      },
+      // Those fields are available in the resolve callback function
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: doc?.title || 'Untitled',
+            href: `/article/${doc?.slug}`,
+          },
+        ],
+      }),
+    }),
     artist: defineLocations({
       // Select one or more fields
       select: {
@@ -113,6 +129,22 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
           {
             title: doc?.title || 'Untitled',
             href: `/image-images/${doc?.slug}`,
+          },
+        ],
+      }),
+    }),
+    feuilletage: defineLocations({
+      // Select one or more fields
+      select: {
+        title: 'title.fr',
+        slug: 'slug.current',
+      },
+      // Those fields are available in the resolve callback function
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: doc?.title || 'Untitled',
+            href: `/feuilletage/${doc?.slug}`,
           },
         ],
       }),

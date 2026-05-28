@@ -57,19 +57,26 @@ const CardInnerMD = ({
       {!isLandscape && (
         <>
           <div className='grid md:grid-cols-12 gap-xs'>
-            <div className='card__header md:col-span-7'>
-              {tags && <div className='card__tag c-tag'>{tags}</div>}
-              <h2 className='card__title c-h2'>{title}</h2>
-              {subtitle && (
-                <div className='card__subtitle c-h3'>{subtitle}</div>
-              )}
+            <div className='card__header md:col-span-7- md:col-span-4'>
+              <div className='header'>
+                {tags && <div className='card__tag c-tag'>{tags}</div>}
+                <h2 className='card__title c-h2'>{title}</h2>
+                {subtitle && (
+                  <div className='card__subtitle c-h3'>{subtitle}</div>
+                )}
+              </div>
+              <div className='footer'>
+                {info && <div className='card__info c-body-xs'>{info}</div>}
+                {infoNode && (
+                  <div className='card__info c-body-xs'>{infoNode}</div>
+                )}
+              </div>
             </div>
-            <div className='card__media md:col-span-5'>
+            <div className='card__media md:col-span-5- md:col-span-8'>
               <Figure asset={imageCover} />
             </div>
           </div>
           <div className='card__footer'>
-            {info && <div className='card__info c-body-xs'>{info}</div>}
             <div className='btns'>
               <Link href={linkPrimary} className='btn btn--primary'>
                 {linkPrimaryLabel}

@@ -1,13 +1,17 @@
 "use client";
 import React from "react";
-import { LocaleString, Tag } from "../sanity-api/types/sanity.types";
+import {
+  LocaleString,
+  LocaleText,
+  Tag,
+} from "../sanity-api/types/sanity.types";
 import { _localizeField } from "../sanity-api/utils";
 
 type Props = {
   tag?: LocaleString | string;
   h1?: LocaleString | string;
   name?: string;
-  subTitle?: LocaleString | string;
+  subTitle?: LocaleString | LocaleText | string;
 };
 
 const PageHeader = ({ tag, h1, name, subTitle }: Props) => {

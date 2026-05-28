@@ -29,6 +29,10 @@ export const _linkResolver = (
       return `/product/${node.slug?.current}`;
     case "imageImages":
       return `/image-images/${node.slug?.current}`;
+    case "feuilletage":
+      return `/feuilletage/${node.slug?.current}`;
+    case "article":
+      return `/article/${node.slug?.current}`;
 
     default:
       return `/${node.slug?.current}`;

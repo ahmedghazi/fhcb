@@ -1,20 +1,21 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-05-27T15:08:07.668Z
+// Generated on: 2026-05-28T13:43:08.951Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
 
 import type {
-  ImageImages,
   Article,
+  Tag,
   Partenaire,
   Settings,
   Exhibition,
   PageModulaire,
-  Tag,
   Artist,
   Product,
   Event,
+  Feuilletage,
+  ImageImages,
   Programme,
   Library,
   PAGE_MODULAIRE_QUERY_RESULT,
@@ -22,6 +23,8 @@ import type {
   EXPHIBITION_QUERY_RESULT,
   PROGRAMME_QUERY_RESULT,
   IMAGE_IMAGES_QUERY_RESULT,
+  FEUILLETAGE_QUERY_RESULT,
+  ARTICLE_QUERY_RESULT,
   TextImageUI,
   KeyVal,
   ImageInGrid,
@@ -41,12 +44,8 @@ export type SanityImageAssetFull = SanityImageAsset & {
   creditLine?: string;
 };
 
-export type ImageImagesExpanded = Omit<ImageImages, 'rebonds' | 'imageCover'> & {
-  rebonds?: Array<ImageImagesExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
-};
-
-export type ArticleExpanded = Omit<Article, 'imageCover'> & {
+export type ArticleExpanded = Omit<Article, 'tags' | 'imageCover'> & {
+  tags?: Array<Tag> | null;
   imageCover?: (Omit<NonNullable<NonNullable<Article>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
@@ -90,6 +89,19 @@ export type EventExpanded = Omit<Event, 'artists' | 'tags' | 'rebonds' | 'imageC
   imageCover?: (Omit<NonNullable<NonNullable<Event>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
+export type FeuilletageExpanded = Omit<Feuilletage, 'artists' | 'tags' | 'rebonds' | 'imageCover'> & {
+  artists?: Array<ArtistExpanded> | null;
+  tags?: Array<Tag> | null;
+  rebonds?: ExhibitionExpanded | null;
+  imageCover?: (Omit<NonNullable<NonNullable<Feuilletage>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type ImageImagesExpanded = Omit<ImageImages, 'artists' | 'rebonds' | 'imageCover'> & {
+  artists?: Array<ArtistExpanded> | null;
+  rebonds?: Array<ImageImagesExpanded> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
 export type ProgrammeExpanded = Omit<Programme, 'imageCover'> & {
   imageCover?: (Omit<NonNullable<NonNullable<Programme>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
@@ -120,8 +132,20 @@ export type PROGRAMME_QUERY_RESULTExpanded = Omit<PROGRAMME_QUERY_RESULT, 'image
   imageCover?: (Omit<NonNullable<NonNullable<PROGRAMME_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type IMAGE_IMAGES_QUERY_RESULTExpanded = Omit<IMAGE_IMAGES_QUERY_RESULT, 'imageCover'> & {
+export type IMAGE_IMAGES_QUERY_RESULTExpanded = Omit<IMAGE_IMAGES_QUERY_RESULT, 'artists' | 'imageCover'> & {
+  artists?: Array<ArtistExpanded> | null;
   imageCover?: (Omit<NonNullable<NonNullable<IMAGE_IMAGES_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type FEUILLETAGE_QUERY_RESULTExpanded = Omit<FEUILLETAGE_QUERY_RESULT, 'artists' | 'tags' | 'imageCover'> & {
+  artists?: Array<ArtistExpanded> | null;
+  tags?: Array<Tag> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<FEUILLETAGE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type ARTICLE_QUERY_RESULTExpanded = Omit<ARTICLE_QUERY_RESULT, 'tags' | 'imageCover'> & {
+  tags?: Array<Tag> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<ARTICLE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type TextImageUIExpanded = Omit<TextImageUI, 'image'> & {

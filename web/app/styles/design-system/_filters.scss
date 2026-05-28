@@ -1,0 +1,9 @@
+.filters {
+  border-bottom: var(--border);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: 1rem;
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+  }
+}

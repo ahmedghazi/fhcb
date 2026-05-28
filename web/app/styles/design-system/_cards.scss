@@ -28,6 +28,11 @@ look 5 = expo à la une (img prems sans fond perdu
         justify-content: center;
       }
     }
+    &.card--exhibition {
+      .card__inner {
+        display: flex;
+      }
+    }
   }
   &--md {
     .card__inner {
@@ -40,6 +45,14 @@ look 5 = expo à la une (img prems sans fond perdu
         justify-content: space-between;
       }
     }
+    &.card--is-portrait {
+      .card__header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        justify-content: space-between;
+      }
+    }
   }
   &--lg {
     .card__body {
@@ -47,11 +60,6 @@ look 5 = expo à la une (img prems sans fond perdu
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    }
-    .card__media {
-      img {
-        // max-height: calc(var(--vh) * 100 - var(--header-h));
-      }
     }
   }
   &--md,
@@ -87,6 +95,9 @@ look 5 = expo à la une (img prems sans fond perdu
     }
   }
   &--is-futur {
+    &--sm {
+      background-color: red;
+    }
   }
 
   &--product {
@@ -101,19 +112,30 @@ look 5 = expo à la une (img prems sans fond perdu
   }
   &--event {
     background-color: var(--color-vert);
-    &--visite-commentee {
+    &.card--visite-commentee {
       background-color: var(--color-jaune);
     }
   }
-  &--visite-commentee {
-    background-color: var(--color-jaune);
-  }
+  // &--visite-commentee {
+  //   background-color: var(--color-jaune);
+  // }
+  // &--feuilletage {
+  //     background-color: var(--color-vert);
+  //   }
   &--artist {
     background-color: var(--color-rose-50);
   }
   &--image-images {
     .btn {
       background-color: var(--color-bg);
+    }
+  }
+  &--feuilletage {
+    background-color: var(--color-gris-100);
+  }
+  &--article {
+    .btn {
+      background-color: var(--color-gris-50);
     }
   }
 

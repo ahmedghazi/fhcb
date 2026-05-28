@@ -42,6 +42,11 @@ header.is-modal-open {
 nav {
   flex: 2;
   padding: 0 var(--spacing-lg);
+  &.is-open {
+    li.has-submenu:hover .sub-menu {
+      display: block;
+    }
+  }
   ul.menu {
     display: flex;
     justify-content: space-between;
@@ -60,11 +65,11 @@ nav {
         a {
           white-space: nowrap;
         }
-        &:hover {
-          .sub-menu {
-            display: block;
-          }
-        }
+        // &:hover {
+        //   .sub-menu {
+        //     display: block;
+        //   }
+        // }
       }
     }
 
@@ -73,6 +78,7 @@ nav {
       left: 2em;
       display: none;
       padding-top: 1.5rem;
+      padding-bottom: var(--spacing-lg);
     }
   }
 }

@@ -13,6 +13,9 @@ import ModuleGridCardUI from "./ModuleGridCardUI";
 import ModuleProgrammeUI from "./ModuleProgrammeUI";
 import ModuleFeaturedCardsUI from "./ModuleFeaturedCardsUI";
 import ModuleNewsCardUI from "./ModuleNewsCardUI";
+import ModuleListFeuilletageUI from "./ModuleListFeuilletageUI";
+import ModuleListImageImages from "./ModuleListImageImages";
+import ModuleListSerieThematiqueUI from "./ModuleListSerieThematiqueUI";
 import "./index.scss";
 
 const Modules = ({ modules }: ModulesList) => {
@@ -43,6 +46,12 @@ const Modules = ({ modules }: ModulesList) => {
           return <ModuleFeaturedCardsUI key={module._key} input={module as any} />;
         case "newsCardUI":
           return <ModuleNewsCardUI key={module._key} input={module as any} />;
+        case "listFeuilletageUI":
+          return <ModuleListFeuilletageUI key={module._key} input={module as any} />;
+        case "listImageImages":
+          return <ModuleListImageImages key={module._key} input={module as any} />;
+        case "listSerieThematiqueUI":
+          return <ModuleListSerieThematiqueUI key={module._key} input={module as any} />;
         default:
           return null;
       }

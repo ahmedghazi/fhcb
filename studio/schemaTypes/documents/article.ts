@@ -3,7 +3,6 @@ import modulesList from '../objects/modules/modulesList'
 import {baseLanguage} from '../locale/supportedLanguages'
 import {IoPersonOutline} from 'react-icons/io5'
 import slug from '../fields/slug'
-import imageFields from '../misc/imageFields'
 
 export default defineType({
   type: 'document',
@@ -43,6 +42,14 @@ export default defineType({
       options: {hotspot: true},
       // fields: imageFields,
 
+      group: 'editorial',
+    }),
+
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'tag'}]}],
       group: 'editorial',
     }),
 

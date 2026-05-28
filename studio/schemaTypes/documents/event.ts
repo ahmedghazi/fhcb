@@ -27,13 +27,7 @@ export default defineType({
       type: 'seo',
       group: 'seo',
     }),
-    defineField({
-      name: 'index',
-      type: 'string',
-      title: 'Index',
-      description: 'réservé au event avec le tag Feuilletage',
-      group: 'editorial',
-    }),
+
     defineField({
       name: 'title',
       title: 'Title',
@@ -82,6 +76,13 @@ export default defineType({
       title: 'Tags',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'index',
+      type: 'string',
+      title: 'Index',
+      description: 'Réservé aux événements avec le tag Feuilletage',
       group: 'editorial',
     }),
 

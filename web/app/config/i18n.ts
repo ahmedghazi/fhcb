@@ -30,6 +30,8 @@ const i18n = {
     mostSearched: "Recherches fréquentes",
     allRightsReserved: "Tous droits réservés",
     contactTeam: "Contacter l'équipe",
+    sort: "Triez",
+    resetFilters: "Effacer les filtres",
   },
   en: {
     default: false,
@@ -62,6 +64,8 @@ const i18n = {
     mostSearched: "Most searched",
     allRightsReserved: "All rights reserved",
     contactTeam: "Contact the team",
+    sort: "Sort",
+    resetFilters: "Reset filters",
   },
 };
 

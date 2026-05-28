@@ -10,10 +10,16 @@ import {
   cardRefEvent,
   cardRefImageImages,
   nav,
+  cardTypes,
+  relatedByArtist,
+  relatedByTag,
 } from "./fragments";
 import {
+  Article,
   ARTIST_QUERY_RESULT,
   EXPHIBITION_QUERY_RESULT,
+  Feuilletage,
+  FEUILLETAGE_QUERY_RESULT,
   HOME_QUERY_RESULT,
   IMAGE_IMAGES_QUERY_RESULT,
   PAGE_MODULAIRE_QUERY_RESULT,
@@ -229,7 +235,7 @@ export async function getAllPagesModulaire(): Promise<any[]> {
 }
 
 /*****************************************************************************************************
- * ALL PAGES (for sitemap)
+ * IMAGE_IMAGES_QUERY
  */
 export const IMAGE_IMAGES_QUERY = groq`*[_type == "imageImages" && slug.current == $slug][0]{
   ...,
@@ -243,14 +249,6 @@ export const IMAGE_IMAGES_QUERY = groq`*[_type == "imageImages" && slug.current 
     ${cardRefImageImages}
   },
 }`;
-/*
- "prevPage": *[_type == "imageImages" && index < ^.index] | order(index desc) [0]{
-   ${cardRefImageImages}
- },
- "nextPage": *[_type == "imageImages" && index > ^.index] | order(index asc) [0]{
-   ${cardRefImageImages}
- }
-*/
 
 export async function getImageImages(
   slug: string,
@@ -258,6 +256,55 @@ export async function getImageImages(
   return sanityFetch({
     query: IMAGE_IMAGES_QUERY,
     tags: ["imageImages"],
+    qParams: { slug },
+  });
+}
+
+/*****************************************************************************************************
+ * FEUILLETAGE_QUERY
+ */
+export const FEUILLETAGE_QUERY = groq`*[_type == "feuilletage" && slug.current == $slug][0]{
+  ...,
+  seo{
+    ${seo}
+  },
+  modules[]{
+    ${modules}
+  },
+  rebonds[]->{
+    ${cardTypes}
+  },
+  "related": ${relatedByArtist}
+}`;
+
+export async function getFeuilletage(
+  slug: string,
+): Promise<FEUILLETAGE_QUERY_RESULT> {
+  return sanityFetch({
+    query: FEUILLETAGE_QUERY,
+    tags: ["feuilletage"],
+    qParams: { slug },
+  });
+}
+
+/*****************************************************************************************************
+ * ARTICLE_QUERY
+ */
+export const ARTICLE_QUERY = groq`*[_type == "article" && slug.current == $slug][0]{
+  ...,
+  seo{
+    ${seo}
+  },
+  modules[]{
+    ${modules}
+  },
+  "related": ${relatedByTag}
+}`;
+
+export async function getArticle(slug: string): Promise<Article> {
+  return sanityFetch({
+    query: ARTICLE_QUERY,
+    tags: ["article"],
     qParams: { slug },
   });
 }

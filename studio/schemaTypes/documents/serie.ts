@@ -1,13 +1,13 @@
 import {defineField, defineType} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
-import {MdOutlineImage} from 'react-icons/md'
+import {TbArticle} from 'react-icons/tb'
 
 export default defineType({
   type: 'document',
-  name: 'imageImages',
-  title: 'Une images des Images',
-  icon: MdOutlineImage,
+  name: 'serie',
+  title: 'Série thématique',
+  icon: TbArticle,
   groups: [
     {
       default: true,
@@ -64,14 +64,6 @@ export default defineType({
     }),
 
     defineField({
-      name: 'artists',
-      title: 'Artistes',
-      type: 'array',
-      of: [{type: 'reference', to: [{type: 'artist'}]}],
-      group: 'editorial',
-    }),
-
-    defineField({
       name: 'modules',
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes)',
@@ -81,15 +73,15 @@ export default defineType({
     }),
 
     defineField({
-      name: 'rebonds',
-      title: 'Rebonds',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{type: 'imageImages'}],
-        },
-      ],
+      name: 'prev',
+      type: 'reference',
+      to: [{type: 'imageImages'}],
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'next',
+      type: 'reference',
+      to: [{type: 'imageImages'}],
       group: 'editorial',
     }),
   ],
@@ -106,7 +98,7 @@ export default defineType({
       // console.log(images)
       return {
         title: `#${index} - ${title}`,
-        subtitle: `/image-images/${slug.current}`,
+        subtitle: `/feuilletage/${slug.current}`,
         media: image,
       }
     },

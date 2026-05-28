@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   LinkExternal,
   LinkInternal,
@@ -8,6 +8,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
 import useHeader, { NavMenuItem } from "../context/HeaderContext";
+import { usePathname } from "next/navigation";
 
 const NavItem = ({ item }: { item: LinkInternal | LinkExternal }) => {
   const { dispatchCurrentMenuItem } = useHeader();
@@ -44,10 +45,15 @@ type Props = {
 };
 
 const Nav = ({ navPrimary }: Props) => {
-  const { dispatchCurrentMenuItem, dispatchModalType } = useHeader();
+  const { dispatchCurrentMenuItem, modalType, dispatchModalType } = useHeader();
+  const pathname = usePathname();
+  useEffect(() => {
+    dispatchCurrentMenuItem(null);
+    dispatchModalType(null);
+  }, [pathname]);
 
   return (
-    <nav>
+    <nav className={clsx(modalType != null && "is-open")}>
       <ul className='menu'>
         {navPrimary?.map((item, i) => (
           <li
@@ -66,15 +72,18 @@ const Nav = ({ navPrimary }: Props) => {
             <NavItem item={item} />
 
             {item._type === "linkInternal" && item.subMenu && (
-              <ul className='sub-menu'>
+              <ul
+                className='sub-menu'
+                onMouseLeave={() => dispatchCurrentMenuItem(null)}>
                 {item.subMenu.map((subItem, i) => (
                   <li
                     key={i}
                     className=''
-                    onMouseLeave={() => dispatchCurrentMenuItem(null)}
                     onMouseEnter={() => {
                       if (subItem._type === "linkInternal" && subItem.link) {
-                        dispatchCurrentMenuItem(subItem.link as unknown as NavMenuItem);
+                        dispatchCurrentMenuItem(
+                          subItem.link as unknown as NavMenuItem,
+                        );
                       }
                     }}>
                     <NavItem item={subItem} />

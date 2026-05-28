@@ -6,4 +6,6 @@ export default [
   {type: 'event'},
   {type: 'library'},
   {type: 'programme'},
+  {type: 'feuilletage'},
+  {type: 'imageImages'},
 ]

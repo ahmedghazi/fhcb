@@ -11,6 +11,8 @@ import programme from './documents/programme'
 import partenaire from './documents/partenaire'
 import article from './documents/article'
 import imageImages from './documents/imageImages'
+import feuilletage from './documents/feuilletage'
+import serie from './documents/serie'
 
 import {seoSchema} from './features/seo'
 
@@ -42,6 +44,9 @@ import gridCardUI from './objects/modules/gridCardUI'
 import programmeUI from './objects/modules/programmeUI'
 import newsCardUI from './objects/modules/newsCardUI'
 import featuredCardsUI from './objects/modules/featuredCardsUI'
+import listFeuilletageUI from './objects/modules/listFeuilletageUI'
+import listImageImages from './objects/modules/listImageImages'
+import listSerieThematiqueUI from './objects/modules/listSerieThematiqueUI'
 
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
@@ -65,6 +70,8 @@ export const schemaTypes = [
   partenaire,
   article,
   imageImages,
+  feuilletage,
+  // serie,
 
   localeString,
   localeText,
@@ -100,5 +107,8 @@ export const schemaTypes = [
   programmeUI,
   newsCardUI,
   featuredCardsUI,
+  listFeuilletageUI,
+  listImageImages,
+  listSerieThematiqueUI,
 ]
 export default schemaTypes

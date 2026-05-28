@@ -2,6 +2,7 @@
 import { Tag } from "@/app/sanity-api/types/sanity.types";
 import {
   EventExpanded,
+  FeuilletageExpanded,
   SanityImageAssetFull,
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import clsx from "clsx";
@@ -18,7 +19,7 @@ import CardInnerLG from "./CardInnerLG";
 import FHCBDates from "../FHCBDates";
 
 type Props = {
-  input: EventExpanded;
+  input: FeuilletageExpanded;
   size?: "sm" | "md" | "lg";
 };
 
@@ -30,16 +31,16 @@ type Props = {
  * event dans programme = l, fond gris
  *
  */
-const CardEvent = ({ input, size = "md" }: Props) => {
+const CardFeuilletage = ({ input, size = "md" }: Props) => {
   const {
     _type,
     title,
     subTitle,
     description,
+    dates,
     tags,
     index,
     imageCover,
-    dates,
   } = input;
   const tagsClassList = tags
     ?.map((tag: Tag) => `card--${tag.slug?.current}`)
@@ -59,7 +60,7 @@ const CardEvent = ({ input, size = "md" }: Props) => {
   return (
     <div
       className={clsx(
-        "card card--event",
+        "card card--feuilletage",
         `card--${size}`,
         size === "md" && "md:col-span-2",
         size === "lg" && "md:col-span-4",
@@ -68,7 +69,7 @@ const CardEvent = ({ input, size = "md" }: Props) => {
         tagsClassList,
       )}>
       {/* <pre>{JSON.stringify(dates, null, 2)}</pre> */}
-      {size === "sm" && (
+      {/* {size === "sm" && (
         <CardInnerSM
           _type={_type}
           tags={tagsTitleList || ""}
@@ -80,11 +81,11 @@ const CardEvent = ({ input, size = "md" }: Props) => {
           linkPrimary={_linkResolver(input)}
           linkPrimaryLabel={_localizeText("discover")}
         />
-      )}
+      )} */}
       {size === "md" && (
         <CardInnerMD
           _type={_type}
-          tags={tagsTitleList || ""}
+          tags={tagsTitleList || `FEUILLETAGE #${index}`}
           title={_localizeField(title) || ""}
           subtitle={_localizeField(subTitle)}
           info={_localizeField(description)}
@@ -110,4 +111,4 @@ const CardEvent = ({ input, size = "md" }: Props) => {
   );
 };
 
-export default CardEvent;
+export default CardFeuilletage;

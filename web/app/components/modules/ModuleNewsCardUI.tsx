@@ -5,17 +5,20 @@ import { NewsCardUI } from "@/app/sanity-api/types/sanity.types";
 import {
   EventExpanded,
   ExhibitionExpanded,
+  FeuilletageExpanded,
   ProductExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardEvent from "../ui/cards/CardEvent";
 import CardProduct from "../ui/cards/CardProduct";
 import { _localizeField } from "@/app/sanity-api/utils";
 import CardExhibition from "../ui/cards/CardExhibition";
+import CardFeuilletage from "../ui/cards/CardFeuilletage";
 
 type NewsCardUIResolved = NewsCardUI & {
   exhibitions?: ExhibitionExpanded[];
   events?: EventExpanded[];
   product?: ProductExpanded[];
+  feuilletage?: FeuilletageExpanded[];
 };
 
 type Props = {
@@ -27,22 +30,8 @@ const ModuleNewsCardUI = ({ input }: Props) => {
   const exhibitions = input.exhibitions || [];
   const events = input.events || [];
   const products = input.product || [];
+  const feuilletages = input.feuilletage || [];
   const cols = gridSize || 4;
-  // const titleText = title?.[locale as "fr" | "en"] || title?.fr;
-
-  // const [events, setEvents] = useState<EventExpanded[]>([]);
-  // const [products, setProducts] = useState<ProductExpanded[]>([]);
-
-  // useEffect(() => {
-  //   fetch("/api/news-items")
-  //     .then((r) => r.json())
-  //     .then(({ events, products }) => {
-  //       setEvents(events ?? []);
-  //       setProducts(products ?? []);
-  //     });
-  // }, []);
-
-  // const hasItems = events.length > 0 || products.length > 0;
 
   return (
     <section className='module module--news-card-ui'>
@@ -71,6 +60,13 @@ const ModuleNewsCardUI = ({ input }: Props) => {
               key={`product-${item._id}-${index}`}
               input={item}
               size='sm'
+            />
+          ))}
+          {feuilletages.map((item, index: number) => (
+            <CardFeuilletage
+              key={`feuilletage-${item._id}-${index}`}
+              input={item}
+              size='md'
             />
           ))}
         </div>

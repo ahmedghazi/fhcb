@@ -25,13 +25,6 @@ const ModuleTextImageUI = ({ input }: Props) => {
         <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter'>
           {image?.asset && (
             <div className='module__image md:col-span-5'>
-              {/* <Figure
-                asset={image.asset}
-                caption={image.asset?.title || ""}
-                alt={image.asset?.altText}
-                author={image.asset?.description}
-                copyright={image.asset?.creditLine}
-              /> */}
               <Figure
                 asset={image.asset}
                 caption={_localizeField(image.asset?.title) || ""}
@@ -42,7 +35,7 @@ const ModuleTextImageUI = ({ input }: Props) => {
             </div>
           )}
           {localizedText && (
-            <div className='module__text text md:col-span-6'>
+            <div className='module__text text md:col-span-7'>
               <PortableText
                 value={localizedText}
                 components={portableTextComponents}

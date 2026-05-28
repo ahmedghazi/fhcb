@@ -239,6 +239,24 @@ export const cardRefEvent = `
   _id,
   title,
   subTitle,
+  index,
+  slug,
+  imageCover{
+    ${imageAsset}
+  },
+  dates,
+  descripption,
+  tags[]->{
+    title,
+    slug
+  }
+`;
+export const cardRefFeuilletage = `
+  _type,
+  _id,
+  title,
+  subTitle,
+  index,
   slug,
   imageCover{
     ${imageAsset}
@@ -290,7 +308,21 @@ export const cardRefImageImages = `
   video
 `;
 
-const cardTypes = `
+export const cardRefArticle = `
+  _type,
+  _id,
+  title,
+  slug,
+  imageCover{
+    ${imageAsset}
+  },
+  tags[]->{
+    title,
+    slug
+  }
+`;
+
+export const cardTypes = `
   _type == "exhibition" => {
     ${cardRefExhibition}
   },
@@ -308,6 +340,12 @@ const cardTypes = `
   },
   _type == "imageImages" => {
     ${cardRefImageImages}
+  },
+  _type == "feuilletage" => {
+    ${cardRefFeuilletage}
+  },
+  _type == "article" => {
+    ${cardRefArticle}
   }
 `;
 
@@ -385,11 +423,59 @@ export const newsCardUI = `
     "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
-    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {
+    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefEvent}
     },
     "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefProduct}
+    },
+    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {
+      ${cardRefFeuilletage}
+    }
+  }
+`;
+
+export const listSerieThematiqueUI = `
+  _type == "listSerieThematiqueUI" => {
+    ...,
+    title{
+      ...
+    },
+    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {
+      ${cardRefArticle}
+    },
+    cta{
+      ...
+    }
+  }
+`;
+
+export const listFeuilletageUI = `
+  _type == "listFeuilletageUI" => {
+    ...,
+    title{
+      ...
+    },
+    "items": *[_type == "feuilletage"] | order(index asc) {
+      ${cardRefFeuilletage}
+    },
+    cta{
+      ...
+    }
+  }
+`;
+
+export const listImageImages = `
+  _type == "listImageImages" => {
+    ...,
+    title{
+      ...
+    },
+    "items": *[_type == "imageImages"] | order(_createdAt desc) {
+      ${cardRefImageImages}
+    },
+    cta{
+      ...
     }
   }
 `;
@@ -407,5 +493,38 @@ export const modules = `
   ${gridCardUI},
   ${programmeUI},
   ${featuredCardsUI},
-  ${newsCardUI}
+  ${newsCardUI},
+  ${listFeuilletageUI},
+  ${listImageImages},
+  ${listSerieThematiqueUI}
+`;
+
+export const relatedByArtist = `
+  *[
+    _id != ^._id &&
+    (
+      (
+        _type in ["event", "exhibition", "event", "product"] &&
+        references(^.artists[]._ref)
+      )
+      ||
+      (
+        _type == "artist" &&
+        _id in ^.artists[]._ref
+      )
+    )
+  ] | order(dates[0].du asc) {
+    ${cardTypes}
+  }
+`;
+
+export const relatedByTag = `
+  *[
+    _id != ^._id &&
+    _type in ["exhibition", "event", "product", "article", "feuilletage"] &&
+    count(^.tags) > 0 &&
+    references(^.tags[]._ref)
+  ] {
+    ${cardTypes}
+  }
 `;

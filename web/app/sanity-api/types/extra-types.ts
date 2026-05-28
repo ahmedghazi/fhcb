@@ -13,6 +13,9 @@ import {
   Library,
   ListsUI,
   ListUI,
+  ListFeuilletageUI,
+  ListImageImages,
+  ListSerieThematiqueUI,
   LocaleString,
   NewsCardUI,
   PageModulaire,
@@ -51,7 +54,10 @@ export type ModuleType =
   | GridCardUI
   | ProgrammeUI
   | FeaturedCardsUI
-  | NewsCardUI;
+  | NewsCardUI
+  | ListFeuilletageUI
+  | ListImageImages
+  | ListSerieThematiqueUI;
 
 export interface ModulesList {
   modules?: Array<
@@ -91,6 +97,15 @@ export interface ModulesList {
     | ({
         _key: string;
       } & NewsCardUI)
+    | ({
+        _key: string;
+      } & ListFeuilletageUI)
+    | ({
+        _key: string;
+      } & ListImageImages)
+    | ({
+        _key: string;
+      } & ListSerieThematiqueUI)
   >;
 }
 

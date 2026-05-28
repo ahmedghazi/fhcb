@@ -56,10 +56,11 @@ p,
 .text {
   font-size: var(--text-xl);
   p {
-    max-width: 41rem;
-    margin: 0 auto;
+    // max-width: 41rem;
+    // margin: 0 auto;
     &.c-chapo {
       max-width: 60rem;
+      margin: 0 auto;
     }
   }
   .blockquote {

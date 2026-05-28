@@ -14,6 +14,7 @@ import {
   ExhibitionExpanded,
   EventExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
+import clsx from "clsx";
 
 type Params = Promise<{ slug: string }>;
 
@@ -56,23 +57,36 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--programme'
       data-template='programme'
       data-slug={data.slug?.current || ""}>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       <div className='container-fluid'>
         <PageHeader h1={data.title} />
         {data.resolvedItems && (
-          <div className='grid gap-gutter'>
+          <div
+            className={clsx("grid md:grid-cols-4 gap-gutter")}
+            style={{
+              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1))",
+              justifyContent: "center",
+            }}>
             {data.resolvedItems.map((item) => (
               <Fragment key={item._id}>
                 {item._type === "exhibition" && (
-                  <CardExhibition
-                    input={item as unknown as ExhibitionExpanded}
-                    size='lg'
-                  />
+                  <div className='md:col-span-4'>
+                    <CardExhibition
+                      input={item as unknown as ExhibitionExpanded}
+                      size='lg'
+                    />
+                  </div>
                 )}
                 {item._type === "event" && (
-                  <CardEvent
-                    input={item as unknown as EventExpanded}
-                    size='lg'
-                  />
+                  <div
+                    className={clsx(
+                      `md:col-span-${data.items === "guided-tours" ? 1 : 4}`,
+                    )}>
+                    <CardEvent
+                      input={item as unknown as EventExpanded}
+                      size={data.items === "guided-tours" ? "sm" : "lg"}
+                    />
+                  </div>
                 )}
               </Fragment>
             ))}

@@ -31,7 +31,7 @@ const CardImageImages = ({ input, size = "md" }: Props) => {
         <div className='card__footer'>
           <div className='btns'>
             <Link href={_linkResolver(input)} className='btn btn--primary'>
-              {_localizeText("readMore")}
+              {_localizeText("discover")}
             </Link>
           </div>
         </div>

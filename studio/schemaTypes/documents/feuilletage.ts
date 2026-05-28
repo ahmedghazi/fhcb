@@ -2,6 +2,8 @@ import {defineField, defineType} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {FiBookOpen} from 'react-icons/fi'
+import modulesList from '../objects/modules/modulesList'
+import linkInternalTypes from '../misc/linkInternalTypes'
 
 export default defineType({
   type: 'document',
@@ -25,34 +27,20 @@ export default defineType({
       type: 'seo',
       group: 'seo',
     }),
-    defineField({
-      name: 'index',
-      type: 'string',
-      title: 'Index',
-      group: 'editorial',
-    }),
+
     defineField({
       name: 'title',
+      title: 'Title',
       type: 'localeString',
-      title: 'Titre',
-      description: 'Le nom de la page',
       group: 'editorial',
     }),
     slug,
-
-    defineField({
-      name: 'speaker',
-      type: 'string',
-      title: 'Intervenant',
-      description: "Le nom de l'intervenant-e",
-      group: 'editorial',
-    }),
-
     defineField({
       name: 'imageCover',
       type: 'image',
-      title: 'Image de couverture',
-      options: {hotspot: true},
+      title: 'Image clef',
+      // fields: imageFields,
+      description: 'Visible sur les pages de liste (largeur 1400px)',
       group: 'editorial',
     }),
 
@@ -64,24 +52,66 @@ export default defineType({
     }),
 
     defineField({
-      name: 'modules',
-      title: 'Modules',
-      description: 'Zone de contenu Modulaire (images, textes)',
+      name: 'subTitle',
+      title: 'Sous titre',
+      type: 'localeText',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'description',
+      type: 'localeText',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'artists',
+      title: 'Artistes',
       type: 'array',
-      of: [{type: 'imagesUI'}, {type: 'textSidebarUI'}],
+      of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',
     }),
 
     defineField({
-      name: 'prev',
-      type: 'reference',
-      to: [{type: 'imageImages'}],
+      name: 'dates',
+      type: 'array',
+      title: 'Dates',
+      group: 'editorial',
+      of: [{type: 'fhcbDate'}],
+    }),
+
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'tag'}]}],
       group: 'editorial',
     }),
     defineField({
-      name: 'next',
-      type: 'reference',
-      to: [{type: 'imageImages'}],
+      name: 'index',
+      type: 'string',
+      title: 'Index',
+      description: 'Réservé aux événements avec le tag Feuilletage',
+      group: 'editorial',
+    }),
+
+    defineField({
+      name: 'modules',
+      title: 'Modules',
+      description: 'Zone de contenu Modulaire (images, textes, embed)',
+      type: 'array',
+      of: modulesList,
+      group: 'editorial',
+    }),
+
+    defineField({
+      name: 'rebonds',
+      title: 'Rebonds',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: linkInternalTypes,
+        },
+      ],
       group: 'editorial',
     }),
   ],
@@ -89,16 +119,17 @@ export default defineType({
   preview: {
     select: {
       title: `title.${baseLanguage}`,
-      index: 'index',
       slug: 'slug',
+      date: 'dates.0.du',
+      index: 'index',
       image: 'imageCover',
     },
     prepare(selection) {
-      const {title, index, slug, image} = selection
+      const {title, slug, date, image, index} = selection
       // console.log(images)
       return {
-        title: `#${index} - ${title}`,
-        subtitle: `/feuilletage/${slug.current}`,
+        title: `${index ? `#${index} ` : ''}${title}`,
+        subtitle: `/feuilletage/${slug.current} - ${date}`,
         media: image,
       }
     },
