@@ -1,25 +1,41 @@
 "use client";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import useLocale from "@/app/context/LocaleContext";
 import CardImageImages from "../ui/cards/CardImageImages";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ListImageImages } from "@/app/sanity-api/types/sanity.types";
-import { _localizeField } from "@/app/sanity-api/utils";
+import FilterBar from "../ui/filters/FilterBar";
+import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
+import { applyFilters } from "./applyFilters";
 
 type Props = {
-  input: ListImageImages & { items?: ImageImagesExpanded[] };
+  input: ListImageImages & {
+    items?: ImageImagesExpanded[];
+    filters?: SanityFilterDef[];
+  };
 };
 
 const ModuleListImageImages = ({ input }: Props) => {
-  const { items } = input;
+  const { locale } = useLocale();
+  const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
+
+  const filterDefs = input.filters ?? [];
+  const filteredItems = applyFilters(
+    input.items ?? [],
+    filterDefs,
+    activeFilters,
+    locale
+  );
 
   return (
     <section className='module module--list-image-images'>
       <div className='module__inner'>
-        <div className='filters'>filters</div>
-
-        {items && (
+        {filterDefs.length > 0 && (
+          <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
+        )}
+        {filteredItems.length > 0 && (
           <div className='grid md:grid-cols-2 items-start gap-gutter'>
-            {items.map((item: ImageImagesExpanded, index: number) => (
+            {filteredItems.map((item: ImageImagesExpanded, index: number) => (
               <Fragment key={`${item._id}-${index}`}>
                 <CardImageImages input={item} size='md' />
               </Fragment>

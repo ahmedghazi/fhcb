@@ -24,20 +24,25 @@ cards simili document
 - # footer
 - # card size (props)
 - # home mise en avant basé sur la catégorie
-
-  -- # cron qui update les current/past categories
-  -- # curl -H "Authorization: Bearer TEST" http://localhost:3000/api/cron/update-exhibition-tags
+- # filtres
+- prev exhib
+- filtes prev exhib
+- programme expo/event vide => message
+- rebonds page
+- # cron qui update les current/past categories
+-
 
 - updates doc icons
 - # image images
 - # feuilletage
 - # single page feuilletage
 
+## shopify
+
 - sync shopify
 - catalog
+- filters shop
 - product page
-- programme expo/event vide => message
-- rebonds page
 
 # modules
 
@@ -63,3 +68,9 @@ cards simili document
 - diff entre evt et visite commentées (est-ce un doc propre ou un type d'evt)
 - cta dans les cards. Soit le texte est présent dans le doc source, soit dans un champs qui permet de convoquer les cartes. Mais pour avoir une cohérence, il faudrait que ce soit toujours le même champs qui soit utilisé. La card expo par ex est appelé à divers endroits.
 - # images (légendes, credits) localizable mais pas dans la mediatheque, ou alors on crée une mediatheque tampon
+
+# GO PREPROD
+
+add env CRON_SECRET=test
+Check cron job
+curl -H "Authorization: Bearer TEST" http://localhost:3000/api/cron/update-exhibition-tags

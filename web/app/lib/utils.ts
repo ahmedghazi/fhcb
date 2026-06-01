@@ -1,4 +1,4 @@
-import { FhcbDate } from "../sanity-api/types/sanity.types";
+import { FhcbDate, Tag } from "../sanity-api/types/sanity.types";
 
 const LOCALE_MAP: Record<string, string> = {
   fr: "fr-FR",
@@ -29,9 +29,27 @@ const monthName = (date: Date, bcp47: string) =>
 const weekdayName = (date: Date, bcp47: string) =>
   cap(date.toLocaleDateString(bcp47, { weekday: "long" }));
 
-type DifferentYears = { type: "different-years"; du: string; au: string; timeStart?: string; timeEnd?: string };
-type SameYear = { type: "same-year"; du: string; au: string; year: number; timeStart?: string; timeEnd?: string };
-type WithTime = { type: "with-time"; date: string; timeStart: string; timeEnd?: string };
+type DifferentYears = {
+  type: "different-years";
+  du: string;
+  au: string;
+  timeStart?: string;
+  timeEnd?: string;
+};
+type SameYear = {
+  type: "same-year";
+  du: string;
+  au: string;
+  year: number;
+  timeStart?: string;
+  timeEnd?: string;
+};
+type WithTime = {
+  type: "with-time";
+  date: string;
+  timeStart: string;
+  timeEnd?: string;
+};
 type Simple = { type: "simple"; date: string };
 
 export type FhcbDateFormatted = DifferentYears | SameYear | WithTime | Simple;
@@ -60,7 +78,12 @@ export const _fhcbDates = (
   // Single date with time
   if (!au && withTime && timeStart) {
     const date = `${weekdayName(duDate, bcp47)} ${ordinal(duDate.getDate(), locale)} ${monthName(duDate, bcp47)} ${duYear}`;
-    return { type: "with-time", date, timeStart, ...(timeEnd ? { timeEnd } : {}) };
+    return {
+      type: "with-time",
+      date,
+      timeStart,
+      ...(timeEnd ? { timeEnd } : {}),
+    };
   }
 
   // Single date, no time
@@ -73,9 +96,8 @@ export const _fhcbDates = (
 
   const auDate = parseDate(au);
   const auYear = auDate.getFullYear();
-  const timeProps = withTime && timeStart
-    ? { timeStart, ...(timeEnd ? { timeEnd } : {}) }
-    : {};
+  const timeProps =
+    withTime && timeStart ? { timeStart, ...(timeEnd ? { timeEnd } : {}) } : {};
 
   // Range spanning different years
   if (duYear !== auYear) {
@@ -113,4 +135,7 @@ export const _isCurrentExhibition = (dates: FhcbDate[]): boolean => {
 
 export const _isFuturExhibition = (dates: FhcbDate[]): boolean => {
   return dates.every((date) => date?.du && new Date(date.du) > new Date());
+};
+export const _isHorsLesMurs = (tags: Tag[]): boolean => {
+  return tags.filter((tag) => tag.slug?.current === "hors-les-murs").length > 0;
 };

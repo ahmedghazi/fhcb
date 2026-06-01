@@ -13,6 +13,7 @@ import Link from "next/link";
 import {
   _isCurrentExhibition,
   _isFuturExhibition,
+  _isHorsLesMurs,
   _isPastExhibition,
 } from "@/app/lib/utils";
 
@@ -22,7 +23,7 @@ type Props = {
 };
 
 const CardExhibition = ({ input, size = "md" }: Props) => {
-  const { artists, imageCover, dates } = input;
+  const { artists, imageCover, dates, tags } = input;
   const artistList = artists?.map((artist) => artist.name).join(", ");
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
@@ -31,6 +32,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
   const isPastExhibition = _isPastExhibition(dates || []);
   const isCurrentExhibition = _isCurrentExhibition(dates || []);
   const isFuturExhibition = _isFuturExhibition(dates || []);
+  const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
   return (
     <div
       className={clsx(
@@ -43,6 +45,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
         isPastExhibition && "card--is-past",
         isCurrentExhibition && "card--is-current",
         isFuturExhibition && "card--is-futur",
+        isHorsLesMurs && "card--is-hors-les-murs",
         "self-start ",
       )}>
       {isPastExhibition && (
@@ -69,6 +72,15 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
           size={size}
         />
       )}
+      {isHorsLesMurs && (
+        <CurrentCardExhibition
+          input={input}
+          artistList={artistList}
+          isLandscape={isLandscape}
+          size={size}
+        />
+      )}
+      <pre>{JSON.stringify(tags, null, 2)}</pre>
     </div>
   );
 };

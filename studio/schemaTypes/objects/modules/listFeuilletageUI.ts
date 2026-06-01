@@ -9,6 +9,12 @@ export default defineField({
   icon: FiBookOpen,
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
+    defineField({
+      name: 'filters',
+      title: 'Filtres',
+      type: 'array',
+      of: [{type: 'filterSort'}, {type: 'filterSearch'}, {type: 'filterRadio'}],
+    }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
   ],
   preview: {

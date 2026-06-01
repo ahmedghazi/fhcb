@@ -263,6 +263,11 @@ export const cardRefFeuilletage = `
   },
   dates,
   descripption,
+  artists[]->{
+    _id,
+    name,
+    slug
+  },
   tags[]->{
     title,
     slug
@@ -302,6 +307,11 @@ export const cardRefImageImages = `
   title,
   slug,
   speaker,
+  artists[]->{
+    _id,
+    name,
+    slug
+  },
   "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
@@ -456,6 +466,19 @@ export const listFeuilletageUI = `
     title{
       ...
     },
+    filters[]{
+      ...,
+      _type == "filterRadio" => {
+        ...,
+        radioOptions[]->{
+          _id,
+          _type,
+          name,
+          title,
+          slug
+        }
+      }
+    },
     "items": *[_type == "feuilletage"] | order(index asc) {
       ${cardRefFeuilletage}
     },
@@ -470,6 +493,19 @@ export const listImageImages = `
     ...,
     title{
       ...
+    },
+    filters[]{
+      ...,
+      _type == "filterRadio" => {
+        ...,
+        radioOptions[]->{
+          _id,
+          _type,
+          name,
+          title,
+          slug
+        }
+      }
     },
     "items": *[_type == "imageImages"] | order(_createdAt desc) {
       ${cardRefImageImages}

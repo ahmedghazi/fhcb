@@ -48,6 +48,9 @@ import listFeuilletageUI from './objects/modules/listFeuilletageUI'
 import listImageImages from './objects/modules/listImageImages'
 import listSerieThematiqueUI from './objects/modules/listSerieThematiqueUI'
 
+import filterSort from './objects/filterSort'
+import filterSearch from './objects/filterSearch'
+import filterRadio from './objects/filterRadio'
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
 import imageInGrid from './objects/imageInGrid'
@@ -90,6 +93,9 @@ export const schemaTypes = [
   cta,
   keyVal,
   keyValGroup,
+  filterSort,
+  filterSearch,
+  filterRadio,
   messageContextuel,
   fhcbDate,
   sidebarGenerique,

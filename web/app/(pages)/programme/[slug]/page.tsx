@@ -57,7 +57,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--programme'
       data-template='programme'
       data-slug={data.slug?.current || ""}>
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(data.resolvedItems, null, 2)}</pre> */}
       <div className='container-fluid'>
         <PageHeader h1={data.title} />
         {data.resolvedItems && (
@@ -70,10 +70,17 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
             {data.resolvedItems.map((item) => (
               <Fragment key={item._id}>
                 {item._type === "exhibition" && (
-                  <div className='md:col-span-4'>
+                  <div
+                    className={clsx(
+                      `md:col-span-${data.items === "exhibitions-out-of-the-box" ? 1 : 4}`,
+                    )}>
                     <CardExhibition
                       input={item as unknown as ExhibitionExpanded}
-                      size='lg'
+                      size={
+                        data.items === "exhibitions-out-of-the-box"
+                          ? "sm"
+                          : "lg"
+                      }
                     />
                   </div>
                 )}
