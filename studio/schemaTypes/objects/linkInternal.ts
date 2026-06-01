@@ -54,10 +54,7 @@ export default defineField({
           type: 'linkExternal',
         },
       ],
-      hidden: ({document, parent, value}) => {
-        console.log(parent)
-        return !parent?.withSubmenu
-      },
+      hidden: ({parent}) => !parent?.withSubmenu,
     }),
   ],
 })

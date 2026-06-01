@@ -36,11 +36,11 @@ export default {
               type: 'string',
               options: {
                 list: [
-                  {title: 'Numéro (index)', value: 'index'},
+                  // {title: 'Numéro (index)', value: 'index'},
                   {title: 'Titre', value: 'title'},
                   {title: 'Date de début', value: 'dateStart'},
                   {title: 'Date de création', value: '_createdAt'},
-                  {title: 'Intervenant', value: 'speaker'},
+                  // {title: 'Intervenant', value: 'speaker'},
                 ],
               },
               validation: (Rule) => Rule.required(),
@@ -85,10 +85,10 @@ export default {
         list: [
           {title: 'Titre', value: 'title'},
           {title: 'Sous-titre', value: 'subTitle'},
-          {title: 'Numéro (index)', value: 'index'},
+          // {title: 'Numéro (index)', value: 'index'},
           {title: 'Tags', value: 'tags'},
           {title: 'Artistes', value: 'artists'},
-          {title: 'Intervenant', value: 'speaker'},
+          // {title: 'Intervenant', value: 'speaker'},
         ],
       },
     }),
@@ -100,7 +100,8 @@ export default {
       type: 'string',
       hidden: ({parent}: any) => parent?.type !== 'radio',
       description: 'Identifiant interne (ex: artist, tag)',
-      validation: (Rule) => Rule.custom((val, ctx: any) => ctx.parent?.type !== 'radio' || !!val || 'Requis'),
+      validation: (Rule) =>
+        Rule.custom((val, ctx: any) => ctx.parent?.type !== 'radio' || !!val || 'Requis'),
     }),
     defineField({
       name: 'radioLabel',
@@ -117,7 +118,12 @@ export default {
         defineArrayMember({
           type: 'object',
           fields: [
-            defineField({name: 'value', title: 'Valeur (slug/id)', type: 'string', validation: (Rule) => Rule.required()}),
+            defineField({
+              name: 'value',
+              title: 'Valeur (slug/id)',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
             defineField({name: 'label', title: 'Label', type: 'localeString'}),
           ],
           preview: {
@@ -133,7 +139,11 @@ export default {
   preview: {
     select: {type: 'type'},
     prepare({type}: any) {
-      const map: Record<string, string> = {sort: '🔀 Tri', search: '🔍 Recherche', radio: '⚪ Radio'}
+      const map: Record<string, string> = {
+        sort: '🔀 Tri',
+        search: '🔍 Recherche',
+        radio: '⚪ Radio',
+      }
       return {title: map[type] || type}
     },
   },

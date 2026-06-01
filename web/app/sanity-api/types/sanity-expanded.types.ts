@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-01T09:50:11.143Z
+// Generated on: 2026-06-01T13:58:15.351Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
@@ -14,9 +14,9 @@ import type {
   Artist,
   Product,
   Event,
+  Programme,
   Feuilletage,
   ImageImages,
-  Programme,
   Library,
   PAGE_MODULAIRE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
@@ -89,6 +89,12 @@ export type EventExpanded = Omit<Event, 'artists' | 'tags' | 'rebonds' | 'imageC
   imageCover?: (Omit<NonNullable<NonNullable<Event>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
+export type ProgrammeExpanded = Omit<Programme, 'filterTags' | 'excludeTags' | 'imageCover'> & {
+  filterTags?: Array<Tag> | null;
+  excludeTags?: Array<Tag> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<Programme>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
 export type FeuilletageExpanded = Omit<Feuilletage, 'artists' | 'tags' | 'rebonds' | 'imageCover'> & {
   artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
@@ -100,10 +106,6 @@ export type ImageImagesExpanded = Omit<ImageImages, 'artists' | 'rebonds' | 'ima
   artists?: Array<ArtistExpanded> | null;
   rebonds?: Array<ImageImagesExpanded> | null;
   imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
-};
-
-export type ProgrammeExpanded = Omit<Programme, 'imageCover'> & {
-  imageCover?: (Omit<NonNullable<NonNullable<Programme>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type LibraryExpanded = Omit<Library, 'miseEnAvant' | 'sliderSelection' | 'items' | 'imageCover'> & {
@@ -128,7 +130,9 @@ export type EXPHIBITION_QUERY_RESULTExpanded = Omit<EXPHIBITION_QUERY_RESULT, 't
   rebonds?: ExhibitionExpanded | null;
 };
 
-export type PROGRAMME_QUERY_RESULTExpanded = Omit<PROGRAMME_QUERY_RESULT, 'imageCover'> & {
+export type PROGRAMME_QUERY_RESULTExpanded = Omit<PROGRAMME_QUERY_RESULT, 'filterTags' | 'excludeTags' | 'imageCover'> & {
+  filterTags?: Array<Tag> | null;
+  excludeTags?: Array<Tag> | null;
   imageCover?: (Omit<NonNullable<NonNullable<PROGRAMME_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 

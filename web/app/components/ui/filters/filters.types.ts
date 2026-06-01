@@ -29,14 +29,14 @@ export type SanityFilterDef =
     }
   | {
       _key: string;
-      _type: "filterRadio";
+      _type: "filterList";
       radioKey: "artist" | "tag";
       radioLabel?: LocaleString;
       radioOptions?: FilterRadioOption[];
     };
 
-// Active filter state: filterKey → current value
+// Active filter state: filterKey → current value(s)
 // "sort"        → "index-asc"
 // "search"      → search term
-// "artist"/"tag"→ referenced document _id
-export type ActiveFilters = Record<string, string>;
+// "artist"/"tag"→ one or many referenced document _ids
+export type ActiveFilters = Record<string, string | string[]>;

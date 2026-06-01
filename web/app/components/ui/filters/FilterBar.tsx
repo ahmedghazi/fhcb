@@ -2,6 +2,7 @@
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import React, { useState } from "react";
 import { ActiveFilters, SanityFilterDef } from "./filters.types";
+import FilterList from "./FilterList";
 import clsx from "clsx";
 
 type Props = {
@@ -15,8 +16,19 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   const isFiltering = Object.keys(active).length != 0;
 
   const _update = (key: string, value: string) => {
-    console.log(key, value);
     const next = { ...active, [key]: value };
+    setActive(next);
+    onChange(next);
+  };
+
+  const _toggle = (key: string, value: string) => {
+    const current = active[key];
+    const arr = Array.isArray(current) ? current : current ? [current] : [];
+    const next = {
+      ...active,
+      [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value],
+    };
+    if ((next[key] as string[]).length === 0) delete next[key];
     setActive(next);
     onChange(next);
   };
@@ -68,37 +80,44 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
               );
             }
 
-            if (def._type === "filterRadio") {
+            if (def._type === "filterList") {
+              const opts = def.radioOptions ?? [];
+              if (opts.length <= 2) {
+                return (
+                  <div key={def._key} className='ui-filters ui-filter__wrapper'>
+                    <fieldset className='ui-filters__radio'>
+                      {opts.map((opt) => (
+                        <label key={opt._id}>
+                          <input
+                            className='ui-radio'
+                            type='radio'
+                            name={def.radioKey}
+                            value={opt._id}
+                            checked={active[def.radioKey] === opt._id}
+                            onChange={() => _update(def.radioKey, opt._id)}
+                          />
+                          <span>{_localizeField(opt.name ?? opt.title)}</span>
+                        </label>
+                      ))}
+                    </fieldset>
+                  </div>
+                );
+              }
+
               return (
-                <div className='ui-filters ui-filter__wrapper'>
-                  <fieldset key={def._key} className='ui-filters__radio'>
-                    {/* {def.radioLabel && (
-                    <legend>{_localizeField(def.radioLabel)}</legend>
-                  )} */}
-                    {/* <label>
-                    <input
-                      type='radio'
-                      name={def.radioKey}
-                      value=''
-                      checked={!active[def.radioKey]}
-                      onChange={() => _update(def.radioKey, "")}
-                    />
-                    <span>{_localizeText("all")}</span>
-                  </label> */}
-                    {def.radioOptions?.map((opt) => (
-                      <label key={opt._id}>
-                        <input
-                          type='radio'
-                          name={def.radioKey}
-                          value={opt._id}
-                          checked={active[def.radioKey] === opt._id}
-                          onChange={() => _update(def.radioKey, opt._id)}
-                        />
-                        <span>{_localizeField(opt.name ?? opt.title)}</span>
-                      </label>
-                    ))}
-                  </fieldset>
-                </div>
+                <FilterList
+                  key={def._key}
+                  def={def}
+                  opts={opts}
+                  activeValues={
+                    Array.isArray(active[def.radioKey])
+                      ? (active[def.radioKey] as string[])
+                      : active[def.radioKey]
+                        ? [active[def.radioKey] as string]
+                        : []
+                  }
+                  onToggle={_toggle}
+                />
               );
             }
 

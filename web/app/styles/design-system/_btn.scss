@@ -34,3 +34,14 @@ a.btn {
 .btn-tickets {
   border-radius: 2.77em; /* = 50px (50 / 18 = 2.77) */
 }
+
+.btn--chip {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  &:hover,
+  &.is-active {
+    background-color: var(--color-accent);
+  }
+}

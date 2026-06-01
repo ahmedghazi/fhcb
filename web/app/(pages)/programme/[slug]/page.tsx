@@ -1,7 +1,6 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import website from "@/app/config/website";
 import { Metadata, NextPage } from "next";
-
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { getClient } from "@/app/sanity-api/sanity.client";
@@ -10,17 +9,14 @@ import { getProgramme, PROGRAMME_QUERY } from "@/app/sanity-api/sanity-queries";
 import PageHeader from "@/app/components/PageHeader";
 import CardExhibition from "@/app/components/ui/cards/CardExhibition";
 import CardEvent from "@/app/components/ui/cards/CardEvent";
+import Modules from "@/app/components/modules";
 import {
   ExhibitionExpanded,
   EventExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
-import clsx from "clsx";
 
 type Params = Promise<{ slug: string }>;
-
-type PageProps = {
-  params: Params;
-};
+type PageProps = { params: Params };
 
 export async function generateMetadata({
   params,
@@ -40,15 +36,12 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
   const { isEnabled } = await draftMode();
   const { slug } = await params;
 
-  let data: PROGRAMME_QUERY_RESULT;
-  if (isEnabled) {
-    data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
-      PROGRAMME_QUERY,
-      { slug },
-    );
-  } else {
-    data = await getProgramme(slug);
-  }
+  const data: PROGRAMME_QUERY_RESULT = isEnabled
+    ? await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
+        PROGRAMME_QUERY,
+        { slug },
+      )
+    : await getProgramme(slug);
 
   if (!data) return notFound();
 
@@ -57,12 +50,14 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--programme'
       data-template='programme'
       data-slug={data.slug?.current || ""}>
-      {/* <pre>{JSON.stringify(data.resolvedItems, null, 2)}</pre> */}
       <div className='container-fluid'>
         <PageHeader h1={data.title} />
+        {/* {data.items === "exhibitions-past" && (
+          <div className='filters'>filters</div>
+        )}
         {data.resolvedItems && (
           <div
-            className={clsx("grid md:grid-cols-4 gap-gutter")}
+            className='grid md:grid-cols-4 gap-gutter'
             style={{
               gridTemplateColumns: "repeat(auto-fit, var(--gridder-1))",
               justifyContent: "center",
@@ -70,38 +65,32 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
             {data.resolvedItems.map((item) => (
               <Fragment key={item._id}>
                 {item._type === "exhibition" && (
-                  <div
-                    className={clsx(
-                      `md:col-span-${data.items === "exhibitions-out-of-the-box" ? 1 : 4}`,
-                    )}>
+                  <div className={`md:col-span-${isExhibitionSmall ? 1 : 4}`}>
                     <CardExhibition
                       input={item as unknown as ExhibitionExpanded}
-                      size={
-                        data.items === "exhibitions-out-of-the-box"
-                          ? "sm"
-                          : "lg"
-                      }
+                      size={isExhibitionSmall ? "sm" : "lg"}
                     />
                   </div>
                 )}
                 {item._type === "event" && (
-                  <div
-                    className={clsx(
-                      `md:col-span-${data.items === "guided-tours" ? 1 : 4}`,
-                    )}>
+                  <div className={`md:col-span-${isEventSmall ? 1 : 4}`}>
                     <CardEvent
                       input={item as unknown as EventExpanded}
-                      size={data.items === "guided-tours" ? "sm" : "lg"}
+                      size={isEventSmall ? "sm" : "lg"}
                     />
                   </div>
                 )}
               </Fragment>
             ))}
-          </div>
-        )}
-      </div>
 
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+
+          </div>
+        )} */}
+        {data.modules && <Modules modules={data.modules as any} />}
+        {/* <pre>{data.items}</pre>
+            <pre>{JSON.stringify(data.filterTags, null, 2)}</pre>
+            <pre>{JSON.stringify(data.resolvedItems, null, 2)}</pre> */}
+      </div>
     </div>
   );
 };

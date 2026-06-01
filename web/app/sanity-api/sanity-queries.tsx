@@ -184,23 +184,22 @@ export const PROGRAMME_QUERY = groq`*[_type == "programme" && slug.current == $s
       ${seo}
     },
     items,
+    modules[]{
+      ${modules}
+    },
     "resolvedItems": select(
-      items == "exhibitions-past" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-passee"]._id]) > 0] | order(dates[0].du asc) {
+      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[
+        _type == "exhibition"
+        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+      ] | order(dates[0].du asc) {
         ${cardRefExhibition}
       },
-      items == "exhibitions-current" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {
-        ${cardRefExhibition}
-      },
-      items == "exhibitions-futur" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
-        ${cardRefExhibition}
-      },
-      items == "exhibitions-out-of-the-box" => *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "hors-les-murs"]._id]) > 0] | order(dates[0].du asc) {
-        ${cardRefExhibition}
-      },
-      items == "events" => *[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {
-        ${cardRefEvent}
-      },
-      items == "guided-tours" => *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(coalesce(dates[0].du, _createdAt) asc) {
+      items in ["events", "guided-tours"] => *[
+        _type == "event"
+        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+      ] | order(coalesce(dates[0].du, _createdAt) asc) {
         ${cardRefEvent}
       },
       []

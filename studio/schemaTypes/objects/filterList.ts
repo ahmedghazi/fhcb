@@ -1,11 +1,11 @@
 import {defineArrayMember, defineField} from 'sanity'
-import {BsCircle} from 'react-icons/bs'
+import {BsList} from 'react-icons/bs'
 
 export default {
-  name: 'filterRadio',
-  title: 'Filtre — Radio',
+  name: 'filterList',
+  title: 'Filtre — Liste',
   type: 'object',
-  icon: BsCircle,
+  icon: BsList,
   fields: [
     defineField({
       name: 'radioKey',
@@ -29,7 +29,8 @@ export default {
       name: 'radioOptions',
       title: 'Options',
       type: 'array',
-      description: 'Sélectionnez les artistes ou tags à proposer en filtre',
+      description:
+        'Sélectionnez les artistes ou tags à proposer. ≤ 2 options → boutons radio, > 2 options → liste A–Z.',
       of: [
         defineArrayMember({
           type: 'reference',
@@ -41,7 +42,7 @@ export default {
   ],
   preview: {
     prepare() {
-      return {title: 'Filtre — Radio', subtitle: '⚪'}
+      return {title: 'Filtre — Liste', subtitle: '≡'}
     },
   },
 }

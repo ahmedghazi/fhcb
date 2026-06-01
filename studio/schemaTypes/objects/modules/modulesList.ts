@@ -14,4 +14,6 @@ export default [
   {type: 'listFeuilletageUI'},
   {type: 'listImageImages'},
   {type: 'listSerieThematiqueUI'},
+  {type: 'listExhibitionsUI'},
+  {type: 'listEventsUI'},
 ]

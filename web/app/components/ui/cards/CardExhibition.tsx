@@ -80,7 +80,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
           size={size}
         />
       )}
-      <pre>{JSON.stringify(tags, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(tags, null, 2)}</pre> */}
     </div>
   );
 };

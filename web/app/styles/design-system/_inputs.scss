@@ -1,0 +1,23 @@
+.ui-filters__checkbox,
+.ui-filters__radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.ui-radio,
+.ui-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  border: var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease;
+  &:checked {
+    background-color: currentColor;
+  }
+}

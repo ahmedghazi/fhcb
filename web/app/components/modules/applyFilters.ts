@@ -53,7 +53,7 @@ export const applyFilters = <T extends Record<string, any>>(
   for (const def of filterDefs) {
     if (def._type === "filterSort") {
       const value = activeFilters["sort"];
-      if (value) {
+      if (typeof value === "string" && value) {
         const dashIdx = value.lastIndexOf("-");
         const field = value.substring(0, dashIdx);
         const direction = value.substring(dashIdx + 1) as "asc" | "desc";
@@ -88,7 +88,8 @@ export const applyFilters = <T extends Record<string, any>>(
     }
 
     if (def._type === "filterSearch") {
-      const term = activeFilters["search"] ?? "";
+      const raw = activeFilters["search"];
+      const term = typeof raw === "string" ? raw : "";
       if (term && def.searchIn?.length) {
         result = result.filter((item) =>
           matchesSearch(item, def.searchIn!, term, locale),
@@ -96,16 +97,16 @@ export const applyFilters = <T extends Record<string, any>>(
       }
     }
 
-    if (def._type === "filterRadio") {
-      const value = activeFilters[def.radioKey] ?? "";
-      if (value) {
+    if (def._type === "filterList") {
+      const raw = activeFilters[def.radioKey];
+      const ids = Array.isArray(raw) ? raw : raw ? [raw] : [];
+      if (ids.length > 0) {
         result = result.filter((item) => {
           if (def.radioKey === "artist") {
-            console.log(def);
-            return item.artists?.some((a: any) => a._id === value) ?? false;
+            return item.artists?.some((a: any) => ids.includes(a._id)) ?? false;
           }
           if (def.radioKey === "tag") {
-            return item.tags?.some((t: any) => t._id === value) ?? false;
+            return item.tags?.some((t: any) => ids.includes(t._id)) ?? false;
           }
           return true;
         });

@@ -47,10 +47,12 @@ import featuredCardsUI from './objects/modules/featuredCardsUI'
 import listFeuilletageUI from './objects/modules/listFeuilletageUI'
 import listImageImages from './objects/modules/listImageImages'
 import listSerieThematiqueUI from './objects/modules/listSerieThematiqueUI'
+import listExhibitionsUI from './objects/modules/listExhibitionsUI'
+import listEventsUI from './objects/modules/listEventsUI'
 
 import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
-import filterRadio from './objects/filterRadio'
+import filterList from './objects/filterList'
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
 import imageInGrid from './objects/imageInGrid'
@@ -95,7 +97,7 @@ export const schemaTypes = [
   keyValGroup,
   filterSort,
   filterSearch,
-  filterRadio,
+  filterList,
   messageContextuel,
   fhcbDate,
   sidebarGenerique,
@@ -116,5 +118,7 @@ export const schemaTypes = [
   listFeuilletageUI,
   listImageImages,
   listSerieThematiqueUI,
+  listExhibitionsUI,
+  listEventsUI,
 ]
 export default schemaTypes

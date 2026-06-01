@@ -16,6 +16,8 @@ import ModuleNewsCardUI from "./ModuleNewsCardUI";
 import ModuleListFeuilletageUI from "./ModuleListFeuilletageUI";
 import ModuleListImageImages from "./ModuleListImageImages";
 import ModuleListSerieThematiqueUI from "./ModuleListSerieThematiqueUI";
+import ModuleListExhibitionsUI from "./ModuleListExhibitionsUI";
+import ModuleListEventsUI from "./ModuleListEventsUI";
 import "./index.scss";
 
 const Modules = ({ modules }: ModulesList) => {
@@ -52,6 +54,10 @@ const Modules = ({ modules }: ModulesList) => {
           return <ModuleListImageImages key={module._key} input={module as any} />;
         case "listSerieThematiqueUI":
           return <ModuleListSerieThematiqueUI key={module._key} input={module as any} />;
+        case "listExhibitionsUI":
+          return <ModuleListExhibitionsUI key={module._key} input={module as any} />;
+        case "listEventsUI":
+          return <ModuleListEventsUI key={module._key} input={module as any} />;
         default:
           return null;
       }

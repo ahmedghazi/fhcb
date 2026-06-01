@@ -231,7 +231,13 @@ export const cardRefExhibition = `
   },
   dates,
   artists[]->{
+    _id,
     name
+  },
+  tags[]->{
+    _id,
+    title,
+    slug
   }
 `;
 export const cardRefEvent = `
@@ -246,7 +252,12 @@ export const cardRefEvent = `
   },
   dates,
   descripption,
+  artists[]->{
+    _id,
+    name
+  },
   tags[]->{
+    _id,
     title,
     slug
   }
@@ -468,7 +479,7 @@ export const listFeuilletageUI = `
     },
     filters[]{
       ...,
-      _type == "filterRadio" => {
+      _type == "filterList" => {
         ...,
         radioOptions[]->{
           _id,
@@ -496,7 +507,7 @@ export const listImageImages = `
     },
     filters[]{
       ...,
-      _type == "filterRadio" => {
+      _type == "filterList" => {
         ...,
         radioOptions[]->{
           _id,
@@ -510,6 +521,76 @@ export const listImageImages = `
     "items": *[_type == "imageImages"] | order(_createdAt desc) {
       ${cardRefImageImages}
     },
+    cta{
+      ...
+    }
+  }
+`;
+
+export const listExhibitionsUI = `
+  _type == "listExhibitionsUI" => {
+    ...,
+    title{
+      ...
+    },
+    filters[]{
+      ...,
+      _type == "filterList" => {
+        ...,
+        radioOptions[]->{
+          _id,
+          _type,
+          name,
+          title,
+          slug
+        }
+      }
+    },
+    "resolvedItems": select(
+      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[
+        _type == "exhibition"
+        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+      ] | order(dates[0].du asc) {
+        ${cardRefExhibition}
+      },
+      []
+    ),
+    cta{
+      ...
+    }
+  }
+`;
+
+export const listEventsUI = `
+  _type == "listEventsUI" => {
+    ...,
+    title{
+      ...
+    },
+    filters[]{
+      ...,
+      _type == "filterList" => {
+        ...,
+        radioOptions[]->{
+          _id,
+          _type,
+          name,
+          title,
+          slug
+        }
+      }
+    },
+    "resolvedItems": select(
+      items in ["events", "guided-tours"] => *[
+        _type == "event"
+        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+      ] | order(coalesce(dates[0].du, _createdAt) asc) {
+        ${cardRefEvent}
+      },
+      []
+    ),
     cta{
       ...
     }
@@ -532,7 +613,9 @@ export const modules = `
   ${newsCardUI},
   ${listFeuilletageUI},
   ${listImageImages},
-  ${listSerieThematiqueUI}
+  ${listSerieThematiqueUI},
+  ${listExhibitionsUI},
+  ${listEventsUI}
 `;
 
 export const relatedByArtist = `

@@ -19,13 +19,15 @@ cards simili document
 - # fix header (img)
 - fix header interractions
 - header aside
+- message contexturel avec auto kill
 - # search scroll
 - # search open focus input
 - # footer
 - # card size (props)
 - # home mise en avant basé sur la catégorie
 - # filtres
-- prev exhib
+- # current expo = same tag as hors les murs
+- # prev exhib
 - filtes prev exhib
 - programme expo/event vide => message
 - rebonds page
@@ -68,6 +70,10 @@ cards simili document
 - diff entre evt et visite commentées (est-ce un doc propre ou un type d'evt)
 - cta dans les cards. Soit le texte est présent dans le doc source, soit dans un champs qui permet de convoquer les cartes. Mais pour avoir une cohérence, il faudrait que ce soit toujours le même champs qui soit utilisé. La card expo par ex est appelé à divers endroits.
 - # images (légendes, credits) localizable mais pas dans la mediatheque, ou alors on crée une mediatheque tampon
+- filtre lieu dans précédente expo?
+- filtre intervenant dans feuilletages?
+- triez par ?
+- les rebonds, quels noms? ex séries thématique
 
 # GO PREPROD
 
