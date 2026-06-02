@@ -16,6 +16,8 @@ import {
   ListFeuilletageUI,
   ListImageImages,
   ListSerieThematiqueUI,
+  ListEventsUI,
+  ListExhibitionsUI,
   LocaleString,
   NewsCardUI,
   PageModulaire,
@@ -57,7 +59,9 @@ export type ModuleType =
   | NewsCardUI
   | ListFeuilletageUI
   | ListImageImages
-  | ListSerieThematiqueUI;
+  | ListSerieThematiqueUI
+  | ListEventsUI
+  | ListExhibitionsUI;
 
 export interface ModulesList {
   modules?: Array<
@@ -106,6 +110,12 @@ export interface ModulesList {
     | ({
         _key: string;
       } & ListSerieThematiqueUI)
+    | ({
+        _key: string;
+      } & ListEventsUI)
+    | ({
+        _key: string;
+      } & ListExhibitionsUI)
   >;
 }
 

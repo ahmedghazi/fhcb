@@ -16,6 +16,7 @@ import {
 } from "./fragments";
 import {
   Article,
+  ARTICLE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
   EXPHIBITION_QUERY_RESULT,
   Feuilletage,
@@ -300,7 +301,7 @@ export const ARTICLE_QUERY = groq`*[_type == "article" && slug.current == $slug]
   "related": ${relatedByTag}
 }`;
 
-export async function getArticle(slug: string): Promise<Article> {
+export async function getArticle(slug: string): Promise<ARTICLE_QUERY_RESULT> {
   return sanityFetch({
     query: ARTICLE_QUERY,
     tags: ["article"],
