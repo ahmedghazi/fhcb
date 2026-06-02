@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-01T13:58:15.351Z
+// Generated on: 2026-06-02T13:23:23.513Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
@@ -16,6 +16,7 @@ import type {
   Event,
   Programme,
   Feuilletage,
+  Chercheur,
   ImageImages,
   Library,
   PAGE_MODULAIRE_QUERY_RESULT,
@@ -95,14 +96,16 @@ export type ProgrammeExpanded = Omit<Programme, 'filterTags' | 'excludeTags' | '
   imageCover?: (Omit<NonNullable<NonNullable<Programme>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type FeuilletageExpanded = Omit<Feuilletage, 'artists' | 'tags' | 'rebonds' | 'imageCover'> & {
+export type FeuilletageExpanded = Omit<Feuilletage, 'artists' | 'chercheur' | 'tags' | 'rebonds' | 'imageCover'> & {
   artists?: Array<ArtistExpanded> | null;
+  chercheur?: Chercheur | null;
   tags?: Array<Tag> | null;
   rebonds?: ExhibitionExpanded | null;
   imageCover?: (Omit<NonNullable<NonNullable<Feuilletage>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type ImageImagesExpanded = Omit<ImageImages, 'artists' | 'rebonds' | 'imageCover'> & {
+export type ImageImagesExpanded = Omit<ImageImages, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
+  chercheur?: Chercheur | null;
   artists?: Array<ArtistExpanded> | null;
   rebonds?: Array<ImageImagesExpanded> | null;
   imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;

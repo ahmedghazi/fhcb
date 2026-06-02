@@ -16,6 +16,11 @@
 
   label:hover {
     color: var(--color-secondary);
+    svg {
+      path {
+        fill: var(--color-secondary);
+      }
+    }
   }
   .ui-filters__search {
     input:focus {
@@ -59,9 +64,18 @@
     transition: padding-bottom 0.3s ease;
     label {
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      svg {
+        transition: transform 0.2s;
+      }
     }
     &.is-open {
-      padding-bottom: 281px;
+      padding-bottom: 17rem;
+      label svg {
+        transform: rotate(180deg);
+      }
       .ui-filter__detail {
         display: block;
       }
@@ -82,6 +96,15 @@
       }
     }
     .ui-filters__checkbox {
+    }
+    &-items {
+      height: 13rem;
+      overflow: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE et ancien Edge */
+      &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
     }
     &-item {
       display: flex;

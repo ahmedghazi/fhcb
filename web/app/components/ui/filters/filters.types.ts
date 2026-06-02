@@ -7,11 +7,11 @@ export type SanitySortOption = {
   label?: LocaleString;
 };
 
-// Referenced artist or tag, resolved by GROQ `->`
+// Referenced artist, tag, or chercheur, resolved by GROQ `->`
 export type FilterRadioOption = {
   _id: string;
-  _type: "artist" | "tag";
-  name?: string;       // artist
+  _type: "artist" | "tag" | "chercheur";
+  name?: string;        // artist, chercheur
   title?: LocaleString; // tag
   slug?: { current?: string };
 };
@@ -30,7 +30,14 @@ export type SanityFilterDef =
   | {
       _key: string;
       _type: "filterList";
-      radioKey: "artist" | "tag";
+      radioKey: "artist" | "tag" | "chercheur";
+      radioLabel?: LocaleString;
+      radioOptions?: FilterRadioOption[];
+    }
+  | {
+      _key: string;
+      _type: "filterRadio";
+      radioKey: "artist" | "tag" | "chercheur";
       radioLabel?: LocaleString;
       radioOptions?: FilterRadioOption[];
     };

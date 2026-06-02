@@ -41,10 +41,10 @@ export default defineType({
     slug,
 
     defineField({
-      name: 'speaker',
-      type: 'string',
-      title: 'Intervenant',
-      description: "Le nom de l'intervenant-e",
+      name: 'chercheur',
+      title: 'Chercheur',
+      type: 'reference',
+      to: [{type: 'chercheur'}],
       group: 'editorial',
     }),
 

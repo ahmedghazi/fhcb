@@ -29,9 +29,19 @@ cards simili document
 - # current expo = same tag as hors les murs
 - # prev exhib
 - filtes prev exhib
-- programme expo/event vide => message
-- rebonds page
+- page programme expo/event vide => afficher un message
+- créer les cards rebonds page
 - grid masonry
+- pb expo en cours dans https://fhcb-preprod.vercel.app/histoire-and-missions
+- slider card ajouter les doc manquant (image images, feuilletage, ...)
+- expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
+- add doc chercheur (name, slug), présent dans feuilletages, image Images, et dans leurs page listes -> filtres
+- carte expo tube, cube (check trello)
+- modules newsletter, soutenir la fondation
+- slider card même hauteur
+- filtre list (cherche automatique tous les artistes ou tag ou chercheur)
+- filtre radio
+
 - # cron qui update les current/past categories
 -
 
@@ -77,6 +87,13 @@ cards simili document
 - les rebonds, quels noms? ex séries thématique
 - me manque la wide regular
 - carte look 3 2 colonnes (taille de grille 4/8)?
+
+# réponses
+
+- rebonds page racine > rebonds page
+- rebonds article > rebonds article (même catégorie)
+- rebonds artiste > autres artistes (aléatoire)
+- rebonds beige = imageImages, série, ... sinon fond blanc
 
 # GO PREPROD
 

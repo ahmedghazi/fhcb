@@ -71,6 +71,14 @@ export default defineType({
     }),
 
     defineField({
+      name: 'chercheur',
+      title: 'Chercheur',
+      type: 'reference',
+      to: [{type: 'chercheur'}],
+      group: 'editorial',
+    }),
+
+    defineField({
       name: 'dates',
       type: 'array',
       title: 'Dates',

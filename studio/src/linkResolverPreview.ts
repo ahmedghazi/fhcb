@@ -69,6 +69,22 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         ],
       }),
     }),
+    programme: defineLocations({
+      // Select one or more fields
+      select: {
+        title: 'title.fr',
+        slug: 'slug.current',
+      },
+      // Those fields are available in the resolve callback function
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: doc?.title || 'Untitled',
+            href: `/programme/${doc?.slug}`,
+          },
+        ],
+      }),
+    }),
     exhibition: defineLocations({
       // Select one or more fields
       select: {

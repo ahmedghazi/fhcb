@@ -242,6 +242,11 @@ export const IMAGE_IMAGES_QUERY = groq`*[_type == "imageImages" && slug.current 
   seo{
     ${seo}
   },
+  chercheur->{
+    _id,
+    name,
+    slug
+  },
   modules[]{
     ${modules}
   },
@@ -267,6 +272,11 @@ export const FEUILLETAGE_QUERY = groq`*[_type == "feuilletage" && slug.current =
   ...,
   seo{
     ${seo}
+  },
+  chercheur->{
+    _id,
+    name,
+    slug
   },
   modules[]{
     ${modules}

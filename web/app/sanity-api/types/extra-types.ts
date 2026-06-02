@@ -28,6 +28,7 @@ import {
   SliderCardUI,
   TextSidebarUI,
   TextUI,
+  ListExhibitionsPastUI,
 } from "./sanity.types";
 
 export type MostSearchedItem = {
@@ -61,7 +62,8 @@ export type ModuleType =
   | ListImageImages
   | ListSerieThematiqueUI
   | ListEventsUI
-  | ListExhibitionsUI;
+  | ListExhibitionsUI
+  | ListExhibitionsPastUI;
 
 export interface ModulesList {
   modules?: Array<
@@ -116,6 +118,9 @@ export interface ModulesList {
     | ({
         _key: string;
       } & ListExhibitionsUI)
+    | ({
+        _key: string;
+      } & ListExhibitionsPastUI)
   >;
 }
 

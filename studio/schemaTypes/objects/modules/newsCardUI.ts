@@ -2,12 +2,13 @@ import {defineField} from 'sanity'
 import {BiImages} from 'react-icons/bi'
 import {baseLanguage} from '../../locale/supportedLanguages'
 import image from '../../fields/image'
+import {CiGrid31} from 'react-icons/ci'
 
 export default defineField({
   name: 'newsCardUI',
   title: 'Actualités UI',
   type: 'object',
-  icon: BiImages,
+  icon: CiGrid31,
   initialValue: {
     gridSize: 4,
   },
@@ -19,23 +20,6 @@ export default defineField({
       title: 'Taille de la grille',
       description: "Nombre d'éléments par ligne",
     }),
-    // defineField({
-    //   name: 'items',
-    //   title: 'Items',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'reference',
-    //       to: [
-    //         {type: 'pageModulaire'},
-    //         {type: 'product'},
-    //         {type: 'event'},
-    //         {type: 'exhibition'},
-    //         {type: 'article'},
-    //       ],
-    //     },
-    //   ],
-    // }),
   ],
 
   preview: {

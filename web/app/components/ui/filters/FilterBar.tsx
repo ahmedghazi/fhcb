@@ -3,6 +3,7 @@ import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import React, { useState } from "react";
 import { ActiveFilters, SanityFilterDef } from "./filters.types";
 import FilterList from "./FilterList";
+import FilterRadio from "./FilterRadio";
 import clsx from "clsx";
 
 type Props = {
@@ -12,7 +13,6 @@ type Props = {
 
 const FilterBar = ({ filterDefs, onChange }: Props) => {
   const [active, setActive] = useState<ActiveFilters>({});
-  console.log(active);
   const isFiltering = Object.keys(active).length != 0;
 
   const _update = (key: string, value: string) => {
@@ -26,7 +26,9 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     const arr = Array.isArray(current) ? current : current ? [current] : [];
     const next = {
       ...active,
-      [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value],
+      [key]: arr.includes(value)
+        ? arr.filter((v) => v !== value)
+        : [...arr, value],
     };
     if ((next[key] as string[]).length === 0) delete next[key];
     setActive(next);
@@ -40,15 +42,15 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
   return (
     <div className={clsx("filters", isFiltering && "is-active")}>
+      {/* <pre>{JSON.stringify(filterDefs, null, 2)}</pre> */}
       <div className='filters__inner'>
         <div className='flex gap-sm' suppressHydrationWarning>
           {filterDefs.map((def) => {
             if (def._type === "filterSort") {
               return (
-                <div className='ui-filter__wrapper'>
+                <div className='ui-filter__wrapper' key={def._key}>
                   <select
                     className='ui-filters ui-filters__select'
-                    key={def._key}
                     value={active["sort"] ?? ""}
                     onChange={(e) => _update("sort", e.target.value)}
                     aria-label={_localizeText("sort")}>
@@ -67,9 +69,8 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
             if (def._type === "filterSearch") {
               return (
-                <div className='ui-filters ui-filter__wrapper'>
+                <div className='ui-filters ui-filter__wrapper' key={def._key}>
                   <input
-                    key={def._key}
                     type='search'
                     value={active["search"] ?? ""}
                     onChange={(e) => _update("search", e.target.value)}
@@ -82,27 +83,6 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
             if (def._type === "filterList") {
               const opts = def.radioOptions ?? [];
-              if (opts.length <= 2) {
-                return (
-                  <div key={def._key} className='ui-filters ui-filter__wrapper'>
-                    <fieldset className='ui-filters__radio'>
-                      {opts.map((opt) => (
-                        <label key={opt._id}>
-                          <input
-                            className='ui-radio'
-                            type='radio'
-                            name={def.radioKey}
-                            value={opt._id}
-                            checked={active[def.radioKey] === opt._id}
-                            onChange={() => _update(def.radioKey, opt._id)}
-                          />
-                          <span>{_localizeField(opt.name ?? opt.title)}</span>
-                        </label>
-                      ))}
-                    </fieldset>
-                  </div>
-                );
-              }
 
               return (
                 <FilterList
@@ -117,6 +97,21 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                         : []
                   }
                   onToggle={_toggle}
+                />
+              );
+            }
+
+            if (def._type === "filterRadio") {
+              return (
+                <FilterRadio
+                  key={def._key}
+                  def={def}
+                  activeValue={
+                    Array.isArray(active[def.radioKey])
+                      ? ""
+                      : ((active[def.radioKey] as string) ?? "")
+                  }
+                  onSelect={_update}
                 />
               );
             }

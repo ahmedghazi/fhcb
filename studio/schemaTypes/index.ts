@@ -12,6 +12,7 @@ import partenaire from './documents/partenaire'
 import article from './documents/article'
 import imageImages from './documents/imageImages'
 import feuilletage from './documents/feuilletage'
+import chercheur from './documents/chercheur'
 import serie from './documents/serie'
 
 import {seoSchema} from './features/seo'
@@ -48,11 +49,13 @@ import listFeuilletageUI from './objects/modules/listFeuilletageUI'
 import listImageImages from './objects/modules/listImageImages'
 import listSerieThematiqueUI from './objects/modules/listSerieThematiqueUI'
 import listExhibitionsUI from './objects/modules/listExhibitionsUI'
+import listExhibitionsPastUI from './objects/modules/listExhibitionsPastUI'
 import listEventsUI from './objects/modules/listEventsUI'
 
 import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
 import filterList from './objects/filterList'
+import filterRadio from './objects/filterRadio'
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
 import imageInGrid from './objects/imageInGrid'
@@ -76,6 +79,7 @@ export const schemaTypes = [
   article,
   imageImages,
   feuilletage,
+  chercheur,
   // serie,
 
   localeString,
@@ -98,6 +102,7 @@ export const schemaTypes = [
   filterSort,
   filterSearch,
   filterList,
+  filterRadio,
   messageContextuel,
   fhcbDate,
   sidebarGenerique,
@@ -119,6 +124,7 @@ export const schemaTypes = [
   listImageImages,
   listSerieThematiqueUI,
   listExhibitionsUI,
+  listExhibitionsPastUI,
   listEventsUI,
 ]
 export default schemaTypes

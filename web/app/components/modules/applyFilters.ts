@@ -97,6 +97,7 @@ export const applyFilters = <T extends Record<string, any>>(
       }
     }
 
+    // filterList — checkbox multi-select: OR (item matches if ANY selected id matches)
     if (def._type === "filterList") {
       const raw = activeFilters[def.radioKey];
       const ids = Array.isArray(raw) ? raw : raw ? [raw] : [];
@@ -107,6 +108,30 @@ export const applyFilters = <T extends Record<string, any>>(
           }
           if (def.radioKey === "tag") {
             return item.tags?.some((t: any) => ids.includes(t._id)) ?? false;
+          }
+          if (def.radioKey === "chercheur") {
+            return item.chercheur?._id ? ids.includes(item.chercheur._id) : false;
+          }
+          return true;
+        });
+      }
+    }
+
+    // filterRadio — single select: exact match (===)
+    if (def._type === "filterRadio") {
+      const id = typeof activeFilters[def.radioKey] === "string"
+        ? (activeFilters[def.radioKey] as string)
+        : "";
+      if (id) {
+        result = result.filter((item) => {
+          if (def.radioKey === "artist") {
+            return item.artists?.some((a: any) => a._id === id) ?? false;
+          }
+          if (def.radioKey === "tag") {
+            return item.tags?.some((t: any) => t._id === id) ?? false;
+          }
+          if (def.radioKey === "chercheur") {
+            return item.chercheur?._id === id;
           }
           return true;
         });

@@ -15,5 +15,6 @@ export default [
   {type: 'listImageImages'},
   {type: 'listSerieThematiqueUI'},
   {type: 'listExhibitionsUI'},
+  {type: 'listExhibitionsPastUI'},
   {type: 'listEventsUI'},
 ]

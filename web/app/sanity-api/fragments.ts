@@ -282,6 +282,11 @@ export const cardRefFeuilletage = `
   tags[]->{
     title,
     slug
+  },
+  chercheur->{
+    _id,
+    name,
+    slug
   }
 `;
 export const cardRefProduct = `
@@ -317,7 +322,11 @@ export const cardRefImageImages = `
   index,
   title,
   slug,
-  speaker,
+  chercheur->{
+    _id,
+    name,
+    slug
+  },
   artists[]->{
     _id,
     name,
@@ -471,6 +480,25 @@ export const listSerieThematiqueUI = `
   }
 `;
 
+const filterRadio = `
+  _type == "filterRadio" => {
+    ...,
+    radioOptions[]->{ _id, _type, name, title, slug }
+  }
+`;
+
+const filterList = `
+  _type == "filterList" => {
+    ...,
+    "radioOptions": select(
+      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },
+      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
+      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },
+      []
+    )
+  }
+`;
+
 export const listFeuilletageUI = `
   _type == "listFeuilletageUI" => {
     ...,
@@ -479,16 +507,8 @@ export const listFeuilletageUI = `
     },
     filters[]{
       ...,
-      _type == "filterList" => {
-        ...,
-        radioOptions[]->{
-          _id,
-          _type,
-          name,
-          title,
-          slug
-        }
-      }
+      ${filterList},
+      ${filterRadio}
     },
     "items": *[_type == "feuilletage"] | order(index asc) {
       ${cardRefFeuilletage}
@@ -507,16 +527,8 @@ export const listImageImages = `
     },
     filters[]{
       ...,
-      _type == "filterList" => {
-        ...,
-        radioOptions[]->{
-          _id,
-          _type,
-          name,
-          title,
-          slug
-        }
-      }
+      ${filterList},
+      ${filterRadio}
     },
     "items": *[_type == "imageImages"] | order(_createdAt desc) {
       ${cardRefImageImages}
@@ -535,22 +547,40 @@ export const listExhibitionsUI = `
     },
     filters[]{
       ...,
-      _type == "filterList" => {
-        ...,
-        radioOptions[]->{
-          _id,
-          _type,
-          name,
-          title,
-          slug
-        }
-      }
+      ${filterList},
+      ${filterRadio}
     },
     "resolvedItems": select(
       items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[
         _type == "exhibition"
         && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
         && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+      ] | order(dates[0].du asc) {
+        ${cardRefExhibition}
+      },
+      []
+    ),
+    cta{
+      ...
+    }
+  }
+`;
+
+export const listExhibitionsPastUI = `
+  _type == "listExhibitionsPastUI" => {
+    ...,
+    title{
+      ...
+    },
+    filters[]{
+      ...,
+      ${filterList},
+      ${filterRadio}
+    },
+    "resolvedItems": select(
+      items in ["exhibitions-past"] => *[
+        _type == "exhibition"
+        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       ] | order(dates[0].du asc) {
         ${cardRefExhibition}
       },
@@ -570,16 +600,8 @@ export const listEventsUI = `
     },
     filters[]{
       ...,
-      _type == "filterList" => {
-        ...,
-        radioOptions[]->{
-          _id,
-          _type,
-          name,
-          title,
-          slug
-        }
-      }
+      ${filterList},
+      ${filterRadio}
     },
     "resolvedItems": select(
       items in ["events", "guided-tours"] => *[
@@ -615,6 +637,7 @@ export const modules = `
   ${listImageImages},
   ${listSerieThematiqueUI},
   ${listExhibitionsUI},
+  ${listExhibitionsPastUI},
   ${listEventsUI}
 `;
 

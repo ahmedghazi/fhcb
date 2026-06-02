@@ -1,13 +1,14 @@
 import {defineField} from 'sanity'
 import {BiImages} from 'react-icons/bi'
 import image from '../../fields/image'
+import {CiGrid32} from 'react-icons/ci'
 
 export default defineField({
   name: 'featuredCardsUI',
   title: 'Mise en avant UI',
   description: 'pour la home',
   type: 'object',
-  icon: BiImages,
+  icon: CiGrid32,
   initialValue: {
     gridSize: 3,
   },
@@ -32,13 +33,7 @@ export default defineField({
       of: [
         {
           type: 'reference',
-          to: [
-            // {type: 'pageModulaire'},
-            // {type: 'product'},
-            // {type: 'event'},
-            {type: 'exhibition'},
-            // {type: 'article'},
-          ],
+          to: [{type: 'exhibition'}],
         },
       ],
     }),
@@ -52,8 +47,8 @@ export default defineField({
     prepare(selection) {
       const {title} = selection
       return {
-        title: title ? title : 'Actualités UI',
-        subtitle: 'Actualités UI',
+        title: title ? title : 'Mise en avant UI',
+        subtitle: 'Mise en avant UI',
       }
     },
   },

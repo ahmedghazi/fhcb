@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField} from 'sanity'
+import {defineField} from 'sanity'
 import {BsList} from 'react-icons/bs'
 
 export default {
@@ -15,6 +15,7 @@ export default {
         list: [
           {title: 'Artiste', value: 'artist'},
           {title: 'Tag', value: 'tag'},
+          {title: 'Chercheur', value: 'chercheur'},
         ],
         layout: 'radio',
       },
@@ -24,20 +25,6 @@ export default {
       name: 'radioLabel',
       title: 'Label du groupe (optionnel)',
       type: 'localeString',
-    }),
-    defineField({
-      name: 'radioOptions',
-      title: 'Options',
-      type: 'array',
-      description:
-        'Sélectionnez les artistes ou tags à proposer. ≤ 2 options → boutons radio, > 2 options → liste A–Z.',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{type: 'artist'}, {type: 'tag'}],
-        }),
-      ],
-      validation: (Rule) => Rule.min(1).error('Ajoutez au moins une option'),
     }),
   ],
   preview: {

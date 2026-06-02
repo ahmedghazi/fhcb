@@ -5,7 +5,7 @@ import {
   getImageImages,
   IMAGE_IMAGES_QUERY,
 } from "@/app/sanity-api/sanity-queries";
-import { IMAGE_IMAGES_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import { Chercheur, IMAGE_IMAGES_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
@@ -61,7 +61,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       <PageHeader
         tag={`Une image, des images #${data.index}`}
         h1={data.title}
-        subTitle={data.speaker}
+        subTitle={(data.chercheur as unknown as Chercheur)?.name}
       />
       <div className='container-fluid'>
         {data.video && <Embed input={data.video} />}

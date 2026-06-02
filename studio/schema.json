@@ -162,6 +162,172 @@
                     "type": "inline",
                     "name": "filterList"
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "filterRadio"
+                  }
+                }
+              ]
+            }
+          },
+          "optional": true
+        },
+        "cta": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "cta"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "listExhibitionsPastUI",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "listExhibitionsPastUI"
+          }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "localeString"
+          },
+          "optional": true
+        },
+        "items": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "exhibitions-current"
+              },
+              {
+                "type": "string",
+                "value": "exhibitions-past"
+              },
+              {
+                "type": "string",
+                "value": "exhibitions-futur"
+              },
+              {
+                "type": "string",
+                "value": "exhibitions-out-of-the-box"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "filterTags": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "rest": {
+                "type": "inline",
+                "name": "tag.reference"
+              }
+            }
+          },
+          "optional": true
+        },
+        "filters": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "union",
+              "of": [
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "filterSort"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "filterSearch"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "filterList"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "filterRadio"
+                  }
                 }
               ]
             }
@@ -265,63 +431,6 @@
                 "type": "inline",
                 "name": "tag.reference"
               }
-            }
-          },
-          "optional": true
-        },
-        "filters": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "union",
-              "of": [
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterSort"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterSearch"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterList"
-                  }
-                }
-              ]
             }
           },
           "optional": true
@@ -441,6 +550,21 @@
                     "type": "inline",
                     "name": "filterList"
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "filterRadio"
+                  }
                 }
               ]
             }
@@ -529,6 +653,21 @@
                   "rest": {
                     "type": "inline",
                     "name": "filterList"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "filterRadio"
                   }
                 }
               ]
@@ -1726,7 +1865,37 @@
     }
   },
   {
-    "name": "filterList",
+    "type": "type",
+    "name": "chercheur.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "chercheur"
+    }
+  },
+  {
+    "name": "filterRadio",
     "type": "type",
     "value": {
       "type": "object",
@@ -1735,7 +1904,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "string",
-            "value": "filterList"
+            "value": "filterRadio"
           }
         },
         "radioKey": {
@@ -1750,6 +1919,10 @@
               {
                 "type": "string",
                 "value": "tag"
+              },
+              {
+                "type": "string",
+                "value": "chercheur"
               }
             ]
           },
@@ -1777,9 +1950,58 @@
                 {
                   "type": "inline",
                   "name": "tag.reference"
+                },
+                {
+                  "type": "inline",
+                  "name": "chercheur.reference"
                 }
               ]
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "filterList",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "filterList"
+          }
+        },
+        "radioKey": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "artist"
+              },
+              {
+                "type": "string",
+                "value": "tag"
+              },
+              {
+                "type": "string",
+                "value": "chercheur"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "radioLabel": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "localeString"
           },
           "optional": true
         }
@@ -3534,6 +3756,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "listEventsUI"
                 }
               }
@@ -4761,6 +4998,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "listEventsUI"
                 }
               }
@@ -5163,6 +5415,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "listEventsUI"
                 }
               }
@@ -5342,6 +5609,35 @@
               "name": "fhcbDate"
             }
           }
+        },
+        "optional": true
+      },
+      "pastille": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
+        },
+        "optional": true
+      },
+      "location": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "inside"
+            },
+            {
+              "type": "string",
+              "value": "outside"
+            },
+            {
+              "type": "string",
+              "value": "itinerant"
+            }
+          ]
         },
         "optional": true
       },
@@ -5612,6 +5908,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "listExhibitionsUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsPastUI"
                 }
               },
               {
@@ -6203,6 +6514,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "listEventsUI"
                 }
               }
@@ -6681,6 +7007,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "listExhibitionsUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsPastUI"
                 }
               },
               {
@@ -7232,6 +7573,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "listEventsUI"
                 }
               }
@@ -7391,6 +7747,14 @@
               "name": "artist.reference"
             }
           }
+        },
+        "optional": true
+      },
+      "chercheur": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "chercheur.reference"
         },
         "optional": true
       },
@@ -7704,6 +8068,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "listEventsUI"
                 }
               }
@@ -7828,10 +8207,11 @@
         },
         "optional": true
       },
-      "speaker": {
+      "chercheur": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
+          "type": "inline",
+          "name": "chercheur.reference"
         },
         "optional": true
       },
@@ -7973,6 +8353,58 @@
               "name": "imageImages.reference"
             }
           }
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "chercheur",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "chercheur"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "name": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "slug": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "slug"
         },
         "optional": true
       }

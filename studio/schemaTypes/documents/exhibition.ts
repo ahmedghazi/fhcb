@@ -33,6 +33,9 @@ export default defineType({
   //     by: [{field: 'tagType', direction: 'desc'}],
   //   },
   // ],
+  initialValue: {
+    location: 'inside',
+  },
   fields: [
     defineField({
       name: 'seo',
@@ -80,6 +83,23 @@ export default defineType({
       of: [{type: 'fhcbDate'}],
     }),
 
+    defineField({
+      name: 'pastille',
+      type: 'localeString',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'location',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'À la fondation', value: 'inside'},
+          {title: 'Hors les murs', value: 'outside'},
+          {title: 'Itinérante', value: 'itinerant'},
+        ],
+      },
+      group: 'editorial',
+    }),
     defineField({
       name: 'tags',
       title: 'Tags',

@@ -17,10 +17,9 @@ export default {
         list: [
           {title: 'Titre', value: 'title'},
           {title: 'Sous-titre', value: 'subTitle'},
-          {title: 'Numéro (index)', value: 'index'},
           {title: 'Tags', value: 'tags'},
           {title: 'Artistes', value: 'artists'},
-          {title: 'Intervenant', value: 'speaker'},
+          {title: 'Chercheur', value: 'chercheur'},
         ],
       },
       validation: (Rule) => Rule.min(1).error('Sélectionnez au moins un champ'),

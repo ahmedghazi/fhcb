@@ -87,22 +87,22 @@ export default async function RootLayout({
     <ViewTransitions>
       <html lang='fr' className={clsx("is-loading", PPRightGrotesk.className)}>
         <body className={clsx("is-loading")} data-theme='theme-fhcb'>
-          <LenisScrollProvider>
-            <div id='page'>
-              <Gridder />
-              <LocaleContextProvider>
-                <PageContextProvider>
-                  <HeaderContextProvider>
-                    <Header settings={settings} />
-                  </HeaderContextProvider>
-                  <main>{children}</main>
-                  <Footer settings={settings} />
-                  {/* <Cursor color='black' size={20} /> */}
-                  {isEnabled && <VisualEditing zIndex={1000} />}
-                </PageContextProvider>
-              </LocaleContextProvider>
-            </div>
-          </LenisScrollProvider>
+          {/* <LenisScrollProvider> */}
+          <div id='page'>
+            <Gridder />
+            <LocaleContextProvider>
+              <PageContextProvider>
+                <HeaderContextProvider>
+                  <Header settings={settings} />
+                </HeaderContextProvider>
+                <main>{children}</main>
+                <Footer settings={settings} />
+                {/* <Cursor color='black' size={20} /> */}
+                {isEnabled && <VisualEditing zIndex={1000} />}
+              </PageContextProvider>
+            </LocaleContextProvider>
+          </div>
+          {/* </LenisScrollProvider> */}
         </body>
       </html>
     </ViewTransitions>

@@ -19,6 +19,7 @@ import ModuleListSerieThematiqueUI from "./ModuleListSerieThematiqueUI";
 import ModuleListExhibitionsUI from "./ModuleListExhibitionsUI";
 import ModuleListEventsUI from "./ModuleListEventsUI";
 import "./index.scss";
+import ModuleListExhibitionsPastUI from "./ModuleListExhibitionsPastUI";
 
 const Modules = ({ modules }: ModulesList) => {
   const _renderModules = () => {
@@ -45,17 +46,37 @@ const Modules = ({ modules }: ModulesList) => {
         case "programmeUI":
           return <ModuleProgrammeUI key={module._key} input={module} />;
         case "featuredCardsUI":
-          return <ModuleFeaturedCardsUI key={module._key} input={module as any} />;
+          return (
+            <ModuleFeaturedCardsUI key={module._key} input={module as any} />
+          );
         case "newsCardUI":
           return <ModuleNewsCardUI key={module._key} input={module as any} />;
         case "listFeuilletageUI":
-          return <ModuleListFeuilletageUI key={module._key} input={module as any} />;
+          return (
+            <ModuleListFeuilletageUI key={module._key} input={module as any} />
+          );
         case "listImageImages":
-          return <ModuleListImageImages key={module._key} input={module as any} />;
+          return (
+            <ModuleListImageImages key={module._key} input={module as any} />
+          );
         case "listSerieThematiqueUI":
-          return <ModuleListSerieThematiqueUI key={module._key} input={module as any} />;
+          return (
+            <ModuleListSerieThematiqueUI
+              key={module._key}
+              input={module as any}
+            />
+          );
         case "listExhibitionsUI":
-          return <ModuleListExhibitionsUI key={module._key} input={module as any} />;
+          return (
+            <ModuleListExhibitionsUI key={module._key} input={module as any} />
+          );
+        case "listExhibitionsPastUI":
+          return (
+            <ModuleListExhibitionsPastUI
+              key={module._key}
+              input={module as any}
+            />
+          );
         case "listEventsUI":
           return <ModuleListEventsUI key={module._key} input={module as any} />;
         default:

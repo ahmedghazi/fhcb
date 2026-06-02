@@ -13,7 +13,7 @@ export default defineField({
       name: 'filters',
       title: 'Filtres',
       type: 'array',
-      of: [{type: 'filterSort'}, {type: 'filterSearch'}, {type: 'filterList'}],
+      of: [{type: 'filterSort'}, {type: 'filterSearch'}, {type: 'filterList'}, {type: 'filterRadio'}],
     }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
   ],

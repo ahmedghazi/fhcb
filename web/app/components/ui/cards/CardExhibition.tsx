@@ -47,7 +47,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
         isCurrentExhibition && "card--is-current",
         isFuturExhibition && "card--is-futur",
         isHorsLesMurs && "card--is-hors-les-murs",
-        "self-start ",
+        // "self-start ",
       )}>
       {isPastExhibition && (
         <PastCardExhibition
