@@ -13,6 +13,9 @@
     &:focus {
       outline: none;
     }
+    &::placeholder {
+      color: white;
+    }
   }
   :global(button.btn) {
     color: var(--color-primary);
