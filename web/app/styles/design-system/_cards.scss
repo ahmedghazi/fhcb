@@ -116,12 +116,7 @@ look 5 = expo à la une (img prems sans fond perdu
       background-color: var(--color-jaune);
     }
   }
-  // &--visite-commentee {
-  //   background-color: var(--color-jaune);
-  // }
-  // &--feuilletage {
-  //     background-color: var(--color-vert);
-  //   }
+
   &--artist {
     background-color: var(--color-rose-50);
   }
@@ -133,7 +128,8 @@ look 5 = expo à la une (img prems sans fond perdu
   &--feuilletage {
     background-color: var(--color-gris-100);
   }
-  &--article {
+  &--article,
+  &--page {
     .btn {
       background-color: var(--color-gris-50);
     }
@@ -157,6 +153,9 @@ look 5 = expo à la une (img prems sans fond perdu
       flex-direction: column;
       gap: var(--spacing-xs);
     }
+  }
+  &__info {
+    line-height: 1.4;
   }
   // &--l1a {
   //   /* 1 image centrée */

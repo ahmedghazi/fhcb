@@ -23,7 +23,7 @@ const ModuleGridCardUI = ({ input }: Props) => {
   return (
     <section className='module module--grid-card-ui'>
       <div className='module__inner'>
-        {title && <h2 className='module__title'>{title}</h2>}
+        {title && <h2 className='module__title c-h2'>{title}</h2>}
         {input.items && (
           <div className='grid md:grid-cols-4 items-start- gap-gutter'>
             {input.items.map((item: PostTypes, index: number) => (

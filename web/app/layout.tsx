@@ -22,6 +22,16 @@ import Gridder from "./components/ui/Gridder";
 const PPRightGrotesk = localFont({
   src: [
     {
+      path: "./styles/fonts/PPRightGrotesk-WideLight.woff",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "./styles/fonts/PPRightGrotesk-WideLightItalic.woff",
+      weight: "200",
+      style: "italic",
+    },
+    {
       path: "./styles/fonts/PPRightGrotesk-Light.woff",
       weight: "300",
       style: "normal",
@@ -43,22 +53,12 @@ const PPRightGrotesk = localFont({
     },
     {
       path: "./styles/fonts/PPRightGrotesk-TightDark.woff",
-      weight: "500",
+      weight: "800",
       style: "normal",
     },
     {
       path: "./styles/fonts/PPRightGrotesk-TightDarkItalic.woff",
-      weight: "500",
-      style: "italic",
-    },
-    {
-      path: "./styles/fonts/PPRightGrotesk-WideLight.woff",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "./styles/fonts/PPRightGrotesk-WideLightItalic.woff",
-      weight: "600",
+      weight: "800",
       style: "italic",
     },
   ],

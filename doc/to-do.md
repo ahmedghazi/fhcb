@@ -74,6 +74,8 @@ cards simili document
 - filtre intervenant dans feuilletages?
 - triez par ?
 - les rebonds, quels noms? ex séries thématique
+- me manque la wide regular
+- carte look 3 2 colonnes (taille de grille 4/8)?
 
 # GO PREPROD
 

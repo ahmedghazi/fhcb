@@ -3,6 +3,7 @@ body {
   font-family: var(--font-primary);
   font-size: var(--text-base);
   line-height: 1.4;
+  font-weight: 400;
   // line-height: 1.2;
   // letter-spacing: 0.02rem;
   // text-rendering: optimizeLegibility;
@@ -82,35 +83,36 @@ ul {
     /* 80px */
     font-size: var(--text-7xl);
     line-height: var(--leading-7xl);
-    font-weight: 500;
+    font-weight: 800;
   }
 
   .c-h1-lg {
     /* 95px */
     font-size: var(--text-8xl);
     line-height: var(--leading-7xl);
-    font-weight: 500;
+    font-weight: 800;
   }
 
   .c-h1_5,
   .c-h1-alt {
     /* 70px */
     font-size: var(--text-6xl);
-    font-weight: 500;
+    font-weight: 800;
     line-height: 1;
   }
 
   .c-h2 {
     /* 40px */
     font-size: var(--text-5xl);
-    font-weight: 500;
+    font-weight: 800;
+    line-height: 1;
   }
 
   .c-h3 {
     /* 17px */
     font-size: var(--text-md);
     line-height: var(--leading-2xl);
-    font-weight: 600;
+    font-weight: 200;
   }
 
   .c-h4 {
@@ -176,6 +178,8 @@ ul {
     line-height: var(--leading-lg);
     text-decoration: underline;
     text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 5%;
   }
 
   /* =====================

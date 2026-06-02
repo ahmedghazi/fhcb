@@ -68,9 +68,8 @@
   --cubic: cubic-bezier(0.87, 0, 0.13, 1);
   --border-width: 1px;
   --border: var(--border-width) solid;
-  --radius: 1rem;
-  --radius-sm: 0.667rem;
-  /* --gutter: 0.4rem; */
+  --radius: 0.938rem;
+  --radius-sm: 0.625rem;
 }
 
 @theme inline {

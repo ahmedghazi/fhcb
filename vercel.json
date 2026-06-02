@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd web && pnpm build",
+  "outputDirectory": "web/.next",
+  "installCommand": "cd web && pnpm install",
+  "framework": "nextjs",
+  "crons": [
+    {
+      "path": "/api/cron/update-exhibition-tags",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}
