@@ -18,7 +18,6 @@ type Props = {
 };
 
 const Header = ({ settings }: Props) => {
-  const pathname = usePathname();
   const { modalType } = useHeader();
 
   if (!settings) return null;

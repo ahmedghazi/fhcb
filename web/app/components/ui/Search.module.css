@@ -9,7 +9,7 @@
     justify-content: space-between;
   }
   :global(input) {
-    flex: 2;
+    /* flex: 2; */
     &:focus {
       outline: none;
     }
@@ -19,7 +19,7 @@
   }
   :global(button.btn) {
     color: var(--color-primary);
-    flex: 0;
+    /* flex: 0; */
   }
 }
 .toggle {
@@ -58,10 +58,11 @@
 .mostSearched {
   margin-top: var(--spacing-lg);
   h2 {
-    font-weight: 500;
+    /* font-weight: 500; */
+    line-height: 1.3333;
   }
   ul {
     font-size: var(--text-md);
-    font-weight: 600;
+    font-weight: 200;
   }
 }

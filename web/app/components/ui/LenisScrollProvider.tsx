@@ -17,10 +17,12 @@ const LenisScrollProvider = ({ children }: LenisScrollProviderProps) => {
       console.log(_e, on);
       if (on) {
         lenis?.start();
-        document.body.style.overflow = "auto";
+        // document.body.style.overflow = "auto";
+        document.body.classList.remove("no-scroll");
       } else {
         lenis?.stop();
-        document.body.style.overflow = "hidden";
+        // document.body.style.overflow = "hidden";
+        document.body.classList.add("no-scroll");
       }
     });
     return () => {

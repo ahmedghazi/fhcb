@@ -16,6 +16,7 @@ import {
   _isHorsLesMurs,
   _isPastExhibition,
 } from "@/app/lib/utils";
+import CardTags from "./CardTags";
 
 type Props = {
   input: ExhibitionExpanded;
@@ -56,7 +57,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
           size={size}
         />
       )}
-      {isCurrentExhibition && (
+      {isCurrentExhibition && !isHorsLesMurs && (
         <CurrentCardExhibition
           input={input}
           artistList={artistList}
@@ -111,9 +112,10 @@ const CurrentCardExhibition = ({
           </div>
           <div className='card__body'>
             <div className='card__header'>
-              <div className='card__tag c-tag'>
+              {/* <div className='card__tag c-tag'>
                 {_localizeText("currentExhibition")}
-              </div>
+              </div> */}
+              <CardTags input={input.tags || []} />
               {artistList && <h2 className='card__title c-h2'>{artistList}</h2>}
               <div className='card__subtitle c-h3'>{_localizeField(title)}</div>
             </div>
@@ -139,9 +141,10 @@ const CurrentCardExhibition = ({
           <div className='md:col-span-4'>
             <div className='card__body'>
               <div className='card__header'>
-                <div className='card__tag c-tag'>
+                {/* <div className='card__tag c-tag'>
                   {_localizeText("currentExhibition")}
-                </div>
+                </div> */}
+                <CardTags input={input.tags || []} />
                 {artistList && (
                   <h2 className='card__title c-h2'>{artistList}</h2>
                 )}
@@ -175,13 +178,15 @@ const CurrentCardExhibition = ({
       )}
 
       {size === "lg" && (
-        <div className='grid md:grid-cols-12 gap-xs'>
+        <div className='grid md:grid-cols-12 gap-xs-'>
           <div className={clsx("md:col-span-4", isLandscape && "order-2")}>
             <div className='card__body'>
               <div className='card__header'>
-                <div className='card__tag c-tag'>
+                {/* <div className='card__tag c-tag'>
                   {_localizeText("currentExhibition")}
-                </div>
+                </div> */}
+                <CardTags input={input.tags || []} />
+
                 {artistList && (
                   <h2 className='card__title c-h2'>{artistList}</h2>
                 )}

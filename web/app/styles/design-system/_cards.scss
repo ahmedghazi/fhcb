@@ -89,6 +89,7 @@ look 5 = expo à la une (img prems sans fond perdu
   &--is-current {
     .card__inner {
       padding: 0;
+      gap: 0;
     }
     .card__body {
       padding: var(--spacing-xs);

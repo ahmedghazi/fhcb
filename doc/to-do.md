@@ -31,6 +31,7 @@ cards simili document
 - filtes prev exhib
 - programme expo/event vide => message
 - rebonds page
+- grid masonry
 - # cron qui update les current/past categories
 -
 

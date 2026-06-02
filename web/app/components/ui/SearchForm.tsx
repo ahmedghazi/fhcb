@@ -112,33 +112,37 @@ const SearchForm = ({ settings }: Props) => {
     <div className={styles.searchForm}>
       <form className='search' onSubmit={_handleSubmit}>
         <div className='inner '>
-          <input
-            type='search'
-            size={10}
-            placeholder={placeholder}
-            name='term'
-            onChange={changeHandler}
-            value={term}
-            id='s'
-            className='flex-2'
-            ref={inputRef}
-            onFocus={() => setPlaceholder("")}
-            onBlur={() => setPlaceholder(initialPlaceholder)}
-          />
-          <button
-            className='btn'
-            disabled={
-              status === "searching" || status === "success" || term === ""
-            }
-            type='submit'
-            aria-label='submit'>
-            <span>{getButtonMsg()}</span>
-          </button>
+          <div className='flex-2'>
+            <input
+              type='search'
+              size={10}
+              placeholder={placeholder}
+              name='term'
+              onChange={changeHandler}
+              value={term}
+              id='s'
+              className='flex-2'
+              ref={inputRef}
+              onFocus={() => setPlaceholder("")}
+              onBlur={() => setPlaceholder(initialPlaceholder)}
+            />
+          </div>
+          <div>
+            <button
+              className='btn'
+              disabled={
+                status === "searching" || status === "success" || term === ""
+              }
+              type='submit'
+              aria-label='submit'>
+              <span>{getButtonMsg()}</span>
+            </button>
+          </div>
         </div>
       </form>
       {mostSearched && searchResult.length === 0 && (
         <div className={styles.mostSearched}>
-          <h2 className='c-quote'>{_localizeText("mostSearched")}</h2>
+          <h2 className='c-h2'>{_localizeText("mostSearched")}</h2>
           <ul className=''>
             {(mostSearched as unknown as MostSearchedItem[]).map((item, i) => (
               <li key={i}>
