@@ -9,6 +9,7 @@ import {linkResolverPreview} from './src/linkResolverPreview'
 import {structure} from './src/deskStructure'
 import {media} from 'sanity-plugin-media'
 import {frFRLocale} from '@sanity/locale-fr-fr'
+import {customPublishAction} from './src/actions/countDocs'
 
 const remoteURL = 'https://fhcb-preprod.vercel.app'
 const localURL = 'http://localhost:3000'
@@ -57,5 +58,18 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+  document: {
+    actions: (prev, context) => {
+      const allowedDocs = ['feuilletage', 'imageImages']
+      console.log(context)
+      if (allowedDocs.includes(context.schemaType)) {
+        return prev.map((originalAction) =>
+          originalAction.name === 'usePublishAction' ? customPublishAction : originalAction,
+        )
+      }
+
+      return prev
+    },
   },
 })

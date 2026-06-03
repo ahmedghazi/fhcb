@@ -33,7 +33,7 @@ const CardArtist = ({ input, size = "md" }: Props) => {
         size === "md" && "md:col-span-2",
         isLandscape && `card--is-landscape`,
         !isLandscape && "card--is-portrait",
-        "self-start",
+        // "self-start",
       )}>
       {size === "sm" && (
         <CardInnerSM

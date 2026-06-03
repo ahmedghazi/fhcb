@@ -7,18 +7,22 @@ import React, {
   useState,
 } from "react";
 import { usePathname } from "next/navigation";
+import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 
-const PageContext = createContext({});
+const PageContext = createContext({
+  settings: {} as SETTINGS_QUERY_RESULT,
+});
 
 interface PageContextProps {
   children: ReactNode;
+  settings: SETTINGS_QUERY_RESULT;
 }
 
 export const PageContextProvider = (props: PageContextProps) => {
-  const { children } = props;
+  const { children, settings } = props;
   const pathname = usePathname();
   const [isInfos, setIsInfos] = useState<boolean>(false);
-  const settings = { pathname };
+  // const settings = { pathname };
 
   const _format = () => {
     const vh = window.innerHeight * 0.01;
@@ -79,9 +83,7 @@ export const PageContextProvider = (props: PageContextProps) => {
   }, [pathname]);
 
   return (
-    <PageContext.Provider value={{ settings, isInfos, setIsInfos }}>
-      {children}
-    </PageContext.Provider>
+    <PageContext.Provider value={{ settings }}>{children}</PageContext.Provider>
   );
 };
 

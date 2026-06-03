@@ -69,26 +69,14 @@ const CardFeuilletage = ({ input, size = "md" }: Props) => {
         !isLandscape && "card--is-portrait",
         tagsClassList,
       )}>
-      {/* <pre>{JSON.stringify(dates, null, 2)}</pre> */}
-      {/* {size === "sm" && (
-        <CardInnerSM
-          _type={_type}
-          tags={tagsTitleList || ""}
-          title={_localizeField(title) || ""}
-          subtitle={[_localizeField(subTitle), chercheur?.name].filter(Boolean).join(' — ')}
-          info={_localizeField(description)}
-          infoNode={dates ? <FHCBDates input={dates} /> : null}
-          imageCover={imageCover?.asset as SanityImageAssetFull}
-          linkPrimary={_linkResolver(input)}
-          linkPrimaryLabel={_localizeText("discover")}
-        />
-      )} */}
       {size === "md" && (
         <CardInnerMD
           _type={_type}
           tags={tagsTitleList || `FEUILLETAGE #${index}`}
           title={_localizeField(title) || ""}
-          subtitle={[_localizeField(subTitle), chercheur?.name].filter(Boolean).join(' — ')}
+          subTitle={[_localizeField(subTitle), chercheur?.name]
+            .filter(Boolean)
+            .join(" — ")}
           info={_localizeField(description)}
           infoNode={dates ? <FHCBDates input={dates} /> : null}
           imageCover={imageCover?.asset as SanityImageAssetFull}
@@ -96,18 +84,20 @@ const CardFeuilletage = ({ input, size = "md" }: Props) => {
           linkPrimaryLabel={_localizeText("discover")}
         />
       )}
-      {size === "lg" && (
+      {/* {size === "lg" && (
         <CardInnerLG
           _type={_type}
           tags={tagsTitleList || ""}
           title={_localizeField(title) || ""}
-          subtitle={[_localizeField(subTitle), chercheur?.name].filter(Boolean).join(' — ')}
+          subtitle={[_localizeField(subTitle), chercheur?.name]
+            .filter(Boolean)
+            .join(" — ")}
           info={_localizeField(description)}
           imageCover={imageCover?.asset as SanityImageAssetFull}
           linkPrimary={_linkResolver(input)}
           linkPrimaryLabel={_localizeText("discover")}
         />
-      )}
+      )} */}
     </div>
   );
 };

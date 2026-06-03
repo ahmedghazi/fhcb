@@ -1,13 +1,14 @@
 import React from "react";
 import website from "@/app/config/website";
 import { Metadata, NextPage } from "next";
-import { ARTIST_QUERY, getArtist } from "@/app/sanity-api/sanity-queries";
+import { ARTIST_QUERY, getArtist, getRandomArtists } from "@/app/sanity-api/sanity-queries";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
 import { ARTIST_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import RebondsArtistes from "@/app/components/RebondsArtistes";
 
 type Params = Promise<{ slug: string }>;
 
@@ -45,6 +46,8 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
 
   if (!data) return notFound();
 
+  const randomArtists = await getRandomArtists(slug);
+
   return (
     <div
       className='template template--artist'
@@ -52,6 +55,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <PageHeader name={data.name} />
       <ContentModulaire input={data} />
+      <RebondsArtistes input={randomArtists} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 import { Tag } from "@/app/sanity-api/types/sanity.types";
 import {
-  ArticleExpanded,
+  PageModulaireExpanded,
   SanityImageAssetFull,
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import clsx from "clsx";
@@ -14,36 +14,27 @@ import {
 import CardInnerMD from "./CardInnerMD";
 
 type Props = {
-  input: ArticleExpanded;
-  size?: "sm" | "md" | "lg";
+  input: PageModulaireExpanded;
+  size?: "md";
 };
 
-const CardArticle = ({ input, size = "md" }: Props) => {
-  const { _type, title, tags, imageCover } = input;
-  const tagsClassList = tags
-    ?.map((tag: Tag) => `card--${tag.slug?.current}`)
-    .join(" ");
-  const tagsTitleList = tags
-    ?.map((tag: Tag) => _localizeField(tag.title))
-    .join(", ");
-
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+const CardPageModulaire = ({ input, size = "md" }: Props) => {
+  const { _type, title, imageCover } = input;
 
   return (
     <div
       className={clsx(
-        "card card--article",
+        "card card--page-modulaire",
         `card--${size}`,
+        `card--${size}-alt`,
+        // "md:col-span-2",
         // size === "md" && "md:col-span-2",
-        isLandscape && "card--is-landscape",
-        !isLandscape && "card--is-portrait",
-        tagsClassList,
+        // isLandscape && "card--is-landscape",
+        // !isLandscape && "card--is-portrait",
       )}>
+      {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
       <CardInnerMD
         _type={_type}
-        tags={tagsTitleList || ""}
         title={_localizeField(title) || ""}
         imageCover={imageCover?.asset as SanityImageAssetFull}
         linkPrimary={_linkResolver(input)}
@@ -53,4 +44,4 @@ const CardArticle = ({ input, size = "md" }: Props) => {
   );
 };
 
-export default CardArticle;
+export default CardPageModulaire;

@@ -44,7 +44,7 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
               <Fragment key={`--${index}`}>
                 <div
                   style={{
-                    width: "var(--gridder-1)",
+                    width: "var(--gridder-1_4)",
                   }}>
                   <CardExhibition input={item} size={"sm"} />
                 </div>

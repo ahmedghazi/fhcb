@@ -43,7 +43,7 @@ const CardProduct = ({ input, size = "md" }: Props) => {
           _type={_type}
           tags={tagsList || ""}
           title={artist?.name || ""}
-          subtitle={_localizeField(title)}
+          subTitle={_localizeField(title)}
           info={prix ? `${prix}€` : ""}
           imageCover={imageCover?.asset as SanityImageAssetFull}
           linkPrimary={_linkResolver(input)}

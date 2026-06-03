@@ -221,6 +221,20 @@ export type ImageImagesReference = {
   [internalGroqTypeReferenceTo]?: "imageImages";
 };
 
+export type FeuilletageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "feuilletage";
+};
+
+export type ArticleReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "article";
+};
+
 export type GridCardUI = {
   _type: "gridCardUI";
   title?: LocaleString;
@@ -231,6 +245,8 @@ export type GridCardUI = {
     | ExhibitionReference
     | ArtistReference
     | ImageImagesReference
+    | FeuilletageReference
+    | ArticleReference
   >;
   cta?: Cta;
 };
@@ -243,7 +259,10 @@ export type SliderCardUI = {
     | ProductReference
     | EventReference
     | ExhibitionReference
+    | ArtistReference
     | ImageImagesReference
+    | FeuilletageReference
+    | ArticleReference
   >;
   cta?: Cta;
 };
@@ -510,13 +529,6 @@ export type ProgrammeReference = {
   _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "programme";
-};
-
-export type FeuilletageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "feuilletage";
 };
 
 export type LinkInternal = {
@@ -875,6 +887,10 @@ export type Settings = {
     linkExternal?: LinkExternal;
     dateExpiration?: string;
   };
+  totalFeuilletages?: number;
+  totalImageImages?: number;
+  totalArtists?: number;
+  totalExhibitions?: number;
   message404?: BlockContent;
   customCss?: string;
 };
@@ -1897,6 +1913,8 @@ export type AllSanitySchemaTypes =
   | ProductReference
   | ArtistReference
   | ImageImagesReference
+  | FeuilletageReference
+  | ArticleReference
   | GridCardUI
   | SliderCardUI
   | ListsUI
@@ -1927,7 +1945,6 @@ export type AllSanitySchemaTypes =
   | LinkIcon
   | LibraryReference
   | ProgrammeReference
-  | FeuilletageReference
   | LinkInternal
   | LinkExternal
   | Embed
@@ -4212,13 +4229,17 @@ export type SETTINGS_QUERY_RESULT = {
     linkExternal?: LinkExternal;
     dateExpiration?: string;
   };
+  totalFeuilletages?: number;
+  totalImageImages?: number;
+  totalArtists?: number;
+  totalExhibitions?: number;
   message404?: BlockContent;
   customCss?: string;
 } | null;
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: HOME_QUERY
-// Query: *[_type == "home"][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  }}
+// Query: *[_type == "home"][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  }}
 export type HOME_QUERY_RESULT = {
   _id: string;
   _type: "home";
@@ -4448,7 +4469,7 @@ export type HOME_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: PAGE_MODULAIRE_QUERY
-// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    }  }
+// Query: *[_type == "pageModulaire" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    tags[]->,    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    },    rebonds[]->{        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    }  }
 export type PAGE_MODULAIRE_QUERY_RESULT = {
   _id: string;
   _type: "pageModulaire";
@@ -4474,11 +4495,15 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  tags?: Array<
-    {
-      _key: string;
-    } & TagReference
-  >;
+  tags: Array<{
+    _id: string;
+    _type: "tag";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: LocaleString;
+    slug?: Slug;
+  }> | null;
   modules: Array<
     | {
         _key: string;
@@ -4532,6 +4557,93 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
           en?: string;
         } | null;
         items: Array<
+          | {
+              _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
           | {
               _id: string;
               _type: "artist";
@@ -4834,6 +4946,124 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -4910,11 +5140,15 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -5148,83 +5382,20 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             _key: string;
           } & TagReference
         >;
-        filters: Array<
-          | {
+        filters?: Array<
+          | ({
               _key: string;
-              _type: "filterList";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions:
-                | Array<{
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "tag";
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }>
-                | Array<never>;
-            }
-          | {
+            } & FilterList)
+          | ({
               _key: string;
-              _type: "filterRadio";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions: Array<
-                | {
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "tag";
-                    name: null;
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }
-              > | null;
-            }
-          | {
+            } & FilterRadio)
+          | ({
               _key: string;
-              _type: "filterSearch";
-              searchIn?: Array<string>;
-            }
-          | {
+            } & FilterSearch)
+          | ({
               _key: string;
-              _type: "filterSort";
-              sortOptions?: Array<{
-                field?:
-                  | "_createdAt"
-                  | "dateStart"
-                  | "index"
-                  | "speaker"
-                  | "title";
-                direction?: "asc" | "desc";
-                label?: LocaleString;
-                _key: string;
-              }>;
-            }
-        > | null;
+            } & FilterSort)
+        >;
         cta: {
           _type: "cta";
           internal?: LinkInternal;
@@ -5441,7 +5612,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
           internal?: LinkInternal;
           external?: LinkExternal;
         } | null;
-        filters: null;
         resolvedItems:
           | Array<{
               _type: "exhibition";
@@ -6063,6 +6233,176 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
         items: Array<
           | {
               _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
+              _type: "artist";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
               _type: "event";
               _createdAt: string;
               _updatedAt: string;
@@ -6280,6 +6620,124 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -6356,11 +6814,15 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -11720,17 +12182,152 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
         } | null;
       }
   > | null;
-  rebonds?: ArrayOf<
-    | EventReference
-    | ExhibitionReference
-    | PageModulaireReference
-    | ProductReference
-  >;
+  rebonds: Array<
+    | {
+        _type: "event";
+        _id: string;
+        title: LocaleString | null;
+        subTitle: LocaleText | null;
+        index: string | null;
+        slug: Slug | null;
+        imageCover: {
+          asset: {
+            _id: string;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        dates: Array<
+          {
+            _key: string;
+          } & FhcbDate
+        > | null;
+        descripption: null;
+        artists: Array<{
+          _id: string;
+          name: string | null;
+        }> | null;
+        tags: Array<{
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+        }> | null;
+      }
+    | {
+        _type: "exhibition";
+        _id: string;
+        title: LocaleString | null;
+        slug: Slug | null;
+        imageCover: {
+          asset: {
+            _id: string;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        dates: Array<
+          {
+            _key: string;
+          } & FhcbDate
+        > | null;
+        artists: Array<{
+          _id: string;
+          name: string | null;
+        }> | null;
+        tags: Array<{
+          _id: string;
+          title: LocaleString | null;
+          slug: Slug | null;
+        }> | null;
+      }
+    | {
+        _type: "pageModulaire";
+        _id: string;
+        title: LocaleString | null;
+        slug: Slug | null;
+        imageCover: {
+          asset: {
+            _id: string;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        tags: Array<{
+          _id: string;
+          _type: "tag";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: LocaleString;
+          slug?: Slug;
+        }> | null;
+      }
+    | {
+        _type: "product";
+        _id: string;
+        title: LocaleString | null;
+        slug: Slug | null;
+        imageCover: {
+          asset: {
+            _id: string;
+            assetId: string | null;
+            title: string | null;
+            altText: string | null;
+            description: string | null;
+            creditLine: null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        prix: string | null;
+        tags: Array<{
+          title: LocaleString | null;
+        }> | null;
+        artist: {
+          name: string | null;
+        } | null;
+      }
+  > | null;
 } | null;
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: ARTIST_QUERY
-// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    }  }
+// Query: *[_type == "artist" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    }  }
 export type ARTIST_QUERY_RESULT = {
   _id: string;
   _type: "artist";
@@ -11809,6 +12406,93 @@ export type ARTIST_QUERY_RESULT = {
           en?: string;
         } | null;
         items: Array<
+          | {
+              _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
           | {
               _id: string;
               _type: "artist";
@@ -12111,6 +12795,124 @@ export type ARTIST_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -12187,11 +12989,15 @@ export type ARTIST_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -12425,83 +13231,20 @@ export type ARTIST_QUERY_RESULT = {
             _key: string;
           } & TagReference
         >;
-        filters: Array<
-          | {
+        filters?: Array<
+          | ({
               _key: string;
-              _type: "filterList";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions:
-                | Array<{
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "tag";
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }>
-                | Array<never>;
-            }
-          | {
+            } & FilterList)
+          | ({
               _key: string;
-              _type: "filterRadio";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions: Array<
-                | {
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "tag";
-                    name: null;
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }
-              > | null;
-            }
-          | {
+            } & FilterRadio)
+          | ({
               _key: string;
-              _type: "filterSearch";
-              searchIn?: Array<string>;
-            }
-          | {
+            } & FilterSearch)
+          | ({
               _key: string;
-              _type: "filterSort";
-              sortOptions?: Array<{
-                field?:
-                  | "_createdAt"
-                  | "dateStart"
-                  | "index"
-                  | "speaker"
-                  | "title";
-                direction?: "asc" | "desc";
-                label?: LocaleString;
-                _key: string;
-              }>;
-            }
-        > | null;
+            } & FilterSort)
+        >;
         cta: {
           _type: "cta";
           internal?: LinkInternal;
@@ -12718,7 +13461,6 @@ export type ARTIST_QUERY_RESULT = {
           internal?: LinkInternal;
           external?: LinkExternal;
         } | null;
-        filters: null;
         resolvedItems:
           | Array<{
               _type: "exhibition";
@@ -13340,6 +14082,176 @@ export type ARTIST_QUERY_RESULT = {
         items: Array<
           | {
               _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
+              _type: "artist";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
               _type: "event";
               _createdAt: string;
               _updatedAt: string;
@@ -13557,6 +14469,124 @@ export type ARTIST_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -13633,11 +14663,15 @@ export type ARTIST_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -19001,7 +20035,7 @@ export type ARTIST_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: EXPHIBITION_QUERY
-// Query: *[_type == "exhibition" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    artists[]->{      name    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    }  }
+// Query: *[_type == "exhibition" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    artists[]->{      name    },    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    }  }
 export type EXPHIBITION_QUERY_RESULT = {
   _id: string;
   _type: "exhibition";
@@ -19110,6 +20144,93 @@ export type EXPHIBITION_QUERY_RESULT = {
           en?: string;
         } | null;
         items: Array<
+          | {
+              _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
           | {
               _id: string;
               _type: "artist";
@@ -19412,6 +20533,124 @@ export type EXPHIBITION_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -19488,11 +20727,15 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -19726,83 +20969,20 @@ export type EXPHIBITION_QUERY_RESULT = {
             _key: string;
           } & TagReference
         >;
-        filters: Array<
-          | {
+        filters?: Array<
+          | ({
               _key: string;
-              _type: "filterList";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions:
-                | Array<{
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "tag";
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }>
-                | Array<never>;
-            }
-          | {
+            } & FilterList)
+          | ({
               _key: string;
-              _type: "filterRadio";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions: Array<
-                | {
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "tag";
-                    name: null;
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }
-              > | null;
-            }
-          | {
+            } & FilterRadio)
+          | ({
               _key: string;
-              _type: "filterSearch";
-              searchIn?: Array<string>;
-            }
-          | {
+            } & FilterSearch)
+          | ({
               _key: string;
-              _type: "filterSort";
-              sortOptions?: Array<{
-                field?:
-                  | "_createdAt"
-                  | "dateStart"
-                  | "index"
-                  | "speaker"
-                  | "title";
-                direction?: "asc" | "desc";
-                label?: LocaleString;
-                _key: string;
-              }>;
-            }
-        > | null;
+            } & FilterSort)
+        >;
         cta: {
           _type: "cta";
           internal?: LinkInternal;
@@ -20019,7 +21199,6 @@ export type EXPHIBITION_QUERY_RESULT = {
           internal?: LinkInternal;
           external?: LinkExternal;
         } | null;
-        filters: null;
         resolvedItems:
           | Array<{
               _type: "exhibition";
@@ -20641,6 +21820,176 @@ export type EXPHIBITION_QUERY_RESULT = {
         items: Array<
           | {
               _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
+              _type: "artist";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
               _type: "event";
               _createdAt: string;
               _updatedAt: string;
@@ -20858,6 +22207,124 @@ export type EXPHIBITION_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -20934,11 +22401,15 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -26308,7 +27779,7 @@ export type EXPHIBITION_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: PROGRAMME_QUERY
-// Query: *[_type == "programme" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    items,    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    )  }
+// Query: *[_type == "programme" && slug.current == $slug][0]{    ...,    seo{        ...,  metaImage{    asset->{      url    }  }    },    items,    modules[]{        ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    )  }
 export type PROGRAMME_QUERY_RESULT = {
   _id: string;
   _type: "programme";
@@ -26416,6 +27887,93 @@ export type PROGRAMME_QUERY_RESULT = {
           en?: string;
         } | null;
         items: Array<
+          | {
+              _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
           | {
               _id: string;
               _type: "artist";
@@ -26718,6 +28276,124 @@ export type PROGRAMME_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -26794,11 +28470,15 @@ export type PROGRAMME_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -27032,83 +28712,20 @@ export type PROGRAMME_QUERY_RESULT = {
             _key: string;
           } & TagReference
         >;
-        filters: Array<
-          | {
+        filters?: Array<
+          | ({
               _key: string;
-              _type: "filterList";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions:
-                | Array<{
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "tag";
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }>
-                | Array<never>;
-            }
-          | {
+            } & FilterList)
+          | ({
               _key: string;
-              _type: "filterRadio";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions: Array<
-                | {
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "tag";
-                    name: null;
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }
-              > | null;
-            }
-          | {
+            } & FilterRadio)
+          | ({
               _key: string;
-              _type: "filterSearch";
-              searchIn?: Array<string>;
-            }
-          | {
+            } & FilterSearch)
+          | ({
               _key: string;
-              _type: "filterSort";
-              sortOptions?: Array<{
-                field?:
-                  | "_createdAt"
-                  | "dateStart"
-                  | "index"
-                  | "speaker"
-                  | "title";
-                direction?: "asc" | "desc";
-                label?: LocaleString;
-                _key: string;
-              }>;
-            }
-        > | null;
+            } & FilterSort)
+        >;
         cta: {
           _type: "cta";
           internal?: LinkInternal;
@@ -27325,7 +28942,6 @@ export type PROGRAMME_QUERY_RESULT = {
           internal?: LinkInternal;
           external?: LinkExternal;
         } | null;
-        filters: null;
         resolvedItems:
           | Array<{
               _type: "exhibition";
@@ -27947,6 +29563,176 @@ export type PROGRAMME_QUERY_RESULT = {
         items: Array<
           | {
               _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
+              _type: "artist";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
               _type: "event";
               _createdAt: string;
               _updatedAt: string;
@@ -28164,6 +29950,124 @@ export type PROGRAMME_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -28240,11 +30144,15 @@ export type PROGRAMME_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -33784,7 +35692,7 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: IMAGE_IMAGES_QUERY
-// Query: *[_type == "imageImages" && slug.current == $slug][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  chercheur->{    _id,    name,    slug  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  },  rebonds[]->{      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },}
+// Query: *[_type == "imageImages" && slug.current == $slug][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  chercheur->{    _id,    name,    slug  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  },  rebonds[]->{      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },}
 export type IMAGE_IMAGES_QUERY_RESULT = {
   _id: string;
   _type: "imageImages";
@@ -35640,7 +37548,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: FEUILLETAGE_QUERY
-// Query: *[_type == "feuilletage" && slug.current == $slug][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  chercheur->{    _id,    name,    slug  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  },  rebonds[]->{      _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }  },  "related":   *[    _id != ^._id &&    (      (        _type in ["event", "exhibition", "event", "product"] &&        references(^.artists[]._ref)      )      ||      (        _type == "artist" &&        _id in ^.artists[]._ref      )    )  ] | order(dates[0].du asc) {      _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }  }}
+// Query: *[_type == "feuilletage" && slug.current == $slug][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  chercheur->{    _id,    name,    slug  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  },  rebonds[]->{      _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }  },  "related":   *[    _id != ^._id &&    (      (        _type in ["event", "exhibition", "event", "product"] &&        references(^.artists[]._ref)      )      ||      (        _type == "artist" &&        _id in ^.artists[]._ref      )    )  ] | order(dates[0].du asc) {      _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }  }}
 export type FEUILLETAGE_QUERY_RESULT = {
   _id: string;
   _type: "feuilletage";
@@ -35743,6 +37651,93 @@ export type FEUILLETAGE_QUERY_RESULT = {
           en?: string;
         } | null;
         items: Array<
+          | {
+              _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
           | {
               _id: string;
               _type: "artist";
@@ -36045,6 +38040,124 @@ export type FEUILLETAGE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -36121,11 +38234,15 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -36359,83 +38476,20 @@ export type FEUILLETAGE_QUERY_RESULT = {
             _key: string;
           } & TagReference
         >;
-        filters: Array<
-          | {
+        filters?: Array<
+          | ({
               _key: string;
-              _type: "filterList";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions:
-                | Array<{
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "tag";
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }>
-                | Array<never>;
-            }
-          | {
+            } & FilterList)
+          | ({
               _key: string;
-              _type: "filterRadio";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions: Array<
-                | {
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "tag";
-                    name: null;
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }
-              > | null;
-            }
-          | {
+            } & FilterRadio)
+          | ({
               _key: string;
-              _type: "filterSearch";
-              searchIn?: Array<string>;
-            }
-          | {
+            } & FilterSearch)
+          | ({
               _key: string;
-              _type: "filterSort";
-              sortOptions?: Array<{
-                field?:
-                  | "_createdAt"
-                  | "dateStart"
-                  | "index"
-                  | "speaker"
-                  | "title";
-                direction?: "asc" | "desc";
-                label?: LocaleString;
-                _key: string;
-              }>;
-            }
-        > | null;
+            } & FilterSort)
+        >;
         cta: {
           _type: "cta";
           internal?: LinkInternal;
@@ -36652,7 +38706,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
           internal?: LinkInternal;
           external?: LinkExternal;
         } | null;
-        filters: null;
         resolvedItems:
           | Array<{
               _type: "exhibition";
@@ -37274,6 +39327,176 @@ export type FEUILLETAGE_QUERY_RESULT = {
         items: Array<
           | {
               _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
+              _type: "artist";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
               _type: "event";
               _createdAt: string;
               _updatedAt: string;
@@ -37491,6 +39714,124 @@ export type FEUILLETAGE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -37567,11 +39908,15 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -43134,6 +45479,15 @@ export type FEUILLETAGE_QUERY_RESULT = {
             } | null;
           } | null;
         } | null;
+        tags: Array<{
+          _id: string;
+          _type: "tag";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: LocaleString;
+          slug?: Slug;
+        }> | null;
       }
     | {
         _type: "product";
@@ -43303,7 +45657,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: ARTICLE_QUERY
-// Query: *[_type == "article" && slug.current == $slug][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {        _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }    },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  },  "related":   *[    _id != ^._id &&    _type in ["exhibition", "event", "product", "article", "feuilletage"] &&    count(^.tags) > 0 &&    references(^.tags[]._ref)  ] {      _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {      _type,  _id,  title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->{    title,    slug  }  }  }}
+// Query: *[_type == "article" && slug.current == $slug][0]{  ...,  seo{      ...,  metaImage{    asset->{      url    }  }  },  modules[]{      ...,    _type == "textUI" => {    ...,    title{      ...    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    }  },    _type == "imagesUI" => {    ...,    title,    items[]{        ...,  image{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }    }  },    _type == "videoUI" => {    ...,    video{      ...,      placeholder{        asset->      }    }  },    _type == "textImageUI" => {    ...,    image{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    direction  },    _type == "textSidebarUI" => {    ...,    text{        ...,  fr[]{    ...,     markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},       _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  },  en[]{    ...,    markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},      _type == "keyValGroup" => {      ...,      items[]{        ...,        image{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      }    }  }    },    sidebar{      commissariat,      coProduction[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      partenaires[]->{        ...,        imageCover{            asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }        }      },      keyVal    }  },    _type == "listUI" => {    ...,    items[]{      ...    },    cta{      ...    }  },    _type == "listsUI" => {    ...,    items[]{      ...    }  },    _type == "sliderCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "gridCardUI" => {    ...,    title{      ...    },    items[]->{      ...,        _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }    },    cta{      ...    }  },    _type == "programmeUI" => {    ...,    title{      ...    },    items[]->{      _type,      _id,      title,      slug,      "imageCover": coalesce(imageCover, image){          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      },      dateStart,      dateEnd,      dates    }  },    _type == "featuredCardsUI" => {    ...,    title,    gridSize,    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    }  },    _type == "newsCardUI" => {    ...,    title{      ...    },    gridSize,    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }    },    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {        _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }    },    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    }  },    _type == "listFeuilletageUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "feuilletage"] | order(index asc) {        _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }    },    cta{      ...    }  },    _type == "listImageImages" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "items": *[_type == "imageImages"] | order(_createdAt desc) {        _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video    },    cta{      ...    }  },    _type == "listSerieThematiqueUI" => {    ...,    title{      ...    },    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {          _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }      },    cta{      ...    }  },    _type == "listExhibitionsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listExhibitionsPastUI" => {    ...,    title{      ...    },    filters[]{      ...,        _type == "filterList" => {    ...,    "radioOptions": select(      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },      []    )  },        _type == "filterRadio" => {    ...,    radioOptions[]->{ _id, _type, name, title, slug }  }    },    "resolvedItems": select(      items in ["exhibitions-past"] => *[        _type == "exhibition"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)      ] | order(dates[0].du asc) {          _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  },    _type == "listEventsUI" => {    ...,    title{      ...    },    "resolvedItems": select(      items in ["events", "guided-tours"] => *[        _type == "event"        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)      ] | order(coalesce(dates[0].du, _createdAt) asc) {          _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }      },      []    ),    cta{      ...    }  }  },  "related":   *[    _id != ^._id &&    _type in ["exhibition", "event", "product", "article", "feuilletage"] &&    count(^.tags) > 0 &&    references(^.tags[]._ref)  ] {      _type == "exhibition" => {      _type,  _id,    title,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "product" => {      _type,  _id,  title,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  prix,  tags[]->{    title  },  artist->{    name  }  },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "artist" => {      _type,  _id,  name,  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  },  _type == "event" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name  },  tags[]->{    _id,    title,    slug  }  },  _type == "imageImages" => {      _type,  _id,  index,  title,  slug,  chercheur->{    _id,    name,    slug  },  artists[]->{    _id,    name,    slug  },  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  video  },  _type == "feuilletage" => {      _type,  _id,  title,  subTitle,  index,  slug,  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  dates,  descripption,  artists[]->{    _id,    name,    slug  },  tags[]->{    title,    slug  },  chercheur->{    _id,    name,    slug  }  },  _type == "article" => {        _type,    _id,    title,    slug,    imageCover{        asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }    },    tags[]->{      title,      slug    }    },  _type == "pageModulaire" => {      _type,  _id,  "title": coalesce(title, name),  slug,  "imageCover": coalesce(imageCover, image){      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  tags[]->,  }  }}
 export type ARTICLE_QUERY_RESULT = {
   _id: string;
   _type: "article";
@@ -43387,6 +45741,93 @@ export type ARTICLE_QUERY_RESULT = {
           en?: string;
         } | null;
         items: Array<
+          | {
+              _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
           | {
               _id: string;
               _type: "artist";
@@ -43689,6 +46130,124 @@ export type ARTICLE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -43765,11 +46324,15 @@ export type ARTICLE_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -44003,83 +46566,20 @@ export type ARTICLE_QUERY_RESULT = {
             _key: string;
           } & TagReference
         >;
-        filters: Array<
-          | {
+        filters?: Array<
+          | ({
               _key: string;
-              _type: "filterList";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions:
-                | Array<{
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    slug: Slug | null;
-                  }>
-                | Array<{
-                    _id: string;
-                    _type: "tag";
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }>
-                | Array<never>;
-            }
-          | {
+            } & FilterList)
+          | ({
               _key: string;
-              _type: "filterRadio";
-              radioKey?: "artist" | "chercheur" | "tag";
-              radioLabel?: LocaleString;
-              radioOptions: Array<
-                | {
-                    _id: string;
-                    _type: "artist";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "chercheur";
-                    name: string | null;
-                    title: null;
-                    slug: Slug | null;
-                  }
-                | {
-                    _id: string;
-                    _type: "tag";
-                    name: null;
-                    title: LocaleString | null;
-                    slug: Slug | null;
-                  }
-              > | null;
-            }
-          | {
+            } & FilterRadio)
+          | ({
               _key: string;
-              _type: "filterSearch";
-              searchIn?: Array<string>;
-            }
-          | {
+            } & FilterSearch)
+          | ({
               _key: string;
-              _type: "filterSort";
-              sortOptions?: Array<{
-                field?:
-                  | "_createdAt"
-                  | "dateStart"
-                  | "index"
-                  | "speaker"
-                  | "title";
-                direction?: "asc" | "desc";
-                label?: LocaleString;
-                _key: string;
-              }>;
-            }
-        > | null;
+            } & FilterSort)
+        >;
         cta: {
           _type: "cta";
           internal?: LinkInternal;
@@ -44296,7 +46796,6 @@ export type ARTICLE_QUERY_RESULT = {
           internal?: LinkInternal;
           external?: LinkExternal;
         } | null;
-        filters: null;
         resolvedItems:
           | Array<{
               _type: "exhibition";
@@ -44918,6 +47417,176 @@ export type ARTICLE_QUERY_RESULT = {
         items: Array<
           | {
               _id: string;
+              _type: "article";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
+              _type: "artist";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              name: string | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+            }
+          | {
+              _id: string;
               _type: "event";
               _createdAt: string;
               _updatedAt: string;
@@ -45135,6 +47804,124 @@ export type ARTICLE_QUERY_RESULT = {
             }
           | {
               _id: string;
+              _type: "feuilletage";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              seo?: Seo;
+              title: LocaleString | null;
+              slug: Slug | null;
+              imageCover: {
+                asset: {
+                  _id: string;
+                  assetId: string | null;
+                  title: string | null;
+                  altText: string | null;
+                  description: string | null;
+                  creditLine: null;
+                  metadata: {
+                    lqip: string | null;
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+              video?: Video;
+              subTitle: LocaleText | null;
+              description?: LocaleText;
+              artists: Array<{
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              }> | null;
+              chercheur: {
+                _id: string;
+                name: string | null;
+                slug: Slug | null;
+              } | null;
+              dates: Array<
+                {
+                  _key: string;
+                } & FhcbDate
+              > | null;
+              tags: Array<{
+                title: LocaleString | null;
+                slug: Slug | null;
+              }> | null;
+              index: string | null;
+              modules?: Array<
+                | ({
+                    _key: string;
+                  } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & ImagesUI)
+                | ({
+                    _key: string;
+                  } & ListEventsUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsPastUI)
+                | ({
+                    _key: string;
+                  } & ListExhibitionsUI)
+                | ({
+                    _key: string;
+                  } & ListFeuilletageUI)
+                | ({
+                    _key: string;
+                  } & ListImageImages)
+                | ({
+                    _key: string;
+                  } & ListSerieThematiqueUI)
+                | ({
+                    _key: string;
+                  } & ListsUI)
+                | ({
+                    _key: string;
+                  } & ListUI)
+                | ({
+                    _key: string;
+                  } & NewsCardUI)
+                | ({
+                    _key: string;
+                  } & ProgrammeUI)
+                | ({
+                    _key: string;
+                  } & SliderCardUI)
+                | ({
+                    _key: string;
+                  } & TextImageUI)
+                | ({
+                    _key: string;
+                  } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
+                  } & VideoUI)
+              >;
+              rebonds?: ArrayOf<
+                | ArtistReference
+                | EventReference
+                | ExhibitionReference
+                | FeuilletageReference
+                | ImageImagesReference
+                | LibraryReference
+                | PageModulaireReference
+                | ProductReference
+                | ProgrammeReference
+              >;
+              descripption: null;
+            }
+          | {
+              _id: string;
               _type: "imageImages";
               _createdAt: string;
               _updatedAt: string;
@@ -45211,11 +47998,15 @@ export type ARTICLE_QUERY_RESULT = {
                   } | null;
                 } | null;
               } | null;
-              tags?: Array<
-                {
-                  _key: string;
-                } & TagReference
-              >;
+              tags: Array<{
+                _id: string;
+                _type: "tag";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                title?: LocaleString;
+                slug?: Slug;
+              }> | null;
               modules?: Array<
                 | ({
                     _key: string;
@@ -50763,14 +53554,14 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"settings\"][0]{\n  ...,\n  navPrimary[]{\n   \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSecondary[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navTertiary[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navQuaternary[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navLegals[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSocial[]{\n    \n  ...,\n  _type == 'linkInternal' => {\n      \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n\n    subMenu[]{\n      ...,\n      _type == 'linkInternal' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    \"imageCover\": coalesce(imageCover, image){\n      // asset->{\n      //   _id\n      // }\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n  }\n,\n      }\n    }\n  },\n  _type == 'linkIcon' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  mostSearched[]->{\n    _type,\n    slug,\n    \"title\": coalesce(title, name)\n  },\n\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n}": SETTINGS_QUERY_RESULT;
-    '\n*[_type == "home"][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
-    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
-    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
-    '*[_type == "exhibition" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    artists[]->{\n      name\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    }\n  }': EXPHIBITION_QUERY_RESULT;
-    '*[_type == "programme" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    items,\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    )\n  }': PROGRAMME_QUERY_RESULT;
+    '\n*[_type == "home"][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
+    '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    tags[]->,\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    },\n    rebonds[]->{\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
+    '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
+    '*[_type == "exhibition" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    artists[]->{\n      name\n    },\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    }\n  }': EXPHIBITION_QUERY_RESULT;
+    '*[_type == "programme" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    items,\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    )\n  }': PROGRAMME_QUERY_RESULT;
     '*[_type == "pageModulaire"]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n}': ALLPAGE_MODULAIRE_QUERY_RESULT;
-    '*[_type == "imageImages" && slug.current == $slug][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  },\n  rebonds[]->{\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n}': IMAGE_IMAGES_QUERY_RESULT;
-    '*[_type == "feuilletage" && slug.current == $slug][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  },\n  rebonds[]->{\n    \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n  },\n  "related": \n  *[\n    _id != ^._id &&\n    (\n      (\n        _type in ["event", "exhibition", "event", "product"] &&\n        references(^.artists[]._ref)\n      )\n      ||\n      (\n        _type == "artist" &&\n        _id in ^.artists[]._ref\n      )\n    )\n  ] | order(dates[0].du asc) {\n    \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n  }\n\n}': FEUILLETAGE_QUERY_RESULT;
-    '*[_type == "article" && slug.current == $slug][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  },\n  "related": \n  *[\n    _id != ^._id &&\n    _type in ["exhibition", "event", "product", "article", "feuilletage"] &&\n    count(^.tags) > 0 &&\n    references(^.tags[]._ref)\n  ] {\n    \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->{\n    title,\n    slug\n  }\n\n  }\n\n  }\n\n}': ARTICLE_QUERY_RESULT;
+    '*[_type == "imageImages" && slug.current == $slug][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  },\n  rebonds[]->{\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n}': IMAGE_IMAGES_QUERY_RESULT;
+    '*[_type == "feuilletage" && slug.current == $slug][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  },\n  rebonds[]->{\n    \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n  },\n  "related": \n  *[\n    _id != ^._id &&\n    (\n      (\n        _type in ["event", "exhibition", "event", "product"] &&\n        references(^.artists[]._ref)\n      )\n      ||\n      (\n        _type == "artist" &&\n        _id in ^.artists[]._ref\n      )\n    )\n  ] | order(dates[0].du asc) {\n    \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n  }\n\n}': FEUILLETAGE_QUERY_RESULT;
+    '*[_type == "article" && slug.current == $slug][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    ...,\n     \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n     \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  },\n  en[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n    \n  _type == "keyValGroup" => {\n      ...,\n      items[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      keyVal\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      ...\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      ...\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    gridSize,\n    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n    },\n    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n    },\n    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage"] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages"] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {\n      \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "radioOptions": select(\n      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },\n      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },\n      []\n    )\n  }\n,\n      \n  _type == "filterRadio" => {\n    ...,\n    radioOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": select(\n      items in ["exhibitions-past"] => *[\n        _type == "exhibition"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      ] | order(dates[0].du asc) {\n        \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n\n    "resolvedItems": select(\n      items in ["events", "guided-tours"] => *[\n        _type == "event"\n        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n      ] | order(coalesce(dates[0].du, _createdAt) asc) {\n        \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n      },\n      []\n    ),\n    cta{\n      ...\n    }\n  }\n\n\n  },\n  "related": \n  *[\n    _id != ^._id &&\n    _type in ["exhibition", "event", "product", "article", "feuilletage"] &&\n    count(^.tags) > 0 &&\n    references(^.tags[]._ref)\n  ] {\n    \n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n    title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  prix,\n  tags[]->{\n    title\n  },\n  artist->{\n    name\n  }\n\n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates,\n  descripption,\n  artists[]->{\n    _id,\n    name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  tags[]->,\n\n  }\n\n  }\n\n}': ARTICLE_QUERY_RESULT;
   }
 }

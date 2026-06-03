@@ -994,6 +994,66 @@
     }
   },
   {
+    "type": "type",
+    "name": "feuilletage.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "feuilletage"
+    }
+  },
+  {
+    "type": "type",
+    "name": "article.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "article"
+    }
+  },
+  {
     "name": "gridCardUI",
     "type": "type",
     "value": {
@@ -1044,6 +1104,14 @@
                 {
                   "type": "inline",
                   "name": "imageImages.reference"
+                },
+                {
+                  "type": "inline",
+                  "name": "feuilletage.reference"
+                },
+                {
+                  "type": "inline",
+                  "name": "article.reference"
                 }
               ]
             }
@@ -1107,7 +1175,19 @@
                 },
                 {
                   "type": "inline",
+                  "name": "artist.reference"
+                },
+                {
+                  "type": "inline",
                   "name": "imageImages.reference"
+                },
+                {
+                  "type": "inline",
+                  "name": "feuilletage.reference"
+                },
+                {
+                  "type": "inline",
+                  "name": "article.reference"
                 }
               ]
             }
@@ -2600,36 +2680,6 @@
         }
       },
       "dereferencesTo": "programme"
-    }
-  },
-  {
-    "type": "type",
-    "name": "feuilletage.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "feuilletage"
     }
   },
   {
@@ -4591,6 +4641,34 @@
               "optional": true
             }
           }
+        },
+        "optional": true
+      },
+      "totalFeuilletages": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "totalImageImages": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "totalArtists": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "totalExhibitions": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
         },
         "optional": true
       },

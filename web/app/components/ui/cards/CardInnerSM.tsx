@@ -6,9 +6,10 @@ import { Link } from "next-view-transitions";
 
 type Props = {
   _type: string;
-  tags: string;
+  tags?: string;
+  supTitle?: string;
   title: string;
-  subtitle?: string;
+  subTitle?: string;
   info?: string;
   infoNode?: ReactNode;
   imageCover: SanityImageAssetFull;
@@ -19,8 +20,9 @@ type Props = {
 const CardInnerSM = ({
   _type,
   tags,
+  supTitle,
   title,
-  subtitle,
+  subTitle,
   info,
   infoNode,
   imageCover,
@@ -31,8 +33,9 @@ const CardInnerSM = ({
     <div className={clsx("card__inner")}>
       <div className='card__header'>
         {tags && <div className='card__tag c-tag'>{tags}</div>}
-        <h2 className='card__title c-h2'>{title}</h2>
-        {subtitle && <div className='card__subtitle c-h3'>{subtitle}</div>}
+        {supTitle && <div className='card__sup-title c-body'>{supTitle}</div>}
+        <h3 className='card__title c-h2'>{title}</h3>
+        {subTitle && <div className='card__subTitle c-h3'>{subTitle}</div>}
       </div>
       {imageCover && (
         <div className='card__media'>
@@ -42,11 +45,13 @@ const CardInnerSM = ({
       <div className='card__footer'>
         {info && <div className='card__info c-body-xs'>{info}</div>}
         {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
-        <div className='btns'>
-          <Link href={linkPrimary} className='btn btn--primary'>
-            {linkPrimaryLabel}
-          </Link>
-        </div>
+        {linkPrimary && (
+          <div className='btns'>
+            <Link href={linkPrimary} className='btn btn--primary'>
+              {linkPrimaryLabel}
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

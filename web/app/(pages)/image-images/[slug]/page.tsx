@@ -5,7 +5,10 @@ import {
   getImageImages,
   IMAGE_IMAGES_QUERY,
 } from "@/app/sanity-api/sanity-queries";
-import { Chercheur, IMAGE_IMAGES_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import {
+  Chercheur,
+  IMAGE_IMAGES_QUERY_RESULT,
+} from "@/app/sanity-api/types/sanity.types";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
@@ -14,7 +17,7 @@ import PageHeader from "@/app/components/PageHeader";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import Embed from "@/app/components/ui/Embed";
 import CardImageImages from "@/app/components/ui/cards/CardImageImages";
-import RelatedImageImages from "@/app/components/RelatedImageImages";
+import RelatedImageImages from "@/app/components/RebondsImageImages";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 
 type Params = Promise<{ slug: string }>;
@@ -67,7 +70,11 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
         {data.video && <Embed input={data.video} />}
       </div>
       <ContentModulaire input={data} />
-      {data.rebonds && <RelatedImageImages input={data.rebonds as unknown as ImageImagesExpanded[]} />}
+      {data.rebonds && (
+        <RelatedImageImages
+          input={data.rebonds as unknown as ImageImagesExpanded[]}
+        />
+      )}
     </div>
   );
 };

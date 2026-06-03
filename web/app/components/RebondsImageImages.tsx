@@ -11,10 +11,10 @@ type Props = {
 
 const RelatedImageImages = ({ input }: Props) => {
   return (
-    <section className='related'>
+    <section className='rebonds rebonds--image-images'>
       <div className='container-fluid'>
         <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2>
-        <div className='grid md:grid-cols-2 gap-gutter'>
+        <div className='grid md:grid-cols-12 gap-gutter'>
           {input?.map((item, i) => (
             <CardImageImages key={i} input={item} />
           ))}

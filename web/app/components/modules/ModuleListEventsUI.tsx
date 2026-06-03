@@ -37,7 +37,7 @@ const ModuleListEventsUI = ({ input }: Props) => {
           <div
             className='grid md:grid-cols-4 gap-gutter'
             style={{
-              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1))",
+              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
               justifyContent: "center",
             }}>
             {filteredItems.map((item: EventExpanded, index: number) => (

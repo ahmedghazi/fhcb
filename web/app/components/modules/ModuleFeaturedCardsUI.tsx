@@ -9,7 +9,7 @@ type Props = {
 
 const ModuleFeaturedCardsUI = ({ input }: Props) => {
   const { gridSize } = input;
-  const cols = gridSize || 3;
+  const cols = gridSize || 12;
   const items = input.items as unknown as ExhibitionExpanded[];
 
   return (

@@ -11,6 +11,9 @@ import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
 import { PAGE_MODULAIRE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import Rebonds from "@/app/components/Rebonds";
+import RebondsBranche from "@/app/components/RebondsBranche";
+import { PageModulaireExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 
 type Params = Promise<{ slug: string }>;
 
@@ -47,7 +50,10 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
   }
 
   if (!data) return notFound();
-
+  const isBranch = data?.tags?.some(
+    (tag) => tag.slug?.current === "branches-ressources",
+  );
+  console.log({ isBranch });
   return (
     <div
       className='template template--page'
@@ -55,6 +61,11 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <PageHeader h1={data.title} />
       <ContentModulaire input={data} />
+      {/* <pre>{JSON.stringify({ isBranch }, null, 2)}</pre> */}
+      {isBranch && data.rebonds && (
+        <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} />
+      )}
+      {!isBranch && data.rebonds && <Rebonds input={data.rebonds} />}
     </div>
   );
 };

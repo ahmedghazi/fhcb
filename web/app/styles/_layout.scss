@@ -30,11 +30,18 @@ body {
 }
 #page {
 }
+
+/*
+for the slider
+*/
 .gridder {
   visibility: hidden;
   position: fixed;
   width: 100%;
   pointer-events: none;
+  &__item {
+    background-color: red;
+  }
 }
 main {
   min-height: var(--app-height, 100vh);
@@ -78,6 +85,16 @@ main {
   }
 }
 
+@media (width >= 10rem) {
+  @for $i from 1 through 12 {
+    .grid-cols-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+    .col-span-#{$i} {
+      grid-column: span $i;
+    }
+  }
+}
 @media (width >= 48rem) {
   @for $i from 1 through 12 {
     .md\:grid-cols-#{$i} {

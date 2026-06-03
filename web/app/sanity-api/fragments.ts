@@ -306,7 +306,7 @@ export const cardRefProduct = `
   }
 `;
 
-const cardRefArtist = `
+export const cardRefArtist = `
   _type,
   _id,
   name,
@@ -339,17 +339,28 @@ export const cardRefImageImages = `
 `;
 
 export const cardRefArticle = `
+    _type,
+    _id,
+    title,
+    slug,
+    imageCover{
+      ${imageAsset}
+    },
+    tags[]->{
+      title,
+      slug
+    }
+  `;
+
+export const cardRefPageModulaire = `
   _type,
   _id,
-  title,
+  "title": coalesce(title, name),
   slug,
-  imageCover{
+  "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
-  tags[]->{
-    title,
-    slug
-  }
+  tags[]->,
 `;
 
 export const cardTypes = `
@@ -376,6 +387,9 @@ export const cardTypes = `
   },
   _type == "article" => {
     ${cardRefArticle}
+  },
+  _type == "pageModulaire" => {
+    ${cardRefPageModulaire}
   }
 `;
 
@@ -545,11 +559,6 @@ export const listExhibitionsUI = `
     title{
       ...
     },
-    filters[]{
-      ...,
-      ${filterList},
-      ${filterRadio}
-    },
     "resolvedItems": select(
       items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[
         _type == "exhibition"
@@ -598,11 +607,7 @@ export const listEventsUI = `
     title{
       ...
     },
-    filters[]{
-      ...,
-      ${filterList},
-      ${filterRadio}
-    },
+
     "resolvedItems": select(
       items in ["events", "guided-tours"] => *[
         _type == "event"

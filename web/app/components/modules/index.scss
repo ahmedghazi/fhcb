@@ -74,14 +74,28 @@
         }
       }
     }
+    &--grid-card-ui {
+      h2 {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+      }
+    }
     &--slider-card-ui {
+      h2 {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+      }
       .keen-slider {
         &__slide {
-          min-width: var(--gridder-1);
-          max-width: var(--gridder-1);
+          min-width: var(--gridder-3_12);
+          max-width: var(--gridder-3_12);
+          .card,
+          .card__inner {
+            height: 100%;
+          }
           &:has(.card--md) {
-            min-width: var(--gridder-2);
-            max-width: var(--gridder-2);
+            min-width: var(--gridder-6_12);
+            max-width: var(--gridder-6_12);
           }
         }
       }

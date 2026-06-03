@@ -1,6 +1,7 @@
 import {defineField} from 'sanity'
 import {baseLanguage} from '../../locale/supportedLanguages'
 import {MdOutlineSlideshow} from 'react-icons/md'
+import listPostTypes from '../../misc/listPostTypes'
 
 export default defineField({
   name: 'sliderCardUI',
@@ -16,13 +17,7 @@ export default defineField({
       of: [
         {
           type: 'reference',
-          to: [
-            {type: 'pageModulaire'},
-            {type: 'product'},
-            {type: 'event'},
-            {type: 'exhibition'},
-            {type: 'imageImages'},
-          ],
+          to: listPostTypes,
         },
       ],
     }),

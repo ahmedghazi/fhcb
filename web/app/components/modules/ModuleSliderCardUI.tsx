@@ -10,6 +10,8 @@ import CardEvent from "../ui/cards/CardEvent";
 import CardExhibition from "../ui/cards/CardExhibition";
 import KeenSlider from "../ui/KeenSlider";
 import CardImageImages from "../ui/cards/CardImageImages";
+import CardFeuilletage from "../ui/cards/CardFeuilletage";
+import CardPageModulaire from "../ui/cards/CardPageModulaire";
 
 type Props = {
   input: SliderCardUI;
@@ -21,7 +23,9 @@ const ModuleSliderCardUI = ({ input }: Props) => {
   return (
     <section className='module module--slider-card-ui'>
       <div className='module__inner'>
-        {title && <h2 className='module__title'>{_localizeField(title)}</h2>}
+        {title && (
+          <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
+        )}
         {items && (
           <KeenSlider>
             {items.map((item: PostTypes, index) => (
@@ -29,10 +33,10 @@ const ModuleSliderCardUI = ({ input }: Props) => {
                 key={`${item && item._id}-${index}`}
                 className='keen-slider__slide'>
                 {item && item._type === "product" && (
-                  <CardProduct input={item} size='md' />
+                  <CardProduct input={item} size='sm' />
                 )}
                 {item && item._type === "pageModulaire" && (
-                  <CardPage input={item} size='md' />
+                  <CardPageModulaire input={item} size='md' />
                 )}
                 {item && item._type === "artist" && <CardArtist input={item} />}
                 {item && item._type === "event" && (
@@ -43,6 +47,9 @@ const ModuleSliderCardUI = ({ input }: Props) => {
                 )}
                 {item && item._type === "imageImages" && (
                   <CardImageImages input={item} />
+                )}
+                {item && item._type === "feuilletage" && (
+                  <CardFeuilletage input={item} />
                 )}
               </div>
             ))}

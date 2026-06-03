@@ -73,7 +73,7 @@ const CardEvent = ({ input, size = "md" }: Props) => {
           _type={_type}
           tags={tagsTitleList || ""}
           title={_localizeField(title) || ""}
-          subtitle={_localizeField(subTitle)}
+          subTitle={_localizeField(subTitle)}
           info={_localizeField(description)}
           infoNode={dates ? <FHCBDates input={dates} /> : null}
           imageCover={imageCover?.asset as SanityImageAssetFull}

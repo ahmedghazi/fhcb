@@ -16,10 +16,10 @@ import PageHeader from "@/app/components/PageHeader";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import Embed from "@/app/components/ui/Embed";
 import CardImageImages from "@/app/components/ui/cards/CardImageImages";
-import RelatedImageImages from "@/app/components/RelatedImageImages";
+import RelatedImageImages from "@/app/components/RebondsImageImages";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ARTICLE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
-import Related from "@/app/components/Related";
+import Related from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
 

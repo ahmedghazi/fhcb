@@ -28,27 +28,42 @@ cards simili document
 - # filtres
 - # current expo = same tag as hors les murs
 - # prev exhib
-- filtes prev exhib
+- # filtes prev exhib
 - page programme expo/event vide => afficher un message
-- créer les cards rebonds page
-- grid masonry
-- pb expo en cours dans https://fhcb-preprod.vercel.app/histoire-and-missions
-- slider card ajouter les doc manquant (image images, feuilletage, ...)
+- # créer les cards rebonds page
+- # grid masonry
+- # pb expo en cours dans https://fhcb-preprod.vercel.app/histoire-and-missions
+- # slider card ajouter les doc manquant (image images, feuilletage, ...)
 - expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
 - add doc chercheur (name, slug), présent dans feuilletages, image Images, et dans leurs page listes -> filtres
 - carte expo tube, cube (check trello)
 - modules newsletter, soutenir la fondation
-- slider card même hauteur
-- filtre list (cherche automatique tous les artistes ou tag ou chercheur)
-- filtre radio
-
+- # slider card même hauteur
+- # filtre list (cherche automatique tous les artistes ou tag ou chercheur)
+- # filtre radio
+- régler grille cartes (tailles)
+- expo hors les murs via le champ location
+- # rebonds page racine > rebonds page
+- rebonds article > rebonds article (même catégorie)
+- # rebonds artiste > autres artistes (aléatoire)
+- # rebonds branche = imageImages, série, ... sinon fond blanc
+- wide reg
 - # cron qui update les current/past categories
--
-
 - updates doc icons
 - # image images
 - # feuilletage
 - # single page feuilletage
+
+## Grilles
+
+- feuilletage 1/6
+- product 2/12
+- expo 2/12, dans rebonds 6/12, dans programme current, hors-les-murs 12/12
+- artiste 6/12, dans rebonds 2/12
+- evt 2/12
+- page 4/12
+- branche 2/12
+- ressources (feuilletage, ...) 6/12
 
 ## shopify
 
@@ -89,11 +104,6 @@ cards simili document
 - carte look 3 2 colonnes (taille de grille 4/8)?
 
 # réponses
-
-- rebonds page racine > rebonds page
-- rebonds article > rebonds article (même catégorie)
-- rebonds artiste > autres artistes (aléatoire)
-- rebonds beige = imageImages, série, ... sinon fond blanc
 
 # GO PREPROD
 

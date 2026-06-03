@@ -218,6 +218,28 @@ export default defineType({
     }),
 
     defineField({
+      name: 'totalFeuilletages',
+      type: 'number',
+      group: 'misc',
+    }),
+    defineField({
+      name: 'totalImageImages',
+      type: 'number',
+      group: 'misc',
+    }),
+    defineField({
+      name: 'totalArtists',
+      type: 'number',
+      group: 'misc',
+      hidden: true,
+    }),
+    defineField({
+      name: 'totalExhibitions',
+      type: 'number',
+      group: 'misc',
+      hidden: true,
+    }),
+    defineField({
       name: 'message404',
       title: 'Message 404',
       type: 'blockContent',

@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-02T13:23:23.513Z
+// Generated on: 2026-06-03T12:21:01.901Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
@@ -118,9 +118,7 @@ export type LibraryExpanded = Omit<Library, 'miseEnAvant' | 'sliderSelection' | 
   imageCover?: (Omit<NonNullable<NonNullable<Library>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type PAGE_MODULAIRE_QUERY_RESULTExpanded = Omit<PAGE_MODULAIRE_QUERY_RESULT, 'tags' | 'rebonds' | 'imageCover'> & {
-  tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
+export type PAGE_MODULAIRE_QUERY_RESULTExpanded = Omit<PAGE_MODULAIRE_QUERY_RESULT, 'imageCover'> & {
   imageCover?: (Omit<NonNullable<NonNullable<PAGE_MODULAIRE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 

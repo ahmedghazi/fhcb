@@ -17,6 +17,19 @@ look 5 = expo à la une (img prems sans fond perdu
     padding: var(--spacing-xs);
   }
   &--sm {
+    grid-column: span 3;
+  }
+  &--md {
+    grid-column: span 6;
+    &-alt {
+      grid-column: span 4;
+    }
+  }
+  &--lg {
+    grid-column: span 12;
+  }
+
+  &--sm {
     .card__inner {
       flex-direction: column;
       gap: var(--spacing-xs);
@@ -35,8 +48,11 @@ look 5 = expo à la une (img prems sans fond perdu
     }
   }
   &--md {
+    height: 100%;
     .card__inner {
+      height: 100%;
       flex-direction: column;
+      justify-content: space-between;
       gap: var(--spacing-xs);
       .card__body {
         height: 100%;
@@ -44,13 +60,22 @@ look 5 = expo à la une (img prems sans fond perdu
         flex-direction: column;
         justify-content: space-between;
       }
+      .grid {
+        height: 100%;
+      }
+      // .grid,
+      // .card__media,
+      // figure,
+      // img {
+      //   height: 100% !important;
+      // }
     }
     &.card--is-portrait {
       .card__header {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-xs);
-        justify-content: space-between;
+        // display: flex;
+        // flex-direction: column;
+        // // gap: var(--spacing-xs);
+        // justify-content: space-between;
       }
     }
   }
@@ -60,6 +85,16 @@ look 5 = expo à la une (img prems sans fond perdu
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+    img {
+      max-height: var(--main-h);
+      object-fit: contain;
+      object-position: right;
+    }
+    &.card--is-landscape {
+      img {
+        // height: var(--main-h) !important;
+      }
     }
   }
   &--md,
@@ -101,6 +136,11 @@ look 5 = expo à la une (img prems sans fond perdu
     }
   }
 
+  &--page-modulaire {
+    h2 {
+      text-align: center;
+    }
+  }
   &--product {
     background-color: var(--color-beige);
   }
@@ -120,8 +160,19 @@ look 5 = expo à la une (img prems sans fond perdu
 
   &--artist {
     background-color: var(--color-rose-50);
+    &,
+    &__inner {
+      height: 100%;
+    }
+    &__inner {
+      justify-content: space-between;
+    }
   }
   &--image-images {
+    .card__inner {
+      // height: 100%;
+      justify-content: space-between;
+    }
     .btn {
       background-color: var(--color-bg);
     }
@@ -130,12 +181,20 @@ look 5 = expo à la une (img prems sans fond perdu
     background-color: var(--color-gris-100);
   }
   &--article,
-  &--page {
+  &--page,
+  &--page-modulaire {
     .btn {
       background-color: var(--color-gris-50);
     }
   }
-
+  &--page-modulaire {
+    .card__header {
+      text-align: center;
+      .card__sup-title {
+        font-weight: 800;
+      }
+    }
+  }
   &__header {
     display: flex;
     flex-direction: column;

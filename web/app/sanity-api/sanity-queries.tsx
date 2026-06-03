@@ -3,6 +3,7 @@ import { sanityFetch } from "./sanity.client";
 import {
   imageAsset,
   cardRefExhibition,
+  cardRefArtist,
   linkInternal,
   linkInternalWithImage,
   modules,
@@ -111,8 +112,12 @@ export const PAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire" && slug.curr
     seo{
       ${seo}
     },
+    tags[]->,
     modules[]{
       ${modules}
+    },
+    rebonds[]->{
+      ${cardTypes}
     }
   }`;
 
@@ -145,6 +150,24 @@ export async function getArtist(slug: string): Promise<ARTIST_QUERY_RESULT> {
     tags: ["artist"],
     qParams: { slug },
   });
+}
+
+export const RANDOM_ARTISTS_QUERY = groq`*[_type == "artist" && slug.current != $slug]{
+  ${cardRefArtist}
+}`;
+
+export async function getRandomArtists(excludeSlug: string, count = 4) {
+  const all = await sanityFetch({
+    query: RANDOM_ARTISTS_QUERY,
+    tags: ["artist"],
+    qParams: { slug: excludeSlug },
+  });
+  if (!Array.isArray(all)) return [];
+  for (let i = all.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [all[i], all[j]] = [all[j], all[i]];
+  }
+  return all.slice(0, count);
 }
 
 /*****************************************************************************************************

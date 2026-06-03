@@ -59,7 +59,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
           <div
             className='grid md:grid-cols-4 gap-gutter'
             style={{
-              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1))",
+              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
               justifyContent: "center",
             }}>
             {data.resolvedItems.map((item) => (

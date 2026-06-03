@@ -1,7 +1,7 @@
 "use client";
 import React, { Fragment } from "react";
 import Link from "next/link";
-import { _linkResolver } from "@/app/sanity-api/utils";
+import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
 import Figure from "@/app/components/ui/Figure";
 import useLocale from "@/app/context/LocaleContext";
 import { GridCardUI } from "@/app/sanity-api/types/sanity.types";
@@ -11,31 +11,36 @@ import CardPage from "../ui/cards/CardPage";
 import CardArtist from "../ui/cards/CardArtist";
 import CardEvent from "../ui/cards/CardEvent";
 import CardExhibition from "../ui/cards/CardExhibition";
+import CardPageModulaire from "../ui/cards/CardPageModulaire";
 
 type Props = {
   input: GridCardUI;
 };
 
 const ModuleGridCardUI = ({ input }: Props) => {
-  const { locale } = useLocale();
-  const title = input.title?.[locale as "fr" | "en"] || input.title?.fr;
-
   return (
     <section className='module module--grid-card-ui'>
       <div className='module__inner'>
-        {title && <h2 className='module__title c-h2'>{title}</h2>}
+        {input.title && (
+          <h2 className='module__title c-h1_5'>
+            {_localizeField(input.title)}
+          </h2>
+        )}
         {input.items && (
-          <div className='grid md:grid-cols-4 items-start- gap-gutter'>
+          <div className='grid md:grid-cols-12 gap-gutter'>
             {input.items.map((item: PostTypes, index: number) => (
               <Fragment key={`${item && item._id}-${index}`}>
                 {item && item._type === "exhibition" && (
                   <CardExhibition input={item} size='sm' />
                 )}
+                {item && item._type === "exhibition" && (
+                  <CardExhibition input={item} size='md' />
+                )}
                 {item && item._type === "product" && (
                   <CardProduct input={item} size='sm' />
                 )}
                 {item && item._type === "pageModulaire" && (
-                  <CardPage input={item} size='sm' />
+                  <CardPageModulaire input={item} size='md' />
                 )}
                 {item && item._type === "artist" && <CardArtist input={item} />}
                 {item && item._type === "event" && (

@@ -91,7 +91,7 @@ export default async function RootLayout({
           <div id='page'>
             <Gridder />
             <LocaleContextProvider>
-              <PageContextProvider>
+              <PageContextProvider settings={settings}>
                 <HeaderContextProvider>
                   <Header settings={settings} />
                 </HeaderContextProvider>

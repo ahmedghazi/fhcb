@@ -8,12 +8,7 @@ type Props = {
 
 const CardTags = ({ input }: Props) => {
   const tagsList = input?.map((tag) => _localizeField(tag.title)).join(", ");
-  return (
-    <div className='card__tag c-tag'>
-      {tagsList}
-      {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
-    </div>
-  );
+  return <div className='card__tag c-tag'>{tagsList}</div>;
 };
 
 export default CardTags;

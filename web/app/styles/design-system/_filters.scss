@@ -82,7 +82,7 @@
     }
     .ui-filter__detail {
       display: none;
-      position: fixed;
+      position: absolute;
       padding-top: 1rem;
       left: var(--spacing-lg);
       right: var(--spacing-lg);

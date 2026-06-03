@@ -31,7 +31,7 @@ const ModuleNewsCardUI = ({ input }: Props) => {
   const events = input.events || [];
   const products = input.product || [];
   const feuilletages = input.feuilletage || [];
-  const cols = gridSize || 4;
+  const cols = gridSize || 12;
 
   return (
     <section className='module module--news-card-ui'>

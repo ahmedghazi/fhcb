@@ -6,9 +6,9 @@ import { Link } from "next-view-transitions";
 
 type Props = {
   _type: string;
-  tags: string;
+  tags?: string;
   title: string;
-  subtitle?: string;
+  subTitle?: string;
   info?: string;
   infoNode?: React.ReactNode;
   imageCover: SanityImageAssetFull;
@@ -20,7 +20,7 @@ const CardInnerMD = ({
   _type,
   tags,
   title,
-  subtitle,
+  subTitle,
   info,
   infoNode,
   imageCover,
@@ -37,8 +37,8 @@ const CardInnerMD = ({
         <>
           <div className='card__header'>
             {tags && <div className='card__tag c-tag'>{tags}</div>}
-            <h2 className='card__title c-h2'>{title}</h2>
-            {subtitle && <div className='card__subtitle c-h3'>{subtitle}</div>}
+            <h3 className='card__title c-h2'>{title}</h3>
+            {subTitle && <div className='card__subTitle c-h3'>{subTitle}</div>}
           </div>
           <div className='card__media'>
             <Figure asset={imageCover} />
@@ -60,9 +60,9 @@ const CardInnerMD = ({
             <div className='card__header md:col-span-4'>
               <div className='header'>
                 {tags && <div className='card__tag c-tag'>{tags}</div>}
-                <h2 className='card__title c-h2'>{title}</h2>
-                {subtitle && (
-                  <div className='card__subtitle c-h3'>{subtitle}</div>
+                <h3 className='card__title c-h2'>{title}</h3>
+                {subTitle && (
+                  <div className='card__subTitle c-h3'>{subTitle}</div>
                 )}
               </div>
               <div className='footer'>

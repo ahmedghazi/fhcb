@@ -24,7 +24,7 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
     input.items ?? [],
     filterDefs,
     activeFilters,
-    locale
+    locale,
   );
 
   return (
@@ -34,7 +34,7 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
           <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
         )}
         {filteredItems.length > 0 && (
-          <div className='grid md:grid-cols-4 items-start gap-gutter'>
+          <div className='grid md:grid-cols-12 items-start gap-gutter'>
             {filteredItems.map((item: FeuilletageExpanded, index: number) => (
               <Fragment key={`${item._id}-${index}`}>
                 <CardFeuilletage input={item} size='md' />

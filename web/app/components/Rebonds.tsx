@@ -7,6 +7,7 @@ import {
   EventExpanded,
   ExhibitionExpanded,
   FeuilletageExpanded,
+  PageModulaireExpanded,
   ProductExpanded,
 } from "../sanity-api/types/sanity-expanded.types";
 import CardArtist from "./ui/cards/CardArtist";
@@ -15,24 +16,38 @@ import CardExhibition from "./ui/cards/CardExhibition";
 import CardProduct from "./ui/cards/CardProduct";
 import CardFeuilletage from "./ui/cards/CardFeuilletage";
 import CardArticle from "./ui/cards/CardArticle";
+import CardPageModulaire from "./ui/cards/CardPageModulaire";
+import { _localizeText } from "../sanity-api/utils";
 
 type Props = {
   // input: NonNullable<FEUILLETAGE_QUERY_RESULT>["related"];
   input: any;
 };
 
-const Related = ({ input }: Props) => {
+const Rebonds = ({ input }: Props) => {
   return (
-    <section className='related mb-lg'>
+    <section className='rebonds mb-lg'>
       <div className='container-fluid'>
-        {/* <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2> */}
+        <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2>
         <div
-          className={clsx("grid md:grid-cols-4 gap-gutter items-start")}
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, var(--gridder-1))",
-            justifyContent: "center",
-          }}>
+          className={clsx("grid md:grid-cols-12 gap-gutter items-start-")}
+          style={
+            {
+              // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
+              // justifyContent: "center",
+            }
+          }>
           {input?.map((item: any, i: number) => {
+            if (item._type === "pageModulaire") {
+              return (
+                <CardPageModulaire
+                  key={i}
+                  input={item as unknown as PageModulaireExpanded}
+                  size='md'
+                />
+              );
+            }
+
             if (item._type === "article") {
               return (
                 <CardArticle
@@ -94,4 +109,4 @@ const Related = ({ input }: Props) => {
   );
 };
 
-export default Related;
+export default Rebonds;

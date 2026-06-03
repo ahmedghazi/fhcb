@@ -20,8 +20,21 @@ export default defineType({
       type: 'string',
       title: 'Nom',
       validation: (Rule) => Rule.required(),
+      group: 'editorial',
     }),
-    slug,
+    defineField({
+      name: 'slug',
+      title: 'Slug (URL)',
+      type: 'slug',
+      description:
+        'Cliquez sur "Générer" — identifiant unique de la page, uniquement des lettres minuscules, chiffres et tirets (sans espaces ni caractères spéciaux)',
+      options: {
+        source: `name`,
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+      group: 'editorial',
+    }),
   ],
   preview: {
     select: {
