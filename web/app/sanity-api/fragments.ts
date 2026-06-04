@@ -624,6 +624,27 @@ export const listEventsUI = `
   }
 `;
 
+export const supportUI = `
+  _type == "supportUI" => {
+    ...,
+    image{
+      ${imageAsset}
+    },
+    cta{
+      ...
+    }
+  }
+`;
+
+export const newsletterUI = `
+  _type == "newsletterUI" => {
+    ...,
+    image{
+      ${imageAsset}
+    }
+  }
+`;
+
 export const modules = `
   ...,
   ${textUI},
@@ -643,7 +664,9 @@ export const modules = `
   ${listSerieThematiqueUI},
   ${listExhibitionsUI},
   ${listExhibitionsPastUI},
-  ${listEventsUI}
+  ${listEventsUI},
+  ${supportUI},
+  ${newsletterUI}
 `;
 
 export const relatedByArtist = `

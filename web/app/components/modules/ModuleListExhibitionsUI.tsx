@@ -28,25 +28,27 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
 
   return (
     <section className='module module--list-exhibitions'>
-      <div className='module__inner'>
-        <div
-          className='grid md:grid-cols-4 gap-gutter'
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-            justifyContent: "center",
-          }}>
-          {input.resolvedItems?.map(
-            (item: ExhibitionExpanded, index: number) => (
-              <Fragment key={`${item._id}-${index}`}>
-                <div className={`md:col-span-${isExhibitionSmall ? 1 : 4}`}>
-                  <CardExhibition
-                    input={item}
-                    size={isExhibitionSmall ? "sm" : "lg"}
-                  />
-                </div>
-              </Fragment>
-            ),
-          )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          <div
+            className='grid md:grid-cols-4 gap-gutter'
+            style={{
+              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
+              justifyContent: "center",
+            }}>
+            {input.resolvedItems?.map(
+              (item: ExhibitionExpanded, index: number) => (
+                <Fragment key={`${item._id}-${index}`}>
+                  <div className={`md:col-span-${isExhibitionSmall ? 1 : 4}`}>
+                    <CardExhibition
+                      input={item}
+                      size={isExhibitionSmall ? "sm" : "lg"}
+                    />
+                  </div>
+                </Fragment>
+              ),
+            )}
+          </div>
         </div>
       </div>
     </section>

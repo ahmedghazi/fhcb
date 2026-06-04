@@ -20,6 +20,8 @@ import ModuleListExhibitionsUI from "./ModuleListExhibitionsUI";
 import ModuleListEventsUI from "./ModuleListEventsUI";
 import "./index.scss";
 import ModuleListExhibitionsPastUI from "./ModuleListExhibitionsPastUI";
+import ModuleSupportUI from "./ModuleSupportUI";
+import ModuleNewsletterUI from "./ModuleNewsletterUI";
 
 const Modules = ({ modules }: ModulesList) => {
   const _renderModules = () => {
@@ -79,6 +81,12 @@ const Modules = ({ modules }: ModulesList) => {
           );
         case "listEventsUI":
           return <ModuleListEventsUI key={module._key} input={module as any} />;
+        case "supportUI":
+          return <ModuleSupportUI key={module._key} input={module as any} />;
+        case "newsletterUI":
+          return (
+            <ModuleNewsletterUI key={module._key} input={module as any} />
+          );
         default:
           return null;
       }

@@ -21,27 +21,29 @@ const ModuleTextImageUI = ({ input }: Props) => {
         "module module--text-image-ui",
         direction === "right" && "module--text-image-ui--reverse",
       )}>
-      <div className='module__inner'>
-        <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter'>
-          {image?.asset && (
-            <div className='module__image md:col-span-5'>
-              <Figure
-                asset={image.asset}
-                caption={_localizeField(image.asset?.title) || ""}
-                alt={_localizeField(image.asset?.altText)}
-                author={_localizeField(image.asset?.description)}
-                copyright={_localizeField(image.asset?.creditLine)}
-              />
-            </div>
-          )}
-          {localizedText && (
-            <div className='module__text text md:col-span-7'>
-              <PortableText
-                value={localizedText}
-                components={portableTextComponents}
-              />
-            </div>
-          )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter'>
+            {image?.asset && (
+              <div className='module__image md:col-span-5'>
+                <Figure
+                  asset={image.asset}
+                  caption={_localizeField(image.asset?.title) || ""}
+                  alt={_localizeField(image.asset?.altText)}
+                  author={_localizeField(image.asset?.description)}
+                  copyright={_localizeField(image.asset?.creditLine)}
+                />
+              </div>
+            )}
+            {localizedText && (
+              <div className='module__text text md:col-span-7'>
+                <PortableText
+                  value={localizedText}
+                  components={portableTextComponents}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

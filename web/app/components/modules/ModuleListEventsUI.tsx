@@ -29,24 +29,26 @@ const ModuleListEventsUI = ({ input }: Props) => {
 
   return (
     <section className='module module--list-events'>
-      <div className='module__inner'>
-        {filterDefs.length > 0 && (
-          <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
-        )}
-        {filteredItems.length > 0 && (
-          <div
-            className='grid md:grid-cols-4 gap-gutter'
-            style={{
-              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-              justifyContent: "center",
-            }}>
-            {filteredItems.map((item: EventExpanded, index: number) => (
-              <Fragment key={`${item._id}-${index}`}>
-                <CardEvent input={item} size='sm' />
-              </Fragment>
-            ))}
-          </div>
-        )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          {filterDefs.length > 0 && (
+            <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
+          )}
+          {filteredItems.length > 0 && (
+            <div
+              className='grid md:grid-cols-4 gap-gutter'
+              style={{
+                gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
+                justifyContent: "center",
+              }}>
+              {filteredItems.map((item: EventExpanded, index: number) => (
+                <Fragment key={`${item._id}-${index}`}>
+                  <CardEvent input={item} size='sm' />
+                </Fragment>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

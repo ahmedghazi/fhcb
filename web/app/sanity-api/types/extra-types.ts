@@ -4,6 +4,8 @@ import {
   ImagesUIExpanded,
   VideoUIExpanded,
   TextImageUIExpanded,
+  SupportUIExpanded,
+  NewsletterUIExpanded,
 } from "./sanity-expanded.types";
 import {
   Artist,
@@ -63,7 +65,9 @@ export type ModuleType =
   | ListSerieThematiqueUI
   | ListEventsUI
   | ListExhibitionsUI
-  | ListExhibitionsPastUI;
+  | ListExhibitionsPastUI
+  | SupportUIExpanded
+  | NewsletterUIExpanded;
 
 export interface ModulesList {
   modules?: Array<
@@ -121,6 +125,12 @@ export interface ModulesList {
     | ({
         _key: string;
       } & ListExhibitionsPastUI)
+    | ({
+        _key: string;
+      } & SupportUIExpanded)
+    | ({
+        _key: string;
+      } & NewsletterUIExpanded)
   >;
 }
 

@@ -33,25 +33,27 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
 
   return (
     <section className='module module--list-exhibitions-past-ui'>
-      <div className='module__inner'>
-        {filterDefs.length > 0 && (
-          <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
-        )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          {filterDefs.length > 0 && (
+            <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
+          )}
 
-        {filteredItems.length > 0 && (
-          <GridMasonry columns={4}>
-            {filteredItems.map((item: ExhibitionExpanded, index: number) => (
-              <Fragment key={`--${index}`}>
-                <div
-                  style={{
-                    width: "var(--gridder-1_4)",
-                  }}>
-                  <CardExhibition input={item} size={"sm"} />
-                </div>
-              </Fragment>
-            ))}
-          </GridMasonry>
-        )}
+          {filteredItems.length > 0 && (
+            <GridMasonry columns={4}>
+              {filteredItems.map((item: ExhibitionExpanded, index: number) => (
+                <Fragment key={`--${index}`}>
+                  <div
+                    style={{
+                      width: "var(--gridder-1_4)",
+                    }}>
+                    <CardExhibition input={item} size={"sm"} />
+                  </div>
+                </Fragment>
+              ))}
+            </GridMasonry>
+          )}
+        </div>
       </div>
     </section>
   );

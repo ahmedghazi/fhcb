@@ -51,6 +51,8 @@ import listSerieThematiqueUI from './objects/modules/listSerieThematiqueUI'
 import listExhibitionsUI from './objects/modules/listExhibitionsUI'
 import listExhibitionsPastUI from './objects/modules/listExhibitionsPastUI'
 import listEventsUI from './objects/modules/listEventsUI'
+import supportUI from './objects/modules/supportUI'
+import newsletterUI from './objects/modules/newsletterUI'
 
 import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
@@ -63,6 +65,7 @@ import blockquote from './objects/blockquote'
 import embed from './objects/embed'
 import keyValGroup from './objects/keyValGroup'
 import sidebarGenerique from './objects/sidebarGenerique'
+import newsletterUI from './objects/modules/newsletterUI'
 
 export const schemaTypes = [
   settings,
@@ -126,5 +129,7 @@ export const schemaTypes = [
   listExhibitionsUI,
   listExhibitionsPastUI,
   listEventsUI,
+  supportUI,
+  newsletterUI,
 ]
 export default schemaTypes

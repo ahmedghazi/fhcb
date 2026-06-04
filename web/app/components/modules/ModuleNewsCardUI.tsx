@@ -35,40 +35,42 @@ const ModuleNewsCardUI = ({ input }: Props) => {
 
   return (
     <section className='module module--news-card-ui'>
-      <div className='module__inner'>
-        {title && (
-          <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
-        )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          {title && (
+            <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
+          )}
 
-        <div className={`grid md:grid-cols-${cols} items-start gap-gutter`}>
-          {exhibitions.map((item, index: number) => (
-            <CardExhibition
-              key={`exhibitions-${item._id}-${index}`}
-              input={item}
-              size='sm'
-            />
-          ))}
-          {events.map((item, index: number) => (
-            <CardEvent
-              key={`event-${item._id}-${index}`}
-              input={item}
-              size='sm'
-            />
-          ))}
-          {products.map((item, index: number) => (
-            <CardProduct
-              key={`product-${item._id}-${index}`}
-              input={item}
-              size='sm'
-            />
-          ))}
-          {feuilletages.map((item, index: number) => (
-            <CardFeuilletage
-              key={`feuilletage-${item._id}-${index}`}
-              input={item}
-              size='md'
-            />
-          ))}
+          <div className={`grid md:grid-cols-${cols} items-start gap-gutter`}>
+            {exhibitions.map((item, index: number) => (
+              <CardExhibition
+                key={`exhibitions-${item._id}-${index}`}
+                input={item}
+                size='sm'
+              />
+            ))}
+            {events.map((item, index: number) => (
+              <CardEvent
+                key={`event-${item._id}-${index}`}
+                input={item}
+                size='sm'
+              />
+            ))}
+            {products.map((item, index: number) => (
+              <CardProduct
+                key={`product-${item._id}-${index}`}
+                input={item}
+                size='sm'
+              />
+            ))}
+            {feuilletages.map((item, index: number) => (
+              <CardFeuilletage
+                key={`feuilletage-${item._id}-${index}`}
+                input={item}
+                size='md'
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

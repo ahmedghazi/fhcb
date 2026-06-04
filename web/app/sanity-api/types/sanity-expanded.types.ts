@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-03T12:21:01.901Z
+// Generated on: 2026-06-04T08:19:59.845Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
@@ -26,6 +26,8 @@ import type {
   IMAGE_IMAGES_QUERY_RESULT,
   FEUILLETAGE_QUERY_RESULT,
   ARTICLE_QUERY_RESULT,
+  NewsletterUI,
+  SupportUI,
   TextImageUI,
   KeyVal,
   ImageInGrid,
@@ -151,6 +153,14 @@ export type FEUILLETAGE_QUERY_RESULTExpanded = Omit<FEUILLETAGE_QUERY_RESULT, 'a
 export type ARTICLE_QUERY_RESULTExpanded = Omit<ARTICLE_QUERY_RESULT, 'tags' | 'imageCover'> & {
   tags?: Array<Tag> | null;
   imageCover?: (Omit<NonNullable<NonNullable<ARTICLE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type NewsletterUIExpanded = Omit<NewsletterUI, 'image'> & {
+  image?: (Omit<NonNullable<NonNullable<NewsletterUI>['image']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type SupportUIExpanded = Omit<SupportUI, 'image'> & {
+  image?: (Omit<NonNullable<NonNullable<SupportUI>['image']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type TextImageUIExpanded = Omit<TextImageUI, 'image'> & {

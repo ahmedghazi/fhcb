@@ -22,39 +22,43 @@ const ModuleSliderCardUI = ({ input }: Props) => {
 
   return (
     <section className='module module--slider-card-ui'>
-      <div className='module__inner'>
-        {title && (
-          <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
-        )}
-        {items && (
-          <KeenSlider>
-            {items.map((item: PostTypes, index) => (
-              <div
-                key={`${item && item._id}-${index}`}
-                className='keen-slider__slide'>
-                {item && item._type === "product" && (
-                  <CardProduct input={item} size='sm' />
-                )}
-                {item && item._type === "pageModulaire" && (
-                  <CardPageModulaire input={item} size='md' />
-                )}
-                {item && item._type === "artist" && <CardArtist input={item} />}
-                {item && item._type === "event" && (
-                  <CardEvent input={item} size='md' />
-                )}
-                {item && item._type === "exhibition" && (
-                  <CardExhibition input={item} size='md' />
-                )}
-                {item && item._type === "imageImages" && (
-                  <CardImageImages input={item} />
-                )}
-                {item && item._type === "feuilletage" && (
-                  <CardFeuilletage input={item} />
-                )}
-              </div>
-            ))}
-          </KeenSlider>
-        )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          {title && (
+            <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
+          )}
+          {items && (
+            <KeenSlider>
+              {items.map((item: PostTypes, index) => (
+                <div
+                  key={`${item && item._id}-${index}`}
+                  className='keen-slider__slide'>
+                  {item && item._type === "product" && (
+                    <CardProduct input={item} size='sm' />
+                  )}
+                  {item && item._type === "pageModulaire" && (
+                    <CardPageModulaire input={item} size='md' />
+                  )}
+                  {item && item._type === "artist" && (
+                    <CardArtist input={item} />
+                  )}
+                  {item && item._type === "event" && (
+                    <CardEvent input={item} size='md' />
+                  )}
+                  {item && item._type === "exhibition" && (
+                    <CardExhibition input={item} size='md' />
+                  )}
+                  {item && item._type === "imageImages" && (
+                    <CardImageImages input={item} />
+                  )}
+                  {item && item._type === "feuilletage" && (
+                    <CardFeuilletage input={item} />
+                  )}
+                </div>
+              ))}
+            </KeenSlider>
+          )}
+        </div>
       </div>
     </section>
   );

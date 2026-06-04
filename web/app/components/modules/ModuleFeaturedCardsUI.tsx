@@ -14,15 +14,17 @@ const ModuleFeaturedCardsUI = ({ input }: Props) => {
 
   return (
     <section className='module module--featured-cards-ui'>
-      <div className='module__inner'>
-        <div className={`grid md:grid-cols-${cols} items-start gap-gutter`}>
-          {items?.map((item, index: number) => (
-            <CardExhibition
-              key={`${item._id}-${index}`}
-              input={item}
-              size='sm'
-            />
-          ))}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          <div className={`grid md:grid-cols-${cols} items-start gap-gutter`}>
+            {items?.map((item, index: number) => (
+              <CardExhibition
+                key={`${item._id}-${index}`}
+                input={item}
+                size='sm'
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

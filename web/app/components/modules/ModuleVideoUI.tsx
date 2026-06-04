@@ -13,19 +13,20 @@ const ModuleVideoUI = ({ input }: Props) => {
 
   return (
     <section className='module module--video-ui'>
-      <div className='module__inner'>
-        {video?.embedUrl && (
-          <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
-            <ReactPlayer
-              src={video.embedUrl}
-              light={video.placeholder?.asset?.url}
-              // controls={false}
-              style={{ width: "100%", height: "100%" }}
-            />
-          </div>
-        )}
-        {/* <LogoFHCB type='icon' /> */}
-        {/* {video?.muxAsset && (
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          {video?.embedUrl && (
+            <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
+              <ReactPlayer
+                src={video.embedUrl}
+                light={video.placeholder?.asset?.url}
+                // controls={false}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+          )}
+          {/* <LogoFHCB type='icon' /> */}
+          {/* {video?.muxAsset && (
           <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
             <ReactPlayer
               src={`https://stream.mux.com/${video.muxAsset.playbackId}.m3u8`}
@@ -34,6 +35,7 @@ const ModuleVideoUI = ({ input }: Props) => {
             />
           </div>
         )} */}
+        </div>
       </div>
     </section>
   );

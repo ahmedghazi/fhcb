@@ -74,10 +74,12 @@ cards simili document
 
 # modules
 
-- listFeuilletage + filtres
-- listImageImages + filtres
+- # listFeuilletage + filtres
+- # listImageImages + filtres
 - listSeriesThematiques + filtres
 - home card video mux
+- newsletter
+- soutenir
 
 # idées
 

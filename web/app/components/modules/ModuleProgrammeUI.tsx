@@ -16,26 +16,28 @@ const ModuleProgrammeUI = ({ input }: Props) => {
 
   return (
     <section className='module module--programme-ui'>
-      <div className='module__inner'>
-        {title && <h2 className='module__title'>{title}</h2>}
-        {input.items && (
-          <div className='module__programme-list'>
-            {input.items.map((item: any) => (
-              <div key={item._id} className='module__programme-item'>
-                <Link href={_linkResolver(item)}>
-                  {item.image?.asset && <Figure asset={item.image.asset} />}
-                  <div className='module__programme-body'>
-                    <p>
-                      {item.title?.[locale as "fr" | "en"] ||
-                        item.title?.fr ||
-                        item.title}
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
-        )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          {title && <h2 className='module__title'>{title}</h2>}
+          {input.items && (
+            <div className='module__programme-list'>
+              {input.items.map((item: any) => (
+                <div key={item._id} className='module__programme-item'>
+                  <Link href={_linkResolver(item)}>
+                    {item.image?.asset && <Figure asset={item.image.asset} />}
+                    <div className='module__programme-body'>
+                      <p>
+                        {item.title?.[locale as "fr" | "en"] ||
+                          item.title?.fr ||
+                          item.title}
+                      </p>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

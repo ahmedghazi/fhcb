@@ -50,7 +50,12 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (actu, mise en acant, newsletter)',
       type: 'array',
-      of: [{type: 'newsCardUI'}, {type: 'featuredCardsUI'}],
+      of: [
+        {type: 'featuredCardsUI'},
+        {type: 'newsCardUI'},
+        {type: 'newsletterUI'},
+        {type: 'supportUI'},
+      ],
       group: 'editorial',
     }),
   ],

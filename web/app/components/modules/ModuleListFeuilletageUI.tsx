@@ -29,19 +29,25 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
 
   return (
     <section className='module module--list-feuilletage-ui'>
-      <div className='module__inner'>
-        {filterDefs.length > 0 && (
-          <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
-        )}
-        {filteredItems.length > 0 && (
-          <div className='grid md:grid-cols-12 items-start gap-gutter'>
-            {filteredItems.map((item: FeuilletageExpanded, index: number) => (
-              <Fragment key={`${item._id}-${index}`}>
-                <CardFeuilletage input={item} size='md' />
-              </Fragment>
-            ))}
+      <div className='container-fluid'>
+        <div className='container-fluid'>
+          <div className='module__inner'>
+            {filterDefs.length > 0 && (
+              <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
+            )}
+            {filteredItems.length > 0 && (
+              <div className='grid md:grid-cols-12 items-start gap-gutter'>
+                {filteredItems.map(
+                  (item: FeuilletageExpanded, index: number) => (
+                    <Fragment key={`${item._id}-${index}`}>
+                      <CardFeuilletage input={item} size='md' />
+                    </Fragment>
+                  ),
+                )}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

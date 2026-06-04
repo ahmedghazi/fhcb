@@ -10,9 +10,9 @@ type Props = {
 const ContentModulaire = ({ input }: Props) => {
   return (
     <div className='content--modulaire relative'>
-      <div className='container-fluid'>
-        {input.modules && <Modules modules={input.modules} />}
-      </div>
+      {/* <div className='container-fluid'> */}
+      {input.modules && <Modules modules={input.modules} />}
+      {/* </div> */}
     </div>
   );
 };

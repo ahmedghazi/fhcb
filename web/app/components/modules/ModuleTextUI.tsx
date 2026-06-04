@@ -11,19 +11,20 @@ type Props = {
 };
 
 const ModuleTextUI = ({ input }: Props) => {
-  const { locale } = useLocale();
   const text = _localizeField(input.text);
   const title = _localizeField(input.title);
 
   return (
     <section className='module module--text-ui'>
-      <div className='module__inner'>
-        {title && <h2 className='module__title c-h1_5'>{title}</h2>}
-        {text && (
-          <div className='module__text text'>
-            <PortableText value={text} components={portableTextComponents} />
-          </div>
-        )}
+      <div className='container-fluid'>
+        <div className='module__inner'>
+          {title && <h2 className='module__title c-h1_5'>{title}</h2>}
+          {text && (
+            <div className='module__text text'>
+              <PortableText value={text} components={portableTextComponents} />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

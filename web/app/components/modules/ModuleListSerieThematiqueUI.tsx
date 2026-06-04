@@ -12,16 +12,20 @@ type Props = {
 const ModuleListSerieThematiqueUI = ({ input }: Props) => {
   return (
     <section className='module module--list-serie-thematique-ui'>
-      <div className='module__inner'>
-        {input.items && (
-          <div className='grid md:grid-cols-4 items-start gap-gutter'>
-            {input.items.map((item: ArticleExpanded, index: number) => (
-              <Fragment key={`${item._id}-${index}`}>
-                <CardArticle input={item} size='md' />
-              </Fragment>
-            ))}
+      <div className='container-fluid'>
+        <div className='container-fluid'>
+          <div className='module__inner'>
+            {input.items && (
+              <div className='grid md:grid-cols-4 items-start gap-gutter'>
+                {input.items.map((item: ArticleExpanded, index: number) => (
+                  <Fragment key={`${item._id}-${index}`}>
+                    <CardArticle input={item} size='md' />
+                  </Fragment>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
