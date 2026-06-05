@@ -9,6 +9,12 @@ export default defineField({
 
   fields: [
     defineField({
+      name: 'location',
+      title: 'Lieu',
+      type: 'reference',
+      to: [{type: 'location'}],
+    }),
+    defineField({
       type: 'date',
       name: 'du',
       title: 'Du',

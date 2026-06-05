@@ -18,6 +18,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'programme',
     'pageModulaire',
     'exhibition',
+    'location',
     'event',
     'product',
     'home',
@@ -74,6 +75,8 @@ export const structure = (S: any) =>
         .title('Expostions')
         .schemaType('exhibition')
         .child(S.documentTypeList('exhibition')),
+      S.listItem().title('Lieux').schemaType('location').child(S.documentTypeList('location')),
+      S.divider(),
 
       S.listItem().title('Événements').schemaType('event').child(S.documentTypeList('event')),
 

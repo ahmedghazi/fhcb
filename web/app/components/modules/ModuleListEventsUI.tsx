@@ -36,11 +36,13 @@ const ModuleListEventsUI = ({ input }: Props) => {
           )}
           {filteredItems.length > 0 && (
             <div
-              className='grid md:grid-cols-4 gap-gutter'
-              style={{
-                gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-                justifyContent: "center",
-              }}>
+              className='grid--centered'
+              style={
+                {
+                  // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
+                  // justifyContent: "center",
+                }
+              }>
               {filteredItems.map((item: EventExpanded, index: number) => (
                 <Fragment key={`${item._id}-${index}`}>
                   <CardEvent input={item} size='sm' />

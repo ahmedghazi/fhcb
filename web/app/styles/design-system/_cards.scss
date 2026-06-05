@@ -1,35 +1,26 @@
-/**
-Look 1 = size = sm
-Look 2 = size = md
-look 3 = size = md + grid  + footer
-look 4 = size = lg + grid
-look 5 = expo à la une (img prems sans fond perdu
-*/
 .card {
   border-radius: var(--radius);
   background-color: var(--color-white);
-
   overflow: clip;
   line-height: 1;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
 
   .card__inner {
     display: flex;
     padding: var(--spacing-xs);
-  }
-  &--sm {
-    grid-column: span 3;
-  }
-  &--md {
-    grid-column: span 6;
-    &-alt {
-      grid-column: span 4;
-    }
-  }
-  &--lg {
-    grid-column: span 12;
+    flex: 1;
   }
 
+  // ── Tailles / colonnes grille ───────────────────────────────────────────────
+
   &--sm {
+    grid-column: span 3;
+    &-alt {
+      grid-column: span 5;
+    }
+
     .card__inner {
       flex-direction: column;
       gap: var(--spacing-xs);
@@ -41,13 +32,14 @@ look 5 = expo à la une (img prems sans fond perdu
         justify-content: center;
       }
     }
-    &.card--exhibition {
-      .card__inner {
-        display: flex;
-      }
-    }
   }
+
   &--md {
+    grid-column: span 6;
+    &-alt {
+      grid-column: span 7;
+    }
+
     height: 100%;
     .card__inner {
       height: 100%;
@@ -63,23 +55,51 @@ look 5 = expo à la une (img prems sans fond perdu
       .grid {
         height: 100%;
       }
-      // .grid,
-      // .card__media,
-      // figure,
-      // img {
-      //   height: 100% !important;
-      // }
     }
+
     &.card--is-portrait {
-      .card__header {
-        // display: flex;
-        // flex-direction: column;
-        // // gap: var(--spacing-xs);
-        // justify-content: space-between;
+      .card__inner {
+        display: block;
+        .grid {
+          grid-template-columns: repeat(12, minmax(0, 1fr));
+          gap: var(--spacing-xs);
+          width: 100%;
+          .card__body {
+            grid-column: span 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+          .card__media {
+            grid-column: span 7;
+          }
+        }
       }
     }
+
+    // footer detached
+    .card__inner + .card__footer {
+      padding: var(--spacing-xs);
+    }
   }
+
   &--lg {
+    grid-column: span 12;
+
+    .grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: var(--spacing-xs);
+      width: 100%;
+      .card__body {
+        grid-column: span 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card__media {
+        grid-column: span 7;
+      }
+    }
     .card__body {
       height: 100%;
       display: flex;
@@ -91,12 +111,13 @@ look 5 = expo à la une (img prems sans fond perdu
       object-fit: contain;
       object-position: right;
     }
-    &.card--is-landscape {
-      img {
-        // height: var(--main-h) !important;
-      }
+    .card__footer .btn {
+      width: auto;
+      display: inline-block;
+      align-self: flex-start;
     }
   }
+
   &--md,
   &--lg {
     &.card--event,
@@ -108,19 +129,21 @@ look 5 = expo à la une (img prems sans fond perdu
       }
     }
   }
+
+  // ── États ───────────────────────────────────────────────────────────────────
+
   &--is-current,
   &--is-futur {
     .card__inner {
-      // padding: 0;
       display: block;
     }
     .card__body {
-      // padding: var(--spacing-xs);
       display: flex;
       flex-direction: column;
       gap: var(--spacing-xs);
     }
   }
+
   &--is-current {
     .card__inner {
       padding: 0;
@@ -130,23 +153,46 @@ look 5 = expo à la une (img prems sans fond perdu
       padding: var(--spacing-xs);
     }
   }
-  &--is-futur {
-    &--sm {
-      background-color: red;
-    }
-  }
 
-  &--page-modulaire {
-    h2 {
-      text-align: center;
-    }
-  }
+  // ── Types / couleurs ────────────────────────────────────────────────────────
+
   &--product {
     background-color: var(--color-beige);
   }
   &--pret,
   &--exhibition {
     background-color: var(--color-bleu);
+  }
+  &--exhibition {
+    &.card--md-alt {
+      .card__inner .grid {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      .card__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+    &:has(.fhcb-dates--multiple) {
+      &:hover {
+        .fhcb-date {
+          display: block;
+        }
+      }
+      .fhcb-date {
+        display: none;
+        &:first-of-type {
+          display: block;
+        }
+      }
+    }
+    &--sm {
+      .btn {
+        display: none;
+      }
+    }
   }
   &--visites {
     background-color: var(--color-jaune);
@@ -157,7 +203,6 @@ look 5 = expo à la une (img prems sans fond perdu
       background-color: var(--color-jaune);
     }
   }
-
   &--artist {
     background-color: var(--color-rose-50);
     &,
@@ -170,7 +215,6 @@ look 5 = expo à la une (img prems sans fond perdu
   }
   &--image-images {
     .card__inner {
-      // height: 100%;
       justify-content: space-between;
     }
     .btn {
@@ -188,6 +232,9 @@ look 5 = expo à la une (img prems sans fond perdu
     }
   }
   &--page-modulaire {
+    h2 {
+      text-align: center;
+    }
     .card__header {
       text-align: center;
       .card__sup-title {
@@ -195,133 +242,111 @@ look 5 = expo à la une (img prems sans fond perdu
       }
     }
   }
+
+  // ── Éléments ────────────────────────────────────────────────────────────────
+
   &__header {
     display: flex;
     flex-direction: column;
-    gap: 0rem;
-
+    gap: 0;
     h2 {
       line-height: 1;
     }
   }
+
   &__footer {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
-    .btns {
+    .card__btns {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-xs);
+      .btn--secondary {
+        opacity: 0.5;
+      }
     }
   }
+
   &__info {
     line-height: 1.4;
   }
-  // &--l1a {
-  //   /* 1 image centrée */
-  //   .card__figure {
-  //     flex: 2;
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: center;
-  //   }
-  // }
-  // &--l1b {
-  //   /* 1 or 2 images */
-  //   figure {
-  //     display: flex;
-  //     flex-direction: column;
-  //     gap: var(--spacing-xs);
-  //   }
-  // }
-  // &--l1c {
-  //   &:hover .card__footer .btns {
-  //     display: flex;
-  //   }
-  //   .card__footer .btns {
-  //     display: none;
-  //   }
-  // }
-  // &--l2 {
-  //   /* carte large */
-  //   .card__figure {
-  //     flex: 2;
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: center;
-  //   }
-  // }
-  // &--l3 {
-  //   /* carte large + grille (5/7) */
-  //   &.card--is-landscape {
-  //   }
-  //   &.card--is-current {
-  //     padding: 0;
-  //     .card__header {
-  //       padding: var(--spacing-xs);
-  //     }
-  //     .card__info {
-  //       margin-bottom: var(--spacing-xs);
-  //     }
-  //   }
-  //   .card__inner {
-  //     display: flex;
-  //     flex-direction: column;
-  //     gap: var(--spacing-xs);
-  //   }
-  //   .card__header__figure {
-  //     display: grid;
-  //     grid-template-columns: repeat(12, minmax(0, 1fr));
-  //     gap: var(--spacing-xs);
-  //   }
+}
 
-  //   .card__header {
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: space-between;
-  //     height: 100%;
-  //   }
-  //   .card__figure {
-  //     img {
-  //       width: 100%;
-  //     }
-  //   }
-  // }
-  // &--l4 {
-  //   /* carte large + grille (5/7)  */
-  //   // display: flex;
-  //   justify-content: space-between;
-  //   flex-direction: row;
-  //   .card__header__footer {
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: space-between;
-  //     gap: var(--spacing-xs);
-  //   }
-  //   .card__header__footer {
-  //     // flex: 2;
-  //   }
-  //   .card__figure {
-  //     img {
-  //       // min-height: 34rem;
-  //     }
-  //   }
-  // }
+// ─── card__inner modifiers ────────────────────────────────────────────────────
 
-  // &--is-landscape {
-  //   .card__header {
-  //     grid-column: span 5;
-  //   }
-  //   .card__figure {
-  //     grid-column: span 7;
-  //   }
-  // }
-  // &--is-portrait {
-  //   .card__header {
-  //     grid-column: span 7;
-  //   }
-  //   .card__figure {
-  //     grid-column: span 5;
-  //   }
-  // }
+.card__inner {
+  &--col {
+    flex-direction: column;
+  }
+
+  &--row {
+    flex-direction: row;
+    align-items: flex-start;
+
+    .card__media {
+      flex: 1;
+      order: 2;
+      position: relative;
+
+      .card__badge {
+        position: absolute;
+        top: var(--spacing-xs);
+        right: var(--spacing-xs);
+        z-index: 1;
+      }
+    }
+
+    .card__body {
+      flex: 1;
+      order: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  &--no-padding {
+    padding: 0;
+  }
+
+  &--row-reverse {
+    .card__media {
+      order: 1;
+    }
+    .card__body {
+      order: 2;
+    }
+  }
+}
+
+// ─── Vidéo hover ─────────────────────────────────────────────────────────────
+
+.card__video--hover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card__video--hover {
+  opacity: 1;
+}
+
+// ─── Deux images ─────────────────────────────────────────────────────────────
+
+.card__media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+
+  &:has(figure + figure) {
+    flex-direction: row;
+    figure {
+      flex: 1;
+    }
+  }
 }

@@ -61,18 +61,24 @@ type FhcbDateExtended = FhcbDate & {
 };
 
 // Sanity `type: 'date'` stores YYYY-MM-DD — append T00:00:00 to avoid UTC offset shift
-const parseDate = (d: string) => new Date(`${d}T00:00:00`);
+const parseDate = (d: string | null | undefined): Date | null => {
+  if (!d || typeof d !== "string") return null;
+  const date = new Date(`${d}T00:00:00`);
+  return isNaN(date.getTime()) ? null : date;
+};
 
 export const _fhcbDates = (
   dates: FhcbDate,
   locale = "fr",
 ): FhcbDateFormatted => {
+  if (!dates) return { type: "simple", date: "" };
   const { du, au, withTime, timeStart, timeEnd } = dates as FhcbDateExtended;
   const bcp47 = toBcp47(locale);
 
   if (!du) return { type: "simple", date: "" };
 
   const duDate = parseDate(du);
+  if (!duDate) return { type: "simple", date: "" };
   const duYear = duDate.getFullYear();
 
   // Single date with time
@@ -95,6 +101,13 @@ export const _fhcbDates = (
   }
 
   const auDate = parseDate(au);
+  if (!auDate) {
+    // au invalide → on affiche juste du
+    return {
+      type: "simple",
+      date: `${ordinal(duDate.getDate(), locale)} ${monthName(duDate, bcp47)} ${duYear}`,
+    };
+  }
   const auYear = auDate.getFullYear();
   const timeProps =
     withTime && timeStart ? { timeStart, ...(timeEnd ? { timeEnd } : {}) } : {};

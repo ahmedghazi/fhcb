@@ -50,47 +50,8 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--programme'
       data-template='programme'
       data-slug={data.slug?.current || ""}>
-      <div className='container-fluid'>
-        <PageHeader h1={data.title} />
-        {/* {data.items === "exhibitions-past" && (
-          <div className='filters'>filters</div>
-        )}
-        {data.resolvedItems && (
-          <div
-            className='grid md:grid-cols-4 gap-gutter'
-            style={{
-              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-              justifyContent: "center",
-            }}>
-            {data.resolvedItems.map((item) => (
-              <Fragment key={item._id}>
-                {item._type === "exhibition" && (
-                  <div className={`md:col-span-${isExhibitionSmall ? 1 : 4}`}>
-                    <CardExhibition
-                      input={item as unknown as ExhibitionExpanded}
-                      size={isExhibitionSmall ? "sm" : "lg"}
-                    />
-                  </div>
-                )}
-                {item._type === "event" && (
-                  <div className={`md:col-span-${isEventSmall ? 1 : 4}`}>
-                    <CardEvent
-                      input={item as unknown as EventExpanded}
-                      size={isEventSmall ? "sm" : "lg"}
-                    />
-                  </div>
-                )}
-              </Fragment>
-            ))}
-
-
-          </div>
-        )} */}
-        {data.modules && <Modules modules={data.modules as any} />}
-        {/* <pre>{data.items}</pre>
-            <pre>{JSON.stringify(data.filterTags, null, 2)}</pre>
-            <pre>{JSON.stringify(data.resolvedItems, null, 2)}</pre> */}
-      </div>
+      <PageHeader h1={data.title} />
+      {data.modules && <Modules modules={data.modules as any} />}
     </div>
   );
 };

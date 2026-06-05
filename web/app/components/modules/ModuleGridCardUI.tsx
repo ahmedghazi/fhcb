@@ -28,7 +28,7 @@ const ModuleGridCardUI = ({ input }: Props) => {
             </h2>
           )}
           {input.items && (
-            <div className='grid md:grid-cols-12 gap-gutter'>
+            <div className='grid--centered'>
               {input.items.map((item: PostTypes, index: number) => (
                 <Fragment key={`${item && item._id}-${index}`}>
                   {item && item._type === "exhibition" && (

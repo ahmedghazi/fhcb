@@ -224,12 +224,17 @@ const cardRefModulaire = `
 export const cardRefExhibition = `
   _type,
   _id,
-    title,
+title,
   slug,
   imageCover{
     ${imageAsset}
   },
-  dates,
+  color,
+  dates[]{
+    ...,
+    location->
+  },
+  location,
   artists[]->{
     _id,
     name

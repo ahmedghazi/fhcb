@@ -89,11 +89,23 @@ export default defineType({
       group: 'editorial',
     }),
     defineField({
+      name: 'color',
+      type: 'color',
+      group: 'editorial',
+      hidden: ({parent}) =>
+        parent?.location !== 'inside' &&
+        parent?.location !== 'inside-cube' &&
+        parent?.location !== 'inside-tube',
+    }),
+    defineField({
       name: 'location',
+      title: 'Lieux',
       type: 'string',
       options: {
         list: [
           {title: 'À la fondation', value: 'inside'},
+          {title: 'À la fondation Cube', value: 'inside-cube'},
+          {title: 'À la fondation Tube', value: 'inside-tube'},
           {title: 'Hors les murs', value: 'outside'},
           {title: 'Itinérante', value: 'itinerant'},
         ],

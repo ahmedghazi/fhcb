@@ -1,14 +1,8 @@
 "use client";
-import { ImageImages } from "@/app/sanity-api/types/sanity.types";
-import {
-  _linkResolver,
-  _localizeField,
-  _localizeText,
-} from "@/app/sanity-api/utils";
-import Link from "next/link";
-import React from "react";
-import Embed from "../Embed";
+import clsx from "clsx";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import { imageImagesToCard } from "./adapters";
+import CardBase from "./CardBase";
 
 type Props = {
   input: ImageImagesExpanded;
@@ -16,26 +10,10 @@ type Props = {
 };
 
 const CardImageImages = ({ input, size = "md" }: Props) => {
-  const { index, chercheur, title, video } = input;
+  const props = imageImagesToCard(input);
   return (
-    <div className='card card--md card--image-images'>
-      <div className='card__inner'>
-        <div className='card__header'>
-          <div className='card__tag c-tag'>une image, des images #{index} </div>
-          {title && (
-            <h2 className='card__title c-h2'>{_localizeField(title)}</h2>
-          )}
-          {chercheur?.name && <div className='card__subtitle c-h3'>{chercheur.name}</div>}
-        </div>
-        <div className='card__media'>{video && <Embed input={video} />}</div>
-        <div className='card__footer'>
-          <div className='btns'>
-            <Link href={_linkResolver(input)} className='btn btn--primary'>
-              {_localizeText("discover")}
-            </Link>
-          </div>
-        </div>
-      </div>
+    <div className={clsx("card card--image-images", `card--${size}`)}>
+      <CardBase {...props} />
     </div>
   );
 };

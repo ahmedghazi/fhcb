@@ -14,6 +14,7 @@ import imageImages from './documents/imageImages'
 import feuilletage from './documents/feuilletage'
 import chercheur from './documents/chercheur'
 import serie from './documents/serie'
+import location from './documents/location'
 
 import {seoSchema} from './features/seo'
 
@@ -83,6 +84,7 @@ export const schemaTypes = [
   imageImages,
   feuilletage,
   chercheur,
+  location,
   // serie,
 
   localeString,

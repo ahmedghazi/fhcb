@@ -16,11 +16,13 @@ const RebondsBranche = ({ input }: Props) => {
       <div className='container-fluid'>
         {/* <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2> */}
         <div
-          className='grid md:grid-cols-12 gap-gutter'
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_12))",
-            justifyContent: "center",
-          }}>
+          className='grid--centered'
+          style={
+            {
+              // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_12))",
+              // justifyContent: "center",
+            }
+          }>
           {input?.map((item, i) => (
             <CardBranche
               key={i}

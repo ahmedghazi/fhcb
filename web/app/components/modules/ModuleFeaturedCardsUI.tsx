@@ -2,6 +2,7 @@ import React from "react";
 import { FeaturedCardsUI } from "@/app/sanity-api/types/sanity.types";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardExhibition from "../ui/cards/CardExhibition";
+import CardExhibitionFeatured from "../ui/cards/CardExhibitionFeatured";
 
 type Props = {
   input: FeaturedCardsUI;
@@ -18,10 +19,10 @@ const ModuleFeaturedCardsUI = ({ input }: Props) => {
         <div className='module__inner'>
           <div className={`grid md:grid-cols-${cols} items-start gap-gutter`}>
             {items?.map((item, index: number) => (
-              <CardExhibition
+              <CardExhibitionFeatured
                 key={`${item._id}-${index}`}
                 input={item}
-                size='sm'
+                // size='sm'
               />
             ))}
           </div>

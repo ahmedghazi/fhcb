@@ -17,7 +17,7 @@ const RebondsArtistes = ({ input }: Props) => {
     <section className='rebonds rebonds--image-images'>
       <div className='container-fluid'>
         <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2>
-        <div className='grid md:grid-cols-12 gap-gutter'>
+        <div className='grid--centered'>
           {input?.map((item, i) => (
             <CardArtist key={i} input={item} size='sm' />
           ))}

@@ -34,25 +34,35 @@ cards simili document
 - # grid masonry
 - # pb expo en cours dans https://fhcb-preprod.vercel.app/histoire-and-missions
 - # slider card ajouter les doc manquant (image images, feuilletage, ...)
-- expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
-- add doc chercheur (name, slug), présent dans feuilletages, image Images, et dans leurs page listes -> filtres
-- carte expo tube, cube (check trello)
-- modules newsletter, soutenir la fondation
+- # add doc chercheur (name, slug), présent dans feuilletages, image Images, et dans leurs page listes -> filtres
 - # slider card même hauteur
 - # filtre list (cherche automatique tous les artistes ou tag ou chercheur)
 - # filtre radio
-- régler grille cartes (tailles)
-- expo hors les murs via le champ location
 - # rebonds page racine > rebonds page
-- rebonds article > rebonds article (même catégorie)
 - # rebonds artiste > autres artistes (aléatoire)
 - # rebonds branche = imageImages, série, ... sinon fond blanc
-- wide reg
 - # cron qui update les current/past categories
-- updates doc icons
 - # image images
 - # feuilletage
 - # single page feuilletage
+- updates doc icons
+- # wide reg
+- # grid centered
+- rebonds article > rebonds article (même catégorie)
+- expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
+- expo hors les murs via le champ location
+- # régler grille cartes (tailles)
+- # carte expo tube, cube (check trello)
+- pastilles
+- branch hover
+- card avec 2nd btn hover
+- date avec location
+- expo passée: itinérante, hors les murs
+
+## card expos
+
+Si l’expo est au cube (espace principal) = carte verticale (même si image paysage)
+Si l’expo est au tube (espace secondaire) = carte horizontale (même si image portrait)
 
 ## Grilles
 
@@ -78,8 +88,8 @@ cards simili document
 - # listImageImages + filtres
 - listSeriesThematiques + filtres
 - home card video mux
-- newsletter
-- soutenir
+- # newsletter
+- # soutenir
 
 # idées
 

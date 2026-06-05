@@ -2,8 +2,8 @@
   padding-top: var(--spacing-xl);
   & > div > .grid {
     // grid-template-columns: repeat(auto-fit, var(--gridder-1_12));
-    grid-template-columns: repeat(12, 1fr);
-    justify-content: center;
+    // grid-template-columns: repeat(12, 1fr);
+    // justify-content: center;
   }
   h2.c-h1_5 {
     text-align: center;

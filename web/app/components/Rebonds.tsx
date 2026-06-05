@@ -30,7 +30,7 @@ const Rebonds = ({ input }: Props) => {
       <div className='container-fluid'>
         <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2>
         <div
-          className={clsx("grid md:grid-cols-12 gap-gutter items-start-")}
+          className='grid--centered'
           style={
             {
               // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",

@@ -41,12 +41,19 @@ const ModuleNewsCardUI = ({ input }: Props) => {
             <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           )}
 
-          <div className={`grid md:grid-cols-${cols} items-start gap-gutter`}>
+          <div
+            className='grid--centered'
+            style={
+              {
+                // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_12))",
+                // justifyContent: "center",
+              }
+            }>
             {exhibitions.map((item, index: number) => (
               <CardExhibition
                 key={`exhibitions-${item._id}-${index}`}
                 input={item}
-                size='sm'
+                size='md'
               />
             ))}
             {events.map((item, index: number) => (

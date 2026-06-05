@@ -32,6 +32,11 @@ const PPRightGrotesk = localFont({
       style: "italic",
     },
     {
+      path: "./styles/fonts/PPRightGrotesk-WideRegular.woff",
+      weight: "450",
+      style: "normal",
+    },
+    {
       path: "./styles/fonts/PPRightGrotesk-Light.woff",
       weight: "300",
       style: "normal",

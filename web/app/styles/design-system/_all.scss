@@ -3,6 +3,28 @@
   padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
 }
 
+.grid--centered {
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit, var(--gridder-1_12));
+  // grid-template-columns: repeat(auto-fill, var(--gridder-1_12));
+  // grid-template-columns: repeat(auto-fit, var(--gridder-1_12));
+
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+  .card {
+    flex-basis: var(--gridder-3_12);
+    width: var(--gridder-3_12);
+    flex-shrink: 0;
+    height: auto;
+    &--md {
+      flex-basis: var(--gridder-6_12);
+      width: var(--gridder-6_12);
+    }
+  }
+}
 figure {
   figcaption {
     text-align: right;
@@ -23,4 +45,8 @@ textarea {
   &::placeholder {
     color: black;
   }
+}
+
+.fhcb-date {
+  margin-bottom: 0.5em;
 }
