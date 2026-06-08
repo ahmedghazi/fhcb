@@ -98,7 +98,7 @@ const Rebonds = ({ input }: Props) => {
                 <CardFeuilletage
                   key={i}
                   input={item as unknown as FeuilletageExpanded}
-                  size='sm'
+                  size='md'
                 />
               );
             }

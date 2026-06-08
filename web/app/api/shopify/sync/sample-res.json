@@ -1,0 +1,5046 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/15184282452354",
+      "handle": "francois-xavier-gbre-radio-ballast-signe",
+      "title": "François-Xavier Gbré, Radio Ballast (signé) (FR)",
+      "descriptionHtml": "",
+      "totalInventory": 50,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/radio-ballast-couv-728x462.jpg?v=1771668644",
+              "altText": null,
+              "width": 728,
+              "height": 462
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/55986445681026",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15193742573954",
+      "handle": "francois-xavier-gbre-radio-ballast-signe-en",
+      "title": "François-Xavier Gbré, Radio Ballast (signé) (EN)",
+      "descriptionHtml": "",
+      "totalInventory": 50,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/radio-ballast-couv-728x462_cc716054-d684-4e87-a6f0-cb17a4531628.jpg?v=1771680046",
+              "altText": null,
+              "width": 728,
+              "height": 462
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56025273106818",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195295842690",
+      "handle": "henri-cartier-bresson-puis-je-garder-quelques-secrets",
+      "title": "Henri Cartier-Bresson, Puis-je garder quelques secrets ?",
+      "descriptionHtml": "",
+      "totalInventory": 15,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "24.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/thumbnail_Couv_PGQSRECADRE-230x290.png?v=1771680000",
+              "altText": null,
+              "width": 230,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56034843623810",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "24.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195307803010",
+      "handle": "raymond-meeks-the-inhabitants-fr",
+      "title": "Raymond Meeks, The Inhabitants (FR)",
+      "descriptionHtml": "",
+      "totalInventory": 50,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Screenshot-2023-10-18-at-13-43-53-TheInhabitants_angled_600x.jpg-Image-WEBP-600-x-700-pixels-280x290_2550c7cd-f0f9-44fe-a53f-33d64a004a51.png?v=1771679977",
+              "altText": null,
+              "width": 280,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56034897494402",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195377205634",
+      "handle": "raymond-meeks-the-inhabitants-en",
+      "title": "Raymond Meeks, The Inhabitants (EN)",
+      "descriptionHtml": "",
+      "totalInventory": 9,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Screenshot-2023-10-18-at-13-43-53-TheInhabitants_angled_91028e75-8d15-4060-a291-1aeda5442112_600x.jpg-Image-WEBP-600-x-700-pixels-280x290.png?v=1771679958",
+              "altText": null,
+              "width": 280,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56034987508098",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195382317442",
+      "handle": "carolyn-drake-men-untitled",
+      "title": "Carolyn Drake, Men Untitled",
+      "descriptionHtml": "",
+      "totalInventory": 6,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/cover-224x290.jpg?v=1771679935",
+              "altText": null,
+              "width": 224,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56034999828866",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195390902658",
+      "handle": "henri-cartier-bresson-lautre-couronnement",
+      "title": "Henri Cartier-Bresson, L'Autre Couronnement",
+      "descriptionHtml": "",
+      "totalInventory": 100,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "49.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/HCB_COUV_-205x290.jpg?v=1771679503",
+              "altText": null,
+              "width": 205,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035010380162",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "49.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195397587330",
+      "handle": "vasantha-yogananthan-mystery-street",
+      "title": "Vasantha Yogananthan, Mystery Street",
+      "descriptionHtml": "",
+      "totalInventory": 35,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/MS_Cover-1-293x290.jpg?v=1771679432",
+              "altText": null,
+              "width": 293,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035031187842",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195401093506",
+      "handle": "helen-levitt-henri-cartier-bresson-mexique-mexico",
+      "title": "Helen Levitt & Henri Cartier-Bresson, Mexique / Mexico",
+      "descriptionHtml": "",
+      "totalInventory": 50,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Cover_HCB_HV_Mexico-242x290.jpg?v=1771678781",
+              "altText": null,
+              "width": 242,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035051504002",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195403420034",
+      "handle": "raymond-depardon-entre-temps",
+      "title": "Raymond Depardon, Entre-Temps",
+      "descriptionHtml": "",
+      "totalInventory": 20,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/EntreTemps_COUV-copie-728x553.png?v=1771678758",
+              "altText": null,
+              "width": 728,
+              "height": 553
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035065495938",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195406827906",
+      "handle": "jan-groover-laboratoire-des-formes",
+      "title": "Jan Groover, Laboratoire des Formes",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/JG-16-218x290.jpg?v=1771678676",
+              "altText": null,
+              "width": 218,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035073163650",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195408826754",
+      "handle": "henri-cartier-bresson-martin-parr-les-anglais-the-english",
+      "title": "Henri Cartier-Bresson & Martin Parr, Les Anglais / The English",
+      "descriptionHtml": "",
+      "totalInventory": 0,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "42.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/COUV_lesanglais_20220914-22-331x290.jpg?v=1771678537",
+              "altText": null,
+              "width": 331,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035077685634",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": false,
+              "price": { "amount": "42.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195417739650",
+      "handle": "nan-goldin-ballad-of-sexual-dependency",
+      "title": "Nan Goldin, Ballad of Sexual Dependency",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "50.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/9781597112086-307x290.jpg?v=1771678495",
+              "altText": null,
+              "width": 307,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035092169090",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "50.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195418591618",
+      "handle": "henri-cartier-bresson-photopoche-henri-cartier-bresson",
+      "title": "Henri Cartier-Bresson, Photopoche Henri Cartier-Bresson",
+      "descriptionHtml": "",
+      "totalInventory": 50,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "14.5", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/9782330203320-191x290.jpg?v=1771680244",
+              "altText": null,
+              "width": 191,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035092824450",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "14.5" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195434123650",
+      "handle": "henri-cartier-bresson-tete-a-tete",
+      "title": "Henri Cartier-Bresson, Tête à Tête",
+      "descriptionHtml": "",
+      "totalInventory": 5,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "25.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Teteatetecouv-231x290.jpg?v=1771678353",
+              "altText": null,
+              "width": 231,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035107275138",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "25.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195458929026",
+      "handle": "mathieu-pernot-la-ruine-de-sa-demeure",
+      "title": "Mathieu Pernot, La ruine de sa demeure",
+      "descriptionHtml": "",
+      "totalInventory": 20,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/FHCB_Mathieu-Pernot_La-ruine-de-sa-demeure-348x290.jpg?v=1771678266",
+              "altText": null,
+              "width": 348,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035121725826",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195473674626",
+      "handle": "masahisa-fukase-sasuke",
+      "title": "Masahisa Fukase, Sasuke",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/sasuke-224x290.png?v=1771678240",
+              "altText": null,
+              "width": 224,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035129328002",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195477213570",
+      "handle": "sergio-larrain-valparaiso-nouvelle-edition",
+      "title": "Sergio Larrain, Valparaiso (nouvelle édition)",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "49.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/26863-4-2-373x290.jpg?v=1771678179",
+              "altText": null,
+              "width": 373,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035136438658",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "49.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195480293762",
+      "handle": "karim-kal-mons-ferratus",
+      "title": "Karim Kal, Mons Ferratus",
+      "descriptionHtml": "",
+      "totalInventory": 100,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Couv_Mons-Ferratus-378x290.jpg?v=1771678063",
+              "altText": null,
+              "width": 378,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035142369666",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195484062082",
+      "handle": "henri-cartier-bresson-the-decisive-moment-nouvelle-edition",
+      "title": "Henri Cartier-Bresson, The Decisive Moment (nouvelle édition)",
+      "descriptionHtml": "",
+      "totalInventory": 2500,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "42.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/MOCKUP-ANGLAIS-340x290.jpg?v=1771678040",
+              "altText": null,
+              "width": 340,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035149316482",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "42.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195491139970",
+      "handle": "martine-franck-henri-cartier-bresson-goulandris",
+      "title": "Martine Franck & Henri Cartier-Bresson, Goulandris",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "38.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/246A8368-SQUARE-120-WEB-290x290.jpg?v=1771678024",
+              "altText": null,
+              "width": 290,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035167863170",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "38.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195496350082",
+      "handle": "henri-cartier-bresson-henri-cartier-bresson-et-litalie-and-italy",
+      "title": "Henri Cartier-Bresson, Henri Cartier-Bresson et l'Italie / and Italy",
+      "descriptionHtml": "",
+      "totalInventory": 34,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "34.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/b7bb5d2ea1a9724471c9761aefa0f843dfcefd957b3dd128958159126f337a45-245x290.jpg?v=1771677956",
+              "altText": null,
+              "width": 245,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035180020098",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "34.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195501691266",
+      "handle": "martine-franck-reporters-sans-frontieres-n-77-martine-franck",
+      "title": "Martine Franck, Reporters sans Frontières N°77 - Martine Franck",
+      "descriptionHtml": "",
+      "totalInventory": 9,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "12.5", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/RSF-77-Franck-Mockups-Cover-aplat-scaled-1-226x290.jpg?v=1771677932",
+              "altText": null,
+              "width": 226,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035192865154",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "12.5" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195506508162",
+      "handle": "henri-cartier-bresson-catalogue-d-exposition-fhel-landerneau",
+      "title": "Henri Cartier-Bresson, Catalogue d’exposition FHEL Landerneau",
+      "descriptionHtml": "",
+      "totalInventory": 5,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/HCB-LANDERNEAU-COUV-261x290.jpg?v=1771677908",
+              "altText": null,
+              "width": 261,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035206660482",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "39.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195508277634",
+      "handle": "stephen-shore-vehiculaire-vernaculaire",
+      "title": "Stephen Shore, Véhiculaire Vernaculaire",
+      "descriptionHtml": "",
+      "totalInventory": 7,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "49.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/hguiu-235x290.jpg?v=1771677887",
+              "altText": null,
+              "width": 235,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035211018626",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "49.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195514929538",
+      "handle": "henri-cartier-bresson-images-a-la-sauvette-nouvelle-edition",
+      "title": "Henri Cartier-Bresson, Images à la Sauvette (nouvelle édition)",
+      "descriptionHtml": "",
+      "totalInventory": 3989,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "42.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/MOCKUP-FR-bd-340x290_27a3000d-9412-46b3-a09e-62ef784eb102.jpg?v=1771677869",
+              "altText": null,
+              "width": 340,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035243852162",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "42.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195520467330",
+      "handle": "rahim-fortune-hardtack",
+      "title": "Rahim Fortune, Hardtack",
+      "descriptionHtml": "",
+      "totalInventory": 4,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "55.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Rahim_Hardtack_shots-1-441x290.jpg?v=1771677783",
+              "altText": null,
+              "width": 441,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035293036930",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "55.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195526594946",
+      "handle": "martine-franck-regarder-les-autres",
+      "title": "Martine Franck, Regarder les Autres",
+      "descriptionHtml": "",
+      "totalInventory": 180,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "38.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/COUV.-FRM-249x290.jpg?v=1771677704",
+              "altText": null,
+              "width": 249,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035339207042",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "38.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195531018626",
+      "handle": "alessandra-sanguinetti-the-adventures-of-guille-and-belinda-and-the-enigmatic-meaning-of-their-dreams",
+      "title": "Alessandra Sanguinetti, The Adventures of Guille and Belinda and The Enigmatic Meaning of Their Dreams",
+      "descriptionHtml": "",
+      "totalInventory": 4,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "75.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/cover496_b617a621-d9e2-42d6-bb1a-3d538c3212fe_860x-728x849.png?v=1771677587",
+              "altText": null,
+              "width": 728,
+              "height": 849
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035400122754",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "75.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195534721410",
+      "handle": "weegee-autopsie-du-spectacle",
+      "title": "Weegee, Autopsie du Spectacle",
+      "descriptionHtml": "",
+      "totalInventory": 6,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "55.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Pages-de-Couv-ECH-1_V2-223x290.jpg?v=1771677206",
+              "altText": null,
+              "width": 223,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035457368450",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "55.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195541897602",
+      "handle": "sybille-bergemann-the-monument",
+      "title": "Sybille Bergemann, The Monument",
+      "descriptionHtml": "",
+      "totalInventory": 15,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/visuels-livre-Le-Monument_The-Monument-couv-fr-483x290_faed3dc8-37f5-4410-b7e7-f4cb0c32d16e.jpg?v=1771677145",
+              "altText": null,
+              "width": 483,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035552493954",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195546354050",
+      "handle": "sybille-bergemann-le-monument",
+      "title": "Sybille Bergemann, Le Monument",
+      "descriptionHtml": "",
+      "totalInventory": 90,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/visuels-livre-Le-Monument_The-Monument-couv-fr-483x290.jpg?v=1771676921",
+              "altText": null,
+              "width": 483,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035617767810",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195550286210",
+      "handle": "henri-cartier-bresson-les-europeens-nouvelle-edition",
+      "title": "Henri Cartier-Bresson, Les Européens (nouvelle édition)",
+      "descriptionHtml": "",
+      "totalInventory": 1983,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "42.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/leseuropeensphotographies-couv-site-340x290.jpg?v=1771676864",
+              "altText": null,
+              "width": 340,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035678814594",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "42.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195568406914",
+      "handle": "richard-avedon-in-the-american-west-version-anglaise-avec-livret-de-traduction",
+      "title": "Richard Avedon, In the American West (version anglaise avec livret de traduction)",
+      "descriptionHtml": "",
+      "totalInventory": 18,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "120.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/cat-avedon-couverture-227x290.jpg?v=1771673487",
+              "altText": null,
+              "width": 227,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035949674882",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "120.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195569389954",
+      "handle": "susan-meiselas-nicaragua",
+      "title": "Susan Meiselas, Nicaragua",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "58.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/71SaI6qzPiL._SL1200_-728x565.jpg?v=1771673463",
+              "altText": null,
+              "width": 728,
+              "height": 565
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035950199170",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "58.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195572076930",
+      "handle": "michaell",
+      "title": "Michaell Schmidt, Ein-Heit",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "20.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Einheit-728x801.jpg?v=1771672898",
+              "altText": null,
+              "width": 728,
+              "height": 801
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035952591234",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "20.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195573780866",
+      "handle": "peter-hujar-portraits-in-life-and-death",
+      "title": "Peter Hujar, Portraits in Life and Death",
+      "descriptionHtml": "",
+      "totalInventory": 4,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "75.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/35331.jpg?v=1771672856",
+              "altText": null,
+              "width": 722,
+              "height": 800
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035954164098",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "75.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195574436226",
+      "handle": "paul-graham-troubled-land",
+      "title": "Paul Graham, Troubled Land",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "60.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/TroubledLandcopy_2100x_jpg-728x616.webp?v=1771672817",
+              "altText": null,
+              "width": 728,
+              "height": 616
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035954884994",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "60.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195578270082",
+      "handle": "sophie-calle-ainsi-de-suite",
+      "title": "Sophie Calle, Ainsi de Suite",
+      "descriptionHtml": "",
+      "totalInventory": 4,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/26812-1.jpg?v=1771672723",
+              "altText": null,
+              "width": 454,
+              "height": 343
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035958391170",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195580563842",
+      "handle": "masahisa-fukase-fukase",
+      "title": "Masahisa Fukase, Fukase",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/28516.jpg?v=1771672628",
+              "altText": null,
+              "width": 728,
+              "height": 1000
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56035962585474",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195707507074",
+      "handle": "paul-fusco-philippe-parreno-rein-jelle-terpstra-the-train-8-juin-1968-le-dernier-voyage-de-robert-f-kennedy",
+      "title": "Paul Fusco, Philippe Parreno, Rein Jelle Terpstra, The Train, 8 juin 1968 – Le dernier voyage de Robert F. Kennedy",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "49.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/book_815_thumbnail_fr-728x660.jpg?v=1771672541",
+              "altText": null,
+              "width": 728,
+              "height": 660
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036208705922",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "49.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195714814338",
+      "handle": "catalina-mena-sergio-larrain-la-photo-perdue",
+      "title": "Catalina Mena, Sergio Larrain, La photo perdue",
+      "descriptionHtml": "",
+      "totalInventory": 8,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "24.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/35215-2.jpg?v=1771672451",
+              "altText": null,
+              "width": 372,
+              "height": 545
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036242358658",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "24.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195721204098",
+      "handle": "garry-winogrand-color",
+      "title": "Garry Winogrand, Color",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "85.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/34438-728x732.jpg?v=1771672378",
+              "altText": null,
+              "width": 728,
+              "height": 732
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036250550658",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "85.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195725726082",
+      "handle": "saul-leiter-retrospective-1923-2013",
+      "title": "Saul Leiter, Rétrospective 1923-2013",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "69.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/61HvWsrGAoL-728x874_34478680-f3b9-4ce5-9840-5200c486974b.jpg?v=1771670740",
+              "altText": null,
+              "width": 728,
+              "height": 874
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036256743810",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "69.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195737751938",
+      "handle": "marjaana-kella",
+      "title": "Marjaana Kella",
+      "descriptionHtml": "",
+      "totalInventory": 80,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "80.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Boeken-048-728x485.jpg?v=1771670680",
+              "altText": null,
+              "width": 728,
+              "height": 485
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036278763906",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "80.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195753677186",
+      "handle": "ruth-orkin-bike-trip-usa-1939-en",
+      "title": "Ruth Orkin, Bike Trip USA, 1939 (EN)",
+      "descriptionHtml": "",
+      "totalInventory": 13,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/RO_COUV_2023-06-05_OK-317x290_789f55d0-f86c-48c3-9419-b39664577d6c.jpg?v=1771670508",
+              "altText": null,
+              "width": 317,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036308484482",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195756429698",
+      "handle": "ruth-orkin-bike-trip-usa-1939-fr-copie",
+      "title": "Ruth Orkin, Bike Trip USA, 1939 (FR)",
+      "descriptionHtml": "",
+      "totalInventory": 7,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/RO_COUV_2023-06-05_OK-317x290.jpg?v=1771670487",
+              "altText": null,
+              "width": 317,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036313137538",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195806433666",
+      "handle": "guy-tillim-museum-of-the-revolution",
+      "title": "Guy Tillim, Museum of the Revolution",
+      "descriptionHtml": "",
+      "totalInventory": 20,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/visuel-guy-249x290.jpg?v=1771670460",
+              "altText": null,
+              "width": 249,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036404167042",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195817247106",
+      "handle": "sergio-larrain-el-rectangulo-en-la-mano",
+      "title": "Sergio Larrain, El rectangulo en la mano",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/RECTANGULO-EN-LA-MANO-SERGIO-LARRAIN-visuel-1.png?v=1771670411",
+              "altText": null,
+              "width": 391,
+              "height": 600
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036459938178",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195821900162",
+      "handle": "henri-cartier-bresson-les-danses-a-bali",
+      "title": "Henri Cartier-Bresson, Les Danses à Bali",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "22.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Bali-HCB-216x290.jpg?v=1771670345",
+              "altText": null,
+              "width": 216,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036472914306",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "22.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195826192770",
+      "handle": "robert-adams-our-lives-and-our-children",
+      "title": "Robert Adams, Our Lives and Our Children",
+      "descriptionHtml": "",
+      "totalInventory": 15,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "25.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Adams_Our_Lives_Cover-248x290.jpg?v=1771670308",
+              "altText": null,
+              "width": 248,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036483334530",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "25.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195843690882",
+      "handle": "dlubak-heritier-des-avant-gardes",
+      "title": "Dlubak, héritier des avant-gardes",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/DLUBAK-A4-1-4-207x290.jpg?v=1771670279",
+              "altText": null,
+              "width": 207,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036535533954",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "39.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195852571010",
+      "handle": "raymond-depardon-traverser",
+      "title": "Raymond Depardon, Traverser",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Couv_Depardon_Traverser-225x290.jpg?v=1771670250",
+              "altText": null,
+              "width": 225,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036555751810",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "39.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195855913346",
+      "handle": "claude-iverne-bilad-es-sudan",
+      "title": "Claude Iverne, Bilad es Sudan",
+      "descriptionHtml": "",
+      "totalInventory": 10,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Capture3-252x290.jpg?v=1771670220",
+              "altText": null,
+              "width": 252,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036564894082",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195867054466",
+      "handle": "louis-faurer-en",
+      "title": "Louis Faurer (EN)",
+      "descriptionHtml": "",
+      "totalInventory": 10,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "34.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Couverture-du-catalogue-de-lexposition-Louis-Faurer-Steild-2017-217x290.png?v=1771670193",
+              "altText": null,
+              "width": 217,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036594155906",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "34.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195879965058",
+      "handle": "jeff-wall-smaller-pictures",
+      "title": "Jeff Wall, Smaller Pictures",
+      "descriptionHtml": "",
+      "totalInventory": 150,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "19.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Sans-titre-220x290.jpg?v=1771670106",
+              "altText": null,
+              "width": 220,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036634755458",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "19.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195880751490",
+      "handle": "henri-cartier-bresson-revoir-paris",
+      "title": "Henri Cartier-Bresson, Revoir Paris",
+      "descriptionHtml": "",
+      "totalInventory": 10,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "40.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/COUV-_HCB_FR-254x290.jpg?v=1771670057",
+              "altText": null,
+              "width": 254,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036637278594",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "40.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195884257666",
+      "handle": "henri-cartier-bresson-le-grand-jeu",
+      "title": "Henri Cartier-Bresson, Le Grand Jeu",
+      "descriptionHtml": "",
+      "totalInventory": 6,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "60.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/HCB_COUV-HD-210x290.jpg?v=1771670034",
+              "altText": null,
+              "width": 210,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036646257026",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "60.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195887993218",
+      "handle": "stephen-shore-steel-town",
+      "title": "Stephen Shore, Steel Town",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "50.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/StephenShore_5801ca08-82a0-433c-8904-eb1445c9c13f_860x-728x849.jpg?v=1771669867",
+              "altText": null,
+              "width": 728,
+              "height": 849
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036659593602",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "50.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195890090370",
+      "handle": "clara-bouveresse-photopoche-coffret-femmes-photographes-3-vol",
+      "title": "Clara Bouveresse, Photopoche Coffret Femmes Photographes (3 vol.)",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Femmes-photographes-coffret-3-vol-201x290.jpg?v=1771680177",
+              "altText": null,
+              "width": 201,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036669129090",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "39.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195901428098",
+      "handle": "puzzle-1000-pieces-henri-cartier-bresson",
+      "title": "Puzzle 1000 pièces Henri Cartier-Bresson",
+      "descriptionHtml": "",
+      "totalInventory": 7,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "24.9", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/puzzle-vu-du-dessus-1-482x290.jpg?v=1771680086",
+              "altText": null,
+              "width": 482,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036720869762",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "24.9" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195904246146",
+      "handle": "sergio-larrain-londres-1959",
+      "title": "Sergio Larrain, Londres, 1959",
+      "descriptionHtml": "",
+      "totalInventory": 14,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/londres-1959-205x290.png?v=1771669764",
+              "altText": null,
+              "width": 205,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036734501250",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "39.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195904835970",
+      "handle": "marie-bovo-nocturnes",
+      "title": "Marie Bovo, Nocturnes",
+      "descriptionHtml": "",
+      "totalInventory": 10,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "42.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Annotation-2020-02-19-112110-cc-238x290.png?v=1771669741",
+              "altText": null,
+              "width": 238,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036736270722",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "42.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195905425794",
+      "handle": "henri-cartier-bresson-catalogue-china-1948-1949-1958-en",
+      "title": "Henri Cartier-Bresson, Catalogue China, 1948-1949/1958 (EN)",
+      "descriptionHtml": "",
+      "totalInventory": 8,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/9780500545188_300-1-240x290.jpg?v=1771681230",
+              "altText": null,
+              "width": 240,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036738924930",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195905655170",
+      "handle": "henri-cartier-bresson-catalogue-china-1948-1949-1958-fr",
+      "title": "Henri Cartier-Bresson, Catalogue Chine, 1948-1949/1958 (FR)",
+      "descriptionHtml": "",
+      "totalInventory": 8,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/couverture-def-HCB-240x290.jpg?v=1771681210",
+              "altText": null,
+              "width": 240,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036742496642",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195905917314",
+      "handle": "henri-cartier-bresson-catalogue-china-1948-1949-1958-it",
+      "title": "Henri Cartier-Bresson, Catalogue Cina, 1948-1949/1958 (IT)",
+      "descriptionHtml": "",
+      "totalInventory": 10,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/catHCBChineitalien-240x290.jpg?v=1771681178",
+              "altText": null,
+              "width": 240,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036743315842",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195907948930",
+      "handle": "clement-cheroux-la-voix-du-voir",
+      "title": "Clément Chéroux, La voix du voir",
+      "descriptionHtml": "",
+      "totalInventory": 25,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "24.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/la-voix-du-voir.png?v=1771681060",
+              "altText": null,
+              "width": 344,
+              "height": 600
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036748099970",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "24.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195917910402",
+      "handle": "robert-doisneau-du-metier-a-loeuvre",
+      "title": "Robert Doisneau, Du métier à l'œuvre",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "38.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/couv-Doisneau-212x290.png?v=1771680992",
+              "altText": null,
+              "width": 212,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036856201602",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "38.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195929051522",
+      "handle": "emmet-gowin-catalogue-emmet-gowin-signe",
+      "title": "Emmet Gowin, Catalogue Emmet Gowin (Signé)",
+      "descriptionHtml": "",
+      "totalInventory": 4,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/emmet-gowin-250x290.png?v=1771680967",
+              "altText": null,
+              "width": 250,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036929831298",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195931378050",
+      "handle": "catalogue-howard-greenberg-collection",
+      "title": "Howard Greenberg, Collection",
+      "descriptionHtml": "",
+      "totalInventory": 10,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "38.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Capture-d_ecran-2019-05-18-a-16.34.45-213x290.jpg?v=1771680940",
+              "altText": null,
+              "width": 213,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56036952408450",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "38.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195937177986",
+      "handle": "clement-cheroux-henri-cartier-bresson-le-tir-photographique",
+      "title": "Clément Chéroux, Henri Cartier-Bresson : Le tir photographique",
+      "descriptionHtml": "",
+      "totalInventory": 30,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "16.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/HCB-letirphotofraphique-gallimard-cheroux-201x290.jpg?v=1771680889",
+              "altText": null,
+              "width": 201,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037014798722",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "16.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195939930498",
+      "handle": "august-sander-voir-observer-et-penser",
+      "title": "August Sander, Voir, Observer et Penser",
+      "descriptionHtml": "",
+      "totalInventory": 7,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "40.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/couv-catalogue-Sander-w1200-h1900-226x290.jpg?v=1771680873",
+              "altText": null,
+              "width": 226,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037034885506",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "40.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195942224258",
+      "handle": "henri-cartier-bresson-scrapbook",
+      "title": "Henri Cartier-Bresson, Scrapbook",
+      "descriptionHtml": "",
+      "totalInventory": 9,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/scarpbook-detoure-263x290.png?v=1771680823",
+              "altText": null,
+              "width": 263,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037038752130",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195944223106",
+      "handle": "cartier-bresson-au-crayon",
+      "title": "Cartier-Bresson, Au Crayon",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "28.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/au-crayon-visuel-2--235x290.jpg?v=1771680793",
+              "altText": null,
+              "width": 235,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037046256002",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "28.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195945992578",
+      "handle": "patrick-faigenbaum-kolkata-calcutta",
+      "title": "Patrick Faigenbaum, Kolkata / Calcutta",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/kolkata-courverture-221x290.png?v=1771680672",
+              "altText": null,
+              "width": 221,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037051990402",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195947991426",
+      "handle": "martine-franck-photopoche-martine-franck",
+      "title": "Martine Franck, Photopoche Martine Franck",
+      "descriptionHtml": "",
+      "totalInventory": 100,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "13.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/martine-franck-photopoche-189x290.jpg?v=1771680603",
+              "altText": null,
+              "width": 189,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037059363202",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "13.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195950055810",
+      "handle": "martine-franck-catalogue-martine-franck-en",
+      "title": "Martine Franck, Catalogue Martine Franck (EN)",
+      "descriptionHtml": "",
+      "totalInventory": 90,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "60.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Martine-Franck-bouquin-visuel-213x290_06bcb5c4-d44a-4fd4-add6-db22a50880d8.png?v=1771680490",
+              "altText": null,
+              "width": 213,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037070602626",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "60.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195950317954",
+      "handle": "martine-franck-catalogue-martine-franck-fr",
+      "title": "Martine Franck, Catalogue Martine Franck (FR)",
+      "descriptionHtml": "",
+      "totalInventory": 14,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "60.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Martine-Franck-bouquin-visuel-213x290.png?v=1771680471",
+              "altText": null,
+              "width": 213,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037074731394",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "60.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195952120194",
+      "handle": "pierre-assouline-cartier-bresson-loeil-du-siecle",
+      "title": "Pierre Assouline, Cartier-Bresson, l'Oeil du Siècle",
+      "descriptionHtml": "",
+      "totalInventory": 40,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "10.4", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/assouline-cartier-bresson-oeildusiecle-172x290.png?v=1771680355",
+              "altText": null,
+              "width": 172,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037104845186",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "10.4" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195954741634",
+      "handle": "martine-franck-venus-dailleurs-peintres-et-sculpteurs-a-paris-depuis-1945-fr",
+      "title": "Martine Franck, Venus d'ailleurs, peintres et sculpteurs à Paris depuis 1945 (FR)",
+      "descriptionHtml": "",
+      "totalInventory": 9,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/venus-d-ailleurs-artine-franck-peintres-et-sculpteurs-a-paris-depuis-1945--290x290.jpg?v=1771680314",
+              "altText": null,
+              "width": 290,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037116281218",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195955691906",
+      "handle": "odette-england-woman-wearing-ring-shields-face-from-flash",
+      "title": "Odette England, Woman Wearing Ring Shields Face from Flash",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/4-728x520.png?v=1771669680",
+              "altText": null,
+              "width": 728,
+              "height": 520
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037127389570",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195958903170",
+      "handle": "sophio-medoidze-bastard-sun",
+      "title": "Sophio Medoidze, Bastard Sun",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "38.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/25102023_Bastard-Sun_LAY1-1280x853-1-435x290.jpg?v=1771669639",
+              "altText": null,
+              "width": 435,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037138956674",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "38.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195963556226",
+      "handle": "sergio-castaneira-limbo",
+      "title": "Sergio Castañeira, Limbo",
+      "descriptionHtml": "",
+      "totalInventory": 5,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Limbo_cover_web-1-395x290_915f7d1d-5287-423f-826e-c31102948bb5.jpg?v=1771669615",
+              "altText": null,
+              "width": 395,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037160223106",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195964244354",
+      "handle": "melissa-shook-daily-self-portraits-1972-1973",
+      "title": "Melissa Shook, Daily Self-Portraits 1972-1973",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "56.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/1-382x290.jpg?v=1771669570",
+              "altText": null,
+              "width": 382,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037164581250",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "56.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195964637570",
+      "handle": "wouter-van-de-voorde-nucleo",
+      "title": "Wouter Van de Voorde, Nucleo (édition limitée avec tirage signé)",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "150.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/rt_site_wouter_area_30-410x290.jpg?v=1771669547",
+              "altText": null,
+              "width": 410,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037166809474",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "150.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195965260162",
+      "handle": "samuel-gratacap-bilateral",
+      "title": "Samuel Gratacap, Bilateral",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Bilateral-repro-face-carre-web-11-290x290.png?v=1771669511",
+              "altText": null,
+              "width": 290,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037170741634",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195966210434",
+      "handle": "lucie-hodiesne-darras-lilou",
+      "title": "Lucie Hodiesne Darras, Lilou",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/FISHEYEEDITIONS-LILOU-LHODIESNEDARRAS-01-600x600-290x290.jpg?v=1771669478",
+              "altText": null,
+              "width": 290,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037174051202",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195966636418",
+      "handle": "olenka-carrasco-patria",
+      "title": "Oleñka Carrasco, Patria",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/couv-825x550-435x290.jpg?v=1771669456",
+              "altText": null,
+              "width": 435,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037175722370",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "39.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195967095170",
+      "handle": "maria-denise-dessimoz-the-inevitable-anguish-of-desire",
+      "title": "Maria Denise Dessimoz, The Inevitable Anguish of Desire",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/couv-410x290.png?v=1771669409",
+              "altText": null,
+              "width": 410,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037177426306",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195967422850",
+      "handle": "jason-hendardy-this-is-a-test",
+      "title": "Jason Hendardy, This is a test",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/hendardy_thisisatest_cover-232x290.jpg?v=1771669363",
+              "altText": null,
+              "width": 232,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037180539266",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195968504194",
+      "handle": "barbara-crane",
+      "title": "Barbara Crane",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "49.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Couv_Crane_BD-616x290.png?v=1771669325",
+              "altText": null,
+              "width": 616,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037186634114",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "49.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195969585538",
+      "handle": "tee-a-corinne-a-forest-fire-between-us",
+      "title": "Tee A. Corinne, A forest fire between us",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/TeeCorinne_angled_443b725c-fc40-4345-aa5d-053e6b0c29fc-334x290.webp?v=1771669274",
+              "altText": null,
+              "width": 334,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037187944834",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195972174210",
+      "handle": "violette-bule-michel-otayek-eds-de-la-lleca-al-cohue",
+      "title": "Violette Bule & Michel Otayek (eds.), De la Lleca al Cohue",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/De-la-Lleca-al-Cohue_7-435x290.jpg?v=1771669186",
+              "altText": null,
+              "width": 435,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037195153794",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195972698498",
+      "handle": "carmen-winant-the-last-safe-abortion",
+      "title": "Carmen Winant, The Last Safe Abortion",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "50.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/TheLastSafeAbortion_Front1-424x290.jpg?v=1771669149",
+              "altText": null,
+              "width": 424,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037196890498",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "50.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195974205826",
+      "handle": "farid-renais-ghimas-angan-angan-harsa",
+      "title": "Farid Renais Ghimas, Angan-Angan Harsa",
+      "descriptionHtml": "",
+      "totalInventory": 0,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "41.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/cover-flat-angan-angan-197x290.jpg?v=1771669102",
+              "altText": null,
+              "width": 197,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037201510786",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": false,
+              "price": { "amount": "41.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195975745922",
+      "handle": "lora-webb-nichols-heap-o-livin",
+      "title": "Lora Webb Nichols, Heap-O-Livin’",
+      "descriptionHtml": "",
+      "totalInventory": 4,
+      "isbn": { "value": "978-90-834510-9-1" },
+      "metas": { "value": "192 pages\n28 × 22cm\nBroché avec rabat" },
+      "editeur": { "value": "Fw:Books " },
+      "auteurs": { "value": "Lora Webb Nichols" },
+      "publicationDate": { "value": "2025-09-01" },
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "56.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/ScreenShot2025-02-11at1.23.58PM-225x290.webp?v=1771669072",
+              "altText": null,
+              "width": 225,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037206196610",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "56.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195976237442",
+      "handle": "jorge-panchoaga-kalabongo",
+      "title": "Jorge Panchoaga, Kalabongó",
+      "descriptionHtml": "",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "40.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Kalabongo_render-768x1016-1-219x290.jpg?v=1771669036",
+              "altText": null,
+              "width": 219,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037207277954",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "40.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195977056642",
+      "handle": "jens-klein-balloons",
+      "title": "Jens Klein, Balloons",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "24.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/01_IMG_2895-387x290_50528af6-9ca6-470c-8a26-597660c33f2b.jpg?v=1771668992",
+              "altText": null,
+              "width": 387,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037214749058",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "24.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195977712002",
+      "handle": "atelier-anonim-vul-ne-ra-bil",
+      "title": "Atelier Anonim, vul-ne-ra-bil",
+      "descriptionHtml": "",
+      "totalInventory": 5,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "25.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/ATELIER_01-1200x800-1-435x290.jpg?v=1771668950",
+              "altText": null,
+              "width": 435,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037218746754",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "25.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15195978563970",
+      "handle": "lavinia-parlamenti-manfredi-pantanella-the-lines-we-draw",
+      "title": "Lavinia Parlamenti, Manfredi Pantanella, The Lines We Draw",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "50.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/A20A5648e-copy-1024x819-1-728x583_cbccae51-2426-412f-8e28-357d5be1a653.jpg?v=1771669236",
+              "altText": null,
+              "width": 728,
+              "height": 583
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56037221663106",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "50.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15248145416578",
+      "handle": "max-pinckers-victoria-gonzalez-figueras-colour-theory",
+      "title": "Max Pinckers & Victoria Gonzalez-Figueras, Colour Theory",
+      "descriptionHtml": "",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "65.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/couv-308x290.jpg?v=1771669218",
+              "altText": null,
+              "width": 308,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56259317563778",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "65.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15250975523202",
+      "handle": "romain-bernini-giphantie",
+      "title": "Romain Bernini, Giphantie",
+      "descriptionHtml": "",
+      "totalInventory": 98,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "39.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/couv-1-378x290.jpg?v=1771668791",
+              "altText": null,
+              "width": 378,
+              "height": 290
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56272135061890",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "39.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15258996113794",
+      "handle": "charlotte-dumas-entendue",
+      "title": "Charlotte Dumas, Entendue",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "40.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Entendue_01-728x485.jpg?v=1771606251",
+              "altText": null,
+              "width": 728,
+              "height": 485
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56306119672194",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "40.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15289427591554",
+      "handle": "henri-cartier-bresson-the-europeans-new-edition",
+      "title": "Henri Cartier-Bresson, The Europeans (new edition)",
+      "descriptionHtml": "",
+      "totalInventory": 498,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "42.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/theeuropeansphotographs-couv-site-728x621.jpg?v=1772904463",
+              "altText": null,
+              "width": 728,
+              "height": 621
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56448470221186",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "42.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15291791212930",
+      "handle": "balarama-heller-sacred-place",
+      "title": "Balarama Heller, Sacred Place",
+      "descriptionHtml": "",
+      "totalInventory": 5,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "55.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/SacredPlace-BalaramaHeller-TISbooks-print-edition_2563cc67-663a-4b68-9fb5-13bafc736f8f.jpg?v=1779208631",
+              "altText": null,
+              "width": 401,
+              "height": 535
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56457301754242",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "55.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15306066755970",
+      "handle": "juliette-pavy-spirals",
+      "title": "Juliette Pavy, Spirals",
+      "descriptionHtml": "<div data-olk-copy-source=\"MessageBody\">Dans<span> </span><i>Spirals</i>, Juliette Pavy exhume la mémoire des femmes groenlandaises stérilisées entre 1966 et 1975 par le gouvernement danois. Entre enquête et poésie visuelle, elle déroule une spirale d'images où le silence glacé révèle la violence d'un oubli collectif et la beauté fragile d'une résistance enfouie. Photographies, archives et paysages s'entrelacent pour rendre visible une histoire longtemps niée, questionnant les héritages coloniaux et les formes de réparation possibles.</div>",
+      "totalInventory": 2,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "50.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/9H0A9142_3.jpg?v=1775126601",
+              "altText": null,
+              "width": 1333,
+              "height": 1000
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56524742361474",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "50.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15307147215234",
+      "handle": "mark-steinmetz-summertime",
+      "title": "Mark Steinmetz, Summertime",
+      "descriptionHtml": "<div class=\"x_elementToProof\" data-olk-copy-source=\"MessageBody\"><span style=\"font-size: 0.875rem;\">Exemplaire signé ; possibilité d'envoi à partir du 10/04.</span></div>\n<div class=\"x_elementToProof\"><br></div>\n<div class=\"x_elementToProof\"></div>\n<div class=\"x_elementToProof\">Publié en 2011, le livre de Mark Steinmetz est aujourd’hui réédité dans une édition enrichie de 30 images inédites et des paroles de l’album<span> </span><i>School’s Out</i> d’Alice Cooper.</div>\n<div class=\"x_elementToProof\">\n<i>Summertime</i> de Mark Steinmetz nous plonge dans les étés américains des années 1980, décor de vacances d’enfants et d’adolescents qui passent leurs journées dehors. Mark Steinmetz a une vingtaine d’années lorsqu’il photographie le quotidien ordinaire de ces jeunes vacanciers, proches de l’âge qu’il vient lui-même de quitter. En noir et blanc, il immortalise des lieux qui lui sont familiers. Baseball, camps d’été, terrains, cabanes, feux de camp :<b> </b>autant de gestes, de lieux et de rituels qui composent l’atmosphère lente et détendue des étés américains d’avant les distractions numériques. À cette époque, les étés semblaient s’étirer indéfiniment, et les enfants avaient le sentiment d’avoir tout le temps du monde.</div>\n<div class=\"x_elementToProof\">Magnifiquement imprimée, cette nouvelle édition de <i>Summertime</i> publiée par Nazraeli est limitée à 2 000 exemplaires.</div>",
+      "totalInventory": 1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "75.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/img_couv_summertime-728x728_3b3cb7dd-66c7-4a5d-bd1c-47d37c926a80.webp?v=1775213764",
+              "altText": null,
+              "width": 728,
+              "height": 728
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56527407284610",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "75.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15307785863554",
+      "handle": "vanessa-winship-she-dances-on-jackson",
+      "title": "Vanessa Winship, She dances on Jackson",
+      "descriptionHtml": "",
+      "totalInventory": 5,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "300.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/winship_jackson_01.jpg?v=1775311988",
+              "altText": null,
+              "width": 360,
+              "height": 460
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56529870324098",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "300.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15326255808898",
+      "handle": "nuits-balneaires-eboro",
+      "title": "Nuits Balnéaires, Eboro (ENG)",
+      "descriptionHtml": "",
+      "totalInventory": 5,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Couverture_Eboro.png?v=1777370590",
+              "altText": null,
+              "width": 2000,
+              "height": 2000
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56593899618690",
+              "title": "ENG- Anglais",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [
+                { "name": "Version linguistique", "value": "ENG- Anglais" }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15326333141378",
+      "handle": "nuits-balneaires-eboro-fr",
+      "title": "Nuits Balnéaires, Eboro (FR)",
+      "descriptionHtml": "",
+      "totalInventory": 0,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "45.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Couverture_Eboro.png?v=1777370590",
+              "altText": null,
+              "width": 2000,
+              "height": 2000
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56594027217282",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "45.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15326444126594",
+      "handle": "snow-sohrab-hura",
+      "title": "Snow, Sohrab Hura",
+      "descriptionHtml": "",
+      "totalInventory": 0,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "75.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Snow_Front1.webp?v=1777385054",
+              "altText": null,
+              "width": 1080,
+              "height": 1033
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56594631688578",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "75.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15326453170562",
+      "handle": "lettres-d-amour-a-la-photographie-daido-moriyama",
+      "title": "Lettres d’amour à la photographie, Daido Moriyama",
+      "descriptionHtml": "",
+      "totalInventory": -1,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "42.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Lettres-damour-cover-scaled.jpg?v=1777386151",
+              "altText": null,
+              "width": 774,
+              "height": 1085
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56594649973122",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "42.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15340809191810",
+      "handle": "farren-van-wyk-mixedness-is-my-mythology",
+      "title": "Farren van Wyk, Mixedness is My Mythology",
+      "descriptionHtml": "<p><em>Mixedness is my Mythology</em> explores the historical relationship between South Africa and the Netherlands that revolves around the connections and contradictions of migration, ethnicity, colonialism and apartheid. Farren was born in South Africa in 1993, the official last year of the apartheid era that classified her as Coloured. Farren’s grandparents were forcefully removed and her parents chose to raise Farren in The Netherlands from the age of six. Being born in South Africa and growing up in the Netherlands has created a point of intersectionality in which she bring South African, Dutch, African American and Black American cultural aspects together in images.</p>",
+      "totalInventory": 25,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "47.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Farren_01.jpg?v=1779811746",
+              "altText": null,
+              "width": 4896,
+              "height": 3264
+            }
+          },
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Farren_04.jpg?v=1779811746",
+              "altText": null,
+              "width": 4896,
+              "height": 3264
+            }
+          },
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Farren_15.jpg?v=1779811746",
+              "altText": null,
+              "width": 4896,
+              "height": 3264
+            }
+          },
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/Farren_07.jpg?v=1779811746",
+              "altText": null,
+              "width": 4896,
+              "height": 3264
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56671827263874",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "47.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15346938151298",
+      "handle": "only-barely-still-on-women-and-wilderness-catherine-lemble",
+      "title": "Only Barely Still – On Women and Wilderness, Catherine Lemblé",
+      "descriptionHtml": "",
+      "totalInventory": 3,
+      "isbn": null,
+      "metas": null,
+      "editeur": null,
+      "auteurs": null,
+      "publicationDate": null,
+      "languages": null,
+      "priceRange": {
+        "minVariantPrice": { "amount": "35.0", "currencyCode": "EUR" }
+      },
+      "compareAtPriceRange": { "minVariantPrice": { "amount": "0.0" } },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "https://cdn.shopify.com/s/files/1/0936/8967/6162/files/TEC148_Only-Barely-Still_Cover.jpg?v=1780664982",
+              "altText": null,
+              "width": 1358,
+              "height": 1831
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "gid://shopify/ProductVariant/56692334559618",
+              "title": "Default Title",
+              "sku": null,
+              "availableForSale": true,
+              "price": { "amount": "35.0" },
+              "compareAtPrice": null,
+              "selectedOptions": [{ "name": "Title", "value": "Default Title" }]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

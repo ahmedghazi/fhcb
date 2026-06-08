@@ -8,8 +8,23 @@ export default defineField({
   title: 'Grid Cards UI',
   type: 'object',
   icon: MdGridView,
+  initialValue: {
+    size: 'sm',
+  },
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
+    defineField({
+      name: 'size',
+      type: 'string',
+      description: 'taille des éléments de la grille, sm = 4/ligne, md = 2/ligne, lg = 1 / ligne',
+      options: {
+        list: [
+          {title: 'Small', value: 'sm'},
+          {title: 'Medium', value: 'md'},
+          {title: 'Large', value: 'lg'},
+        ],
+      },
+    }),
     defineField({
       name: 'items',
       title: 'Items',

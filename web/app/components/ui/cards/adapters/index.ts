@@ -102,7 +102,7 @@ export function exhibitionToCard(
 // ─── Product ─────────────────────────────────────────────────────────────────
 
 export function productToCard(input: ProductExpanded): CardBaseProps {
-  const { imageCover, tags, prix } = input;
+  const { imageCover, tags, price } = input;
   const artistName = input.artist?.name || "";
   const title = (_localizeField(input.title) as string) || "";
   return {
@@ -111,9 +111,11 @@ export function productToCard(input: ProductExpanded): CardBaseProps {
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
-    title: artistName || title,
-    subTitle: artistName ? title : undefined,
-    infoNode: prix ? `${prix}€` : undefined,
+    // title: artistName || title,
+    // subTitle: artistName ? title : undefined,
+    title: title,
+    subTitle: artistName,
+    infoNode: price ? `${price}€` : undefined,
     actions: [
       {
         label: _localizeText("discover") as string,

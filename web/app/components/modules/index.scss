@@ -126,20 +126,6 @@
       }
     }
     &--list-exhibitions-past-ui {
-      .my-masonry-grid {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        margin-left: -30px;
-        width: auto;
-      }
-      .my-masonry-grid_column {
-        padding-left: 30px;
-        background-clip: padding-box;
-      }
-      .my-masonry-grid_column > div {
-        margin-bottom: 30px;
-      }
     }
     &--support-ui {
       background-color: var(--color-rose-50);

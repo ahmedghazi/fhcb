@@ -153,3 +153,17 @@ export const _isFuturExhibition = (dates: FhcbDate[]): boolean => {
 export const _isHorsLesMurs = (tags: Tag[]): boolean => {
   return tags.filter((tag) => tag.slug?.current === "hors-les-murs").length > 0;
 };
+
+export const descriptionHtmlToBlocks = (html: string) => {
+  return html
+    .split(/<\/p>|<br\s*\/?>/i)
+    .map((chunk) => chunk.replace(/<[^>]+>/g, "").trim())
+    .filter(Boolean)
+    .map((text, i) => ({
+      _type: "block",
+      _key: `block-${i}`,
+      style: "normal",
+      markDefs: [],
+      children: [{ _type: "span", _key: `span-${i}`, text, marks: [] }],
+    }));
+};

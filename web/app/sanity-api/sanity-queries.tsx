@@ -4,8 +4,6 @@ import {
   imageAsset,
   cardRefExhibition,
   cardRefArtist,
-  linkInternal,
-  linkInternalWithImage,
   modules,
   seo,
   cardRefEvent,
@@ -14,20 +12,26 @@ import {
   cardTypes,
   relatedByArtist,
   relatedByTag,
+  cardRefProduct,
+  sliderCardUI,
+  gridCardUI,
+  relatedByArtists,
 } from "./fragments";
 import {
-  Article,
   ARTICLE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
   EXPHIBITION_QUERY_RESULT,
-  Feuilletage,
   FEUILLETAGE_QUERY_RESULT,
   HOME_QUERY_RESULT,
   IMAGE_IMAGES_QUERY_RESULT,
+  LIBRARY_QUERY_RESULT,
   PAGE_MODULAIRE_QUERY_RESULT,
+  Product,
+  PRODUCT_QUERY_RESULT,
   PROGRAMME_QUERY_RESULT,
   SETTINGS_QUERY_RESULT,
 } from "./types/sanity.types";
+import CardProduct from "../components/ui/cards/CardProduct";
 
 /*****************************************************************************************************
  * SETTINGS
@@ -307,7 +311,7 @@ export const FEUILLETAGE_QUERY = groq`*[_type == "feuilletage" && slug.current =
   rebonds[]->{
     ${cardTypes}
   },
-  "related": ${relatedByArtist}
+  "related": ${relatedByArtists}
 }`;
 
 export async function getFeuilletage(
@@ -341,3 +345,72 @@ export async function getArticle(slug: string): Promise<ARTICLE_QUERY_RESULT> {
     qParams: { slug },
   });
 }
+
+/*****************************************************************************************************
+ * LIBRARY_QUERY
+ */
+export const LIBRARY_QUERY = groq`*[_type == "library"][0]{
+  ...,
+  seo{
+    ${seo}
+  },
+  modules[]{
+    ${sliderCardUI},
+    ${gridCardUI},
+  },
+  "items": *[_type == "product" ] | order(publicationDate asc) [0...20] {
+    ${cardRefProduct}
+  }
+}`;
+
+export async function getLibrairie(): Promise<LIBRARY_QUERY_RESULT> {
+  return sanityFetch({
+    query: LIBRARY_QUERY,
+    tags: ["library"],
+  });
+}
+
+/*****************************************************************************************************
+ * PRODUCT_QUERY
+ */
+export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug][0]{
+  ...,
+  seo{
+    ${seo}
+  },
+  artist->,
+  imageCover{
+    ${imageAsset}
+  },
+  images[]{
+    ${imageAsset}
+  },
+  "related": ${relatedByArtist}
+}`;
+
+export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
+  return sanityFetch({
+    query: PRODUCT_QUERY,
+    tags: ["product"],
+    qParams: { slug },
+  });
+}
+
+/*
+// "related":*[
+  //   _id != ^._id &&
+  //   (
+  //     (
+  //       _type == product &&
+  //       references(^.artists[]._ref)
+  //     )
+  //     ||
+  //     (
+  //       _type == "artist" &&
+  //       _id in ^.artists[]._ref
+  //     )
+  //   )
+  // ] | order(publicationDate asc) {
+  //   ${cardRefProduct}
+  // }
+*/

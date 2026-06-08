@@ -39,6 +39,8 @@ const i18n = {
     sortTitleDesc: "Titre Z→A",
     sortDateAsc: "Date (ancienne)",
     sortDateDesc: "Date (récente)",
+    allProducts: "Tous les livres",
+    addToCart: "Ajouter au panier",
   },
   en: {
     default: false,
@@ -80,6 +82,8 @@ const i18n = {
     sortTitleDesc: "Title Z→A",
     sortDateAsc: "Date (oldest)",
     sortDateDesc: "Date (recent)",
+    allProducts: "All products",
+    addToCart: "Add to cart",
   },
 };
 

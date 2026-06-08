@@ -44,11 +44,20 @@ export default defineType({
     }),
 
     defineField({
+      name: 'modules',
+      title: 'Modules',
+      description: 'Zone de contenu Modulaire (images, textes, embed)',
+      type: 'array',
+      of: [{type: 'gridCardUI'}, {type: 'sliderCardUI'}],
+      group: 'editorial',
+    }),
+    defineField({
       name: 'miseEnAvant',
       title: 'Mise en avant',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'product'}]}],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -57,6 +66,7 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'product'}]}],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -65,6 +75,7 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'product'}]}],
       group: 'editorial',
+      hidden: true,
     }),
   ],
 

@@ -14,11 +14,12 @@ import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import Embed from "@/app/components/ui/Embed";
-import CardImageImages from "@/app/components/ui/cards/CardImageImages";
-import RelatedImageImages from "@/app/components/RebondsImageImages";
-import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+// import CardImageImages from "@/app/components/ui/cards/CardImageImages";
+// import RelatedImageImages from "@/app/components/RebondsImageImages";
+// import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { FEUILLETAGE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
-import Related from "@/app/components/Rebonds";
+// import Related from "@/app/components/Rebonds";
+import Rebonds from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
 
@@ -70,8 +71,8 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
         {data.video && <Embed input={data.video} />}
       </div>
       <ContentModulaire input={data} />
-      {data.related && <Related input={data.related} />}
-      {data.rebonds && <Related input={data.rebonds} />}
+      {data.related && <Rebonds input={data.related} />}
+      {data.rebonds && <Rebonds input={data.rebonds} />}
       {/* <pre>{JSON.stringify(data.rebonds, null, 2)}</pre> */}
     </div>
   );

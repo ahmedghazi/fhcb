@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-05T15:19:45.975Z
+// Generated on: 2026-06-08T12:42:18.738Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
@@ -26,6 +26,8 @@ import type {
   IMAGE_IMAGES_QUERY_RESULT,
   FEUILLETAGE_QUERY_RESULT,
   ARTICLE_QUERY_RESULT,
+  LIBRARY_QUERY_RESULT,
+  PRODUCT_QUERY_RESULT,
   NewsletterUI,
   SupportUI,
   TextImageUI,
@@ -153,6 +155,18 @@ export type FEUILLETAGE_QUERY_RESULTExpanded = Omit<FEUILLETAGE_QUERY_RESULT, 'a
 export type ARTICLE_QUERY_RESULTExpanded = Omit<ARTICLE_QUERY_RESULT, 'tags' | 'imageCover'> & {
   tags?: Array<Tag> | null;
   imageCover?: (Omit<NonNullable<NonNullable<ARTICLE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type LIBRARY_QUERY_RESULTExpanded = Omit<LIBRARY_QUERY_RESULT, 'miseEnAvant' | 'sliderSelection' | 'imageCover'> & {
+  miseEnAvant?: Array<ProductExpanded> | null;
+  sliderSelection?: Array<ProductExpanded> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<LIBRARY_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type PRODUCT_QUERY_RESULTExpanded = Omit<PRODUCT_QUERY_RESULT, 'tags' | 'rebonds' | 'imageCover'> & {
+  tags?: Array<Tag> | null;
+  rebonds?: ExhibitionExpanded | null;
+  imageCover?: (Omit<NonNullable<NonNullable<PRODUCT_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type NewsletterUIExpanded = Omit<NewsletterUI, 'image'> & {

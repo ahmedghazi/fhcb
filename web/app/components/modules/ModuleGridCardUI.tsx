@@ -14,7 +14,7 @@ import CardExhibition from "../ui/cards/CardExhibition";
 import CardPageModulaire from "../ui/cards/CardPageModulaire";
 
 type Props = {
-  input: GridCardUI;
+  input: GridCardUI | any;
 };
 
 const ModuleGridCardUI = ({ input }: Props) => {
@@ -34,11 +34,11 @@ const ModuleGridCardUI = ({ input }: Props) => {
                   {item && item._type === "exhibition" && (
                     <CardExhibition input={item} size='sm' />
                   )}
-                  {item && item._type === "exhibition" && (
+                  {/* {item && item._type === "exhibition" && (
                     <CardExhibition input={item} size='md' />
-                  )}
+                    )} */}
                   {item && item._type === "product" && (
-                    <CardProduct input={item} size='sm' />
+                    <CardProduct input={item} size={input.size || "sm"} />
                   )}
                   {item && item._type === "pageModulaire" && (
                     <CardPageModulaire input={item} size='md' />

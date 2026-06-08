@@ -117,6 +117,22 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         ],
       }),
     }),
+    library: defineLocations({
+      // Select one or more fields
+      select: {
+        title: 'title.fr',
+        slug: 'slug.current',
+      },
+      // Those fields are available in the resolve callback function
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: doc?.title || 'Untitled',
+            href: `/${doc?.slug}`,
+          },
+        ],
+      }),
+    }),
     product: defineLocations({
       // Select one or more fields
       select: {

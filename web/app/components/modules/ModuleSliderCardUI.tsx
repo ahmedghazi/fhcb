@@ -14,7 +14,7 @@ import CardFeuilletage from "../ui/cards/CardFeuilletage";
 import CardPageModulaire from "../ui/cards/CardPageModulaire";
 
 type Props = {
-  input: SliderCardUI;
+  input: SliderCardUI | any;
 };
 
 const ModuleSliderCardUI = ({ input }: Props) => {
@@ -29,7 +29,7 @@ const ModuleSliderCardUI = ({ input }: Props) => {
           )}
           {items && (
             <KeenSlider>
-              {items.map((item: PostTypes, index) => (
+              {items.map((item: PostTypes, index: number) => (
                 <div
                   key={`${item && item._id}-${index}`}
                   className='keen-slider__slide'>

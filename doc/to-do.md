@@ -59,6 +59,7 @@ cards simili document
 - date avec location
 - expo passée: itinérante, hors les murs
 - btn hover, all hover
+- fix search result
 
 ## card expos
 
@@ -82,6 +83,17 @@ Si l’expo est au tube (espace secondaire) = carte horizontale (même si image 
 - catalog
 - filters shop
 - product page
+
+## shopify
+
+- ajouter des metas fields
+- - langues, description, date de paruation, fiche technique (générique), artiste
+    custom.isbn
+    custom.fiche_technique
+    custom.editeur
+    custom.auteurs
+    custom.date_de_publication
+    custom.languages
 
 # modules
 

@@ -302,7 +302,11 @@ export const cardRefProduct = `
   "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
-  prix,
+  shopifyId,
+  shopifyHandle,
+  price,
+  totalInventory,
+  variants,
   tags[]->{
     title
   },
@@ -675,6 +679,25 @@ export const modules = `
 `;
 
 export const relatedByArtist = `
+  *[
+    _id != ^._id &&
+    (
+      (
+        _type in ["event", "exhibition", "feuilletage", "imageImages", "product"] &&
+        references(coalesce(^.artists[]._ref, [^.artist._ref]))
+      )
+      ||
+      (
+        _type == "artist" &&
+        _id in coalesce(^.artists[]._ref, [^.artist._ref])
+      )
+    )
+  ] | order(dates[0].du asc) {
+    ${cardTypes}
+  }
+`;
+
+export const relatedByArtists = `
   *[
     _id != ^._id &&
     (

@@ -5,9 +5,10 @@ import "./index.scss";
 
 type Props = {
   children: ReactNode;
+  perView?: number | "auto";
 };
 
-const KeenSlider = ({ children }: Props) => {
+const KeenSlider = ({ children, perView = "auto" }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -15,7 +16,7 @@ const KeenSlider = ({ children }: Props) => {
     mode: "snap",
     loop: true,
     slides: {
-      perView: "auto",
+      perView: perView,
       spacing: 36,
     },
     slideChanged(slider) {
@@ -41,9 +42,7 @@ const KeenSlider = ({ children }: Props) => {
 
   return (
     <div>
-      <div
-        ref={sliderRef}
-        className='keen-slider'>
+      <div ref={sliderRef} className='keen-slider'>
         {children}
       </div>
       {loaded && instanceRef.current && (

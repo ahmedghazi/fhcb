@@ -66,6 +66,7 @@ import blockquote from './objects/blockquote'
 import embed from './objects/embed'
 import keyValGroup from './objects/keyValGroup'
 import sidebarGenerique from './objects/sidebarGenerique'
+import productVariant from './objects/productVariant'
 import newsletterUI from './objects/modules/newsletterUI'
 
 export const schemaTypes = [
@@ -111,6 +112,7 @@ export const schemaTypes = [
   messageContextuel,
   fhcbDate,
   sidebarGenerique,
+  productVariant,
 
   imagesUI,
   textUI,

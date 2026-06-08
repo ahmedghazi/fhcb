@@ -1,0 +1,14 @@
+.template--product {
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .slider {
+    .keen-slider {
+      .keen-slider__slide {
+        width: 100%;
+      }
+    }
+  }
+}

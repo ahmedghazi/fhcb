@@ -26,7 +26,7 @@ export const _linkResolver = (
     case "library":
       return `/${node.slug?.current}`;
     case "product":
-      return `/product/${node.slug?.current}`;
+      return `/publications/${node.slug?.current}`;
     case "imageImages":
       return `/image-images/${node.slug?.current}`;
     case "feuilletage":

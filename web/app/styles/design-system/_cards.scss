@@ -134,23 +134,27 @@
 
   &--is-current,
   &--is-futur {
-    .card__inner {
-      display: block;
-    }
-    .card__body {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-xs);
+    &:not(.card--sm, .card--md) {
+      .card__inner {
+        display: block;
+      }
+      .card__body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+      }
     }
   }
 
   &--is-current {
-    .card__inner {
-      padding: 0;
-      gap: 0;
-    }
-    .card__body {
-      padding: var(--spacing-xs);
+    &:not(.card--sm, .card--md) {
+      .card__inner {
+        padding: 0;
+        gap: 0;
+      }
+      .card__body {
+        padding: var(--spacing-xs);
+      }
     }
   }
 

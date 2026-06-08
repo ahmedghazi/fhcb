@@ -43,16 +43,63 @@ export default defineType({
     slug,
 
     defineField({
-      name: 'prix',
+      name: 'shopifyId',
       type: 'string',
+      title: 'Shopify ID',
+      readOnly: true,
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'shopifyHandle',
+      type: 'string',
+      title: 'Shopify Handle',
+      readOnly: true,
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'price',
+      type: 'number',
       title: 'Prix',
       group: 'shop',
     }),
 
     defineField({
-      name: 'qty',
+      name: 'compareAtPrice',
       type: 'number',
-      title: 'Quantité',
+      title: 'Prix barré',
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'inStock',
+      type: 'boolean',
+      title: 'En stock',
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'totalInventory',
+      type: 'number',
+      title: 'Inventaire total',
+      readOnly: true,
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'variants',
+      type: 'array',
+      title: 'Variantes',
+      of: [{type: 'productVariant'}],
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'syncedAt',
+      type: 'datetime',
+      title: 'Dernière synchro Shopify',
+      readOnly: true,
       group: 'shop',
     }),
 
@@ -75,6 +122,14 @@ export default defineType({
       name: 'editeur',
       type: 'string',
       title: 'Éditeur',
+      group: 'metas',
+    }),
+
+    defineField({
+      name: 'isbn',
+      type: 'string',
+      title: 'ISBN',
+      readOnly: true,
       group: 'metas',
     }),
 
