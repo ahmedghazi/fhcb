@@ -26,17 +26,74 @@ const FHCBDates = ({ input }: Props) => {
   return (
     <div
       className={clsx("fhcb-dates", hasSeveralDates && "fhcb-dates--multiple")}>
-      {dates.map((date, index) => {
+      {dates.map((date: FhcbDate, index) => {
         if (!date) return null;
         const fmt = _fhcbDates(date, locale);
 
-        if (fmt.type === "different-years") {
+        return (
+          <div
+            key={index}
+            className={clsx("fhcb-date", date.inSite ? "in-site" : "off-site")}>
+            {fmt.type === "different-years" && (
+              <>
+                <time dateTime={date.du ?? undefined}>{fmt.du}</time>
+                <br />
+                <time dateTime={date.au ?? undefined}>→ {fmt.au}</time>
+                {date.location && (
+                  <LocationSlot
+                    location={date.location as unknown as Location}
+                  />
+                )}
+              </>
+            )}
+            {fmt.type === "same-year" && (
+              <>
+                <time dateTime={date.du ?? undefined}>
+                  {fmt.du} → {fmt.au} {fmt.year}
+                </time>
+                {date.location && (
+                  <LocationSlot
+                    location={date.location as unknown as Location}
+                  />
+                )}
+              </>
+            )}
+            {fmt.type === "with-time" && (
+              <>
+                <time dateTime={date.du ?? undefined}>
+                  {fmt.date} | {fmt.timeStart}
+                  {fmt.timeEnd ? `–${fmt.timeEnd}` : ""}
+                </time>
+                {date.location && (
+                  <LocationSlot
+                    location={date.location as unknown as Location}
+                  />
+                )}
+              </>
+            )}
+            {fmt.type !== "with-time" &&
+              fmt.type !== "same-year" &&
+              fmt.type !== "different-years" && (
+                <>
+                  <time dateTime={date.du ?? undefined}>{fmt.date}</time>
+                  {date.location && (
+                    <LocationSlot
+                      location={date.location as unknown as Location}
+                    />
+                  )}
+                </>
+              )}
+          </div>
+        );
+        /*if (fmt.type === "different-years") {
           return (
             <div key={index} className='fhcb-date'>
               <time dateTime={date.du ?? undefined}>{fmt.du}</time>
               <br />
               <time dateTime={date.au ?? undefined}>→ {fmt.au}</time>
-              {date.location && <LocationSlot location={date.location} />}
+              {date.location && (
+                <LocationSlot location={date.location as unknown as Location} />
+              )}
             </div>
           );
         }
@@ -47,7 +104,9 @@ const FHCBDates = ({ input }: Props) => {
               <time dateTime={date.du ?? undefined}>
                 {fmt.du} → {fmt.au} {fmt.year}
               </time>
-              {date.location && <LocationSlot location={date.location} />}
+              {date.location && (
+                <LocationSlot location={date.location as unknown as Location} />
+              )}
             </div>
           );
         }
@@ -59,17 +118,21 @@ const FHCBDates = ({ input }: Props) => {
                 {fmt.date} | {fmt.timeStart}
                 {fmt.timeEnd ? `–${fmt.timeEnd}` : ""}
               </time>
-              {date.location && <LocationSlot location={date.location} />}
+              {date.location && (
+                <LocationSlot location={date.location as unknown as Location} />
+              )}
             </div>
           );
-        }
+        }*/
 
-        return (
-          <div key={index} className='fhcb-date'>
-            <time dateTime={date.du ?? undefined}>{fmt.date}</time>
-            {date.location && <LocationSlot location={date.location} />}
-          </div>
-        );
+        // return (
+        //   <div key={index} className='fhcb-date'>
+        //     <time dateTime={date.du ?? undefined}>{fmt.date}</time>
+        //     {date.location && (
+        //       <LocationSlot location={date.location as unknown as Location} />
+        //     )}
+        //   </div>
+        // );
       })}
     </div>
   );

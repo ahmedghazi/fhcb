@@ -6,13 +6,20 @@ export default defineField({
   title: 'Date',
   type: 'object',
   icon: CiCalendarDate,
-
+  initialValue: {
+    inSite: true,
+  },
   fields: [
     defineField({
       name: 'location',
       title: 'Lieu',
       type: 'reference',
       to: [{type: 'location'}],
+    }),
+    defineField({
+      name: 'inSite',
+      title: 'À la fondation?',
+      type: 'boolean',
     }),
     defineField({
       type: 'date',
@@ -54,12 +61,14 @@ export default defineField({
     select: {
       du: 'du',
       au: 'au',
+      inSite: 'inSite',
     },
     prepare(selection) {
-      const {du, au} = selection
+      const {du, au, inSite} = selection
       const fmt = (d: string | undefined) => (d ? new Date(d).toLocaleDateString('fr-FR') : '?')
       return {
         title: `${fmt(du)} - ${fmt(au)}`,
+        subtitle: inSite ? 'À la fondation' : 'Hors site',
       }
     },
   },

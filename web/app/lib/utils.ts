@@ -139,6 +139,7 @@ export const _isPastExhibition = (dates: FhcbDate[]): boolean => {
 export const _isCurrentExhibition = (dates: FhcbDate[]): boolean => {
   return dates.some(
     (date) =>
+      date.inSite &&
       date?.du &&
       new Date(date.du) <= new Date() &&
       date?.au &&

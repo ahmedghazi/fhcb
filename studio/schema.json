@@ -2009,6 +2009,13 @@
           },
           "optional": true
         },
+        "inSite": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "du": {
           "type": "objectAttribute",
           "value": {

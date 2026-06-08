@@ -24,6 +24,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
 
   const isPast = _isPastExhibition(dates || []);
+  //pb ici avec les expos passées et itinérante (date présente ou futur)
   const isCurrent = _isCurrentExhibition(dates || []);
   const isFutur = _isFuturExhibition(dates || []);
   const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;

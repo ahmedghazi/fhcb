@@ -175,16 +175,16 @@
         justify-content: space-between;
       }
     }
+
     &:has(.fhcb-dates--multiple) {
       &:hover {
-        .fhcb-date {
+        .fhcb-date.off-site {
           display: block;
         }
       }
       .fhcb-date {
-        display: none;
-        &:first-of-type {
-          display: block;
+        &.off-site {
+          display: none;
         }
       }
     }

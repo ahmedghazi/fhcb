@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-05T15:01:04.073Z
+// Generated on: 2026-06-05T15:19:45.975Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file

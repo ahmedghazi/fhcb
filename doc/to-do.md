@@ -58,6 +58,7 @@ cards simili document
 - card avec 2nd btn hover
 - date avec location
 - expo passée: itinérante, hors les murs
+- btn hover, all hover
 
 ## card expos
 
@@ -86,7 +87,7 @@ Si l’expo est au tube (espace secondaire) = carte horizontale (même si image 
 
 - # listFeuilletage + filtres
 - # listImageImages + filtres
-- listSeriesThematiques + filtres
+- # listSeriesThematiques + filtres
 - home card video mux
 - # newsletter
 - # soutenir
