@@ -54,6 +54,7 @@ import listExhibitionsPastUI from './objects/modules/listExhibitionsPastUI'
 import listEventsUI from './objects/modules/listEventsUI'
 import supportUI from './objects/modules/supportUI'
 import newsletterUI from './objects/modules/newsletterUI'
+import listProductUI from './objects/modules/listProductUI'
 
 import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
@@ -67,7 +68,6 @@ import embed from './objects/embed'
 import keyValGroup from './objects/keyValGroup'
 import sidebarGenerique from './objects/sidebarGenerique'
 import productVariant from './objects/productVariant'
-import newsletterUI from './objects/modules/newsletterUI'
 
 export const schemaTypes = [
   settings,
@@ -133,6 +133,7 @@ export const schemaTypes = [
   listExhibitionsUI,
   listExhibitionsPastUI,
   listEventsUI,
+  listProductUI,
   supportUI,
   newsletterUI,
 ]

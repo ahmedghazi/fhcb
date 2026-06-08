@@ -22,7 +22,7 @@ const SHOPIFY_DOMAIN =
 const SHOPIFY_STOREFRONT_TOKEN =
   process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN!;
 const DEBUG_SYNC = process.env.SHOPIFY_SYNC_DEBUG === "true";
-const DEBUG_LIMIT = 3;
+const DEBUG_LIMIT = 20;
 
 const PRODUCTS_QUERY = `
   query getProducts($cursor: String) {
@@ -245,7 +245,15 @@ async function buildProductFields(p: any, artists: ArtistRef[]) {
     slug: { _type: "slug", current: p.handle },
     text: { fr: descriptionBlocks },
     ...(matchedArtist
-      ? { artist: { _type: "reference", _ref: matchedArtist._id } }
+      ? {
+          artists: [
+            {
+              _type: "reference",
+              _key: matchedArtist._id,
+              _ref: matchedArtist._id,
+            },
+          ],
+        }
       : {}),
     seo: {
       metaTitle: p.title,

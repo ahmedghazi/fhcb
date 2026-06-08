@@ -310,7 +310,8 @@ export const cardRefProduct = `
   tags[]->{
     title
   },
-  artist->{
+  artists[]->{
+    _id,
     name
   }
 `;
@@ -633,6 +634,26 @@ export const listEventsUI = `
   }
 `;
 
+export const listProductUI = `
+  _type == "listProductUI" => {
+    ...,
+    title{
+      ...
+    },
+    filters[]{
+      ...,
+      ${filterList},
+      ${filterRadio}
+    },
+    "resolvedItems": *[_type == "product"] | order(publicationDate asc) {
+      ${cardRefProduct}
+    },
+    cta{
+      ...
+    }
+  }
+`;
+
 export const supportUI = `
   _type == "supportUI" => {
     ...,
@@ -678,31 +699,12 @@ export const modules = `
   ${newsletterUI}
 `;
 
-export const relatedByArtist = `
-  *[
-    _id != ^._id &&
-    (
-      (
-        _type in ["event", "exhibition", "feuilletage", "imageImages", "product"] &&
-        references(coalesce(^.artists[]._ref, [^.artist._ref]))
-      )
-      ||
-      (
-        _type == "artist" &&
-        _id in coalesce(^.artists[]._ref, [^.artist._ref])
-      )
-    )
-  ] | order(dates[0].du asc) {
-    ${cardTypes}
-  }
-`;
-
 export const relatedByArtists = `
   *[
     _id != ^._id &&
     (
       (
-        _type in ["event", "exhibition", "event", "product"] &&
+        _type in ["event", "exhibition", "feuilletage", "imageImages", "product"] &&
         references(^.artists[]._ref)
       )
       ||

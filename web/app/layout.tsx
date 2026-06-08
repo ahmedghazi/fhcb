@@ -14,6 +14,8 @@ import LenisScrollProvider from "./components/ui/LenisScrollProvider";
 import { ViewTransitions } from "next-view-transitions";
 import Cursor from "./components/ui/Cursor";
 import { HeaderContextProvider } from "./context/HeaderContext";
+import { CartContextProvider } from "./context/CartContext";
+import CartModal from "./components/CartModal";
 import Gridder from "./components/ui/Gridder";
 
 // const sourceSans = Source_Sans_3({
@@ -97,13 +99,16 @@ export default async function RootLayout({
             <Gridder />
             <LocaleContextProvider>
               <PageContextProvider settings={settings}>
-                <HeaderContextProvider>
-                  <Header settings={settings} />
-                </HeaderContextProvider>
-                <main>{children}</main>
-                <Footer settings={settings} />
-                {/* <Cursor color='black' size={20} /> */}
-                {isEnabled && <VisualEditing zIndex={1000} />}
+                <CartContextProvider>
+                  <HeaderContextProvider>
+                    <Header settings={settings} />
+                  </HeaderContextProvider>
+                  <main>{children}</main>
+                  <Footer settings={settings} />
+                  <CartModal />
+                  {/* <Cursor color='black' size={20} /> */}
+                  {isEnabled && <VisualEditing zIndex={1000} />}
+                </CartContextProvider>
               </PageContextProvider>
             </LocaleContextProvider>
           </div>

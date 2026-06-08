@@ -109,8 +109,8 @@ const SearchForm = ({ settings }: Props) => {
   };
 
   return (
-    <div className={styles.searchForm}>
-      <form className='search' onSubmit={_handleSubmit}>
+    <div className={""}>
+      <form className={styles.searchForm} onSubmit={_handleSubmit}>
         <div className='inner '>
           <div className='flex-2'>
             <input
@@ -158,7 +158,7 @@ const SearchForm = ({ settings }: Props) => {
         <div className={styles.searchResults}>
           <div className='inner'>
             <div className='body'>
-              <div className='grid md:grid-cols-4 gap-gutter'>
+              <div className='grid md:grid-cols-12 gap-gutter'>
                 {searchResult?.map((item, i) => (
                   <SearchResultItem input={item} key={i} />
                 ))}

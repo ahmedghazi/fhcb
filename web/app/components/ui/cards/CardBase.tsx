@@ -62,7 +62,10 @@ export const CardFooter = ({ actions }: { actions: CardAction[] }) => (
         <Link
           key={i}
           href={action.href}
-          className={clsx("btn", action.variant === "secondary" && "btn--secondary")}>
+          className={clsx(
+            "btn",
+            action.variant === "secondary" && "btn--secondary",
+          )}>
           {action.label}
         </Link>
       ))}
@@ -78,7 +81,10 @@ const ActionButtons = ({ actions }: { actions: CardAction[] }) => (
       <Link
         key={i}
         href={action.href}
-        className={clsx("btn", action.variant === "secondary" && "btn--secondary")}>
+        className={clsx(
+          "btn",
+          action.variant === "secondary" && "btn--secondary",
+        )}>
         {action.label}
       </Link>
     ))}
@@ -127,17 +133,31 @@ const CardBase = ({
   const mediaBlock = (
     <div className='card__media'>
       {badge && <CardBadge {...badge} />}
-      {customMediaSlot ?? (
-        hasVideo && videoBehavior === "inline" ? (
+      {customMediaSlot ??
+        (hasVideo && videoBehavior === "inline" ? (
           <div className='card__video-wrap'>
-            <video ref={videoRef} src={videoUrl} controls playsInline preload='metadata' className='card__video' />
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              controls
+              playsInline
+              preload='metadata'
+              className='card__video'
+            />
           </div>
         ) : hasVideo && videoBehavior === "hover" ? (
-          <video ref={videoRef} src={videoUrl} loop muted playsInline preload='none' className='card__video card__video--hover' />
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            loop
+            muted
+            playsInline
+            preload='none'
+            className='card__video card__video--hover'
+          />
         ) : (
           images.map((asset, i) => <Figure key={i} asset={asset} />)
-        )
-      )}
+        ))}
     </div>
   );
 
@@ -146,7 +166,9 @@ const CardBase = ({
       {tags && <div className='card__tags c-tag'>{tags}</div>}
       {supTitle && (
         <div className='card__sup-title c-body'>
-          {contentCount !== undefined ? `[${contentCount}] ${supTitle}` : supTitle}
+          {contentCount !== undefined
+            ? `[${contentCount}] ${supTitle}`
+            : supTitle}
         </div>
       )}
       {contentCount !== undefined && !supTitle && (
@@ -164,8 +186,13 @@ const CardBase = ({
     noPadding && "card__inner--no-padding",
     className,
   );
-  const cardStyle = colorVar ? ({ "--card-color": colorVar } as React.CSSProperties) : undefined;
-  const handlers = { onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave };
+  const cardStyle = colorVar
+    ? ({ "--card-color": colorVar } as React.CSSProperties)
+    : undefined;
+  const handlers = {
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+  };
 
   // ── COL + image top ──────────────────────────────────────────────────────────
   // card__media → card__body(header + footer(infoNode + btns))
@@ -177,7 +204,9 @@ const CardBase = ({
           {headerSlot}
           {(infoNode || actions.length > 0) && (
             <div className='card__footer'>
-              {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
+              {infoNode && (
+                <div className='card__info c-body-xs'>{infoNode}</div>
+              )}
               {actions.length > 0 && <ActionButtons actions={actions} />}
             </div>
           )}
@@ -193,9 +222,16 @@ const CardBase = ({
       <div className={cardInnerClass} style={cardStyle} {...handlers}>
         {headerSlot}
         {hasMedia && mediaBlock}
+        {!hasMedia && (
+          <div className='card__media'>
+            <div className='card__media-inner' />
+          </div>
+        )}
         {!isDetached && (description || infoNode || actions.length > 0) && (
           <div className='card__footer'>
-            {description && <div className='card__description c-body'>{description}</div>}
+            {description && (
+              <div className='card__description c-body'>{description}</div>
+            )}
             {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
             {actions.length > 0 && <ActionButtons actions={actions} />}
           </div>
@@ -212,10 +248,14 @@ const CardBase = ({
         <div className='grid'>
           <div className='card__body'>
             {headerSlot}
-            {description && <div className='card__description c-body'>{description}</div>}
+            {description && (
+              <div className='card__description c-body'>{description}</div>
+            )}
             {(infoNode || actions.length > 0) && (
               <div className='card__footer'>
-                {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
+                {infoNode && (
+                  <div className='card__info c-body-xs'>{infoNode}</div>
+                )}
                 {actions.length > 0 && <ActionButtons actions={actions} />}
               </div>
             )}
@@ -235,7 +275,9 @@ const CardBase = ({
         <div className='card__body'>
           <div className='card__body-header'>
             {headerSlot}
-            {description && <div className='card__description c-body'>{description}</div>}
+            {description && (
+              <div className='card__description c-body'>{description}</div>
+            )}
           </div>
           <div className='card__body-footer'>
             {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}

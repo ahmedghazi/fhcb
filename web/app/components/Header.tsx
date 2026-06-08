@@ -2,7 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { _linkResolver, _localizeField } from "../sanity-api/utils";
+import {
+  _linkResolver,
+  _localizeField,
+  _localizeText,
+} from "../sanity-api/utils";
 import useLocale from "../context/LocaleContext";
 import LogoFHCB from "./LogoFHCB";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
@@ -11,6 +15,7 @@ import LocalesSwitcher from "./ui/LocaleSwitcher";
 import SearchToggle from "./ui/SearchToggle";
 import NavModal from "./NavModal";
 import useHeader from "../context/HeaderContext";
+import useCart from "../context/CartContext";
 import clsx from "clsx";
 
 type Props = {
@@ -19,6 +24,7 @@ type Props = {
 
 const Header = ({ settings }: Props) => {
   const { modalType } = useHeader();
+  const { cartCount, toggleCart } = useCart();
 
   if (!settings) return null;
 
@@ -35,6 +41,7 @@ const Header = ({ settings }: Props) => {
         <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
         <div className='header__meta-nav'>
           <SearchToggle />
+
           <LocalesSwitcher />
           <ul className='meta-nav'>
             {settings.btnLibrary && (
@@ -44,6 +51,14 @@ const Header = ({ settings }: Props) => {
                   className='btn-library'>
                   {_localizeField(settings.btnLibrary.label)}
                 </Link>
+                {cartCount > 0 && (
+                  <button className='cart-toggle' onClick={toggleCart}>
+                    <span>{_localizeText("cart")}</span>
+                    {cartCount > 0 && (
+                      <span className='cart-toggle__count'>{cartCount}</span>
+                    )}
+                  </button>
+                )}
               </li>
             )}
             {settings.btnTickets && (

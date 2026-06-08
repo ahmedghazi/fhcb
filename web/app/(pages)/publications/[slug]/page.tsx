@@ -3,9 +3,14 @@ import { Metadata, NextPage } from "next";
 import { draftMode } from "next/headers";
 
 import { getClient } from "@/app/sanity-api/sanity.client";
-import { getProduct, PRODUCT_QUERY } from "@/app/sanity-api/sanity-queries";
+import {
+  getProduct,
+  getRandomProductss,
+  PRODUCT_QUERY,
+} from "@/app/sanity-api/sanity-queries";
 import { notFound } from "next/navigation";
 import ContentProduct from "@/app/components/ContentProduct";
+import RebondsProducts from "@/app/components/RebondsProducts";
 
 type Params = Promise<{ slug: string }>;
 
@@ -39,11 +44,13 @@ const ProductPage: NextPage<PageProps> = async ({ params }) => {
     : await getProduct(slug);
 
   if (!data) return notFound();
+  const randomProducts = await getRandomProductss(slug);
 
   return (
     <div className='template template--product' data-template='product'>
       {/* <PageHeader h1={data.title} /> */}
       <ContentProduct input={data} />
+      <RebondsProducts input={randomProducts} />
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </div>
   );

@@ -1,5 +1,5 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-08T12:42:18.738Z
+// Generated on: 2026-06-08T13:33:30.633Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
@@ -79,8 +79,8 @@ export type PageModulaireExpanded = Omit<PageModulaire, 'tags' | 'rebonds' | 'im
   imageCover?: (Omit<NonNullable<NonNullable<PageModulaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type ProductExpanded = Omit<Product, 'artist' | 'tags' | 'rebonds' | 'imageCover' | 'images'> & {
-  artist?: ArtistExpanded | null;
+export type ProductExpanded = Omit<Product, 'artists' | 'tags' | 'rebonds' | 'imageCover' | 'images'> & {
+  artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
   rebonds?: ExhibitionExpanded | null;
   imageCover?: (Omit<NonNullable<NonNullable<Product>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
@@ -157,16 +157,15 @@ export type ARTICLE_QUERY_RESULTExpanded = Omit<ARTICLE_QUERY_RESULT, 'tags' | '
   imageCover?: (Omit<NonNullable<NonNullable<ARTICLE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type LIBRARY_QUERY_RESULTExpanded = Omit<LIBRARY_QUERY_RESULT, 'miseEnAvant' | 'sliderSelection' | 'imageCover'> & {
+export type LIBRARY_QUERY_RESULTExpanded = Omit<LIBRARY_QUERY_RESULT, 'miseEnAvant' | 'sliderSelection' | 'items'> & {
   miseEnAvant?: Array<ProductExpanded> | null;
   sliderSelection?: Array<ProductExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<LIBRARY_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  items?: Array<ProductExpanded> | null;
 };
 
-export type PRODUCT_QUERY_RESULTExpanded = Omit<PRODUCT_QUERY_RESULT, 'tags' | 'rebonds' | 'imageCover'> & {
+export type PRODUCT_QUERY_RESULTExpanded = Omit<PRODUCT_QUERY_RESULT, 'tags' | 'rebonds'> & {
   tags?: Array<Tag> | null;
   rebonds?: ExhibitionExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<PRODUCT_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type NewsletterUIExpanded = Omit<NewsletterUI, 'image'> & {

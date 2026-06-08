@@ -102,8 +102,8 @@ export function exhibitionToCard(
 // ─── Product ─────────────────────────────────────────────────────────────────
 
 export function productToCard(input: ProductExpanded): CardBaseProps {
-  const { imageCover, tags, price } = input;
-  const artistName = input.artist?.name || "";
+  const { imageCover, tags, price, artists } = input;
+  const artistName = artists?.map((a) => a.name).join(", ") || "";
   const title = (_localizeField(input.title) as string) || "";
   return {
     _type: input._type,

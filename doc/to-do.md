@@ -79,10 +79,11 @@ Si l’expo est au tube (espace secondaire) = carte horizontale (même si image 
 
 ## shopify
 
-- sync shopify
-- catalog
-- filters shop
-- product page
+- # sync shopify
+- # catalog
+- # filters shop
+- # product page
+- cart
 
 ## shopify
 

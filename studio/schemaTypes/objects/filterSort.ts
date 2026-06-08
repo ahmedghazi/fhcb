@@ -21,11 +21,12 @@ export default {
               type: 'string',
               options: {
                 list: [
-                  {title: 'Numéro (index)', value: 'index'},
+                  // {title: 'Numéro (index)', value: 'index'},
                   {title: 'Titre', value: 'title'},
+                  {title: 'Date de parution', value: 'publicationDate'},
                   {title: 'Date de début', value: 'dateStart'},
                   {title: 'Date de création', value: '_createdAt'},
-                  {title: 'Intervenant', value: 'speaker'},
+                  // {title: 'Intervenant', value: 'speaker'},
                 ],
               },
               validation: (Rule) => Rule.required(),

@@ -9,6 +9,7 @@ import { _localizeText } from "../sanity-api/utils";
 import Modules from "./modules";
 import ModuleSliderCardUI from "./modules/ModuleSliderCardUI";
 import ModuleGridCardUI from "./modules/ModuleGridCardUI";
+import ModuleListProductUI from "./modules/ModuleListProductUI";
 import "../components/modules/index.scss";
 type Props = {
   input: LIBRARY_QUERY_RESULT;
@@ -27,10 +28,14 @@ const ContentLibrary = ({ input }: Props) => {
   const _renderModules = () => {
     return input.modules?.map((module) => {
       switch (module._type) {
-        case "sliderCardUI":
-          return <ModuleSliderCardUI key={module._key} input={module} />;
-        case "gridCardUI":
-          return <ModuleGridCardUI key={module._key} input={module} />;
+        // case "sliderCardUI":
+        //   return <ModuleSliderCardUI key={module._key} input={module} />;
+        // case "gridCardUI":
+        //   return <ModuleGridCardUI key={module._key} input={module} />;
+        case "listProductUI":
+          return (
+            <ModuleListProductUI key={module._key} input={module as any} />
+          );
 
         default:
           return null;
@@ -40,12 +45,12 @@ const ContentLibrary = ({ input }: Props) => {
 
   return (
     <div className='content content--library'>
-      <div className='container-fluid'>
+      {/* <div className='container-fluid'>
         <div className='filters'>filters</div>
-      </div>
+      </div> */}
       {input.modules && <div className='modules'>{_renderModules()}</div>}
 
-      {input.items && (
+      {/* {input.items && (
         <div className='container-fluid'>
           <section className='product'>
             <h2 className='c-h1_5'>{_localizeText("allProducts")}</h2>
@@ -60,7 +65,7 @@ const ContentLibrary = ({ input }: Props) => {
             {hasMore && <div ref={sentinelRef} aria-hidden />}
           </section>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -104,10 +104,10 @@ export default defineType({
     }),
 
     defineField({
-      name: 'artist',
-      title: 'Artiste',
-      type: 'reference',
-      to: [{type: 'artist'}],
+      name: 'artists',
+      title: 'Artistes',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',
     }),
 

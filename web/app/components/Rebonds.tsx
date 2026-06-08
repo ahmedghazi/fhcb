@@ -22,13 +22,14 @@ import { _localizeText } from "../sanity-api/utils";
 type Props = {
   // input: NonNullable<FEUILLETAGE_QUERY_RESULT>["related"];
   input: any;
+  title?: string;
 };
 
-const Rebonds = ({ input }: Props) => {
+const Rebonds = ({ input, title = "discoverToo" }: Props) => {
   return (
     <section className='rebonds mb-lg'>
       <div className='container-fluid'>
-        <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2>
+        <h2 className='c-h1_5'>{_localizeText(title)}</h2>
         <div
           className='grid--centered'
           style={

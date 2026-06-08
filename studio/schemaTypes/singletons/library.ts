@@ -48,7 +48,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes, embed)',
       type: 'array',
-      of: [{type: 'gridCardUI'}, {type: 'sliderCardUI'}],
+      of: [{type: 'gridCardUI'}, {type: 'sliderCardUI'}, {type: 'listProductUI'}],
       group: 'editorial',
     }),
     defineField({

@@ -10,12 +10,12 @@ import {
   cardRefImageImages,
   nav,
   cardTypes,
-  relatedByArtist,
   relatedByTag,
   cardRefProduct,
   sliderCardUI,
   gridCardUI,
   relatedByArtists,
+  listProductUI,
 } from "./fragments";
 import {
   ARTICLE_QUERY_RESULT,
@@ -357,10 +357,11 @@ export const LIBRARY_QUERY = groq`*[_type == "library"][0]{
   modules[]{
     ${sliderCardUI},
     ${gridCardUI},
+    ${listProductUI}
   },
-  "items": *[_type == "product" ] | order(publicationDate asc) [0...20] {
-    ${cardRefProduct}
-  }
+  // "items": *[_type == "product" ] | order(publicationDate asc) [0...20] {
+  //   ${cardRefProduct}
+  // }
 }`;
 
 export async function getLibrairie(): Promise<LIBRARY_QUERY_RESULT> {
@@ -378,14 +379,14 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   seo{
     ${seo}
   },
-  artist->,
+  artists[]->,
   imageCover{
     ${imageAsset}
   },
   images[]{
     ${imageAsset}
   },
-  "related": ${relatedByArtist}
+  "related": ${relatedByArtists}
 }`;
 
 export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
@@ -394,6 +395,24 @@ export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
     tags: ["product"],
     qParams: { slug },
   });
+}
+
+export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && slug.current != $slug]{
+  ${cardRefProduct}
+}`;
+
+export async function getRandomProductss(excludeSlug: string, count = 4) {
+  const all = await sanityFetch({
+    query: RANDOM_PRODUCT_QUERY,
+    tags: ["product"],
+    qParams: { slug: excludeSlug },
+  });
+  if (!Array.isArray(all)) return [];
+  for (let i = all.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [all[i], all[j]] = [all[j], all[i]];
+  }
+  return all.slice(0, count);
 }
 
 /*

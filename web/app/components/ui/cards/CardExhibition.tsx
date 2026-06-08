@@ -30,7 +30,6 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
   const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
 
   const props = exhibitionToCard(input, size);
-  console.log(input);
   return (
     <div
       className={clsx(

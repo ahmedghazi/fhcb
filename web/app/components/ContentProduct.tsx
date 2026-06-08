@@ -3,10 +3,15 @@ import React from "react";
 import {
   Artist,
   KeyVal,
-  Product,
   PRODUCT_QUERY_RESULT,
 } from "../sanity-api/types/sanity.types";
-import { _localizeField, _localizeText } from "../sanity-api/utils";
+import {
+  _linkResolver,
+  _localizeField,
+  _localizeText,
+} from "../sanity-api/utils";
+import { urlFor } from "../sanity-api/sanity-utils";
+import useCart from "../context/CartContext";
 import KeenSlider from "./ui/KeenSlider";
 import Figure from "./ui/Figure";
 import Rebonds from "./Rebonds";
@@ -16,13 +21,15 @@ type Props = {
 };
 
 const ContentProduct = ({ input }: Props) => {
+  const { addToCart } = useCart();
+
   if (!input) return null;
-  console.log(input);
   const {
     imageCover,
     title,
     price,
-    artist,
+    inStock,
+    artists,
     images,
     isbn,
     editeur,
@@ -30,8 +37,24 @@ const ContentProduct = ({ input }: Props) => {
     metas,
     publicationDate,
     related,
+    shopifyId,
+    variants,
   } = input;
-  // const creditsKeys = ["isbn", "editeur", "languages", "metas"];
+
+  const localizedTitle = (_localizeField(title) as string) || "";
+
+  const _handleAddToCart = () => {
+    const variantId = variants?.[0]?.shopifyVariantId || shopifyId;
+    if (!variantId) return;
+    addToCart({
+      id: variantId.split("/").pop()!,
+      title: localizedTitle,
+      price: variants?.[0]?.price ?? price ?? 0,
+      image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
+      href: _linkResolver(input),
+    });
+  };
+
   return (
     <div className='content content--product'>
       <div className='container-fluid'>
@@ -39,14 +62,19 @@ const ContentProduct = ({ input }: Props) => {
           <div className='header'>
             <div>
               <h1 className='c-h2'>{_localizeField(title)}</h1>
-              {artist && (
+              {artists && artists.length > 0 && (
                 <div className='subtitle c-chapo c-chapo--i'>
-                  {(artist as unknown as Artist).name}
+                  {(artists as unknown as Artist[])
+                    .map((a) => a.name)
+                    .join(", ")}
                 </div>
               )}
             </div>
             <div className='price c-h2'>{price}€</div>
-            <button className='add-to-cart btn'>
+            <div className='stock'>
+              {inStock ? _localizeText("inStock") : _localizeText("outOfStock")}
+            </div>
+            <button className='add-to-cart btn' onClick={_handleAddToCart}>
               {_localizeText("addToCart")}
             </button>
             <ul className='sidebar'>
@@ -118,7 +146,9 @@ const ContentProduct = ({ input }: Props) => {
           <div className='md:col-span-1'></div>
         </div>
       </div>
-      {related && <Rebonds input={related} />}
+      {related && related.length > 0 && (
+        <Rebonds input={related} title='aroundThertist' />
+      )}
       {/* <pre>{JSON.stringify(related, null, 2)}</pre> */}
     </div>
   );

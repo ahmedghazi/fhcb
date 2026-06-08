@@ -41,6 +41,13 @@ const i18n = {
     sortDateDesc: "Date (récente)",
     allProducts: "Tous les livres",
     addToCart: "Ajouter au panier",
+    aroundThertist: "Autour de l'artiste",
+    cart: "Panier",
+    cartEmpty: "Votre panier est vide",
+    checkout: "Commander",
+    total: "Total",
+    remove: "Retirer",
+    close: "Fermer",
   },
   en: {
     default: false,
@@ -84,6 +91,13 @@ const i18n = {
     sortDateDesc: "Date (recent)",
     allProducts: "All products",
     addToCart: "Add to cart",
+    aroundThertist: "Around the artist",
+    cart: "Cart",
+    cartEmpty: "Your cart is empty",
+    checkout: "Checkout",
+    total: "Total",
+    remove: "Remove",
+    close: "Close",
   },
 };
 

@@ -32,6 +32,24 @@ header {
       .meta-nav {
         display: flex;
       }
+      .cart-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.4em;
+        text-transform: uppercase;
+        font-size: var(--text-sm);
+        &__count {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 1.4em;
+          height: 1.4em;
+          border-radius: 50%;
+          background-color: var(--color-accent);
+          color: var(--color-white);
+          font-size: 0.7em;
+        }
+      }
     }
   }
   .header__logo {
