@@ -10,6 +10,9 @@ import { isInSiteLocationType } from "@/app/lib/utils";
 const TAG_CURRENT_SLUG = "exposition-en-cours";
 const TAG_PAST_SLUG = "exposition-passee";
 const TAG_UPCOMING_SLUG = "exposition-a-venir";
+const TAG_HORS_LES_MURS_SLUG = "hors-les-murs";
+
+const OFF_SITE_LOCATION_TYPES = ["offSite", "travelling"];
 
 // Actions API requires apiVersion >= 2023-08-04
 function getWriteClient() {
@@ -41,11 +44,12 @@ export async function GET(request: Request) {
 
   // Resolve or create managed tags
   const existingTags: { _id: string; slug: string }[] = await client.fetch(
-    `*[_type == "tag" && slug.current in [$current, $past, $upcoming]]{ _id, "slug": slug.current }`,
+    `*[_type == "tag" && slug.current in [$current, $past, $upcoming, $horsLesMurs]]{ _id, "slug": slug.current }`,
     {
       current: TAG_CURRENT_SLUG,
       past: TAG_PAST_SLUG,
       upcoming: TAG_UPCOMING_SLUG,
+      horsLesMurs: TAG_HORS_LES_MURS_SLUG,
     },
   );
 
@@ -64,10 +68,11 @@ export async function GET(request: Request) {
     return doc._id;
   };
 
-  const [currentTagId, pastTagId, upcomingTagId] = await Promise.all([
+  const [currentTagId, pastTagId, upcomingTagId, horsLesMursTagId] = await Promise.all([
     resolve(TAG_CURRENT_SLUG, "Exposition en cours", "Current exhibition"),
     resolve(TAG_PAST_SLUG, "Exposition passée", "Past exhibition"),
     resolve(TAG_UPCOMING_SLUG, "Exposition à venir", "Upcoming exhibition"),
+    resolve(TAG_HORS_LES_MURS_SLUG, "Hors les murs", "Off-site"),
   ]);
 
   // Fetch all published exhibitions with dates and tags
@@ -83,7 +88,7 @@ export async function GET(request: Request) {
     }`,
   );
 
-  const managedIds = new Set([currentTagId, pastTagId, upcomingTagId]);
+  const managedIds = new Set([currentTagId, pastTagId, upcomingTagId, horsLesMursTagId]);
   let updated = 0;
   const log: string[] = [];
 
@@ -108,6 +113,10 @@ export async function GET(request: Request) {
       (d) =>
         isInSiteLocationType(d.locationType) && d.du && d.au && d.du <= nowDate && d.au >= nowDate,
     );
+    const isHorsLesMurs = exhibition.dates.some(
+      (d) =>
+        d.locationType && OFF_SITE_LOCATION_TYPES.includes(d.locationType) && d.du && d.au && d.du <= nowDate && d.au >= nowDate,
+    );
     const isPast = lastEnd < nowDate;
     const isUpcoming = firstStart > nowDate;
 
@@ -116,6 +125,7 @@ export async function GET(request: Request) {
     );
     const nextTags = [...otherTags];
     if (isCurrent) nextTags.push({ _key: randomKey(), _ref: currentTagId });
+    if (isHorsLesMurs) nextTags.push({ _key: randomKey(), _ref: horsLesMursTagId });
     if (isPast) nextTags.push({ _key: randomKey(), _ref: pastTagId });
     if (isUpcoming) nextTags.push({ _key: randomKey(), _ref: upcomingTagId });
 
@@ -153,7 +163,7 @@ export async function GET(request: Request) {
 
     updated++;
     log.push(
-      `${exhibition._id}: ${isCurrent ? "current" : isPast ? "past" : "upcoming"}`,
+      `${exhibition._id}: ${[isCurrent && "current", isHorsLesMurs && "hors-les-murs", isPast && "past", isUpcoming && "upcoming"].filter(Boolean).join("+") || "none"}`,
     );
   }
 

@@ -59,6 +59,7 @@ cards simili document
 - date avec location
 - btn hover, all hover
 - # fix search result
+- page event (comme exhib)
 
 ## card expos
 

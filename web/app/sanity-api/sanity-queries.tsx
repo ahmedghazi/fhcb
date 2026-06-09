@@ -2,11 +2,9 @@ import { groq } from "next-sanity";
 import { sanityFetch } from "./sanity.client";
 import {
   imageAsset,
-  cardRefExhibition,
   cardRefArtist,
   modules,
   seo,
-  cardRefEvent,
   cardRefImageImages,
   nav,
   cardTypes,
@@ -190,7 +188,8 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     },
     modules[]{
       ${modules}
-    }
+    },
+    "related": ${relatedByArtists}
   }`;
 
 export async function getExhibition(
@@ -211,27 +210,9 @@ export const PROGRAMME_QUERY = groq`*[_type == "programme" && slug.current == $s
     seo{
       ${seo}
     },
-    items,
     modules[]{
       ${modules}
-    },
-    "resolvedItems": select(
-      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[
-        _type == "exhibition"
-        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
-        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
-      ] | order(dates[0].du asc) {
-        ${cardRefExhibition}
-      },
-      items in ["events", "guided-tours"] => *[
-        _type == "event"
-        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
-        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
-      ] | order(coalesce(dates[0].du, _createdAt) asc) {
-        ${cardRefEvent}
-      },
-      []
-    )
+    }
   }`;
 
 export async function getProgramme(

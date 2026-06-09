@@ -1,5 +1,5 @@
 "use client";
-import { _fhcbDates } from "@/app/lib/utils";
+import { _fhcbDates, dateIsInSite } from "@/app/lib/utils";
 import { FhcbDate, Location } from "@/app/sanity-api/types/sanity.types";
 import useLocale from "@/app/context/LocaleContext";
 import React from "react";
@@ -33,7 +33,10 @@ const FHCBDates = ({ input }: Props) => {
         return (
           <div
             key={index}
-            className={clsx("fhcb-date", date.inSite ? "in-site" : "off-site")}>
+            className={clsx(
+              "fhcb-date",
+              dateIsInSite(date) ? "in-site" : "off-site",
+            )}>
             {fmt.type === "different-years" && (
               <>
                 <time dateTime={date.du ?? undefined}>{fmt.du}</time>

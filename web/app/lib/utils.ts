@@ -70,6 +70,9 @@ export const IN_SITE_LOCATION_TYPES: readonly LocationType[] = [
 
 // Whether a locationType is considered "in site".
 // Absent locationType → true (backward compat with old inSite boolean field).
+export const dateIsInSite = (date: FhcbDateExtended): boolean => {
+  return isInSiteLocationType(date.locationType);
+};
 export const isInSiteLocationType = (locationType?: string | null): boolean => {
   if (!locationType) return true;
   return (IN_SITE_LOCATION_TYPES as readonly string[]).includes(locationType);

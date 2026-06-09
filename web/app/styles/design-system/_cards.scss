@@ -185,7 +185,7 @@
       }
     }
 
-    &:has(.fhcb-dates--multiple) {
+    &.card--sm:has(.fhcb-dates--multiple) {
       &:hover {
         .fhcb-date.off-site {
           display: block;

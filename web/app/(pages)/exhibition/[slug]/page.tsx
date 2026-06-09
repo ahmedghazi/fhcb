@@ -12,6 +12,7 @@ import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import ExhibitionHero from "@/app/components/ExhibitionHero";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import Rebonds from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
 
@@ -56,6 +57,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <ExhibitionHero input={data as unknown as ExhibitionExpanded} />
       <ContentModulaire input={data} />
+      {data.related && <Rebonds input={data.related} />}
     </div>
   );
 };
