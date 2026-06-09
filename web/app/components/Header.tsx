@@ -70,7 +70,7 @@ const Header = ({ settings }: Props) => {
                   rel='noopener noreferrer'
                   href={settings.btnTickets.link}
                   className='btn-tickets'>
-                  {settings.btnTickets.label}
+                  {_localizeField(settings.btnTickets.label)}
                 </a>
               </li>
             )}

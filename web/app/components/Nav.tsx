@@ -27,7 +27,7 @@ const NavItem = ({ item }: { item: LinkInternal | LinkExternal }) => {
         target='_blank'
         rel='noopener noreferrer'
         className=''>
-        <div className=''>{item.label}</div>
+        <div className=''>{_localizeField(item.label)}</div>
       </a>
     );
   }
