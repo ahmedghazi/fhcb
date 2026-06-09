@@ -4,6 +4,7 @@ import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types
 import { _isCurrentExhibition, _isHorsLesMurs } from "@/app/lib/utils";
 import { exhibitionToCard } from "./adapters";
 import CardBase from "./CardBase";
+import { FhcbDate } from "@/app/sanity-api/types/sanity.types";
 
 type Props = {
   input: ExhibitionExpanded;
@@ -13,10 +14,12 @@ const CardExhibitionFeatured = ({ input }: Props) => {
   const { dates, tags, color } = input;
   const isCurrent = _isCurrentExhibition(dates || []);
   const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
-  const isTube = (input as any).location === "inside-tube";
+  // const isTube = (input as any).location === "inside-tube";
+  const isTube =
+    dates?.some((item: FhcbDate) => item.locationType === "inSite-tube") ??
+    false;
 
   const props = exhibitionToCard(input, "md", true);
-  console.log(props);
   return (
     <div
       style={{ backgroundColor: (color as any)?.hex || "var(--color-bleu)" }}

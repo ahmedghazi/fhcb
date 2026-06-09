@@ -16,7 +16,7 @@ import {
   ProductExpanded,
   SanityImageAssetFull,
 } from "@/app/sanity-api/types/sanity-expanded.types";
-import { Tag } from "@/app/sanity-api/types/sanity.types";
+import { FhcbDate, Tag } from "@/app/sanity-api/types/sanity.types";
 import {
   _linkResolver,
   _localizeField,
@@ -50,16 +50,19 @@ export function exhibitionToCard(
   size: "sm" | "md" | "lg" = "sm",
   featured?: boolean,
 ): CardBaseProps {
-  const { artists, imageCover, dates, tags } = input;
+  const { title, artists, imageCover, dates, tags } = input;
   const artistList = artists?.map((a) => a.name).join(", ");
 
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const imagePortrait = !isLandscape;
-
-  const isTube = (input as any).location === "inside-tube";
-
+  console.log(title);
+  console.log(dates);
+  const isTube =
+    dates?.some((item: FhcbDate) => item.locationType === "inSite-tube") ??
+    false;
+  console.log({ isTube });
   let layout: CardBaseProps["layout"];
   let imagePlacement: CardBaseProps["imagePlacement"] | undefined;
 
@@ -86,8 +89,10 @@ export function exhibitionToCard(
     colorVar: "var(--color-exhibition)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
-    title: artistList || (_localizeField(input.title) as string) || "",
-    subTitle: artistList ? (_localizeField(input.title) as string) : undefined,
+    // title: artistList || (_localizeField(input.title) as string) || "",
+    // subTitle: artistList ? (_localizeField(input.title) as string) : undefined,
+    title: (_localizeField(title) as string) || "",
+    subTitle: artistList,
     infoNode: toInfoNode(dates),
     actions: [
       {

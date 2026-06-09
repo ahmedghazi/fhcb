@@ -48,7 +48,9 @@ textarea {
 }
 
 .fhcb-date {
-  margin-bottom: 0.5em;
+  &.has-location {
+    margin-bottom: 0.5em;
+  }
 }
 
 .my-masonry-grid {

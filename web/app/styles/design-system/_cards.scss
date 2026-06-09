@@ -61,17 +61,26 @@
       .card__inner {
         display: block;
         .grid {
-          grid-template-columns: repeat(12, minmax(0, 1fr));
+          // grid-template-columns: repeat(12, minmax(0, 1fr));
           gap: var(--spacing-xs);
           width: 100%;
           .card__body {
-            grid-column: span 5;
+            // grid-column: span 5;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
           }
           .card__media {
-            grid-column: span 7;
+            // grid-column: span 7;
+          }
+
+          display: flex;
+          .card__body {
+            flex: 0;
+            min-width: 10rem;
+          }
+          .card__media {
+            flex: 2;
           }
         }
       }
@@ -80,6 +89,7 @@
     // footer detached
     .card__inner + .card__footer {
       padding: var(--spacing-xs);
+      padding-top: 0;
     }
   }
 
@@ -130,6 +140,13 @@
     }
   }
 
+  &--sm-alt {
+    &.card--row {
+      .grid {
+        display: flex;
+      }
+    }
+  }
   // ── États ───────────────────────────────────────────────────────────────────
 
   &--is-current,

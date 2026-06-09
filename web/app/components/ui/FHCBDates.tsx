@@ -36,6 +36,7 @@ const FHCBDates = ({ input }: Props) => {
             className={clsx(
               "fhcb-date",
               dateIsInSite(date) ? "in-site" : "off-site",
+              date.location && "has-location",
             )}>
             {fmt.type === "different-years" && (
               <>
