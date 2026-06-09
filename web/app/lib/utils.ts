@@ -1,3 +1,4 @@
+import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
 import { FhcbDate, Tag } from "../sanity-api/types/sanity.types";
 
 const LOCALE_MAP: Record<string, string> = {
@@ -176,6 +177,17 @@ export const _isFuturExhibition = (dates: FhcbDate[]): boolean => {
 };
 export const _isHorsLesMurs = (tags: Tag[]): boolean => {
   return tags.filter((tag) => tag.slug?.current === "hors-les-murs").length > 0;
+};
+
+export const _isPastHorOutside = (item: ExhibitionExpanded) => {
+  const isPast = _isPastExhibition(item.dates || []);
+  const isOffSite = item.dates?.some((date) => {
+    const d = date as FhcbDateExtended;
+    const outsideLocations = ["offSite", "travelling"];
+    return outsideLocations.includes(d.locationType || "");
+  });
+  return isPast || isOffSite;
+  // return _isPastExhibition(item.dates) && _isHorsLesMurs(item.tags);
 };
 
 export const descriptionHtmlToBlocks = (html: string) => {

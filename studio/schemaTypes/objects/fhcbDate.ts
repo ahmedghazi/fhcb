@@ -27,6 +27,7 @@ export default defineField({
       name: 'locationType',
       title: 'Type de lieu',
       type: 'string',
+      validation: (Rule) => Rule.required(),
       options: {
         list: [
           // {title: 'À la fondation', value: 'inside'},
