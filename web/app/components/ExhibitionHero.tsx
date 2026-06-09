@@ -14,17 +14,22 @@ type Props = {
 };
 
 const ExhibitionHero = ({ input }: Props) => {
-  const { title, artists, imageCover, dates, tags } = input;
+  const { title, artists, imageCover, dates, tags, color } = input;
   const artistList = artists?.map((artist) => artist.name).join(", ");
   const isCurrentExhibition = _isCurrentExhibition(dates || []);
   const isPast = _isPastExhibition(dates || []);
   return (
     <section
       className={clsx(
-        "exhibition-hero bg-mauve",
+        "exhibition-hero bg-mauve-",
         isCurrentExhibition && "exhibition-hero--is-current",
         isPast && "exhibition-hero--is-past",
-      )}>
+      )}
+      style={{
+        backgroundColor: isCurrentExhibition
+          ? (color as any)?.hex || "var(--color-mauve)"
+          : "var(--color-mauve)",
+      }}>
       <div className='container-fluid'>
         <div className='grid md:grid-cols-2 gap-gutter'>
           <div className='hero__figure'>
