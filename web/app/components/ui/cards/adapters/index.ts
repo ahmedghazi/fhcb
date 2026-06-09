@@ -22,7 +22,7 @@ import {
   _localizeField,
   _localizeText,
 } from "@/app/sanity-api/utils";
-import { CardBaseProps } from "../CardBase";
+import { CardAction, CardBaseProps } from "../CardBase";
 import CardTags from "../CardTags";
 import FHCBDates from "../../FHCBDates";
 import Embed from "../../Embed";
@@ -50,19 +50,16 @@ export function exhibitionToCard(
   size: "sm" | "md" | "lg" = "sm",
   featured?: boolean,
 ): CardBaseProps {
-  const { title, artists, imageCover, dates, tags } = input;
+  const { title, artists, imageCover, dates, tags, links } = input;
   const artistList = artists?.map((a) => a.name).join(", ");
 
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const imagePortrait = !isLandscape;
-  console.log(title);
-  console.log(dates);
   const isTube =
     dates?.some((item: FhcbDate) => item.locationType === "inSite-tube") ??
     false;
-  console.log({ isTube });
   let layout: CardBaseProps["layout"];
   let imagePlacement: CardBaseProps["imagePlacement"] | undefined;
 
@@ -80,6 +77,23 @@ export function exhibitionToCard(
     layout = "col";
   }
 
+  const actions: CardAction[] = [];
+  actions.push({
+    label: _localizeText("discoverTheExhibition") as string,
+    href: _linkResolver(input),
+    variant: "primary",
+  });
+
+  if (links) {
+    links.forEach((link) => {
+      actions.push({
+        label: (_localizeField(link.label) as string) || "",
+        href: link.link ?? "",
+        variant: "secondary",
+      });
+    });
+  }
+
   return {
     _type: input._type,
     layout,
@@ -94,13 +108,7 @@ export function exhibitionToCard(
     title: (_localizeField(title) as string) || "",
     subTitle: artistList,
     infoNode: toInfoNode(dates),
-    actions: [
-      {
-        label: _localizeText("discoverTheExhibition") as string,
-        href: _linkResolver(input),
-        variant: "primary",
-      },
-    ],
+    actions: actions,
   };
 }
 

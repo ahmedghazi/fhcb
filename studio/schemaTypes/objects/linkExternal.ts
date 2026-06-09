@@ -1,4 +1,5 @@
 import {defineField} from 'sanity'
+import {baseLanguage} from '../locale/supportedLanguages'
 
 export default defineField({
   title: 'Lien Externe',
@@ -6,7 +7,7 @@ export default defineField({
   type: 'object',
   preview: {
     select: {
-      label: `label`,
+      label: `label.${baseLanguage}`,
     },
     prepare(selection) {
       const {label} = selection
@@ -19,7 +20,7 @@ export default defineField({
     defineField({
       name: 'label',
       title: 'Label',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'link',

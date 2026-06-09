@@ -224,7 +224,7 @@ const cardRefModulaire = `
 export const cardRefExhibition = `
   _type,
   _id,
-title,
+  title,
   slug,
   imageCover{
     ${imageAsset}
@@ -242,6 +242,9 @@ title,
     _id,
     title,
     slug
+  },
+  links[]{
+    ...
   }
 `;
 export const cardRefEvent = `
