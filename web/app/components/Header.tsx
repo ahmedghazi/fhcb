@@ -17,6 +17,7 @@ import NavModal from "./NavModal";
 import useHeader from "../context/HeaderContext";
 import useCart from "../context/CartContext";
 import clsx from "clsx";
+import BtnCart from "./ui/btns/BtnCart";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -24,7 +25,7 @@ type Props = {
 
 const Header = ({ settings }: Props) => {
   const { modalType } = useHeader();
-  const { cartCount, toggleCart } = useCart();
+  // const { cartCount, toggleCart } = useCart();
 
   if (!settings) return null;
 
@@ -45,20 +46,21 @@ const Header = ({ settings }: Props) => {
           <LocalesSwitcher />
           <ul className='meta-nav'>
             {settings.btnLibrary && (
-              <li>
+              <li className='flex'>
                 <Link
                   href={_linkResolver(settings.btnLibrary.link)}
                   className='btn-library'>
                   {_localizeField(settings.btnLibrary.label)}
                 </Link>
-                {cartCount > 0 && (
+                {/* {cartCount > 0 && (
                   <button className='cart-toggle' onClick={toggleCart}>
                     <span>{_localizeText("cart")}</span>
                     {cartCount > 0 && (
                       <span className='cart-toggle__count'>{cartCount}</span>
                     )}
                   </button>
-                )}
+                )} */}
+                <BtnCart />
               </li>
             )}
             {settings.btnTickets && (

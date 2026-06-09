@@ -17,6 +17,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
   const _update = (key: string, value: string) => {
     const next = { ...active, [key]: value };
+    if (!value) delete next[key];
     setActive(next);
     onChange(next);
   };

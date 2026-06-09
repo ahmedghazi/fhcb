@@ -13,6 +13,18 @@ a.btn {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  position: relative;
+  &:hover::before {
+    opacity: 0.2;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--color-gris-100);
+    opacity: 0;
+  }
   &--secondary {
     background-color: var(--color-white-0_5);
   }
@@ -30,6 +42,18 @@ a.btn {
   font-weight: 800;
   padding: 0.3em 0.6em;
   text-transform: uppercase;
+  position: relative;
+  &:hover::before {
+    opacity: 0.2;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--color-gris-100);
+    opacity: 0;
+  }
 }
 .btn-tickets {
   border-radius: 2.77em; /* = 50px (50 / 18 = 2.77) */
@@ -43,5 +67,28 @@ a.btn {
   &:hover,
   &.is-active {
     background-color: var(--color-accent);
+  }
+}
+
+.btn--cart-toggle {
+  position: relative;
+  &:hover .shade {
+    opacity: 0.2;
+  }
+  .shade {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-color: var(--color-gris-50);
+    opacity: 0;
+  }
+  &:hover {
+  }
+  &__count {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-52%, -45%);
+    color: white;
   }
 }

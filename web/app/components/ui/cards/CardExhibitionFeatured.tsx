@@ -16,7 +16,7 @@ const CardExhibitionFeatured = ({ input }: Props) => {
   const isTube = (input as any).location === "inside-tube";
 
   const props = exhibitionToCard(input, "md", true);
-
+  console.log(props);
   return (
     <div
       style={{ backgroundColor: (color as any)?.hex || "var(--color-bleu)" }}

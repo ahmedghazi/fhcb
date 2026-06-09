@@ -51,6 +51,7 @@ import listImageImages from './objects/modules/listImageImages'
 import listSerieThematiqueUI from './objects/modules/listSerieThematiqueUI'
 import listExhibitionsUI from './objects/modules/listExhibitionsUI'
 import listExhibitionsPastUI from './objects/modules/listExhibitionsPastUI'
+import listExhibitionsEventsUI from './objects/modules/listExhibitionsEventsUI'
 import listEventsUI from './objects/modules/listEventsUI'
 import supportUI from './objects/modules/supportUI'
 import newsletterUI from './objects/modules/newsletterUI'
@@ -132,6 +133,7 @@ export const schemaTypes = [
   listSerieThematiqueUI,
   listExhibitionsUI,
   listExhibitionsPastUI,
+  listExhibitionsEventsUI,
   listEventsUI,
   listProductUI,
   supportUI,

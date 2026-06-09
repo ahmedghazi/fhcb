@@ -10,20 +10,6 @@ export default defineField({
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
     defineField({
-      name: 'items',
-      type: 'string',
-      title: 'Type de contenu',
-      description: 'Détermine quelles expositions sont affichées.',
-      options: {
-        list: [
-          {title: 'Expositions en cours', value: 'exhibitions-current'},
-          {title: 'Expositions passées', value: 'exhibitions-past'},
-          {title: 'Expositions à venir', value: 'exhibitions-futur'},
-          {title: 'Expositions hors-les-murs', value: 'exhibitions-out-of-the-box'},
-        ],
-      },
-    }),
-    defineField({
       name: 'filterTags',
       type: 'array',
       title: 'Filtrer par tags',

@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import CardProduct from "../ui/cards/CardProduct";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
@@ -8,6 +8,7 @@ import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "./applyFilters";
 import GridMasonry from "../ui/GridMasonry";
+import { publish } from "pubsub-js";
 
 type Props = {
   input: ListProductUI & {
@@ -27,6 +28,12 @@ const ModuleListProductUI = ({ input }: Props) => {
     activeFilters,
     locale,
   );
+
+  useEffect(() => {
+    console.log(activeFilters);
+    const hasFilters = Object.keys(activeFilters).length > 0;
+    publish("IS_FILTERING", hasFilters);
+  }, [activeFilters]);
 
   return (
     <section className='module module--list-product-ui'>

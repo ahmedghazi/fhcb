@@ -1,26 +1,28 @@
 import {defineField} from 'sanity'
 import {baseLanguage} from '../../locale/supportedLanguages'
-import {FiCalendar} from 'react-icons/fi'
+import {FiGrid} from 'react-icons/fi'
 
 export default defineField({
-  name: 'listEventsUI',
-  title: 'List Événements UI',
+  name: 'listExhibitionsEventsUI',
+  title: 'List Expositions & Événements UI',
   type: 'object',
-  icon: FiCalendar,
+  icon: FiGrid,
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
     defineField({
       name: 'filterTags',
       type: 'array',
       title: 'Filtrer par tags',
-      description: "Restreindre les éléments affichés aux documents portant ces tags. Laisser vide pour tout afficher.",
+      description:
+        'Restreindre les éléments affichés aux documents portant ces tags. Laisser vide pour tout afficher.',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
     }),
     defineField({
       name: 'excludeTags',
       type: 'array',
       title: 'Exclure par tags',
-      description: "Exclure les éléments portant ces tags, même s'ils correspondent aux tags de filtre.",
+      description:
+        "Exclure les éléments portant ces tags. Ex. : exclure « hors-les-murs ».",
       of: [{type: 'reference', to: [{type: 'tag'}]}],
     }),
     defineField({
@@ -35,7 +37,10 @@ export default defineField({
   preview: {
     select: {title: `title.${baseLanguage}`},
     prepare(selection) {
-      return {title: selection.title || 'List Événements UI', subtitle: 'List Événements UI'}
+      return {
+        title: selection.title || 'List Expositions & Événements UI',
+        subtitle: 'List Expositions & Événements UI',
+      }
     },
   },
 })

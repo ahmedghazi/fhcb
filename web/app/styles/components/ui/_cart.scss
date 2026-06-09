@@ -5,11 +5,11 @@
   right: var(--spacing-xs);
   bottom: var(--spacing-xs);
   z-index: 1100;
-  visibility: hidden;
+  // visibility: hidden;
   pointer-events: none;
 
   &.is-open {
-    visibility: visible;
+    // visibility: visible;
     pointer-events: auto;
 
     .cart-modal__overlay {

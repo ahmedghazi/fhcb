@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
 import { projectId, dataset } from "@/app/sanity-api/sanity.api";
+import { isInSiteLocationType } from "@/app/lib/utils";
 
+/**
+ * curl -H "Authorization: Bearer TEST" http://localhost:3000/api/cron/update-exhibition-tags
+
+ */
 const TAG_CURRENT_SLUG = "exposition-en-cours";
 const TAG_PAST_SLUG = "exposition-passee";
 const TAG_UPCOMING_SLUG = "exposition-a-venir";
@@ -37,7 +42,11 @@ export async function GET(request: Request) {
   // Resolve or create managed tags
   const existingTags: { _id: string; slug: string }[] = await client.fetch(
     `*[_type == "tag" && slug.current in [$current, $past, $upcoming]]{ _id, "slug": slug.current }`,
-    { current: TAG_CURRENT_SLUG, past: TAG_PAST_SLUG, upcoming: TAG_UPCOMING_SLUG },
+    {
+      current: TAG_CURRENT_SLUG,
+      past: TAG_PAST_SLUG,
+      upcoming: TAG_UPCOMING_SLUG,
+    },
   );
 
   const resolve = async (
@@ -64,12 +73,12 @@ export async function GET(request: Request) {
   // Fetch all published exhibitions with dates and tags
   const exhibitions: {
     _id: string;
-    dates: { du?: string; au?: string }[] | null;
+    dates: { du?: string; au?: string; locationType?: string }[] | null;
     tags: { _key: string; _ref: string }[] | null;
   }[] = await client.fetch(
     `*[_type == "exhibition" && !(_id in path("drafts.**"))] {
       _id,
-      dates,
+      "dates": dates[]{ du, au, locationType },
       "tags": tags[]{ _key, _ref }
     }`,
   );
@@ -77,6 +86,9 @@ export async function GET(request: Request) {
   const managedIds = new Set([currentTagId, pastTagId, upcomingTagId]);
   let updated = 0;
   const log: string[] = [];
+
+  // Use date-only string for comparison with YYYY-MM-DD date fields
+  const nowDate = now.slice(0, 10);
 
   for (const exhibition of exhibitions) {
     if (!exhibition.dates?.length) continue;
@@ -92,9 +104,12 @@ export async function GET(request: Request) {
     const firstStart = allStarts.sort()[0];
     const lastEnd = allEnds.sort().reverse()[0];
 
-    const isCurrent = firstStart <= now && lastEnd >= now;
-    const isPast = lastEnd < now;
-    const isUpcoming = firstStart > now;
+    const isCurrent = exhibition.dates.some(
+      (d) =>
+        isInSiteLocationType(d.locationType) && d.du && d.au && d.du <= nowDate && d.au >= nowDate,
+    );
+    const isPast = lastEnd < nowDate;
+    const isUpcoming = firstStart > nowDate;
 
     const otherTags = (exhibition.tags || []).filter(
       (t) => !managedIds.has(t._ref),

@@ -569,16 +569,13 @@ export const listExhibitionsUI = `
     title{
       ...
     },
-    "resolvedItems": select(
-      items in ["exhibitions-past", "exhibitions-current", "exhibitions-futur", "exhibitions-out-of-the-box"] => *[
-        _type == "exhibition"
-        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
-        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
-      ] | order(dates[0].du asc) {
-        ${cardRefExhibition}
-      },
-      []
-    ),
+    "resolvedItems": *[
+      _type == "exhibition"
+      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+    ] | order(dates[0].du asc) {
+      ${cardRefExhibition}
+    },
     cta{
       ...
     }
@@ -596,15 +593,44 @@ export const listExhibitionsPastUI = `
       ${filterList},
       ${filterRadio}
     },
-    "resolvedItems": select(
-      items in ["exhibitions-past"] => *[
-        _type == "exhibition"
-        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
-      ] | order(dates[0].du asc) {
-        ${cardRefExhibition}
-      },
-      []
-    ),
+    "resolvedItems": *[
+      _type == "exhibition"
+      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+    ] | order(dates[0].du desc) {
+      ${cardRefExhibition}
+    },
+    cta{
+      ...
+    }
+  }
+`;
+
+export const listExhibitionsEventsUI = `
+  _type == "listExhibitionsEventsUI" => {
+    ...,
+    title{
+      ...
+    },
+    filters[]{
+      ...,
+      ${filterList},
+      ${filterRadio}
+    },
+    "exhibitions": *[
+      _type == "exhibition"
+      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+    ] | order(dates[0].du asc) {
+      ${cardRefExhibition}
+    },
+    "events": *[
+      _type == "event"
+      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+    ] | order(coalesce(dates[0].du, _createdAt) asc) {
+      ${cardRefEvent}
+    },
     cta{
       ...
     }
@@ -618,21 +644,21 @@ export const listEventsUI = `
       ...
     },
 
-    "resolvedItems": select(
-      items in ["events", "guided-tours"] => *[
-        _type == "event"
-        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
-        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
-      ] | order(coalesce(dates[0].du, _createdAt) asc) {
-        ${cardRefEvent}
-      },
-      []
-    ),
+    "resolvedItems": *[
+      _type == "event"
+
+      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+    ] | order(coalesce(dates[0].du, _createdAt) asc) {
+      ${cardRefEvent}
+    },
     cta{
       ...
     }
   }
 `;
+/*
+&& (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+*/
 
 export const listProductUI = `
   _type == "listProductUI" => {
@@ -694,6 +720,7 @@ export const modules = `
   ${listSerieThematiqueUI},
   ${listExhibitionsUI},
   ${listExhibitionsPastUI},
+  ${listExhibitionsEventsUI},
   ${listEventsUI},
   ${supportUI},
   ${newsletterUI}

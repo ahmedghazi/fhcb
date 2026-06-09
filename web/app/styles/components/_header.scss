@@ -17,7 +17,7 @@ header {
     color: var(--color-secondary);
   }
   svg path {
-    fill: var(--color-secondary);
+    // fill: var(--color-secondary);
   }
   .header__inner {
     display: flex;
@@ -31,24 +31,8 @@ header {
       gap: var(--spacing-sm);
       .meta-nav {
         display: flex;
-      }
-      .cart-toggle {
-        display: flex;
         align-items: center;
-        gap: 0.4em;
-        text-transform: uppercase;
-        font-size: var(--text-sm);
-        &__count {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-width: 1.4em;
-          height: 1.4em;
-          border-radius: 50%;
-          background-color: var(--color-accent);
-          color: var(--color-white);
-          font-size: 0.7em;
-        }
+        gap: var(--spacing-xs);
       }
     }
   }
@@ -94,6 +78,19 @@ body.nav-open {
     }
     .search {
       z-index: 0;
+    }
+    .cart-toggle {
+      svg {
+        path.fill--accent {
+          fill: white;
+        }
+        path.fill--white {
+          fill: var(--color-secondary);
+        }
+      }
+      span {
+        color: var(--color-secondary);
+      }
     }
   }
 }

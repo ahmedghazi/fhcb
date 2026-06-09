@@ -156,6 +156,11 @@
         padding: var(--spacing-xs);
       }
     }
+    &.card--sm-alt {
+      .card__inner {
+        gap: var(--spacing-xs);
+      }
+    }
   }
 
   // ── Types / couleurs ────────────────────────────────────────────────────────

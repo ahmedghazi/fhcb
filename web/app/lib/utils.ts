@@ -54,7 +54,28 @@ type Simple = { type: "simple"; date: string };
 
 export type FhcbDateFormatted = DifferentYears | SameYear | WithTime | Simple;
 
+export type LocationType =
+  | "inSite"
+  | "inSite-cube"
+  | "inSite-tube"
+  | "offSite"
+  | "travelling";
+
+export const IN_SITE_LOCATION_TYPES: readonly LocationType[] = [
+  "inSite",
+  "inSite-cube",
+  "inSite-tube",
+];
+
+// Whether a locationType is considered "in site".
+// Absent locationType → true (backward compat with old inSite boolean field).
+export const isInSiteLocationType = (locationType?: string | null): boolean => {
+  if (!locationType) return true;
+  return (IN_SITE_LOCATION_TYPES as readonly string[]).includes(locationType);
+};
+
 type FhcbDateExtended = FhcbDate & {
+  locationType?: LocationType | string;
   withTime?: boolean;
   timeStart?: string;
   timeEnd?: string;
@@ -137,14 +158,17 @@ export const _isPastExhibition = (dates: FhcbDate[]): boolean => {
 };
 
 export const _isCurrentExhibition = (dates: FhcbDate[]): boolean => {
-  return dates.some(
-    (date) =>
-      date.inSite &&
-      date?.du &&
-      new Date(date.du) <= new Date() &&
-      date?.au &&
-      new Date(date.au) >= new Date(),
-  );
+  const today = new Date();
+  return dates.some((date) => {
+    const d = date as FhcbDateExtended;
+    return (
+      isInSiteLocationType(d.locationType) &&
+      d.du &&
+      new Date(d.du) <= today &&
+      d.au &&
+      new Date(d.au) >= today
+    );
+  });
 };
 
 export const _isFuturExhibition = (dates: FhcbDate[]): boolean => {

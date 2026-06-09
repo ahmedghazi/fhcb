@@ -82,25 +82,11 @@ export default defineType({
       group: 'editorial',
       of: [{type: 'fhcbDate'}],
     }),
-
-    defineField({
-      name: 'pastille',
-      type: 'localeString',
-      group: 'editorial',
-    }),
-    defineField({
-      name: 'color',
-      type: 'color',
-      group: 'editorial',
-      hidden: ({parent}) =>
-        parent?.location !== 'inside' &&
-        parent?.location !== 'inside-cube' &&
-        parent?.location !== 'inside-tube',
-    }),
     defineField({
       name: 'location',
       title: 'Lieux',
       type: 'string',
+      hidden: true,
       options: {
         list: [
           {title: 'À la fondation', value: 'inside'},
@@ -118,6 +104,21 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
       group: 'editorial',
+    }),
+
+    defineField({
+      name: 'pastille',
+      type: 'localeString',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'color',
+      type: 'color',
+      group: 'editorial',
+      hidden: ({parent}) =>
+        parent?.location !== 'inside' &&
+        parent?.location !== 'inside-cube' &&
+        parent?.location !== 'inside-tube',
     }),
 
     defineField({
@@ -148,13 +149,13 @@ export default defineType({
       title: `title.${baseLanguage}`,
       subtitle: 'slug.current',
       image: 'imageCover',
-      tags: `tags.0.title.${baseLanguage}`,
+      tag: `tags.0.title.${baseLanguage}`,
     },
     prepare(selection) {
-      const {title, subtitle, image, tags} = selection
+      const {title, subtitle, image, tag} = selection
       // console.log(images)
       return {
-        title: `${title} [${tags}]`,
+        title: `${title} [${tag.replace('Exposition ', '')}]`,
         subtitle: `/exhibition/${subtitle}`,
         media: image,
       }

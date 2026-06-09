@@ -8,6 +8,7 @@ export default defineField({
   icon: CiCalendarDate,
   initialValue: {
     inSite: true,
+    locationType: 'inSite',
   },
   fields: [
     defineField({
@@ -20,6 +21,24 @@ export default defineField({
       name: 'inSite',
       title: 'À la fondation?',
       type: 'boolean',
+      hidden: true,
+    }),
+    defineField({
+      name: 'locationType',
+      title: 'Type de lieu',
+      type: 'string',
+      options: {
+        list: [
+          // {title: 'À la fondation', value: 'inside'},
+          // {title: 'Hors les murs', value: 'outside'},
+          // { title: 'Itinérante', value: 'itinerant' },
+          {title: 'À la fondation', value: 'inSite'},
+          {title: 'À la fondation Cube', value: 'inSite-cube'},
+          {title: 'À la fondation Tube', value: 'inSite-tube'},
+          {title: 'Hors les murs', value: 'offSite'},
+          {title: 'Itinérante', value: 'travelling'},
+        ],
+      },
     }),
     defineField({
       type: 'date',
@@ -62,13 +81,14 @@ export default defineField({
       du: 'du',
       au: 'au',
       inSite: 'inSite',
+      locationType: 'locationType',
     },
     prepare(selection) {
-      const {du, au, inSite} = selection
+      const {du, au, inSite, locationType} = selection
       const fmt = (d: string | undefined) => (d ? new Date(d).toLocaleDateString('fr-FR') : '?')
       return {
         title: `${fmt(du)} - ${fmt(au)}`,
-        subtitle: inSite ? 'À la fondation' : 'Hors site',
+        subtitle: locationType,
       }
     },
   },

@@ -88,7 +88,9 @@ const CartModal = () => {
         </div> */}
 
         {items.length === 0 ? (
-          <p className='cart-modal__empty'>{_localizeText("cartEmpty")}</p>
+          <div className='cart-modal__empty'>
+            <p className=''>{_localizeText("cartEmpty")}</p>
+          </div>
         ) : (
           <ul className='cart-modal__list'>
             {items.map((line) => (
