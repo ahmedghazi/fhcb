@@ -291,7 +291,7 @@ export function imageImagesToCard(input: ImageImagesExpanded): CardBaseProps {
     layout: "col",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
-    supTitle: index ? `une image, des images #${index}` : undefined,
+    tags: index ? `une image, des images #${index}` : undefined,
     title: (_localizeField(input.title) as string) || "",
     subTitle: chercheur?.name || undefined,
     actions: [

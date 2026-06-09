@@ -63,10 +63,10 @@ cards simili document
 
 ## card expos
 
-- expo passée: itinérante, hors les murs
-- cards avec plusieurs dates (effet si card sm)
-  Si l’expo est au cube (espace principal) = carte verticale (même si image paysage)
-  Si l’expo est au tube (espace secondaire) = carte horizontale (même si image portrait)
+- # expo passée: itinérante, hors les murs
+- # cards avec plusieurs dates (effet si card sm)
+  # Si l’expo est au cube (espace principal) = carte verticale (même si image paysage)
+  # Si l’expo est au tube (espace secondaire) = carte horizontale (même si image portrait)
 
 ## Grilles
 
