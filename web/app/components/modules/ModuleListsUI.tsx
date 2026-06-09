@@ -11,17 +11,17 @@ type Props = {
 const ModuleListsUI = ({ input }: Props) => {
   return (
     <section className='module module--lists-ui'>
-      <div className='container-fluid'>
-        <div className='module__inner'>
-          {input.items && (
-            <div className='module__lists'>
-              {input.items.map((item: any, i: number) => (
-                <ModuleListUI key={item._key || i} input={item} />
-              ))}
-            </div>
-          )}
-        </div>
+      {/* <div className='container-fluid'> */}
+      <div className='module__inner'>
+        {input.items && (
+          <div className='module__lists'>
+            {input.items.map((item: any, i: number) => (
+              <ModuleListUI key={item._key || i} input={item} />
+            ))}
+          </div>
+        )}
       </div>
+      {/* </div> */}
     </section>
   );
 };

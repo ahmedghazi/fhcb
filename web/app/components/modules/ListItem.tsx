@@ -9,7 +9,7 @@ type Props = {
 const ListItemComponent = ({ input }: Props) => {
   return (
     <div className='list-item'>
-      <div className='title'>{_localizeField(input.title)}</div>
+      <div className='title c-h3'>{_localizeField(input.title)}</div>
       <div className='content'>{_localizeField(input.content)}</div>
     </div>
   );
