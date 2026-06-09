@@ -33,11 +33,12 @@
   .ui-filters__select {
     appearance: none;
     -webkit-appearance: none;
-    padding-right: 1.5em;
+    padding-left: 1.5em;
     background-image: none;
     background-image: url("data:image/svg+xml,%3Csvg width='8' height='9' viewBox='0 0 8 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4.0625H1.2124L3.12939 6.96973L3.23096 6.94434C3.19287 6.65658 3.1696 6.2736 3.16113 5.79541L3.16113 0L4.23389 1.35151e-08L4.24023 5.79541C4.24023 6.22282 4.21696 6.60579 4.17041 6.94434L4.27832 6.96973L6.19531 4.0625H7.40137L3.88477 8.88672H3.5166L0 4.0625Z' fill='black'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.5em center;
+    background-position: left 0.5em center;
+    text-transform: uppercase;
     cursor: pointer;
     &:hover {
       color: var(--color-secondary);
@@ -53,20 +54,20 @@
       gap: 8px;
       cursor: pointer;
       user-select: none;
+      text-transform: uppercase;
     }
     input {
     }
   }
   .ui-filter__list {
-    // display: flex;
-    // flex-direction: column;
-    // gap: var(--spacing-sm);
     transition: padding-bottom 0.3s ease;
     label {
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
+
       svg {
         transition: transform 0.2s;
       }

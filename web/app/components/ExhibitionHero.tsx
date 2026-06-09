@@ -1,6 +1,10 @@
 "use client";
 import React from "react";
-import { Exhibition, FhcbDate } from "../sanity-api/types/sanity.types";
+import {
+  Exhibition,
+  FhcbDate,
+  LinkInternal,
+} from "../sanity-api/types/sanity.types";
 import { _localizeField, _localizeText } from "../sanity-api/utils";
 import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
 import FHCBDates from "./ui/FHCBDates";
@@ -14,7 +18,7 @@ type Props = {
 };
 
 const ExhibitionHero = ({ input }: Props) => {
-  const { title, artists, imageCover, dates, tags, color } = input;
+  const { title, artists, imageCover, dates, tags, color, links } = input;
   const artistList = artists?.map((artist) => artist.name).join(", ");
   const isCurrentExhibition = _isCurrentExhibition(dates || []);
   const isPast = _isPastExhibition(dates || []);
@@ -58,6 +62,20 @@ const ExhibitionHero = ({ input }: Props) => {
               {dates && (
                 <div className='hero__info'>
                   <FHCBDates input={dates} />
+                </div>
+              )}
+              {isCurrentExhibition && (
+                <div className='pt-sm'>
+                  {links?.map((item, i: number) => (
+                    <a
+                      key={i}
+                      className='btn '
+                      href={item.link}
+                      target='_blank'
+                      rel='noopener noreferrer'>
+                      {_localizeField(item.label)}
+                    </a>
+                  ))}
                 </div>
               )}
             </div>

@@ -27,7 +27,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
   //pb ici avec les expos passées et itinérante (date présente ou futur)
   const isCurrent = _isCurrentExhibition(dates || []);
   const isFutur = _isFuturExhibition(dates || []);
-  const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
+  // const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
 
   const props = exhibitionToCard(input, size);
   return (

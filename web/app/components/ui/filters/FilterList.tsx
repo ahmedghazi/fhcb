@@ -58,7 +58,6 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
         open && "is-open",
       )}>
       <label htmlFor={`filter-list-${def._key}`} onClick={() => setOpen(!open)}>
-        <span>{_localizeField(def.radioLabel)}</span>
         <svg
           width='8'
           height='9'
@@ -70,6 +69,7 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
             fill='black'
           />
         </svg>
+        <span>{_localizeField(def.radioLabel)}</span>
       </label>
       <div className='ui-filter__detail'>
         <div className='ui-filter__list-alpha'>

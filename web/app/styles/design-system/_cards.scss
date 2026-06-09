@@ -64,15 +64,16 @@
           // grid-template-columns: repeat(12, minmax(0, 1fr));
           gap: var(--spacing-xs);
           width: 100%;
-          .card__body {
-            // grid-column: span 5;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-          }
-          .card__media {
-            // grid-column: span 7;
-          }
+          // .card__body {
+          // grid-column: span 5;
+          // display: flex;
+          // flex-direction: column;
+          // justify-content: space-between;
+          // padding: var(--spacing-xs);
+          // }
+          // .card__media {
+          // grid-column: span 7;
+          // }
 
           display: flex;
           .card__body {
@@ -100,7 +101,7 @@
       gap: 0;
       display: flex;
       justify-content: space-between;
-
+      width: 100%;
       .card__body,
       .card__media {
         flex-shrink: 0;
@@ -270,7 +271,6 @@
   // ── Éléments ────────────────────────────────────────────────────────────────
 
   &__body {
-    padding: var(--spacing-xs);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

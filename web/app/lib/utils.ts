@@ -182,14 +182,14 @@ export const _isHorsLesMurs = (tags: Tag[]): boolean => {
   return tags.filter((tag) => tag.slug?.current === "hors-les-murs").length > 0;
 };
 
-export const _isPastHorOutside = (item: ExhibitionExpanded) => {
+export const _isPast = (item: ExhibitionExpanded) => {
   const isPast = _isPastExhibition(item.dates || []);
-  const isOffSite = item.dates?.some((date) => {
-    const d = date as FhcbDateExtended;
-    const outsideLocations = ["offSite", "travelling"];
-    return outsideLocations.includes(d.locationType || "");
-  });
-  return isPast || isOffSite;
+  // const isOffSite = item.dates?.some((date) => {
+  //   const d = date as FhcbDateExtended;
+  //   const outsideLocations = ["offSite", "travelling"];
+  //   return outsideLocations.includes(d.locationType || "");
+  // });
+  return isPast;
   // return _isPastExhibition(item.dates) && _isHorsLesMurs(item.tags);
 };
 

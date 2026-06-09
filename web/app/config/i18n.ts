@@ -31,7 +31,7 @@ const i18n = {
     allRightsReserved: "Tous droits réservés",
     contactTeam: "Contacter l'équipe",
     all: "Tous",
-    sort: "Triez",
+    sort: "Trier par",
     resetFilters: "Effacer les filtres",
     sortIndexAsc: "N° croissant",
     sortIndexDesc: "N° décroissant",
@@ -48,6 +48,7 @@ const i18n = {
     total: "Total",
     remove: "Retirer",
     close: "Fermer",
+    book: "Livre",
   },
   en: {
     default: false,
@@ -98,6 +99,7 @@ const i18n = {
     total: "Total",
     remove: "Remove",
     close: "Close",
+    book: "Book",
   },
 };
 

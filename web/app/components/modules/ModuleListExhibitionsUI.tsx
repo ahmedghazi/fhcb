@@ -8,7 +8,7 @@ import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "./applyFilters";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { _isPastHorOutside } from "@/app/lib/utils";
+import { _isPast } from "@/app/lib/utils";
 
 type Props = {
   input: ListExhibitionsUI & {
@@ -26,8 +26,8 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
   const isExhibitionSmall =
     input.items === "exhibitions-out-of-the-box" ||
     input.items === "exhibitions-past";
-  const __isPastHorOutside = (item: ExhibitionExpanded) => {
-    return _isPastHorOutside(item);
+  const __isPast = (item: ExhibitionExpanded) => {
+    return _isPast(item);
   };
 
   return (
@@ -44,11 +44,10 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
             {input.resolvedItems?.map(
               (item: ExhibitionExpanded, index: number) => (
                 <Fragment key={`${item._id}-${index}`}>
-                  <div
-                    className={`md:col-span-${__isPastHorOutside(item) ? 1 : 4}`}>
+                  <div className={`md:col-span-${__isPast(item) ? 1 : 4}`}>
                     <CardExhibition
                       input={item}
-                      size={__isPastHorOutside(item) ? "sm" : "lg"}
+                      size={__isPast(item) ? "sm" : "lg"}
                     />
                   </div>
                 </Fragment>

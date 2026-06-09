@@ -5,7 +5,7 @@ cards simili document
 2 types de cartes, celle qui sont hydratées par un document et celle qui sont hydratées par un des champs propres au component
 
 - # ajouter le liens tickets dans exhibition
-- afficher le bouton ticket sur cardExhibition
+- # afficher le bouton ticket sur cardExhibition
 - # feuilltages
 - # articles
 - # Une image des images
@@ -50,16 +50,21 @@ cards simili document
 - # grid centered
 - rebonds article > rebonds article (même catégorie)
 - expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
-- expo hors les murs via le champ location
+- # expo hors les murs via le champ location
 - # régler grille cartes (tailles)
 - # carte expo tube, cube (check trello)
 - pastilles
 - branch hover
 - card avec 2nd btn hover
-- date avec location
+- # date avec location
 - btn hover, all hover
 - # fix search result
 - page event (comme exhib)
+- # page expo hero temporalité des ui. (bouton resa)
+- # card product si hors de la page librairie, affiche le tag "Livre"
+- série thématique doc sanity comme imageImages
+- forms de contact
+- module Ressources affiche les dernières ressources avec carte branches ressources (video auto play ) + hover
 
 ## card expos
 
@@ -67,6 +72,7 @@ cards simili document
 - # cards avec plusieurs dates (effet si card sm)
   # Si l’expo est au cube (espace principal) = carte verticale (même si image paysage)
   # Si l’expo est au tube (espace secondaire) = carte horizontale (même si image portrait)
+- en cours et offSite = hors les murs + itinérante (page expos hors les murs => lg)
 
 ## Grilles
 

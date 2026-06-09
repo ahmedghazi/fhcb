@@ -118,12 +118,13 @@ export function productToCard(input: ProductExpanded): CardBaseProps {
   const { imageCover, tags, price, artists } = input;
   const artistName = artists?.map((a) => a.name).join(", ") || "";
   const title = (_localizeField(input.title) as string) || "";
+  const isOffShop = location.href.indexOf("librairie") === -1;
   return {
     _type: input._type,
     layout: "col",
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
-    tags: toTags(tags),
+    tags: isOffShop ? _localizeText("book") : toTags(tags),
     // title: artistName || title,
     // subTitle: artistName ? title : undefined,
     title: title,
