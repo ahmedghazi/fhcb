@@ -119,7 +119,7 @@ const ContentProduct = ({ input }: Props) => {
               <KeenSlider perView={1}>
                 {imageCover && (
                   <div
-                    key={`${imageCover && imageCover.asset?._ref}-00`}
+                    key={`${imageCover && imageCover.asset?._id}-00`}
                     className='keen-slider__slide'>
                     <Figure asset={imageCover.asset} width={2000} />
                   </div>
