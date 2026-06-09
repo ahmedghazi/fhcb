@@ -6,21 +6,24 @@ import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
 import FHCBDates from "./ui/FHCBDates";
 import Figure from "./ui/Figure";
 import clsx from "clsx";
-import { _isCurrentExhibition } from "../lib/utils";
+import { _isCurrentExhibition, _isPastExhibition } from "../lib/utils";
+import CardTags from "./ui/cards/CardTags";
 
 type Props = {
   input: ExhibitionExpanded;
 };
 
 const ExhibitionHero = ({ input }: Props) => {
-  const { title, artists, imageCover, dates } = input;
+  const { title, artists, imageCover, dates, tags } = input;
   const artistList = artists?.map((artist) => artist.name).join(", ");
   const isCurrentExhibition = _isCurrentExhibition(dates || []);
+  const isPast = _isPastExhibition(dates || []);
   return (
     <section
       className={clsx(
         "exhibition-hero bg-mauve",
         isCurrentExhibition && "exhibition-hero--is-current",
+        isPast && "exhibition-hero--is-past",
       )}>
       <div className='container-fluid'>
         <div className='grid md:grid-cols-2 gap-gutter'>
@@ -35,10 +38,11 @@ const ExhibitionHero = ({ input }: Props) => {
           </div>
           <div className='hero__header'>
             <div className='top'>
-              <div className='card__tag c-tag'>
+              <CardTags input={tags || []} />
+              {/* <div className='card__tag c-tag'>
                 {isCurrentExhibition && _localizeText("currentExhibition")}
                 {!isCurrentExhibition && _localizeText("pastExhibition")}
-              </div>
+              </div> */}
               <h2 className='hero__title c-h1'>{artistList}</h2>
               <div className='hero__subtitle c-title-expo'>
                 {_localizeField(title)}

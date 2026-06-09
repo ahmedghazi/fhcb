@@ -183,8 +183,19 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     imageCover{
       ${imageAsset}
     },
+
+    dates[]{
+      ...,
+      location->
+    },
     artists[]->{
+      _id,
       name
+    },
+    tags[]->{
+      _id,
+      title,
+      slug
     },
     modules[]{
       ${modules}

@@ -234,7 +234,6 @@ title,
     ...,
     location->
   },
-  location,
   artists[]->{
     _id,
     name

@@ -2,6 +2,9 @@
   .exhibition-hero {
     margin-bottom: var(--spacing-lg);
     padding-bottom: var(--spacing-md);
+    &__is-past {
+      background-color: red;
+    }
     .hero__header {
       display: flex;
       flex-direction: column;
