@@ -16,7 +16,7 @@ const ModuleSupportUI = ({ input }: Props) => {
 
   const ctaLabel = cta?.internal?.label
     ? _localizeField(cta.internal.label)
-    : cta?.external?.label || null;
+    : _localizeField(cta?.external?.label);
   const ctaHref = cta?.external?.link || null;
 
   return (

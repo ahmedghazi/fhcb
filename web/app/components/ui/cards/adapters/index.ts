@@ -15,8 +15,13 @@ import {
   PageModulaireExpanded,
   ProductExpanded,
   SanityImageAssetFull,
+  SerieThematiqueExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
-import { FhcbDate, Tag } from "@/app/sanity-api/types/sanity.types";
+import {
+  FhcbDate,
+  LinkExternal,
+  Tag,
+} from "@/app/sanity-api/types/sanity.types";
 import {
   _linkResolver,
   _localizeField,
@@ -26,6 +31,7 @@ import { CardAction, CardBaseProps } from "../CardBase";
 import CardTags from "../CardTags";
 import FHCBDates from "../../FHCBDates";
 import Embed from "../../Embed";
+import { _isPast, _isPastByDates } from "@/app/lib/utils";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -143,7 +149,24 @@ export function productToCard(input: ProductExpanded): CardBaseProps {
 // ─── Event ────────────────────────────────────────────────────────────────────
 
 export function eventToCard(input: EventExpanded): CardBaseProps {
-  const { imageCover, dates, tags } = input;
+  const { imageCover, dates, tags, links } = input;
+  const isPast = _isPastByDates(dates || []);
+  const actions: CardAction[] = [];
+  actions.push({
+    label: _localizeText("discoverTheExhibition") as string,
+    href: _linkResolver(input),
+    variant: "primary",
+  });
+
+  if (links && !isPast) {
+    links.forEach((link: LinkExternal) => {
+      actions.push({
+        label: (_localizeField(link.label) as string) || "",
+        href: link.link ?? "",
+        variant: "secondary",
+      });
+    });
+  }
   return {
     _type: input._type,
     layout: "col",
@@ -152,13 +175,7 @@ export function eventToCard(input: EventExpanded): CardBaseProps {
     tags: toTags(tags),
     title: (_localizeField(input.title) as string) || "",
     infoNode: toInfoNode(dates),
-    actions: [
-      {
-        label: _localizeText("discover") as string,
-        href: _linkResolver(input),
-        variant: "primary",
-      },
-    ],
+    actions: actions,
   };
 }
 
@@ -286,6 +303,30 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
 // ─── ImageImages ──────────────────────────────────────────────────────────────
 
 export function imageImagesToCard(input: ImageImagesExpanded): CardBaseProps {
+  const { index, chercheur, video, imageCover } = input;
+  return {
+    _type: input._type,
+    layout: "col",
+    images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
+    tags: index ? `une image, des images #${index}` : undefined,
+    title: (_localizeField(input.title) as string) || "",
+    subTitle: chercheur?.name || undefined,
+    actions: [
+      {
+        label: _localizeText("discover") as string,
+        href: _linkResolver(input),
+        variant: "primary",
+      },
+    ],
+  };
+}
+
+// ─── SerieThematique ──────────────────────────────────────────────────────────────
+
+export function serieThematiqueToCard(
+  input: SerieThematiqueExpanded,
+): CardBaseProps {
   const { index, chercheur, video, imageCover } = input;
   return {
     _type: input._type,

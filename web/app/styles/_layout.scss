@@ -52,9 +52,11 @@ main {
   .template {
     padding-top: var(--header-h);
     padding-bottom: var(--header-h);
-    &--exhibition {
+    &--exhibition,
+    &--event {
       padding-top: 0;
-      section.exhibition-hero {
+      section.hero-exhibition,
+      section.hero-event {
         padding-top: var(--header-h);
       }
     }

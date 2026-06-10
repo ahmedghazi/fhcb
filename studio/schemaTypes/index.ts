@@ -13,7 +13,6 @@ import article from './documents/article'
 import imageImages from './documents/imageImages'
 import feuilletage from './documents/feuilletage'
 import chercheur from './documents/chercheur'
-import serie from './documents/serie'
 import location from './documents/location'
 
 import {seoSchema} from './features/seo'
@@ -56,7 +55,9 @@ import listEventsUI from './objects/modules/listEventsUI'
 import supportUI from './objects/modules/supportUI'
 import newsletterUI from './objects/modules/newsletterUI'
 import listProductUI from './objects/modules/listProductUI'
+import ressourcesUI from './objects/modules/ressourcesUI'
 
+/** ui */
 import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
 import filterList from './objects/filterList'
@@ -69,6 +70,7 @@ import embed from './objects/embed'
 import keyValGroup from './objects/keyValGroup'
 import sidebarGenerique from './objects/sidebarGenerique'
 import productVariant from './objects/productVariant'
+import serieThematique from './documents/serieThematique'
 
 export const schemaTypes = [
   settings,
@@ -85,9 +87,9 @@ export const schemaTypes = [
   article,
   imageImages,
   feuilletage,
+  serieThematique,
   chercheur,
   location,
-  // serie,
 
   localeString,
   localeText,
@@ -138,5 +140,6 @@ export const schemaTypes = [
   listProductUI,
   supportUI,
   newsletterUI,
+  ressourcesUI,
 ]
 export default schemaTypes

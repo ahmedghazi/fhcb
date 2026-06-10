@@ -1,39 +1,41 @@
 "use client";
 import React from "react";
-import {
-  Exhibition,
-  FhcbDate,
-  LinkInternal,
-} from "../sanity-api/types/sanity.types";
 import { _localizeField, _localizeText } from "../sanity-api/utils";
-import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
+import { EventExpanded } from "../sanity-api/types/sanity-expanded.types";
 import FHCBDates from "./ui/FHCBDates";
 import Figure from "./ui/Figure";
 import clsx from "clsx";
-import { _isCurrentExhibition, _isPastExhibition } from "../lib/utils";
+import {
+  _isCurrentByDates,
+  _isCurrentOrFuturByDates,
+  _isPastByDates,
+  _isVisiteGuidee,
+} from "../lib/utils";
 import CardTags from "./ui/cards/CardTags";
 
 type Props = {
-  input: ExhibitionExpanded;
+  input: EventExpanded;
 };
 
-const ExhibitionHero = ({ input }: Props) => {
-  const { title, artists, imageCover, dates, tags, color, links } = input;
+const HeroEvent = ({ input }: Props) => {
+  const { title, artists, imageCover, dates, tags, links } = input;
   const artistList = artists?.map((artist) => artist.name).join(", ");
-  const isCurrentExhibition = _isCurrentExhibition(dates || []);
-  const isPast = _isPastExhibition(dates || []);
+  const isVisiteGuidee = _isVisiteGuidee(tags || []);
+  // const isCurrentOrFuturByDates = _isCurrentOrFuturByDates(dates || []);
+  const isPast = _isPastByDates(dates || []);
   return (
     <section
       className={clsx(
-        "exhibition-hero bg-mauve-",
-        isCurrentExhibition && "exhibition-hero--is-current",
-        isPast && "exhibition-hero--is-past",
+        "hero-event bg-beige",
+        // isCurrentOrFuturByDates && "hero-event--is-current",
+        isPast && "hero-event--is-past",
+        isVisiteGuidee && "bg-jaune",
       )}
-      style={{
-        backgroundColor: isCurrentExhibition
-          ? (color as any)?.hex || "var(--color-mauve)"
-          : "var(--color-mauve)",
-      }}>
+      style={
+        {
+          // backgroundColor: "var(--color-mauve)",
+        }
+      }>
       <div className='container-fluid'>
         <div className='grid md:grid-cols-2 gap-gutter'>
           <div className='hero__figure'>
@@ -48,10 +50,7 @@ const ExhibitionHero = ({ input }: Props) => {
           <div className='hero__header'>
             <div className='top'>
               <CardTags input={tags || []} />
-              {/* <div className='card__tag c-tag'>
-                {isCurrentExhibition && _localizeText("currentExhibition")}
-                {!isCurrentExhibition && _localizeText("pastExhibition")}
-              </div> */}
+
               <h2 className='hero__title c-h1'>{artistList}</h2>
               <div className='hero__subtitle c-title-expo'>
                 {_localizeField(title)}
@@ -64,7 +63,7 @@ const ExhibitionHero = ({ input }: Props) => {
                   <FHCBDates input={dates} />
                 </div>
               )}
-              {isCurrentExhibition && (
+              {!isPast && (
                 <div className='pt-sm'>
                   {links?.map((item, i: number) => (
                     <a
@@ -86,4 +85,4 @@ const ExhibitionHero = ({ input }: Props) => {
   );
 };
 
-export default ExhibitionHero;
+export default HeroEvent;

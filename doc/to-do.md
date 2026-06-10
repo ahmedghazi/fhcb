@@ -55,16 +55,18 @@ cards simili document
 - # carte expo tube, cube (check trello)
 - pastilles
 - branch hover
-- card avec 2nd btn hover
+- # card avec 2nd btn hover (exhib, events) qui si pas past
 - # date avec location
 - btn hover, all hover
 - # fix search result
-- page event (comme exhib)
+- # page event (comme exhib)
 - # page expo hero temporalité des ui. (bouton resa)
 - # card product si hors de la page librairie, affiche le tag "Livre"
-- série thématique doc sanity comme imageImages
+- # série thématique doc sanity comme imageImages
 - forms de contact
-- module Ressources affiche les dernières ressources avec carte branches ressources (video auto play ) + hover
+- search au click
+- # module Ressources affiche les dernières ressources avec carte branches ressources (video auto play ) + hover
+- single event related
 
 ## card expos
 

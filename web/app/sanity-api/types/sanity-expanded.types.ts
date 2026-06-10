@@ -1,27 +1,29 @@
 // AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-09T11:58:54.018Z
+// Generated on: 2026-06-10T13:22:37.331Z
 // Run 'npm run typegen' to regenerate
 // Project structure: web="../../web", studio="./"
 // Detection method: configuration file
 
 import type {
+  SerieThematique,
+  Chercheur,
+  Artist,
+  ImageImages,
   Article,
   Tag,
   Partenaire,
   Settings,
-  Exhibition,
   PageModulaire,
-  Artist,
+  Exhibition,
   Product,
   Event,
   Programme,
   Feuilletage,
-  Chercheur,
-  ImageImages,
   Library,
   PAGE_MODULAIRE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
   EXPHIBITION_QUERY_RESULT,
+  EVENT_QUERY_RESULT,
   PROGRAMME_QUERY_RESULT,
   IMAGE_IMAGES_QUERY_RESULT,
   FEUILLETAGE_QUERY_RESULT,
@@ -49,6 +51,24 @@ export type SanityImageAssetFull = SanityImageAsset & {
   creditLine?: string;
 };
 
+export type ArtistExpanded = Omit<Artist, 'imageCover'> & {
+  imageCover?: (Omit<NonNullable<NonNullable<Artist>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type ImageImagesExpanded = Omit<ImageImages, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
+  chercheur?: Chercheur | null;
+  artists?: Array<ArtistExpanded> | null;
+  rebonds?: Array<ImageImagesExpanded> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type SerieThematiqueExpanded = Omit<SerieThematique, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
+  chercheur?: Chercheur | null;
+  artists?: Array<ArtistExpanded> | null;
+  rebonds?: Array<ImageImagesExpanded> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<SerieThematique>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
 export type ArticleExpanded = Omit<Article, 'tags' | 'imageCover'> & {
   tags?: Array<Tag> | null;
   imageCover?: (Omit<NonNullable<NonNullable<Article>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
@@ -58,31 +78,27 @@ export type PartenaireExpanded = Omit<Partenaire, 'imageCover'> & {
   imageCover?: (Omit<NonNullable<NonNullable<Partenaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type ArtistExpanded = Omit<Artist, 'imageCover'> & {
-  imageCover?: (Omit<NonNullable<NonNullable<Artist>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type PageModulaireExpanded = Omit<PageModulaire, 'tags' | 'rebonds' | 'imageCover'> & {
+  tags?: Array<Tag> | null;
+  rebonds?: PageModulaireExpanded | null;
+  imageCover?: (Omit<NonNullable<NonNullable<PageModulaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type SettingsExpanded = Omit<Settings, 'mostSearched'> & {
+  mostSearched?: PageModulaireExpanded | null;
 };
 
 export type ExhibitionExpanded = Omit<Exhibition, 'artists' | 'tags' | 'rebonds' | 'imageCover'> & {
   artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
+  rebonds?: PageModulaireExpanded | null;
   imageCover?: (Omit<NonNullable<NonNullable<Exhibition>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
-};
-
-export type SettingsExpanded = Omit<Settings, 'mostSearched'> & {
-  mostSearched?: ExhibitionExpanded | null;
-};
-
-export type PageModulaireExpanded = Omit<PageModulaire, 'tags' | 'rebonds' | 'imageCover'> & {
-  tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<PageModulaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type ProductExpanded = Omit<Product, 'artists' | 'tags' | 'rebonds' | 'imageCover' | 'images'> & {
   artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
+  rebonds?: PageModulaireExpanded | null;
   imageCover?: (Omit<NonNullable<NonNullable<Product>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
   images?: (Omit<NonNullable<NonNullable<Product>['images']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
@@ -90,7 +106,7 @@ export type ProductExpanded = Omit<Product, 'artists' | 'tags' | 'rebonds' | 'im
 export type EventExpanded = Omit<Event, 'artists' | 'tags' | 'rebonds' | 'imageCover'> & {
   artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
+  rebonds?: PageModulaireExpanded | null;
   imageCover?: (Omit<NonNullable<NonNullable<Event>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
@@ -104,15 +120,8 @@ export type FeuilletageExpanded = Omit<Feuilletage, 'artists' | 'chercheur' | 't
   artists?: Array<ArtistExpanded> | null;
   chercheur?: Chercheur | null;
   tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
+  rebonds?: PageModulaireExpanded | null;
   imageCover?: (Omit<NonNullable<NonNullable<Feuilletage>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
-};
-
-export type ImageImagesExpanded = Omit<ImageImages, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
-  chercheur?: Chercheur | null;
-  artists?: Array<ArtistExpanded> | null;
-  rebonds?: Array<ImageImagesExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type LibraryExpanded = Omit<Library, 'miseEnAvant' | 'sliderSelection' | 'items' | 'imageCover'> & {
@@ -131,7 +140,11 @@ export type ARTIST_QUERY_RESULTExpanded = Omit<ARTIST_QUERY_RESULT, 'imageCover'
 };
 
 export type EXPHIBITION_QUERY_RESULTExpanded = Omit<EXPHIBITION_QUERY_RESULT, 'rebonds'> & {
-  rebonds?: ExhibitionExpanded | null;
+  rebonds?: PageModulaireExpanded | null;
+};
+
+export type EVENT_QUERY_RESULTExpanded = Omit<EVENT_QUERY_RESULT, 'rebonds'> & {
+  rebonds?: PageModulaireExpanded | null;
 };
 
 export type PROGRAMME_QUERY_RESULTExpanded = Omit<PROGRAMME_QUERY_RESULT, 'filterTags' | 'excludeTags' | 'imageCover'> & {
@@ -164,7 +177,7 @@ export type LIBRARY_QUERY_RESULTExpanded = Omit<LIBRARY_QUERY_RESULT, 'miseEnAva
 
 export type PRODUCT_QUERY_RESULTExpanded = Omit<PRODUCT_QUERY_RESULT, 'tags' | 'rebonds'> & {
   tags?: Array<Tag> | null;
-  rebonds?: ExhibitionExpanded | null;
+  rebonds?: PageModulaireExpanded | null;
 };
 
 export type NewsletterUIExpanded = Omit<NewsletterUI, 'image'> & {

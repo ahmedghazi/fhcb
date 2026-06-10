@@ -267,6 +267,9 @@ export const cardRefEvent = `
     _id,
     title,
     slug
+  },
+  links[]{
+    ...
   }
 `;
 export const cardRefFeuilletage = `
@@ -350,6 +353,27 @@ export const cardRefImageImages = `
   video
 `;
 
+export const cardRefSerieThematique = `
+  _type,
+  _id,
+  index,
+  title,
+  slug,
+  chercheur->{
+    _id,
+    name,
+    slug
+  },
+  artists[]->{
+    _id,
+    name,
+    slug
+  },
+  "imageCover": coalesce(imageCover, image){
+    ${imageAsset}
+  },
+`;
+
 export const cardRefArticle = `
     _type,
     _id,
@@ -402,6 +426,9 @@ export const cardTypes = `
   },
   _type == "pageModulaire" => {
     ${cardRefPageModulaire}
+  },
+  _type == "serieThematique" => {
+    ${cardRefSerieThematique}
   }
 `;
 
@@ -491,21 +518,6 @@ export const newsCardUI = `
   }
 `;
 
-export const listSerieThematiqueUI = `
-  _type == "listSerieThematiqueUI" => {
-    ...,
-    title{
-      ...
-    },
-    "items": *[_type == "article" && count(tags[_ref in *[_type == "tag" && slug.current == "serie-thematique"]._id]) > 0] | order(_createdAt desc) {
-      ${cardRefArticle}
-    },
-    cta{
-      ...
-    }
-  }
-`;
-
 const filterRadio = `
   _type == "filterRadio" => {
     ...,
@@ -558,6 +570,26 @@ export const listImageImages = `
     },
     "items": *[_type == "imageImages"] | order(_createdAt desc) {
       ${cardRefImageImages}
+    },
+    cta{
+      ...
+    }
+  }
+`;
+
+export const listSerieThematiqueUI = `
+  _type == "listSerieThematiqueUI" => {
+    ...,
+    title{
+      ...
+    },
+    filters[]{
+      ...,
+      ${filterList},
+      ${filterRadio}
+    },
+    "items": *[_type == "serieThematique" ] | order(_createdAt desc) {
+      ${cardRefSerieThematique}
     },
     cta{
       ...
@@ -703,6 +735,21 @@ export const newsletterUI = `
   }
 `;
 
+export const ressourcesUI = `
+  _type == "ressourcesUI" => {
+    ...,
+    "imageImages": *[_type == "imageImages"] | order(_createdAt asc) {
+      ${cardRefImageImages}
+    },
+    "feuilletage": *[_type == "feuilletage"] | order(_createdAt asc) {
+      ${cardRefFeuilletage}
+    },
+    branches[]->{
+      ${cardRefPageModulaire}
+    }
+  }
+`;
+
 export const modules = `
   ...,
   ${textUI},
@@ -717,6 +764,8 @@ export const modules = `
   ${programmeUI},
   ${featuredCardsUI},
   ${newsCardUI},
+  ${ressourcesUI},
+
   ${listFeuilletageUI},
   ${listImageImages},
   ${listSerieThematiqueUI},
@@ -725,7 +774,7 @@ export const modules = `
   ${listExhibitionsEventsUI},
   ${listEventsUI},
   ${supportUI},
-  ${newsletterUI}
+  ${newsletterUI},
 `;
 
 export const relatedByArtists = `

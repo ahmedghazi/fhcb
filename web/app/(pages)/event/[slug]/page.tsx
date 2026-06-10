@@ -1,18 +1,19 @@
 import React from "react";
 import website from "@/app/config/website";
 import { Metadata, NextPage } from "next";
-import {
-  EXPHIBITION_QUERY,
-  getExhibition,
-} from "@/app/sanity-api/sanity-queries";
-import { EXPHIBITION_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import { EVENT_QUERY, getEvent } from "@/app/sanity-api/sanity-queries";
+import { EVENT_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
-import HeroExhibition from "@/app/components/HeroExhibition";
-import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import ExhibitionHero from "@/app/components/HeroExhibition";
+import {
+  EventExpanded,
+  ExhibitionExpanded,
+} from "@/app/sanity-api/types/sanity-expanded.types";
 import Rebonds from "@/app/components/Rebonds";
+import HeroEvent from "@/app/components/HeroEvent";
 
 type Params = Promise<{ slug: string }>;
 
@@ -24,7 +25,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const data = await getExhibition(slug);
+  const data = await getEvent(slug);
   return {
     title: `${data?.seo?.metaTitle || data?.title?.fr || ""}`,
     description: data?.seo?.metaDescription,
@@ -34,32 +35,32 @@ export async function generateMetadata({
   };
 }
 
-const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
+const EventTemplate: NextPage<PageProps> = async ({ params }) => {
   const { isEnabled } = await draftMode();
   const { slug } = await params;
 
-  let data: EXPHIBITION_QUERY_RESULT;
+  let data: EVENT_QUERY_RESULT;
   if (isEnabled) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
-      EXPHIBITION_QUERY,
+      EVENT_QUERY,
       { slug },
     );
   } else {
-    data = (await getExhibition(slug)) as EXPHIBITION_QUERY_RESULT;
+    data = (await getEvent(slug)) as EVENT_QUERY_RESULT;
   }
 
   if (!data) return notFound();
 
   return (
     <div
-      className='template template--exhibition'
-      data-template='exhibition'
+      className='template template--event'
+      data-template='event'
       data-slug={data.slug?.current || ""}>
-      <HeroExhibition input={data as unknown as ExhibitionExpanded} />
+      <HeroEvent input={data as unknown as EventExpanded} />
       <ContentModulaire input={data} />
       {data.related && <Rebonds input={data.related} />}
     </div>
   );
 };
 
-export default Exhibitiontemplate;
+export default EventTemplate;

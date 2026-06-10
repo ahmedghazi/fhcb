@@ -5,7 +5,7 @@ import {TbArticle} from 'react-icons/tb'
 
 export default defineType({
   type: 'document',
-  name: 'serie',
+  name: 'serieThematique',
   title: 'Série thématique',
   icon: TbArticle,
   groups: [
@@ -41,10 +41,10 @@ export default defineType({
     slug,
 
     defineField({
-      name: 'speaker',
-      type: 'string',
-      title: 'Intervenant',
-      description: "Le nom de l'intervenant-e",
+      name: 'chercheur',
+      title: 'Chercheur',
+      type: 'reference',
+      to: [{type: 'chercheur'}],
       group: 'editorial',
     }),
 
@@ -64,6 +64,14 @@ export default defineType({
     }),
 
     defineField({
+      name: 'artists',
+      title: 'Artistes',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'artist'}]}],
+      group: 'editorial',
+    }),
+
+    defineField({
       name: 'modules',
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes)',
@@ -73,15 +81,15 @@ export default defineType({
     }),
 
     defineField({
-      name: 'prev',
-      type: 'reference',
-      to: [{type: 'imageImages'}],
-      group: 'editorial',
-    }),
-    defineField({
-      name: 'next',
-      type: 'reference',
-      to: [{type: 'imageImages'}],
+      name: 'rebonds',
+      title: 'Rebonds',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'imageImages'}],
+        },
+      ],
       group: 'editorial',
     }),
   ],
@@ -98,7 +106,7 @@ export default defineType({
       // console.log(images)
       return {
         title: `#${index} - ${title}`,
-        subtitle: `/feuilletage/${slug.current}`,
+        subtitle: `/serie-thematique/${slug.current}`,
         media: image,
       }
     },

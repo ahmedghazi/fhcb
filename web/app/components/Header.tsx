@@ -52,14 +52,7 @@ const Header = ({ settings }: Props) => {
                   className='btn-library'>
                   {_localizeField(settings.btnLibrary.label)}
                 </Link>
-                {/* {cartCount > 0 && (
-                  <button className='cart-toggle' onClick={toggleCart}>
-                    <span>{_localizeText("cart")}</span>
-                    {cartCount > 0 && (
-                      <span className='cart-toggle__count'>{cartCount}</span>
-                    )}
-                  </button>
-                )} */}
+
                 <BtnCart />
               </li>
             )}

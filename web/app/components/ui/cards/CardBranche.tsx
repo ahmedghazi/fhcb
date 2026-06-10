@@ -11,6 +11,7 @@ type Props = {
 };
 
 const CardBranche = ({ input, size = "sm" }: Props) => {
+  if (!input) return null;
   const { slug } = input;
   const { settings } = usePageContext();
 
@@ -23,7 +24,11 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
 
   const props = brancheToCard(input, supTitle);
   return (
-    <div className={clsx("card card--branche card--page-modulaire", `card--${size}`)}>
+    <div
+      className={clsx(
+        "card card--branche card--page-modulaire",
+        `card--${size}`,
+      )}>
       <CardBase {...props} />
     </div>
   );

@@ -1,4 +1,7 @@
-import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
+import {
+  EventExpanded,
+  ExhibitionExpanded,
+} from "../sanity-api/types/sanity-expanded.types";
 import { FhcbDate, Tag } from "../sanity-api/types/sanity.types";
 
 const LOCALE_MAP: Record<string, string> = {
@@ -157,11 +160,14 @@ export const _fhcbDates = (
   };
 };
 
-export const _isPastExhibition = (dates: FhcbDate[]): boolean => {
-  return dates.every((date) => date?.au && new Date(date.au) < new Date());
+export const _isPastByDates = (dates: FhcbDate[]): boolean => {
+  return dates.every((date) => {
+    const reference = date?.au || date?.du;
+    return reference && new Date(reference) < new Date();
+  });
 };
 
-export const _isCurrentExhibition = (dates: FhcbDate[]): boolean => {
+export const _isCurrentByDates = (dates: FhcbDate[]): boolean => {
   const today = new Date();
   return dates.some((date) => {
     const d = date as FhcbDateExtended;
@@ -175,22 +181,37 @@ export const _isCurrentExhibition = (dates: FhcbDate[]): boolean => {
   });
 };
 
-export const _isFuturExhibition = (dates: FhcbDate[]): boolean => {
-  return dates.every((date) => date?.du && new Date(date.du) > new Date());
+export const _isFuturByDates = (dates: FhcbDate[]): boolean => {
+  return dates.every((date) => {
+    const reference = date?.du || date?.au;
+    return reference && new Date(reference) > new Date();
+  });
+};
+export const _isCurrentOrFuturByDates = (dates: FhcbDate[]): boolean => {
+  const isCurrent = _isCurrentByDates(dates);
+  const isFutur = _isFuturByDates(dates);
+  return isCurrent || isFutur;
 };
 export const _isHorsLesMurs = (tags: Tag[]): boolean => {
   return tags.filter((tag) => tag.slug?.current === "hors-les-murs").length > 0;
 };
 
 export const _isPast = (item: ExhibitionExpanded) => {
-  const isPast = _isPastExhibition(item.dates || []);
+  const isPast = _isPastByDates(item.dates || []);
   // const isOffSite = item.dates?.some((date) => {
   //   const d = date as FhcbDateExtended;
   //   const outsideLocations = ["offSite", "travelling"];
   //   return outsideLocations.includes(d.locationType || "");
   // });
   return isPast;
-  // return _isPastExhibition(item.dates) && _isHorsLesMurs(item.tags);
+  // return _isPastByDates(item.dates) && _isHorsLesMurs(item.tags);
+};
+
+export const _isVisiteGuidee = (tags: Tag[]) => {
+  console.log(tags);
+  return (
+    tags.filter((tag) => tag.slug?.current === "visite-commentee").length > 0
+  );
 };
 
 export const descriptionHtmlToBlocks = (html: string) => {

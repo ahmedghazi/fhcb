@@ -35,7 +35,6 @@ const HomePage = async function Page() {
 
   return (
     <div className='template template--home' data-template='home'>
-      {/* <DS /> */}
       {data && data.modules && <ContentModulaire input={data} />}
     </div>
   );

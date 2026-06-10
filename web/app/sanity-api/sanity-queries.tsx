@@ -18,6 +18,7 @@ import {
 import {
   ARTICLE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
+  EVENT_QUERY_RESULT,
   EXPHIBITION_QUERY_RESULT,
   FEUILLETAGE_QUERY_RESULT,
   HOME_QUERY_RESULT,
@@ -209,6 +210,45 @@ export async function getExhibition(
   return sanityFetch({
     query: EXPHIBITION_QUERY,
     tags: ["exhibition"],
+    qParams: { slug },
+  });
+}
+
+/*****************************************************************************************************
+ * EVENT
+ */
+export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0]{
+    ...,
+    seo{
+      ${seo}
+    },
+    imageCover{
+      ${imageAsset}
+    },
+
+    dates[]{
+      ...,
+      location->
+    },
+    artists[]->{
+      _id,
+      name
+    },
+    tags[]->{
+      _id,
+      title,
+      slug
+    },
+    modules[]{
+      ${modules}
+    },
+    "related": ${relatedByArtists}
+  }`;
+
+export async function getEvent(slug: string): Promise<EVENT_QUERY_RESULT> {
+  return sanityFetch({
+    query: EVENT_QUERY,
+    tags: ["event"],
     qParams: { slug },
   });
 }

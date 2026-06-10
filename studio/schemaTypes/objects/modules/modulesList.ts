@@ -17,4 +17,5 @@ export default [
   {type: 'listExhibitionsUI'},
   {type: 'listExhibitionsPastUI'},
   {type: 'listEventsUI'},
+  {type: 'ressourcesUI'},
 ]

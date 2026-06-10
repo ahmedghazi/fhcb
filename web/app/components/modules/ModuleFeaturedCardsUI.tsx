@@ -24,8 +24,8 @@ const ModuleFeaturedCardsUI = ({ input }: Props) => {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "24px",
-              gridAutoRows: "8px",
+              gap: "var(--spacing-gutter)",
+              gridAutoRows: "18px",
             }}>
             {items?.map((item, index: number) => (
               <CardExhibitionFeatured

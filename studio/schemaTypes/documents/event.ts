@@ -55,6 +55,16 @@ export default defineType({
       type: 'localeText',
       group: 'editorial',
     }),
+
+    defineField({
+      name: 'links',
+      title: 'Liens',
+      description: 'Tickets, ...',
+      type: 'array',
+      of: [{type: 'linkExternal'}],
+      group: 'editorial',
+    }),
+
     defineField({
       name: 'artists',
       title: 'Artistes',

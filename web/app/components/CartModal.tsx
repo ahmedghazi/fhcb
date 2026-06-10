@@ -54,14 +54,7 @@ const CartProductItem = ({ line }: { line: any }) => {
   );
 };
 const CartModal = () => {
-  const {
-    items,
-    isOpen,
-    closeCart,
-    removeFromCart,
-    updateQuantity,
-    cartTotal,
-  } = useCart();
+  const { items, isOpen, closeCart, cartTotal } = useCart();
 
   const handleCheckout = () => {
     if (!items.length || !SHOPIFY_DOMAIN) return;
@@ -70,6 +63,10 @@ const CartModal = () => {
       .join(",");
     window.location.href = `${SHOPIFY_DOMAIN}/cart/${cartPath}`;
   };
+
+  const tCartEmpty = _localizeText("cartEmpty");
+  const tTotal = _localizeText("total");
+  const tCheckout = _localizeText("checkout");
 
   return (
     <div
@@ -89,7 +86,7 @@ const CartModal = () => {
 
         {items.length === 0 ? (
           <div className='cart-modal__empty'>
-            <p className=''>{_localizeText("cartEmpty")}</p>
+            <p className=''>{tCartEmpty}</p>
           </div>
         ) : (
           <ul className='cart-modal__list'>
@@ -102,13 +99,13 @@ const CartModal = () => {
         {items.length > 0 && (
           <div className='cart-modal__footer'>
             <div className='cart-modal__total'>
-              <span>{_localizeText("total")}</span>
+              <span>{tTotal}</span>
               <span>{cartTotal}€</span>
             </div>
             <button
               className='btn cart-modal__checkout'
               onClick={handleCheckout}>
-              {_localizeText("checkout")}
+              {tCheckout}
             </button>
           </div>
         )}

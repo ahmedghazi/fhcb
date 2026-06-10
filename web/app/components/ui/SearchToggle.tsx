@@ -51,9 +51,9 @@ const SearchToggle = () => {
       <button
         className={styles.toggle}
         // onMouseLeave={() => dispatchModalType(null)}
-        onMouseEnter={() => {
-          dispatchModalType("search");
-        }}
+        // onMouseEnter={() => {
+        //   dispatchModalType("search");
+        // }}
         onClick={() => setActive(!active)}>
         <svg
           width='24'

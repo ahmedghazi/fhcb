@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
-import { _isCurrentExhibition, _isHorsLesMurs } from "@/app/lib/utils";
+import { _isCurrentByDates, _isHorsLesMurs } from "@/app/lib/utils";
 import { exhibitionToCard } from "./adapters";
 import CardBase from "./CardBase";
 import { FhcbDate } from "@/app/sanity-api/types/sanity.types";
@@ -14,7 +14,7 @@ type Props = {
 const CardExhibitionFeatured = ({ input }: Props) => {
   const { dates, tags, color } = input;
   const ref = useRef<HTMLDivElement>(null);
-  const isCurrent = _isCurrentExhibition(dates || []);
+  const isCurrent = _isCurrentByDates(dates || []);
   const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
   // const isTube = (input as any).location === "inside-tube";
   const isTube =
@@ -40,7 +40,6 @@ const CardExhibitionFeatured = ({ input }: Props) => {
   function resizeGridItem(item: HTMLDivElement) {
     const grid = item.parentElement;
     if (!grid) return;
-    console.log(grid);
     const rowHeight = parseInt(
       getComputedStyle(grid).getPropertyValue("grid-auto-rows"),
     );

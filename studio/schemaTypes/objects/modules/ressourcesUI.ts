@@ -1,25 +1,20 @@
 import {defineField} from 'sanity'
 import {baseLanguage} from '../../locale/supportedLanguages'
-import {TbArticle} from 'react-icons/tb'
+import {VscLibrary} from 'react-icons/vsc'
 
 export default defineField({
-  name: 'listSerieThematiqueUI',
-  title: 'List Série Thématique UI',
+  name: 'ressourcesUI',
+  title: 'Ressources UI',
   type: 'object',
-  icon: TbArticle,
+  icon: VscLibrary,
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
 
     defineField({
-      name: 'filters',
-      title: 'Filtres',
+      name: 'branches',
+      title: 'Branches',
       type: 'array',
-      of: [
-        {type: 'filterSort'},
-        {type: 'filterSearch'},
-        {type: 'filterList'},
-        {type: 'filterRadio'},
-      ],
+      of: [{type: 'reference', to: [{type: 'pageModulaire'}]}],
     }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
   ],
@@ -27,8 +22,8 @@ export default defineField({
     select: {title: `title.${baseLanguage}`},
     prepare(selection) {
       return {
-        title: selection.title || 'List Série Thématique UI',
-        subtitle: 'List Série Thématique UI',
+        title: selection.title || 'Ressources UI',
+        subtitle: 'Ressources UI',
       }
     },
   },

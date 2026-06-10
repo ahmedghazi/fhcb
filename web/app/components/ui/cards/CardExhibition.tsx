@@ -3,10 +3,10 @@ import clsx from "clsx";
 import React from "react";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import {
-  _isCurrentExhibition,
-  _isFuturExhibition,
+  _isCurrentByDates,
+  _isFuturByDates,
   _isHorsLesMurs,
-  _isPastExhibition,
+  _isPastByDates,
 } from "@/app/lib/utils";
 import { exhibitionToCard } from "./adapters";
 import CardBase, { CardFooter } from "./CardBase";
@@ -23,10 +23,10 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
 
-  const isPast = _isPastExhibition(dates || []);
+  const isPast = _isPastByDates(dates || []);
   //pb ici avec les expos passées et itinérante (date présente ou futur)
-  const isCurrent = _isCurrentExhibition(dates || []);
-  const isFutur = _isFuturExhibition(dates || []);
+  const isCurrent = _isCurrentByDates(dates || []);
+  const isFutur = _isFuturByDates(dates || []);
   // const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
 
   const props = exhibitionToCard(input, size);
