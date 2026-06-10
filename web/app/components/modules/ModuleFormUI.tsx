@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { FormUI } from "@/app/sanity-api/types/sanity.types";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import clsx from "clsx";
@@ -15,7 +15,7 @@ const ModuleFormUI = ({ input }: Props) => {
     console.log(val);
     setData((pre) => ({ ...pre, [key]: val }));
   };
-  const _onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(data);
   };
