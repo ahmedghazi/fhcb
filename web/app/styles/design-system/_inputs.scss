@@ -21,3 +21,26 @@
     background-color: currentColor;
   }
 }
+
+.form-row {
+  label,
+  input {
+    display: block;
+  }
+  label {
+    font-size: var(--text-sm);
+  }
+
+  input,
+  textarea,
+  select {
+    background-color: white;
+    border-radius: var(--radius-sm);
+    padding: 0.5em;
+    width: 100%;
+  }
+  button {
+    display: inline-block;
+    width: auto;
+  }
+}

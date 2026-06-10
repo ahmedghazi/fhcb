@@ -32,6 +32,7 @@ import {
   TextUI,
   ListExhibitionsPastUI,
   RessourcesUI,
+  FormUI,
 } from "./sanity.types";
 
 export type MostSearchedItem = {
@@ -135,6 +136,9 @@ export interface ModulesList {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
 }
 

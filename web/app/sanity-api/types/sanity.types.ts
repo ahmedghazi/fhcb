@@ -21,6 +21,17 @@ type ArrayOf<T> = Array<
 >;
 
 // Source: schema.json
+export type FormUI = {
+  _type: "formUI";
+  title?: LocaleString;
+  subject?: Array<{
+    title?: LocaleString;
+    description?: LocaleString;
+    _type: "subectItem";
+    _key: string;
+  }>;
+};
+
 export type PageModulaireReference = {
   _ref: string;
   _type: "reference";
@@ -935,6 +946,9 @@ export type Article = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
 };
 
@@ -1165,6 +1179,9 @@ export type PageModulaire = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -1248,6 +1265,9 @@ export type Artist = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
 };
 
@@ -1348,6 +1368,9 @@ export type Exhibition = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -1473,6 +1496,9 @@ export type Product = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -1579,6 +1605,9 @@ export type Event = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -1690,6 +1719,9 @@ export type Programme = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
 };
 
@@ -1787,6 +1819,9 @@ export type Feuilletage = {
     | ({
         _key: string;
       } & RessourcesUI)
+    | ({
+        _key: string;
+      } & FormUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -2141,6 +2176,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | FormUI
   | PageModulaireReference
   | RessourcesUI
   | SanityImageAssetReference
@@ -5072,6 +5108,17 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "formUI";
+        title?: LocaleString;
+        subject?: Array<{
+          title?: LocaleString;
+          description?: LocaleString;
+          _type: "subectItem";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -5114,6 +5161,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -5200,6 +5250,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -5309,6 +5362,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -5453,6 +5509,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -5566,6 +5625,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -5727,6 +5789,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -5856,6 +5921,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -7148,6 +7216,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -7232,6 +7303,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -7341,6 +7415,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -7485,6 +7562,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -7598,6 +7678,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -7759,6 +7842,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -7890,6 +7976,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -8019,6 +8108,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8116,6 +8208,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -8228,6 +8323,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8328,6 +8426,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -8507,6 +8608,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8631,6 +8735,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -8739,6 +8846,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -8915,6 +9025,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9012,6 +9125,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -9124,6 +9240,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9224,6 +9343,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -9403,6 +9525,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9527,6 +9652,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9635,6 +9763,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -9819,6 +9950,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -9916,6 +10050,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -10028,6 +10165,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10128,6 +10268,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -10307,6 +10450,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10431,6 +10577,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10539,6 +10688,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -10715,6 +10867,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -10812,6 +10967,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -10924,6 +11082,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11024,6 +11185,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -11203,6 +11367,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11327,6 +11494,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11435,6 +11605,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -11689,6 +11862,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11786,6 +11962,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -11898,6 +12077,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -11998,6 +12180,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -12177,6 +12362,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12301,6 +12489,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12409,6 +12600,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -12585,6 +12779,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12682,6 +12879,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -12794,6 +12994,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -12894,6 +13097,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -13073,6 +13279,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13197,6 +13406,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -13305,6 +13517,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -13766,6 +13981,17 @@ export type ARTIST_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "formUI";
+        title?: LocaleString;
+        subject?: Array<{
+          title?: LocaleString;
+          description?: LocaleString;
+          _type: "subectItem";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -13808,6 +14034,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -13894,6 +14123,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -14003,6 +14235,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -14147,6 +14382,9 @@ export type ARTIST_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14260,6 +14498,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -14421,6 +14662,9 @@ export type ARTIST_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -14550,6 +14794,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -15842,6 +16089,9 @@ export type ARTIST_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -15926,6 +16176,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -16035,6 +16288,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -16179,6 +16435,9 @@ export type ARTIST_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -16292,6 +16551,9 @@ export type ARTIST_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -16453,6 +16715,9 @@ export type ARTIST_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -16584,6 +16849,9 @@ export type ARTIST_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -16713,6 +16981,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -16810,6 +17081,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -16922,6 +17196,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17022,6 +17299,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -17201,6 +17481,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17325,6 +17608,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17433,6 +17719,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -17609,6 +17898,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17706,6 +17998,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -17818,6 +18113,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -17918,6 +18216,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -18097,6 +18398,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -18221,6 +18525,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -18329,6 +18636,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -18513,6 +18823,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -18610,6 +18923,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -18722,6 +19038,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -18822,6 +19141,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -19001,6 +19323,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -19125,6 +19450,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -19233,6 +19561,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -19409,6 +19740,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -19506,6 +19840,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -19618,6 +19955,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -19718,6 +20058,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -19897,6 +20240,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -20021,6 +20367,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -20129,6 +20478,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -20383,6 +20735,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -20480,6 +20835,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -20592,6 +20950,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -20692,6 +21053,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -20871,6 +21235,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -20995,6 +21362,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -21103,6 +21473,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -21279,6 +21652,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -21376,6 +21752,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -21488,6 +21867,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -21588,6 +21970,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -21767,6 +22152,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -21891,6 +22279,9 @@ export type ARTIST_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -21999,6 +22390,9 @@ export type ARTIST_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -22356,6 +22750,17 @@ export type EXPHIBITION_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "formUI";
+        title?: LocaleString;
+        subject?: Array<{
+          title?: LocaleString;
+          description?: LocaleString;
+          _type: "subectItem";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -22398,6 +22803,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -22484,6 +22892,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -22593,6 +23004,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -22737,6 +23151,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -22850,6 +23267,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -23011,6 +23431,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -23140,6 +23563,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -24432,6 +24858,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -24516,6 +24945,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -24625,6 +25057,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -24769,6 +25204,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -24882,6 +25320,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -25043,6 +25484,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -25174,6 +25618,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -25303,6 +25750,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -25400,6 +25850,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -25512,6 +25965,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -25612,6 +26068,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -25791,6 +26250,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -25915,6 +26377,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -26023,6 +26488,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -26199,6 +26667,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -26296,6 +26767,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -26408,6 +26882,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -26508,6 +26985,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -26687,6 +27167,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -26811,6 +27294,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -26919,6 +27405,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -27103,6 +27592,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -27200,6 +27692,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -27312,6 +27807,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -27412,6 +27910,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -27591,6 +28092,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -27715,6 +28219,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -27823,6 +28330,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -27999,6 +28509,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -28096,6 +28609,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -28208,6 +28724,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -28308,6 +28827,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -28487,6 +29009,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -28611,6 +29136,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -28719,6 +29247,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -28973,6 +29504,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -29070,6 +29604,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -29182,6 +29719,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -29282,6 +29822,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -29461,6 +30004,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -29585,6 +30131,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -29693,6 +30242,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -29869,6 +30421,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -29966,6 +30521,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -30078,6 +30636,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -30178,6 +30739,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -30357,6 +30921,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -30481,6 +31048,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -30589,6 +31159,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -31180,6 +31753,17 @@ export type EVENT_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "formUI";
+        title?: LocaleString;
+        subject?: Array<{
+          title?: LocaleString;
+          description?: LocaleString;
+          _type: "subectItem";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -31222,6 +31806,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -31308,6 +31895,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -31417,6 +32007,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -31561,6 +32154,9 @@ export type EVENT_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -31674,6 +32270,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -31835,6 +32434,9 @@ export type EVENT_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -31964,6 +32566,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -33256,6 +33861,9 @@ export type EVENT_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -33340,6 +33948,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -33449,6 +34060,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -33593,6 +34207,9 @@ export type EVENT_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -33706,6 +34323,9 @@ export type EVENT_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -33867,6 +34487,9 @@ export type EVENT_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -33998,6 +34621,9 @@ export type EVENT_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -34127,6 +34753,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -34224,6 +34853,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -34336,6 +34968,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -34436,6 +35071,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -34615,6 +35253,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -34739,6 +35380,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -34847,6 +35491,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -35023,6 +35670,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -35120,6 +35770,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -35232,6 +35885,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -35332,6 +35988,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -35511,6 +36170,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -35635,6 +36297,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -35743,6 +36408,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -35927,6 +36595,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -36024,6 +36695,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -36136,6 +36810,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -36236,6 +36913,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -36415,6 +37095,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -36539,6 +37222,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -36647,6 +37333,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -36823,6 +37512,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -36920,6 +37612,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -37032,6 +37727,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -37132,6 +37830,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -37311,6 +38012,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -37435,6 +38139,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -37543,6 +38250,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -37797,6 +38507,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -37894,6 +38607,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -38006,6 +38722,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -38106,6 +38825,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -38285,6 +39007,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -38409,6 +39134,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -38517,6 +39245,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -38693,6 +39424,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -38790,6 +39524,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -38902,6 +39639,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -39002,6 +39742,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -39181,6 +39924,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -39305,6 +40051,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -39413,6 +40162,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -39979,6 +40731,17 @@ export type PROGRAMME_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "formUI";
+        title?: LocaleString;
+        subject?: Array<{
+          title?: LocaleString;
+          description?: LocaleString;
+          _type: "subectItem";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -40021,6 +40784,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -40107,6 +40873,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -40216,6 +40985,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -40360,6 +41132,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -40473,6 +41248,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -40634,6 +41412,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -40763,6 +41544,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -42055,6 +42839,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -42139,6 +42926,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -42248,6 +43038,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -42392,6 +43185,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -42505,6 +43301,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -42666,6 +43465,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -42797,6 +43599,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -42926,6 +43731,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -43023,6 +43831,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -43135,6 +43946,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -43235,6 +44049,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -43414,6 +44231,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -43538,6 +44358,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -43646,6 +44469,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -43822,6 +44648,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -43919,6 +44748,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -44031,6 +44863,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -44131,6 +44966,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -44310,6 +45148,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -44434,6 +45275,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -44542,6 +45386,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -44726,6 +45573,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -44823,6 +45673,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -44935,6 +45788,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -45035,6 +45891,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -45214,6 +46073,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -45338,6 +46200,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -45446,6 +46311,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -45622,6 +46490,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -45719,6 +46590,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -45831,6 +46705,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -45931,6 +46808,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -46110,6 +46990,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -46234,6 +47117,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -46342,6 +47228,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -46596,6 +47485,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -46693,6 +47585,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -46805,6 +47700,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -46905,6 +47803,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -47084,6 +47985,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -47208,6 +48112,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -47316,6 +48223,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -47492,6 +48402,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -47589,6 +48502,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -47701,6 +48617,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -47801,6 +48720,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -47980,6 +48902,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -48104,6 +49029,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -48212,6 +49140,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -48426,6 +49357,9 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
       } & FeaturedCardsUI)
     | ({
         _key: string;
+      } & FormUI)
+    | ({
+        _key: string;
       } & GridCardUI)
     | ({
         _key: string;
@@ -48601,6 +49535,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -48698,6 +49635,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -48810,6 +49750,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -48910,6 +49853,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -49089,6 +50035,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -49213,6 +50162,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -49321,6 +50273,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -49497,6 +50452,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -49594,6 +50552,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -49706,6 +50667,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -49806,6 +50770,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -49985,6 +50952,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -50109,6 +51079,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -50217,6 +51190,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -50585,6 +51561,17 @@ export type FEUILLETAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "formUI";
+        title?: LocaleString;
+        subject?: Array<{
+          title?: LocaleString;
+          description?: LocaleString;
+          _type: "subectItem";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -50627,6 +51614,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -50713,6 +51703,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -50822,6 +51815,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -50966,6 +51962,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -51079,6 +52078,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -51240,6 +52242,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -51369,6 +52374,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -52661,6 +53669,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -52745,6 +53756,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -52854,6 +53868,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -52998,6 +54015,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -53111,6 +54131,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -53272,6 +54295,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -53403,6 +54429,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -53532,6 +54561,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -53629,6 +54661,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -53741,6 +54776,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -53841,6 +54879,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -54020,6 +55061,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -54144,6 +55188,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -54252,6 +55299,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -54428,6 +55478,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -54525,6 +55578,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -54637,6 +55693,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -54737,6 +55796,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -54916,6 +55978,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -55040,6 +56105,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -55148,6 +56216,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -55332,6 +56403,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -55429,6 +56503,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -55541,6 +56618,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -55641,6 +56721,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -55820,6 +56903,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -55944,6 +57030,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -56052,6 +57141,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -56228,6 +57320,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -56325,6 +57420,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -56437,6 +57535,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -56537,6 +57638,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -56716,6 +57820,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -56840,6 +57947,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -56948,6 +58058,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -57202,6 +58315,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -57299,6 +58415,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -57411,6 +58530,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -57511,6 +58633,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -57690,6 +58815,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -57814,6 +58942,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -57922,6 +59053,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -58098,6 +59232,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -58195,6 +59332,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -58307,6 +59447,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -58407,6 +59550,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -58586,6 +59732,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -58710,6 +59859,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -58818,6 +59970,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -59643,6 +60798,17 @@ export type ARTICLE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "formUI";
+        title?: LocaleString;
+        subject?: Array<{
+          title?: LocaleString;
+          description?: LocaleString;
+          _type: "subectItem";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "gridCardUI";
         title: {
           _type: "localeString";
@@ -59685,6 +60851,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -59771,6 +60940,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -59880,6 +61052,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -60024,6 +61199,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -60137,6 +61315,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -60298,6 +61479,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -60427,6 +61611,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -61719,6 +62906,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -61803,6 +62993,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -61912,6 +63105,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -62056,6 +63252,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -62169,6 +63368,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -62330,6 +63532,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -62461,6 +63666,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -62590,6 +63798,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -62687,6 +63898,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -62799,6 +64013,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -62899,6 +64116,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -63078,6 +64298,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -63202,6 +64425,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -63310,6 +64536,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -63486,6 +64715,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -63583,6 +64815,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -63695,6 +64930,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -63795,6 +65033,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -63974,6 +65215,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -64098,6 +65342,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -64206,6 +65453,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -64390,6 +65640,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -64487,6 +65740,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -64599,6 +65855,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -64699,6 +65958,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -64878,6 +66140,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -65002,6 +66267,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -65110,6 +66378,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -65286,6 +66557,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -65383,6 +66657,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -65495,6 +66772,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -65595,6 +66875,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -65774,6 +67057,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -65898,6 +67184,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -66006,6 +67295,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -66260,6 +67552,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -66357,6 +67652,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -66469,6 +67767,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -66569,6 +67870,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -66748,6 +68052,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -66872,6 +68179,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -66980,6 +68290,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -67156,6 +68469,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -67253,6 +68569,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -67365,6 +68684,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -67465,6 +68787,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -67644,6 +68969,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -67768,6 +69096,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & FeaturedCardsUI)
                               | ({
                                   _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
                                 } & GridCardUI)
                               | ({
                                   _key: string;
@@ -67876,6 +69207,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
                               | ({
                                   _key: string;
                                 } & GridCardUI)
@@ -68360,6 +69694,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -68444,6 +69781,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -68553,6 +69893,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -68697,6 +70040,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -68810,6 +70156,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -68971,6 +70320,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -69100,6 +70452,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -69343,6 +70698,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -69427,6 +70785,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -69536,6 +70897,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -69680,6 +71044,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -69793,6 +71160,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -69954,6 +71324,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & FeaturedCardsUI)
                 | ({
                     _key: string;
+                  } & FormUI)
+                | ({
+                    _key: string;
                   } & GridCardUI)
                 | ({
                     _key: string;
@@ -70083,6 +71456,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & FeaturedCardsUI)
+                | ({
+                    _key: string;
+                  } & FormUI)
                 | ({
                     _key: string;
                   } & GridCardUI)
@@ -70232,6 +71608,9 @@ export type PRODUCT_QUERY_RESULT = {
         } & FeaturedCardsUI)
       | ({
           _key: string;
+        } & FormUI)
+      | ({
+          _key: string;
         } & GridCardUI)
       | ({
           _key: string;
@@ -70341,6 +71720,9 @@ export type PRODUCT_QUERY_RESULT = {
     | ({
         _key: string;
       } & FeaturedCardsUI)
+    | ({
+        _key: string;
+      } & FormUI)
     | ({
         _key: string;
       } & GridCardUI)

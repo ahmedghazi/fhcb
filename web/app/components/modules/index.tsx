@@ -23,6 +23,7 @@ import ModuleListExhibitionsPastUI from "./ModuleListExhibitionsPastUI";
 import ModuleSupportUI from "./ModuleSupportUI";
 import ModuleNewsletterUI from "./ModuleNewsletterUI";
 import ModuleRessourcesUI from "./ModuleRessourcesUI";
+import ModuleFormUI from "./ModuleFormUI";
 
 const Modules = ({ modules }: ModulesList) => {
   const _renderModules = () => {
@@ -88,6 +89,8 @@ const Modules = ({ modules }: ModulesList) => {
           return <ModuleNewsletterUI key={module._key} input={module as any} />;
         case "ressourcesUI":
           return <ModuleRessourcesUI key={module._key} input={module as any} />;
+        case "formUI":
+          return <ModuleFormUI key={module._key} input={module as any} />;
         default:
           return null;
       }

@@ -18,4 +18,5 @@ export default [
   {type: 'listExhibitionsPastUI'},
   {type: 'listEventsUI'},
   {type: 'ressourcesUI'},
+  {type: 'formUI'},
 ]

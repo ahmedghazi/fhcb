@@ -56,6 +56,7 @@ import supportUI from './objects/modules/supportUI'
 import newsletterUI from './objects/modules/newsletterUI'
 import listProductUI from './objects/modules/listProductUI'
 import ressourcesUI from './objects/modules/ressourcesUI'
+import formUI from './objects/modules/formUI'
 
 /** ui */
 import filterSort from './objects/filterSort'
@@ -141,5 +142,6 @@ export const schemaTypes = [
   supportUI,
   newsletterUI,
   ressourcesUI,
+  formUI,
 ]
 export default schemaTypes

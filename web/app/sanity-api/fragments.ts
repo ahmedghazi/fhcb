@@ -750,6 +750,12 @@ export const ressourcesUI = `
   }
 `;
 
+export const formUI = `
+  _type == "formUI" => {
+    ...
+  }
+`;
+
 export const modules = `
   ...,
   ${textUI},
@@ -775,14 +781,23 @@ export const modules = `
   ${listEventsUI},
   ${supportUI},
   ${newsletterUI},
+  ${formUI}
 `;
 
+const allPostType = [
+  "event",
+  "exhibition",
+  "feuilletage",
+  "imageImages",
+  "serieThematique",
+  "product",
+];
 export const relatedByArtists = `
   *[
     _id != ^._id &&
     (
       (
-        _type in ["event", "exhibition", "feuilletage", "imageImages", "product"] &&
+        _type in ["event", "exhibition", "feuilletage", "imageImages", "serieThematique", "product"] &&
         references(^.artists[]._ref)
       )
       ||

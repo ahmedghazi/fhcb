@@ -64,7 +64,7 @@ cards simili document
 - # card product si hors de la page librairie, affiche le tag "Livre"
 - # série thématique doc sanity comme imageImages
 - forms de contact
-- search au click
+- # search au click
 - # module Ressources affiche les dernières ressources avec carte branches ressources (video auto play ) + hover
 - single event related
 

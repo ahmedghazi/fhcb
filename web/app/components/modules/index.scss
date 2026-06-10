@@ -180,6 +180,20 @@
         margin-bottom: var(--spacing-lg);
       }
     }
+    &--form-ui {
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--spacing-gutter);
+        row-gap: var(--spacing-sm);
+        .form-row {
+          grid-column: span 2 / span 2;
+          &--half {
+            grid-column: span 1 / span 1;
+          }
+        }
+      }
+    }
   }
 }
 
