@@ -31,7 +31,11 @@ import { CardAction, CardBaseProps } from "../CardBase";
 import CardTags from "../CardTags";
 import FHCBDates from "../../FHCBDates";
 import Embed from "../../Embed";
-import { _isPast, _isPastByDates } from "@/app/lib/utils";
+import {
+  _isCurrentOrFuturByDates,
+  _isPast,
+  _isPastByDates,
+} from "@/app/lib/utils";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -58,18 +62,20 @@ export function exhibitionToCard(
 ): CardBaseProps {
   const { title, artists, imageCover, dates, tags, links } = input;
   const artistList = artists?.map((a) => a.name).join(", ");
-
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const imagePortrait = !isLandscape;
-  const isTube =
-    dates?.some((item: FhcbDate) => item.locationType === "inSite-tube") ??
-    false;
+  const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
+
   let layout: CardBaseProps["layout"];
   let imagePlacement: CardBaseProps["imagePlacement"] | undefined;
 
   if (featured) {
+    const isTube =
+      dates?.some((item: FhcbDate) => item.locationType === "inSite-tube") ??
+      false;
+
     layout = isTube ? "row" : "col";
     imagePlacement = isTube ? undefined : "top";
     if (size === "lg") {
@@ -90,7 +96,7 @@ export function exhibitionToCard(
     variant: "primary",
   });
 
-  if (links) {
+  if (links && _isCurrentOrFutur) {
     links.forEach((link) => {
       actions.push({
         label: (_localizeField(link.label) as string) || "",

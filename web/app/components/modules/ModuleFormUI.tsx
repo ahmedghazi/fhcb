@@ -92,7 +92,7 @@ const ModuleFormUI = ({ input }: Props) => {
                       "form-row",
                       item.type !== "textarea" && "form-row--half",
                     )}>
-                    <label for={item.name}>
+                    <label>
                       <span>{item.label}</span>
                       {item.required && "*"}
                       {!item.required && (

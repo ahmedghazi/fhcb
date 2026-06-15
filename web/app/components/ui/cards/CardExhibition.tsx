@@ -41,8 +41,8 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
         isCurrent && "card--is-current",
         isFutur && "card--is-futur",
         `card--is-${location}`,
-      )}
-      style={{ backgroundColor: (color as any)?.hex || "var(--color-bleu)" }}>
+      )}>
+      {/* <pre>{JSON.stringify({ isPast, isCurrent, isFutur }, null, 2)}</pre> */}
       <CardBase {...props} />
       {size === "md" && !!props.actions?.length && (
         <CardFooter actions={props.actions} />

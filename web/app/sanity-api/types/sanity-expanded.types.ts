@@ -1,8 +1,17 @@
-// AUTO-GENERATED EXTENDED TYPES - DO NOT EDIT MANUALLY
-// Generated on: 2026-06-10T14:26:36.334Z
-// Run 'npm run typegen' to regenerate
-// Project structure: web="../../web", studio="./"
-// Detection method: configuration file
+// Hand-maintained extensions on top of the official Sanity TypeGen output
+// (./sanity.types.ts, generated via `pnpm run typegen` -> `sanity typegen generate`).
+//
+// TypeGen derives types from the raw schema types (Artist, Exhibition, ...), which still
+// reference unresolved `*Reference` types and `SanityImageAssetReference` for image assets,
+// even though the actual GROQ queries dereference these (`->`) and resolve to full objects.
+// The types below describe those dereferenced shapes so components can be typed against
+// what the queries actually return.
+//
+// `creditLine` is added to images by the `sanity-plugin-media` studio plugin and isn't part
+// of the `sanity.imageAsset` schema TypeGen sees, so it always infers `creditLine: null`.
+// `SanityImageAssetFull` patches that field back in.
+//
+// When the schema or a query shape changes, update the corresponding type(s) below to match.
 
 import type {
   SerieThematique,
