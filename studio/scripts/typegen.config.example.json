@@ -1,6 +1,0 @@
-{
-  "webPath": "../web",
-  "sanityApiPath": "app/utils/sanity-api", 
-  "generatedTypesFile": "sanity.types.ts",
-  "extendedTypesFile": "sanity-extend.types.ts"
-}
