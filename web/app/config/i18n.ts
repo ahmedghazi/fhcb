@@ -50,6 +50,7 @@ const i18n = {
     remove: "Retirer",
     close: "Fermer",
     book: "Livre",
+    delete: "Retirer",
   },
   en: {
     default: false,
@@ -101,6 +102,7 @@ const i18n = {
     remove: "Remove",
     close: "Close",
     book: "Book",
+    delete: "Delete",
   },
 };
 

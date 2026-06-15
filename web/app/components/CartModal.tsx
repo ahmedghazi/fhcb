@@ -23,7 +23,7 @@ const CartProductItem = ({ line }: { line: any }) => {
         </div>
         <div className='cart-modal__item__footer'>
           <div className='cart-modal__price'>{line.price}€</div>
-          <div className='flex gap-md '>
+          <div className='flex gap-sm '>
             <button
               className='cart-modal__delete c-tag'
               onClick={() => removeFromCart(line.id)}>
@@ -33,7 +33,7 @@ const CartProductItem = ({ line }: { line: any }) => {
               <button
                 onClick={() => updateQuantity(line.id, line.quantity - 1)}
                 disabled={line.quantity <= 1}>
-                -
+                —
               </button>
               <span>{line.quantity}</span>
               <button
