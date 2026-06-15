@@ -15,7 +15,7 @@ const CardEvent = ({ input, size = "md" }: Props) => {
   const tagsClassList = tags
     ?.map((tag: Tag) => `card--${tag.slug?.current}`)
     .join(" ");
-  const props = eventToCard(input);
+  const props = eventToCard(input, size);
 
   return (
     <div className={clsx("card card--event", `card--${size}`, tagsClassList)}>

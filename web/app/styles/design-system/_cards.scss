@@ -221,6 +221,14 @@
         display: none;
       }
     }
+    &.card--is-past {
+      &:hover .card__footer {
+        display: flex;
+      }
+      .card__footer {
+        display: none;
+      }
+    }
   }
   &--visites {
     background-color: var(--color-jaune);
@@ -229,6 +237,9 @@
     background-color: var(--color-vert);
     &.card--visite-commentee {
       background-color: var(--color-jaune);
+    }
+    &.card--grand-entretien {
+      background-color: var(--color-gris-100);
     }
   }
   &--artist {

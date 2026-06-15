@@ -66,7 +66,8 @@ export function exhibitionToCard(
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const imagePortrait = !isLandscape;
-  const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
+  // const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
+  const isPast = _isPastByDates(dates || []);
 
   let layout: CardBaseProps["layout"];
   let imagePlacement: CardBaseProps["imagePlacement"] | undefined;
@@ -96,7 +97,7 @@ export function exhibitionToCard(
     variant: "primary",
   });
 
-  if (links && _isCurrentOrFutur) {
+  if (links && !isPast) {
     links.forEach((link) => {
       actions.push({
         label: (_localizeField(link.label) as string) || "",
@@ -154,7 +155,10 @@ export function productToCard(input: ProductExpanded): CardBaseProps {
 
 // ─── Event ────────────────────────────────────────────────────────────────────
 
-export function eventToCard(input: EventExpanded): CardBaseProps {
+export function eventToCard(
+  input: EventExpanded,
+  size: "sm" | "md" | "lg" = "sm",
+): CardBaseProps {
   const { imageCover, dates, tags, links } = input;
   const isPast = _isPastByDates(dates || []);
   const actions: CardAction[] = [];
@@ -175,7 +179,7 @@ export function eventToCard(input: EventExpanded): CardBaseProps {
   }
   return {
     _type: input._type,
-    layout: "col",
+    layout: size === "lg" ? "row" : "col",
     colorVar: "var(--color-event)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
