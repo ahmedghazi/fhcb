@@ -18,16 +18,15 @@ type Props = {
 };
 
 const ModuleGridCardUI = ({ input }: Props) => {
+  const { title, items, cta } = input;
   return (
     <section className='module module--grid-card-ui'>
       <div className='container-fluid'>
         <div className='module__inner'>
-          {input.title && (
-            <h2 className='module__title c-h1_5'>
-              {_localizeField(input.title)}
-            </h2>
+          {title && (
+            <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           )}
-          {input.items && (
+          {items && (
             <div className='grid--centered'>
               {input.items.map((item: PostTypes, index: number) => (
                 <Fragment key={`${item && item._id}-${index}`}>
@@ -51,6 +50,16 @@ const ModuleGridCardUI = ({ input }: Props) => {
                   )}
                 </Fragment>
               ))}
+            </div>
+          )}
+
+          {cta && (
+            <div className='footer'>
+              {cta.internal && (
+                <Link className='btn' href={_linkResolver(cta.internal.link)}>
+                  {_localizeField(cta.internal.label)}
+                </Link>
+              )}
             </div>
           )}
         </div>

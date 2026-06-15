@@ -81,6 +81,13 @@ const Footer = ({ settings }: Props) => {
                   })}
                   <li>
                     <h5 className='c-h2'>{_localizeText("contactTeam")}</h5>
+                    {settings.navTertiary?.map((item: any) => (
+                      <li key={item._key}>
+                        <Link href={_linkResolver(item.link)}>
+                          {_localizeField(item.label)}
+                        </Link>
+                      </li>
+                    ))}
                   </li>
                 </ul>
                 <div className='credits-n-legals md:col-span-2'>

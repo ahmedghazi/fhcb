@@ -73,14 +73,21 @@ export const linkInternalWithImage = `
     _type,
     slug,
     "imageCover": coalesce(imageCover, image){
-      // asset->{
-      //   _id
-      // }
       ${imageAsset}
     },
   }
 `;
 
+const cta = `
+  ...,
+   internal {
+    label,
+    link->{
+      _type,
+      slug
+    }
+  },
+`;
 export const nav = `
   ...,
   _type == 'linkInternal' => {
@@ -197,7 +204,7 @@ export const listUI = `
       ...
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -443,7 +450,7 @@ export const sliderCardUI = `
       ${cardTypes}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -459,7 +466,7 @@ export const gridCardUI = `
       ${cardTypes}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -552,7 +559,7 @@ export const listFeuilletageUI = `
       ${cardRefFeuilletage}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -572,7 +579,7 @@ export const listImageImages = `
       ${cardRefImageImages}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -592,7 +599,7 @@ export const listSerieThematiqueUI = `
       ${cardRefSerieThematique}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -611,7 +618,7 @@ export const listExhibitionsUI = `
       ${cardRefExhibition}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -635,7 +642,7 @@ export const listExhibitionsPastUI = `
       ${cardRefExhibition}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -666,7 +673,7 @@ export const listExhibitionsEventsUI = `
       ${cardRefEvent}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -686,7 +693,7 @@ export const listEventsUI = `
       ${cardRefEvent}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -709,7 +716,7 @@ export const listProductUI = `
       ${cardRefProduct}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;
@@ -721,7 +728,7 @@ export const supportUI = `
       ${imageAsset}
     },
     cta{
-      ...
+      ${cta}
     }
   }
 `;

@@ -74,7 +74,10 @@ const Nav = ({ navPrimary }: Props) => {
             {item._type === "linkInternal" && item.subMenu && (
               <ul
                 className='sub-menu'
-                onMouseLeave={() => dispatchCurrentMenuItem(null)}>
+                onMouseLeave={() => {
+                  dispatchCurrentMenuItem(null);
+                  dispatchModalType(null);
+                }}>
                 {item.subMenu.map((subItem, i) => (
                   <li
                     key={i}

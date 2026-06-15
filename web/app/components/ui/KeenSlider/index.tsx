@@ -12,12 +12,21 @@ const KeenSlider = ({ children, perView = "auto" }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-    initial: 0,
-    mode: "snap",
+    // initial: 0,
+    // mode: "snap",
+    // loop: true,
+    // slides: {
+    //   perView: perView,
+    //   spacing: 10,
+    // },
     loop: true,
+    mode: "snap",
+    rubberband: false,
+    initial: 0,
     slides: {
-      perView: perView,
-      spacing: 36,
+      perView: 2.2,
+      spacing: 10,
+      // origin: "left",
     },
     slideChanged(slider) {
       if (slider.track.details) {

@@ -53,7 +53,6 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
   const isBranch = data?.tags?.some(
     (tag) => tag.slug?.current === "branches-ressources",
   );
-  console.log({ isBranch });
   return (
     <div
       className='template template--page'
@@ -61,7 +60,6 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <PageHeader h1={data.title} />
       <ContentModulaire input={data} />
-      {/* <pre>{JSON.stringify({ isBranch }, null, 2)}</pre> */}
       {isBranch && data.rebonds && (
         <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} />
       )}

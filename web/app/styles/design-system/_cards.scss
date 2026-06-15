@@ -95,7 +95,7 @@
   }
 
   &--lg {
-    grid-column: span 12;
+    // grid-column: span 12;
 
     .grid {
       gap: 0;
@@ -106,6 +106,9 @@
       .card__media {
         flex-shrink: 0;
         flex: 0;
+      }
+      .card__body {
+        flex: 1;
       }
     }
 
@@ -265,6 +268,15 @@
       .card__sup-title {
         font-weight: 800;
       }
+    }
+  }
+
+  &--branche {
+    &:hover .card__footer {
+      display: block;
+    }
+    .card__footer {
+      display: none;
     }
   }
 

@@ -33,6 +33,9 @@
         max-width: 41rem;
         margin: 0 auto;
       }
+      &:has(.c-chapo) p {
+        max-width: 60rem;
+      }
     }
     &--text-image-ui {
       &--reverse {
@@ -71,6 +74,7 @@
         .content {
           font-weight: 200;
           font-size: var(--text-base);
+          font-weight: 200;
         }
       }
     }
@@ -79,8 +83,19 @@
         text-align: center;
         margin-bottom: var(--spacing-lg);
       }
+      .footer {
+        padding: var(--spacing-lg);
+        text-align: center;
+        .btn {
+          display: inline-block;
+          width: auto;
+        }
+      }
     }
     &--slider-card-ui {
+      .module__inner {
+        padding-left: var(--spacing-lg);
+      }
       h2 {
         text-align: center;
         margin-bottom: var(--spacing-lg);
@@ -97,6 +112,14 @@
             min-width: var(--gridder-6_12);
             max-width: var(--gridder-6_12);
           }
+        }
+      }
+      .footer {
+        padding: var(--spacing-lg);
+        text-align: center;
+        .btn {
+          display: inline-block;
+          width: auto;
         }
       }
     }

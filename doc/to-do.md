@@ -68,6 +68,7 @@ cards simili document
 - # module Ressources affiche les dernières ressources avec carte branches ressources (video auto play ) + hover
 - single event related
 - cron in preprod
+- add remaining cta in modules
 
 ## card expos
 

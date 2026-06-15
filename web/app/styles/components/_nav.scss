@@ -47,29 +47,36 @@ nav {
       display: block;
     }
   }
+  a {
+    white-space: nowrap;
+    line-height: 1.8;
+    width: 100%;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   ul.menu {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
+
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
     & > li {
       // flex: 1;
       position: relative;
       & > a {
         padding: 0em 2em 0;
         display: inline-block;
+        font-weight: 450;
+        // background-color: red;
         // text-align: center;
       }
       &.has-submenu {
         & > a {
           // pointer-events: none;
         }
-        a {
-          white-space: nowrap;
-        }
-        // &:hover {
-        //   .sub-menu {
-        //     display: block;
-        //   }
-        // }
       }
     }
 
