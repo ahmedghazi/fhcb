@@ -5,9 +5,17 @@
     gap: 1rem;
   }
   .slider {
+    background-color: var(--color-beige);
+    border-radius: var(--radius);
+    padding: var(--spacing-md);
     .keen-slider {
       .keen-slider__slide {
         width: 100%;
+        img {
+          max-height: var(--main-h);
+          height: calc(var(--main-h) - var(--spacing-lg)) !important;
+          object-fit: contain;
+        }
       }
     }
   }

@@ -116,7 +116,7 @@ const ContentProduct = ({ input }: Props) => {
           </div>
           {images && (
             <div className='slider md:col-span-3'>
-              <KeenSlider perView={1}>
+              <KeenSlider perView={1} controlsFloating={true}>
                 {imageCover && (
                   <div
                     key={`${imageCover && imageCover.asset?._id}-00`}

@@ -28,6 +28,7 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
       className={clsx(
         "card card--branche card--page-modulaire",
         `card--${size}`,
+        size === "sm" ? "card--footer-hover" : "",
       )}>
       <CardBase {...props} />
     </div>

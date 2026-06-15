@@ -37,7 +37,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
         `card--${size}`,
         `card--${props.layout}`,
         isLandscape ? "card--is-landscape" : "card--is-portrait",
-        isPast && "card--is-past",
+        isPast && "card--is-past card--footer-hover",
         isCurrent && "card--is-current",
         isFutur && "card--is-futur",
         `card--is-${location}`,

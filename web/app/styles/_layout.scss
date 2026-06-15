@@ -44,7 +44,7 @@ for the slider
   }
 }
 main {
-  min-height: var(--app-height, 100vh);
+  min-height: var(--h-app, 100vh);
   position: relative;
   // padding-top: var(--header-h);
 
@@ -69,7 +69,7 @@ main {
 }
 
 .h-app {
-  height: var(--app-height);
+  height: var(--h-app);
 }
 
 @media all and (min-width: variables.$md) {

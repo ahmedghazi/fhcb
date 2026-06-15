@@ -1,7 +1,7 @@
 .modules {
   width: 100%;
   section.module {
-    margin-bottom: var(--spacing-gutter);
+    margin-bottom: var(--spacing-lg);
     &--featured-cards-ui {
       .card--is-landscape {
         grid-column: span 2 / span 2;
@@ -102,15 +102,16 @@
       }
       .keen-slider {
         &__slide {
-          min-width: var(--gridder-3_12);
-          max-width: var(--gridder-3_12);
+          min-width: var(--gridder-3_12) !important;
+          max-width: var(--gridder-3_12) !important;
+
           .card,
           .card__inner {
             height: 100%;
           }
           &:has(.card--md) {
-            min-width: var(--gridder-6_12);
-            max-width: var(--gridder-6_12);
+            min-width: var(--gridder-6_12) !important;
+            max-width: var(--gridder-6_12) !important;
           }
         }
       }

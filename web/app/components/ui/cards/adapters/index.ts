@@ -36,6 +36,7 @@ import {
   _isPast,
   _isPastByDates,
 } from "@/app/lib/utils";
+import { usePathname } from "next/navigation";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -116,8 +117,6 @@ export function exhibitionToCard(
     colorVar: "var(--color-exhibition)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
-    // title: artistList || (_localizeField(input.title) as string) || "",
-    // subTitle: artistList ? (_localizeField(input.title) as string) : undefined,
     title: (_localizeField(title) as string) || "",
     subTitle: artistList,
     infoNode: toInfoNode(dates),
@@ -127,19 +126,31 @@ export function exhibitionToCard(
 
 // ─── Product ─────────────────────────────────────────────────────────────────
 
-export function productToCard(input: ProductExpanded): CardBaseProps {
+export function productToCard(
+  input: ProductExpanded,
+  size: "sm" | "md" | "lg" = "md",
+): CardBaseProps {
   const { imageCover, tags, price, artists } = input;
   const artistName = artists?.map((a) => a.name).join(", ") || "";
   const title = (_localizeField(input.title) as string) || "";
-  const isOffShop = location.href.indexOf("librairie") === -1;
+  const pathname = usePathname();
+  const isOffShop = pathname.indexOf("librairie") === -1;
+
+  const isLandscape =
+    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  const imagePortrait = !isLandscape;
+  let layout: CardBaseProps["layout"];
+  if (size === "md") {
+    layout = imagePortrait ? "row" : "col";
+  }
   return {
     _type: input._type,
-    layout: "col",
+    layout: layout,
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: isOffShop ? _localizeText("book") : toTags(tags),
-    // title: artistName || title,
-    // subTitle: artistName ? title : undefined,
+    footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
     subTitle: artistName,
     infoNode: price ? `${price}€` : undefined,

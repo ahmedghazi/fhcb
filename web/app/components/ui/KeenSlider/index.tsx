@@ -6,9 +6,14 @@ import "./index.scss";
 type Props = {
   children: ReactNode;
   perView?: number | "auto";
+  controlsFloating?: boolean;
 };
 
-const KeenSlider = ({ children, perView = "auto" }: Props) => {
+const KeenSlider = ({
+  children,
+  perView = "auto",
+  controlsFloating = false,
+}: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -24,7 +29,7 @@ const KeenSlider = ({ children, perView = "auto" }: Props) => {
     rubberband: false,
     initial: 0,
     slides: {
-      perView: 2.2,
+      perView: perView, //2.2,
       spacing: 10,
       // origin: "left",
     },
@@ -50,11 +55,11 @@ const KeenSlider = ({ children, perView = "auto" }: Props) => {
   }, [loaded]);
 
   return (
-    <div>
+    <div className='keen-slider-container'>
       <div ref={sliderRef} className='keen-slider'>
         {children}
       </div>
-      {loaded && instanceRef.current && (
+      {loaded && instanceRef.current && !controlsFloating && (
         <div className='keen-slider__controls'>
           <Arrow
             left
@@ -63,7 +68,6 @@ const KeenSlider = ({ children, perView = "auto" }: Props) => {
               if (instanceRef.current?.track.details)
                 instanceRef.current.prev();
             }}
-            // disabled={currentSlide === 0}
           />
 
           <Arrow
@@ -72,11 +76,25 @@ const KeenSlider = ({ children, perView = "auto" }: Props) => {
               if (instanceRef.current?.track.details)
                 instanceRef.current.next();
             }}
-            // disabled={
-            //   currentSlide ===
-            //   instanceRef.current.track.details.slides.length - 1
-            // }
           />
+        </div>
+      )}
+      {loaded && instanceRef.current && controlsFloating && (
+        <div className='keen-slider__controls keen-slider__controls-floating'>
+          <div
+            className='prev'
+            onClick={(e: any) => {
+              e.stopPropagation();
+              if (instanceRef.current?.track.details)
+                instanceRef.current.prev();
+            }}></div>
+          <div
+            className='next'
+            onClick={(e: any) => {
+              e.stopPropagation();
+              if (instanceRef.current?.track.details)
+                instanceRef.current.next();
+            }}></div>
         </div>
       )}
     </div>
