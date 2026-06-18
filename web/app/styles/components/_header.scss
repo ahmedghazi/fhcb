@@ -1,6 +1,6 @@
 @use "../variables";
 
-header {
+header.header {
   position: fixed;
   width: 100dvw;
   width: 100%;
@@ -19,6 +19,11 @@ header {
   svg path {
     // fill: var(--color-secondary);
   }
+
+  .header__logo,
+  .header__meta-nav {
+    // width: 17.75rem;
+  }
   .header__inner {
     display: flex;
     justify-content: space-between;
@@ -29,6 +34,7 @@ header {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
+
       .meta-nav {
         display: flex;
         align-items: center;

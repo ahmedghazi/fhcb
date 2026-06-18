@@ -5,3 +5,19 @@ $base-font-size: 16 !default;
 @function rem($px) {
   @return math.div($px, $base-font-size) * 1rem;
 }
+
+@mixin debugFiletX($x) {
+  // outline: 1px solid red;
+  // outline-offset: -50%;
+  &::before {
+    content: "";
+    background-color: red;
+    width: 1px;
+    position: fixed;
+    top: 0;
+    left: $x;
+    // transform: translateX(-50%);
+    height: 100dvh;
+    height: 100vh;
+  }
+}

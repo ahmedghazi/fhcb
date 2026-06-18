@@ -10,3 +10,4 @@
   ??
 - Mettre la barre de filtres en haut, avant les livres à la une
   complexe
+- filtre radio : checkbox

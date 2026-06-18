@@ -41,21 +41,10 @@ const Header = ({ settings }: Props) => {
 
         <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
         <div className='header__meta-nav'>
+          <LocalesSwitcher />
           <SearchToggle />
 
-          <LocalesSwitcher />
           <ul className='meta-nav'>
-            {settings.btnLibrary && (
-              <li className='flex'>
-                <Link
-                  href={_linkResolver(settings.btnLibrary.link)}
-                  className='btn-library'>
-                  {_localizeField(settings.btnLibrary.label)}
-                </Link>
-
-                <BtnCart />
-              </li>
-            )}
             {settings.btnTickets && (
               <li>
                 <a
@@ -65,6 +54,17 @@ const Header = ({ settings }: Props) => {
                   className='btn-tickets'>
                   {_localizeField(settings.btnTickets.label)}
                 </a>
+              </li>
+            )}
+            {settings.btnLibrary && (
+              <li className='flex'>
+                <Link
+                  href={_linkResolver(settings.btnLibrary.link)}
+                  className='btn-library'>
+                  {_localizeField(settings.btnLibrary.label)}
+                </Link>
+
+                <BtnCart />
               </li>
             )}
           </ul>

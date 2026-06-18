@@ -1,7 +1,8 @@
 @use "../variables";
 
 footer {
-  padding: var(--spacing-sm) var(--spacing-lg);
+  // padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--spacing-lg);
   &,
   a {
     color: var(--color-secondary);

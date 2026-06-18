@@ -2944,6 +2944,10 @@
                     "of": [
                       {
                         "type": "string",
+                        "value": "index"
+                      },
+                      {
+                        "type": "string",
                         "value": "title"
                       },
                       {
@@ -6325,6 +6329,20 @@
         "optional": true
       },
       "name": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "last_name": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "first_name": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -9920,6 +9938,20 @@
         }
       },
       "name": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "last_name": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "first_name": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

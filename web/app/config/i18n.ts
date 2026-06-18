@@ -51,6 +51,7 @@ const i18n = {
     close: "Fermer",
     book: "Livre",
     delete: "Retirer",
+    ressources: "Ressources",
   },
   en: {
     default: false,
@@ -103,6 +104,7 @@ const i18n = {
     close: "Close",
     book: "Book",
     delete: "Delete",
+    ressources: "Ressources",
   },
 };
 

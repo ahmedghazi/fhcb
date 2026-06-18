@@ -34,7 +34,7 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
   const letters = Array.from(
     new Set(
       opts.map((o) =>
-        loc(o.name ?? o.title)
+        loc(o.last_name ?? o.name ?? o.title)
           .charAt(0)
           .toUpperCase(),
       ),
@@ -45,7 +45,7 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
     opts
       .filter((o) => activeValues.includes(o._id))
       .map((o) =>
-        loc(o.name ?? o.title)
+        loc(o.last_name ?? o.name ?? o.title)
           .charAt(0)
           .toUpperCase(),
       ),
@@ -105,12 +105,14 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
               {opts
                 .filter(
                   (o) =>
-                    loc(o.name ?? o.title)
+                    loc(o.last_name ?? o.name ?? o.title)
                       .charAt(0)
                       .toUpperCase() === letter,
                 )
                 .sort((a, b) =>
-                  loc(a.name ?? a.title).localeCompare(loc(b.name ?? b.title)),
+                  loc(a.last_name ?? a.name ?? a.title).localeCompare(
+                    loc(b.last_name ?? b.name ?? b.title),
+                  ),
                 )
                 .map((opt) => (
                   <label key={opt._id} className='ui-filters__checkbox'>

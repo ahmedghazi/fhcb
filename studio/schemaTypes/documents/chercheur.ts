@@ -23,6 +23,20 @@ export default defineType({
       group: 'editorial',
     }),
     defineField({
+      name: 'last_name',
+      type: 'string',
+      title: 'Nom',
+      description: 'Utilisé dans les filtres',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'first_name',
+      type: 'string',
+      title: 'Prénom',
+      description: 'optionnel',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug (URL)',
       type: 'slug',

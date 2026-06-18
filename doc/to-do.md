@@ -69,6 +69,7 @@ cards simili document
 - single event related
 - cron in preprod
 - add remaining cta in modules
+- ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
 
 ## card expos
 

@@ -16,7 +16,9 @@ const FilterRadio = ({ def, activeValue, onSelect }: Props) => {
   return (
     <div className='ui-filters ui-filter__wrapper ui-filter__radio'>
       {def.radioLabel && (
-        <span className='ui-filter__label'>{_localizeField(def.radioLabel)}</span>
+        <span className='ui-filter__label'>
+          {_localizeField(def.radioLabel)}
+        </span>
       )}
       <fieldset className='ui-filters__radio'>
         {opts.map((opt) => (

@@ -18,9 +18,10 @@
 
     figure {
       img {
-        max-height: calc(
-          var(--vh) * 100 - calc(var(--header-h) + var(--spacing-md))
-        );
+        // max-height: calc(
+        //   var(--vh) * 100 - calc(var(--header-h) + var(--spacing-md))
+        // );
+        max-height: var(--max-img-h);
         width: 100%;
         object-fit: contain;
         object-position: left;

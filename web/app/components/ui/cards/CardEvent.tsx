@@ -12,6 +12,7 @@ type Props = {
 
 const CardEvent = ({ input, size = "md" }: Props) => {
   const { tags } = input;
+
   const tagsClassList = tags
     ?.map((tag: Tag) => `card--${tag.slug?.current}`)
     .join(" ");

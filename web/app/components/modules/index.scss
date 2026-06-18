@@ -170,7 +170,8 @@
         }
       }
       img {
-        max-height: 32.5rem;
+        // max-height: 32.5rem;
+        max-height: var(--max-img-h);
       }
     }
     &--newsletter-ui {
@@ -193,12 +194,14 @@
         }
       }
       img {
-        max-height: 32.5rem;
+        // max-height: 32.5rem;
+        max-height: var(--max-img-h);
       }
     }
     &--ressources-ui {
       padding: var(--spacing-lg) 0;
       background-color: var(--color-coquille);
+      margin: 0;
       h2 {
         text-align: center;
         margin-bottom: var(--spacing-lg);

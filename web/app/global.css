@@ -74,6 +74,8 @@
   --border: var(--border-width) solid;
   --radius: 0.938rem;
   --radius-sm: 0.625rem;
+
+  --max-img-h: calc(var(--vh) * 100 - (var(--header-h) + var(--spacing-md)));
 }
 
 @theme inline {

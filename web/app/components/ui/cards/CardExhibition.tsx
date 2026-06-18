@@ -14,6 +14,7 @@ import CardBase, { CardFooter } from "./CardBase";
 type Props = {
   input: ExhibitionExpanded;
   size?: "sm" | "md" | "lg";
+  // context: ''
 };
 
 const CardExhibition = ({ input, size = "md" }: Props) => {
@@ -40,7 +41,7 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
         isPast && "card--is-past card--footer-hover",
         isCurrent && "card--is-current",
         isFutur && "card--is-futur",
-        `card--is-${location}`,
+        location && `card--is-${location}`,
       )}>
       {/* <pre>{JSON.stringify({ isPast, isCurrent, isFutur }, null, 2)}</pre> */}
       <CardBase {...props} />

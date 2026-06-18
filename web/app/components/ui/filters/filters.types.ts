@@ -11,7 +11,8 @@ export type SanitySortOption = {
 export type FilterRadioOption = {
   _id: string;
   _type: "artist" | "tag" | "chercheur";
-  name?: string;        // artist, chercheur
+  name?: string; // artist, chercheur
+  last_name?: string; // artist, chercheur
   title?: LocaleString; // tag
   slug?: { current?: string };
 };

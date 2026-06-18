@@ -536,9 +536,9 @@ const filterList = `
   _type == "filterList" => {
     ...,
     "radioOptions": select(
-      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, slug },
+      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },
       radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
-      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, slug },
+      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },
       []
     )
   }
@@ -687,7 +687,7 @@ export const listEventsUI = `
 
     "resolvedItems": *[
       _type == "event"
-
+      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
     ] | order(coalesce(dates[0].du, _createdAt) asc) {
       ${cardRefEvent}

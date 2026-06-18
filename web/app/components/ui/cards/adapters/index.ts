@@ -172,12 +172,17 @@ export function eventToCard(
 ): CardBaseProps {
   const { imageCover, dates, tags, links } = input;
   const isPast = _isPastByDates(dates || []);
+  const isHorsLeMurs = tags?.some(
+    (tag: Tag) => tag.slug?.current === "hors-les-murs",
+  );
   const actions: CardAction[] = [];
-  actions.push({
-    label: _localizeText("discoverTheExhibition") as string,
-    href: _linkResolver(input),
-    variant: "primary",
-  });
+  if (!isHorsLeMurs) {
+    actions.push({
+      label: _localizeText("discoverTheExhibition") as string,
+      href: _linkResolver(input),
+      variant: "primary",
+    });
+  }
 
   if (links && !isPast) {
     links.forEach((link: LinkExternal) => {

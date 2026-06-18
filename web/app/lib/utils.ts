@@ -4,6 +4,20 @@ import {
 } from "../sanity-api/types/sanity-expanded.types";
 import { FhcbDate, Tag } from "../sanity-api/types/sanity.types";
 
+export const descriptionHtmlToBlocks = (html: string) => {
+  return html
+    .split(/<\/p>|<br\s*\/?>/i)
+    .map((chunk) => chunk.replace(/<[^>]+>/g, "").trim())
+    .filter(Boolean)
+    .map((text, i) => ({
+      _type: "block",
+      _key: `block-${i}`,
+      style: "normal",
+      markDefs: [],
+      children: [{ _type: "span", _key: `span-${i}`, text, marks: [] }],
+    }));
+};
+
 const LOCALE_MAP: Record<string, string> = {
   fr: "fr-FR",
   en: "en-GB",
@@ -214,16 +228,8 @@ export const _isVisiteGuidee = (tags: Tag[]) => {
   );
 };
 
-export const descriptionHtmlToBlocks = (html: string) => {
-  return html
-    .split(/<\/p>|<br\s*\/?>/i)
-    .map((chunk) => chunk.replace(/<[^>]+>/g, "").trim())
-    .filter(Boolean)
-    .map((text, i) => ({
-      _type: "block",
-      _key: `block-${i}`,
-      style: "normal",
-      markDefs: [],
-      children: [{ _type: "span", _key: `span-${i}`, text, marks: [] }],
-    }));
+export const _isRessource = (tags: Tag[]) => {
+  return (
+    tags.filter((tag) => tag.slug?.current === "branches-ressources").length > 0
+  );
 };
