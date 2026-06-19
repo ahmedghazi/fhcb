@@ -584,7 +584,7 @@ export type FilterSearch = {
 export type FilterSort = {
   _type: "filterSort";
   sortOptions?: Array<{
-    field?: "title" | "publicationDate" | "dateStart" | "_createdAt";
+    field?: "index" | "title" | "publicationDate" | "dateStart" | "_createdAt";
     direction?: "asc" | "desc";
     label?: LocaleString;
     _key: string;
@@ -699,6 +699,8 @@ export type LinkInternal = {
         _key: string;
       } & LinkExternal)
   >;
+  withMessage?: boolean;
+  navMessage?: LocaleBlockContent;
 };
 
 export type LinkExternal = {
@@ -1619,6 +1621,54 @@ export type Event = {
   >;
 };
 
+export type Library = {
+  _id: string;
+  _type: "library";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo?: Seo;
+  title?: LocaleString;
+  slug?: Slug;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: LocaleString;
+    alt?: LocaleString;
+    author?: string;
+    copyright?: string;
+    _type: "image";
+  };
+  modules?: Array<
+    | ({
+        _key: string;
+      } & GridCardUI)
+    | ({
+        _key: string;
+      } & SliderCardUI)
+    | ({
+        _key: string;
+      } & ListProductUI)
+  >;
+  miseEnAvant?: Array<
+    {
+      _key: string;
+    } & ProductReference
+  >;
+  sliderSelection?: Array<
+    {
+      _key: string;
+    } & ProductReference
+  >;
+  items?: Array<
+    {
+      _key: string;
+    } & ProductReference
+  >;
+};
+
 export type Programme = {
   _id: string;
   _type: "programme";
@@ -1899,54 +1949,6 @@ export type MuxVideoAssetReference = {
 export type MuxVideo = {
   _type: "mux.video";
   asset?: MuxVideoAssetReference;
-};
-
-export type Library = {
-  _id: string;
-  _type: "library";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  seo?: Seo;
-  title?: LocaleString;
-  slug?: Slug;
-  imageCover?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    caption?: LocaleString;
-    alt?: LocaleString;
-    author?: string;
-    copyright?: string;
-    _type: "image";
-  };
-  modules?: Array<
-    | ({
-        _key: string;
-      } & GridCardUI)
-    | ({
-        _key: string;
-      } & SliderCardUI)
-    | ({
-        _key: string;
-      } & ListProductUI)
-  >;
-  miseEnAvant?: Array<
-    {
-      _key: string;
-    } & ProductReference
-  >;
-  sliderSelection?: Array<
-    {
-      _key: string;
-    } & ProductReference
-  >;
-  items?: Array<
-    {
-      _key: string;
-    } & ProductReference
-  >;
 };
 
 export type Color = {
@@ -2259,13 +2261,13 @@ export type AllSanitySchemaTypes =
   | Exhibition
   | Product
   | Event
+  | Library
   | Programme
   | Feuilletage
   | ImageImages
   | Chercheur
   | MuxVideoAssetReference
   | MuxVideo
-  | Library
   | Color
   | RgbaColor
   | HsvaColor
@@ -2710,8 +2712,12 @@ export type SETTINGS_QUERY_RESULT = {
                     _key: string;
                   } & LinkInternal)
               >;
+              withMessage?: boolean;
+              navMessage?: LocaleBlockContent;
             }
         > | null;
+        withMessage?: boolean;
+        navMessage?: LocaleBlockContent;
       }
   > | null;
   btnTickets: {
@@ -2769,6 +2775,8 @@ export type SETTINGS_QUERY_RESULT = {
           _key: string;
         } & LinkInternal)
     >;
+    withMessage?: boolean;
+    navMessage?: LocaleBlockContent;
   } | null;
   mostSearched: Array<
     | {
@@ -3231,8 +3239,12 @@ export type SETTINGS_QUERY_RESULT = {
                     _key: string;
                   } & LinkInternal)
               >;
+              withMessage?: boolean;
+              navMessage?: LocaleBlockContent;
             }
         > | null;
+        withMessage?: boolean;
+        navMessage?: LocaleBlockContent;
       }
   > | null;
   navTertiary: Array<
@@ -3649,8 +3661,12 @@ export type SETTINGS_QUERY_RESULT = {
                     _key: string;
                   } & LinkInternal)
               >;
+              withMessage?: boolean;
+              navMessage?: LocaleBlockContent;
             }
         > | null;
+        withMessage?: boolean;
+        navMessage?: LocaleBlockContent;
       }
   > | null;
   navQuaternary: Array<
@@ -4067,8 +4083,12 @@ export type SETTINGS_QUERY_RESULT = {
                     _key: string;
                   } & LinkInternal)
               >;
+              withMessage?: boolean;
+              navMessage?: LocaleBlockContent;
             }
         > | null;
+        withMessage?: boolean;
+        navMessage?: LocaleBlockContent;
       }
   > | null;
   navLegals: Array<
@@ -4485,8 +4505,12 @@ export type SETTINGS_QUERY_RESULT = {
                     _key: string;
                   } & LinkInternal)
               >;
+              withMessage?: boolean;
+              navMessage?: LocaleBlockContent;
             }
         > | null;
+        withMessage?: boolean;
+        navMessage?: LocaleBlockContent;
       }
   > | null;
   navSocial: Array<{
@@ -6319,6 +6343,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -6645,6 +6670,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -6822,6 +6848,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -6989,6 +7016,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -15578,6 +15606,7 @@ export type ARTIST_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -15904,6 +15933,7 @@ export type ARTIST_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -16081,6 +16111,7 @@ export type ARTIST_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -16248,6 +16279,7 @@ export type ARTIST_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -24731,6 +24763,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -25057,6 +25090,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -25234,6 +25268,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -25401,6 +25436,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -34152,6 +34188,7 @@ export type EVENT_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -34478,6 +34515,7 @@ export type EVENT_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -34655,6 +34693,7 @@ export type EVENT_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -34822,6 +34861,7 @@ export type EVENT_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -43548,6 +43588,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -43874,6 +43915,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -44051,6 +44093,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -44218,6 +44261,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -54766,6 +54810,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -55092,6 +55137,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -55269,6 +55315,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -55436,6 +55483,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -64421,6 +64469,7 @@ export type ARTICLE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -64747,6 +64796,7 @@ export type ARTICLE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -64924,6 +64974,7 @@ export type ARTICLE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -65091,6 +65142,7 @@ export type ARTICLE_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";
@@ -73484,6 +73536,7 @@ export type LIBRARY_QUERY_RESULT = {
                 field?:
                   | "_createdAt"
                   | "dateStart"
+                  | "index"
                   | "publicationDate"
                   | "title";
                 direction?: "asc" | "desc";

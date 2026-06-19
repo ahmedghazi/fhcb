@@ -70,6 +70,9 @@ cards simili document
 - cron in preprod
 - add remaining cta in modules
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
+- # nav avec logo dans le même ul
+- grille rebonds branche
+- nav image(s) + aside
 
 ## card expos
 
@@ -78,6 +81,13 @@ cards simili document
   # Si l’expo est au cube (espace principal) = carte verticale (même si image paysage)
   # Si l’expo est au tube (espace secondaire) = carte horizontale (même si image portrait)
 - en cours et offSite = hors les murs + itinérante (page expos hors les murs => lg)
+- typo de sous menu
+- seuil de changement de grille, container fuild max width 1300px
+- component blockqote
+- champs ressource label, liste de choix
+- contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
+- rebonds page expo, ordre
+- autour de l'expo
 
 ## Grilles
 

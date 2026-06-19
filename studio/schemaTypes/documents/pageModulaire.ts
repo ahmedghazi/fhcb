@@ -16,6 +16,7 @@ export default defineType({
       name: 'editorial',
       title: 'Editorial',
     },
+
     {
       name: 'seo',
       title: 'SEO',

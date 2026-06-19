@@ -6,7 +6,7 @@ header.is-modal-open {
 .nav-modal {
   position: fixed;
   inset: 0;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-lg) 0;
   padding-top: calc(var(--header-h) + var(--spacing-sm));
   background-color: var(--color-secondary);
   color: var(--color-white);
@@ -14,14 +14,23 @@ header.is-modal-open {
   height: 100dvh;
   overflow-y: auto;
   display: none;
+  &--search {
+    aside,
+    .nav-media {
+      display: none;
+    }
+  }
   .inner {
     height: 100%;
     position: relative;
   }
-  .imageCover {
+  .nav-media {
     position: absolute;
     right: 0;
     bottom: 0;
+    max-width: calc(100% - 11.188rem);
+    overflow-x: auto;
+    overflow: clip;
     figure.figure {
       &--is-landscape {
         width: 40vw;
@@ -37,18 +46,24 @@ header.is-modal-open {
     position: absolute;
     left: 0;
     bottom: 0;
+    max-width: 11.188rem;
+    .text {
+      font-size: var(--text-md);
+      line-height: var(--leading-2xl);
+    }
   }
 }
 nav {
   flex: 2;
-  padding: 0 var(--spacing-lg);
+  // padding: 0 var(--spacing-lg);
   // padding: 0;
   &.is-open {
     li.has-submenu:hover .sub-menu {
       display: block;
     }
   }
-  a {
+  a,
+  .menu-label {
     white-space: nowrap;
     line-height: 1.8;
     width: 100%;
@@ -62,12 +77,18 @@ nav {
     // justify-content: space-between;
 
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--nav-len), minmax(0, 1fr));
+    // gap: var(--spacing-md);
 
+    .menu-label {
+      cursor: pointer;
+      // padding-left: 2em;
+    }
     & > li {
       // flex: 1;
       position: relative;
-      & > a {
+      & > .menu-label,
+      & > a > .menu-label {
         padding: 0em 2em 0;
         display: inline-block;
         font-weight: 450;
@@ -84,6 +105,7 @@ nav {
     .sub-menu {
       position: absolute;
       left: 2em;
+      // left: 0;
       display: none;
       padding-top: 1.5rem;
       padding-bottom: var(--spacing-lg);

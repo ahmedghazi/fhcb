@@ -8,24 +8,31 @@ import React, {
 } from "react";
 import { SanityImageAssetFull } from "../sanity-api/types/sanity-expanded.types";
 import { publish } from "pubsub-js";
+import { LocaleBlockContent } from "../sanity-api/types/sanity.types";
+import { ModulesList } from "../sanity-api/types/extra-types";
 
 interface HeaderContextProps {
   children: ReactNode;
 }
 
+export type NavMenuImage = {
+  asset?: SanityImageAssetFull | null;
+};
+
 export type NavMenuItem = {
-  imageCover?: {
-    asset?: SanityImageAssetFull | null;
-  } | null;
+  images?: NavMenuImage[];
 } | null;
 
+type MODAL_TYPES = "base" | "menu" | "search" | null;
 type ContextProps = {
-  modalType: "menu" | "search" | null;
-  dispatchModalType: React.Dispatch<
-    React.SetStateAction<"menu" | "search" | null>
-  >;
+  modalType: MODAL_TYPES;
+  dispatchModalType: React.Dispatch<React.SetStateAction<MODAL_TYPES>>;
   currentMenuItem: NavMenuItem;
   dispatchCurrentMenuItem: React.Dispatch<React.SetStateAction<NavMenuItem>>;
+  currentMenuMessage: LocaleBlockContent | null;
+  dispatchCurrentMenuMessage: React.Dispatch<
+    React.SetStateAction<LocaleBlockContent | null>
+  >;
 };
 
 const HeaderContext = createContext<ContextProps>({} as ContextProps);
@@ -33,9 +40,9 @@ const HeaderContext = createContext<ContextProps>({} as ContextProps);
 export const HeaderContextProvider = ({ children }: HeaderContextProps) => {
   const [currentMenuItem, dispatchCurrentMenuItem] =
     useState<NavMenuItem>(null);
-  const [modalType, dispatchModalType] = useState<"menu" | "search" | null>(
-    null,
-  );
+  const [currentMenuMessage, dispatchCurrentMenuMessage] =
+    useState<LocaleBlockContent | null>(null);
+  const [modalType, dispatchModalType] = useState<MODAL_TYPES>(null);
 
   useEffect(() => {
     if (currentMenuItem) {
@@ -60,6 +67,8 @@ export const HeaderContextProvider = ({ children }: HeaderContextProps) => {
         dispatchCurrentMenuItem,
         modalType,
         dispatchModalType,
+        currentMenuMessage,
+        dispatchCurrentMenuMessage,
       }}>
       {children}
     </HeaderContext.Provider>

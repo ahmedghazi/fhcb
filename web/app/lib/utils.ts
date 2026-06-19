@@ -1,8 +1,19 @@
+import { NavMenuItem } from "../context/HeaderContext";
 import {
   EventExpanded,
   ExhibitionExpanded,
 } from "../sanity-api/types/sanity-expanded.types";
-import { FhcbDate, Tag } from "../sanity-api/types/sanity.types";
+import {
+  Artist,
+  Exhibition,
+  Feuilletage,
+  FhcbDate,
+  ImageImages,
+  PageModulaire,
+  Programme,
+  ProgrammeReference,
+  Tag,
+} from "../sanity-api/types/sanity.types";
 
 export const descriptionHtmlToBlocks = (html: string) => {
   return html
@@ -232,4 +243,44 @@ export const _isRessource = (tags: Tag[]) => {
   return (
     tags.filter((tag) => tag.slug?.current === "branches-ressources").length > 0
   );
+};
+
+type PostTypesRef =
+  | PageModulaire
+  | Artist
+  | Exhibition
+  | Programme
+  | Feuilletage
+  | ImageImages;
+export const _collectFirstImagesFromNavItem = (item: PostTypesRef) => {
+  const moduleImages = (item?.modules ?? [])
+    .flatMap((m: any) => m?.items ?? [])
+    .map((i: any) => i?.imageCover)
+    .filter(Boolean);
+
+  if (moduleImages.length > 0) {
+    const capped = moduleImages.slice(0, 2);
+    return capped;
+  }
+
+  const pageCover = (item as any)?.imageCover;
+  return pageCover ? [pageCover] : [];
+  // const modules = item.modules || [];
+  // modules.forEach((module) => {
+  //   if (module._type === "listExhibitionUI") {
+  //     // images.push(module.imageCover);
+  //     console.log(module);
+  //   }
+  // });
+  // if (item.imageCover) {
+  //   images.push(item.imageCover);
+  // }
+  // if (item.subMenu) {
+  //   item.subMenu.forEach((subItem) => {
+  //     if (subItem.imageCover) {
+  //       images.push(subItem.imageCover);
+  //     }
+  //   });
+  // }
+  // return images;
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { CSSProperties, useEffect } from "react";
 import {
   LinkExternal,
   LinkInternal,
@@ -9,16 +9,26 @@ import Link from "next/link";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
 import useHeader, { NavMenuItem } from "../context/HeaderContext";
 import { usePathname } from "next/navigation";
+import LogoFHCB from "./LogoFHCB";
+import { _collectFirstImagesFromNavItem } from "../lib/utils";
 
-const NavItem = ({ item }: { item: LinkInternal | LinkExternal }) => {
-  const { dispatchCurrentMenuItem } = useHeader();
+type NavItemProps = {
+  item: LinkInternal | LinkExternal;
+  withSubMenu?: boolean;
+};
+const NavItem = ({ item, withSubMenu }: NavItemProps) => {
+  // const { dispatchCurrentMenuItem } = useHeader();
 
   if (item._type === "linkInternal") {
-    return (
-      <Link href={_linkResolver(item.link)}>
-        <div className=''>{_localizeField(item.label)}</div>
-      </Link>
-    );
+    if (withSubMenu) {
+      return <div className='menu-label'>{_localizeField(item.label)}</div>;
+    } else {
+      return (
+        <Link href={_linkResolver(item.link)}>
+          <div className='menu-label'>{_localizeField(item.label)}</div>
+        </Link>
+      );
+    }
   }
   if (item._type === "linkExternal") {
     return (
@@ -27,7 +37,7 @@ const NavItem = ({ item }: { item: LinkInternal | LinkExternal }) => {
         target='_blank'
         rel='noopener noreferrer'
         className=''>
-        <div className=''>{_localizeField(item.label)}</div>
+        <div className='menu-label'>{_localizeField(item.label)}</div>
       </a>
     );
   }
@@ -45,38 +55,70 @@ type Props = {
 };
 
 const Nav = ({ navPrimary }: Props) => {
-  const { dispatchCurrentMenuItem, modalType, dispatchModalType } = useHeader();
+  const {
+    dispatchCurrentMenuItem,
+
+    dispatchCurrentMenuMessage,
+    modalType,
+    dispatchModalType,
+  } = useHeader();
   const pathname = usePathname();
   useEffect(() => {
     dispatchCurrentMenuItem(null);
     dispatchModalType(null);
   }, [pathname]);
 
+  const menuStyle: React.CSSProperties = {
+    "--nav-len": navPrimary?.length,
+  } as React.CSSProperties;
+  // console.log(navPrimary);
   return (
     <nav className={clsx(modalType != null && "is-open")}>
-      <ul className='menu'>
+      <ul className='menu' style={menuStyle}>
         {navPrimary?.map((item, i) => (
           <li
             key={i}
             className={clsx(
               item._type === "linkInternal" && item.subMenu && "has-submenu",
             )}
-            onMouseLeave={() => dispatchCurrentMenuItem(null)}
+            onMouseLeave={() => {
+              // dispatchCurrentMenuItem(null);
+            }}
             onMouseEnter={() => {
+              console.log(item);
+              dispatchCurrentMenuMessage(null);
+              if (item._type === "linkInternal" && item.withMessage) {
+                dispatchCurrentMenuMessage(item.navMessage || null);
+              }
+
               if (item._type === "linkInternal" && item.link) {
-                dispatchCurrentMenuItem(item.link as unknown as NavMenuItem);
+                const link = item.link as any;
+                const images = _collectFirstImagesFromNavItem(link);
+                console.log(images);
+                // const images = (link?.modules ?? [])
+                //   .flatMap((m: any) => m?.items ?? [])
+                //   .map((i: any) => i?.imageCover)
+                //   .filter(Boolean);
+                dispatchCurrentMenuItem({ ...link, images } as NavMenuItem);
               } else {
                 dispatchModalType("menu");
               }
             }}>
-            <NavItem item={item} />
+            <NavItem
+              item={item}
+              withSubMenu={
+                item._type === "linkInternal" &&
+                item.subMenu &&
+                item.subMenu?.length > 0
+              }
+            />
 
             {item._type === "linkInternal" && item.subMenu && (
               <ul
                 className='sub-menu'
                 onMouseLeave={() => {
-                  dispatchCurrentMenuItem(null);
-                  dispatchModalType(null);
+                  // dispatchCurrentMenuItem(null);
+                  // dispatchModalType(null);
                 }}>
                 {item.subMenu.map((subItem, i) => (
                   <li
@@ -84,9 +126,17 @@ const Nav = ({ navPrimary }: Props) => {
                     className=''
                     onMouseEnter={() => {
                       if (subItem._type === "linkInternal" && subItem.link) {
-                        dispatchCurrentMenuItem(
-                          subItem.link as unknown as NavMenuItem,
-                        );
+                        const link = subItem.link as any;
+                        const images = _collectFirstImagesFromNavItem(link);
+                        console.log(images);
+                        // const images = (link?.modules ?? [])
+                        //   .flatMap((m: any) => m?.items ?? [])
+                        //   .map((i: any) => i?.imageCover)
+                        //   .filter(Boolean);
+                        dispatchCurrentMenuItem({
+                          ...link,
+                          images,
+                        } as NavMenuItem);
                       }
                     }}>
                     <NavItem item={subItem} />

@@ -23,10 +23,10 @@
       flex-basis: var(--gridder-6_12);
       width: var(--gridder-6_12);
     }
-    @media screen and (min-width: 1600px) {
-      flex-basis: var(--gridder-2_12);
-      width: var(--gridder-2_12);
-    }
+    // @media screen and (min-width: 1600px) {
+    //   flex-basis: var(--gridder-2_12);
+    //   width: var(--gridder-2_12);
+    // }
   }
 }
 figure {

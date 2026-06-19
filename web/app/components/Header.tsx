@@ -24,50 +24,56 @@ type Props = {
 };
 
 const Header = ({ settings }: Props) => {
-  const { modalType } = useHeader();
+  const { modalType, dispatchModalType } = useHeader();
   // const { cartCount, toggleCart } = useCart();
 
   if (!settings) return null;
 
   return (
-    <header className={clsx("header", modalType && "is-modal-open")}>
+    <header
+      className={clsx("header", modalType && "is-modal-open")}
+      // onMouseEnter={() => dispatchModalType("base")}
+      // onMouseLeave={() => dispatchModalType(null)}
+    >
       <NavModal settings={settings} />
-      <div className='header__inner'>
-        <div className='header__logo'>
-          <Link href='/'>
-            <LogoFHCB type='default' />
-          </Link>
-        </div>
+      <div className='container-fluid'>
+        <div className='header__inner'>
+          <div className='header__logo'>
+            <Link href='/'>
+              <LogoFHCB type='default' />
+            </Link>
+          </div>
 
-        <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
-        <div className='header__meta-nav'>
-          <LocalesSwitcher />
-          <SearchToggle />
+          <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
+          <div className='header__meta-nav'>
+            <LocalesSwitcher />
+            <SearchToggle />
 
-          <ul className='meta-nav'>
-            {settings.btnTickets && (
-              <li>
-                <a
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  href={settings.btnTickets.link}
-                  className='btn-tickets'>
-                  {_localizeField(settings.btnTickets.label)}
-                </a>
-              </li>
-            )}
-            {settings.btnLibrary && (
-              <li className='flex'>
-                <Link
-                  href={_linkResolver(settings.btnLibrary.link)}
-                  className='btn-library'>
-                  {_localizeField(settings.btnLibrary.label)}
-                </Link>
+            <ul className='meta-nav'>
+              {settings.btnLibrary && (
+                <li className='flex'>
+                  <Link
+                    href={_linkResolver(settings.btnLibrary.link)}
+                    className='btn-library'>
+                    {_localizeField(settings.btnLibrary.label)}
+                  </Link>
 
-                <BtnCart />
-              </li>
-            )}
-          </ul>
+                  <BtnCart />
+                </li>
+              )}
+              {settings.btnTickets && (
+                <li>
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href={settings.btnTickets.link}
+                    className='btn-tickets'>
+                    {_localizeField(settings.btnTickets.label)}
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </header>

@@ -236,11 +236,23 @@
       }
     }
     &.card--is-past {
-      &:hover .card__footer {
-        display: flex;
+      position: relative;
+      &:hover {
+        overflow: unset;
+        .card__footer {
+          display: flex;
+        }
       }
       .card__footer {
         display: none;
+        // position: absolute;
+        // bottom: var(--spacing-xs);
+        // left: 0;
+        // right: 0;
+        // background-color: var(--color-bleu);
+        // z-index: 3;
+        // padding: var(--spacing-xs);
+        // transform: translateY(100%);
       }
     }
   }

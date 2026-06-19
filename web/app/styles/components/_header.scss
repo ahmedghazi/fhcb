@@ -7,13 +7,16 @@ header.header {
   top: 0;
   left: 0;
   padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--spacing-sm) 0;
   z-index: 50;
   transition:
     transform 0.2s var(--cubic),
     opacity 0.2s var(--cubic);
   color: var(--color-secondary);
+  font-weight: 450;
   a,
-  button {
+  button,
+  .menu-label {
     color: var(--color-secondary);
   }
   svg path {
@@ -29,6 +32,7 @@ header.header {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    gap: var(--spacing-lg);
     z-index: 1;
     .header__meta-nav {
       display: flex;
@@ -68,6 +72,7 @@ body.nav-open {
   header {
     background-color: var(--color-secondary);
     nav a,
+    nav .menu-label,
     .locale-switcher button,
     .nav-modal a {
       color: white;

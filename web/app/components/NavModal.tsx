@@ -1,41 +1,36 @@
+"use client";
 import React from "react";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 import useHeader from "../context/HeaderContext";
 import Figure from "./ui/Figure";
 import SearchForm from "./ui/SearchForm";
 import { _localizeField } from "../sanity-api/utils";
+import { PortableText } from "@portabletext/react";
+import portableTextComponents from "../sanity-api/portableTextComponents";
+import NavMessage from "./NavMessage";
+import NavMedia from "./NavMedia";
+import clsx from "clsx";
 
 type Props = {
   settings: NonNullable<SETTINGS_QUERY_RESULT>;
 };
 
 const NavModal = ({ settings }: Props) => {
-  const { modalType, currentMenuItem } = useHeader();
+  const { modalType, currentMenuItem, currentMenuMessage } = useHeader();
 
   return (
-    <div className='nav-modal' data-lenis-prevent>
-      <div className='inner'>
-        <aside>aside</aside>
-        {currentMenuItem?.imageCover && (
-          <div className='imageCover'>
-            <Figure
-              width={300}
-              asset={currentMenuItem.imageCover.asset}
-              caption={
-                _localizeField(currentMenuItem.imageCover.asset?.title) || ""
-              }
-              alt={_localizeField(currentMenuItem.imageCover.asset?.altText)}
-              author={_localizeField(
-                currentMenuItem.imageCover.asset?.description,
-              )}
-              copyright={_localizeField(
-                currentMenuItem.imageCover.asset?.creditLine,
-              )}
-            />
-          </div>
-        )}
+    <div
+      className={clsx("nav-modal", modalType && `nav-modal--${modalType}`)}
+      data-lenis-prevent>
+      <div className='container-fluid h-full'>
+        <div className='inner'>
+          <aside>
+            {currentMenuMessage && <NavMessage input={currentMenuMessage} />}
+          </aside>
+          {!!currentMenuItem?.images?.length && <NavMedia input={currentMenuItem} />}
 
-        {modalType === "search" && <SearchForm settings={settings} />}
+          {modalType === "search" && <SearchForm settings={settings} />}
+        </div>
       </div>
     </div>
   );

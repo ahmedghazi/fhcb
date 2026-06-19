@@ -56,5 +56,15 @@ export default defineField({
       ],
       hidden: ({parent}) => !parent?.withSubmenu,
     }),
+    defineField({
+      name: 'withMessage',
+      type: 'boolean',
+      title: 'Avec message',
+    }),
+    defineField({
+      name: 'navMessage',
+      type: 'localeBlockContent',
+      hidden: ({parent}) => !parent?.withMessage,
+    }),
   ],
 })
