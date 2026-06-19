@@ -45,8 +45,8 @@ const Modules = ({ modules }: ModulesList) => {
           return <ModuleListsUI key={module._key} input={module} />;
         case "sliderCardUI":
           return <ModuleSliderCardUI key={module._key} input={module} />;
-        case "gridCardUI":
-          return <ModuleGridCardUI key={module._key} input={module} />;
+        // case "gridCardUI":
+        //   return <ModuleGridCardUI key={module._key} input={module} />;
         case "programmeUI":
           return <ModuleProgrammeUI key={module._key} input={module} />;
         case "featuredCardsUI":

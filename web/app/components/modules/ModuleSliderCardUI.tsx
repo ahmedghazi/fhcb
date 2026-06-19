@@ -8,7 +8,7 @@ import CardPage from "../ui/cards/CardPage";
 import CardArtist from "../ui/cards/CardArtist";
 import CardEvent from "../ui/cards/CardEvent";
 import CardExhibition from "../ui/cards/CardExhibition";
-import KeenSlider from "../ui/KeenSlider";
+import SlickSlider from "../ui/SlickSlider";
 import CardImageImages from "../ui/cards/CardImageImages";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
 import CardPageModulaire from "../ui/cards/CardPageModulaire";
@@ -23,17 +23,22 @@ const ModuleSliderCardUI = ({ input }: Props) => {
 
   return (
     <section className='module module--slider-card-ui'>
-      <div className='container-fluid-'>
-        <div className='module__inner'>
+      <div className='module__inner'>
+        <div className='container-fluid'>
           {title && (
             <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           )}
+        </div>
+
+        <div className='container-offwidth'>
           {items && (
-            <KeenSlider>
+            <SlickSlider
+              settings={{
+                centerMode: true,
+                variableWidth: true,
+              }}>
               {items.map((item: PostTypes, index: number) => (
-                <div
-                  key={`${item && item._id}-${index}`}
-                  className='keen-slider__slide'>
+                <div key={`${item && item._id}-${index}`}>
                   {item && item._type === "product" && (
                     <CardProduct input={item} size='sm' />
                   )}
@@ -57,19 +62,19 @@ const ModuleSliderCardUI = ({ input }: Props) => {
                   )}
                 </div>
               ))}
-            </KeenSlider>
-          )}
-
-          {cta && (
-            <div className='footer'>
-              {cta.internal && (
-                <Link className='btn' href={_linkResolver(cta.internal.link)}>
-                  {_localizeField(cta.internal.label)}
-                </Link>
-              )}
-            </div>
+            </SlickSlider>
           )}
         </div>
+
+        {cta && (
+          <div className='footer'>
+            {cta.internal && (
+              <Link className='btn' href={_linkResolver(cta.internal.link)}>
+                {_localizeField(cta.internal.label)}
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

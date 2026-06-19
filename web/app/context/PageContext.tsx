@@ -51,6 +51,18 @@ export const PageContextProvider = (props: PageContextProps) => {
       );
     }
 
+    const containerFluid = document.querySelector(".container-fluid");
+    if (containerFluid) {
+      const containerFluidBounding = containerFluid.getBoundingClientRect();
+      document.documentElement.style.setProperty(
+        "--container-fluid-w",
+        containerFluidBounding.width + "px",
+      );
+      const edges = (window.innerWidth - containerFluidBounding.width) / 1;
+      console.log(containerFluidBounding, edges);
+      document.documentElement.style.setProperty("--edge-w", edges + "px");
+    }
+
     const gridder = document.querySelector(".gridder");
     if (gridder) {
       const children = gridder.querySelectorAll(".gridder__item");
