@@ -5,6 +5,7 @@ import { ActiveFilters, SanityFilterDef } from "./filters.types";
 import FilterList from "./FilterList";
 import FilterRadio from "./FilterRadio";
 import clsx from "clsx";
+import FilterCheckbox from "./FilterCheckbox";
 
 type Props = {
   filterDefs: SanityFilterDef[];
@@ -23,6 +24,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   };
 
   const _toggle = (key: string, value: string) => {
+    console.log("toggle", key, value);
     const current = active[key];
     const arr = Array.isArray(current) ? current : current ? [current] : [];
     const next = {
@@ -83,7 +85,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
             }
 
             if (def._type === "filterList") {
-              const opts = def.radioOptions ?? [];
+              const opts = def.filterOptions ?? [];
 
               return (
                 <FilterList
@@ -91,10 +93,27 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                   def={def}
                   opts={opts}
                   activeValues={
-                    Array.isArray(active[def.radioKey])
-                      ? (active[def.radioKey] as string[])
-                      : active[def.radioKey]
-                        ? [active[def.radioKey] as string]
+                    Array.isArray(active[def.filterKey])
+                      ? (active[def.filterKey] as string[])
+                      : active[def.filterKey]
+                        ? [active[def.filterKey] as string]
+                        : []
+                  }
+                  onToggle={_toggle}
+                />
+              );
+            }
+
+            if (def._type === "filterCheckbox") {
+              return (
+                <FilterCheckbox
+                  key={def._key}
+                  def={def}
+                  activeValues={
+                    Array.isArray(active[def.filterKey])
+                      ? (active[def.filterKey] as string[])
+                      : active[def.filterKey]
+                        ? [active[def.filterKey] as string]
                         : []
                   }
                   onToggle={_toggle}
@@ -108,9 +127,9 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                   key={def._key}
                   def={def}
                   activeValue={
-                    Array.isArray(active[def.radioKey])
+                    Array.isArray(active[def.filterKey])
                       ? ""
-                      : ((active[def.radioKey] as string) ?? "")
+                      : ((active[def.filterKey] as string) ?? "")
                   }
                   onSelect={_update}
                 />

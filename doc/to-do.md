@@ -72,7 +72,10 @@ cards simili document
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
 - # nav avec logo dans le même ul
 - grille rebonds branche
-- nav image(s) + aside
+- # nav image(s) + aside
+- filter checkbox
+- filters shop
+- filter search x
 
 ## card expos
 

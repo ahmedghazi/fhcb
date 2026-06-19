@@ -1,4 +1,4 @@
-import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
+import { ActiveFilters, SanityFilterDef } from "./filters.types";
 
 const localize = (field: any, locale: string): string => {
   if (!field) return "";
@@ -49,7 +49,6 @@ export const applyFilters = <T extends Record<string, any>>(
   locale: string,
 ): T[] => {
   let result = [...items];
-
   for (const def of filterDefs) {
     if (def._type === "filterSort") {
       const value = activeFilters["sort"];
@@ -99,38 +98,65 @@ export const applyFilters = <T extends Record<string, any>>(
 
     // filterList — checkbox multi-select: OR (item matches if ANY selected id matches)
     if (def._type === "filterList") {
-      const raw = activeFilters[def.radioKey];
+      const raw = activeFilters[def.filterKey];
       const ids = Array.isArray(raw) ? raw : raw ? [raw] : [];
       if (ids.length > 0) {
         result = result.filter((item) => {
-          if (def.radioKey === "artist") {
+          if (def.filterKey === "artist") {
             return item.artists?.some((a: any) => ids.includes(a._id)) ?? false;
           }
-          if (def.radioKey === "tag") {
+          if (def.filterKey === "tag") {
             return item.tags?.some((t: any) => ids.includes(t._id)) ?? false;
           }
-          if (def.radioKey === "chercheur") {
-            return item.chercheur?._id ? ids.includes(item.chercheur._id) : false;
+          if (def.filterKey === "chercheur") {
+            return item.chercheur?._id
+              ? ids.includes(item.chercheur._id)
+              : false;
           }
           return true;
         });
       }
     }
+    if (def._type === "filterCheckbox") {
+      const raw = activeFilters[def.filterKey];
+      const ids = Array.isArray(raw) ? raw : raw ? [raw] : [];
+      // console.log(def);
+      // console.log(result);
+      if (ids.length > 0) {
+        console.log("result before", result);
+        result = result.filter((item) => {
+          if (def.filterKey === "artist") {
+            return item.artists?.some((a: any) => ids.includes(a._id)) ?? false;
+          }
+          if (def.filterKey === "tag") {
+            return item.tags?.some((t: any) => ids.includes(t._id)) ?? false;
+          }
+          if (def.filterKey === "chercheur") {
+            return item.chercheur?._id
+              ? ids.includes(item.chercheur._id)
+              : false;
+          }
+          return true;
+        });
+        console.log("result after", result);
+      }
+    }
 
     // filterRadio — single select: exact match (===)
     if (def._type === "filterRadio") {
-      const id = typeof activeFilters[def.radioKey] === "string"
-        ? (activeFilters[def.radioKey] as string)
-        : "";
+      const id =
+        typeof activeFilters[def.filterKey] === "string"
+          ? (activeFilters[def.filterKey] as string)
+          : "";
       if (id) {
         result = result.filter((item) => {
-          if (def.radioKey === "artist") {
+          if (def.filterKey === "artist") {
             return item.artists?.some((a: any) => a._id === id) ?? false;
           }
-          if (def.radioKey === "tag") {
+          if (def.filterKey === "tag") {
             return item.tags?.some((t: any) => t._id === id) ?? false;
           }
-          if (def.radioKey === "chercheur") {
+          if (def.filterKey === "chercheur") {
             return item.chercheur?._id === id;
           }
           return true;

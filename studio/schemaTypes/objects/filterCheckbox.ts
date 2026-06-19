@@ -2,8 +2,8 @@ import {defineArrayMember, defineField} from 'sanity'
 import {BsUiRadios} from 'react-icons/bs'
 
 export default {
-  name: 'filterRadio',
-  title: 'Filtre — 2 options radio',
+  name: 'filterCheckbox',
+  title: 'Filtre — 2 options checkbox',
   type: 'object',
   icon: BsUiRadios,
   fields: [
@@ -21,16 +21,16 @@ export default {
       },
       validation: (Rule) => Rule.required(),
     }),
+    // defineField({
+    //   name: 'filterLabel',
+    //   title: 'Label du groupe (optionnel)',
+    //   type: 'localeString',
+    // }),
     defineField({
-      name: 'filterLabel',
-      title: 'Label du groupe (optionnel)',
-      type: 'localeString',
-    }),
-    defineField({
-      name: 'radioOptions',
+      name: 'filterOptions',
       title: '2 options',
       type: 'array',
-      description: 'Sélectionnez exactement 2 items à proposer comme boutons radio.',
+      description: 'Sélectionnez exactement 2 items à proposer comme boutons checkbox.',
       of: [
         defineArrayMember({
           type: 'reference',
@@ -47,9 +47,9 @@ export default {
     }),
   ],
   preview: {
-    select: {filterKey: 'filterKey'},
-    prepare({filterKey}: any) {
-      return {title: `Filtre — ${filterKey || '?'} ◉`, subtitle: '2 choix radio'}
+    select: {checkboxKey: 'checkboxKey'},
+    prepare({checkboxKey}: any) {
+      return {title: `Filtre — ${checkboxKey || '?'} ◉`, subtitle: '2 choix checkbox'}
     },
   },
 }

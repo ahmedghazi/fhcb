@@ -8,7 +8,7 @@ export default {
   icon: BsList,
   fields: [
     defineField({
-      name: 'radioKey',
+      name: 'filterKey',
       title: 'Type de filtre',
       type: 'string',
       options: {
@@ -22,7 +22,7 @@ export default {
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'radioLabel',
+      name: 'filterLabel',
       title: 'Label du groupe (optionnel)',
       type: 'localeString',
     }),

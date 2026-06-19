@@ -62,7 +62,7 @@ import formUI from './objects/modules/formUI'
 import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
 import filterList from './objects/filterList'
-import filterRadio from './objects/filterRadio'
+import filterCheckbox from './objects/filterCheckbox'
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
 import imageInGrid from './objects/imageInGrid'
@@ -112,7 +112,7 @@ export const schemaTypes = [
   filterSort,
   filterSearch,
   filterList,
-  filterRadio,
+  filterCheckbox,
   messageContextuel,
   fhcbDate,
   sidebarGenerique,

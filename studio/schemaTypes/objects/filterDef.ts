@@ -95,7 +95,7 @@ export default {
 
     // ── RADIO ─────────────────────────────────────────
     defineField({
-      name: 'radioKey',
+      name: 'filterKey',
       title: 'Clé du filtre',
       type: 'string',
       hidden: ({parent}: any) => parent?.type !== 'radio',
@@ -104,7 +104,7 @@ export default {
         Rule.custom((val, ctx: any) => ctx.parent?.type !== 'radio' || !!val || 'Requis'),
     }),
     defineField({
-      name: 'radioLabel',
+      name: 'filterLabel',
       title: 'Label du groupe',
       type: 'localeString',
       hidden: ({parent}: any) => parent?.type !== 'radio',

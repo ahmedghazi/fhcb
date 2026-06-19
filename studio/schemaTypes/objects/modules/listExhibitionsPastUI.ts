@@ -21,8 +21,7 @@ export default defineField({
       name: 'excludeTags',
       type: 'array',
       title: 'Exclure par tags',
-      description:
-        "Exclure les éléments portant ces tags. Ex. : exclure « hors-les-murs ».",
+      description: 'Exclure les éléments portant ces tags. Ex. : exclure « hors-les-murs ».',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
     }),
     defineField({
@@ -30,7 +29,12 @@ export default defineField({
       title: 'Filtres',
       type: 'array',
       description: 'Filtres client-side (tri, recherche, tag).',
-      of: [{type: 'filterSort'}, {type: 'filterSearch'}, {type: 'filterList'}, {type: 'filterRadio'}],
+      of: [
+        {type: 'filterSort'},
+        {type: 'filterSearch'},
+        {type: 'filterList'},
+        {type: 'filterCheckbox'},
+      ],
     }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
   ],

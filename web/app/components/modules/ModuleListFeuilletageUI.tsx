@@ -6,7 +6,7 @@ import { FeuilletageExpanded } from "@/app/sanity-api/types/sanity-expanded.type
 import { ListFeuilletageUI } from "@/app/sanity-api/types/sanity.types";
 import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
-import { applyFilters } from "./applyFilters";
+import { applyFilters } from "../ui/filters/applyFilters";
 
 type Props = {
   input: ListFeuilletageUI & {

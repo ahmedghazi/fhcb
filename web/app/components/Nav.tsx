@@ -73,7 +73,12 @@ const Nav = ({ navPrimary }: Props) => {
   } as React.CSSProperties;
   // console.log(navPrimary);
   return (
-    <nav className={clsx(modalType != null && "is-open")}>
+    <nav
+      className={clsx(modalType != null && "is-open")}
+      onMouseLeave={() => {
+        dispatchCurrentMenuItem(null);
+        dispatchModalType(null);
+      }}>
       <ul className='menu' style={menuStyle}>
         {navPrimary?.map((item, i) => (
           <li
@@ -85,7 +90,6 @@ const Nav = ({ navPrimary }: Props) => {
               // dispatchCurrentMenuItem(null);
             }}
             onMouseEnter={() => {
-              console.log(item);
               dispatchCurrentMenuMessage(null);
               if (item._type === "linkInternal" && item.withMessage) {
                 dispatchCurrentMenuMessage(item.navMessage || null);

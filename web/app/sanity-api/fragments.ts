@@ -572,20 +572,33 @@ export const newsCardUI = `
   }
 `;
 
+const filterCheckbox = `
+  _type == "filterCheckbox" => {
+    ...,
+    // "filterOptions": select(
+    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },
+    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
+    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },
+    //   []
+    // )
+    filterOptions[]->{ _id, _type, name, title, slug }
+  }
+`;
+
 const filterRadio = `
   _type == "filterRadio" => {
     ...,
-    radioOptions[]->{ _id, _type, name, title, slug }
+    filterOptions[]->{ _id, _type, name, title, slug }
   }
 `;
 
 const filterList = `
   _type == "filterList" => {
     ...,
-    "radioOptions": select(
-      radioKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },
-      radioKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
-      radioKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },
+    "filterOptions": select(
+      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },
+      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
+      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },
       []
     )
   }
@@ -600,7 +613,7 @@ export const listFeuilletageUI = `
     filters[]{
       ...,
       ${filterList},
-      ${filterRadio}
+      ${filterCheckbox}
     },
     "items": *[_type == "feuilletage"] | order(index asc) {
       ${cardRefFeuilletage}
@@ -620,7 +633,7 @@ export const listImageImages = `
     filters[]{
       ...,
       ${filterList},
-      ${filterRadio}
+      ${filterCheckbox}
     },
     "items": *[_type == "imageImages"] | order(_createdAt desc) {
       ${cardRefImageImages}
@@ -640,7 +653,7 @@ export const listSerieThematiqueUI = `
     filters[]{
       ...,
       ${filterList},
-      ${filterRadio}
+      ${filterCheckbox}
     },
     "items": *[_type == "serieThematique" ] | order(_createdAt desc) {
       ${cardRefSerieThematique}
@@ -679,7 +692,7 @@ export const listExhibitionsPastUI = `
     filters[]{
       ...,
       ${filterList},
-      ${filterRadio}
+      ${filterCheckbox}
     },
     "resolvedItems": *[
       _type == "exhibition"
@@ -703,7 +716,7 @@ export const listExhibitionsEventsUI = `
     filters[]{
       ...,
       ${filterList},
-      ${filterRadio}
+      ${filterCheckbox}
     },
     "exhibitions": *[
       _type == "exhibition"
@@ -757,7 +770,7 @@ export const listProductUI = `
     filters[]{
       ...,
       ${filterList},
-      ${filterRadio}
+      ${filterCheckbox}
     },
     "resolvedItems": *[_type == "product"] | order(publicationDate asc) {
       ${cardRefProduct}

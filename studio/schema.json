@@ -441,7 +441,7 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "filterRadio"
+                    "name": "filterCheckbox"
                   }
                 }
               ]
@@ -555,78 +555,6 @@
           },
           "optional": true
         },
-        "filters": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "union",
-              "of": [
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterSort"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterSearch"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterList"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterRadio"
-                  }
-                }
-              ]
-            }
-          },
-          "optional": true
-        },
         "cta": {
           "type": "objectAttribute",
           "value": {
@@ -699,78 +627,6 @@
                 "type": "inline",
                 "name": "tag.reference"
               }
-            }
-          },
-          "optional": true
-        },
-        "filters": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "union",
-              "of": [
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterSort"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterSearch"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterList"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "filterRadio"
-                  }
-                }
-              ]
             }
           },
           "optional": true
@@ -977,7 +833,7 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "filterRadio"
+                    "name": "filterCheckbox"
                   }
                 }
               ]
@@ -1157,7 +1013,7 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "filterRadio"
+                    "name": "filterCheckbox"
                   }
                 }
               ]
@@ -1261,7 +1117,7 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "filterRadio"
+                    "name": "filterCheckbox"
                   }
                 }
               ]
@@ -1365,7 +1221,7 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "filterRadio"
+                    "name": "filterCheckbox"
                   }
                 }
               ]
@@ -2778,7 +2634,7 @@
     }
   },
   {
-    "name": "filterRadio",
+    "name": "filterCheckbox",
     "type": "type",
     "value": {
       "type": "object",
@@ -2787,10 +2643,10 @@
           "type": "objectAttribute",
           "value": {
             "type": "string",
-            "value": "filterRadio"
+            "value": "filterCheckbox"
           }
         },
-        "radioKey": {
+        "filterKey": {
           "type": "objectAttribute",
           "value": {
             "type": "union",
@@ -2811,15 +2667,7 @@
           },
           "optional": true
         },
-        "radioLabel": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "localeString"
-          },
-          "optional": true
-        },
-        "radioOptions": {
+        "filterOptions": {
           "type": "objectAttribute",
           "value": {
             "type": "array",
@@ -2859,7 +2707,7 @@
             "value": "filterList"
           }
         },
-        "radioKey": {
+        "filterKey": {
           "type": "objectAttribute",
           "value": {
             "type": "union",
@@ -2880,7 +2728,7 @@
           },
           "optional": true
         },
-        "radioLabel": {
+        "filterLabel": {
           "type": "objectAttribute",
           "value": {
             "type": "inline",

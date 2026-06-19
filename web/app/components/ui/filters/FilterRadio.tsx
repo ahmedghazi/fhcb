@@ -11,13 +11,13 @@ type Props = {
 };
 
 const FilterRadio = ({ def, activeValue, onSelect }: Props) => {
-  const opts = def.radioOptions ?? [];
+  const opts = def.filterOptions ?? [];
 
   return (
     <div className='ui-filters ui-filter__wrapper ui-filter__radio'>
-      {def.radioLabel && (
+      {def.filterLabel && (
         <span className='ui-filter__label'>
-          {_localizeField(def.radioLabel)}
+          {_localizeField(def.filterLabel)}
         </span>
       )}
       <fieldset className='ui-filters__radio'>
@@ -26,10 +26,10 @@ const FilterRadio = ({ def, activeValue, onSelect }: Props) => {
             <input
               className='ui-radio'
               type='radio'
-              name={def.radioKey}
+              name={def.filterKey}
               value={opt._id}
               checked={activeValue === opt._id}
-              onChange={() => onSelect(def.radioKey, opt._id)}
+              onChange={() => onSelect(def.filterKey, opt._id)}
             />
             <span>{_localizeField(opt.name ?? opt.title)}</span>
           </label>

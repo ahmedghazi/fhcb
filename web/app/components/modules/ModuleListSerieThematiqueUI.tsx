@@ -12,7 +12,7 @@ import {
 } from "@/app/sanity-api/types/sanity.types";
 import CardSerieThematique from "../ui/cards/CardSerieThematique";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
-import { applyFilters } from "./applyFilters";
+import { applyFilters } from "../ui/filters/applyFilters";
 import FilterBar from "../ui/filters/FilterBar";
 
 type Props = {
