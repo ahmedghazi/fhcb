@@ -200,6 +200,19 @@
 
   &--product {
     background-color: var(--color-beige);
+    &.card--sm {
+      &.card--footer-hover {
+        &:hover .card__footer .card__btns {
+          display: block;
+        }
+        .card__footer {
+          display: flex;
+          .card__btns {
+            display: none;
+          }
+        }
+      }
+    }
   }
   &--pret,
   &--exhibition {

@@ -73,7 +73,7 @@ cards simili document
 - # nav avec logo dans le même ul
 - grille rebonds branche
 - # nav image(s) + aside
-- filter checkbox
+- # filter checkbox
 - filters shop
 - filter search x
 - module blockquote

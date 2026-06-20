@@ -53,13 +53,14 @@ export const PageContextProvider = (props: PageContextProps) => {
 
     const containerFluid = document.querySelector(".container-fluid");
     if (containerFluid) {
+      const bodyBounding = document.body.getBoundingClientRect();
       const containerFluidBounding = containerFluid.getBoundingClientRect();
       document.documentElement.style.setProperty(
         "--container-fluid-w",
         containerFluidBounding.width + "px",
       );
-      const edges = (window.innerWidth - containerFluidBounding.width) / 1;
-      console.log(containerFluidBounding, edges);
+      const edges = (bodyBounding.width - containerFluidBounding.width) / 2;
+      console.log(bodyBounding.width, containerFluidBounding.width, edges);
       document.documentElement.style.setProperty("--edge-w", edges + "px");
     }
 

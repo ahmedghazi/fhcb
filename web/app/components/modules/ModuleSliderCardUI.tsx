@@ -30,41 +30,38 @@ const ModuleSliderCardUI = ({ input }: Props) => {
           )}
         </div>
 
-        <div className='container-offwidth'>
-          {items && (
-            <SlickSlider
-              settings={{
-                centerMode: true,
-                variableWidth: true,
-              }}>
-              {items.map((item: PostTypes, index: number) => (
-                <div key={`${item && item._id}-${index}`}>
-                  {item && item._type === "product" && (
-                    <CardProduct input={item} size='sm' />
-                  )}
-                  {item && item._type === "pageModulaire" && (
-                    <CardPageModulaire input={item} size='md' />
-                  )}
-                  {item && item._type === "artist" && (
-                    <CardArtist input={item} />
-                  )}
-                  {item && item._type === "event" && (
-                    <CardEvent input={item} size='md' />
-                  )}
-                  {item && item._type === "exhibition" && (
-                    <CardExhibition input={item} size='md' />
-                  )}
-                  {item && item._type === "imageImages" && (
-                    <CardImageImages input={item} />
-                  )}
-                  {item && item._type === "feuilletage" && (
-                    <CardFeuilletage input={item} />
-                  )}
-                </div>
-              ))}
-            </SlickSlider>
-          )}
-        </div>
+        {items && (
+          <SlickSlider
+            settings={{
+              infinite: false,
+              // centerMode: true,
+              variableWidth: true,
+            }}>
+            {items.map((item: PostTypes, index: number) => (
+              <div key={`${item && item._id}-${index}`}>
+                {item && item._type === "product" && (
+                  <CardProduct input={item} size='sm' />
+                )}
+                {item && item._type === "pageModulaire" && (
+                  <CardPageModulaire input={item} size='md' />
+                )}
+                {item && item._type === "artist" && <CardArtist input={item} />}
+                {item && item._type === "event" && (
+                  <CardEvent input={item} size='md' />
+                )}
+                {item && item._type === "exhibition" && (
+                  <CardExhibition input={item} size='md' />
+                )}
+                {item && item._type === "imageImages" && (
+                  <CardImageImages input={item} />
+                )}
+                {item && item._type === "feuilletage" && (
+                  <CardFeuilletage input={item} />
+                )}
+              </div>
+            ))}
+          </SlickSlider>
+        )}
 
         {cta && (
           <div className='footer'>
