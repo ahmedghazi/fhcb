@@ -7,8 +7,32 @@ export default defineField({
   title: 'List Événements UI',
   type: 'object',
   icon: FiCalendar,
+  initialValue: {
+    cardSize: 'sm',
+  },
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
+    defineField({
+      name: 'cardSize',
+      type: 'string',
+      title: 'Taille de carte',
+      options: {
+        list: [
+          {
+            value: 'sm',
+            title: 'Petite',
+          },
+          {
+            value: 'md',
+            title: 'Moyenne',
+          },
+          {
+            value: 'lg',
+            title: 'grande',
+          },
+        ],
+      },
+    }),
     defineField({
       name: 'filterTags',
       type: 'array',

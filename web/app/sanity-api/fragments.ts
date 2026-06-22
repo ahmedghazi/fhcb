@@ -744,7 +744,10 @@ export const listEventsUI = `
     title{
       ...
     },
-
+    cardSize,
+    filterTags[]->{
+      slug
+    },
     "resolvedItems": *[
       _type == "event"
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)

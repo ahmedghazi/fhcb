@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import CardEvent from "../ui/cards/CardEvent";
 import { EventExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
-import { ListEventsUI } from "@/app/sanity-api/types/sanity.types";
+import { ListEventsUI, Tag } from "@/app/sanity-api/types/sanity.types";
 import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
@@ -11,41 +11,41 @@ import { applyFilters } from "../ui/filters/applyFilters";
 type Props = {
   input: ListEventsUI & {
     resolvedItems?: EventExpanded[];
-    filters?: SanityFilterDef[];
+    // filters?: SanityFilterDef[];
   };
 };
 
 const ModuleListEventsUI = ({ input }: Props) => {
   const { locale } = useLocale();
-  const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
+  const { cardSize, resolvedItems } = input;
+  // const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
 
-  const filterDefs = input.filters ?? [];
-  const filteredItems = applyFilters(
-    input.resolvedItems ?? [],
-    filterDefs,
-    activeFilters,
-    locale,
-  );
+  // const filterDefs = input.filters ?? [];
+  // const filteredItems = applyFilters(
+  //   input.resolvedItems ?? [],
+  //   filterDefs,
+  //   activeFilters,
+  //   locale,
+  // );
 
   return (
     <section className='module module--list-events'>
       <div className='container-fluid'>
         <div className='module__inner'>
-          {filterDefs.length > 0 && (
+          {/* {filterDefs.length > 0 && (
             <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
-          )}
-          {filteredItems.length > 0 && (
+          )} */}
+          {(resolvedItems?.length ?? 0) > 0 && (
             <div
-              className='grid--centered'
-              style={
-                {
-                  // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-                  // justifyContent: "center",
-                }
+              className={
+                cardSize !== "lg" ? "grid--centered" : "grid gap-gutter"
               }>
-              {filteredItems.map((item: EventExpanded, index: number) => (
+              {resolvedItems?.map((item: EventExpanded, index: number) => (
                 <Fragment key={`${item._id}-${index}`}>
-                  <CardEvent input={item} size='sm' />
+                  <CardEvent
+                    input={item}
+                    size={cardSize === "lg" ? "lg" : "sm"}
+                  />
                 </Fragment>
               ))}
             </div>

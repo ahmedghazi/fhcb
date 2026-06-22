@@ -92,8 +92,6 @@ nav {
         padding: 0em 2em 0;
         display: inline-block;
         font-weight: 450;
-        // background-color: red;
-        // text-align: center;
       }
       &.has-submenu {
         & > a {
@@ -109,6 +107,7 @@ nav {
       display: none;
       padding-top: 1.5rem;
       padding-bottom: var(--spacing-lg);
+      font-weight: 200;
     }
   }
 }

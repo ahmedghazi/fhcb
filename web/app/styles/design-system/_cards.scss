@@ -219,6 +219,11 @@
     background-color: var(--color-bleu);
   }
   &--exhibition {
+    &.card--lg {
+      h3 {
+        font-size: var(--text-6xl);
+      }
+    }
     &.card--md-alt {
       .card__inner .grid {
         display: flex;

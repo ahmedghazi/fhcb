@@ -49,6 +49,7 @@ const Footer = ({ settings }: Props) => {
           <div className='navs'></div>
           <div className='flex gap-gutter- items-baseline-'>
             <address
+              className='c-h2-'
               style={{
                 width: `${logoTypeWidth}px`,
               }}>

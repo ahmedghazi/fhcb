@@ -12,20 +12,11 @@ import { _isPast } from "@/app/lib/utils";
 
 type Props = {
   input: ListExhibitionsUI & {
-    items:
-      | "exhibitions-current"
-      | "exhibitions-past"
-      | "exhibitions-futur"
-      | "exhibitions-out-of-the-box";
     resolvedItems?: ExhibitionExpanded[];
-    // filters?: SanityFilterDef[];
   };
 };
 
 const ModuleListExhibitionsUI = ({ input }: Props) => {
-  const isExhibitionSmall =
-    input.items === "exhibitions-out-of-the-box" ||
-    input.items === "exhibitions-past";
   const __isPast = (item: ExhibitionExpanded) => {
     return _isPast(item);
   };

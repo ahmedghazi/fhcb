@@ -511,6 +511,27 @@
           },
           "optional": true
         },
+        "cardSize": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "sm"
+              },
+              {
+                "type": "string",
+                "value": "md"
+              },
+              {
+                "type": "string",
+                "value": "lg"
+              }
+            ]
+          },
+          "optional": true
+        },
         "filterTags": {
           "type": "objectAttribute",
           "value": {

@@ -93,6 +93,7 @@ cards simili document
 - contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
 - rebonds page expo, ordre
 - autour de l'expo
+- couple titre sous titre > 450 / 200
 
 ## Grilles
 

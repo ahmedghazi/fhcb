@@ -64,17 +64,18 @@
       }
       h3 {
         color: var(--color-secondary);
+        font-weight: 450;
       }
       .list-item {
         display: flex;
         justify-content: space-between;
         font-size: var(--text-md);
         line-height: var(--leading-2xl);
-        font-weight: 600;
+        // font-weight: 600;
+        font-weight: 200;
         .content {
-          font-weight: 200;
+          font-weight: 300;
           font-size: var(--text-base);
-          font-weight: 200;
         }
       }
     }
