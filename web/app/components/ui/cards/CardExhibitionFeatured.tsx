@@ -64,6 +64,7 @@ const CardExhibitionFeatured = ({ input }: Props) => {
         `card--${props.layout}`,
       )}>
       {/* {input.location} */}
+      {/* <pre>{JSON.stringify(color, null, 2)}</pre> */}
       <CardBase {...props} />
     </div>
   );

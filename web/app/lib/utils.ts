@@ -1,4 +1,5 @@
 import { NavMenuItem } from "../context/HeaderContext";
+import { PostTypes } from "../sanity-api/types/extra-types";
 import {
   EventExpanded,
   ExhibitionExpanded,
@@ -245,14 +246,7 @@ export const _isRessource = (tags: Tag[]) => {
   );
 };
 
-type PostTypesRef =
-  | PageModulaire
-  | Artist
-  | Exhibition
-  | Programme
-  | Feuilletage
-  | ImageImages;
-export const _collectFirstImagesFromNavItem = (item: PostTypesRef) => {
+export const _collectFirstImagesFromNavItem = (item: PostTypes) => {
   const moduleImages = (item?.modules ?? [])
     .flatMap((m: any) => m?.items ?? [])
     .map((i: any) => i?.imageCover)
@@ -265,22 +259,4 @@ export const _collectFirstImagesFromNavItem = (item: PostTypesRef) => {
 
   const pageCover = (item as any)?.imageCover;
   return pageCover ? [pageCover] : [];
-  // const modules = item.modules || [];
-  // modules.forEach((module) => {
-  //   if (module._type === "listExhibitionUI") {
-  //     // images.push(module.imageCover);
-  //     console.log(module);
-  //   }
-  // });
-  // if (item.imageCover) {
-  //   images.push(item.imageCover);
-  // }
-  // if (item.subMenu) {
-  //   item.subMenu.forEach((subItem) => {
-  //     if (subItem.imageCover) {
-  //       images.push(subItem.imageCover);
-  //     }
-  //   });
-  // }
-  // return images;
 };

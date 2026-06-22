@@ -8,11 +8,12 @@ type Props = {
 };
 
 const ContentModulaire = ({ input }: Props) => {
+  const { tags, modules } = input;
+  // const _isRessource =
   return (
     <div className='content--modulaire relative'>
-      {/* <div className='container-fluid'> */}
-      {input.modules && <Modules modules={input.modules} />}
-      {/* </div> */}
+      {/* <pre>{JSON.stringify(tags, null, 2)}</pre> */}
+      {modules && <Modules modules={modules} />}
     </div>
   );
 };

@@ -77,6 +77,7 @@ cards simili document
 - filters shop
 - filter search x
 - module blockquote
+- # slider slick
 
 ## card expos
 

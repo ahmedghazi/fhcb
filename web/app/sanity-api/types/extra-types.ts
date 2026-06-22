@@ -33,6 +33,8 @@ import {
   ListExhibitionsPastUI,
   RessourcesUI,
   FormUI,
+  ImageImages,
+  Feuilletage,
 } from "./sanity.types";
 
 export type MostSearchedItem = {
@@ -48,7 +50,11 @@ export type PostTypes =
   | Artist
   | Library
   | Product
+  | Programme
+  | Feuilletage
+  | ImageImages
   | any;
+
 export type ModuleType =
   | TextUI
   | ImagesUIExpanded

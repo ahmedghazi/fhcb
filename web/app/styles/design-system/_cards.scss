@@ -257,17 +257,14 @@
         }
       }
       .card__footer {
-        display: none;
-        // position: absolute;
-        // bottom: var(--spacing-xs);
-        // left: 0;
-        // right: 0;
-        // background-color: var(--color-bleu);
-        // z-index: 3;
-        // padding: var(--spacing-xs);
-        // transform: translateY(100%);
+        // display: none;
       }
     }
+    // &.card--sm.card--is-past {
+    //   .card__footer {
+    //     display: none;
+    //   }
+    // }
   }
   &--visites {
     background-color: var(--color-jaune);
