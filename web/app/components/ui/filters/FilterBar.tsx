@@ -25,7 +25,6 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   };
 
   const _toggle = (key: string, value: string) => {
-    console.log("toggle", key, value);
     const current = active[key];
     const arr = Array.isArray(current) ? current : current ? [current] : [];
     const next = {
@@ -52,9 +51,11 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
           {filterDefs.map((def) => {
             if (def._type === "filterSort") {
               return (
-                <div className='ui-filter__wrapper' key={def._key}>
+                <div
+                  className='ui-filters ui-filter__wrapper ui-filter__select'
+                  key={def._key}>
                   <select
-                    className='ui-filters ui-filters__select'
+                    className='ui-filters ui-filter__select'
                     value={active["sort"] ?? ""}
                     onChange={(e) => _update("sort", e.target.value)}
                     aria-label={_localizeText("sort")}>
@@ -73,7 +74,9 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
             if (def._type === "filterSearch") {
               return (
-                <div className='ui-filters ui-filter__wrapper' key={def._key}>
+                <div
+                  className='ui-filters ui-filter__wrapper ui-filter__search'
+                  key={def._key}>
                   <input
                     type='search'
                     value={active["search"] ?? ""}

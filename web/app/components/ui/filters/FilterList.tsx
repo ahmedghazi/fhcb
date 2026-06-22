@@ -116,7 +116,7 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
                     ),
                   )
                   .map((opt) => (
-                    <label key={opt._id} className='ui-filters__checkbox'>
+                    <label key={opt._id} className='ui-filter__checkbox'>
                       <input
                         className='ui-checkbox'
                         type='checkbox'
