@@ -24,13 +24,17 @@ import ModuleSupportUI from "./ModuleSupportUI";
 import ModuleNewsletterUI from "./ModuleNewsletterUI";
 import ModuleRessourcesUI from "./ModuleRessourcesUI";
 import ModuleFormUI from "./ModuleFormUI";
+import ModuleBlockquoteUI from "./ModuleBlockquoteUI";
 
 const Modules = ({ modules }: ModulesList) => {
   const _renderModules = () => {
     return modules?.map((module) => {
+      // console.log(module._type);
       switch (module._type) {
         case "textUI":
           return <ModuleTextUI key={module._key} input={module} />;
+        case "blockquoteUI":
+          return <ModuleBlockquoteUI key={module._key} input={module} />;
         case "imagesUI":
           return <ModuleImagesUI key={module._key} input={module} />;
         case "videoUI":

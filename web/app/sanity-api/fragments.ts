@@ -122,7 +122,7 @@ export const linkInternalWithImage = `
   }
 `;
 
-const cta = `
+export const cta = `
   ...,
    internal {
     label,
@@ -181,6 +181,12 @@ export const textUI = `
     text{
       ${blockContent}
     }
+  }
+`;
+
+export const blockquoteUI = `
+  _type == "blockquoteUI" => {
+    ...
   }
 `;
 
@@ -366,6 +372,8 @@ export const cardRefProduct = `
   price,
   totalInventory,
   variants,
+  inStock,
+  languages,
   tags[]->{
     title
   },
@@ -599,6 +607,7 @@ const filterList = `
       filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },
       filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
       filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },
+      filterKey == "language" => array::unique(*[_type == "product" && defined(languages)].languages[]) | order(@ asc),
       []
     )
   }
@@ -841,7 +850,6 @@ export const modules = `
   ${featuredCardsUI},
   ${newsCardUI},
   ${ressourcesUI},
-
   ${listFeuilletageUI},
   ${listImageImages},
   ${listSerieThematiqueUI},
@@ -851,7 +859,8 @@ export const modules = `
   ${listEventsUI},
   ${supportUI},
   ${newsletterUI},
-  ${formUI}
+  ${formUI},
+  ${blockquoteUI}
 `;
 
 const allPostType = [

@@ -16,6 +16,7 @@ export default {
           {title: 'Artiste', value: 'artist'},
           {title: 'Tag', value: 'tag'},
           {title: 'Chercheur', value: 'chercheur'},
+          {title: 'Langue', value: 'language'},
         ],
         layout: 'radio',
       },

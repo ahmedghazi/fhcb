@@ -113,6 +113,9 @@ export const applyFilters = <T extends Record<string, any>>(
               ? ids.includes(item.chercheur._id)
               : false;
           }
+          if (def.filterKey === "language") {
+            return item.languages?.some((l: string) => ids.includes(l)) ?? false;
+          }
           return true;
         });
       }
@@ -158,6 +161,19 @@ export const applyFilters = <T extends Record<string, any>>(
           }
           if (def.filterKey === "chercheur") {
             return item.chercheur?._id === id;
+          }
+          return true;
+        });
+      }
+    }
+
+    // filterToggle — single boolean checkbox
+    if (def._type === "filterToggle") {
+      const checked = activeFilters[def.filterKey] === "true";
+      if (checked) {
+        result = result.filter((item) => {
+          if (def.filterKey === "inStock") {
+            return !!item.inStock;
           }
           return true;
         });

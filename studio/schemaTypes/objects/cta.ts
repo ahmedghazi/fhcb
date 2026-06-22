@@ -9,10 +9,12 @@ export default defineField({
 
   fields: [
     defineField({
+      title: 'Lien interne',
       name: 'internal',
       type: 'linkInternal',
     }),
     defineField({
+      title: 'Lien interne',
       name: 'external',
       type: 'linkExternal',
     }),

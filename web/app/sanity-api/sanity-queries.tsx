@@ -14,6 +14,7 @@ import {
   gridCardUI,
   relatedByArtists,
   listProductUI,
+  cta,
 } from "./fragments";
 import {
   ARTICLE_QUERY_RESULT,
@@ -69,6 +70,12 @@ export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
     _type,
     slug,
     "title": coalesce(title, name)
+  },
+  bandeauContextuel{
+    ...,
+    cta{
+      ${cta}
+    }
   },
 
   siteDescription{

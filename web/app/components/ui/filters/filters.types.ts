@@ -17,11 +17,12 @@ export type FilterCheckboxOption = {
   slug?: { current?: string };
 };
 
-// Referenced artist, tag, or chercheur, resolved by GROQ `->`
+// Referenced artist, tag, or chercheur, resolved by GROQ `->`,
+// or a plain language code normalized into the same shape on the client
 export type FilterRadioOption = {
   _id: string;
-  _type: "artist" | "tag" | "chercheur";
-  name?: string; // artist, chercheur
+  _type: "artist" | "tag" | "chercheur" | "language";
+  name?: string; // artist, chercheur, language
   last_name?: string; // artist, chercheur
   title?: LocaleString; // tag
   slug?: { current?: string };
@@ -41,9 +42,10 @@ export type SanityFilterDef =
   | {
       _key: string;
       _type: "filterList";
-      filterKey: "artist" | "tag" | "chercheur";
+      filterKey: "artist" | "tag" | "chercheur" | "language";
       filterLabel?: LocaleString;
-      filterOptions?: FilterRadioOption[];
+      // Referenced docs for artist/tag/chercheur, or plain language codes for "language"
+      filterOptions?: FilterRadioOption[] | string[];
     }
   | {
       _key: string;
@@ -58,6 +60,12 @@ export type SanityFilterDef =
       filterKey: "artist" | "tag" | "chercheur";
       filterLabel?: LocaleString;
       filterOptions?: FilterRadioOption[];
+    }
+  | {
+      _key: string;
+      _type: "filterToggle";
+      filterKey: "inStock";
+      filterLabel?: LocaleString;
     };
 
 // Active filter state: filterKey → current value(s)

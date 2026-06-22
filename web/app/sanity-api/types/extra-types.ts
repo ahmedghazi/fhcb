@@ -35,6 +35,7 @@ import {
   FormUI,
   ImageImages,
   Feuilletage,
+  BlockquoteUI,
 } from "./sanity.types";
 
 export type MostSearchedItem = {
@@ -82,6 +83,9 @@ export interface ModulesList {
     | ({
         _key: string;
       } & TextUI)
+    | ({
+        _key: string;
+      } & BlockquoteUI)
     | ({
         _key: string;
       } & ImagesUIExpanded)

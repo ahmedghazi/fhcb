@@ -44,3 +44,27 @@
     width: auto;
   }
 }
+
+input[type="search"] {
+  position: relative;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: var(--color-primary);
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    cursor: pointer;
+    height: 1em;
+    width: 1em;
+    border-radius: 50em;
+    $crossIcon: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeDE9IjAuNzM5Njc1IiB5MT0iMC4yNDY2NTMiIHgyPSIyNy43Mzk3IiB5Mj0iMjcuMjQ2NyIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIvPgo8bGluZSB4MT0iMC4yNDQ3IiB5MT0iMjcuMjQ2NyIgeDI9IjI3LjI0NDciIHkyPSIwLjI0NjY1NCIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K";
+    background: url($crossIcon) no-repeat 50% 50%;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+  }
+}

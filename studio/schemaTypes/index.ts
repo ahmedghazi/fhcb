@@ -57,12 +57,14 @@ import newsletterUI from './objects/modules/newsletterUI'
 import listProductUI from './objects/modules/listProductUI'
 import ressourcesUI from './objects/modules/ressourcesUI'
 import formUI from './objects/modules/formUI'
+import blockquoteUI from './objects/modules/blockquoteUI'
 
 /** ui */
 import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
 import filterList from './objects/filterList'
 import filterCheckbox from './objects/filterCheckbox'
+import filterToggle from './objects/filterToggle'
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
 import imageInGrid from './objects/imageInGrid'
@@ -113,6 +115,7 @@ export const schemaTypes = [
   filterSearch,
   filterList,
   filterCheckbox,
+  filterToggle,
   messageContextuel,
   fhcbDate,
   sidebarGenerique,
@@ -143,5 +146,6 @@ export const schemaTypes = [
   newsletterUI,
   ressourcesUI,
   formUI,
+  blockquoteUI,
 ]
 export default schemaTypes

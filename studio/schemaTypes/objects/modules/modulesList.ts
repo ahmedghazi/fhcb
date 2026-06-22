@@ -1,9 +1,10 @@
 export default [
   {type: 'textUI'},
-  {type: 'imagesUI'},
-  {type: 'videoUI'},
+  {type: 'blockquoteUI'},
   {type: 'textImageUI'},
   {type: 'textSidebarUI'},
+  {type: 'imagesUI'},
+  {type: 'videoUI'},
   {type: 'listUI'},
   {type: 'listsUI'},
   {type: 'sliderCardUI'},

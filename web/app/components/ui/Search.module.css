@@ -2,6 +2,7 @@
   position: relative;
   z-index: 0;
   font-size: var(--text-sm);
+  color: white;
   :global(.inner) {
     display: flex;
     align-items: center;
@@ -9,8 +10,9 @@
     justify-content: space-between;
   }
   :global(input) {
+    color: white;
     /* flex: 2; */
-    width: 100%;
+    /* width: 100%;
     &:focus {
       outline: none;
     }
@@ -28,7 +30,7 @@
       background-size: contain;
       position: absolute;
       right: 0;
-    }
+    } */
   }
   :global(button.btn) {
     color: var(--color-primary);

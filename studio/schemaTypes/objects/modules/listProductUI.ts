@@ -18,6 +18,7 @@ export default defineField({
         {type: 'filterSearch'},
         {type: 'filterList'},
         {type: 'filterCheckbox'},
+        {type: 'filterToggle'},
       ],
     }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),

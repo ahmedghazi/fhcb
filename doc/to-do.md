@@ -75,8 +75,8 @@ cards simili document
 - # nav image(s) + aside
 - # filter checkbox
 - filters shop
-- filter search x
-- module blockquote
+- # filter search x
+- # module blockquote
 - # slider slick
 
 ## card expos
@@ -88,12 +88,13 @@ cards simili document
 - en cours et offSite = hors les murs + itinérante (page expos hors les murs => lg)
 - # typo de sous menu
 - # seuil de changement de grille, container fuild max width 1300px
-- component blockqote
+- # component blockqote
 - champs ressource label, liste de choix
 - contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
 - rebonds page expo, ordre
 - autour de l'expo
 - couple titre sous titre > 450 / 200
+- bandeau contextuel
 
 ## Grilles
 

@@ -186,13 +186,19 @@ export default defineType({
     defineField({
       name: 'bandeauContextuel',
       title: 'Bandeau contextuel',
+      description: "Visible si renseigné et dont la date d'expiration est dans le futur",
       type: 'object',
       group: 'bandeau',
       fields: [
+        // defineField({
+        //   name: 'display',
+        //   title: 'Afficher',
+        //   type: 'boolean',
+        // }),
         defineField({
-          name: 'display',
-          title: 'Afficher',
-          type: 'boolean',
+          name: 'dateExpiration',
+          title: "Date d'expiration",
+          type: 'date',
         }),
         defineField({
           name: 'text',
@@ -200,20 +206,20 @@ export default defineType({
           type: 'localeString',
         }),
         defineField({
-          name: 'link',
-          title: 'Lien interne',
-          type: 'linkInternal',
+          name: 'cta',
+          // title: 'Texte',
+          type: 'cta',
         }),
-        defineField({
-          name: 'linkExternal',
-          title: 'Lien externe',
-          type: 'linkExternal',
-        }),
-        defineField({
-          name: 'dateExpiration',
-          title: "Date d'expiration",
-          type: 'date',
-        }),
+        // defineField({
+        //   name: 'link',
+        //   title: 'Lien interne',
+        //   type: 'linkInternal',
+        // }),
+        // defineField({
+        //   name: 'linkExternal',
+        //   title: 'Lien externe',
+        //   type: 'linkExternal',
+        // }),
       ],
     }),
 

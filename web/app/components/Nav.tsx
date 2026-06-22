@@ -98,11 +98,7 @@ const Nav = ({ navPrimary }: Props) => {
               if (item._type === "linkInternal" && item.link) {
                 const link = item.link as any;
                 const images = _collectFirstImagesFromNavItem(link);
-                console.log(images);
-                // const images = (link?.modules ?? [])
-                //   .flatMap((m: any) => m?.items ?? [])
-                //   .map((i: any) => i?.imageCover)
-                //   .filter(Boolean);
+
                 dispatchCurrentMenuItem({ ...link, images } as NavMenuItem);
               } else {
                 dispatchModalType("menu");
@@ -132,11 +128,7 @@ const Nav = ({ navPrimary }: Props) => {
                       if (subItem._type === "linkInternal" && subItem.link) {
                         const link = subItem.link as any;
                         const images = _collectFirstImagesFromNavItem(link);
-                        console.log(images);
-                        // const images = (link?.modules ?? [])
-                        //   .flatMap((m: any) => m?.items ?? [])
-                        //   .map((i: any) => i?.imageCover)
-                        //   .filter(Boolean);
+
                         dispatchCurrentMenuItem({
                           ...link,
                           images,

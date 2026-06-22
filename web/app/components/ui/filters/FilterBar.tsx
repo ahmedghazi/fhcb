@@ -6,6 +6,7 @@ import FilterList from "./FilterList";
 import FilterRadio from "./FilterRadio";
 import clsx from "clsx";
 import FilterCheckbox from "./FilterCheckbox";
+import FilterToggle from "./FilterToggle";
 
 type Props = {
   filterDefs: SanityFilterDef[];
@@ -85,7 +86,12 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
             }
 
             if (def._type === "filterList") {
-              const opts = def.filterOptions ?? [];
+              const rawOpts = def.filterOptions ?? [];
+              const opts = rawOpts.map((opt) =>
+                typeof opt === "string"
+                  ? { _id: opt, _type: "language" as const, name: opt }
+                  : opt,
+              );
 
               return (
                 <FilterList
@@ -132,6 +138,17 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                       : ((active[def.filterKey] as string) ?? "")
                   }
                   onSelect={_update}
+                />
+              );
+            }
+
+            if (def._type === "filterToggle") {
+              return (
+                <FilterToggle
+                  key={def._key}
+                  def={def}
+                  active={!!active[def.filterKey]}
+                  onChange={_update}
                 />
               );
             }
