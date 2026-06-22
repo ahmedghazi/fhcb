@@ -1176,6 +1176,15 @@ export type PageModulaire = {
         _key: string;
       } & FormUI)
   >;
+  rebondsLabel?:
+    | "readMore"
+    | "viewMore"
+    | "aroundThertist"
+    | "discover"
+    | "discoverToo"
+    | "aroundThertist"
+    | "discoverTheArtist"
+    | "discoverTheExhibition";
   rebonds?: ArrayOf<
     | PageModulaireReference
     | EventReference
@@ -8905,6 +8914,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -9845,6 +9862,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -16876,6 +16901,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -17816,6 +17849,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -24742,6 +24783,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -25682,6 +25731,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -32608,6 +32665,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -33548,6 +33613,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -40474,6 +40547,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -41414,6 +41495,14 @@ export type SETTINGS_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -43214,6 +43303,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -45609,6 +45706,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -46435,6 +46540,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -47375,6 +47488,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -48323,6 +48444,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -49263,6 +49392,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -50281,6 +50418,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -51221,6 +51366,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -51585,6 +51738,14 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
         } | null;
       }
   > | null;
+  rebondsLabel?:
+    | "aroundThertist"
+    | "discover"
+    | "discoverTheArtist"
+    | "discoverTheExhibition"
+    | "discoverToo"
+    | "readMore"
+    | "viewMore";
   rebonds: Array<
     | {
         _type: "event";
@@ -52640,6 +52801,14 @@ export type ARTIST_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -55035,6 +55204,14 @@ export type ARTIST_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -55861,6 +56038,14 @@ export type ARTIST_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -56801,6 +56986,14 @@ export type ARTIST_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -57749,6 +57942,14 @@ export type ARTIST_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -58689,6 +58890,14 @@ export type ARTIST_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -59707,6 +59916,14 @@ export type ARTIST_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -60647,6 +60864,14 @@ export type ARTIST_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -61958,6 +62183,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -64353,6 +64586,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -65179,6 +65420,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -66119,6 +66368,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -67067,6 +67324,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -68007,6 +68272,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -69025,6 +69298,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -69965,6 +70246,14 @@ export type EXPHIBITION_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -71546,6 +71835,14 @@ export type EVENT_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -73941,6 +74238,14 @@ export type EVENT_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -74767,6 +75072,14 @@ export type EVENT_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -75707,6 +76020,14 @@ export type EVENT_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -76655,6 +76976,14 @@ export type EVENT_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -77595,6 +77924,14 @@ export type EVENT_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -78613,6 +78950,14 @@ export type EVENT_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -79553,6 +79898,14 @@ export type EVENT_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -81109,6 +81462,14 @@ export type PROGRAMME_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -83504,6 +83865,14 @@ export type PROGRAMME_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -84330,6 +84699,14 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -85270,6 +85647,14 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -86218,6 +86603,14 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -87158,6 +87551,14 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -88176,6 +88577,14 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -89116,6 +89525,14 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -89580,6 +89997,14 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
         _key: string;
       } & VideoUI)
   >;
+  rebondsLabel?:
+    | "aroundThertist"
+    | "discover"
+    | "discoverTheArtist"
+    | "discoverTheExhibition"
+    | "discoverToo"
+    | "readMore"
+    | "viewMore";
   rebonds?: ArrayOf<
     | EventReference
     | ExhibitionReference
@@ -90275,6 +90700,14 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -91215,6 +91648,14 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -92537,6 +92978,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -94932,6 +95381,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -95758,6 +96215,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -96698,6 +97163,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -97646,6 +98119,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -98586,6 +99067,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -99604,6 +100093,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -100544,6 +101041,14 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -102361,6 +102866,14 @@ export type ARTICLE_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -104756,6 +105269,14 @@ export type ARTICLE_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -105582,6 +106103,14 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -106522,6 +107051,14 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -107470,6 +108007,14 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -108410,6 +108955,14 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -109428,6 +109981,14 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -110368,6 +110929,14 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & VideoUI)
                             >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
                               | ExhibitionReference
@@ -111747,6 +112316,14 @@ export type LIBRARY_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference
@@ -112865,6 +113442,14 @@ export type LIBRARY_QUERY_RESULT = {
                     _key: string;
                   } & VideoUI)
               >;
+              rebondsLabel?:
+                | "aroundThertist"
+                | "discover"
+                | "discoverTheArtist"
+                | "discoverTheExhibition"
+                | "discoverToo"
+                | "readMore"
+                | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
                 | ExhibitionReference

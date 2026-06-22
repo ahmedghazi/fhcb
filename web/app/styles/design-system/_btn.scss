@@ -33,8 +33,9 @@ a.btn {
     color: var(--color-white);
   }
 }
-.btn-library,
-.btn-tickets {
+a.btn-library,
+a.btn-tickets,
+button.btn--menu-toggle {
   background-color: var(--color-white);
   color: var(--color-secondary);
   font-size: var(--text-lg);
@@ -58,7 +59,8 @@ a.btn {
     opacity: 0;
   }
 }
-.btn-tickets {
+a.btn-tickets,
+button.btn--menu-toggle {
   border-radius: 2.77em; /* = 50px (50 / 18 = 2.77) */
 }
 

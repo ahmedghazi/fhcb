@@ -75,9 +75,9 @@ const ModuleFormUI = ({ input }: Props) => {
                     // value={data["subject"] ?? ""}
                     onChange={(e) => _update("subject", e.target.value)}
                     aria-label={_localizeText("Motif de contact *")}>
-                    <option value=''>
+                    {/* <option value=''>
                       {_localizeText("Motif de contact")}
-                    </option>
+                    </option> */}
                     {subject?.map((opt) => (
                       <option key={opt._key} value={`${opt}`}>
                         {_localizeField(opt.title)}{" "}
@@ -110,7 +110,8 @@ const ModuleFormUI = ({ input }: Props) => {
                       <textarea
                         name={item.name}
                         onChange={(e) => _update(item.name, e.target.value)}
-                        placeholder={item.label}></textarea>
+                        // placeholder={item.label}
+                      ></textarea>
                     )}
                   </div>
                 ))}

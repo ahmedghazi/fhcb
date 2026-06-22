@@ -74,7 +74,7 @@ cards simili document
 - grille rebonds branche
 - # nav image(s) + aside
 - # filter checkbox
-- filters shop
+- # filters shop
 - # filter search x
 - # module blockquote
 - # slider slick
@@ -94,7 +94,7 @@ cards simili document
 - rebonds page expo, ordre
 - autour de l'expo
 - couple titre sous titre > 450 / 200
-- bandeau contextuel
+- # bandeau contextuel
 
 ## Grilles
 

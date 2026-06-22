@@ -81,7 +81,7 @@ const Rebonds = ({ input, title = "discoverToo" }: Props) => {
                 <CardProduct
                   key={i}
                   input={item as unknown as ProductExpanded}
-                  size='sm'
+                  size='md'
                 />
               );
             }

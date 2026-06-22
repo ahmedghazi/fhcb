@@ -18,6 +18,9 @@ import useHeader from "../context/HeaderContext";
 import useCart from "../context/CartContext";
 import clsx from "clsx";
 import BtnCart from "./ui/btns/BtnCart";
+import useDeviceDetect from "../hooks/useDeviceDetect";
+import HeaderMobile from "./HeaderMobile";
+import HeaderDesktop from "./HeaderDesktop";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -25,6 +28,7 @@ type Props = {
 
 const Header = ({ settings }: Props) => {
   const { modalType, dispatchModalType } = useHeader();
+  const { isMobile } = useDeviceDetect();
   // const { cartCount, toggleCart } = useCart();
 
   if (!settings) return null;
@@ -36,45 +40,10 @@ const Header = ({ settings }: Props) => {
       // onMouseLeave={() => dispatchModalType(null)}
     >
       <NavModal settings={settings} />
+
       <div className='container-fluid'>
-        <div className='header__inner'>
-          <div className='header__logo'>
-            <Link href='/'>
-              <LogoFHCB type='default' />
-            </Link>
-          </div>
-
-          <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
-          <div className='header__meta-nav'>
-            <LocalesSwitcher />
-            <SearchToggle />
-
-            <ul className='meta-nav'>
-              {settings.btnLibrary && (
-                <li className='flex'>
-                  <Link
-                    href={_linkResolver(settings.btnLibrary.link)}
-                    className='btn-library'>
-                    {_localizeField(settings.btnLibrary.label)}
-                  </Link>
-
-                  <BtnCart />
-                </li>
-              )}
-              {settings.btnTickets && (
-                <li>
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href={settings.btnTickets.link}
-                    className='btn-tickets'>
-                    {_localizeField(settings.btnTickets.label)}
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
+        {isMobile && <HeaderMobile settings={settings} />}
+        {!isMobile && <HeaderDesktop settings={settings} />}
       </div>
     </header>
   );

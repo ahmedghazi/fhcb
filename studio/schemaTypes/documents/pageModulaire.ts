@@ -4,6 +4,7 @@ import modulesList from '../objects/modules/modulesList'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {SiElasticstack} from 'react-icons/si'
+import rebondsLabels from '../misc/rebondsLabels'
 
 export default defineType({
   name: 'pageModulaire',
@@ -81,6 +82,14 @@ export default defineType({
       group: 'editorial',
     }),
 
+    defineField({
+      name: 'rebondsLabel',
+      type: 'string',
+      options: {
+        list: rebondsLabels,
+      },
+      group: 'editorial',
+    }),
     defineField({
       name: 'rebonds',
       title: 'Rebonds',

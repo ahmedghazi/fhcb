@@ -6241,6 +6241,47 @@
         },
         "optional": true
       },
+      "rebondsLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "readMore"
+            },
+            {
+              "type": "string",
+              "value": "viewMore"
+            },
+            {
+              "type": "string",
+              "value": "aroundThertist"
+            },
+            {
+              "type": "string",
+              "value": "discover"
+            },
+            {
+              "type": "string",
+              "value": "discoverToo"
+            },
+            {
+              "type": "string",
+              "value": "aroundThertist"
+            },
+            {
+              "type": "string",
+              "value": "discoverTheArtist"
+            },
+            {
+              "type": "string",
+              "value": "discoverTheExhibition"
+            }
+          ]
+        },
+        "optional": true
+      },
       "rebonds": {
         "type": "objectAttribute",
         "value": {

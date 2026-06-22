@@ -57,7 +57,9 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <HeroExhibition input={data as unknown as ExhibitionExpanded} />
       <ContentModulaire input={data} />
-      {data.related && <Rebonds input={data.related} />}
+      {data.related && (
+        <Rebonds input={data.related} title='aroundTheExhibition' />
+      )}
     </div>
   );
 };

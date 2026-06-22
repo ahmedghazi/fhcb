@@ -65,13 +65,13 @@ main {
 }
 
 .container-fluid {
-  // padding-left: var(--spacing-lg);
-  // padding-right: var(--spacing-lg);
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-sm);
   max-width: 86rem;
   margin: 0 auto;
   @media all and (min-width: 1400px) {
-    // padding-left: var(--spacing-lg);
-    // padding-right: var(--spacing-lg);
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 

@@ -115,14 +115,18 @@
           padding: 0 calc(var(--spacing-gutter) * 0.5);
         }
       }
+      .arrow {
+        left: calc(50% - var(--spacing-gutter) * 0.5);
+        &--left {
+        }
+        &--right {
+        }
+      }
       .slick-track {
         display: flex;
         align-items: stretch;
       }
       .slick-slide {
-        // min-width: var(--gridder-3_12) !important;
-        // max-width: var(--gridder-3_12) !important;
-        // margin: 0 var(--spacing-sm);
         height: auto !important;
         display: flex !important;
         > div {

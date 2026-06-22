@@ -3,6 +3,7 @@ import {
   LinkExternal,
   LinkInternal,
   Settings,
+  SETTINGS_QUERY_RESULT,
 } from "../sanity-api/types/sanity.types";
 import clsx from "clsx";
 import Link from "next/link";
@@ -11,6 +12,7 @@ import useHeader, { NavMenuItem } from "../context/HeaderContext";
 import { usePathname } from "next/navigation";
 import LogoFHCB from "./LogoFHCB";
 import { _collectFirstImagesFromNavItem } from "../lib/utils";
+import BtnCart from "./ui/btns/BtnCart";
 
 type NavItemProps = {
   item: LinkInternal | LinkExternal;
@@ -52,9 +54,10 @@ type Props = {
         _key: string;
       } & LinkExternal)
   >;
+  settings?: SETTINGS_QUERY_RESULT;
 };
 
-const Nav = ({ navPrimary }: Props) => {
+const Nav = ({ navPrimary, settings }: Props) => {
   const {
     dispatchCurrentMenuItem,
 
@@ -142,6 +145,18 @@ const Nav = ({ navPrimary }: Props) => {
             )}
           </li>
         ))}
+
+        {settings?.btnLibrary && (
+          <li className='flex sm-only'>
+            <Link
+              href={_linkResolver(settings.btnLibrary.link)}
+              className='btn-library'>
+              {_localizeField(settings.btnLibrary.label)}
+            </Link>
+
+            <BtnCart />
+          </li>
+        )}
       </ul>
     </nav>
   );

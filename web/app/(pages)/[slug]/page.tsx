@@ -66,7 +66,10 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
         <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} />
       )}
       {!isRessource && data.rebonds && (
-        <Rebonds input={data.rebonds} title='ressources' />
+        <Rebonds
+          input={data.rebonds}
+          title={data.rebondsLabel || "ressources"}
+        />
       )}
     </div>
   );
