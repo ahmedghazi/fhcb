@@ -47,7 +47,11 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
                     style={{
                       width: "var(--gridder-1_4)",
                     }}>
-                    <CardExhibition input={item} size={"sm"} />
+                    <CardExhibition
+                      input={item}
+                      size={"sm"}
+                      footerHover={true}
+                    />
                   </div>
                 </Fragment>
               ))}

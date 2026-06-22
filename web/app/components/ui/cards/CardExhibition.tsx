@@ -14,10 +14,11 @@ import CardBase, { CardFooter } from "./CardBase";
 type Props = {
   input: ExhibitionExpanded;
   size?: "sm" | "md" | "lg";
+  footerHover?: boolean;
   // context: ''
 };
 
-const CardExhibition = ({ input, size = "md" }: Props) => {
+const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
   const { imageCover, dates, color, location } = input;
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
@@ -43,7 +44,8 @@ const CardExhibition = ({ input, size = "md" }: Props) => {
         `card--${props.layout}`,
         isLandscape ? "card--is-landscape" : "card--is-portrait",
         isPast && "card--is-past",
-        isPast && size === "sm" && "card--footer-hover",
+        // isPast && size === "sm" && "card--footer-hover",
+        footerHover && "card--footer-hover",
         isCurrent && "card--is-current",
         isFutur && "card--is-futur",
         location && `card--is-${location}`,
