@@ -69,6 +69,27 @@
   --leading-6xl: 2.8125rem; /* 45px — quote */
   --leading-7xl: 5rem; /* 80px — h1 */
 
+  /* =====================
+     FONT SIZE — MOBILE ($md breakpoint)
+  ===================== */
+  --text-sm-sm: 0.875rem; /* 14px — bouton mobile */
+  --text-sm-md: 1.125rem; /* 18px — h3 mobile */
+  --text-sm-xl: 1.15625rem; /* 18.5px — p mobile */
+  --text-sm-3xl: 1.125rem; /* 18px — chapo mobile */
+  --text-sm-4xl: 1.625rem; /* 26px — quote mobile */
+  --text-sm-5xl: 2.375rem; /* 38px — h2 mobile */
+  --text-sm-6xl: 3.75rem; /* 60px — h1.5/alt mobile */
+  --text-sm-8xl: 5rem; /* 80px — h1 large mobile */
+
+  /* =====================
+     LINE HEIGHT — MOBILE ($md breakpoint)
+  ===================== */
+  --leading-sm-md: 1.25rem; /* 20px — bouton mobile */
+  --leading-sm-2xl: 1.375rem; /* 22px — h3 mobile */
+  --leading-sm-3xl: 1.5625rem; /* 25px — p mobile */
+  --leading-sm-5xl: 1.625rem; /* 26px — chapo mobile */
+  --leading-sm-6xl: 1.875rem; /* 30px — quote mobile */
+
   --cubic: cubic-bezier(0.87, 0, 0.13, 1);
   --border-width: 1px;
   --border: var(--border-width) solid;
@@ -121,6 +142,15 @@
   --text-7xl: var(--text-7xl);
   --text-8xl: var(--text-8xl);
 
+  --text-sm-sm: var(--text-sm-sm);
+  --text-sm-md: var(--text-sm-md);
+  --text-sm-xl: var(--text-sm-xl);
+  --text-sm-3xl: var(--text-sm-3xl);
+  --text-sm-4xl: var(--text-sm-4xl);
+  --text-sm-5xl: var(--text-sm-5xl);
+  --text-sm-6xl: var(--text-sm-6xl);
+  --text-sm-8xl: var(--text-sm-8xl);
+
   --leading-xs: var(--leading-xs);
   --leading-sm: var(--leading-sm);
   --leading-md: var(--leading-md);
@@ -132,6 +162,12 @@
   --leading-5xl: var(--leading-5xl);
   --leading-6xl: var(--leading-6xl);
   --leading-7xl: var(--leading-7xl);
+
+  --leading-sm-md: var(--leading-sm-md);
+  --leading-sm-2xl: var(--leading-sm-2xl);
+  --leading-sm-3xl: var(--leading-sm-3xl);
+  --leading-sm-5xl: var(--leading-sm-5xl);
+  --leading-sm-6xl: var(--leading-sm-6xl);
 
   --cubic: var(--cubic);
   --border-width: var(--border-width);

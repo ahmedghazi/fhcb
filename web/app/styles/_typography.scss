@@ -1,3 +1,5 @@
+@use "variables";
+
 body {
   color: var(--color-primary);
   font-family: var(--font-primary);
@@ -218,5 +220,63 @@ ul {
     line-height: var(--leading-4xl);
     font-weight: 200;
     font-style: italic;
+  }
+
+  /* =====================
+     MOBILE OVERRIDES
+  ===================== */
+  @media all and (max-width: variables.$md) {
+    .c-h1-lg {
+      /* 80px */
+      font-size: var(--text-sm-8xl);
+      line-height: 4.375rem; /* 70px */
+    }
+
+    .c-h1_5,
+    .c-h1-alt {
+      /* 60px */
+      font-size: var(--text-sm-6xl);
+      line-height: 3.4375rem; /* 55px */
+    }
+
+    .c-h2 {
+      /* 38px */
+      font-size: var(--text-sm-5xl);
+    }
+
+    .c-h3 {
+      /* 18px */
+      font-size: var(--text-sm-md);
+      line-height: var(--leading-sm-2xl);
+    }
+
+    .c-chapo {
+      /* 18px */
+      font-size: var(--text-sm-3xl);
+      line-height: var(--leading-sm-5xl);
+    }
+
+    .c-quote {
+      /* 26px */
+      font-size: var(--text-sm-4xl);
+      line-height: var(--leading-sm-6xl);
+    }
+
+    .c-body {
+      /* 18.5px */
+      font-size: var(--text-sm-xl);
+      line-height: var(--leading-sm-3xl);
+    }
+
+    .c-btn {
+      /* 14px, attention hauteur du bouton à 40 */
+      font-size: var(--text-sm-sm);
+      line-height: var(--leading-sm-md);
+    }
+
+    .c-filter {
+      /* 15px */
+      font-size: var(--text-base);
+    }
   }
 }

@@ -104,13 +104,13 @@ export default async function RootLayout({
                   <HeaderContextProvider>
                     <Header settings={settings} />
                   </HeaderContextProvider>
-                  {bandeauContextuel && (
+                  {/* {bandeauContextuel && (
                     <BandeauContextuel
                       cta={bandeauContextuel.cta}
                       text={bandeauContextuel.text}
                       dateExpiration={bandeauContextuel.dateExpiration}
                     />
-                  )}
+                  )} */}
                   <main>{children}</main>
                   <Footer settings={settings} />
                   <CartModal />

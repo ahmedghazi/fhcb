@@ -27,6 +27,21 @@ header.header {
   .header__meta-nav {
     // width: 17.75rem;
   }
+
+  .header--mobile {
+    display: block;
+  }
+  .header--desktop {
+    display: none;
+  }
+  @media all and (min-width: (variables.$md + 1px)) {
+    .header--mobile {
+      display: none;
+    }
+    .header--desktop {
+      display: block;
+    }
+  }
   .header__inner {
     display: flex;
     justify-content: space-between;
@@ -73,7 +88,7 @@ header.header {
       position: fixed;
       inset: 0;
       background-color: var(--color-accent);
-      padding: var(--spacing-xs);
+      padding: var(--spacing-sm);
       padding-top: var(--header-h);
       .menu .menu-label,
       .menu a,
@@ -82,13 +97,6 @@ header.header {
       }
       &--open {
         display: block;
-      }
-      nav ul.menu {
-        display: flex;
-        flex-direction: column;
-        & > li .menu-label {
-          font-weight: 600;
-        }
       }
     }
   }

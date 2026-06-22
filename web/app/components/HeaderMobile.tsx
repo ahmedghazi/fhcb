@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 import { _localizeField } from "../sanity-api/utils";
 import LocalesSwitcher from "./ui/LocaleSwitcher";
@@ -8,13 +8,23 @@ import Nav from "./Nav";
 import Link from "next/link";
 import LogoFHCB from "./LogoFHCB";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
 };
 
 const HeaderMobile = ({ settings }: Props) => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
+  const pathname = usePathname();
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.classList.toggle("nav-open", open);
+  }, [open]);
+
   return (
     <div className='header--mobile'>
       <div className='header__inner'>
@@ -45,7 +55,7 @@ const HeaderMobile = ({ settings }: Props) => {
         </ul>
       </div>
       <div className={clsx("header__modal", open && "header__modal--open")}>
-        <div className='header__modal__content'>
+        <div className='header__modal-content'>
           <div className='header__group'>
             {settings?.btnTickets && (
               <a
@@ -63,8 +73,10 @@ const HeaderMobile = ({ settings }: Props) => {
             )}
           </div>
           <div className='header__group'>
-            <LocalesSwitcher />
-            <SearchToggle />
+            <div className='flex justify-between'>
+              <SearchToggle />
+              <LocalesSwitcher />
+            </div>
           </div>
         </div>
       </div>

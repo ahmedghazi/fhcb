@@ -18,7 +18,6 @@ import useHeader from "../context/HeaderContext";
 import useCart from "../context/CartContext";
 import clsx from "clsx";
 import BtnCart from "./ui/btns/BtnCart";
-import useDeviceDetect from "../hooks/useDeviceDetect";
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
 
@@ -28,7 +27,6 @@ type Props = {
 
 const Header = ({ settings }: Props) => {
   const { modalType, dispatchModalType } = useHeader();
-  const { isMobile } = useDeviceDetect();
   // const { cartCount, toggleCart } = useCart();
 
   if (!settings) return null;
@@ -42,8 +40,8 @@ const Header = ({ settings }: Props) => {
       <NavModal settings={settings} />
 
       <div className='container-fluid'>
-        {isMobile && <HeaderMobile settings={settings} />}
-        {!isMobile && <HeaderDesktop settings={settings} />}
+        <HeaderMobile settings={settings} />
+        <HeaderDesktop settings={settings} />
       </div>
     </header>
   );
