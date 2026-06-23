@@ -10,7 +10,7 @@ export default defineField({
   type: 'object',
   icon: CiGrid32,
   initialValue: {
-    gridSize: 3,
+    // gridSize: 3,
   },
   fields: [
     defineField({
@@ -24,6 +24,7 @@ export default defineField({
       type: 'number',
       title: 'Taille de la grille',
       description: "Nombre d'éléments par ligne",
+      hidden: true,
     }),
     defineField({
       name: 'items',

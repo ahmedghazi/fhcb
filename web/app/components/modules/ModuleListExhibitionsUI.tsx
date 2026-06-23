@@ -28,10 +28,12 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
         <div className='module__inner'>
           <div
             className='grid md:grid-cols-4 gap-gutter'
-            style={{
-              gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-              justifyContent: "center",
-            }}>
+            style={
+              {
+                // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
+                // justifyContent: "center",
+              }
+            }>
             {input.resolvedItems?.map(
               (item: ExhibitionExpanded, index: number) => (
                 <Fragment key={`${item._id}-${index}`}>

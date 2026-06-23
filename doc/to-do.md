@@ -95,6 +95,8 @@ cards simili document
 - autour de l'expo
 - couple titre sous titre > 450 / 200
 - # bandeau contextuel
+- pastilles expo
+- pastilles event
 
 ## Grilles
 

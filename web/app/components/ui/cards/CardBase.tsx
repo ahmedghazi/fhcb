@@ -17,7 +17,7 @@ export type CardAction = {
 
 export type CardBadgeProps = {
   label: string;
-  colorVar?: string;
+  // colorVar?: string;
 };
 
 export type CardBaseProps = {
@@ -45,13 +45,25 @@ export type CardBaseProps = {
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 
-const CardBadge = ({ label, colorVar }: CardBadgeProps) => (
-  <span
-    className='card__badge c-tag'
-    style={colorVar ? { backgroundColor: colorVar } : undefined}>
-    {label}
-  </span>
-);
+const CardBadge = ({ label }: CardBadgeProps) => {
+  return !label ? undefined : (
+    <div className='card__badge c-tag'>
+      <svg
+        width='103'
+        height='111'
+        viewBox='0 0 103 111'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'>
+        <path
+          d='M87.7593 -0.000772777C96.0435 -0.000787134 102.759 6.71495 102.759 14.9992L102.759 110.629L0.000430541 -0.000660476L87.7593 -0.000772777Z'
+          fill='white'
+        />
+      </svg>
+
+      <div className='inner'>{label}</div>
+    </div>
+  );
+};
 
 // ─── CardFooter (mode detached — rendu par le parent) ────────────────────────
 
@@ -132,7 +144,6 @@ const CardBase = ({
 
   const mediaBlock = (
     <div className='card__media'>
-      {badge && <CardBadge {...badge} />}
       {customMediaSlot ??
         (hasVideo && videoBehavior === "inline" ? (
           <div className='card__video-wrap'>
@@ -200,6 +211,8 @@ const CardBase = ({
     return (
       <div className={cardInnerClass} style={cardStyle} {...handlers}>
         {hasMedia && mediaBlock}
+        {badge && <CardBadge {...badge} />}
+
         <div className='card__body'>
           {headerSlot}
           {(infoNode || actions.length > 0) && (
@@ -220,6 +233,7 @@ const CardBase = ({
   if (layout === "col") {
     return (
       <div className={cardInnerClass} style={cardStyle} {...handlers}>
+        {badge && <CardBadge {...badge} />}
         {headerSlot}
         {hasMedia && mediaBlock}
         {!hasMedia && (
@@ -245,6 +259,8 @@ const CardBase = ({
   if (!isDetached) {
     return (
       <div className={cardInnerClass} style={cardStyle} {...handlers}>
+        {badge && <CardBadge {...badge} />}
+
         <div className='grid'>
           <div className='card__body'>
             {headerSlot}
@@ -271,6 +287,8 @@ const CardBase = ({
   // card__footer rendu par le parent via <CardFooter>
   return (
     <div className={cardInnerClass} style={cardStyle} {...handlers}>
+      {badge && <CardBadge {...badge} />}
+
       <div className='grid'>
         <div className='card__body'>
           <div className='card__body-header'>

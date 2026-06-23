@@ -371,11 +371,38 @@
   &__info {
     line-height: 1.4;
   }
+  &__badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    text-align: center;
+
+    &:empty {
+      display: none;
+    }
+    .inner {
+      position: absolute;
+      top: 0%;
+      right: 0%;
+      // transform: translate(10%, 100%) rotate(47deg);
+      transform: translate(16%, 105%) rotate(47deg);
+      transform: center top;
+      text-align: center;
+      width: 100%;
+      padding: 0 var(--spacing-xs);
+      line-height: 1.1;
+      // background-color: red;
+      min-height: 2.2em;
+    }
+  }
 }
 
 // ─── card__inner modifiers ────────────────────────────────────────────────────
 
 .card__inner {
+  position: relative;
   &--col {
     flex-direction: column;
   }

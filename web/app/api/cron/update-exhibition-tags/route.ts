@@ -68,12 +68,13 @@ export async function GET(request: Request) {
     return doc._id;
   };
 
-  const [currentTagId, pastTagId, upcomingTagId, horsLesMursTagId] = await Promise.all([
-    resolve(TAG_CURRENT_SLUG, "Exposition en cours", "Current exhibition"),
-    resolve(TAG_PAST_SLUG, "Exposition passée", "Past exhibition"),
-    resolve(TAG_UPCOMING_SLUG, "Exposition à venir", "Upcoming exhibition"),
-    resolve(TAG_HORS_LES_MURS_SLUG, "Hors les murs", "Off-site"),
-  ]);
+  const [currentTagId, pastTagId, upcomingTagId, horsLesMursTagId] =
+    await Promise.all([
+      resolve(TAG_CURRENT_SLUG, "Exposition en cours", "Current exhibition"),
+      resolve(TAG_PAST_SLUG, "Exposition passée", "Past exhibition"),
+      resolve(TAG_UPCOMING_SLUG, "Exposition à venir", "Upcoming exhibition"),
+      resolve(TAG_HORS_LES_MURS_SLUG, "Hors les murs", "Off-site"),
+    ]);
 
   // Fetch all published exhibitions with dates and tags
   const exhibitions: {
@@ -88,7 +89,12 @@ export async function GET(request: Request) {
     }`,
   );
 
-  const managedIds = new Set([currentTagId, pastTagId, upcomingTagId, horsLesMursTagId]);
+  const managedIds = new Set([
+    currentTagId,
+    pastTagId,
+    upcomingTagId,
+    horsLesMursTagId,
+  ]);
   let updated = 0;
   const log: string[] = [];
 
@@ -109,13 +115,42 @@ export async function GET(request: Request) {
     const firstStart = allStarts.sort()[0];
     const lastEnd = allEnds.sort().reverse()[0];
 
+    const now = new Date();
+    const lastEndDate = new Date(lastEnd);
+    const diffTime = Math.abs(now.getTime() - lastEndDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    let pastilleText = {
+      fr: "",
+      en: "",
+    };
+    /*
+    here compare date.now() width lastDate, implement pastille text ex: J -12
+    */
+    if (diffDays <= 10) {
+      pastilleText.fr = `J -${diffDays}`;
+      pastilleText.en = `J -${diffDays}`;
+    }
+    if (diffDays < 5) {
+      pastilleText.fr = `derniers jours`;
+      pastilleText.en = `last days`;
+    }
+
     const isCurrent = exhibition.dates.some(
       (d) =>
-        isInSiteLocationType(d.locationType) && d.du && d.au && d.du <= nowDate && d.au >= nowDate,
+        isInSiteLocationType(d.locationType) &&
+        d.du &&
+        d.au &&
+        d.du <= nowDate &&
+        d.au >= nowDate,
     );
     const isHorsLesMurs = exhibition.dates.some(
       (d) =>
-        d.locationType && OFF_SITE_LOCATION_TYPES.includes(d.locationType) && d.du && d.au && d.du <= nowDate && d.au >= nowDate,
+        d.locationType &&
+        OFF_SITE_LOCATION_TYPES.includes(d.locationType) &&
+        d.du &&
+        d.au &&
+        d.du <= nowDate &&
+        d.au >= nowDate,
     );
     const isPast = lastEnd < nowDate;
     const isUpcoming = firstStart > nowDate;
@@ -125,7 +160,8 @@ export async function GET(request: Request) {
     );
     const nextTags = [...otherTags];
     if (isCurrent) nextTags.push({ _key: randomKey(), _ref: currentTagId });
-    if (isHorsLesMurs) nextTags.push({ _key: randomKey(), _ref: horsLesMursTagId });
+    if (isHorsLesMurs)
+      nextTags.push({ _key: randomKey(), _ref: horsLesMursTagId });
     if (isPast) nextTags.push({ _key: randomKey(), _ref: pastTagId });
     if (isUpcoming) nextTags.push({ _key: randomKey(), _ref: upcomingTagId });
 
@@ -144,7 +180,12 @@ export async function GET(request: Request) {
     if (!fullDoc) continue;
 
     // Write a draft with updated tags (create or replace)
-    await client.createOrReplace({ ...fullDoc, _id: draftId, tags: tagRefs });
+    await client.createOrReplace({
+      ...fullDoc,
+      _id: draftId,
+      tags: tagRefs,
+      pastille: pastilleText,
+    });
 
     // Publish the draft immediately via Actions API (bypasses direct-mutation ACL)
     await client.request({

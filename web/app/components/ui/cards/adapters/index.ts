@@ -61,7 +61,7 @@ export function exhibitionToCard(
   size: "sm" | "md" | "lg" = "sm",
   featured?: boolean,
 ): CardBaseProps {
-  const { title, artists, imageCover, dates, tags, links } = input;
+  const { title, artists, imageCover, dates, tags, links, pastille } = input;
   const artistList = artists?.map((a) => a.name).join(", ");
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
@@ -121,6 +121,10 @@ export function exhibitionToCard(
     subTitle: artistList,
     infoNode: toInfoNode(dates),
     actions: actions,
+    badge:
+      pastille && pastille.fr
+        ? { label: _localizeField(pastille) as string }
+        : undefined,
   };
 }
 
