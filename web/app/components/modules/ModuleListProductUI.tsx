@@ -48,9 +48,11 @@ const ModuleListProductUI = ({ input }: Props) => {
               {filteredItems.map((item: ProductExpanded, index: number) => (
                 <Fragment key={`--${index}`}>
                   <div
-                    style={{
-                      width: "var(--gridder-1_4)",
-                    }}>
+                    style={
+                      {
+                        // width: "var(--gridder-1_4)",
+                      }
+                    }>
                     <CardProduct input={item} size={"sm"} />
                   </div>
                 </Fragment>

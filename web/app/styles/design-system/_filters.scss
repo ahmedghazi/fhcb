@@ -1,7 +1,16 @@
+@use "../variables";
+
 .filters {
   border-bottom: var(--border);
   margin-bottom: var(--spacing-lg);
   padding-bottom: 0.5rem;
+
+  @media all and (max-width: variables.$md) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
   &.is-active {
     .reset {
       text-decoration: underline;

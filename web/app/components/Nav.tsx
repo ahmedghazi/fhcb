@@ -148,13 +148,13 @@ const Nav = ({ navPrimary, settings }: Props) => {
 
         {settings?.btnLibrary && (
           <li className='flex sm-only'>
-            <Link
-              href={_linkResolver(settings.btnLibrary.link)}
-              className='btn-library'>
-              {_localizeField(settings.btnLibrary.label)}
+            <Link href={_linkResolver(settings.btnLibrary.link)}>
+              <div className='menu-label'>
+                {_localizeField(settings.btnLibrary.label)}
+              </div>
             </Link>
 
-            <BtnCart />
+            {/* <BtnCart /> */}
           </li>
         )}
       </ul>

@@ -39,6 +39,7 @@ for the slider
   visibility: hidden;
   position: fixed;
   width: 100%;
+  max-width: 100dvw;
   pointer-events: none;
   &__item {
     background-color: red;

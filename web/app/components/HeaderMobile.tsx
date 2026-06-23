@@ -69,7 +69,10 @@ const HeaderMobile = ({ settings }: Props) => {
           </div>
           <div className='header__group'>
             {settings?.navPrimary && (
-              <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
+              <Nav
+                navPrimary={(settings.navPrimary ?? undefined) as any}
+                settings={settings}
+              />
             )}
           </div>
           <div className='header__group'>

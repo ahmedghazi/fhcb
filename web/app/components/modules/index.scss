@@ -115,16 +115,6 @@
         margin-bottom: var(--spacing-lg);
       }
 
-      .slick-list {
-        padding: 0 var(--edge-w);
-      }
-
-      .slick-list {
-        margin: 0 calc(var(--spacing-gutter) * -0.5);
-        .slick-slide {
-          padding: 0 calc(var(--spacing-gutter) * 0.5);
-        }
-      }
       .arrow {
         left: calc(50% - var(--spacing-gutter) * 0.5);
         &--left {
@@ -139,6 +129,7 @@
       .slick-slide {
         height: auto !important;
         display: flex !important;
+        margin: 0 var(--spacing-sm) !important;
         > div {
           display: flex;
           flex: 1;
@@ -148,14 +139,12 @@
           height: 100%;
         }
         .card {
-          width: var(--gridder-3_12) !important;
+          width: var(--gridder-4_4) !important;
+          max-width: var(--gridder-4_4) !important;
           &--md {
-            width: var(--gridder-6_12) !important;
+            width: var(--gridder-4_4) !important;
+            max-width: var(--gridder-4_4) !important;
           }
-        }
-        &:has(.card--md) {
-          // min-width: var(--gridder-6_12) !important;
-          // max-width: var(--gridder-6_12) !important;
         }
       }
       .footer {
@@ -164,6 +153,31 @@
         .btn {
           display: inline-block;
           width: auto;
+        }
+      }
+
+      .slick-list {
+        padding: 0 var(--spacing-sm);
+      }
+
+      @media all and (min-width: variables.$md) {
+        overflow: hidden;
+        .slick-list {
+          padding: 0 var(--edge-w);
+        }
+
+        .slick-list {
+          // margin: 0 calc(var(--spacing-gutter) * -0.5);
+          .slick-slide {
+            // padding: 0 calc(var(--spacing-gutter) * 0.5);
+          }
+        }
+
+        .slick-slide .card {
+          width: var(--gridder-3_12) !important;
+          &--md {
+            width: var(--gridder-6_12) !important;
+          }
         }
       }
     }
