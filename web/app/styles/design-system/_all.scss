@@ -1,3 +1,5 @@
+@use "../variables";
+
 .page-header {
   text-align: center;
   padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
@@ -23,10 +25,17 @@
       flex-basis: var(--gridder-6_12);
       width: var(--gridder-6_12);
     }
-    // @media screen and (min-width: 1600px) {
-    //   flex-basis: var(--gridder-2_12);
-    //   width: var(--gridder-2_12);
-    // }
+  }
+
+  @media all and (max-width: variables.$md) {
+    .card {
+      flex-basis: var(--gridder-12_12);
+      width: var(--gridder-12_12);
+      &--md {
+        flex-basis: var(--gridder-12_12);
+        width: var(--gridder-12_12);
+      }
+    }
   }
 }
 figure {

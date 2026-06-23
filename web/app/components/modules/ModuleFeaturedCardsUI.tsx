@@ -21,12 +21,14 @@ const ModuleFeaturedCardsUI = ({ input }: Props) => {
           {/* <GridMasonry columns={3}> */}
           <div
             className={`grid md:grid-cols-${cols} items-start gap-gutter`}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "var(--spacing-gutter)",
-              gridAutoRows: "18px",
-            }}>
+            style={
+              {
+                // display: "grid",
+                // gridTemplateColumns: "repeat(3, 1fr)",
+                // gap: "var(--spacing-gutter)",
+                // gridAutoRows: "18px",
+              }
+            }>
             {items?.map((item, index: number) => (
               <CardExhibitionFeatured
                 key={`${item._id}-${index}`}
