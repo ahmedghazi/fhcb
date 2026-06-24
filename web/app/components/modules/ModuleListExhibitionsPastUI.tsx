@@ -11,6 +11,7 @@ import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import GridMasonryDessandro from "../ui/GridMasonryDessandro";
+import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 
 type Props = {
   input: ListExhibitionsPastUI & {
@@ -22,7 +23,7 @@ type Props = {
 const ModuleListExhibitionsPastUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
-
+  const { isMobile } = useDeviceDetect();
   const filterDefs = input.filters ?? [];
   const filteredItems = applyFilters(
     input.resolvedItems ?? [],
@@ -45,7 +46,9 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
                 <Fragment key={`--${index}`}>
                   <div
                     style={{
-                      width: "var(--gridder-1_4)",
+                      width: isMobile
+                        ? "var(--gridder-4_4)"
+                        : "var(--gridder-1_4)",
                     }}>
                     <CardExhibition
                       input={item}

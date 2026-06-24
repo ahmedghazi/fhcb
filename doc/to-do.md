@@ -91,6 +91,7 @@ cards simili document
 - # pastilles expo
 - # pastilles event
 - page 404
+- mobile font sizes
 
 ## card expos
 
@@ -162,6 +163,7 @@ cards simili document
 - les rebonds, quels noms? ex séries thématique
 - me manque la wide regular
 - carte look 3 2 colonnes (taille de grille 4/8)?
+- card video, d'où viennent elles (page)
 
 # réponses
 

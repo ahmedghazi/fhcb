@@ -1,3 +1,5 @@
+@use "../variables";
+
 .card {
   border-radius: var(--radius);
   background-color: var(--color-white);
@@ -490,6 +492,23 @@
     flex-direction: row;
     figure {
       flex: 1;
+    }
+  }
+}
+
+@media all and (max-width: variables.$md) {
+  .card {
+    .card__inner--row .grid {
+      flex-direction: column;
+    }
+    &--lg {
+      .card__inner--row .grid {
+        flex-direction: column-reverse;
+        gap: var(--spacing-xs);
+      }
+      img {
+        max-width: 100%;
+      }
     }
   }
 }
