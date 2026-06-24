@@ -15,23 +15,47 @@ import CardProduct from "./cards/CardProduct";
 import styles from "./Search.module.css";
 import Link from "next/link";
 import CardImageImages from "./cards/CardImageImages";
+import CardFeuilletage from "./cards/CardFeuilletage";
+import CardPageModulaire from "./cards/CardPageModulaire";
+import CardEvent from "./cards/CardEvent";
 
+/*
+  | PageModulaire
+  | Exhibition
+  | Event
+  | Artist
+  | Library
+  | Product
+  | Programme
+  | Feuilletage
+  | ImageImages
+  | any;
+*/
 type SearchResultItemProps = {
   input: PostTypes;
 };
 
 const SearchResultItem = ({ input }: SearchResultItemProps) => {
+  if (input._type === "pageModulaire") {
+    return <CardPageModulaire input={input} size='md' />;
+  }
   if (input._type === "artist") {
     return <CardArtist input={input} size='sm' />;
   }
   if (input._type === "exhibition") {
-    return <CardExhibition input={input} size='sm' />;
+    return <CardExhibition input={input} size='md' />;
+  }
+  if (input._type === "event") {
+    return <CardEvent input={input} size='sm' />;
   }
   if (input._type === "product") {
     return <CardProduct input={input} size='sm' />;
   }
   if (input._type === "imageImages") {
-    return <CardImageImages input={input} size='sm' />;
+    return <CardImageImages input={input} size='md' />;
+  }
+  if (input._type === "Feuilletage") {
+    return <CardFeuilletage input={input} size='md' />;
   }
   return "";
 };

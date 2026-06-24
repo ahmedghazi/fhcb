@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
     "artist",
     "pageModulaire",
     "imageImages",
+    "feuilletage",
   ];
 
   const query = `*[_type in $postTypes
@@ -45,7 +46,11 @@ export async function POST(request: NextRequest) {
         ...,
         asset->
       },
-      dates
+      dates,
+      artists[]->{
+        name
+      },
+      color
     } | order(_createdAt desc)
     `;
 

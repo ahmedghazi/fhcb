@@ -36,6 +36,11 @@ footer {
     }
     li ul {
       font-weight: 450;
+      li {
+        a {
+          line-height: 1.2;
+        }
+      }
     }
   }
   .credits-n-legals {

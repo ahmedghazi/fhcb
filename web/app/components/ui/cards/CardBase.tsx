@@ -250,6 +250,14 @@ const CardBase = ({
             {actions.length > 0 && <ActionButtons actions={actions} />}
           </div>
         )}
+        {isDetached && (description || infoNode) && (
+          <div className='card__footer'>
+            {description && (
+              <div className='card__description c-body'>{description}</div>
+            )}
+            {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
+          </div>
+        )}
       </div>
     );
   }
