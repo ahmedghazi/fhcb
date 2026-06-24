@@ -7,7 +7,6 @@ import { ListProductUI } from "@/app/sanity-api/types/sanity.types";
 import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
-import GridMasonry from "../ui/GridMasonry";
 import { publish } from "pubsub-js";
 import GridMasonryDessandro from "../ui/GridMasonryDessandro";
 

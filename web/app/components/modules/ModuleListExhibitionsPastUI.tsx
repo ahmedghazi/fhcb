@@ -10,7 +10,7 @@ import {
 import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
-import GridMasonry from "../ui/GridMasonry";
+import GridMasonryDessandro from "../ui/GridMasonryDessandro";
 
 type Props = {
   input: ListExhibitionsPastUI & {
@@ -40,7 +40,7 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
           )}
 
           {filteredItems.length > 0 && (
-            <GridMasonry columns={4}>
+            <GridMasonryDessandro>
               {filteredItems.map((item: ExhibitionExpanded, index: number) => (
                 <Fragment key={`--${index}`}>
                   <div
@@ -55,7 +55,7 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
                   </div>
                 </Fragment>
               ))}
-            </GridMasonry>
+            </GridMasonryDessandro>
           )}
         </div>
       </div>
