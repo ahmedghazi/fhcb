@@ -18,15 +18,10 @@ html {
       // overflow: hidden;
     }
   }
-  .is-blur {
-    animation: blur 2s ease-in-out;
-  }
 }
 body {
-  // overflow-y: auto;
   background-color: var(--color-bg);
   // @include mixins.debugFiletX(50%);
-
   // @include debugOutline(var(--space-md));
 }
 #page {

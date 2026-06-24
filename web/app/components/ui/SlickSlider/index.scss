@@ -1,10 +1,15 @@
 .slick-slider-container {
+  --arrow-size: 2.75rem;
   position: relative;
 
   .slick-slider {
-    padding-bottom: 88px;
-    .slick-slide {
+    padding-bottom: calc(var(--spacing-md) + var(--arrow-size));
+
+    .slick-track {
+      display: flex;
+      align-items: stretch;
     }
+
     .slick-prev,
     .slick-next {
       display: none !important;
@@ -22,13 +27,13 @@
       }
     }
     position: absolute;
-    left: 50%;
+    left: calc(50% - calc(var(--arrow-size) / 2));
     bottom: 0;
     &--left {
-      transform: translate(-2rem, 0%);
+      transform: translateX(calc(var(--arrow-size) / -2 - 0.313rem));
     }
     &--right {
-      transform: translate(2rem, 0%);
+      transform: translateX(calc(var(--arrow-size) / 2 + 0.313rem));
     }
   }
 
