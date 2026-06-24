@@ -5,6 +5,11 @@
   padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
 }
 
+.grid-masonry-dessandro {
+  .card {
+    padding: 0 var(--spacing-sm);
+  }
+}
 .grid--centered {
   // display: grid;
   // grid-template-columns: repeat(auto-fit, var(--gridder-1_12));

@@ -18,7 +18,8 @@ cards simili document
 - # programme
 - # fix header (img)
 - fix header interractions
-- header aside
+- # header aside
+- # message contexturel avec auto kill
 - message contexturel avec auto kill
 - # search scroll
 - # search open focus input
@@ -48,13 +49,13 @@ cards simili document
 - updates doc icons
 - # wide reg
 - # grid centered
-- rebonds article > rebonds article (même catégorie)
+- # rebonds article > rebonds article (même catégorie)
 - expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
 - # expo hors les murs via le champ location
 - # régler grille cartes (tailles)
 - # carte expo tube, cube (check trello)
-- pastilles
-- branch hover
+- # pastilles
+- # branch hover
 - # card avec 2nd btn hover (exhib, events) qui si pas past
 - # date avec location
 - btn hover, all hover
@@ -63,10 +64,10 @@ cards simili document
 - # page expo hero temporalité des ui. (bouton resa)
 - # card product si hors de la page librairie, affiche le tag "Livre"
 - # série thématique doc sanity comme imageImages
-- forms de contact
+- # forms de contact
 - # search au click
 - # module Ressources affiche les dernières ressources avec carte branches ressources (video auto play ) + hover
-- single event related
+- # single event related
 - cron in preprod
 - add remaining cta in modules
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
@@ -78,6 +79,18 @@ cards simili document
 - # filter search x
 - # module blockquote
 - # slider slick
+- # typo de sous menu
+- # seuil de changement de grille, container fuild max width 1300px
+- # component blockqote
+- # champs ressource label, liste de choix
+- contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
+- rebonds page expo, ordre
+- autour de l'expo
+- couple titre sous titre > 450 / 200
+- # bandeau contextuel
+- # pastilles expo
+- # pastilles event
+- page 404
 
 ## card expos
 
@@ -86,17 +99,6 @@ cards simili document
   # Si l’expo est au cube (espace principal) = carte verticale (même si image paysage)
   # Si l’expo est au tube (espace secondaire) = carte horizontale (même si image portrait)
 - en cours et offSite = hors les murs + itinérante (page expos hors les murs => lg)
-- # typo de sous menu
-- # seuil de changement de grille, container fuild max width 1300px
-- # component blockqote
-- champs ressource label, liste de choix
-- contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
-- rebonds page expo, ordre
-- autour de l'expo
-- couple titre sous titre > 450 / 200
-- # bandeau contextuel
-- pastilles expo
-- pastilles event
 
 ## Grilles
 

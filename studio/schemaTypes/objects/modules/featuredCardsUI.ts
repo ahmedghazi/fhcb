@@ -27,6 +27,10 @@ export default defineField({
       hidden: true,
     }),
     defineField({
+      name: 'video',
+      type: 'mux.video',
+    }),
+    defineField({
       name: 'items',
       title: 'Items',
       type: 'array',

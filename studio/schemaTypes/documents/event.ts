@@ -55,7 +55,11 @@ export default defineType({
       type: 'localeText',
       group: 'editorial',
     }),
-
+    defineField({
+      name: 'pastille',
+      type: 'localeString',
+      group: 'editorial',
+    }),
     defineField({
       name: 'links',
       title: 'Liens',

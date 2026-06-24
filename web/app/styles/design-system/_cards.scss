@@ -142,11 +142,16 @@
   }
 
   &--sm-alt {
+    width: var(--gridder-1_3);
     &.card--row {
       .grid {
         display: flex;
       }
     }
+  }
+  &--md-alt {
+    grid-column: span 2;
+    width: var(--gridder-2_3);
   }
   // ── États ───────────────────────────────────────────────────────────────────
 
@@ -330,6 +335,17 @@
     }
     .card__footer {
       display: none;
+    }
+  }
+  &--video {
+    // aspect-ratio: 16 / 9;
+    position: relative;
+    .card__footer {
+      padding: var(--spacing-xs);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   }
 

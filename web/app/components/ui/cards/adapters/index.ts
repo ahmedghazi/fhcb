@@ -174,7 +174,7 @@ export function eventToCard(
   input: EventExpanded,
   size: "sm" | "md" | "lg" = "sm",
 ): CardBaseProps {
-  const { imageCover, dates, tags, links } = input;
+  const { imageCover, dates, tags, links, pastille } = input;
   const isPast = _isPastByDates(dates || []);
   const isHorsLeMurs = tags?.some(
     (tag: Tag) => tag.slug?.current === "hors-les-murs",
@@ -206,6 +206,10 @@ export function eventToCard(
     title: (_localizeField(input.title) as string) || "",
     infoNode: toInfoNode(dates),
     actions: actions,
+    badge:
+      pastille && pastille.fr
+        ? { label: _localizeField(pastille) as string }
+        : undefined,
   };
 }
 

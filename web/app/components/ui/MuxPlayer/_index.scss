@@ -1,0 +1,49 @@
+.mux-player-container {
+  position: relative;
+  mux-player {
+    // height: calc(100dvh - var(--header-h));
+    /* Hide all controls at once */
+    --controls: none;
+
+    /* Target all sections by excluding the section prefix */
+    // --play-button: none;
+    // --live-button: none;
+    // --seek-backward-button: none;
+    // --seek-forward-button: none;
+    // --mute-button: none;
+    // --captions-button: none;
+    // --airplay-button: none;
+    // --pip-button: none;
+    // --fullscreen-button: none;
+    // --cast-button: none;
+    // --playback-rate-button: none;
+    // --volume-range: none;
+    // --time-range: none;
+    // --time-display: none;
+    // --title-display: none;
+    // --duration-display: none;
+    aspect-ratio: 16 / 9;
+    height: 100%;
+  }
+  .controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    mix-blend-mode: difference;
+    .timeline {
+      // background-color: blue;
+      .timeline__bar {
+        height: 10px;
+        background-color: #d9d9d9;
+      }
+    }
+    .muted {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: var(--spacing-50);
+      color: white;
+    }
+  }
+}

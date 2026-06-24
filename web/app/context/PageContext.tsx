@@ -21,7 +21,6 @@ interface PageContextProps {
 export const PageContextProvider = (props: PageContextProps) => {
   const { children, settings } = props;
   const pathname = usePathname();
-  const [isInfos, setIsInfos] = useState<boolean>(false);
   // const settings = { pathname };
 
   const _format = () => {
@@ -60,7 +59,6 @@ export const PageContextProvider = (props: PageContextProps) => {
         containerFluidBounding.width + "px",
       );
       const edges = (bodyBounding.width - containerFluidBounding.width) / 2;
-      console.log(bodyBounding.width, containerFluidBounding.width, edges);
       document.documentElement.style.setProperty("--edge-w", edges + "px");
     }
 

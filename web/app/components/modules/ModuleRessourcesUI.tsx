@@ -26,7 +26,6 @@ const ModuleRessourcesUI = ({ input }: Props) => {
     ...(feuilletages ?? []),
     ...(imageImages ?? []),
   ];
-  console.log(branches);
   return (
     <section className='module module--ressources-ui'>
       <div className='container-fluid'>
