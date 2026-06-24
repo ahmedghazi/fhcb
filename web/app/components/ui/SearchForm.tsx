@@ -36,6 +36,7 @@ type SearchResultItemProps = {
 };
 
 const SearchResultItem = ({ input }: SearchResultItemProps) => {
+  console.log(input._type);
   if (input._type === "pageModulaire") {
     return <CardPageModulaire input={input} size='md' />;
   }
@@ -54,7 +55,7 @@ const SearchResultItem = ({ input }: SearchResultItemProps) => {
   if (input._type === "imageImages") {
     return <CardImageImages input={input} size='md' />;
   }
-  if (input._type === "Feuilletage") {
+  if (input._type === "feuilletage") {
     return <CardFeuilletage input={input} size='md' />;
   }
   return "";

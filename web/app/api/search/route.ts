@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
     "pageModulaire",
     "imageImages",
     "feuilletage",
+    "serieThematique",
   ];
 
   const query = `*[_type in $postTypes
@@ -35,6 +36,7 @@ export async function POST(request: NextRequest) {
       || name match $s + "*"
       || tags[]->title match $s + "*"
       || artists[]->name match $s + "*"
+      || chercheur->name match $s + "*"
       )
     ]
     {
@@ -53,6 +55,7 @@ export async function POST(request: NextRequest) {
       color
     } | order(_createdAt desc)
     `;
+  console.log(query);
 
   try {
     const res = await client.fetch(query, { s, postTypes });
