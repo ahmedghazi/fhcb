@@ -15,6 +15,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'article',
     'partenaire',
     'artist',
+    'chercheur',
     'programme',
     'pageModulaire',
     'exhibition',
@@ -37,33 +38,18 @@ export const structure = (S: any) =>
   S.list()
     .title('Base')
     .items([
-      S.listItem()
-        .title('Réglages (header, footer, ...)')
-        .schemaType('settings')
-        .child(
-          S.editor()
-            .title('Réglages (header, footer, ...)')
-            .schemaType('settings')
-            .documentId('settings'),
-        ),
-      S.divider(),
-
-      S.listItem().title("Page d'accueil").schemaType('home').child(
-        S.editor()
-          // .title('Réglages (header, footer, ...)')
-          .schemaType('home')
-          .documentId('home'),
-      ),
-
-      S.listItem()
-        .title('Pages')
-        .schemaType('pageModulaire')
-        .child(S.documentTypeList('pageModulaire')),
       // S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),
 
       S.divider(),
 
       S.listItem().title('Artistes').schemaType('artist').child(S.documentTypeList('artist')),
+      S.listItem().title('Lieux').schemaType('location').child(S.documentTypeList('location')),
+      S.listItem()
+        .title('Partenaires')
+        .schemaType('partenaire')
+        .child(S.documentTypeList('partenaire')),
+
+      S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),
       S.divider(),
 
       S.listItem()
@@ -75,13 +61,16 @@ export const structure = (S: any) =>
         .title('Expostions')
         .schemaType('exhibition')
         .child(S.documentTypeList('exhibition')),
-      S.listItem().title('Lieux').schemaType('location').child(S.documentTypeList('location')),
-      S.divider(),
 
       S.listItem().title('Événements').schemaType('event').child(S.documentTypeList('event')),
-
+      S.listItem()
+        .title('Pages')
+        .schemaType('pageModulaire')
+        .child(S.documentTypeList('pageModulaire')),
+      S.listItem().title('Articles').schemaType('article').child(S.documentTypeList('article')),
       S.divider(),
 
+      /* SHOP */
       S.listItem()
         .title('Librairie')
         .schemaType('library')
@@ -90,8 +79,7 @@ export const structure = (S: any) =>
       S.listItem().title('Produits').schemaType('product').child(S.documentTypeList('product')),
       S.divider(),
 
-      S.listItem().title('Articles').schemaType('article').child(S.documentTypeList('article')),
-      S.divider(),
+      /* RESSOURCES */
       S.listItem()
         .title('Une images des Images')
         .schemaType('imageImages')
@@ -108,14 +96,23 @@ export const structure = (S: any) =>
 
       S.divider(),
 
-      S.listItem()
-        .title('Partenaires')
-        .schemaType('partenaire')
-        .child(S.documentTypeList('partenaire')),
+      S.listItem().title("Page d'accueil").schemaType('home').child(
+        S.editor()
+          // .title('Réglages (header, footer, ...)')
+          .schemaType('home')
+          .documentId('home'),
+      ),
       S.divider(),
 
-      S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),
-      S.divider(),
+      S.listItem()
+        .title('Réglages (header, footer, ...)')
+        .schemaType('settings')
+        .child(
+          S.editor()
+            .title('Réglages (header, footer, ...)')
+            .schemaType('settings')
+            .documentId('settings'),
+        ),
 
       // We also need to remove the new singletons from the main list
       ...S.documentTypeListItems().filter(hiddenDocTypes),

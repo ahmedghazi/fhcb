@@ -1,7 +1,11 @@
 import React from "react";
 import website from "@/app/config/website";
 import { Metadata, NextPage } from "next";
-import { ARTIST_QUERY, getArtist, getRandomArtists } from "@/app/sanity-api/sanity-queries";
+import {
+  ARTIST_QUERY,
+  getArtist,
+  getRandomArtists,
+} from "@/app/sanity-api/sanity-queries";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";

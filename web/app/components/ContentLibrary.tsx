@@ -1,12 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { LIBRARY_QUERY_RESULT } from "../sanity-api/types/sanity.types";
-import GridMasonry from "./ui/GridMasonry";
-import CardProduct from "./ui/cards/CardProduct";
-import { ProductExpanded } from "../sanity-api/types/sanity-expanded.types";
-import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { _localizeText } from "../sanity-api/utils";
-import Modules from "./modules";
 import ModuleSliderCardUI from "./modules/ModuleSliderCardUI";
 import ModuleGridCardUI from "./modules/ModuleGridCardUI";
 import ModuleListProductUI from "./modules/ModuleListProductUI";
