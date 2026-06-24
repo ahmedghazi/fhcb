@@ -47,7 +47,7 @@ const Footer = ({ settings }: Props) => {
             </Link>
           </div>
           <div className='navs'></div>
-          <div className='flex gap-gutter- items-baseline-'>
+          <div className='flex flex-col md:flex-row'>
             <address
               className='c-h2-'
               style={{
@@ -61,7 +61,7 @@ const Footer = ({ settings }: Props) => {
             </address>
             {settings?.navSecondary && (
               <nav className='footer__nav'>
-                <div className='grid md:grid-cols-3 gap-gutter'>
+                <div className='grid md:grid-cols-3 gap-sm md:gap-gutter'>
                   <ul className='md:col-span-3 grid md:grid-cols-3 gap-gutter'>
                     {settings.navSecondary.map((item: any) => {
                       return (

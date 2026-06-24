@@ -120,6 +120,8 @@ nav {
 
 @media all and (max-width: variables.$md) {
   .header__modal {
+    overflow-y: auto;
+
     &-content {
       display: flex;
       flex-direction: column;
@@ -128,24 +130,28 @@ nav {
       height: 100%;
     }
   }
-  nav ul.menu {
-    display: flex;
-    flex-direction: column;
+  nav {
+    // &.is-open
+    ul.menu {
+      display: flex;
+      flex-direction: column;
 
-    & > li .menu-label,
-    & > li > a .menu-label {
-      font-weight: 600;
-      font-size: var(--text-sm-6xl);
-      padding: 0;
-      line-height: 1;
-    }
-    .sub-menu {
-      position: initial;
-      padding: 0;
-      a {
-        .menu-label {
-          font-size: var(--text-sm-md);
-          font-weight: 200;
+      & > li .menu-label,
+      & > li > a .menu-label {
+        font-weight: 600;
+        font-size: var(--text-sm-6xl);
+        padding: 0;
+        line-height: 1;
+      }
+      .sub-menu {
+        position: initial;
+        padding: calc(var(--spacing-sm) * 0.9) 0;
+        a {
+          .menu-label {
+            font-size: var(--text-sm-md);
+            font-weight: 200;
+            line-height: 1.8;
+          }
         }
       }
     }

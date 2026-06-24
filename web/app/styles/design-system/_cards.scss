@@ -174,13 +174,13 @@
 
   &--is-current {
     &:not(.card--sm, .card--md) {
-      .card__inner {
-        padding: 0;
-        gap: 0;
-      }
-      .card__body {
-        padding: var(--spacing-xs);
-      }
+      // .card__inner {
+      //   padding: 0;
+      //   gap: 0;
+      // }
+      // .card__body {
+      //   padding: var(--spacing-xs);
+      // }
     }
     &.card--sm-alt {
       .card__inner {
@@ -189,20 +189,6 @@
     }
   }
 
-  &--footer-hover {
-    &:hover .card__footer {
-      display: flex;
-    }
-    .card__footer {
-      display: none;
-      // position: absolute;
-      // bottom: 0;
-      // left: 0;
-      // right: 0;
-      // padding: var(--spacing-xs);
-      // transform: translateY(50%);
-    }
-  }
   // ── Types / couleurs ────────────────────────────────────────────────────────
 
   &--product {
@@ -419,7 +405,7 @@
 
 // ─── card__inner modifiers ────────────────────────────────────────────────────
 
-.card__inner {
+.card .card__inner {
   position: relative;
   &--col {
     flex-direction: column;
@@ -453,6 +439,9 @@
 
   &--no-padding {
     padding: 0;
+    .card__body {
+      padding: var(--spacing-xs);
+    }
   }
 
   &--row-reverse {
@@ -496,8 +485,8 @@
   }
 }
 
-@media all and (max-width: variables.$md) {
-  .card {
+.card {
+  @media all and (max-width: variables.$md) {
     .card__inner--row .grid {
       flex-direction: column;
     }
@@ -506,8 +495,22 @@
         flex-direction: column-reverse;
         gap: var(--spacing-xs);
       }
-      img {
-        max-width: 100%;
+    }
+    img {
+      width: 100% !important;
+      max-width: 100%;
+      min-height: unset;
+      max-height: unset;
+    }
+  }
+
+  @media all and (mib-width: variables.$md) {
+    &--footer-hover {
+      &:hover .card__footer {
+        display: flex;
+      }
+      .card__footer {
+        display: none;
       }
     }
   }

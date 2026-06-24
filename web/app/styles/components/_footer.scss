@@ -24,8 +24,6 @@ footer {
       font-size: var(--text-lg);
       font-style: unset;
     }
-    p {
-    }
   }
   nav {
     padding: 0;
@@ -51,5 +49,26 @@ footer {
     }
   }
   @media all and (max-width: variables.$md) {
+    address {
+      padding: 0;
+      width: auto !important;
+    }
+    nav {
+      h5 {
+        margin-bottom: calc(var(--spacing-xs) * 0.8);
+      }
+      .nav-actions {
+        order: 2;
+        flex-wrap: wrap;
+        li:nth-child(1),
+        li:nth-child(2) {
+          min-width: 100%;
+          flex-basis: 100%;
+        }
+      }
+      .credits-n-legals {
+        order: 3;
+      }
+    }
   }
 }
