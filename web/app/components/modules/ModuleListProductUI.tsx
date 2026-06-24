@@ -9,6 +9,7 @@ import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import GridMasonry from "../ui/GridMasonry";
 import { publish } from "pubsub-js";
+import GridMasonryDessandro from "../ui/GridMasonryDessandro";
 
 type Props = {
   input: ListProductUI & {
@@ -44,7 +45,7 @@ const ModuleListProductUI = ({ input }: Props) => {
           )}
 
           {filteredItems.length > 0 && (
-            <GridMasonry columns={4}>
+            <GridMasonryDessandro>
               {filteredItems.map((item: ProductExpanded, index: number) => (
                 <Fragment key={`--${index}`}>
                   <div
@@ -57,7 +58,7 @@ const ModuleListProductUI = ({ input }: Props) => {
                   </div>
                 </Fragment>
               ))}
-            </GridMasonry>
+            </GridMasonryDessandro>
           )}
         </div>
       </div>

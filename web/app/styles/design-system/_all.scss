@@ -6,8 +6,25 @@
 }
 
 .grid-masonry-dessandro {
+  margin: 0 calc(var(--spacing-gutter) / -2);
+  .grid-item {
+    padding: 0 calc(var(--spacing-gutter) / 2) calc(var(--spacing-gutter) / 1);
+    box-sizing: border-box;
+  }
   .card {
-    padding: 0 var(--spacing-sm);
+    // padding: 0 var(--spacing-sm);
+    &--sm {
+      width: var(--gridder-3_12);
+    }
+    &--md {
+      width: var(--gridder-6_12);
+    }
+    &--sm-alt {
+      width: var(--gridder-4_12);
+    }
+    &--md-alt {
+      width: var(--gridder-8_12);
+    }
   }
 }
 .grid--centered {
