@@ -10,7 +10,7 @@ type Props = {
 const CardVideo = forwardRef<HTMLDivElement, Props>(({ input, style }, ref) => {
   return (
     <div ref={ref} style={style} className='card card--video card--md-alt'>
-      <MuxVideoPlayer playbackId={input?.asset?.playbackId} />
+      <MuxVideoPlayer playbackId={input?.asset?.playbackId} loop />
       <div className='card__footer'>
         <button className='btn'>
           La collection Henri Cartier-Bresson & Martine Franck

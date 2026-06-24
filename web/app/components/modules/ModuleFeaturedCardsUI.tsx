@@ -10,25 +10,23 @@ type Props = {
 };
 
 const ModuleFeaturedCardsUI = ({ input }: Props) => {
-  const { gridSize } = input;
   const ref = useRef<HTMLDivElement>(null);
   const items = input.items as unknown as ExhibitionExpanded[];
   const video = input.video;
+
+  const cards: React.ReactNode[] = (items ?? []).map((item, index) => (
+    <CardExhibitionFeatured key={`${item._id}-${index}`} input={item} />
+  ));
+  if (video) {
+    cards.splice(1, 0, <CardVideo key='video' input={video} />);
+  }
 
   return (
     <section className='module module--featured-cards-ui'>
       <div className='container-fluid'>
         <div className='module__inner'>
           <div ref={ref}>
-            <GridMasonryDessandro>
-              {video && <CardVideo input={video} />}
-              {items?.map((item, index: number) => (
-                <CardExhibitionFeatured
-                  key={`${item._id}-${index}`}
-                  input={item}
-                />
-              ))}
-            </GridMasonryDessandro>
+            <GridMasonryDessandro>{cards}</GridMasonryDessandro>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ type Props = {
   title?: string;
   controls?: boolean;
   paused?: boolean;
+  loop?: boolean;
 };
 
 const MuxVideoPlayer = ({
@@ -14,6 +15,7 @@ const MuxVideoPlayer = ({
   title,
   controls = false,
   paused = true,
+  loop = false,
 }: Props) => {
   const [ready, setReady] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
@@ -39,7 +41,7 @@ const MuxVideoPlayer = ({
             autoPlay='muted'
             muted={muted}
             paused={paused}
-            loop
+            loop={loop}
             // onTimeUpdate={(event: CustomEvent) => {
             //   const target = event.target as HTMLMediaElement;
             //   const currentTime = target?.currentTime;
