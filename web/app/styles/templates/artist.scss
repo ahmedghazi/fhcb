@@ -1,0 +1,29 @@
+.template--artist {
+  .hero-artist {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+
+    figure {
+      margin-bottom: var(--spacing-xs);
+      img {
+        // max-height: var(--max-img-h);
+        // width: 100%;
+        // object-fit: contain;
+        // object-position: left;
+      }
+      figcaption {
+        text-align: left;
+      }
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-2xs);
+      .btn {
+        width: auto;
+        display: inline-block;
+      }
+    }
+  }
+}

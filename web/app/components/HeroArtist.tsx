@@ -17,11 +17,11 @@ type Props = {
   input: NonNullable<ARTIST_QUERY_RESULT>;
 };
 
-const ContentArtist = ({ input }: Props) => {
+const HeroArtist = ({ input }: Props) => {
   const { text, imageCover, links } = input;
   // const _isRessource =
   return (
-    <div className='content--artist'>
+    <div className='hero-artist'>
       <div className='container-fluid'>
         <div className='grid md:grid-cols-2 gap-gutter'>
           <div className='group'>
@@ -34,7 +34,7 @@ const ContentArtist = ({ input }: Props) => {
                 copyright={_localizeField(imageCover?.asset?.creditLine)}
               />
             )}
-            <div className='flex flex-col gap-xs'>
+            <div className='links'>
               {links?.map((item: LinkExternal, i: number) => (
                 <a
                   className='btn'
@@ -46,11 +46,13 @@ const ContentArtist = ({ input }: Props) => {
               ))}
             </div>
           </div>
-          <div className=' text'>
-            <PortableText
-              value={_localizeField(text)}
-              components={portableTextComponents}
-            />
+          <div className='group'>
+            <div className=' text'>
+              <PortableText
+                value={_localizeField(text)}
+                components={portableTextComponents}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -59,4 +61,4 @@ const ContentArtist = ({ input }: Props) => {
   );
 };
 
-export default ContentArtist;
+export default HeroArtist;

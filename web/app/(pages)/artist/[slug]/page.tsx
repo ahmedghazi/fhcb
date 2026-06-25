@@ -8,12 +8,11 @@ import {
 } from "@/app/sanity-api/sanity-queries";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
 import { ARTIST_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import RebondsArtistes from "@/app/components/RebondsArtistes";
-import ContentArtist from "@/app/components/ContentArtist";
+import HeroArtist from "@/app/components/HeroArtist";
 
 type Params = Promise<{ slug: string }>;
 
@@ -59,7 +58,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       data-template='artist'
       data-slug={data.slug?.current || ""}>
       <PageHeader name={data.name} />
-      <ContentArtist input={data} />
+      <HeroArtist input={data} />
       <RebondsArtistes input={randomArtists} />
     </div>
   );
