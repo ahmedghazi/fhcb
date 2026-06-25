@@ -61,7 +61,16 @@ export function exhibitionToCard(
   size: "sm" | "md" | "lg" = "sm",
   featured?: boolean,
 ): CardBaseProps {
-  const { title, artists, imageCover, dates, tags, links, pastille } = input;
+  const {
+    title,
+    artists,
+    imageCover,
+    dates,
+    tags,
+    links,
+    linkTickets,
+    pastille,
+  } = input;
   const artistList = artists?.map((a) => a.name).join(", ");
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
@@ -98,13 +107,20 @@ export function exhibitionToCard(
     variant: "primary",
   });
 
-  if (links && !isPast) {
-    links.forEach((link) => {
-      actions.push({
-        label: (_localizeField(link.label) as string) || "",
-        href: link.link ?? "",
-        variant: "secondary",
-      });
+  // if (links && !isPast) {
+  //   links.forEach((link) => {
+  //     actions.push({
+  //       label: (_localizeField(link.label) as string) || "",
+  //       href: link.link ?? "",
+  //       variant: "secondary",
+  //     });
+  //   });
+  // }
+  if (linkTickets) {
+    actions.push({
+      label: _localizeText("bookTickets") as string,
+      href: linkTickets,
+      variant: "primary",
     });
   }
 
@@ -174,7 +190,16 @@ export function eventToCard(
   input: EventExpanded,
   size: "sm" | "md" | "lg" = "sm",
 ): CardBaseProps {
-  const { title, subTitle, imageCover, dates, tags, links, pastille } = input;
+  const {
+    title,
+    subTitle,
+    description,
+    imageCover,
+    dates,
+    tags,
+    links,
+    pastille,
+  } = input;
   const isPast = _isPastByDates(dates || []);
   const isHorsLeMurs = tags?.some(
     (tag: Tag) => tag.slug?.current === "hors-les-murs",
@@ -205,6 +230,7 @@ export function eventToCard(
     tags: toTags(tags),
     title: (_localizeField(title) as string) || "",
     subTitle: _localizeField(subTitle),
+    description: _localizeField(description),
     infoNode: toInfoNode(dates),
     actions: actions,
     badge:

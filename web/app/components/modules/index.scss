@@ -58,6 +58,9 @@
           order: 1;
         }
       }
+      h2 {
+        margin-bottom: var(--spacing-lg);
+      }
     }
     &--text-sidebar-ui {
       .module__inner {

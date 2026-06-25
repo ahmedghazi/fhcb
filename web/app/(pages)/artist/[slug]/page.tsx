@@ -13,6 +13,7 @@ import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
 import { ARTIST_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import RebondsArtistes from "@/app/components/RebondsArtistes";
+import ContentArtist from "@/app/components/ContentArtist";
 
 type Params = Promise<{ slug: string }>;
 
@@ -58,7 +59,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       data-template='artist'
       data-slug={data.slug?.current || ""}>
       <PageHeader name={data.name} />
-      <ContentModulaire input={data} />
+      <ContentArtist input={data} />
       <RebondsArtistes input={randomArtists} />
     </div>
   );

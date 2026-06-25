@@ -149,9 +149,11 @@ export const ARTIST_QUERY = groq`*[_type == "artist" && slug.current == $slug][0
     seo{
       ${seo}
     },
-    modules[]{
-      ${modules}
-    }
+    imageCover{
+      ${imageAsset}
+    },
+    text,
+    links
   }`;
 
 export async function getArtist(slug: string): Promise<ARTIST_QUERY_RESULT> {

@@ -58,6 +58,7 @@ const i18n = {
     delete: "Retirer",
     ressources: "Ressources",
     closeBanner: "Fermer l'annonce",
+    bookTicket: "Réserver vos billets",
   },
   en: {
     default: false,
@@ -114,6 +115,7 @@ const i18n = {
     delete: "Delete",
     ressources: "Ressources",
     closeBanner: "Close banner",
+    bookTicket: "Book your tickets",
   },
 };
 

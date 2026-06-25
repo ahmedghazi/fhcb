@@ -77,6 +77,14 @@ export default defineType({
       type: 'localeBlockContent',
       group: 'editorial',
     }),
+    defineField({
+      name: 'links',
+      title: 'Liens',
+      description: 'websitez, instagram, ...',
+      type: 'array',
+      of: [{type: 'linkExternal'}],
+      group: 'editorial',
+    }),
 
     defineField({
       name: 'modules',
@@ -85,7 +93,7 @@ export default defineType({
       type: 'array',
       of: modulesList,
       group: 'editorial',
-      hidde: true,
+      // hidden: true,
     }),
   ],
 
