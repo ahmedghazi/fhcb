@@ -18,13 +18,14 @@ import ModuleListImageImages from "./ModuleListImageImages";
 import ModuleListSerieThematiqueUI from "./ModuleListSerieThematiqueUI";
 import ModuleListExhibitionsUI from "./ModuleListExhibitionsUI";
 import ModuleListEventsUI from "./ModuleListEventsUI";
-import "./index.scss";
 import ModuleListExhibitionsPastUI from "./ModuleListExhibitionsPastUI";
 import ModuleSupportUI from "./ModuleSupportUI";
 import ModuleNewsletterUI from "./ModuleNewsletterUI";
 import ModuleRessourcesUI from "./ModuleRessourcesUI";
 import ModuleFormUI from "./ModuleFormUI";
 import ModuleBlockquoteUI from "./ModuleBlockquoteUI";
+import "./index.scss";
+import ModuleSliderArtistUI from "./ModuleSliderArtistUI";
 
 const Modules = ({ modules }: ModulesList) => {
   const _renderModules = () => {
@@ -95,6 +96,10 @@ const Modules = ({ modules }: ModulesList) => {
           return <ModuleRessourcesUI key={module._key} input={module as any} />;
         case "formUI":
           return <ModuleFormUI key={module._key} input={module as any} />;
+        case "sliderArtistUI":
+          return (
+            <ModuleSliderArtistUI key={module._key} input={module as any} />
+          );
         default:
           return null;
       }

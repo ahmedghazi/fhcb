@@ -16,7 +16,6 @@ type NavGroupProps = {
   input: LinkInternal | LinkExternal;
 };
 const NavGroup = ({ input }: NavGroupProps) => {
-  console.log(input);
   const {
     dispatchCurrentMenuMessage,
     dispatchCurrentMenuItem,

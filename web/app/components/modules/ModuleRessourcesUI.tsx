@@ -7,25 +7,32 @@ import { _localizeField } from "@/app/sanity-api/utils";
 import {
   FeuilletageExpanded,
   ImageImagesExpanded,
+  SerieThematiqueExpanded,
   PageModulaireExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardPageModulaire from "../ui/cards/CardPageModulaire";
 import CardBranche from "../ui/cards/CardBranche";
+import CardSerieThematique from "../ui/cards/CardSerieThematique";
 
 type Props = {
   input: RessourcesUI & {
-    feuilletages?: FeuilletageExpanded[];
-    imageImages: ImageImagesExpanded[];
-    branches: PageModulaireExpanded[];
+    feuilletages?: FeuilletageExpanded;
+    imageImages: ImageImagesExpanded;
+    serieThematique: SerieThematiqueExpanded;
+    branches: PageModulaireExpanded;
   };
 };
 
 const ModuleRessourcesUI = ({ input }: Props) => {
-  const { title, branches, feuilletages, imageImages } = input;
-  const items: Array<FeuilletageExpanded | ImageImagesExpanded> = [
-    ...(feuilletages ?? []),
-    ...(imageImages ?? []),
-  ];
+  const { title, branches, feuilletages, imageImages, serieThematique } = input;
+  // const items: Array<
+  //   FeuilletageExpanded | ImageImagesExpanded | SerieThematiqueExpanded
+  // > = [
+  //   ...(feuilletages ?? []),
+  //   ...(imageImages ?? []),
+  //   ...(serieThematique ?? []),
+  // ];
+  const itemsFlatten = [feuilletages, imageImages, serieThematique];
   return (
     <section className='module module--ressources-ui'>
       <div className='container-fluid'>
@@ -33,15 +40,18 @@ const ModuleRessourcesUI = ({ input }: Props) => {
           {title && (
             <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           )}
-
+          {/* <pre>{JSON.stringify(items)}</pre> */}
           <div className='grid--centered'>
-            {items.map((item, i) => (
+            {itemsFlatten.map((item, i) => (
               <Fragment key={i}>
-                {item._type === "imageImages" && (
+                {item?._type === "imageImages" && (
                   <CardImageImages input={item} size='md' />
                 )}
-                {item._type === "feuilletage" && (
+                {item?._type === "feuilletage" && (
                   <CardFeuilletage input={item} size='md' />
+                )}
+                {item?._type === "serieThematique" && (
+                  <CardSerieThematique input={item} size='md' />
                 )}
               </Fragment>
             ))}

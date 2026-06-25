@@ -58,6 +58,7 @@ import listProductUI from './objects/modules/listProductUI'
 import ressourcesUI from './objects/modules/ressourcesUI'
 import formUI from './objects/modules/formUI'
 import blockquoteUI from './objects/modules/blockquoteUI'
+import sliderArtistUI from './objects/modules/sliderArtistUI'
 
 /** ui */
 import filterSort from './objects/filterSort'
@@ -147,5 +148,6 @@ export const schemaTypes = [
   ressourcesUI,
   formUI,
   blockquoteUI,
+  sliderArtistUI,
 ]
 export default schemaTypes

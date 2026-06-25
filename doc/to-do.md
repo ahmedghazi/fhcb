@@ -92,6 +92,10 @@ cards simili document
 - # pastilles event
 - page 404
 - mobile font sizes
+- module carte videos
+- video Cover sur les pages ressources
+- page ressources ajouter un sliderArtiste (ressources + articles)
+- module ressources doit afficher 1 / type, pas toutes les ressources.
 
 ## card expos
 

@@ -4,7 +4,7 @@ import {VscLibrary} from 'react-icons/vsc'
 
 export default defineField({
   name: 'ressourcesUI',
-  title: 'Ressources UI',
+  title: 'Ressources Mise en avant UI',
   type: 'object',
   icon: VscLibrary,
   fields: [

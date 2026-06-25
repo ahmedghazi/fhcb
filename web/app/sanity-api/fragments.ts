@@ -513,6 +513,36 @@ export const sliderCardUI = `
   }
 `;
 
+export const sliderArtistUI = `
+  _type == "sliderArtistUI" => {
+    ...,
+    artist->{
+      _id,
+      name,
+      slug
+    },
+    "items": *[
+      _id != ^._id &&
+      (
+        (
+          _type in [ "feuilletage", "imageImages", "serieThematique"] &&
+          references(^.artist._ref)
+        )
+        ||
+        (
+          _type == "artist" &&
+          _id == ^.artist._ref
+        )
+      )
+    ] | order(dates[0].du asc) {
+      ${cardTypes}
+    },
+    cta{
+      ${cta}
+    }
+  }
+`;
+
 export const gridCardUI = `
   _type == "gridCardUI" => {
     ...,
@@ -825,10 +855,13 @@ export const newsletterUI = `
 export const ressourcesUI = `
   _type == "ressourcesUI" => {
     ...,
-    "imageImages": *[_type == "imageImages"] | order(_createdAt asc) {
+    "imageImages": *[_type == "imageImages"] | order(_createdAt desc)[0] {
       ${cardRefImageImages}
     },
-    "feuilletage": *[_type == "feuilletage"] | order(_createdAt asc) {
+    "feuilletage": *[_type == "feuilletage"] | order(_createdAt desc)[0] {
+      ${cardRefFeuilletage}
+    },
+    "serieThematique": *[_type == "serieThematique"] | order(_createdAt desc)[0] {
       ${cardRefFeuilletage}
     },
     branches[]->{
@@ -868,7 +901,8 @@ export const modules = `
   ${supportUI},
   ${newsletterUI},
   ${formUI},
-  ${blockquoteUI}
+  ${blockquoteUI},
+  ${sliderArtistUI}
 `;
 
 const allPostType = [

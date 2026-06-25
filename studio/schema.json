@@ -1,5 +1,67 @@
 [
   {
+    "type": "type",
+    "name": "artist.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "artist"
+    }
+  },
+  {
+    "name": "sliderArtistUI",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "sliderArtistUI"
+          }
+        },
+        "artist": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "artist.reference"
+          },
+          "optional": true
+        },
+        "cta": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "cta"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "blockquoteUI",
     "type": "type",
     "value": {
@@ -1530,36 +1592,6 @@
         }
       },
       "dereferencesTo": "product"
-    }
-  },
-  {
-    "type": "type",
-    "name": "artist.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "artist"
     }
   },
   {
@@ -4731,21 +4763,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "blockquoteUI"
                 }
               },
@@ -4761,7 +4778,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -4776,82 +4793,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -4881,7 +4823,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -4896,7 +4838,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -4911,7 +4853,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -4971,7 +4928,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -4986,7 +4943,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -5001,7 +4958,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -5031,7 +5003,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -5988,21 +6035,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "blockquoteUI"
                 }
               },
@@ -6018,7 +6050,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -6033,82 +6065,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -6138,7 +6095,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -6153,7 +6110,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -6168,7 +6125,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -6228,7 +6200,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -6243,7 +6215,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -6258,7 +6230,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -6288,7 +6275,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -6490,6 +6552,14 @@
         },
         "optional": true
       },
+      "text": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeBlockContent"
+        },
+        "optional": true
+      },
       "modules": {
         "type": "objectAttribute",
         "value": {
@@ -6497,21 +6567,6 @@
           "of": {
             "type": "union",
             "of": [
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "textUI"
-                }
-              },
               {
                 "type": "object",
                 "attributes": {
@@ -6539,7 +6594,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -6554,82 +6609,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -6659,7 +6639,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -6674,7 +6654,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -6689,7 +6669,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -6749,7 +6744,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -6764,7 +6759,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -6779,7 +6774,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -6809,7 +6819,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -7077,21 +7162,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "blockquoteUI"
                 }
               },
@@ -7107,7 +7177,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -7122,82 +7192,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -7227,7 +7222,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -7242,7 +7237,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -7257,7 +7252,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -7317,7 +7327,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -7332,7 +7342,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -7347,7 +7357,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -7377,7 +7402,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -7792,21 +7892,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "blockquoteUI"
                 }
               },
@@ -7822,7 +7907,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -7837,82 +7922,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -7942,7 +7952,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -7957,7 +7967,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -7972,7 +7982,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -8032,7 +8057,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -8047,7 +8072,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -8062,7 +8087,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -8092,7 +8132,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -8374,21 +8489,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "blockquoteUI"
                 }
               },
@@ -8404,7 +8504,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -8419,82 +8519,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -8524,7 +8549,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -8539,7 +8564,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -8554,7 +8579,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -8614,7 +8654,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -8629,7 +8669,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -8644,7 +8684,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -8674,7 +8729,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -9232,21 +9362,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "blockquoteUI"
                 }
               },
@@ -9262,7 +9377,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -9277,82 +9392,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -9382,7 +9422,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -9397,7 +9437,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -9412,7 +9452,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -9472,7 +9527,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -9487,7 +9542,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -9502,7 +9557,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -9532,7 +9602,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -9772,21 +9917,6 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
                   "name": "blockquoteUI"
                 }
               },
@@ -9802,7 +9932,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textImageUI"
+                  "name": "featuredCardsUI"
                 }
               },
               {
@@ -9817,82 +9947,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "textSidebarUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "imagesUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "videoUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "listsUI"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "sliderCardUI"
+                  "name": "formUI"
                 }
               },
               {
@@ -9922,7 +9977,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "programmeUI"
+                  "name": "imagesUI"
                 }
               },
               {
@@ -9937,7 +9992,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "newsCardUI"
+                  "name": "listEventsUI"
                 }
               },
               {
@@ -9952,7 +10007,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "featuredCardsUI"
+                  "name": "listExhibitionsPastUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "listExhibitionsUI"
                 }
               },
               {
@@ -10012,7 +10082,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsUI"
+                  "name": "listUI"
                 }
               },
               {
@@ -10027,7 +10097,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listExhibitionsPastUI"
+                  "name": "listsUI"
                 }
               },
               {
@@ -10042,7 +10112,22 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "listEventsUI"
+                  "name": "newsCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "programmeUI"
                 }
               },
               {
@@ -10072,7 +10157,82 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "formUI"
+                  "name": "sliderArtistUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "sliderCardUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textImageUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textSidebarUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "textUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "videoUI"
                 }
               }
             ]
@@ -10127,60 +10287,6 @@
           }
         },
         "optional": true
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "mux.videoAsset.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "mux.videoAsset"
-    }
-  },
-  {
-    "name": "mux.video",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "mux.video"
-          }
-        },
-        "asset": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "mux.videoAsset.reference"
-          },
-          "optional": true
-        }
       }
     }
   },
@@ -10464,6 +10570,60 @@
           "name": "slug"
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "mux.videoAsset.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "mux.videoAsset"
+    }
+  },
+  {
+    "name": "mux.video",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "mux.video"
+          }
+        },
+        "asset": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "mux.videoAsset.reference"
+          },
+          "optional": true
+        }
       }
     }
   },

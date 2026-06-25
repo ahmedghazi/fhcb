@@ -105,7 +105,8 @@
         }
       }
     }
-    &--slider-card-ui {
+    &--slider-card-ui,
+    &--slider-artist-ui {
       overflow-x: hidden;
 
       h2 {
@@ -178,6 +179,9 @@
           }
         }
       }
+    }
+    &--slider-artist-ui {
+      padding: var(--spacing-lg) 0;
     }
     &--video-ui {
       &:hover .logo-fhcb svg path {
