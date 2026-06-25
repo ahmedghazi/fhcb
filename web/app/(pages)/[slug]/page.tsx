@@ -71,6 +71,7 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
           title={data.rebondsLabel || "ressources"}
         />
       )}
+      {/* <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} /> */}
     </div>
   );
 };

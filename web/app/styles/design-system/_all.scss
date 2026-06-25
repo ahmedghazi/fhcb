@@ -49,6 +49,10 @@
       flex-basis: var(--gridder-6_12);
       width: var(--gridder-6_12);
     }
+    &--md-alt {
+      // flex-basis: var(--gridder-1_3);
+      // width: var(--gridder-1_3);
+    }
   }
 
   @media all and (max-width: variables.$md) {
