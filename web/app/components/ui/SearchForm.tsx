@@ -183,7 +183,7 @@ const SearchForm = ({ settings }: Props) => {
         <div className={styles.searchResults}>
           <div className='inner'>
             <div className='body'>
-              <div className='grid md:grid-cols-12 gap-gutter'>
+              <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter grid--centered'>
                 {searchResult?.map((item, i) => (
                   <SearchResultItem input={item} key={i} />
                 ))}

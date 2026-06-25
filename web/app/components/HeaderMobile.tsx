@@ -55,30 +55,32 @@ const HeaderMobile = ({ settings }: Props) => {
         </ul>
       </div>
       <div className={clsx("header__modal", open && "header__modal--open")}>
-        <div className='header__modal-content'>
-          <div className='header__group'>
-            {settings?.btnTickets && (
-              <a
-                target='_blank'
-                rel='noopener noreferrer'
-                href={settings.btnTickets.link}
-                className='btn-tickets'>
-                {_localizeField(settings.btnTickets.label)}
-              </a>
-            )}
-          </div>
-          <div className='header__group'>
-            {settings?.navPrimary && (
-              <Nav
-                navPrimary={(settings.navPrimary ?? undefined) as any}
-                settings={settings}
-              />
-            )}
-          </div>
-          <div className='header__group'>
-            <div className='flex justify-between'>
-              <SearchToggle />
-              <LocalesSwitcher />
+        <div className='scroll-y'>
+          <div className='header__modal-content'>
+            <div className='header__group'>
+              {settings?.btnTickets && (
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={settings.btnTickets.link}
+                  className='btn-tickets'>
+                  {_localizeField(settings.btnTickets.label)}
+                </a>
+              )}
+            </div>
+            <div className='header__group'>
+              {settings?.navPrimary && (
+                <Nav
+                  navPrimary={(settings.navPrimary ?? undefined) as any}
+                  settings={settings}
+                />
+              )}
+            </div>
+            <div className='header__group'>
+              <div className='flex justify-between'>
+                <SearchToggle />
+                <LocalesSwitcher />
+              </div>
             </div>
           </div>
         </div>

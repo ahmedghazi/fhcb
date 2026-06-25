@@ -678,6 +678,13 @@ export type LinkInternal = {
     | ProgrammeReference
     | FeuilletageReference
     | ImageImagesReference;
+  imageCover?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   withSubmenu?: boolean;
   subMenu?: Array<
     | ({
@@ -1183,6 +1190,7 @@ export type PageModulaire = {
     | "aroundThertist"
     | "discover"
     | "discoverToo"
+    | "toDiscoverToo"
     | "aroundThertist"
     | "discoverTheArtist"
     | "discoverTheExhibition";
@@ -5310,6 +5318,13 @@ export type SETTINGS_QUERY_RESULT = {
               > | null;
             }
           | null;
+        imageCover?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
         withSubmenu?: boolean;
         subMenu: Array<
           | {
@@ -8301,6 +8316,13 @@ export type SETTINGS_QUERY_RESULT = {
                     > | null;
                   }
                 | null;
+              imageCover?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
               withSubmenu?: boolean;
               subMenu?: Array<
                 | ({
@@ -8938,6 +8960,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -9887,6 +9910,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -10264,6 +10288,13 @@ export type SETTINGS_QUERY_RESULT = {
           slug: Slug | null;
         }
       | null;
+    imageCover?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     withSubmenu?: boolean;
     subMenu?: Array<
       | ({
@@ -13313,6 +13344,13 @@ export type SETTINGS_QUERY_RESULT = {
               > | null;
             }
           | null;
+        imageCover?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
         withSubmenu?: boolean;
         subMenu: Array<
           | {
@@ -16304,6 +16342,13 @@ export type SETTINGS_QUERY_RESULT = {
                     > | null;
                   }
                 | null;
+              imageCover?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
               withSubmenu?: boolean;
               subMenu?: Array<
                 | ({
@@ -16941,6 +16986,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -17890,6 +17936,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -21211,6 +21258,13 @@ export type SETTINGS_QUERY_RESULT = {
               > | null;
             }
           | null;
+        imageCover?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
         withSubmenu?: boolean;
         subMenu: Array<
           | {
@@ -24202,6 +24256,13 @@ export type SETTINGS_QUERY_RESULT = {
                     > | null;
                   }
                 | null;
+              imageCover?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
               withSubmenu?: boolean;
               subMenu?: Array<
                 | ({
@@ -24839,6 +24900,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -25788,6 +25850,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -29109,6 +29172,13 @@ export type SETTINGS_QUERY_RESULT = {
               > | null;
             }
           | null;
+        imageCover?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
         withSubmenu?: boolean;
         subMenu: Array<
           | {
@@ -32100,6 +32170,13 @@ export type SETTINGS_QUERY_RESULT = {
                     > | null;
                   }
                 | null;
+              imageCover?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
               withSubmenu?: boolean;
               subMenu?: Array<
                 | ({
@@ -32737,6 +32814,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -33686,6 +33764,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -37007,6 +37086,13 @@ export type SETTINGS_QUERY_RESULT = {
               > | null;
             }
           | null;
+        imageCover?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
         withSubmenu?: boolean;
         subMenu: Array<
           | {
@@ -39998,6 +40084,13 @@ export type SETTINGS_QUERY_RESULT = {
                     > | null;
                   }
                 | null;
+              imageCover?: {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
               withSubmenu?: boolean;
               subMenu?: Array<
                 | ({
@@ -40635,6 +40728,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -41584,6 +41678,7 @@ export type SETTINGS_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -43407,6 +43502,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -45816,6 +45912,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -46651,6 +46748,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -47600,6 +47698,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -48557,6 +48656,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -49506,6 +49606,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -50533,6 +50634,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -51482,6 +51584,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -51854,6 +51957,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
     | "discoverTheExhibition"
     | "discoverToo"
     | "readMore"
+    | "toDiscoverToo"
     | "viewMore";
   rebonds: Array<
     | {
@@ -52926,6 +53030,7 @@ export type ARTIST_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -55335,6 +55440,7 @@ export type ARTIST_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -56170,6 +56276,7 @@ export type ARTIST_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -57119,6 +57226,7 @@ export type ARTIST_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -58076,6 +58184,7 @@ export type ARTIST_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -59025,6 +59134,7 @@ export type ARTIST_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -60052,6 +60162,7 @@ export type ARTIST_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -61001,6 +61112,7 @@ export type ARTIST_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -62327,6 +62439,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -64736,6 +64849,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -65571,6 +65685,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -66520,6 +66635,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -67477,6 +67593,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -68426,6 +68543,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -69453,6 +69571,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -70402,6 +70521,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -72001,6 +72121,7 @@ export type EVENT_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -74410,6 +74531,7 @@ export type EVENT_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -75245,6 +75367,7 @@ export type EVENT_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -76194,6 +76317,7 @@ export type EVENT_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -77151,6 +77275,7 @@ export type EVENT_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -78100,6 +78225,7 @@ export type EVENT_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -79127,6 +79253,7 @@ export type EVENT_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -80076,6 +80203,7 @@ export type EVENT_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -81649,6 +81777,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -84058,6 +84187,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -84893,6 +85023,7 @@ export type PROGRAMME_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -85842,6 +85973,7 @@ export type PROGRAMME_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -86799,6 +86931,7 @@ export type PROGRAMME_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -87748,6 +87881,7 @@ export type PROGRAMME_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -88775,6 +88909,7 @@ export type PROGRAMME_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -89724,6 +89859,7 @@ export type PROGRAMME_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -90196,6 +90332,7 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
     | "discoverTheExhibition"
     | "discoverToo"
     | "readMore"
+    | "toDiscoverToo"
     | "viewMore";
   rebonds?: ArrayOf<
     | EventReference
@@ -90900,6 +91037,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -91849,6 +91987,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -93186,6 +93325,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -95595,6 +95735,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -96430,6 +96571,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -97379,6 +97521,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -98336,6 +98479,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -99285,6 +99429,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -100312,6 +100457,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -101261,6 +101407,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -103097,6 +103244,7 @@ export type ARTICLE_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -105506,6 +105654,7 @@ export type ARTICLE_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -106341,6 +106490,7 @@ export type ARTICLE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -107290,6 +107440,7 @@ export type ARTICLE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -108247,6 +108398,7 @@ export type ARTICLE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -109196,6 +109348,7 @@ export type ARTICLE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -110223,6 +110376,7 @@ export type ARTICLE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -111172,6 +111326,7 @@ export type ARTICLE_QUERY_RESULT = {
                               | "discoverTheExhibition"
                               | "discoverToo"
                               | "readMore"
+                              | "toDiscoverToo"
                               | "viewMore";
                             rebonds?: ArrayOf<
                               | EventReference
@@ -112562,6 +112717,7 @@ export type LIBRARY_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference
@@ -113689,6 +113845,7 @@ export type LIBRARY_QUERY_RESULT = {
                 | "discoverTheExhibition"
                 | "discoverToo"
                 | "readMore"
+                | "toDiscoverToo"
                 | "viewMore";
               rebonds?: ArrayOf<
                 | EventReference

@@ -26,6 +26,15 @@ header.is-modal-open {
     height: 100%;
     position: relative;
   }
+  .btn-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(-120%);
+    svg line {
+      fill: white;
+    }
+  }
   .nav-media {
     position: absolute;
     right: 0;
@@ -89,6 +98,9 @@ nav {
     .menu-label {
       cursor: pointer;
       // padding-left: 2em;
+      &.is-active + .sub-menu {
+        display: block;
+      }
     }
     & > li {
       // flex: 1;
@@ -99,37 +111,22 @@ nav {
         display: inline-block;
         font-weight: 450;
       }
-      &.has-submenu {
-        & > a {
-          // pointer-events: none;
-        }
-      }
     }
 
     .sub-menu {
       position: absolute;
       left: 2em;
-      // left: 0;
+      left: 0;
+      padding: 1.5rem 2rem var(--spacing-lg);
       display: none;
-      padding-top: 1.5rem;
-      padding-bottom: var(--spacing-lg);
+      // padding-top: 1.5rem;
+      // padding-bottom: var(--spacing-lg);
       font-weight: 200;
     }
   }
 }
 
 @media all and (max-width: variables.$md) {
-  .header__modal {
-    overflow-y: auto;
-
-    &-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: var(--spacing-sm);
-      height: 100%;
-    }
-  }
   nav {
     // &.is-open
     ul.menu {

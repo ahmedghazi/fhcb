@@ -10,14 +10,25 @@ import portableTextComponents from "../sanity-api/portableTextComponents";
 import NavMessage from "./NavMessage";
 import NavMedia from "./NavMedia";
 import clsx from "clsx";
+import Icon from "./ui/Icon";
 
 type Props = {
   settings: NonNullable<SETTINGS_QUERY_RESULT>;
 };
 
 const NavModal = ({ settings }: Props) => {
-  const { modalType, currentMenuItem, currentMenuMessage } = useHeader();
+  const {
+    modalType,
+    currentMenuItem,
+    currentMenuMessage,
+    dispatchCurrentMenuItem,
+    dispatchModalType,
+  } = useHeader();
 
+  const _close = () => {
+    dispatchCurrentMenuItem(null);
+    dispatchModalType(null);
+  };
   return (
     <div
       className={clsx("nav-modal", modalType && `nav-modal--${modalType}`)}
@@ -27,9 +38,14 @@ const NavModal = ({ settings }: Props) => {
           <aside>
             {currentMenuMessage && <NavMessage input={currentMenuMessage} />}
           </aside>
-          {!!currentMenuItem?.images?.length && <NavMedia input={currentMenuItem} />}
+          {!!currentMenuItem?.images?.length && (
+            <NavMedia input={currentMenuItem} />
+          )}
 
           {modalType === "search" && <SearchForm settings={settings} />}
+          <button className='btn-close' onClick={_close}>
+            <Icon name='close' />
+          </button>
         </div>
       </div>
     </div>

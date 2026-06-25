@@ -1,8 +1,7 @@
-import React, { CSSProperties, useEffect } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import {
   LinkExternal,
   LinkInternal,
-  Settings,
   SETTINGS_QUERY_RESULT,
 } from "../sanity-api/types/sanity.types";
 import clsx from "clsx";
@@ -10,9 +9,83 @@ import Link from "next/link";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
 import useHeader, { NavMenuItem } from "../context/HeaderContext";
 import { usePathname } from "next/navigation";
-import LogoFHCB from "./LogoFHCB";
 import { _collectFirstImagesFromNavItem } from "../lib/utils";
-import BtnCart from "./ui/btns/BtnCart";
+import useDeviceDetect from "../hooks/useDeviceDetect";
+
+type NavGroupProps = {
+  input: LinkInternal | LinkExternal;
+};
+const NavGroup = ({ input }: NavGroupProps) => {
+  console.log(input);
+  const {
+    dispatchCurrentMenuMessage,
+    dispatchCurrentMenuItem,
+    dispatchModalType,
+    currentMenuItem,
+  } = useHeader();
+  const { isMobile } = useDeviceDetect();
+  const hasSubmenu = input._type === "linkInternal" && input.subMenu;
+
+  const _onMouseEnter = () => {
+    if (isMobile) return;
+    dispatchCurrentMenuMessage(null);
+    if (input._type === "linkInternal" && input.withMessage) {
+      dispatchCurrentMenuMessage(input.navMessage || null);
+    }
+
+    if (input._type === "linkInternal" && input.imageCover) {
+      dispatchCurrentMenuItem({
+        ...input,
+        images: [input.imageCover],
+      } as NavMenuItem);
+    }
+    // if (input._type === "linkInternal" && input.link) {
+    //   const link = input.link as any;
+    //   const images = _collectFirstImagesFromNavItem(link);
+
+    //   dispatchCurrentMenuItem({ ...link, images } as NavMenuItem);
+    // }
+    else {
+      dispatchModalType("menu");
+    }
+  };
+
+  return (
+    <li
+      className={clsx(hasSubmenu && "has-submenu")}
+      onMouseLeave={() => {
+        if (currentMenuItem) return;
+        dispatchCurrentMenuItem(null);
+      }}
+      onMouseEnter={() => {
+        _onMouseEnter();
+      }}>
+      <NavItem
+        item={input}
+        withSubMenu={
+          input._type === "linkInternal" &&
+          input.subMenu &&
+          input.subMenu?.length > 0
+        }
+      />
+
+      {hasSubmenu && (
+        <ul
+          className='sub-menu'
+          onMouseLeave={() => {
+            // dispatchCurrentMenuItem(null);
+            // dispatchModalType(null);
+          }}>
+          {input.subMenu?.map((subItem, i) => (
+            <li key={i} className=''>
+              <NavItem item={subItem} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+};
 
 type NavItemProps = {
   item: LinkInternal | LinkExternal;
@@ -20,10 +93,27 @@ type NavItemProps = {
 };
 const NavItem = ({ item, withSubMenu }: NavItemProps) => {
   // const { dispatchCurrentMenuItem } = useHeader();
+  const { isMobile } = useDeviceDetect();
+  const pathname = usePathname();
+  const [active, setActive] = useState<boolean>(false);
 
+  useEffect(() => {
+    setActive(false);
+  }, [pathname]);
+
+  const _onTouchStart = () => {
+    if (!isMobile) return;
+    setActive(!active);
+  };
   if (item._type === "linkInternal") {
     if (withSubMenu) {
-      return <div className='menu-label'>{_localizeField(item.label)}</div>;
+      return (
+        <div
+          onTouchStart={_onTouchStart}
+          className={clsx("menu-label", active && "is-active")}>
+          {_localizeField(item.label)}
+        </div>
+      );
     } else {
       return (
         <Link href={_linkResolver(item.link)}>
@@ -60,12 +150,12 @@ type Props = {
 const Nav = ({ navPrimary, settings }: Props) => {
   const {
     dispatchCurrentMenuItem,
-
     dispatchCurrentMenuMessage,
     modalType,
     dispatchModalType,
   } = useHeader();
   const pathname = usePathname();
+
   useEffect(() => {
     dispatchCurrentMenuItem(null);
     dispatchModalType(null);
@@ -74,7 +164,7 @@ const Nav = ({ navPrimary, settings }: Props) => {
   const menuStyle: React.CSSProperties = {
     "--nav-len": navPrimary?.length,
   } as React.CSSProperties;
-  // console.log(navPrimary);
+
   return (
     <nav
       className={clsx(modalType != null && "is-open")}
@@ -84,66 +174,7 @@ const Nav = ({ navPrimary, settings }: Props) => {
       }}>
       <ul className='menu' style={menuStyle}>
         {navPrimary?.map((item, i) => (
-          <li
-            key={i}
-            className={clsx(
-              item._type === "linkInternal" && item.subMenu && "has-submenu",
-            )}
-            onMouseLeave={() => {
-              // dispatchCurrentMenuItem(null);
-            }}
-            onMouseEnter={() => {
-              dispatchCurrentMenuMessage(null);
-              if (item._type === "linkInternal" && item.withMessage) {
-                dispatchCurrentMenuMessage(item.navMessage || null);
-              }
-
-              if (item._type === "linkInternal" && item.link) {
-                const link = item.link as any;
-                const images = _collectFirstImagesFromNavItem(link);
-
-                dispatchCurrentMenuItem({ ...link, images } as NavMenuItem);
-              } else {
-                dispatchModalType("menu");
-              }
-            }}>
-            <NavItem
-              item={item}
-              withSubMenu={
-                item._type === "linkInternal" &&
-                item.subMenu &&
-                item.subMenu?.length > 0
-              }
-            />
-
-            {item._type === "linkInternal" && item.subMenu && (
-              <ul
-                className='sub-menu'
-                onMouseLeave={() => {
-                  // dispatchCurrentMenuItem(null);
-                  // dispatchModalType(null);
-                }}>
-                {item.subMenu.map((subItem, i) => (
-                  <li
-                    key={i}
-                    className=''
-                    onMouseEnter={() => {
-                      if (subItem._type === "linkInternal" && subItem.link) {
-                        const link = subItem.link as any;
-                        const images = _collectFirstImagesFromNavItem(link);
-
-                        dispatchCurrentMenuItem({
-                          ...link,
-                          images,
-                        } as NavMenuItem);
-                      }
-                    }}>
-                    <NavItem item={subItem} />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
+          <NavGroup key={i} input={item} />
         ))}
 
         {settings?.btnLibrary && (

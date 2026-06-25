@@ -59,17 +59,8 @@ export const blockContent = `
   }
 `;
 
-export const linkInternal = `
-  ...,
-  link->{
-    _type,
-    slug
-  }
-`;
-
-export const linkInternalWithImage = `
-  ...,
-  link->{
+/*
+link->{
     _type,
     slug,
     "imageCover": coalesce(imageCover, image){
@@ -120,7 +111,7 @@ export const linkInternalWithImage = `
       }
     }
   }
-`;
+*/
 
 export const cta = `
   ...,
@@ -132,6 +123,23 @@ export const cta = `
     }
   },
 `;
+
+export const linkInternal = `
+  ...,
+  link->{
+    _type,
+    slug
+  }
+`;
+
+export const linkInternalWithImage = `
+  ...,
+  ${linkInternal},
+  imageCover{
+    ${imageAsset}
+  }
+`;
+
 export const nav = `
   ...,
   _type == 'linkInternal' => {
@@ -139,7 +147,7 @@ export const nav = `
     subMenu[]{
       ...,
       _type == 'linkInternal' => {
-        ${linkInternalWithImage},
+        ${linkInternal},
       }
     },
     withMessage,
@@ -157,13 +165,6 @@ export const nav = `
     }
   }
 `;
-
-/**
-     // imageCover{
-    //   // ${imageAsset}
-    //   asset->_id
-    // }
- */
 
 export const imageInGrid = `
   ...,

@@ -13,13 +13,15 @@ export default defineField({
       label: `label.${baseLanguage}`,
       _type: 'link._type',
       withSubmenu: 'withSubmenu',
+      media: 'imageCover',
     },
     prepare(selection) {
-      const {label, _type, withSubmenu} = selection
+      const {label, _type, withSubmenu, media} = selection
       console.log(label, _type)
       return {
         title: label,
         subtitle: withSubmenu ? 'Avec sous-menu' : _type,
+        media: media,
         // subtitle: link._type,
         // subtitle: "test",
       }
@@ -36,6 +38,11 @@ export default defineField({
       title: 'Lien',
       weak: true,
       to: linkInternalTypes,
+    }),
+    defineField({
+      name: 'imageCover',
+      type: 'image',
+      title: 'Image clef',
     }),
     defineField({
       name: 'withSubmenu',

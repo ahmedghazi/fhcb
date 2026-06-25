@@ -7,17 +7,10 @@ import {
   _localizeField,
   _localizeText,
 } from "../sanity-api/utils";
-import useLocale from "../context/LocaleContext";
-import LogoFHCB from "./LogoFHCB";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
-import Nav from "./Nav";
-import LocalesSwitcher from "./ui/LocaleSwitcher";
-import SearchToggle from "./ui/SearchToggle";
 import NavModal from "./NavModal";
 import useHeader from "../context/HeaderContext";
-import useCart from "../context/CartContext";
 import clsx from "clsx";
-import BtnCart from "./ui/btns/BtnCart";
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
 
