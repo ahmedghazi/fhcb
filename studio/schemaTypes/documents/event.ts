@@ -2,8 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
 import {BsCalendar2Event} from 'react-icons/bs'
 import slug from '../fields/slug'
-import modulesList from '../objects/modules/modulesList'
-import imageFields from '../misc/imageFields'
+import modulesListExhibitionEvent from '../objects/modules/modulesListExhibitionEvent'
 
 export default defineType({
   type: 'document',
@@ -105,7 +104,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes, embed)',
       type: 'array',
-      of: modulesList,
+      of: modulesListExhibitionEvent,
       group: 'editorial',
     }),
 

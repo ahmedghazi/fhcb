@@ -13,7 +13,7 @@ type Props = {
 };
 
 const ModuleTextImageUI = ({ input }: Props) => {
-  const { image, text, direction } = input;
+  const { title, image, text, direction } = input;
   const localizedText = _localizeField(text);
   return (
     <section
@@ -37,6 +37,11 @@ const ModuleTextImageUI = ({ input }: Props) => {
             )}
             {localizedText && (
               <div className='module__text text md:col-span-7'>
+                {title && (
+                  <h2 className='module__title c-h1_5'>
+                    {_localizeField(title)}
+                  </h2>
+                )}
                 <PortableText
                   value={localizedText}
                   components={portableTextComponents}

@@ -52,8 +52,14 @@
   }
 
   &__close {
-    font-size: 1.5rem;
-    line-height: 1;
+    // font-size: 1.5rem;
+    // line-height: 1;
+    position: absolute;
+    right: var(--spacing-sm);
+    top: var(--spacing-sm);
+    svg line {
+      stroke: var(--color-primary);
+    }
   }
 
   &__empty {

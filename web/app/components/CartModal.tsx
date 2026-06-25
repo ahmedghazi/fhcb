@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import useCart from "../context/CartContext";
 import { _localizeText } from "../sanity-api/utils";
+import Icon from "./ui/Icon";
 
 const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
 
@@ -74,6 +75,12 @@ const CartModal = () => {
       data-lenis-prevent>
       <div className='cart-modal__overlay' onClick={closeCart} />
       <div className='cart-modal__inner'>
+        <button
+          className='cart-modal__close'
+          onClick={closeCart}
+          aria-label={_localizeText("close")}>
+          <Icon name='close' />
+        </button>
         {/* <div className='cart-modal__header'>
           <h2 className='c-h4'>{_localizeText("cart")}</h2>
           <button

@@ -2,8 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
 import {LuGalleryHorizontal} from 'react-icons/lu'
 import slug from '../fields/slug'
-import modulesList from '../objects/modules/modulesList'
-import imageFields from '../misc/imageFields'
+import modulesListExhibitionEvent from '../objects/modules/modulesListExhibitionEvent'
 
 export default defineType({
   type: 'document',
@@ -65,6 +64,13 @@ export default defineType({
       type: 'array',
       of: [{type: 'linkExternal'}],
       group: 'editorial',
+      hidden: true,
+    }),
+    defineField({
+      name: 'linkTickets',
+      title: 'Lien de billetterie',
+      type: 'url',
+      group: 'editorial',
     }),
 
     defineField({
@@ -114,6 +120,8 @@ export default defineType({
     defineField({
       name: 'color',
       type: 'color',
+      title: 'Couleur',
+      description: 'Pour les expos en cours',
       group: 'editorial',
       hidden: ({parent}) =>
         parent?.location !== 'inside' &&
@@ -126,9 +134,12 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes, embed)',
       type: 'array',
-      of: modulesList,
+      of: modulesListExhibitionEvent,
       group: 'editorial',
     }),
+    /*
+    Citation, texte + sidebar générique + images UI, Vidéo UI
+    */
 
     defineField({
       name: 'rebonds',

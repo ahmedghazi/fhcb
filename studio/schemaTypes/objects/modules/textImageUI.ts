@@ -12,6 +12,7 @@ export default defineField({
     direction: 'left',
   },
   fields: [
+    defineField({name: 'title', title: 'Titre', type: 'localeString'}),
     defineField({
       name: 'image',
       type: 'image',
@@ -35,15 +36,16 @@ export default defineField({
   ],
   preview: {
     select: {
+      title: `title.${baseLanguage}`,
       image: 'image',
       text: `text.${baseLanguage}`,
     },
     prepare(selection) {
-      const {text, image} = selection
+      const {title, text, image} = selection
       // ici afficher la première phrase du blockContent
       const firstParagraph = text?.[0]?.children?.[0]?.text || ''
       return {
-        title: firstParagraph || 'Texte + Image UI',
+        title: title || firstParagraph || 'Texte + Image UI',
         subtitle: 'Texte + Image UI',
         media: image,
       }

@@ -25,7 +25,7 @@ export default defineField({
     }),
     defineField({
       name: 'locationType',
-      title: 'Type de lieu',
+      title: 'Type d’exposition',
       type: 'string',
       validation: (Rule) => Rule.required(),
       options: {
@@ -81,15 +81,15 @@ export default defineField({
     select: {
       du: 'du',
       au: 'au',
-      inSite: 'inSite',
       locationType: 'locationType',
     },
     prepare(selection) {
-      const {du, au, inSite, locationType} = selection
+      const {du, au, locationType} = selection
       const fmt = (d: string | undefined) => (d ? new Date(d).toLocaleDateString('fr-FR') : '?')
+      const _locationType = locationType === 'inSite' ? 'À la fondation' : locationType
       return {
-        title: `${fmt(du)} - ${fmt(au)}`,
-        subtitle: locationType,
+        title: `${fmt(du)} - ${au ? fmt(au) : ''}`,
+        subtitle: _locationType,
       }
     },
   },

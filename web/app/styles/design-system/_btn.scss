@@ -14,15 +14,20 @@ a.btn {
   text-overflow: ellipsis;
   overflow: hidden;
   position: relative;
-  &:hover::before {
-    opacity: 0.2;
+  &:hover {
+    background-color: transparent;
+    &::before {
+      opacity: 1;
+    }
   }
   &::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background-color: var(--color-gris-100);
+    // background-color: var(--color-gris-100);
+    border: var(--border);
+    // border-color: currentColor;
     opacity: 0;
   }
   &--secondary {

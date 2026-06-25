@@ -1,4 +1,3 @@
-import { sliderArtistUI } from "../fragments";
 import {
   EventExpanded,
   ExhibitionExpanded,
@@ -37,7 +36,7 @@ import {
   ImageImages,
   Feuilletage,
   BlockquoteUI,
-  sliderArtistUI,
+  SliderArtistUI,
 } from "./sanity.types";
 
 export type MostSearchedItem = {
@@ -153,7 +152,7 @@ export interface ModulesList {
       } & FormUI)
     | ({
         _key: string;
-      } & sliderArtistUI)
+      } & SliderArtistUI)
   >;
 }
 

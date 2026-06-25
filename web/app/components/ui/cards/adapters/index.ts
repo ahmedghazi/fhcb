@@ -174,7 +174,7 @@ export function eventToCard(
   input: EventExpanded,
   size: "sm" | "md" | "lg" = "sm",
 ): CardBaseProps {
-  const { imageCover, dates, tags, links, pastille } = input;
+  const { title, subTitle, imageCover, dates, tags, links, pastille } = input;
   const isPast = _isPastByDates(dates || []);
   const isHorsLeMurs = tags?.some(
     (tag: Tag) => tag.slug?.current === "hors-les-murs",
@@ -203,7 +203,8 @@ export function eventToCard(
     colorVar: "var(--color-event)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
-    title: (_localizeField(input.title) as string) || "",
+    title: (_localizeField(title) as string) || "",
+    subTitle: _localizeField(subTitle),
     infoNode: toInfoNode(dates),
     actions: actions,
     badge:
