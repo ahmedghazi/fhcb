@@ -109,3 +109,11 @@ textarea {
 .my-masonry-grid_column > div {
   margin-bottom: 30px;
 }
+
+.hide-sb {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE et ancien Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}

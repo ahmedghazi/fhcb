@@ -80,6 +80,7 @@ button.btn--menu-toggle {
   height: 2rem;
   border-radius: 50%;
   background-color: var(--color-white);
+  flex-shrink: 0;
   &:hover,
   &.is-active {
     background-color: var(--color-accent);

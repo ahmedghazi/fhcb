@@ -17,6 +17,8 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [active, setActive] = useState<ActiveFilters>({});
   const isFiltering = Object.keys(active).length != 0;
+  const localizedResetFilters = _localizeText("resetFilters");
+  const localizedClose = _localizeText("close");
 
   const _update = (key: string, value: string) => {
     const next = { ...active, [key]: value };
@@ -24,7 +26,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     setActive(next);
     onChange(next);
   };
-
+  console.log(active);
   const _toggle = (key: string, value: string) => {
     const current = active[key];
     const arr = Array.isArray(current) ? current : current ? [current] : [];
@@ -63,7 +65,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                 <div
                   className='ui-filters ui-filter__wrapper ui-filter__select'
                   key={def._key}>
-                  <div className='ui-filters__inner'>
+                  <div className='ui-filters__summary'>
                     <select
                       className='ui-filters ui-filter__select'
                       value={active["sort"] ?? ""}
@@ -78,6 +80,9 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                         </option>
                       ))}
                     </select>
+                    {active["sort"] && (
+                      <div className='value'>{active["sort"]}</div>
+                    )}
                   </div>
                 </div>
               );
@@ -88,7 +93,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                 <div
                   className='ui-filters ui-filter__wrapper ui-filter__search'
                   key={def._key}>
-                  <div className='ui-filters__inner'>
+                  <div className='ui-filters__summary'>
                     <input
                       type='search'
                       value={active["search"] ?? ""}
@@ -96,6 +101,9 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                       placeholder={_localizeText("search")}
                       className='ui-filters__search'
                     />
+                    {active["search"] && (
+                      <div className='value'>{active["search"]}</div>
+                    )}
                   </div>
                 </div>
               );
@@ -176,10 +184,10 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
           {_localizeText("resetFilters")}
         </button>
       </div>
-      <div className='filters-controls'>
+      <div className='filters__controls'>
         {open && (
           <button className='btn-toggle' onClick={() => setOpen(false)}>
-            {_localizeText("close")}
+            {localizedClose}
           </button>
         )}
         <button className='btn-toggle' onClick={() => setOpen(true)}>
@@ -187,7 +195,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
         </button>
         {open && (
           <button onClick={_reset} className={clsx("reset")}>
-            {_localizeText("resetFilters")}
+            {localizedResetFilters}
           </button>
         )}
       </div>
