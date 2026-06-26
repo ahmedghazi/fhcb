@@ -6,6 +6,11 @@ import slug from '../fields/slug'
 import {SiElasticstack} from 'react-icons/si'
 import rebondsLabels from '../misc/rebondsLabels'
 
+const BRANCHES_RESSOURCES_TAG_ID = 'e9f34dd4-cc69-4ef2-83a7-71b38a79741f'
+
+const hasTag = (document: Record<string, unknown> | undefined, tagId: string) =>
+  (document?.tags as {_ref?: string}[] | undefined)?.some((tag) => tag._ref === tagId) ?? false
+
 export default defineType({
   name: 'pageModulaire',
   type: 'document',
@@ -63,6 +68,15 @@ export default defineType({
       options: {hotspot: true},
       // fields: imageFields,
       group: 'editorial',
+      hidden: ({document}) => hasTag(document, BRANCHES_RESSOURCES_TAG_ID),
+    }),
+
+    defineField({
+      name: 'videoCover',
+      type: 'mux.video',
+      title: 'Video de couverture',
+      group: 'editorial',
+      hidden: ({document}) => !hasTag(document, BRANCHES_RESSOURCES_TAG_ID),
     }),
 
     defineField({

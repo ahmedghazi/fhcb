@@ -53,11 +53,17 @@ import type {
   SidebarGenerique,
   KeyValGroup,
   TextSidebarUI,
-  SanityImageAsset
+  SanityImageAsset,
+  MuxVideo,
+  MuxVideoAsset
 } from './sanity.types'
 
 export type SanityImageAssetFull = SanityImageAsset & {
   creditLine?: string;
+};
+
+export type MuxVideoExpanded = Omit<MuxVideo, 'asset'> & {
+  asset?: MuxVideoAsset | null;
 };
 
 export type ArtistExpanded = Omit<Artist, 'imageCover'> & {
@@ -87,10 +93,11 @@ export type PartenaireExpanded = Omit<Partenaire, 'imageCover'> & {
   imageCover?: (Omit<NonNullable<NonNullable<Partenaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
-export type PageModulaireExpanded = Omit<PageModulaire, 'tags' | 'rebonds' | 'imageCover'> & {
+export type PageModulaireExpanded = Omit<PageModulaire, 'tags' | 'rebonds' | 'imageCover' | 'videoCover'> & {
   tags?: Array<Tag> | null;
   rebonds?: PageModulaireExpanded | null;
   imageCover?: (Omit<NonNullable<NonNullable<PageModulaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  videoCover?: MuxVideoExpanded | null;
 };
 
 export type SettingsExpanded = Omit<Settings, 'mostSearched'> & {

@@ -8,6 +8,8 @@ type Props = {
   controls?: boolean;
   paused?: boolean;
   loop?: boolean;
+  /** Play (and loop) only while hovered, paused and reset otherwise. */
+  hoverPlay?: boolean;
 };
 
 const MuxVideoPlayer = ({
@@ -16,11 +18,13 @@ const MuxVideoPlayer = ({
   controls = false,
   paused = true,
   loop = false,
+  hoverPlay = false,
 }: Props) => {
   const [ready, setReady] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [muted, setMuted] = useState<boolean>(true);
-  const [refresh, setRefresh] = useState<boolean>(true);
+  const [hovered, setHovered] = useState<boolean>(false);
+  const playerRef = useRef<React.ComponentRef<typeof MuxPlayer>>(null);
 
   useEffect(() => {
     setReady(true);
@@ -28,19 +32,34 @@ const MuxVideoPlayer = ({
 
   useEffect(() => {
     // console.log("progress", progress);
-    // setRefresh(!refresh);
   }, [progress]);
 
+  const handleMouseEnter = () => {
+    if (!hoverPlay) return;
+    setHovered(true);
+  };
+  const handleMouseLeave = () => {
+    if (!hoverPlay) return;
+    setHovered(false);
+    const player = playerRef.current;
+    if (player) player.currentTime = 0;
+  };
+
   return (
-    <div className='mux-player-container' onClick={() => setMuted(!muted)}>
+    <div
+      className='mux-player-container'
+      onClick={hoverPlay ? undefined : () => setMuted(!muted)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
       {ready && (
         <>
           <MuxPlayer
+            ref={playerRef}
             playbackId={playbackId}
             metadata={title ? { video_title: title } : undefined}
-            autoPlay='muted'
+            autoPlay={hoverPlay ? false : "muted"}
             muted={muted}
-            paused={paused}
+            paused={hoverPlay ? !hovered : paused}
             loop={loop}
             // onTimeUpdate={(event: CustomEvent) => {
             //   const target = event.target as HTMLMediaElement;

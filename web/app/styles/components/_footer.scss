@@ -49,6 +49,7 @@ footer {
     }
   }
   @media all and (max-width: variables.$md) {
+    padding: var(--spacing-md) 0;
     address {
       padding: 0;
       width: auto !important;
@@ -56,6 +57,9 @@ footer {
     nav {
       h5 {
         margin-bottom: calc(var(--spacing-xs) * 0.8);
+      }
+      a {
+        font-size: var(--text-sm);
       }
       .nav-actions {
         order: 2;

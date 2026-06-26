@@ -34,8 +34,8 @@
     }
     &--text-ui {
       h2 {
-        padding-left: 1em;
-        padding-right: 1em;
+        // padding-left: 1em;
+        // padding-right: 1em;
         text-align: center;
         margin-bottom: var(--spacing-gutter);
       }
@@ -45,6 +45,8 @@
       }
       &:has(.c-chapo) p {
         max-width: 60rem;
+      }
+      @media all and (max-width: variables.$md) {
       }
     }
     &--blockquote-ui {
@@ -69,6 +71,12 @@
       }
       .module__text {
       }
+
+      @media all and (max-width: variables.$md) {
+        .module__inner {
+          padding-top: var(--spacing-2xs);
+        }
+      }
     }
     &--list-ui {
       margin-bottom: var(--spacing-sm);
@@ -91,6 +99,11 @@
         .content {
           font-weight: 300;
           font-size: var(--text-base);
+        }
+      }
+      @media all and (max-width: variables.$md) {
+        .list-item {
+          flex-direction: column;
         }
       }
     }
@@ -226,6 +239,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: var(--spacing-gutter);
+        h2 {
+          margin-bottom: var(--spacing-xs);
+        }
         .btn {
           display: inline-block;
           width: auto;
@@ -234,6 +251,11 @@
       img {
         // max-height: 32.5rem;
         max-height: var(--max-img-h);
+      }
+      @media all and (max-width: variables.$md) {
+        .module__inner {
+          flex-direction: column;
+        }
       }
     }
     &--newsletter-ui {
@@ -250,6 +272,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: var(--spacing-gutter);
+        h2 {
+          margin-bottom: var(--spacing-xs);
+        }
         .btn {
           display: inline-block;
           width: auto;
@@ -258,6 +284,11 @@
       img {
         // max-height: 32.5rem;
         max-height: var(--max-img-h);
+      }
+      @media all and (max-width: variables.$md) {
+        .module__inner {
+          flex-direction: column;
+        }
       }
     }
     &--ressources-ui {

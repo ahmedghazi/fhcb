@@ -31,6 +31,7 @@ import { CardAction, CardBaseProps } from "../CardBase";
 import CardTags from "../CardTags";
 import FHCBDates from "../../FHCBDates";
 import Embed from "../../Embed";
+import MuxVideoPlayer from "../../MuxPlayer";
 import {
   _isCurrentOrFuturByDates,
   _isPast,
@@ -414,12 +415,20 @@ export function brancheToCard(
   supTitle?: string,
   contentCount?: number,
 ): CardBaseProps {
-  const { imageCover } = input;
+  const { imageCover, videoCover } = input;
+  const playbackId = videoCover?.asset?.playbackId;
   return {
     _type: input._type,
     layout: "col",
     colorVar: "var(--color-white)",
-    images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    // La vidéo de couverture prime sur l'image de couverture quand elle est présente.
+    images:
+      !playbackId && imageCover?.asset
+        ? [imageCover.asset as SanityImageAssetFull]
+        : [],
+    mediaSlot: playbackId
+      ? React.createElement(MuxVideoPlayer, { playbackId, loop: true, hoverPlay: true })
+      : undefined,
     supTitle,
     title: (_localizeField(input.title) as string) || "",
     contentCount,

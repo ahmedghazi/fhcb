@@ -7,9 +7,21 @@ const nextConfig: NextConfig = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    remotePatterns: [
-      { hostname: "cdn.sanity.io" },
-    ],
+    remotePatterns: [{ hostname: "cdn.sanity.io" }],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/artist/henri-cartier-bresson",
+        destination: "/henri-cartier-bresson",
+        permanent: true,
+      },
+      {
+        source: "/artist/martine-franck",
+        destination: "/martine-franck",
+        permanent: true,
+      },
+    ];
   },
 };
 

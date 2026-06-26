@@ -5,11 +5,54 @@
   margin-bottom: var(--spacing-lg);
   padding-bottom: 0.5rem;
 
+  .filters-controls {
+    display: none;
+  }
   @media all and (max-width: variables.$md) {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    padding: 0;
+    border: none;
+    border-top: var(--border);
+    background-color: var(--color-bg);
+    z-index: 51;
+    margin: 0;
+
+    .filters__inner {
+      display: none;
+      .reset {
+        display: none;
+      }
+    }
+    .filters-controls {
+      text-align: center;
+      display: block;
+      width: 100%;
+      padding: var(--spacing-xs);
+      background-color: var(--color-bg);
+      display: flex;
+      justify-content: space-between;
+    }
+    &.is-open .filters__inner {
+      display: block;
+    }
+
+    div.ui-filters {
+      border-bottom: var(--border);
+      background-color: var(--color-bg);
+      overflow: hidden;
+      &__inner {
+        padding: var(--spacing-xs);
+      }
+      label {
+      }
+      select.ui-filter__select {
+        padding-left: 1rem;
+        background-position: left 0em center;
+      }
+    }
   }
   &.is-active {
     .reset {
@@ -39,14 +82,17 @@
       color: var(--color-primary);
     }
   }
-  .ui-filter__select {
+  select.ui-filter__select {
     appearance: none;
     -webkit-appearance: none;
-    padding-left: 1.5em;
+    // padding-left: 1.5em;
     background-image: none;
     background-image: url("data:image/svg+xml,%3Csvg width='8' height='9' viewBox='0 0 8 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4.0625H1.2124L3.12939 6.96973L3.23096 6.94434C3.19287 6.65658 3.1696 6.2736 3.16113 5.79541L3.16113 0L4.23389 1.35151e-08L4.24023 5.79541C4.24023 6.22282 4.21696 6.60579 4.17041 6.94434L4.27832 6.96973L6.19531 4.0625H7.40137L3.88477 8.88672H3.5166L0 4.0625Z' fill='black'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: left 0.5em center;
+    // background-position: left 0.5em center;
+    padding-left: 1rem;
+    background-position: left 0em center;
+
     text-transform: uppercase;
     cursor: pointer;
     &:hover {

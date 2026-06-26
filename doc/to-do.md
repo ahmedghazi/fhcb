@@ -93,9 +93,11 @@ cards simili document
 - page 404
 - mobile font sizes
 - module carte videos
-- videoCover sur les pages ressources
+- # videoCover sur les pages ressources
 - # page ressources ajouter un sliderArtiste (ressources + articles)
 - # module ressources doit afficher 1 / type, pas toutes les ressources.
+- # add redirect from artist/hcb > /hcb, artist/mf > /mf
+- filters mobile
 
 ## card expos
 
@@ -107,14 +109,14 @@ cards simili document
 
 ## Grilles
 
-- feuilletage 1/6
+<!-- - feuilletage 1/6
 - product 2/12
 - expo 2/12, dans rebonds 6/12, dans programme current, hors-les-murs 12/12
 - artiste 6/12, dans rebonds 2/12
 - evt 2/12
 - page 4/12
 - branche 2/12
-- ressources (feuilletage, ...) 6/12
+- ressources (feuilletage, ...) 6/12 -->
 
 ## shopify
 
@@ -161,13 +163,14 @@ cards simili document
 - diff entre evt et visite commentées (est-ce un doc propre ou un type d'evt)
 - cta dans les cards. Soit le texte est présent dans le doc source, soit dans un champs qui permet de convoquer les cartes. Mais pour avoir une cohérence, il faudrait que ce soit toujours le même champs qui soit utilisé. La card expo par ex est appelé à divers endroits.
 - # images (légendes, credits) localizable mais pas dans la mediatheque, ou alors on crée une mediatheque tampon
-- filtre lieu dans précédente expo?
-- filtre intervenant dans feuilletages?
-- triez par ?
-- les rebonds, quels noms? ex séries thématique
-- me manque la wide regular
-- carte look 3 2 colonnes (taille de grille 4/8)?
-- card video, d'où viennent elles (page)
+- # filtre lieu dans précédente expo?
+- # filtre intervenant dans feuilletages?
+- # triez par ?
+- # les rebonds, quels noms? ex séries thématique
+- # me manque la wide regular
+- # carte look 3 2 colonnes (taille de grille 4/8)?
+- # card video, d'où viennent elles (page)
+- pb ordre éléments entre desktop et mobile. Ex hero exhibition, card newsletter, ...
 
 # réponses
 

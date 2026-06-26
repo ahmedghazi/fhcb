@@ -26,7 +26,9 @@ const ModuleSupportUI = ({ input }: Props) => {
           <div className='module__text  flex flex-col '>
             <div className='header'>
               {localizedTitle && (
-                <h2 className='module__title c-h1_5'>{localizedTitle}</h2>
+                <h2 className='module__title c-h1_5- c-h1-lg'>
+                  {localizedTitle}
+                </h2>
               )}
               {localizedSubtitle && (
                 <p className='module__subtitle'>{localizedSubtitle}</p>

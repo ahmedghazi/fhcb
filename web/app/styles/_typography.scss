@@ -77,6 +77,12 @@ ul {
   padding: 0;
 }
 
+@media all and (max-width: variables.$md) {
+  .text {
+    font-size: var(--text-sm-xl);
+  }
+}
+
 @layer components {
   /* =====================
      HEADINGS

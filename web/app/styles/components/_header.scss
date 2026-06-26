@@ -114,6 +114,11 @@ header.header {
         height: 100%;
         padding: var(--spacing-sm);
         padding-top: var(--header-h);
+        .header__group:nth-child(1) {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
   }

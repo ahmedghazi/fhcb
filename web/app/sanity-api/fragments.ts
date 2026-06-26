@@ -25,6 +25,11 @@ export const imageAsset = `
   }
 `;
 
+export const videoAsset = `
+  asset->{
+    playbackId
+  }
+`;
 const blockContentMarkDefs = `
 markDefs[]{
   ...,
@@ -461,19 +466,25 @@ export const cardRefPageModulaire = `
   "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
+  videoCover{
+    ${videoAsset}
+  },
   tags[]->,
 `;
 
 export const cardTypes = `
+ _type == "pageModulaire" => {
+    ${cardRefPageModulaire}
+  },
   _type == "exhibition" => {
     ${cardRefExhibition}
   },
   _type == "product" => {
     ${cardRefProduct}
   },
-  _type == "pageModulaire" => {
-    ${cardRefModulaire}
-  },
+  // _type == "pageModulaire" => {
+  //   ${cardRefModulaire}
+  // },
   _type == "artist" => {
     ${cardRefArtist}
   },
@@ -488,9 +499,6 @@ export const cardTypes = `
   },
   _type == "article" => {
     ${cardRefArticle}
-  },
-  _type == "pageModulaire" => {
-    ${cardRefPageModulaire}
   },
   _type == "serieThematique" => {
     ${cardRefSerieThematique}
@@ -589,9 +597,7 @@ export const featuredCardsUI = `
       ${cardRefExhibition}
     },
     video{
-      asset->{
-        playbackId
-      }
+      ${videoAsset}
     }
   }
 `;

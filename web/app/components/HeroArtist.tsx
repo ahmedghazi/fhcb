@@ -37,6 +37,7 @@ const HeroArtist = ({ input }: Props) => {
             <div className='links'>
               {links?.map((item: LinkExternal, i: number) => (
                 <a
+                  key={i}
                   className='btn'
                   href={item.link}
                   target='_blank'

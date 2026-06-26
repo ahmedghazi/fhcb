@@ -14,6 +14,7 @@ type Props = {
 };
 
 const FilterBar = ({ filterDefs, onChange }: Props) => {
+  const [open, setOpen] = useState<boolean>(false);
   const [active, setActive] = useState<ActiveFilters>({});
   const isFiltering = Object.keys(active).length != 0;
 
@@ -44,30 +45,40 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   };
 
   return (
-    <div className={clsx("filters", isFiltering && "is-active")}>
+    <div
+      className={clsx(
+        "filters",
+        open && "is-open",
+        isFiltering && "is-active",
+      )}>
       {/* <pre>{JSON.stringify(filterDefs, null, 2)}</pre> */}
+
       <div className='filters__inner'>
-        <div className='flex gap-sm' suppressHydrationWarning>
+        <div
+          className='flex flex-col md:flex-row md:gap-sm'
+          suppressHydrationWarning>
           {filterDefs.map((def) => {
             if (def._type === "filterSort") {
               return (
                 <div
                   className='ui-filters ui-filter__wrapper ui-filter__select'
                   key={def._key}>
-                  <select
-                    className='ui-filters ui-filter__select'
-                    value={active["sort"] ?? ""}
-                    onChange={(e) => _update("sort", e.target.value)}
-                    aria-label={_localizeText("sort")}>
-                    <option value=''>{_localizeText("sort")}</option>
-                    {def.sortOptions?.map((opt) => (
-                      <option
-                        key={opt._key}
-                        value={`${opt.field}-${opt.direction}`}>
-                        {_localizeField(opt.label)}
-                      </option>
-                    ))}
-                  </select>
+                  <div className='ui-filters__inner'>
+                    <select
+                      className='ui-filters ui-filter__select'
+                      value={active["sort"] ?? ""}
+                      onChange={(e) => _update("sort", e.target.value)}
+                      aria-label={_localizeText("sort")}>
+                      <option value=''>{_localizeText("sort")}</option>
+                      {def.sortOptions?.map((opt) => (
+                        <option
+                          key={opt._key}
+                          value={`${opt.field}-${opt.direction}`}>
+                          {_localizeField(opt.label)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               );
             }
@@ -77,13 +88,15 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                 <div
                   className='ui-filters ui-filter__wrapper ui-filter__search'
                   key={def._key}>
-                  <input
-                    type='search'
-                    value={active["search"] ?? ""}
-                    onChange={(e) => _update("search", e.target.value)}
-                    placeholder={_localizeText("search")}
-                    className='ui-filters__search'
-                  />
+                  <div className='ui-filters__inner'>
+                    <input
+                      type='search'
+                      value={active["search"] ?? ""}
+                      onChange={(e) => _update("search", e.target.value)}
+                      placeholder={_localizeText("search")}
+                      className='ui-filters__search'
+                    />
+                  </div>
                 </div>
               );
             }
@@ -162,6 +175,21 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
         <button onClick={_reset} className={clsx("reset")}>
           {_localizeText("resetFilters")}
         </button>
+      </div>
+      <div className='filters-controls'>
+        {open && (
+          <button className='btn-toggle' onClick={() => setOpen(false)}>
+            {_localizeText("close")}
+          </button>
+        )}
+        <button className='btn-toggle' onClick={() => setOpen(true)}>
+          Filters
+        </button>
+        {open && (
+          <button onClick={_reset} className={clsx("reset")}>
+            {_localizeText("resetFilters")}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+@use "../variables";
+
 button.btn,
 a.btn {
   border-radius: var(--radius-sm);
@@ -62,6 +64,10 @@ button.btn--menu-toggle {
     border-radius: inherit;
     background-color: var(--color-gris-100);
     opacity: 0;
+  }
+
+  @media all and (max-width: variables.$md) {
+    font-size: var(--text-xl);
   }
 }
 a.btn-tickets,

@@ -13,18 +13,20 @@ type Props = {
 const FilterToggle = ({ def, active, onChange }: Props) => {
   return (
     <div className='ui-filters ui-filter__wrapper ui-filter__toggle'>
-      <label>
-        <input
-          className='ui-checkbox'
-          type='checkbox'
-          name={def.filterKey}
-          checked={active}
-          onChange={(e) =>
-            onChange(def.filterKey, e.target.checked ? "true" : "")
-          }
-        />
-        <span>{_localizeField(def.filterLabel)}</span>
-      </label>
+      <div className='ui-filters__inner'>
+        <label>
+          <input
+            className='ui-checkbox'
+            type='checkbox'
+            name={def.filterKey}
+            checked={active}
+            onChange={(e) =>
+              onChange(def.filterKey, e.target.checked ? "true" : "")
+            }
+          />
+          <span>{_localizeField(def.filterLabel)}</span>
+        </label>
+      </div>
     </div>
   );
 };

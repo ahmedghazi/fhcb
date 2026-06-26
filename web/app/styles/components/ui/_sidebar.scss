@@ -1,3 +1,5 @@
+@use "../../variables";
+
 .sidebar {
   h3 {
     text-transform: uppercase;
@@ -10,5 +12,12 @@
   figure {
     margin-top: 1rem;
     max-width: 10rem;
+  }
+
+  @media all and (max-width: variables.$md) {
+    &__item {
+      padding-bottom: var(--spacing-2xs);
+      margin-bottom: var(--spacing-2xs);
+    }
   }
 }

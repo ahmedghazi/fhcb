@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
-import { _localizeField } from "../sanity-api/utils";
+import { _localizeField, _localizeText } from "../sanity-api/utils";
 import LocalesSwitcher from "./ui/LocaleSwitcher";
 import SearchToggle from "./ui/SearchToggle";
 import Nav from "./Nav";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import LogoFHCB from "./LogoFHCB";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import Icon from "./ui/Icon";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -49,7 +50,7 @@ const HeaderMobile = ({ settings }: Props) => {
             <button
               className='btn btn--menu-toggle'
               onClick={() => setOpen(!open)}>
-              {open ? "CLOSE" : "MENU"}
+              {open ? _localizeText("close") : "MENU"}
             </button>
           </li>
         </ul>
@@ -67,6 +68,9 @@ const HeaderMobile = ({ settings }: Props) => {
                   {_localizeField(settings.btnTickets.label)}
                 </a>
               )}
+              <button onClick={() => setOpen(false)}>
+                <Icon name='close' />
+              </button>
             </div>
             <div className='header__group'>
               {settings?.navPrimary && (

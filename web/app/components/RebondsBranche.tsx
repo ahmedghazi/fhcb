@@ -14,15 +14,7 @@ const RebondsBranche = ({ input }: Props) => {
   return (
     <section className='rebonds rebonds--branche'>
       <div className='container-fluid'>
-        {/* <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2> */}
-        <div
-          className='grid--centered'
-          style={
-            {
-              // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_12))",
-              // justifyContent: "center",
-            }
-          }>
+        <div className='grid--centered'>
           {input?.map((item, i) => (
             <CardBranche
               key={i}
