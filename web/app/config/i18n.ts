@@ -26,6 +26,7 @@ const i18n = {
     toDiscoverToo: "À découvrir aussi",
     discoverTheArtist: "Découvrir l'artiste",
     aroundThertist: "Autour de l'artiste",
+    readTheArticle: "Lire l'article",
 
     discoverTheExhibition: "Découvrir l'exposition",
     aroundTheExhibition: "Autour de l'exposition",
@@ -86,6 +87,7 @@ const i18n = {
     toDiscoverToo: "To discover too",
     discoverTheArtist: "Discover the artist",
     discoverTheExhibition: "Discover the exhibition",
+    readTheArticle: "read the article",
     currentExhibition: "Current exhibition",
     pastExhibition: "Past exhibition",
     futurExhibition: "Futur exhibition",
