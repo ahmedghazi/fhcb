@@ -3,16 +3,9 @@ import React from "react";
 import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
 import { SliderCardUI } from "@/app/sanity-api/types/sanity.types";
 import { PostTypes } from "@/app/sanity-api/types/extra-types";
-import CardProduct from "../ui/cards/CardProduct";
-import CardPage from "../ui/cards/CardPage";
-import CardArtist from "../ui/cards/CardArtist";
-import CardEvent from "../ui/cards/CardEvent";
-import CardExhibition from "../ui/cards/CardExhibition";
 import SlickSlider from "../ui/SlickSlider";
-import CardImageImages from "../ui/cards/CardImageImages";
-import CardFeuilletage from "../ui/cards/CardFeuilletage";
-import CardPageModulaire from "../ui/cards/CardPageModulaire";
 import { Link } from "next-view-transitions";
+import CardType from "../ui/cards/CardType";
 
 type Props = {
   input: SliderCardUI | any;
@@ -39,25 +32,7 @@ const ModuleSliderCardUI = ({ input }: Props) => {
             }}>
             {items.map((item: PostTypes, index: number) => (
               <div key={`${item && item._id}-${index}`}>
-                {item && item._type === "product" && (
-                  <CardProduct input={item} size='sm' />
-                )}
-                {item && item._type === "pageModulaire" && (
-                  <CardPageModulaire input={item} size='md' />
-                )}
-                {item && item._type === "artist" && <CardArtist input={item} />}
-                {item && item._type === "event" && (
-                  <CardEvent input={item} size='md' />
-                )}
-                {item && item._type === "exhibition" && (
-                  <CardExhibition input={item} size='md' />
-                )}
-                {item && item._type === "imageImages" && (
-                  <CardImageImages input={item} />
-                )}
-                {item && item._type === "feuilletage" && (
-                  <CardFeuilletage input={item} />
-                )}
+                <CardType input={item} context='slider' />
               </div>
             ))}
           </SlickSlider>
