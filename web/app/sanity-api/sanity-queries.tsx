@@ -210,7 +210,10 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     modules[]{
       ${modules}
     },
-    "related": ${relatedByArtists}
+    aroundTheExhibition[]->{
+      ${cardTypes}
+    },
+    "related": ${relatedByTag}
   }`;
 
 export async function getExhibition(

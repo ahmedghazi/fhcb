@@ -182,6 +182,12 @@
       //   padding: var(--spacing-xs);
       // }
     }
+    &.card--lg.card--is-portrait {
+      figure {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
     &.card--sm-alt {
       .card__inner {
         gap: var(--spacing-xs);

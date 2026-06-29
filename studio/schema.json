@@ -6950,6 +6950,36 @@
     }
   },
   {
+    "type": "type",
+    "name": "serieThematique.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "serieThematique"
+    }
+  },
+  {
     "name": "exhibition",
     "type": "document",
     "attributes": {
@@ -7267,7 +7297,7 @@
         },
         "optional": true
       },
-      "rebonds": {
+      "aroundTheExhibition": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -7284,7 +7314,19 @@
               },
               {
                 "type": "inline",
-                "name": "exhibition.reference"
+                "name": "artist.reference"
+              },
+              {
+                "type": "inline",
+                "name": "imageImages.reference"
+              },
+              {
+                "type": "inline",
+                "name": "feuilletage.reference"
+              },
+              {
+                "type": "inline",
+                "name": "serieThematique.reference"
               },
               {
                 "type": "inline",

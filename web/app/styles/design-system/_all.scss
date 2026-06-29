@@ -5,6 +5,43 @@
   padding: var(--spacing-md) 0 var(--spacing-lg);
 }
 
+.grid--centered {
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+  .card {
+    flex-basis: var(--gridder-3_12);
+    width: var(--gridder-3_12);
+    flex-shrink: 0;
+    /*
+    This next line makes card same height
+    */
+    // height: auto;
+    &--md {
+      flex-basis: var(--gridder-6_12);
+      width: var(--gridder-6_12);
+    }
+    &--md-alt {
+      // flex-basis: var(--gridder-1_3);
+      // width: var(--gridder-1_3);
+    }
+  }
+
+  @media all and (max-width: variables.$md) {
+    gap: var(--spacing-sm);
+    .card {
+      flex-basis: var(--gridder-4_4);
+      width: var(--gridder-4_4);
+      &--md {
+        flex-basis: var(--gridder-4_4);
+        width: var(--gridder-4_4);
+      }
+    }
+  }
+}
+
 .grid-masonry-dessandro {
   margin: 0 calc(var(--spacing-gutter) / -2);
   .grid-item {
@@ -34,39 +71,7 @@
     }
   }
 }
-.grid--centered {
-  margin-inline: auto;
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-gutter);
-  flex-wrap: wrap;
-  .card {
-    flex-basis: var(--gridder-3_12);
-    width: var(--gridder-3_12);
-    flex-shrink: 0;
-    height: auto;
-    &--md {
-      flex-basis: var(--gridder-6_12);
-      width: var(--gridder-6_12);
-    }
-    &--md-alt {
-      // flex-basis: var(--gridder-1_3);
-      // width: var(--gridder-1_3);
-    }
-  }
 
-  @media all and (max-width: variables.$md) {
-    gap: var(--spacing-sm);
-    .card {
-      flex-basis: var(--gridder-4_4);
-      width: var(--gridder-4_4);
-      &--md {
-        flex-basis: var(--gridder-4_4);
-        width: var(--gridder-4_4);
-      }
-    }
-  }
-}
 figure {
   figcaption {
     text-align: right;
@@ -90,7 +95,7 @@ textarea {
 }
 
 .fhcb-date {
-  &.has-location {
+  &:not(:last-child).has-location {
     margin-bottom: 0.5em;
   }
 }

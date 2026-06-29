@@ -56,7 +56,7 @@ const HeroExhibition = ({ input }: Props) => {
                   <FHCBDates input={dates} />
                 </div>
               )}
-              {!isPast && (
+              {!isPast && links && (
                 <div className='pt-sm'>
                   {links?.map((item, i: number) => (
                     <a

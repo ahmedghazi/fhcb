@@ -40,8 +40,8 @@ type Props = {
 // previously lived duplicated across ModuleGridCardUI, ModuleSliderCardUI and Rebonds)
 const SIZES = {
   event: { grid: "sm", slider: "md", rebonds: "sm" },
-  exhibition: { grid: "sm", slider: "md", rebonds: "sm" },
-  product: { grid: "sm", slider: "sm", rebonds: "md" },
+  exhibition: { grid: "sm", slider: "md", rebonds: "md" },
+  product: { grid: "sm", slider: "sm", rebonds: "sm" },
   article: { grid: "sm", slider: "sm", rebonds: "md" },
   artist: { grid: "md", slider: "md", rebonds: "sm" },
   imageImages: { grid: "md", slider: "md", rebonds: "md" },

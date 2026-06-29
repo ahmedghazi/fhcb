@@ -99,6 +99,7 @@ cards simili document
 - # add redirect from artist/hcb > /hcb, artist/mf > /mf
 - filters mobile
 - # compteur ressources sur les cartes branches ressource
+- rebonds expos (by tag)
 
 ## card expos
 

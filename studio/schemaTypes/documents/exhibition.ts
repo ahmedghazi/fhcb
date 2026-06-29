@@ -142,13 +142,22 @@ export default defineType({
     */
 
     defineField({
-      name: 'rebonds',
-      title: 'Rebonds',
+      name: 'aroundTheExhibition',
+      title: "Autour de l'exposition",
       type: 'array',
       of: [
         {
           type: 'reference',
-          to: [{type: 'pageModulaire'}, {type: 'event'}, {type: 'exhibition'}, {type: 'product'}],
+          to: [
+            {type: 'pageModulaire'},
+            {type: 'event'},
+            // {type: 'exhibition'},
+            {type: 'artist'},
+            {type: 'imageImages'},
+            {type: 'feuilletage'},
+            {type: 'serieThematique'},
+            {type: 'product'},
+          ],
         },
       ],
       group: 'editorial',
