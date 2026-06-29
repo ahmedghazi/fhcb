@@ -29,6 +29,7 @@ import {
   Product,
   PRODUCT_QUERY_RESULT,
   PROGRAMME_QUERY_RESULT,
+  SERIE_THEMATIQUE_QUERY_RESULT,
   SETTINGS_QUERY_RESULT,
 } from "./types/sanity.types";
 import CardProduct from "../components/ui/cards/CardProduct";
@@ -364,6 +365,38 @@ export async function getFeuilletage(
   return sanityFetch({
     query: FEUILLETAGE_QUERY,
     tags: ["feuilletage"],
+    qParams: { slug },
+  });
+}
+
+/*****************************************************************************************************
+ * SERIE_THEMATIQUE_QUERY
+ */
+export const SERIE_THEMATIQUE_QUERY = groq`*[_type == "serieThematique" && slug.current == $slug][0]{
+  ...,
+  seo{
+    ${seo}
+  },
+  chercheur->{
+    _id,
+    name,
+    slug
+  },
+  modules[]{
+    ${modules}
+  },
+  rebonds[]->{
+    ${cardTypes}
+  },
+  "related": ${relatedByArtists}
+}`;
+
+export async function getSerieThematique(
+  slug: string,
+): Promise<SERIE_THEMATIQUE_QUERY_RESULT> {
+  return sanityFetch({
+    query: SERIE_THEMATIQUE_QUERY,
+    tags: ["serieThematique"],
     qParams: { slug },
   });
 }

@@ -19,6 +19,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   const isFiltering = Object.keys(active).length != 0;
   const localizedResetFilters = _localizeText("resetFilters");
   const localizedClose = _localizeText("close");
+  const localizedFilters = _localizeText("filters");
 
   const _update = (key: string, value: string) => {
     const next = { ...active, [key]: value };
@@ -191,7 +192,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
           </button>
         )}
         <button className='btn-toggle' onClick={() => setOpen(true)}>
-          Filters
+          {localizedFilters}
         </button>
         {open && (
           <button onClick={_reset} className={clsx("reset")}>

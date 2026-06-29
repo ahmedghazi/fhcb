@@ -14,6 +14,7 @@ export const _linkResolver = (
 ) => {
   if (!node || !node._type || (node._type === "pageModulaire" && node.homePage))
     return "/";
+  console.log(node._type);
   switch (node._type) {
     case "programme":
       return `/programme/${node.slug?.current}`;
@@ -31,6 +32,8 @@ export const _linkResolver = (
       return `/image-images/${node.slug?.current}`;
     case "feuilletage":
       return `/feuilletage/${node.slug?.current}`;
+    case "serieThematique":
+      return `/serie-thematique/${node.slug?.current}`;
     case "article":
       return `/article/${node.slug?.current}`;
 
