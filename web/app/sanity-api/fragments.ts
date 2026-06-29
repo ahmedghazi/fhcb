@@ -482,9 +482,6 @@ export const cardTypes = `
   _type == "product" => {
     ${cardRefProduct}
   },
-  // _type == "pageModulaire" => {
-  //   ${cardRefModulaire}
-  // },
   _type == "artist" => {
     ${cardRefArtist}
   },

@@ -12,6 +12,7 @@ import CardArtist from "../ui/cards/CardArtist";
 import CardEvent from "../ui/cards/CardEvent";
 import CardExhibition from "../ui/cards/CardExhibition";
 import CardPageModulaire from "../ui/cards/CardPageModulaire";
+import CardArticle from "../ui/cards/CardArticle";
 
 type Props = {
   input: GridCardUI | any;
@@ -47,6 +48,9 @@ const ModuleGridCardUI = ({ input }: Props) => {
                   )}
                   {item && item._type === "event" && (
                     <CardEvent input={item} size='sm' />
+                  )}
+                  {item && item._type === "article" && (
+                    <CardArticle input={item} size='sm' />
                   )}
                 </Fragment>
               ))}

@@ -81,7 +81,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                       ))}
                     </select>
                     {active["sort"] && (
-                      <div className='value'>{active["sort"]}</div>
+                      <div className='filters__value'>{active["sort"]}</div>
                     )}
                   </div>
                 </div>
@@ -102,7 +102,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                       className='ui-filters__search'
                     />
                     {active["search"] && (
-                      <div className='value'>{active["search"]}</div>
+                      <div className='filters__value'>{active["search"]}</div>
                     )}
                   </div>
                 </div>
