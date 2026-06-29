@@ -39,7 +39,6 @@ export default defineField({
     },
     prepare(selection) {
       const {title, image} = selection
-      console.log({title, image})
       return {
         title: title ? title : 'Images UI',
         subtitle: 'Image(s) UI',

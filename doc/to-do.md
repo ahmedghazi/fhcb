@@ -50,7 +50,7 @@ cards simili document
 - # wide reg
 - # grid centered
 - # rebonds article > rebonds article (même catégorie)
-- expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
+- # expo itinérante = inside et outside, n'apparait que dans expo passée, pas visible dans les filtres
 - # expo hors les murs via le champ location
 - # régler grille cartes (tailles)
 - # carte expo tube, cube (check trello)
@@ -58,7 +58,7 @@ cards simili document
 - # branch hover
 - # card avec 2nd btn hover (exhib, events) qui si pas past
 - # date avec location
-- btn hover, all hover
+- # btn hover, all hover
 - # fix search result
 - # page event (comme exhib)
 - # page expo hero temporalité des ui. (bouton resa)
@@ -98,6 +98,7 @@ cards simili document
 - # module ressources doit afficher 1 / type, pas toutes les ressources.
 - # add redirect from artist/hcb > /hcb, artist/mf > /mf
 - filters mobile
+- # compteur ressources sur les cartes branches ressource
 
 ## card expos
 
@@ -175,6 +176,8 @@ cards simili document
 # réponses
 
 # GO PREPROD
+
+batch sync products
 
 add env CRON_SECRET=test
 Check cron job

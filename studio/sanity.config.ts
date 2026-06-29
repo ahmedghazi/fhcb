@@ -61,11 +61,11 @@ export default defineConfig({
   },
   document: {
     actions: (prev, context) => {
-      const allowedDocs = ['feuilletage', 'imageImages']
-      console.log(context)
+      const allowedDocs = ['feuilletage', 'imageImages', 'serieThematique', 'artist', 'exhibition']
       if (allowedDocs.includes(context.schemaType)) {
+        // console.log(context)
         return prev.map((originalAction) =>
-          originalAction.name === 'usePublishAction' ? customPublishAction : originalAction,
+          originalAction.action === 'publish' ? customPublishAction : originalAction,
         )
       }
 

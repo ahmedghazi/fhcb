@@ -5865,6 +5865,13 @@
         },
         "optional": true
       },
+      "totalSerieThematique": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "totalArtists": {
         "type": "objectAttribute",
         "value": {

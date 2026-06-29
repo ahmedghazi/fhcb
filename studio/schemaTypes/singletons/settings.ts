@@ -234,6 +234,11 @@ export default defineType({
       group: 'misc',
     }),
     defineField({
+      name: 'totalSerieThematique',
+      type: 'number',
+      group: 'misc',
+    }),
+    defineField({
       name: 'totalArtists',
       type: 'number',
       group: 'misc',

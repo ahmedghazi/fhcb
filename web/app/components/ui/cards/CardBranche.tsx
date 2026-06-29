@@ -20,6 +20,8 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
     supTitle = `[${settings?.totalImageImages}]`;
   } else if (slug?.current?.includes("feuilletage")) {
     supTitle = `[${settings?.totalFeuilletages}]`;
+  } else if (slug?.current?.includes("series-thematique")) {
+    supTitle = `[${settings?.totalSerieThematique}]`;
   }
 
   const props = brancheToCard(input, supTitle);

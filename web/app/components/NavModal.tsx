@@ -43,7 +43,7 @@ const NavModal = ({ settings }: Props) => {
           )}
 
           {modalType === "search" && <SearchForm settings={settings} />}
-          <button className='btn-close' onClick={_close}>
+          <button className='btn-close sm-only' onClick={_close}>
             <Icon name='close' />
           </button>
         </div>

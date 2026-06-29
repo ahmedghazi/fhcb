@@ -10,18 +10,12 @@ type Props = {
 };
 
 const Rebonds = ({ input, title = "discoverToo" }: Props) => {
+  if (!input || input.length === 0) return null;
   return (
     <section className='rebonds mb-lg'>
       <div className='container-fluid'>
         <h2 className='c-h1_5'>{_localizeText(title)}</h2>
-        <div
-          className='grid--centered'
-          style={
-            {
-              // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-              // justifyContent: "center",
-            }
-          }>
+        <div className='grid--centered'>
           {input?.map((item: any, i: number) => (
             <CardType key={i} input={item} context='rebonds' />
           ))}
