@@ -4,6 +4,7 @@ import {
   ImagesUIExpanded,
   VideoUIExpanded,
   TextImageUIExpanded,
+  TextSidebarUIExpanded,
   SupportUIExpanded,
   NewsletterUIExpanded,
 } from "./sanity-expanded.types";
@@ -28,7 +29,6 @@ import {
   ProgrammeUI,
   Slug,
   SliderCardUI,
-  TextSidebarUI,
   TextUI,
   ListExhibitionsPastUI,
   RessourcesUI,
@@ -62,7 +62,7 @@ export type ModuleType =
   | ImagesUIExpanded
   | VideoUIExpanded
   | TextImageUIExpanded
-  | TextSidebarUI
+  | TextSidebarUIExpanded
   | ListUI
   | ListsUI
   | SliderCardUI
@@ -98,7 +98,7 @@ export interface ModulesList {
       } & TextImageUIExpanded)
     | ({
         _key: string;
-      } & TextSidebarUI)
+      } & TextSidebarUIExpanded)
     | ({
         _key: string;
       } & ListUI)

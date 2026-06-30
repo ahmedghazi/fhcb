@@ -9,9 +9,11 @@
     padding-bottom: 1rem;
     margin-bottom: 1rem;
   }
-  figure {
-    margin-top: 1rem;
-    max-width: 10rem;
+  &__partenaires {
+    figure {
+      margin-top: 1rem;
+      max-width: 10rem;
+    }
   }
 
   @media all and (max-width: variables.$md) {

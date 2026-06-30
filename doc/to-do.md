@@ -100,7 +100,8 @@ cards simili document
 - filters mobile
 - # compteur ressources sur les cartes branches ressource
 - # rebonds expos (by tag)
-- autour de l'expo vie la backoffice
+- # autour de l'expo vie la backoffice
+- sidebard product
 
 ## card expos
 

@@ -244,7 +244,7 @@ export type ImagesUIExpanded = Omit<ImagesUI, 'items'> & {
   > | null;
 };
 
-export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | 'coProduction' | 'partenaires' | 'keyVal'> & {
+export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | 'coProduction' | 'partenaires' | 'products' | 'keyVal'> & {
   commissariat?: Array<
     {
       _key: string;
@@ -265,6 +265,11 @@ export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | '
     | ({
         _key: string;
       } & PartenaireExpanded)
+  > | null;
+  products?: Array<
+    {
+      _key: string;
+    } & ProductExpanded
   > | null;
   keyVal?: Array<
     {

@@ -1,18 +1,13 @@
 "use client";
 import React from "react";
 import { PortableText } from "@portabletext/react";
-import {
-  LocaleBlockContent,
-  TextSidebarUI,
-} from "@/app/sanity-api/types/sanity.types";
 import portableTextComponents from "@/app/sanity-api/portableTextComponents";
-import useLocale from "@/app/context/LocaleContext";
 import { _localizeField } from "@/app/sanity-api/utils";
 import Sidebar from "../ui/Sidebar";
-import { SidebarGeneriqueExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import { TextSidebarUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 
 type Props = {
-  input: TextSidebarUI;
+  input: TextSidebarUIExpanded;
 };
 
 const ModuleTextSidebarUI = ({ input }: Props) => {
@@ -24,7 +19,7 @@ const ModuleTextSidebarUI = ({ input }: Props) => {
           <div className='grid md:grid-cols-12 gap-gutter'>
             {sidebar && (
               <div className='md:col-span-3 modile__aside'>
-                <Sidebar input={sidebar as SidebarGeneriqueExpanded} />
+                <Sidebar input={sidebar} />
               </div>
             )}
 

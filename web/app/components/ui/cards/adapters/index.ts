@@ -152,7 +152,7 @@ export function productToCard(
   size: "sm" | "md" | "lg" = "md",
 ): CardBaseProps {
   const { imageCover, tags, price, artists } = input;
-  const artistName = artists?.map((a) => a.name).join(", ") || "";
+  const artistName = artists?.map((a) => a?.name).join(", ") || "";
   const title = (_localizeField(input.title) as string) || "";
   const pathname = usePathname();
   const isOffShop = pathname.indexOf("librairie") === -1;
@@ -427,7 +427,11 @@ export function brancheToCard(
         ? [imageCover.asset as SanityImageAssetFull]
         : [],
     mediaSlot: playbackId
-      ? React.createElement(MuxVideoPlayer, { playbackId, loop: true, hoverPlay: true })
+      ? React.createElement(MuxVideoPlayer, {
+          playbackId,
+          loop: true,
+          hoverPlay: true,
+        })
       : undefined,
     supTitle,
     title: (_localizeField(input.title) as string) || "",

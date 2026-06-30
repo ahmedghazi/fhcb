@@ -1,14 +1,19 @@
 import { SidebarGeneriqueExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
-import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
+import {
+  _linkResolver,
+  _localizeField,
+  _localizeText,
+} from "@/app/sanity-api/utils";
 import React from "react";
 import Figure from "./Figure";
+import Link from "next/link";
 
 type Props = {
   input: SidebarGeneriqueExpanded;
 };
 
 const Sidebar = ({ input }: Props) => {
-  const { commissariat, coProduction, partenaires, keyVal } = input;
+  const { commissariat, coProduction, partenaires, products, keyVal } = input;
   return (
     <aside className='sidebar'>
       {commissariat && (
@@ -62,6 +67,24 @@ const Sidebar = ({ input }: Props) => {
           </ul>
         </div>
       )}
+      {products && (
+        <div className='sidebar__item sidebar__products'>
+          <ul>
+            {products.map((item, i) => (
+              <li key={i} title={_localizeField(item.title)}>
+                {item && (
+                  <div className='flex flex-col gap-xs'>
+                    <Figure asset={item?.imageCover?.asset} />
+                    <Link className='btn' href={_linkResolver(item)}>
+                      {_localizeText("buy")}
+                    </Link>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {keyVal && (
         <div className='sidebar__item sidebar__keyVal'>
           {/* <h3 className='c-tag underline'>{_localizeText("keyVal")}</h3> */}
@@ -79,6 +102,7 @@ const Sidebar = ({ input }: Props) => {
           </ul>
         </div>
       )}
+      {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
     </aside>
   );
 };

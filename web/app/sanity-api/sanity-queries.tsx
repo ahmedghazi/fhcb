@@ -2,14 +2,10 @@ import { groq } from "next-sanity";
 import { sanityFetch } from "./sanity.client";
 import {
   imageAsset,
-  cardRefArtist,
   modules,
   seo,
-  cardRefImageImages,
   nav,
-  cardTypes,
   relatedByTag,
-  cardRefProduct,
   sliderCardUI,
   gridCardUI,
   relatedByArtists,
@@ -26,13 +22,18 @@ import {
   IMAGE_IMAGES_QUERY_RESULT,
   LIBRARY_QUERY_RESULT,
   PAGE_MODULAIRE_QUERY_RESULT,
-  Product,
   PRODUCT_QUERY_RESULT,
   PROGRAMME_QUERY_RESULT,
   SERIE_THEMATIQUE_QUERY_RESULT,
   SETTINGS_QUERY_RESULT,
 } from "./types/sanity.types";
 import CardProduct from "../components/ui/cards/CardProduct";
+import {
+  cardRefArtist,
+  cardRefImageImages,
+  cardRefProduct,
+  cardTypes,
+} from "./fragments-cards";
 
 /*****************************************************************************************************
  * SETTINGS

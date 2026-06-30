@@ -24,13 +24,20 @@ export default defineType({
     }),
     defineField({
       name: 'partenaires',
-      title: 'MÉCÉNAT',
+      title: 'Mécénat',
       type: 'array',
-      of: [{type: 'keyVal'}, {type: 'reference', to: [{type: 'partenaire'}]}],
+      of: [{type: 'keyVal'}, {title: 'Mécène', type: 'reference', to: [{type: 'partenaire'}]}],
+    }),
+    defineField({
+      name: 'products',
+      title: 'Produits',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'product'}]}],
     }),
     defineField({
       name: 'keyVal',
       title: 'titre + texte',
+      description: 'Libre',
       type: 'array',
       of: [{type: 'keyVal'}],
     }),

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/app/sanity-api/sanity.client";
-import { cardRefProduct } from "@/app/sanity-api/fragments";
+import { cardRefProduct } from "@/app/sanity-api/fragments-cards";
 
 const PRODUCTS_PAGE_QUERY = groq`*[_type == "product"] | order(publicationDate asc) [$start...$end] {
   ${cardRefProduct}

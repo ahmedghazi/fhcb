@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/app/sanity-api/sanity.client";
-import { cardRefEvent, cardRefProduct } from "@/app/sanity-api/fragments";
+import { cardRefEvent, cardRefProduct } from "@/app/sanity-api/fragments-cards";
 
 const EVENTS_QUERY = groq`*[_type == "event"] | order(coalesce(dates[0].du, _createdAt) asc) {
   ${cardRefEvent}
