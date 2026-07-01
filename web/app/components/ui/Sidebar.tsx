@@ -71,7 +71,7 @@ const Sidebar = ({ input }: Props) => {
         <div className='sidebar__item sidebar__products'>
           <ul>
             {products.map((item, i) => (
-              <li key={i} title={_localizeField(item.title)}>
+              <li key={i} className='mb-md' title={_localizeField(item.title)}>
                 {item && (
                   <div className='flex flex-col gap-xs'>
                     <Figure asset={item?.imageCover?.asset} />

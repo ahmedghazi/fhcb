@@ -12,9 +12,17 @@ type Props = {
 };
 
 const LocationSlot = ({ location }: { location: Location }) => {
+  const localizedTitle: string = _localizeField(location.title);
+  if (localizedTitle.toLowerCase().indexOf("tube") > -1) {
+    return null;
+  }
+  if (localizedTitle.toLowerCase().indexOf("cube") > -1) {
+    return null;
+  }
+
   return (
     <div className={clsx("location", location.inSite && "location--is-insite")}>
-      {_localizeField(location.title)}
+      {localizedTitle}
     </div>
   );
 };

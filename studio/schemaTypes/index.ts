@@ -30,6 +30,7 @@ import contactLinkItem from './objects/contactLinkItem'
 import cta from './objects/cta'
 import keyVal from './objects/keyVal'
 import video from './objects/video'
+import cardVideoMux from './objects/cardVideoMux'
 
 /** modules */
 import imagesUI from './objects/modules/imagesUI'
@@ -108,6 +109,7 @@ export const schemaTypes = [
   linkIcon,
   contactLinkItem,
   video,
+  cardVideoMux,
   imageInGrid,
   cta,
   keyVal,

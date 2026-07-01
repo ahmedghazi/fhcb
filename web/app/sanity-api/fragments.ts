@@ -362,8 +362,14 @@ export const featuredCardsUI = `
     "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
-    video{
-      ${videoAsset}
+    cardVideoMux{
+      ...,
+      video{
+        ${videoAsset}
+      },
+      cta{
+        ${cta}
+      }
     }
   }
 `;

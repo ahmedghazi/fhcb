@@ -29,6 +29,11 @@ export default defineField({
     defineField({
       name: 'video',
       type: 'mux.video',
+      hidden: true,
+    }),
+    defineField({
+      name: 'cardVideoMux',
+      type: 'cardVideoMux',
     }),
     defineField({
       name: 'items',

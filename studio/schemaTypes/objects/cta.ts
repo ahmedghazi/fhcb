@@ -14,7 +14,8 @@ export default defineField({
       type: 'linkInternal',
     }),
     defineField({
-      title: 'Lien interne',
+      title: 'Lien externe',
+      description: 'Ailleurs sur le web',
       name: 'external',
       type: 'linkExternal',
     }),
