@@ -252,6 +252,7 @@ export function artistToCard(
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return {
+    tags: _localizeText("artist"),
     _type: input._type,
     layout: size === "md" && !isLandscape ? "row" : "col",
     colorVar: "var(--color-artist)",

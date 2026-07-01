@@ -63,6 +63,7 @@ const i18n = {
     ressources: "Ressources",
     closeBanner: "Fermer l'annonce",
     bookTicket: "Réserver vos billets",
+    artist: "Artiste",
   },
   en: {
     default: false,
@@ -123,6 +124,7 @@ const i18n = {
     ressources: "Ressources",
     closeBanner: "Close banner",
     bookTicket: "Book your tickets",
+    artist: "Artist",
   },
 };
 

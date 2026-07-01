@@ -177,6 +177,7 @@ cards simili document
 - # carte look 3 2 colonnes (taille de grille 4/8)?
 - # card video, d'où viennent elles (page)
 - pb ordre éléments entre desktop et mobile. Ex hero exhibition, card newsletter, ...
+- page mf et hcb, ne seront pas les pages artistes?
 
 # réponses
 
