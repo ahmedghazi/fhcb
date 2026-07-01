@@ -53,6 +53,7 @@ export default defineField({
       type: 'date',
       name: 'au',
       title: 'Au',
+      description: 'Ne pas remplir si exposition ou événement sur 1 jour',
       options: {
         dateFormat: 'DD/MM/YYYY',
       },

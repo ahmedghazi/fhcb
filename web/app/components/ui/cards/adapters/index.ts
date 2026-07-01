@@ -208,7 +208,7 @@ export function eventToCard(
   const actions: CardAction[] = [];
   if (!isHorsLeMurs) {
     actions.push({
-      label: _localizeText("discoverTheExhibition") as string,
+      label: _localizeText("discoverTheEvent") as string,
       href: _linkResolver(input),
       variant: "primary",
     });

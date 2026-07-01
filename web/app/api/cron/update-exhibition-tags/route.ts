@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
+import nodemailer from "nodemailer";
 import { projectId, dataset } from "@/app/sanity-api/sanity.api";
 import { isInSiteLocationType } from "@/app/lib/utils";
 
@@ -31,6 +32,53 @@ function randomKey() {
   return Math.random().toString(36).slice(2, 10);
 }
 
+async function sendCronReport({
+  updated,
+  log,
+  error,
+}: {
+  updated: number;
+  log: string[];
+  error?: string;
+}) {
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT ?? 587),
+    secure: process.env.SMTP_SECURE === "true",
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+
+  const subject = error
+    ? `[CRON] update-exhibition-tags — ERREUR`
+    : `[CRON] update-exhibition-tags — ${updated} doc(s) mis à jour`;
+
+  const bodyLines = error
+    ? [`<p style="color:red"><strong>Erreur :</strong> ${error}</p>`]
+    : [
+        `<p><strong>${updated}</strong> exposition(s) mise(s) à jour.</p>`,
+        updated > 0
+          ? `<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-family:monospace;font-size:13px">
+              <thead><tr><th>Document ID</th><th>Tags assignés</th></tr></thead>
+              <tbody>${log.map((l) => `<tr>${l.split(": ").map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>
+            </table>`
+          : `<p>Aucun document modifié.</p>`,
+      ];
+
+  await transporter.sendMail({
+    from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
+    to: "hello@ahmedghazi.com",
+    subject,
+    html: `
+      <h2>Rapport CRON — update-exhibition-tags</h2>
+      <p>Date : ${new Date().toISOString()}</p>
+      ${bodyLines.join("\n")}
+    `,
+  });
+}
+
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
@@ -39,9 +87,18 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const client = getWriteClient();
+  let client: ReturnType<typeof getWriteClient>;
+  try {
+    client = getWriteClient();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    await sendCronReport({ updated: 0, log: [], error: message });
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+
   const now = new Date().toISOString();
 
+  try {
   // Resolve or create managed tags
   const existingTags: { _id: string; slug: string }[] = await client.fetch(
     `*[_type == "tag" && slug.current in [$current, $past, $upcoming, $horsLesMurs]]{ _id, "slug": slug.current }`,
@@ -208,5 +265,11 @@ export async function GET(request: Request) {
     );
   }
 
+  await sendCronReport({ updated, log });
   return NextResponse.json({ updated, log });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    await sendCronReport({ updated: 0, log: [], error: message });
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

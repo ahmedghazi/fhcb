@@ -17,10 +17,10 @@ cards simili document
 - # futur exhibitions
 - # programme
 - # fix header (img)
-- fix header interractions
+- # fix header interractions
 - # header aside
 - # message contexturel avec auto kill
-- message contexturel avec auto kill
+- # message contexturel avec auto kill
 - # search scroll
 - # search open focus input
 - # footer
@@ -30,7 +30,6 @@ cards simili document
 - # current expo = same tag as hors les murs
 - # prev exhib
 - # filtes prev exhib
-- page programme expo/event vide => afficher un message
 - # créer les cards rebonds page
 - # grid masonry
 - # pb expo en cours dans https://fhcb-preprod.vercel.app/histoire-and-missions
@@ -46,7 +45,6 @@ cards simili document
 - # image images
 - # feuilletage
 - # single page feuilletage
-- updates doc icons
 - # wide reg
 - # grid centered
 - # rebonds article > rebonds article (même catégorie)
@@ -68,11 +66,8 @@ cards simili document
 - # search au click
 - # module Ressources affiche les dernières ressources avec carte branches ressources (video auto play ) + hover
 - # single event related
-- cron in preprod
-- add remaining cta in modules
-- ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
 - # nav avec logo dans le même ul
-- grille rebonds branche
+- # grille rebonds branche
 - # nav image(s) + aside
 - # filter checkbox
 - # filters shop
@@ -83,25 +78,31 @@ cards simili document
 - # seuil de changement de grille, container fuild max width 1300px
 - # component blockqote
 - # champs ressource label, liste de choix
-- contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
-- rebonds page expo, ordre
-- autour de l'expo
-- couple titre sous titre > 450 / 200
 - # bandeau contextuel
 - # pastilles expo
 - # pastilles event
-- page 404
-- mobile font sizes
-- module carte videos
+- # module carte video mux
 - # videoCover sur les pages ressources
 - # page ressources ajouter un sliderArtiste (ressources + articles)
 - # module ressources doit afficher 1 / type, pas toutes les ressources.
 - # add redirect from artist/hcb > /hcb, artist/mf > /mf
-- filters mobile
 - # compteur ressources sur les cartes branches ressource
 - # rebonds expos (by tag)
 - # autour de l'expo vie la backoffice
 - # sidebar product
+- cron in preprod
+- add remaining cta in modules
+- ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
+- contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
+- rebonds page expo, ordre
+- autour de l'expo
+- couple titre sous titre > 450 / 200
+- page 404
+- mobile font sizes
+- filters mobile
+- page programme expo/event vide => afficher un message
+- updates doc icons
+- test import produits avec les nx custom fields
 
 ## card expos
 
@@ -128,11 +129,12 @@ cards simili document
 - # catalog
 - # filters shop
 - # product page
-- cart
+- # cart
+- post checkout
 
 ## shopify
 
-- ajouter des metas fields
+- # ajouter des metas fields
 - - langues, description, date de paruation, fiche technique (générique), artiste
     custom.isbn
     custom.fiche_technique
@@ -146,7 +148,7 @@ cards simili document
 - # listFeuilletage + filtres
 - # listImageImages + filtres
 - # listSeriesThematiques + filtres
-- home card video mux
+- # home card video mux
 - # newsletter
 - # soutenir
 
@@ -158,14 +160,14 @@ cards simili document
 
 # questions
 
-- programme = diff entre programme expo et programme evts
+- # programme = diff entre programme expo et programme evts
 - # - PROGRAMME AUTO GÉNÉRÉ PAR TYPE
 - # home: as-t-on toujours cette ordre?
 - - # modules spécifique home mais qui se génèrent tout seul
 - # card size, quels contexte font que la card soit en grand ou en petit?
 - # diff entre card expo avec et sans fond perdu (expo en cours?)
-- diff entre evt et visite commentées (est-ce un doc propre ou un type d'evt)
-- cta dans les cards. Soit le texte est présent dans le doc source, soit dans un champs qui permet de convoquer les cartes. Mais pour avoir une cohérence, il faudrait que ce soit toujours le même champs qui soit utilisé. La card expo par ex est appelé à divers endroits.
+- # diff entre evt et visite commentées (est-ce un doc propre ou un type d'evt)
+- # cta dans les cards. Soit le texte est présent dans le doc source, soit dans un champs qui permet de convoquer les cartes. Mais pour avoir une cohérence, il faudrait que ce soit toujours le même champs qui soit utilisé. La card expo par ex est appelé à divers endroits.
 - # images (légendes, credits) localizable mais pas dans la mediatheque, ou alors on crée une mediatheque tampon
 - # filtre lieu dans précédente expo?
 - # filtre intervenant dans feuilletages?
@@ -180,7 +182,8 @@ cards simili document
 
 # GO PREPROD
 
-batch sync products
+- update email smtp
+- batch sync products
 
 add env CRON_SECRET=test
 Check cron job

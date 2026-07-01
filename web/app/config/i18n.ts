@@ -31,6 +31,8 @@ const i18n = {
     discoverTheExhibition: "Découvrir l'exposition",
     aroundTheExhibition: "Autour de l'exposition",
 
+    discoverTheEvent: "Découvrir l'événement",
+
     currentExhibition: "Exposition en cours",
     pastExhibition: "Exposition passée",
     futurExhibition: "Exposition à venir",
@@ -88,6 +90,7 @@ const i18n = {
     toDiscoverToo: "To discover too",
     discoverTheArtist: "Discover the artist",
     discoverTheExhibition: "Discover the exhibition",
+    discoverTheEvent: "Discover the event",
     readTheArticle: "read the article",
     currentExhibition: "Current exhibition",
     pastExhibition: "Past exhibition",
