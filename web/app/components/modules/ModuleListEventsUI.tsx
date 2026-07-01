@@ -1,40 +1,26 @@
 "use client";
-import { Fragment, useState } from "react";
-import useLocale from "@/app/context/LocaleContext";
+import { Fragment } from "react";
+import Link from "next/link";
 import CardEvent from "../ui/cards/CardEvent";
 import { EventExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ListEventsUI, Tag } from "@/app/sanity-api/types/sanity.types";
-import FilterBar from "../ui/filters/FilterBar";
-import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
-import { applyFilters } from "../ui/filters/applyFilters";
+import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
 
 type Props = {
-  input: ListEventsUI & {
+  input: Omit<ListEventsUI, "filterTags"> & {
+    filterTags: Tag[];
     resolvedItems?: EventExpanded[];
-    // filters?: SanityFilterDef[];
+    linkFallback?: any;
   };
 };
 
 const ModuleListEventsUI = ({ input }: Props) => {
-  const { locale } = useLocale();
-  const { cardSize, resolvedItems } = input;
-  // const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
-
-  // const filterDefs = input.filters ?? [];
-  // const filteredItems = applyFilters(
-  //   input.resolvedItems ?? [],
-  //   filterDefs,
-  //   activeFilters,
-  //   locale,
-  // );
+  const { cardSize, resolvedItems, filterTags, linkFallback } = input;
 
   return (
     <section className='module module--list-events'>
       <div className='container-fluid'>
         <div className='module__inner'>
-          {/* {filterDefs.length > 0 && (
-            <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
-          )} */}
           {(resolvedItems?.length ?? 0) > 0 && (
             <div
               className={
@@ -48,6 +34,35 @@ const ModuleListEventsUI = ({ input }: Props) => {
                   />
                 </Fragment>
               ))}
+            </div>
+          )}
+          {resolvedItems?.length === 0 && linkFallback?.internal && (
+            <div className='text-center'>
+              <Link
+                className='btn'
+                href={_linkResolver(linkFallback.internal.link)}>
+                {_localizeField(linkFallback.internal.label)}
+              </Link>
+            </div>
+          )}
+          {resolvedItems?.length === 0 && (
+            <div className='text-center'>
+              <p>
+                Il n&apos;y a pas d&apos;
+                {filterTags?.map((tag) => (
+                  <span key={tag._id} className='tag'>
+                    {_localizeField(tag.title)}
+                  </span>
+                ))}{" "}
+                actuellement.
+              </p>
+              {linkFallback?.internal && (
+                <Link
+                  className='btn'
+                  href={_linkResolver(linkFallback.internal.link)}>
+                  {_localizeField(linkFallback.internal.label)}
+                </Link>
+              )}
             </div>
           )}
         </div>

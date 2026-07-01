@@ -516,6 +516,9 @@ export const listExhibitionsUI = `
     title{
       ...
     },
+    filterTags[]->{
+      title
+    },
     "resolvedItems": *[
       _type == "exhibition"
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
@@ -524,6 +527,9 @@ export const listExhibitionsUI = `
       ${cardRefExhibition}
     },
     cta{
+      ${cta}
+    },
+    linkFallback{
       ${cta}
     }
   }
@@ -558,6 +564,9 @@ export const listExhibitionsEventsUI = `
     ...,
     title{
       ...
+    },
+    filterTags[]->{
+      title
     },
     filters[]{
       ...,
@@ -602,6 +611,9 @@ export const listEventsUI = `
       ${cardRefEvent}
     },
     cta{
+      ${cta}
+    },
+    linkFallback{
       ${cta}
     }
   }

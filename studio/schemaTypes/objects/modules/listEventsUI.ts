@@ -62,6 +62,12 @@ export default defineField({
     //   ],
     // }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
+    defineField({
+      name: 'linkFallback',
+      type: 'cta',
+      title: 'Lien de repli',
+      description: "Affiché si aucun événement n'est trouvé — ex. : renvoyer vers les événements passés.",
+    }),
   ],
   preview: {
     select: {title: `title.${baseLanguage}`},

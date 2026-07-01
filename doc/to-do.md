@@ -91,6 +91,7 @@ cards simili document
 - # autour de l'expo vie la backoffice
 - # sidebar product
 - # ajout conversation
+- # page programme expo/event vide => afficher un message
 - cron in preprod
 - add remaining cta in modules
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
@@ -101,7 +102,6 @@ cards simili document
 - page 404
 - mobile font sizes
 - filters mobile
-- page programme expo/event vide => afficher un message
 - updates doc icons
 - test import produits avec les nx custom fields
 

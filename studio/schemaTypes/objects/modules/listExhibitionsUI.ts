@@ -34,6 +34,12 @@ export default defineField({
     //   hidden: ({parent}) => parent?.items !== 'exhibitions-past',
     // }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
+    defineField({
+      name: 'linkFallback',
+      type: 'cta',
+      title: 'Lien de repli',
+      description: "Affiché si aucune exposition n'est trouvée — ex. : renvoyer vers les expositions passées.",
+    }),
   ],
   preview: {
     select: {title: `title.${baseLanguage}`},

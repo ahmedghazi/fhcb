@@ -1,50 +1,67 @@
 "use client";
-import { Fragment, useState } from "react";
-import useLocale from "@/app/context/LocaleContext";
+import { Fragment } from "react";
+import Link from "next/link";
 import CardExhibition from "../ui/cards/CardExhibition";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
-import { ListExhibitionsUI } from "@/app/sanity-api/types/sanity.types";
-import FilterBar from "../ui/filters/FilterBar";
-import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
-import { applyFilters } from "../ui/filters/applyFilters";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { ListExhibitionsUI, Tag } from "@/app/sanity-api/types/sanity.types";
 import { _isPast } from "@/app/lib/utils";
+import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
 
 type Props = {
-  input: ListExhibitionsUI & {
+  input: Omit<ListExhibitionsUI, "filterTags"> & {
+    filterTags?: Tag[];
     resolvedItems?: ExhibitionExpanded[];
+    linkFallback?: any;
   };
 };
 
 const ModuleListExhibitionsUI = ({ input }: Props) => {
-  const __isPast = (item: ExhibitionExpanded) => {
-    return _isPast(item);
-  };
+  const { resolvedItems, filterTags, linkFallback } = input;
+  const __isPast = (item: ExhibitionExpanded) => _isPast(item);
 
   return (
     <section className='module module--list-exhibitions'>
-      {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
       <div className='container-fluid'>
         <div className='module__inner'>
-          <div
-            className='grid md:grid-cols-4 gap-gutter'
-            style={
-              {
-                // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_4))",
-                // justifyContent: "center",
-              }
-            }>
-            {input.resolvedItems?.map(
-              (item: ExhibitionExpanded, index: number) => (
-                <Fragment key={`${item._id}-${index}`}>
-                  <div className={`md:col-span-${__isPast(item) ? 1 : 4}`}>
-                    <CardExhibition
-                      input={item}
-                      size={__isPast(item) ? "sm" : "lg"}
-                    />
-                  </div>
-                </Fragment>
-              ),
+          {/* {filterTags && filterTags.length > 0 && (
+            <div className='module__tags'>
+              {filterTags.map((tag) => (
+                <span key={tag._id} className='tag'>
+                  {_localizeField(tag.title)}
+                </span>
+              ))}
+            </div>
+          )} */}
+          <div className='grid gap-gutter'>
+            {resolvedItems?.map((item: ExhibitionExpanded, index: number) => (
+              <Fragment key={`${item._id}-${index}`}>
+                <div className={`md:col-span-${__isPast(item) ? 1 : 4}`}>
+                  <CardExhibition
+                    input={item}
+                    size={__isPast(item) ? "sm" : "lg"}
+                  />
+                </div>
+              </Fragment>
+            ))}
+            {resolvedItems?.length === 0 && (
+              <div className='text-center'>
+                <p>
+                  Il n&apos;y a pas d&apos;
+                  {filterTags?.map((tag) => (
+                    <span key={tag._id} className='tag'>
+                      {_localizeField(tag.title)}
+                    </span>
+                  ))}{" "}
+                  actuellement.
+                </p>
+                {linkFallback?.internal && (
+                  <Link
+                    className='btn'
+                    href={_linkResolver(linkFallback.internal.link)}>
+                    {_localizeField(linkFallback.internal.label)}
+                  </Link>
+                )}
+              </div>
             )}
           </div>
         </div>

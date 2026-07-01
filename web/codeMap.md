@@ -56,6 +56,9 @@ Router central : `index.tsx` — reçoit le tableau `modules[]` de Sanity et dis
 | `ModuleSliderCardUI` | `sliderCardUI` | Slider de cartes (références Sanity) |
 | `ModuleGridCardUI` | `gridCardUI` | Grille de cartes (références Sanity) |
 | `ModuleProgrammeUI` | `programmeUI` | Liste d'événements/expositions |
+| `ModuleListEventsUI` | `listEventsUI` | Liste d'événements filtrée par tags, taille de carte configurable (sm/md/lg), lien de repli si vide |
+| `ModuleListExhibitionsUI` | `listExhibitionsUI` | Liste d'expositions filtrée par tags, carte lg si en cours / sm si passée, lien de repli si vide |
+| `ModuleListExhibitionsPastUI` | `listExhibitionsPastUI` | Liste d'expositions passées (variante dédiée) |
 
 ### components/ui/
 
@@ -65,6 +68,30 @@ Router central : `index.tsx` — reçoit le tableau `modules[]` de Sanity et dis
 | `Cursor.tsx` | Curseur custom (mix-blend-mode difference) |
 | `Figure.tsx` | Image Sanity optimisée via `next/image` + `urlFor` |
 | `Embed.tsx` | Lecteur vidéo embed (ReactPlayer) ou iframe brut |
+
+### components/ui/cards/
+
+Composants de carte utilisés par les modules de liste et de grille.
+
+| Fichier | Type de contenu |
+|---|---|
+| `CardBase.tsx` | Carte générique de base |
+| `CardEvent.tsx` | Événement (taille sm/lg) |
+| `CardExhibition.tsx` | Exposition (taille sm/lg) |
+| `CardExhibitionFeatured.tsx` | Exposition mise en avant |
+| `CardArticle.tsx` | Article |
+| `CardArtist.tsx` | Artiste (tag artiste) |
+| `CardPage.tsx` | Page générique |
+| `CardPageModulaire.tsx` | Page modulaire |
+| `CardConversation.tsx` | Conversation |
+| `CardFeuilletage.tsx` | Feuilletage |
+| `CardSerieThematique.tsx` | Série thématique |
+| `CardBranche.tsx` | Branche |
+| `CardProduct.tsx` | Produit |
+| `CardVideoMux.tsx` | Vidéo Mux |
+| `CardImageImages.tsx` | Image dans grille |
+| `CardTags.tsx` | Tags |
+| `CardType.tsx` | Type |
 
 ### context/
 
