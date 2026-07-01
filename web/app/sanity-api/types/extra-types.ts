@@ -37,6 +37,7 @@ import {
   Feuilletage,
   BlockquoteUI,
   SliderArtistUI,
+  ListConversationUI,
 } from "./sanity.types";
 
 export type MostSearchedItem = {
@@ -138,6 +139,9 @@ export interface ModulesList {
     | ({
         _key: string;
       } & ListExhibitionsPastUI)
+    | ({
+        _key: string;
+      } & ListConversationUI)
     | ({
         _key: string;
       } & SupportUIExpanded)

@@ -90,10 +90,11 @@ cards simili document
 - # rebonds expos (by tag)
 - # autour de l'expo vie la backoffice
 - # sidebar product
+- # ajout conversation
 - cron in preprod
 - add remaining cta in modules
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
-- contexte des cards (expos en cours, affiche la coulmeur + bouton), ...
+- contexte des cards (expos en cours, affiche la couleur + bouton), ...
 - rebonds page expo, ordre
 - autour de l'expo
 - couple titre sous titre > 450 / 200

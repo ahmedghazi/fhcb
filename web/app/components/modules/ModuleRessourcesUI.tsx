@@ -19,7 +19,7 @@ import CardConversation from "../ui/cards/CardConversation";
 
 type Props = {
   input: RessourcesUI & {
-    feuilletages?: FeuilletageExpanded;
+    feuilletage?: FeuilletageExpanded;
     imageImages: ImageImagesExpanded;
     serieThematique: SerieThematiqueExpanded;
     conversation: ConversationExpanded;
@@ -36,7 +36,6 @@ const ModuleRessourcesUI = ({ input }: Props) => {
     serieThematique,
     conversation,
   } = input;
-  console.log(input);
   // const items: Array<
   //   FeuilletageExpanded | ImageImagesExpanded | SerieThematiqueExpanded
   // > = [
