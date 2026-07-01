@@ -64,6 +64,7 @@ const i18n = {
     closeBanner: "Fermer l'annonce",
     bookTicket: "Réserver vos billets",
     artist: "Artiste",
+    serieThematique: "Série thématique",
   },
   en: {
     default: false,
@@ -125,6 +126,7 @@ const i18n = {
     closeBanner: "Close banner",
     bookTicket: "Book your tickets",
     artist: "Artist",
+    serieThematique: "Thematic series",
   },
 };
 

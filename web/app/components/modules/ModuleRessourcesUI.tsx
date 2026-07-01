@@ -9,22 +9,34 @@ import {
   ImageImagesExpanded,
   SerieThematiqueExpanded,
   PageModulaireExpanded,
+  ConversationExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardPageModulaire from "../ui/cards/CardPageModulaire";
 import CardBranche from "../ui/cards/CardBranche";
 import CardSerieThematique from "../ui/cards/CardSerieThematique";
+import CardType from "../ui/cards/CardType";
+import CardConversation from "../ui/cards/CardConversation";
 
 type Props = {
   input: RessourcesUI & {
     feuilletages?: FeuilletageExpanded;
     imageImages: ImageImagesExpanded;
     serieThematique: SerieThematiqueExpanded;
+    conversation: ConversationExpanded;
     branches: PageModulaireExpanded;
   };
 };
 
 const ModuleRessourcesUI = ({ input }: Props) => {
-  const { title, branches, feuilletages, imageImages, serieThematique } = input;
+  const {
+    title,
+    branches,
+    feuilletage,
+    imageImages,
+    serieThematique,
+    conversation,
+  } = input;
+  console.log(input);
   // const items: Array<
   //   FeuilletageExpanded | ImageImagesExpanded | SerieThematiqueExpanded
   // > = [
@@ -32,7 +44,12 @@ const ModuleRessourcesUI = ({ input }: Props) => {
   //   ...(imageImages ?? []),
   //   ...(serieThematique ?? []),
   // ];
-  const itemsFlatten = [feuilletages, imageImages, serieThematique];
+  const itemsFlatten = [
+    feuilletage,
+    imageImages,
+    serieThematique,
+    conversation,
+  ];
   return (
     <section className='module module--ressources-ui'>
       <div className='container-fluid'>
@@ -41,7 +58,7 @@ const ModuleRessourcesUI = ({ input }: Props) => {
             <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           )}
           {/* <pre>{JSON.stringify(items)}</pre> */}
-          <div className='grid--centered'>
+          <div className='grid--centered mb-gutter'>
             {itemsFlatten.map((item, i) => (
               <Fragment key={i}>
                 {item?._type === "imageImages" && (
@@ -53,9 +70,14 @@ const ModuleRessourcesUI = ({ input }: Props) => {
                 {item?._type === "serieThematique" && (
                   <CardSerieThematique input={item} size='md' />
                 )}
+                {item?._type === "conversation" && (
+                  <CardConversation input={item} size='md' />
+                )}
+                {/* <CardType input={item} /> */}
               </Fragment>
             ))}
-
+          </div>
+          <div className='grid--centered'>
             {branches.map((item, i) => (
               <CardBranche
                 key={i}

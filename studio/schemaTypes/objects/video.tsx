@@ -31,15 +31,16 @@ export default {
   name: 'video',
   type: 'object',
   icon: GoVideo,
-  initialValue: {
-    colSize: 3,
-  },
+  // initialValue: {
+  //   colSize: 3,
+  // },
   fields: [
     defineField({
       name: 'title',
       type: 'localeString',
       title: 'Titre',
       description: 'Légende',
+      hidden: true,
       // hidden: ({parent, document}) => {
       //   console.log(parent, document)
       //   return document?._type === 'project'
@@ -52,11 +53,11 @@ export default {
       type: 'string',
     }),
 
-    defineField({
-      title: 'Video mux',
-      name: 'video',
-      type: 'mux.video',
-    }),
+    // defineField({
+    //   title: 'Video mux',
+    //   name: 'video',
+    //   type: 'mux.video',
+    // }),
 
     defineField({
       name: 'placeholder',

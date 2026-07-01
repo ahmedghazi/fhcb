@@ -8,7 +8,8 @@ function refreshTotals(client: ReturnType<typeof useClient>) {
       `{
       "totalFeuilletages": count(*[_type == "feuilletage"]),
       "totalImageImages": count(*[_type == "imageImages"]),
-      "totalSerieThematique": count(*[_type == "serieThematique"])
+      "totalSerieThematique": count(*[_type == "serieThematique"]),
+      "totalConversation": count(*[_type == "conversation"])
     }`,
     )
     .then((stats) =>
@@ -18,6 +19,7 @@ function refreshTotals(client: ReturnType<typeof useClient>) {
           totalFeuilletages: stats.totalFeuilletages,
           totalImageImages: stats.totalImageImages,
           totalSerieThematique: stats.totalSerieThematique,
+          totalConversation: stats.totalConversation,
         })
         .commit(),
     )

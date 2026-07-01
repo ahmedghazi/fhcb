@@ -22,6 +22,8 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
     supTitle = `[${settings?.totalFeuilletages}]`;
   } else if (slug?.current?.includes("series-thematique")) {
     supTitle = `[${settings?.totalSerieThematique}]`;
+  } else if (slug?.current?.includes("conversation")) {
+    supTitle = `[${settings?.totalConversation}]`;
   }
 
   const props = brancheToCard(input, supTitle);

@@ -25,6 +25,7 @@ import {
   PRODUCT_QUERY_RESULT,
   PROGRAMME_QUERY_RESULT,
   SERIE_THEMATIQUE_QUERY_RESULT,
+  CONVERSATION_QUERY_RESULT,
   SETTINGS_QUERY_RESULT,
 } from "./types/sanity.types";
 import CardProduct from "../components/ui/cards/CardProduct";
@@ -398,6 +399,38 @@ export async function getSerieThematique(
   return sanityFetch({
     query: SERIE_THEMATIQUE_QUERY,
     tags: ["serieThematique"],
+    qParams: { slug },
+  });
+}
+
+/*****************************************************************************************************
+ * CONVERSATION_QUERY
+ */
+export const CONVERSATION_QUERY = groq`*[_type == "conversation" && slug.current == $slug][0]{
+  ...,
+  seo{
+    ${seo}
+  },
+  chercheur->{
+    _id,
+    name,
+    slug
+  },
+  modules[]{
+    ${modules}
+  },
+  rebonds[]->{
+    ${cardTypes}
+  },
+  "related": ${relatedByArtists}
+}`;
+
+export async function getConversation(
+  slug: string,
+): Promise<CONVERSATION_QUERY_RESULT> {
+  return sanityFetch({
+    query: CONVERSATION_QUERY,
+    tags: ["conversation"],
     qParams: { slug },
   });
 }

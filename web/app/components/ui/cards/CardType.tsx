@@ -14,6 +14,7 @@ import {
   ImageImagesExpanded,
   ProductExpanded,
   ArticleExpanded,
+  ConversationExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardProduct from "./CardProduct";
 import CardArticle from "./CardArticle";
@@ -30,7 +31,8 @@ type Props = {
     | ArtistExpanded
     | ImageImagesExpanded
     | FeuilletageExpanded
-    | ArticleExpanded;
+    | ArticleExpanded
+    | ConversationExpanded;
   context: Context;
   // editor-configurable size from the GridCardUI module (only used for product in grid context)
   size?: Size | null;
@@ -46,6 +48,7 @@ const SIZES = {
   artist: { grid: "md", slider: "md", rebonds: "sm" },
   imageImages: { grid: "md", slider: "md", rebonds: "md" },
   feuilletage: { grid: "md", slider: "md", rebonds: "md" },
+  conversation: { grid: "md", slider: "md", rebonds: "md" },
 } satisfies Record<string, Record<Context, Size>>;
 
 const CardType = ({ input, context, size }: Props) => {

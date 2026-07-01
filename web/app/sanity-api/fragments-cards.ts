@@ -136,6 +136,27 @@ export const cardRefImageImages = `
   video
 `;
 
+export const cardRefConversation = `
+  _type,
+  _id,
+  index,
+  title,
+  slug,
+  chercheur->{
+    _id,
+    name,
+    slug
+  },
+  artists[]->{
+    _id,
+    name,
+    slug
+  },
+  "imageCover": coalesce(imageCover, image){
+    ${imageAsset}
+  },
+`;
+
 export const cardRefSerieThematique = `
   _type,
   _id,
@@ -212,5 +233,8 @@ export const cardTypes = `
   },
   _type == "serieThematique" => {
     ${cardRefSerieThematique}
+  },
+  _type == "conversation" => {
+    ${cardRefConversation}
   }
 `;

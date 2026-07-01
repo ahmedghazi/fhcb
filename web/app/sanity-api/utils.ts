@@ -34,6 +34,8 @@ export const _linkResolver = (
       return `/feuilletage/${node.slug?.current}`;
     case "serieThematique":
       return `/serie-thematique/${node.slug?.current}`;
+    case "conversation":
+      return `/conversation/${node.slug?.current}`;
     case "article":
       return `/article/${node.slug?.current}`;
 

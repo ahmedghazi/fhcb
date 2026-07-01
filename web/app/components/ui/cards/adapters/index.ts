@@ -8,6 +8,7 @@ import React from "react";
 import {
   ArticleExpanded,
   ArtistExpanded,
+  ConversationExpanded,
   EventExpanded,
   ExhibitionExpanded,
   FeuilletageExpanded,
@@ -348,7 +349,7 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     footerPlacement: "detached",
     colorVar: "var(--color-gris-100)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
-    tags: tagsLabel,
+    tags: tagsLabel ? tagsLabel : _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
     subTitle,
     description: (_localizeField(input.description) as string) || undefined,
@@ -372,7 +373,32 @@ export function imageImagesToCard(input: ImageImagesExpanded): CardBaseProps {
     layout: "col",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
-    tags: index ? `une image, des images #${index}` : undefined,
+    tags: index
+      ? `une image, des images #${index}`
+      : _localizeText(input._type),
+    title: (_localizeField(input.title) as string) || "",
+    subTitle: chercheur?.name || undefined,
+    actions: [
+      {
+        label: _localizeText("discover") as string,
+        href: _linkResolver(input),
+        variant: "primary",
+      },
+    ],
+  };
+}
+
+// ─── Conversation ─────────────────────────────────────────────────────────────
+
+export function conversationToCard(input: ConversationExpanded): CardBaseProps {
+  const { chercheur, imageCover, video } = input;
+  return {
+    _type: input._type,
+    layout: "col",
+    // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
+    tags: _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
     subTitle: chercheur?.name || undefined,
     actions: [
@@ -396,7 +422,9 @@ export function serieThematiqueToCard(
     layout: "col",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
-    tags: index ? `une image, des images #${index}` : undefined,
+    tags: index
+      ? `une image, des images #${index}`
+      : _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
     subTitle: chercheur?.name || undefined,
     actions: [

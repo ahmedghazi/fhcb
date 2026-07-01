@@ -1,4 +1,5 @@
 import {
+  cardRefConversation,
   cardRefEvent,
   cardRefExhibition,
   cardRefFeuilletage,
@@ -299,7 +300,7 @@ export const sliderArtistUI = `
       _id != ^._id &&
       (
         (
-          _type in [ "feuilletage", "imageImages", "serieThematique"] &&
+          _type in [ "feuilletage", "imageImages", "serieThematique", "conversation"] &&
           references(^.artist._ref)
         )
         ||
@@ -489,6 +490,26 @@ export const listSerieThematiqueUI = `
   }
 `;
 
+export const listConversationUI = `
+  _type == "listConversationUI" => {
+    ...,
+    title{
+      ...
+    },
+    filters[]{
+      ...,
+      ${filterList},
+      ${filterCheckbox}
+    },
+    "items": *[_type == "conversation"] | order(_createdAt desc) {
+      ${cardRefConversation}
+    },
+    cta{
+      ${cta}
+    }
+  }
+`;
+
 export const listExhibitionsUI = `
   _type == "listExhibitionsUI" => {
     ...,
@@ -642,6 +663,9 @@ export const ressourcesUI = `
     "serieThematique": *[_type == "serieThematique"] | order(_createdAt desc)[0] {
       ${cardRefFeuilletage}
     },
+    "conversation": *[_type == "conversation"] | order(_createdAt desc)[0] {
+      ${cardRefConversation}
+    },
     branches[]->{
       ${cardRefPageModulaire}
     }
@@ -672,6 +696,7 @@ export const modules = `
   ${listFeuilletageUI},
   ${listImageImages},
   ${listSerieThematiqueUI},
+  ${listConversationUI},
   ${listExhibitionsUI},
   ${listExhibitionsPastUI},
   ${listExhibitionsEventsUI},
@@ -696,7 +721,7 @@ export const relatedByArtists = `
     _id != ^._id &&
     (
       (
-        _type in ["event", "exhibition", "feuilletage", "imageImages", "serieThematique", "product"] &&
+        _type in ["event", "exhibition", "feuilletage", "imageImages", "serieThematique", "conversation", "product"] &&
         references(^.artists[]._ref)
       )
       ||

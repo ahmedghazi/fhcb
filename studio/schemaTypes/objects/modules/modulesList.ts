@@ -10,6 +10,7 @@ export default [
   {type: 'listFeuilletageUI'},
   {type: 'listImageImages'},
   {type: 'listSerieThematiqueUI'},
+  {type: 'listConversationUI'},
   {type: 'listUI'},
   {type: 'listsUI'},
   {type: 'newsCardUI'},

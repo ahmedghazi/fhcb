@@ -49,6 +49,7 @@ import featuredCardsUI from './objects/modules/featuredCardsUI'
 import listFeuilletageUI from './objects/modules/listFeuilletageUI'
 import listImageImages from './objects/modules/listImageImages'
 import listSerieThematiqueUI from './objects/modules/listSerieThematiqueUI'
+import listConversationUI from './objects/modules/listConversationUI'
 import listExhibitionsUI from './objects/modules/listExhibitionsUI'
 import listExhibitionsPastUI from './objects/modules/listExhibitionsPastUI'
 import listExhibitionsEventsUI from './objects/modules/listExhibitionsEventsUI'
@@ -76,6 +77,7 @@ import keyValGroup from './objects/keyValGroup'
 import sidebarGenerique from './objects/sidebarGenerique'
 import productVariant from './objects/productVariant'
 import serieThematique from './documents/serieThematique'
+import conversation from './documents/conversation'
 
 export const schemaTypes = [
   settings,
@@ -93,6 +95,7 @@ export const schemaTypes = [
   imageImages,
   feuilletage,
   serieThematique,
+  conversation,
   chercheur,
   location,
 
@@ -140,6 +143,7 @@ export const schemaTypes = [
   listFeuilletageUI,
   listImageImages,
   listSerieThematiqueUI,
+  listConversationUI,
   listExhibitionsUI,
   listExhibitionsPastUI,
   listExhibitionsEventsUI,

@@ -61,7 +61,7 @@ export default defineConfig({
   },
   document: {
     actions: (prev, context) => {
-      const allowedDocs = ['feuilletage', 'imageImages', 'serieThematique', 'artist', 'exhibition']
+      const allowedDocs = ['feuilletage', 'imageImages', 'serieThematique', 'conversation']
       if (allowedDocs.includes(context.schemaType)) {
         // console.log(context)
         return prev.map((originalAction) =>

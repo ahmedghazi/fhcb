@@ -15,6 +15,7 @@
 
 import type {
   SerieThematique,
+  Conversation,
   Chercheur,
   Artist,
   ImageImages,
@@ -82,6 +83,13 @@ export type SerieThematiqueExpanded = Omit<SerieThematique, 'chercheur' | 'artis
   artists?: Array<ArtistExpanded> | null;
   rebonds?: Array<ImageImagesExpanded> | null;
   imageCover?: (Omit<NonNullable<NonNullable<SerieThematique>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+};
+
+export type ConversationExpanded = Omit<Conversation, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
+  chercheur?: Chercheur | null;
+  artists?: Array<ArtistExpanded> | null;
+  rebonds?: Array<ImageImagesExpanded> | null;
+  imageCover?: (Omit<NonNullable<NonNullable<Conversation>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
 };
 
 export type ArticleExpanded = Omit<Article, 'tags' | 'imageCover'> & {

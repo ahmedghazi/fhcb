@@ -238,6 +238,13 @@ export default defineType({
       type: 'number',
       group: 'misc',
     }),
+
+    defineField({
+      name: 'totalConversation',
+      type: 'number',
+      group: 'misc',
+      // hidden: true,
+    }),
     defineField({
       name: 'totalArtists',
       type: 'number',

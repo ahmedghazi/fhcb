@@ -29,6 +29,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'imageImages',
     'feuilletage',
     'serieThematique',
+    'conversation',
     'media.tag',
     'mux.videoAsset',
   ].includes(id)
@@ -92,6 +93,10 @@ export const structure = (S: any) =>
         .title('Série Thématique')
         .schemaType('serieThematique')
         .child(S.documentTypeList('serieThematique')),
+      S.listItem()
+        .title('Conversation')
+        .schemaType('conversation')
+        .child(S.documentTypeList('conversation')),
       // S.listItem().title('Série Thématique').schemaType('serie').child(S.documentTypeList('serie')),
 
       S.divider(),

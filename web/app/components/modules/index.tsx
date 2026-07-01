@@ -16,6 +16,7 @@ import ModuleNewsCardUI from "./ModuleNewsCardUI";
 import ModuleListFeuilletageUI from "./ModuleListFeuilletageUI";
 import ModuleListImageImages from "./ModuleListImageImages";
 import ModuleListSerieThematiqueUI from "./ModuleListSerieThematiqueUI";
+import ModuleListConversationUI from "./ModuleListConversationUI";
 import ModuleListExhibitionsUI from "./ModuleListExhibitionsUI";
 import ModuleListEventsUI from "./ModuleListEventsUI";
 import ModuleListExhibitionsPastUI from "./ModuleListExhibitionsPastUI";
@@ -71,6 +72,13 @@ const Modules = ({ modules }: ModulesList) => {
         case "listSerieThematiqueUI":
           return (
             <ModuleListSerieThematiqueUI
+              key={module._key}
+              input={module as any}
+            />
+          );
+        case "listConversationUI":
+          return (
+            <ModuleListConversationUI
               key={module._key}
               input={module as any}
             />
