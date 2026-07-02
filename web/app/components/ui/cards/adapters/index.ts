@@ -299,7 +299,7 @@ export function pageModulaireToCard(
   input: PageModulaireExpanded,
   contentCount?: number,
 ): CardBaseProps {
-  const { imageCover } = input;
+  const { imageCover, tags } = input;
   return {
     _type: input._type,
     layout: "col",
@@ -308,6 +308,7 @@ export function pageModulaireToCard(
     // videoUrl: (input as any).previewVideo?.asset?.url,
     // videoBehavior: "hover",
     title: (_localizeField(input.title) as string) || "",
+    tags: toTags(tags),
     // contentCount,
     actions: [
       {

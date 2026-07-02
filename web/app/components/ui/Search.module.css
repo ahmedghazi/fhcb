@@ -11,6 +11,7 @@
   }
   :global(input) {
     color: white;
+    font-size: var(--text-md);
     /* flex: 2; */
     /* width: 100%;
     &:focus {

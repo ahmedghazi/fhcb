@@ -92,7 +92,7 @@ cards simili document
 - # sidebar product
 - # ajout conversation
 - # page programme expo/event vide => afficher un message
-- cron in preprod
+- # cron in preprod
 - add remaining cta in modules
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
 - contexte des cards (expos en cours, affiche la couleur + bouton), ...
@@ -179,6 +179,7 @@ cards simili document
 - # card video, d'où viennent elles (page)
 - pb ordre éléments entre desktop et mobile. Ex hero exhibition, card newsletter, ...
 - page mf et hcb, ne seront pas les pages artistes?
+- ordre éléments dans http://localhost:3000/image-images/teheran-1979-de-martine-franck-par-taous-dahmani
 
 # réponses
 

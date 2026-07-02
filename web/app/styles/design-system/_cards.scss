@@ -523,13 +523,15 @@
     }
   }
 
-  @media all and (mib-width: variables.$md) {
+  @media all and (min-width: variables.$md) {
     &--footer-hover {
       &:hover .card__footer {
-        display: flex;
+        // display: flex;
+        opacity: 1;
       }
       .card__footer {
-        display: none;
+        // display: none;
+        opacity: 0;
       }
     }
   }

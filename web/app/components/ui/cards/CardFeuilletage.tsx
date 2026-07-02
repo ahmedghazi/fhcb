@@ -26,7 +26,7 @@ const CardFeuilletage = ({ input, size = "md" }: Props) => {
         "card card--feuilletage",
         `card--${size}`,
         isLandscape ? "card--is-landscape" : "card--is-portrait",
-        tagsClassList,
+        // tagsClassList,
       )}>
       <CardBase {...props} />
       {size === "md" && !!props.actions?.length && (
