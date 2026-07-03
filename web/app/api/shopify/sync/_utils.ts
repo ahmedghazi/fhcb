@@ -392,10 +392,13 @@ export async function buildProductFields(
       _key: `col-${coll.id.split("/").pop()}`,
       _ref: `shopify-collection-${coll.id.split("/").pop()}`,
     })),
+    // Shopify-owned fields overwritten on every sync
+    title: Object.fromEntries(LOCALES.map(({ key }) => [key, localeData[key].title])),
+    ...(imageCover._type ? { imageCover } : {}),
+    images: restImages,
   };
 
   const initial = {
-    title: Object.fromEntries(LOCALES.map(({ key }) => [key, localeData[key].title])),
     slug: { _type: "slug", current: base.handle },
     text: Object.fromEntries(LOCALES.map(({ key }) => [key, blocksByLocale[key]])),
     ...(matchedArtist
@@ -416,8 +419,6 @@ export async function buildProductFields(
         ? { metaImage: { _type: "image", asset: imageCover.asset } }
         : {}),
     },
-    ...(imageCover._type ? { imageCover } : {}),
-    images: restImages,
   };
 
   return { id, synced, initial };
@@ -564,8 +565,22 @@ export async function syncProducts(
 
 // ─── Sync single product ──────────────────────────────────────────────────────
 
-export async function syncProduct(shopifyId: string): Promise<void> {
-  const artists: ArtistRef[] = await getSanityClient().fetch(
+export async function syncProduct(shopifyId: string): Promise<{
+  sanityId: string;
+  dataset: string;
+  projectId: string;
+  categoriesCount: number;
+}> {
+  const client = getSanityClient();
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "unknown";
+  const hasToken = !!process.env.SANITY_API_WRITE_TOKEN;
+
+  if (!hasToken) {
+    throw new Error("SANITY_API_WRITE_TOKEN is not configured");
+  }
+
+  const artists: ArtistRef[] = await client.fetch(
     `*[_type == "artist" && defined(name)]{ _id, name }`,
   );
 
@@ -576,11 +591,13 @@ export async function syncProduct(shopifyId: string): Promise<void> {
 
   const { id, synced, initial } = await buildProductFields(base, locale, artists);
 
-  await getSanityClient()
+  await client
     .transaction()
     .createIfNotExists({ _type: "product", _id: id, ...initial, ...synced })
     .patch(id, { set: synced, setIfMissing: initial })
     .commit();
+
+  return { sanityId: id, dataset, projectId, categoriesCount: (synced.categories ?? []).length };
 }
 
 // ─── HMAC validation ──────────────────────────────────────────────────────────

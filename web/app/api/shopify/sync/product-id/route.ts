@@ -17,6 +17,10 @@ async function sendDebugEmail(info: {
   shopifyId: string;
   payload: Record<string, unknown>;
   success: boolean;
+  sanityId?: string;
+  dataset?: string;
+  projectId?: string;
+  categoriesCount?: number;
   error?: unknown;
 }) {
   const transporter = nodemailer.createTransport({
@@ -49,6 +53,10 @@ async function sendDebugEmail(info: {
     ["status", info.payload.status],
     ["updated_at", info.payload.updated_at],
     ["GID résolu", info.shopifyId],
+    ["Sanity _id", info.sanityId ?? "—"],
+    ["Sanity dataset", info.dataset ?? "—"],
+    ["Sanity projectId", info.projectId ?? "—"],
+    ["Categories synced", info.categoriesCount ?? "—"],
   ];
 
   const payloadHtml = `
@@ -121,8 +129,8 @@ export async function POST(req: Request) {
   }
 
   try {
-    await syncProduct(shopifyId);
-    await sendDebugEmail({ shopifyId, payload, success: true }).catch(console.error);
+    const result = await syncProduct(shopifyId);
+    await sendDebugEmail({ shopifyId, payload, success: true, ...result }).catch(console.error);
   } catch (err) {
     console.error(`[shopify-sync] product-id sync failed (${shopifyId}):`, err);
     await sendDebugEmail({ shopifyId, payload, success: false, error: err }).catch(
