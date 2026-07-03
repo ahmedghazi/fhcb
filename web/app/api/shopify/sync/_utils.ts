@@ -570,6 +570,7 @@ export async function syncProduct(shopifyId: string): Promise<{
   dataset: string;
   projectId: string;
   categoriesCount: number;
+  collectionsRaw: string[];
 }> {
   const client = getSanityClient();
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
@@ -597,7 +598,13 @@ export async function syncProduct(shopifyId: string): Promise<{
     .patch(id, { set: synced, setIfMissing: initial })
     .commit();
 
-  return { sanityId: id, dataset, projectId, categoriesCount: (synced.categories ?? []).length };
+  return {
+    sanityId: id,
+    dataset,
+    projectId,
+    categoriesCount: (synced.categories ?? []).length,
+    collectionsRaw: (base.collections?.nodes ?? []).map((c: any) => `${c.handle} (${c.id})`),
+  };
 }
 
 // ─── HMAC validation ──────────────────────────────────────────────────────────

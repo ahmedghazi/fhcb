@@ -21,6 +21,7 @@ async function sendDebugEmail(info: {
   dataset?: string;
   projectId?: string;
   categoriesCount?: number;
+  collectionsRaw?: string[];
   error?: unknown;
 }) {
   const transporter = nodemailer.createTransport({
@@ -57,6 +58,7 @@ async function sendDebugEmail(info: {
     ["Sanity dataset", info.dataset ?? "—"],
     ["Sanity projectId", info.projectId ?? "—"],
     ["Categories synced", info.categoriesCount ?? "—"],
+    ["Collections (raw)", info.collectionsRaw?.join(", ") || "aucune"],
   ];
 
   const payloadHtml = `
