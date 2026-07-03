@@ -1,0 +1,197 @@
+{
+  "admin_graphql_api_id": "gid:\/\/shopify\/Product\/15184282452354",
+  "body_html": "\u003cp\u003ePhotographe franco-ivoirien, François-Xavier Gbré développe une pratique artistique qui explore les territoires et revisite l’histoire. Son travail s’intéresse particulièrement au langage de l’architecture comme témoin de mémoire et des changements sociaux. Dans le cadre du programme Latitudes de la Fondation d’entreprise Hermès dont il est le premier lauréat, il a choisi de suivre la ligne de chemin de fer qui relie Abidjan au Niger. Construite dans l’ancienne Afrique occidentale française (AOF), la ligne autrefois dédiée au transport des matières premières ivoiriennes, burkinabés et nigériennes, dans une démarche extractiviste, ainsi qu’aux transports de voyageurs, reste aujourd’hui active mais est uniquement réservée aux marchandises. Les petites gares, typiques de l’architecture moderniste coloniale, et certains tronçons ferroviaires sont désormais abandonnés : la nature luxuriante des régions traversées s’est peu à peu infiltrée, envahissant salles d’attente, hangars et ballasts vétustes…\u003c\/p\u003e\n\u003cp\u003ePendant plus d’un an, François-Xavier Gbré a parcouru les territoires traversés par la voie de chemin de fer, photographiant wagons, gares, ateliers de maintenance et diversité des paysages. Ses images sont chargées d’une certaine mélancolie, celle d’un regard porté sur le passage du temps sur la matière. En contrepoint aux photographies de paysages, baignés de lumière et d’où s’exhale l’humidité de la terre, répond un ensemble d’images de fragments : surfaces pelées par le passage du temps ou rongées par la rouille… Peu à peu, il se dégage des lieux une atmosphère surannée, la sensation d’un temps suspendu. Le voyage auquel nous convie le photographe parle d’une histoire certes révolue mais dont les échos résonnent encore sur des zones longtemps morcelées par la présence coloniale et dont l’empreinte de cette dernière perdure malgré les aléas de la nature et des hommes.\u003c\/p\u003e\n\u003cp\u003eCette série est accompagnée d’un texte de Clément Chéroux, directeur de la Fondation Henri Cartier-Bresson, d’un essai de Sandrine Colard, historienne de la photographie et professeure à l’université de Rutgers-Newark (États-Unis), ainsi que d’une nouvelle inédite de l’écrivain Gauz’.\u003c\/p\u003e",
+  "created_at": "2025-11-19T16:07:41+01:00",
+  "handle": "francois-xavier-gbre-radio-ballast-signe",
+  "id": 15184282452354,
+  "product_type": "",
+  "published_at": "2025-11-19T16:07:49+01:00",
+  "template_suffix": "",
+  "title": "Radio Ballast (signé) test abc",
+  "updated_at": "2026-07-03T15:55:41+02:00",
+  "vendor": "Fondation Henri Cartier-Bresson",
+  "status": "active",
+  "published_scope": "global",
+  "tags": "",
+  "variants": [
+    {
+      "admin_graphql_api_id": "gid:\/\/shopify\/ProductVariant\/56748241158530",
+      "barcode": null,
+      "compare_at_price": null,
+      "created_at": "2026-07-03T14:33:49+02:00",
+      "id": 56748241158530,
+      "inventory_policy": "deny",
+      "position": 1,
+      "price": "45.00",
+      "product_id": 15184282452354,
+      "sku": null,
+      "taxable": true,
+      "title": "Français",
+      "updated_at": "2026-07-03T14:33:49+02:00",
+      "option1": "Français",
+      "option2": null,
+      "option3": null,
+      "image_id": null,
+      "inventory_item_id": 55229579592066,
+      "inventory_quantity": 50,
+      "old_inventory_quantity": 50
+    },
+    {
+      "admin_graphql_api_id": "gid:\/\/shopify\/ProductVariant\/56748241191298",
+      "barcode": null,
+      "compare_at_price": null,
+      "created_at": "2026-07-03T14:33:49+02:00",
+      "id": 56748241191298,
+      "inventory_policy": "deny",
+      "position": 2,
+      "price": "45.00",
+      "product_id": 15184282452354,
+      "sku": null,
+      "taxable": true,
+      "title": "Anglais",
+      "updated_at": "2026-07-03T14:42:47+02:00",
+      "option1": "Anglais",
+      "option2": null,
+      "option3": null,
+      "image_id": null,
+      "inventory_item_id": 55229579624834,
+      "inventory_quantity": 2,
+      "old_inventory_quantity": 2
+    }
+  ],
+  "options": [
+    {
+      "name": "langues",
+      "id": 17800107000194,
+      "product_id": 15184282452354,
+      "position": 1,
+      "values": ["Français", "Anglais"]
+    }
+  ],
+  "images": [
+    {
+      "id": 77250406121858,
+      "product_id": 15184282452354,
+      "position": 1,
+      "created_at": "2026-02-21T11:10:42+01:00",
+      "updated_at": "2026-02-21T11:10:56+01:00",
+      "alt": null,
+      "width": 728,
+      "height": 462,
+      "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0936\/8967\/6162\/files\/radio-ballast-couv-728x462.jpg?v=1771668644",
+      "variant_ids": [],
+      "admin_graphql_api_id": "gid:\/\/shopify\/ProductImage\/77250406121858"
+    },
+    {
+      "id": 78192653762946,
+      "product_id": 15184282452354,
+      "position": 2,
+      "created_at": "2026-07-03T13:28:29+02:00",
+      "updated_at": "2026-07-03T15:08:23+02:00",
+      "alt": null,
+      "width": 728,
+      "height": 462,
+      "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0936\/8967\/6162\/files\/radio-ballast-int2-728x462.jpg?v=1783078111",
+      "variant_ids": [],
+      "admin_graphql_api_id": "gid:\/\/shopify\/ProductImage\/78192653762946"
+    },
+    {
+      "id": 78192652484994,
+      "product_id": 15184282452354,
+      "position": 3,
+      "created_at": "2026-07-03T13:28:05+02:00",
+      "updated_at": "2026-07-03T15:08:23+02:00",
+      "alt": null,
+      "width": 728,
+      "height": 462,
+      "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0936\/8967\/6162\/files\/radio-ballast-int1-728x462.jpg?v=1783078087",
+      "variant_ids": [],
+      "admin_graphql_api_id": "gid:\/\/shopify\/ProductImage\/78192652484994"
+    }
+  ],
+  "image": {
+    "id": 77250406121858,
+    "product_id": 15184282452354,
+    "position": 1,
+    "created_at": "2026-02-21T11:10:42+01:00",
+    "updated_at": "2026-02-21T11:10:56+01:00",
+    "alt": null,
+    "width": 728,
+    "height": 462,
+    "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0936\/8967\/6162\/files\/radio-ballast-couv-728x462.jpg?v=1771668644",
+    "variant_ids": [],
+    "admin_graphql_api_id": "gid:\/\/shopify\/ProductImage\/77250406121858"
+  },
+  "media": [
+    {
+      "id": 67058291638658,
+      "product_id": 15184282452354,
+      "position": 1,
+      "created_at": "2026-02-21T11:10:42+01:00",
+      "updated_at": "2026-02-21T11:10:56+01:00",
+      "alt": null,
+      "status": "READY",
+      "media_content_type": "IMAGE",
+      "preview_image": {
+        "width": 728,
+        "height": 462,
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0936\/8967\/6162\/files\/radio-ballast-couv-728x462.jpg?v=1771668644",
+        "status": "READY"
+      },
+      "variant_ids": [],
+      "admin_graphql_api_id": "gid:\/\/shopify\/MediaImage\/67058291638658"
+    },
+    {
+      "id": 67949999489410,
+      "product_id": 15184282452354,
+      "position": 2,
+      "created_at": "2026-07-03T13:28:29+02:00",
+      "updated_at": "2026-07-03T15:08:23+02:00",
+      "alt": null,
+      "status": "READY",
+      "media_content_type": "IMAGE",
+      "preview_image": {
+        "width": 728,
+        "height": 462,
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0936\/8967\/6162\/files\/radio-ballast-int2-728x462.jpg?v=1783078111",
+        "status": "READY"
+      },
+      "variant_ids": [],
+      "admin_graphql_api_id": "gid:\/\/shopify\/MediaImage\/67949999489410"
+    },
+    {
+      "id": 67949998375298,
+      "product_id": 15184282452354,
+      "position": 3,
+      "created_at": "2026-07-03T13:28:05+02:00",
+      "updated_at": "2026-07-03T15:08:23+02:00",
+      "alt": null,
+      "status": "READY",
+      "media_content_type": "IMAGE",
+      "preview_image": {
+        "width": 728,
+        "height": 462,
+        "src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0936\/8967\/6162\/files\/radio-ballast-int1-728x462.jpg?v=1783078087",
+        "status": "READY"
+      },
+      "variant_ids": [],
+      "admin_graphql_api_id": "gid:\/\/shopify\/MediaImage\/67949998375298"
+    }
+  ],
+  "variant_gids": [
+    {
+      "admin_graphql_api_id": "gid:\/\/shopify\/ProductVariant\/56748241191298",
+      "updated_at": "2026-07-03T12:42:47.000Z"
+    },
+    {
+      "admin_graphql_api_id": "gid:\/\/shopify\/ProductVariant\/56748241158530",
+      "updated_at": "2026-07-03T12:33:49.000Z"
+    }
+  ],
+  "has_variants_that_requires_components": false,
+  "category": {
+    "admin_graphql_api_id": "gid:\/\/shopify\/TaxonomyCategory\/me-1-3",
+    "name": "Livres imprimés",
+    "full_name": "Médias \u003e Livres \u003e Livres imprimés"
+  }
+}

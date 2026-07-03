@@ -95,7 +95,7 @@ export async function POST(req: Request) {
   }
 
   if (!hmacOk) {
-    sendDebugEmail({
+    await sendDebugEmail({
       shopifyId: String(payload.id ?? "unknown"),
       payload,
       success: false,
@@ -122,10 +122,10 @@ export async function POST(req: Request) {
 
   try {
     await syncProduct(shopifyId);
-    sendDebugEmail({ shopifyId, payload, success: true }).catch(console.error);
+    await sendDebugEmail({ shopifyId, payload, success: true }).catch(console.error);
   } catch (err) {
     console.error(`[shopify-sync] product-id sync failed (${shopifyId}):`, err);
-    sendDebugEmail({ shopifyId, payload, success: false, error: err }).catch(
+    await sendDebugEmail({ shopifyId, payload, success: false, error: err }).catch(
       console.error,
     );
     return new Response("Sync failed", { status: 500 });
