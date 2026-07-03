@@ -83,17 +83,30 @@ async function sendDebugEmail(info: {
 export async function POST(req: Request) {
   const body = await req.text();
   const hmac = req.headers.get("x-shopify-hmac-sha256");
+  const hmacOk = verifyShopifyHmac(body, hmac);
 
-  if (!verifyShopifyHmac(body, hmac)) {
+  let payload: Record<string, unknown> = {};
+  try {
+    payload = JSON.parse(body);
+  } catch {
+    // keep payload empty
+  }
+
+  if (!hmacOk) {
+    sendDebugEmail({
+      shopifyId: String(payload.id ?? "unknown"),
+      payload,
+      success: false,
+      error: new Error(
+        `HMAC verification failed — secret configured: ${!!process.env.SHOPIFY_WEBHOOK_SECRET} / received hmac: ${hmac ?? "none"}`,
+      ),
+    }).catch(console.error);
     return new Response("Unauthorized", { status: 401 });
   }
 
   let shopifyId: string;
-  let payload: Record<string, unknown> = {};
 
   try {
-    payload = JSON.parse(body);
-
     const rawId = payload.id ?? payload.shopifyId;
     if (!rawId) {
       return new Response("Missing product id in body", { status: 400 });
