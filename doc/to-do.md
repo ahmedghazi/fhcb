@@ -104,6 +104,19 @@ cards simili document
 - filters mobile
 - updates doc icons
 - test import produits avec les nx custom fields
+- shopify sync si ajout nx produit déclenche le sync
+- shopify fiche technique en attente
+- shopify sync multilangue
+- catégorie produit depuis shopify
+- product cta hover que sur grid masonry
+- product masonry click
+- produit simple/variable > sur le champs langues afficher un add to cart sur la carte product
+- dans search produit afficher le prix
+- bouton avec animation des expo > afficher que le 2e bouton, le reste de la carte click vers la page
+- pastille scenario
+- menu avec message, autoKill date
+- search desktop btn fermer
+- menu avec enfant:hover pas de sous ligné
 
 ## card expos
 
@@ -177,11 +190,10 @@ cards simili document
 - # me manque la wide regular
 - # carte look 3 2 colonnes (taille de grille 4/8)?
 - # card video, d'où viennent elles (page)
-- pb ordre éléments entre desktop et mobile. Ex hero exhibition, card newsletter, ...
-- page mf et hcb, ne seront pas les pages artistes?
-- ordre éléments dans http://localhost:3000/image-images/teheran-1979-de-martine-franck-par-taous-dahmani
-
-# réponses
+- # pb ordre éléments entre desktop et mobile. Ex hero exhibition, card newsletter, ...
+- # page mf et hcb, ne seront pas les pages artistes?
+- # ordre éléments dans http://localhost:3000/image-images/teheran-1979-de-martine-franck-par-taous-dahmani
+- liste de course
 
 # GO PREPROD
 
@@ -191,3 +203,7 @@ cards simili document
 add env CRON_SECRET=test
 Check cron job
 curl -H "Authorization: Bearer TEST" http://localhost:3000/api/cron/update-exhibition-tags
+
+SYNC SHOPIFY
+https://fhcb-preprod.vercel.app/api/shopify/sync/product-id
+https://fhcb-preprod.vercel.app/api/shopify/sync/products

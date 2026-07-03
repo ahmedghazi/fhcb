@@ -15,6 +15,8 @@ import useCart from "../context/CartContext";
 import KeenSlider from "./ui/KeenSlider";
 import Figure from "./ui/Figure";
 import Rebonds from "./Rebonds";
+import BtnAddToCart from "./ui/btns/BtnAddToCart";
+import { ProductExpanded } from "../sanity-api/types/sanity-expanded.types";
 
 type Props = {
   input: PRODUCT_QUERY_RESULT;
@@ -74,9 +76,10 @@ const ContentProduct = ({ input }: Props) => {
             <div className='stock'>
               {inStock ? _localizeText("inStock") : _localizeText("outOfStock")}
             </div>
-            <button className='add-to-cart btn' onClick={_handleAddToCart}>
+            {/* <button className='add-to-cart btn' onClick={_handleAddToCart}>
               {_localizeText("addToCart")}
-            </button>
+            </button> */}
+            <BtnAddToCart input={input as unknown as ProductExpanded} />
             <ul className='sidebar'>
               {editeur && (
                 <li className='sidebar__item'>

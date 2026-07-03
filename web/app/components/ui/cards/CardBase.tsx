@@ -33,6 +33,7 @@ export type CardBaseProps = {
   subTitle?: string;
   description?: ReactNode;
   infoNode?: ReactNode;
+  actionsNode?: ReactNode;
   actions?: CardAction[];
   footerPlacement?: "auto" | "detached";
   imagePlacement?: "auto" | "top";
@@ -67,7 +68,13 @@ const CardBadge = ({ label }: CardBadgeProps) => {
 
 // ─── CardFooter (mode detached — rendu par le parent) ────────────────────────
 
-export const CardFooter = ({ actions }: { actions: CardAction[] }) => (
+export const CardFooter = ({
+  actions,
+  actionsNode,
+}: {
+  actions: CardAction[];
+  actionsNode?: ReactNode;
+}) => (
   <div className='card__footer'>
     <div className='card__btns'>
       {actions.map((action, i) => (
@@ -81,13 +88,20 @@ export const CardFooter = ({ actions }: { actions: CardAction[] }) => (
           {action.label}
         </Link>
       ))}
+      {actionsNode}
     </div>
   </div>
 );
 
 // ─── ActionButtons ────────────────────────────────────────────────────────────
 
-const ActionButtons = ({ actions }: { actions: CardAction[] }) => (
+const ActionButtons = ({
+  actions,
+  actionsNode,
+}: {
+  actions: CardAction[];
+  actionsNode?: ReactNode;
+}) => (
   <div className='card__btns'>
     {actions.map((action, i) => (
       <Link
@@ -100,6 +114,7 @@ const ActionButtons = ({ actions }: { actions: CardAction[] }) => (
         {action.label}
       </Link>
     ))}
+    {actionsNode}
   </div>
 );
 
@@ -118,6 +133,7 @@ const CardBase = ({
   subTitle,
   description,
   infoNode,
+  actionsNode,
   actions = [],
   footerPlacement = "auto",
   imagePlacement = "auto",
@@ -215,12 +231,14 @@ const CardBase = ({
 
         <div className='card__body'>
           {headerSlot}
-          {(infoNode || actions.length > 0) && (
+          {(infoNode || actions.length > 0 || actionsNode) && (
             <div className='card__footer'>
               {infoNode && (
                 <div className='card__info c-body-xs'>{infoNode}</div>
               )}
-              {actions.length > 0 && <ActionButtons actions={actions} />}
+              {(actions.length > 0 || actionsNode) && (
+                <ActionButtons actions={actions} actionsNode={actionsNode} />
+              )}
             </div>
           )}
         </div>
@@ -241,13 +259,15 @@ const CardBase = ({
             <div className='card__media-inner' />
           </div>
         )}
-        {!isDetached && (description || infoNode || actions.length > 0) && (
+        {!isDetached && (description || infoNode || actions.length > 0 || actionsNode) && (
           <div className='card__footer'>
             {description && (
               <div className='card__description c-body'>{description}</div>
             )}
             {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
-            {actions.length > 0 && <ActionButtons actions={actions} />}
+            {(actions.length > 0 || actionsNode) && (
+              <ActionButtons actions={actions} actionsNode={actionsNode} />
+            )}
           </div>
         )}
         {isDetached && (description || infoNode) && (
@@ -275,12 +295,14 @@ const CardBase = ({
             {description && (
               <div className='card__description c-body'>{description}</div>
             )}
-            {(infoNode || actions.length > 0) && (
+            {(infoNode || actions.length > 0 || actionsNode) && (
               <div className='card__footer'>
                 {infoNode && (
                   <div className='card__info c-body-xs'>{infoNode}</div>
                 )}
-                {actions.length > 0 && <ActionButtons actions={actions} />}
+                {(actions.length > 0 || actionsNode) && (
+                  <ActionButtons actions={actions} actionsNode={actionsNode} />
+                )}
               </div>
             )}
           </div>

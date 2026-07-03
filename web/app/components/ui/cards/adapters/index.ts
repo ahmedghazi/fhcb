@@ -29,6 +29,7 @@ import {
   _localizeText,
 } from "@/app/sanity-api/utils";
 import { CardAction, CardBaseProps } from "../CardBase";
+import BtnAddToCart from "../../btns/BtnAddToCart";
 import CardTags from "../CardTags";
 import FHCBDates from "../../FHCBDates";
 import Embed from "../../Embed";
@@ -109,15 +110,15 @@ export function exhibitionToCard(
     variant: "primary",
   });
 
-  // if (links && !isPast) {
-  //   links.forEach((link) => {
-  //     actions.push({
-  //       label: (_localizeField(link.label) as string) || "",
-  //       href: link.link ?? "",
-  //       variant: "secondary",
-  //     });
-  //   });
-  // }
+  if (links && !isPast) {
+    links.forEach((link) => {
+      actions.push({
+        label: (_localizeField(link.label) as string) || "",
+        href: link.link ?? "",
+        variant: "secondary",
+      });
+    });
+  }
   if (linkTickets) {
     actions.push({
       label: _localizeText("bookTickets") as string,
@@ -152,7 +153,7 @@ export function productToCard(
   input: ProductExpanded,
   size: "sm" | "md" | "lg" = "md",
 ): CardBaseProps {
-  const { imageCover, tags, price, artists } = input;
+  const { imageCover, tags, price, artists, languages } = input;
   const artistName = artists?.map((a) => a?.name).join(", ") || "";
   const title = (_localizeField(input.title) as string) || "";
   const pathname = usePathname();
@@ -166,23 +167,29 @@ export function productToCard(
   if (size === "md") {
     layout = imagePortrait ? "row" : "col";
   }
+  const isProductVariable = languages && languages?.length > 1;
+  const actions: CardAction[] = [];
+  actions.push({
+    label: _localizeText("discover") as string,
+    href: _linkResolver(input),
+    variant: "primary",
+  });
   return {
     _type: input._type,
     layout: layout,
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
-    tags: isOffShop ? _localizeText("book") : toTags(tags),
+    tags: isOffShop
+      ? `${_localizeText("book")} ${tags ? toTags(tags) : ""}`
+      : toTags(tags),
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
     subTitle: artistName,
     infoNode: price ? `${price}€` : undefined,
-    actions: [
-      {
-        label: _localizeText("discover") as string,
-        href: _linkResolver(input),
-        variant: "primary",
-      },
-    ],
+    actionsNode: !isProductVariable
+      ? React.createElement(BtnAddToCart, { input: input as any })
+      : undefined,
+    actions: actions,
   };
 }
 

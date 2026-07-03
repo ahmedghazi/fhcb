@@ -20,12 +20,12 @@ const CardProduct = ({ input, size = "md" }: Props) => {
         "card card--product",
         `card--${size}`,
         `card--${props.layout}`,
-        isLandscape ? "card--is-landscape" : "card--is-portrait",
-        size === "sm" ? "card--footer-hover" : "",
+        // isLandscape ? "card--is-landscape" : "card--is-portrait",
+        size === "sm" ? "card--footer-hover-" : "",
       )}>
       <CardBase {...props} />
-      {size === "md" && !!props.actions?.length && props.layout === "row" && (
-        <CardFooter actions={props.actions} />
+      {size === "md" && (!!props.actions?.length || props.actionsNode) && props.layout === "row" && (
+        <CardFooter actions={props.actions ?? []} actionsNode={props.actionsNode} />
       )}
     </div>
   );

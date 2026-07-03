@@ -8335,6 +8335,13 @@
         },
         "optional": true
       },
+      "auteurs": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "editeur": {
         "type": "objectAttribute",
         "value": {

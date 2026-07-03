@@ -119,6 +119,13 @@ export default defineType({
     }),
 
     defineField({
+      name: 'auteurs',
+      type: 'string',
+      title: 'Auteurs',
+      group: 'metas',
+    }),
+
+    defineField({
       name: 'editeur',
       type: 'string',
       title: 'Éditeur',
@@ -196,6 +203,7 @@ export default defineType({
       title: 'Chapo',
       type: 'localeBlockContent',
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -212,6 +220,7 @@ export default defineType({
       type: 'array',
       of: modulesList,
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
