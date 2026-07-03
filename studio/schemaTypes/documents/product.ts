@@ -166,13 +166,22 @@ export default defineType({
     }),
 
     defineField({
+      name: 'categories',
+      title: 'Catégories Shopify',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'tagProduct'}]}],
+      readOnly: true,
+      group: 'shop',
+    }),
+
+    defineField({
       name: 'tags',
       title: 'Tags',
       type: 'array',
       of: [
         {
           type: 'reference',
-          to: [{type: 'tag'}],
+          to: [{type: 'tagProduct'}],
         },
       ],
       group: 'editorial',

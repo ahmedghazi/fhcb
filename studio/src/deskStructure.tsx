@@ -25,6 +25,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'home',
     'library',
     'tag',
+    'tagProduct',
     'settings',
     'imageImages',
     'feuilletage',
@@ -78,6 +79,10 @@ export const structure = (S: any) =>
         .child(S.editor().title('Librairie').schemaType('library').documentId('library')),
 
       S.listItem().title('Produits').schemaType('product').child(S.documentTypeList('product')),
+      S.listItem()
+        .title('Tags Produits')
+        .schemaType('tagProduct')
+        .child(S.documentTypeList('tagProduct')),
       S.divider(),
 
       /* RESSOURCES */

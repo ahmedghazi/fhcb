@@ -40,6 +40,7 @@ export type LocaleData = {
   title: string;
   descriptionHtml: string;
   category?: { id: string; name: string } | null;
+  collections?: { id: string; handle: string; title: string }[];
 };
 
 // ─── GraphQL queries ──────────────────────────────────────────────────────────
@@ -54,7 +55,7 @@ const PRODUCT_FULL_FIELDS = `
   editeur: metafield(namespace: "custom", key: "editeur") { value }
   auteurs: metafield(namespace: "custom", key: "auteurs") { value }
   publicationDate: metafield(namespace: "custom", key: "date_de_publication") { value }
-  langues: metafield(namespace: "custom", key: "langues") { value }
+  collections(first: 10) { nodes { id handle title } }
   priceRange { minVariantPrice { amount currencyCode } }
   compareAtPriceRange { minVariantPrice { amount } }
   images(first: 10) { edges { node { url altText width height } } }
@@ -86,7 +87,7 @@ const PRODUCTS_LOCALE_BATCH_QUERY = `
   @inContext(language: $language, country: $country) {
     products(first: 50, after: $cursor) {
       pageInfo { hasNextPage endCursor }
-      edges { node { id title descriptionHtml category { id name } } }
+      edges { node { id title descriptionHtml category { id name } collections(first: 10) { nodes { id handle title } } } }
     }
   }
 `;
@@ -99,17 +100,6 @@ const PRODUCT_QUERY = `
   }
 `;
 
-// Metaobject resolution (for langues GID references)
-const METAOBJECT_QUERY = `
-  query getMetaobject($id: ID!) {
-    metaobject(id: $id) {
-      id
-      handle
-      type
-      fields { key value }
-    }
-  }
-`;
 
 // ─── Shopify fetch ────────────────────────────────────────────────────────────
 
@@ -156,6 +146,7 @@ export async function fetchShopifyProduct(id: string): Promise<{
         title: data?.title ?? "",
         descriptionHtml: data?.descriptionHtml ?? "",
         category: data?.category ?? null,
+        collections: data?.collections?.nodes ?? [],
       },
     ]),
   ) as Record<LocaleKey, LocaleData>;
@@ -208,6 +199,7 @@ export async function fetchShopifyProducts(
             title: node.title ?? "",
             descriptionHtml: node.descriptionHtml ?? "",
             category: node.category ?? null,
+            collections: node.collections?.nodes ?? [],
           });
         }
       }
@@ -226,6 +218,7 @@ export async function fetchShopifyProducts(
       title: base.title ?? "",
       descriptionHtml: base.descriptionHtml ?? "",
       category: base.category ?? null,
+      collections: base.collections?.nodes ?? [],
     };
     const locale = Object.fromEntries(
       LOCALES.map(({ key }) => [
@@ -298,26 +291,6 @@ export function parseMetafieldList(value: string): string[] {
     .filter(Boolean);
 }
 
-// Resolve Shopify Metaobject GIDs to human-readable labels.
-// Falls back to handle, then raw GID if the object can't be fetched.
-async function resolveMetaobjectGids(gids: string[]): Promise<string[]> {
-  return Promise.all(
-    gids.map(async (gid) => {
-      if (!gid.startsWith("gid://shopify/Metaobject/")) return gid;
-      try {
-        const res = await shopifyFetch(METAOBJECT_QUERY, { id: gid });
-        const obj = res?.metaobject;
-        if (!obj) return gid;
-        const nameField = obj.fields?.find((f: any) =>
-          ["name", "label", "titre", "title"].includes(f.key),
-        );
-        return nameField?.value ?? obj.handle ?? gid;
-      } catch {
-        return gid;
-      }
-    }),
-  );
-}
 
 // ─── Build Sanity product document ───────────────────────────────────────────
 
@@ -375,15 +348,17 @@ export async function buildProductFields(
     ...(base.publicationDate?.value
       ? { publicationDate: base.publicationDate.value.slice(0, 10) }
       : {}),
-    // Fix: metafield alias is `langues`, Sanity field is `languages`.
-    // GID references (gid://shopify/Metaobject/…) are resolved to labels.
-    ...(base.langues?.value
-      ? {
-          languages: await resolveMetaobjectGids(
-            parseMetafieldList(base.langues.value),
-          ),
-        }
-      : {}),
+    // Languages derived from variant selectedOptions (option name matches /lang/i)
+    languages: [
+      ...new Set<string>(
+        base.variants.edges
+          .flatMap(({ node: v }: any) =>
+            (v.selectedOptions ?? []).filter((o: any) => /lang/i.test(o.name)),
+          )
+          .map((o: any) => o.value as string)
+          .filter(Boolean),
+      ),
+    ],
     ...(base.metas?.value
       ? {
           metas: [
@@ -410,6 +385,12 @@ export async function buildProductFields(
         _key: `option-${i}`,
         ...o,
       })),
+    })),
+    // References to tagProduct documents (upserted before this runs)
+    categories: (base.collections?.nodes ?? []).map((coll: any) => ({
+      _type: "reference",
+      _key: coll.id.split("/").pop(),
+      _ref: `shopify-collection-${coll.id.split("/").pop()}`,
     })),
   };
 
@@ -442,17 +423,90 @@ export async function buildProductFields(
   return { id, synced, initial };
 }
 
+// ─── Upsert tagProduct documents for Shopify collections ──────────────────────
+
+type CollectionSyncItem = {
+  id: string;
+  handle: string;
+  localeData: Record<LocaleKey, { title: string }>;
+};
+
+function collectionsFromProduct(
+  base: any,
+  locale: Record<LocaleKey, LocaleData>,
+): CollectionSyncItem[] {
+  return (base.collections?.nodes ?? []).map((coll: any) => ({
+    id: coll.id,
+    handle: coll.handle,
+    localeData: Object.fromEntries(
+      LOCALES.map(({ key }) => [
+        key,
+        {
+          title:
+            locale[key].collections?.find((c) => c.handle === coll.handle)
+              ?.title ?? coll.title,
+        },
+      ]),
+    ) as Record<LocaleKey, { title: string }>,
+  }));
+}
+
+async function upsertTagProducts(items: CollectionSyncItem[]): Promise<void> {
+  if (items.length === 0) return;
+  const transaction = getSanityClient().transaction();
+
+  for (const { id, handle, localeData } of items) {
+    const numericId = id.split("/").pop();
+    const docId = `shopify-collection-${numericId}`;
+    const title = Object.fromEntries(
+      LOCALES.map(({ key }) => [key, localeData[key].title]),
+    );
+    const slug = { _type: "slug", current: handle };
+    transaction
+      .createIfNotExists({
+        _type: "tagProduct",
+        _id: docId,
+        title,
+        slug,
+        handle,
+        shopifyId: id,
+      })
+      .patch(docId, { set: { title, handle, shopifyId: id } });
+  }
+
+  await transaction.commit();
+}
+
 // ─── Sync all products ────────────────────────────────────────────────────────
 
-export async function syncProducts(opts: { limit?: number } = {}): Promise<{
+export async function syncProducts(
+  opts: { limit?: number; upsert?: boolean } = {},
+): Promise<{
   synced: number;
   failed: number;
   ids: string[];
 }> {
   const products = await fetchShopifyProducts(opts);
-  const artists: ArtistRef[] = await getSanityClient().fetch(
+  const client = getSanityClient();
+  const artists: ArtistRef[] = await client.fetch(
     `*[_type == "artist" && defined(name)]{ _id, name }`,
   );
+
+  // Upsert all tagProduct documents for unique collections across all products
+  const collectionsMap = new Map<string, CollectionSyncItem>();
+  for (const { base, locale } of products) {
+    for (const item of collectionsFromProduct(base, locale)) {
+      if (!collectionsMap.has(item.id)) collectionsMap.set(item.id, item);
+    }
+  }
+  await upsertTagProducts([...collectionsMap.values()]);
+
+  // By default (upsert: false) only patch documents that already exist in
+  // Sanity — this prevents deleted products from being recreated on every sync.
+  // Pass upsert: true for the initial go-live import.
+  const existingIds = opts.upsert
+    ? null
+    : new Set<string>(await client.fetch(`*[_type == "product"]._id`));
 
   const BATCH_SIZE = 20;
   let synced = 0;
@@ -461,7 +515,7 @@ export async function syncProducts(opts: { limit?: number } = {}): Promise<{
 
   for (let i = 0; i < products.length; i += BATCH_SIZE) {
     const batch = products.slice(i, i + BATCH_SIZE);
-    const transaction = getSanityClient().transaction();
+    const transaction = client.transaction();
     let queued = 0;
 
     for (const { base, locale } of batch) {
@@ -471,9 +525,20 @@ export async function syncProducts(opts: { limit?: number } = {}): Promise<{
           locale,
           artists,
         );
-        transaction
-          .createIfNotExists({ _type: "product", _id: id, ...initial, ...s })
-          .patch(id, { set: s, setIfMissing: initial });
+
+        const docExists = existingIds === null || existingIds.has(id);
+        if (!docExists) continue; // skip products deleted in Sanity
+
+        if (existingIds === null) {
+          // upsert mode: create if missing
+          transaction.createIfNotExists({
+            _type: "product",
+            _id: id,
+            ...initial,
+            ...s,
+          });
+        }
+        transaction.patch(id, { set: s, setIfMissing: initial });
         ids.push(base.id);
         queued++;
       } catch (err) {
@@ -506,6 +571,8 @@ export async function syncProduct(shopifyId: string): Promise<void> {
 
   const { base, locale } = await fetchShopifyProduct(shopifyId);
   if (!base) throw new Error(`Product not found in Shopify: ${shopifyId}`);
+
+  await upsertTagProducts(collectionsFromProduct(base, locale));
 
   const { id, synced, initial } = await buildProductFields(base, locale, artists);
 

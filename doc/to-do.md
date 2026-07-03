@@ -103,10 +103,10 @@ cards simili document
 - mobile font sizes
 - filters mobile
 - updates doc icons
-- test import produits avec les nx custom fields
-- shopify sync si ajout nx produit déclenche le sync
+- # test import produits avec les nx custom fields
+- # shopify sync si ajout nx produit déclenche le sync
 - shopify fiche technique en attente
-- shopify sync multilangue
+- # shopify sync multilangue
 - catégorie produit depuis shopify
 - product cta hover que sur grid masonry
 - product masonry click
@@ -117,6 +117,9 @@ cards simili document
 - menu avec message, autoKill date
 - search desktop btn fermer
 - menu avec enfant:hover pas de sous ligné
+- # product variant = langue
+- # product artist ne vient plus du titre mais du champs artiste
+- product low stock = afficher la pastille "bientot rupture"
 
 ## card expos
 

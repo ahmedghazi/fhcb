@@ -79,6 +79,7 @@ const ContentProduct = ({ input }: Props) => {
             {/* <button className='add-to-cart btn' onClick={_handleAddToCart}>
               {_localizeText("addToCart")}
             </button> */}
+            <pre>{JSON.stringify(input.variants, null, 2)}</pre>
             <BtnAddToCart input={input as unknown as ProductExpanded} />
             <ul className='sidebar'>
               {editeur && (

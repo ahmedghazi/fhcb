@@ -6,6 +6,7 @@ import exposition from './documents/exhibition'
 import library from './singletons/library'
 import product from './documents/product'
 import tag from './documents/tag'
+import tagProduct from './documents/tagProduct'
 import settings from './singletons/settings'
 import programme from './documents/programme'
 import partenaire from './documents/partenaire'
@@ -86,9 +87,10 @@ export const schemaTypes = [
   artist,
   event,
   exposition,
+  tag,
   library,
   product,
-  tag,
+  tagProduct,
   programme,
   partenaire,
   article,
