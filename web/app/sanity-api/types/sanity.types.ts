@@ -73387,6 +73387,13 @@ export type PRODUCT_QUERY_RESULT = {
       _key: string;
     } & TagReference
   >;
+  categories?: Array<{
+    _id: string;
+    _type: "tagProduct";
+    title?: LocaleString;
+    slug?: Slug;
+    handle?: string;
+  } | null> | null;
   imageCover: {
     asset: {
       _id: string;

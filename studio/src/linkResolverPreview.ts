@@ -144,7 +144,7 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         locations: [
           {
             title: doc?.title || 'Untitled',
-            href: `/product/${doc?.slug}`,
+            href: `/publications/${doc?.slug}`,
           },
         ],
       }),

@@ -389,7 +389,7 @@ export async function buildProductFields(
     // References to tagProduct documents (upserted before this runs)
     categories: (base.collections?.nodes ?? []).map((coll: any) => ({
       _type: "reference",
-      _key: coll.id.split("/").pop(),
+      _key: `col-${coll.id.split("/").pop()}`,
       _ref: `shopify-collection-${coll.id.split("/").pop()}`,
     })),
   };

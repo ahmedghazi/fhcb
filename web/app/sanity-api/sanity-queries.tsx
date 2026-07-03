@@ -491,6 +491,7 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
     ${seo}
   },
   artists[]->,
+  categories[]->{ _id, title, slug, handle },
   imageCover{
     ${imageAsset}
   },

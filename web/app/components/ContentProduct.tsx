@@ -41,6 +41,7 @@ const ContentProduct = ({ input }: Props) => {
     related,
     shopifyId,
     variants,
+    categories,
   } = input;
 
   const localizedTitle = (_localizeField(title) as string) || "";
@@ -79,7 +80,7 @@ const ContentProduct = ({ input }: Props) => {
             {/* <button className='add-to-cart btn' onClick={_handleAddToCart}>
               {_localizeText("addToCart")}
             </button> */}
-            <pre>{JSON.stringify(input.variants, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(input.variants, null, 2)}</pre> */}
             <BtnAddToCart input={input as unknown as ProductExpanded} />
             <ul className='sidebar'>
               {editeur && (
@@ -107,6 +108,17 @@ const ContentProduct = ({ input }: Props) => {
                 </li>
               )}
 
+              {categories && categories.length > 0 && (
+                <li className='sidebar__item'>
+                  <div>{_localizeText("categories")}</div>
+                  <div className='c-body--tight'>
+                    {categories
+                      .map((cat) => cat && _localizeField(cat.title))
+                      .filter(Boolean)
+                      .join(", ")}
+                  </div>
+                </li>
+              )}
               {metas?.map((item: KeyVal, i: number) => (
                 <li className='sidebar__item' key={i}>
                   {item && (
