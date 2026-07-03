@@ -82,6 +82,8 @@ async function sendDebugEmail(info: {
 
 export async function POST(req: Request) {
   const body = await req.text();
+  console.log("in sync/product-id");
+  console.log(body);
   const hmac = req.headers.get("x-shopify-hmac-sha256");
   const hmacOk = verifyShopifyHmac(body, hmac);
 
