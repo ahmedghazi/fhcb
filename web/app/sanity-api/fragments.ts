@@ -246,7 +246,12 @@ export const textSidebarUI = `
       products[]->{
         ${cardRefProduct}
       },
-      keyVal
+      keyVal[]{
+        ...,
+        image{
+          ${imageAsset}
+        }
+      }
     }
   }
 `;

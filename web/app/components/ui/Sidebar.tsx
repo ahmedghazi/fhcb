@@ -87,11 +87,12 @@ const Sidebar = ({ input }: Props) => {
       )}
       {keyVal && (
         <div className='sidebar__item sidebar__keyVal'>
+          {/* <pre>{JSON.stringify(keyVal, null, 2)}</pre> */}
           {/* <h3 className='c-tag underline'>{_localizeText("keyVal")}</h3> */}
           <ul>
             {keyVal.map((item, i) => (
               <li key={i}>
-                {item.text && _localizeField(item.text) && (
+                {item.title && _localizeField(item.title) && (
                   <>
                     {item.title && (
                       <div>{_localizeField(item.title) || ""}</div>
@@ -100,6 +101,9 @@ const Sidebar = ({ input }: Props) => {
                       <div className='c-body--tight'>
                         {_localizeField(item.text) || ""}
                       </div>
+                    )}
+                    {item.image && item.image.asset && (
+                      <Figure asset={item.image.asset} />
                     )}
                   </>
                 )}
