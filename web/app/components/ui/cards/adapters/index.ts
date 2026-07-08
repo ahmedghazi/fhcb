@@ -81,7 +81,7 @@ export function exhibitionToCard(
   const imagePortrait = !isLandscape;
   // const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
-
+  console.log(featured, title);
   let layout: CardBaseProps["layout"];
   let imagePlacement: CardBaseProps["imagePlacement"] | undefined;
 
