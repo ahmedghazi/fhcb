@@ -1,3 +1,4 @@
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
 export function useScroll() {
@@ -13,6 +14,7 @@ export function useScroll() {
     y: 0,
   };
 
+  const pathname = usePathname();
   const [bodyOffset, setBodyOffset] = useState<any>(EmptySSRRect);
   const [scrollY, setScrollY] = useState<number>(bodyOffset.top);
   const [scrollX, setScrollX] = useState<number>(bodyOffset.left);
@@ -23,16 +25,22 @@ export function useScroll() {
   // let _prevScrollTop = 0
   const lastScrollTopRef = useRef<number>(0);
   const lastScrollTop: number = lastScrollTopRef.current;
+  const isNavigatingRef = useRef<boolean>(false);
 
-  const listener = (e: Event) => {
+  const listener = () => {
+    if (isNavigatingRef.current) return;
     setBodyOffset(
       typeof window === "undefined" || !window.document
         ? EmptySSRRect
-        : document.body.getBoundingClientRect()
+        : document.body.getBoundingClientRect(),
     );
     setScrollY(-bodyOffset.top);
     setScrollX(bodyOffset.left);
-    setScrollDirection(lastScrollTop > -bodyOffset.top ? "down" : "up");
+    if (bodyOffset.top < -100) {
+      setScrollDirection(lastScrollTop > -bodyOffset.top ? "down" : "up");
+    } else {
+      setScrollDirection("");
+    }
     // lastScrollTopRef.current = -bodyOffset.top
     // console.log(window.scrollY, window.innerHeight)
     setIsBelowViewPort(window.scrollY > 50);
@@ -42,6 +50,16 @@ export function useScroll() {
     // _prevScrollTop = window.pageYOffset
     lastScrollTopRef.current = -bodyOffset.top;
   };
+
+  useEffect(() => {
+    isNavigatingRef.current = true;
+    setScrollDirection("");
+    lastScrollTopRef.current = 0;
+    const t = setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 200);
+    return () => clearTimeout(t);
+  }, [pathname]);
 
   useEffect(() => {
     window.addEventListener("scroll", listener);

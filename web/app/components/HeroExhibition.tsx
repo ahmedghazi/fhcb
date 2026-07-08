@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { _localizeField, _localizeText } from "../sanity-api/utils";
 import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
 import FHCBDates from "./ui/FHCBDates";
@@ -17,6 +17,7 @@ const HeroExhibition = ({ input }: Props) => {
   const artistList = artists?.map((artist) => artist.name).join(", ");
   const isCurrentByDates = _isCurrentByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
+
   return (
     <section
       className={clsx(

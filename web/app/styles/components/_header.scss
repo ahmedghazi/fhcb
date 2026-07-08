@@ -167,3 +167,7 @@ body.nav-open {
     }
   }
 }
+
+body:has(.template--exhibition) header {
+  background-color: var(--color-mauve);
+}
