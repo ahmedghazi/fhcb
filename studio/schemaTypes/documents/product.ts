@@ -119,23 +119,55 @@ export default defineType({
     }),
 
     defineField({
-      name: 'auteurs',
-      type: 'string',
-      title: 'Auteurs',
-      group: 'metas',
-    }),
-
-    defineField({
       name: 'editeur',
       type: 'string',
       title: 'Éditeur',
       group: 'metas',
     }),
+    defineField({
+      title: 'Crédits éditoriaux',
+      name: 'auteurs',
+      type: 'string',
+      group: 'metas',
+    }),
+    defineField({
+      title: 'Traducteurs',
+      name: 'traducteurs',
+      type: 'string',
+      group: 'metas',
+    }),
+    defineField({
+      title: 'Direction éditoriale',
+      name: 'direction_editoriale',
+      type: 'string',
+      group: 'metas',
+    }),
 
     defineField({
+      title: 'ISBN',
       name: 'isbn',
       type: 'string',
-      title: 'ISBN',
+      readOnly: true,
+      group: 'metas',
+    }),
+    defineField({
+      title: 'Reliure',
+      name: 'reliure',
+      type: 'string',
+      readOnly: true,
+      group: 'metas',
+    }),
+    defineField({
+      title: 'Dimensions',
+      name: 'dimensions',
+      type: 'string',
+      readOnly: true,
+      group: 'metas',
+    }),
+    defineField({
+      title: 'Nombre de pages',
+      name: 'nombre_de_pages',
+      type: 'string',
       readOnly: true,
       group: 'metas',
     }),
@@ -146,12 +178,13 @@ export default defineType({
       of: [{type: 'string'}],
       title: 'Langues',
       group: 'metas',
+      hidden: true,
     }),
 
     defineField({
       name: 'publicationDate',
       type: 'date',
-      title: 'Date de parution',
+      title: 'Date de publication',
       group: 'metas',
     }),
 
@@ -163,6 +196,7 @@ export default defineType({
       of: [{type: 'keyVal'}],
       // description: 'fiche technique',
       group: 'metas',
+      hidden: true,
     }),
 
     defineField({

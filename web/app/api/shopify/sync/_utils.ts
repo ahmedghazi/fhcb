@@ -50,10 +50,15 @@ const PRODUCT_FULL_FIELDS = `
   id handle totalInventory
   title descriptionHtml
   category { id name }
-  isbn: metafield(namespace: "custom", key: "isbn") { value }
   metas: metafield(namespace: "custom", key: "fiche_technique") { value }
   editeur: metafield(namespace: "custom", key: "editeur") { value }
   auteurs: metafield(namespace: "custom", key: "auteurs") { value }
+  traducteurs: metafield(namespace: "custom", key: "auteurs") { value }
+  direction_editoriale: metafield(namespace: "custom", key: "auteurs") { value }
+  isbn: metafield(namespace: "custom", key: "isbn") { value }
+  reliure: metafield(namespace: "custom", key: "auteurs") { value }
+  dimensions: metafield(namespace: "custom", key: "auteurs") { value }
+  nombre_de_pages: metafield(namespace: "custom", key: "auteurs") { value }
   publicationDate: metafield(namespace: "custom", key: "date_de_publication") { value }
   collections(first: 10) { nodes { id handle title } }
   priceRange { minVariantPrice { amount currencyCode } }
@@ -119,7 +124,6 @@ const PRODUCT_QUERY = `
   }
 `;
 
-
 // ─── Shopify fetch ────────────────────────────────────────────────────────────
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -182,7 +186,9 @@ export async function fetchShopifyProducts(
 
   if (opts.sortByUpdated && opts.limit) {
     // Fast path: single query for the N most-recently edited products
-    const page = await shopifyFetch(PRODUCTS_UPDATED_QUERY, { first: opts.limit });
+    const page = await shopifyFetch(PRODUCTS_UPDATED_QUERY, {
+      first: opts.limit,
+    });
     for (const { node } of page.products.edges) {
       frById.set(node.id, node);
     }
@@ -332,7 +338,6 @@ export function parseMetafieldList(value: string): string[] {
     .filter(Boolean);
 }
 
-
 // ─── Build Sanity product document ───────────────────────────────────────────
 
 /**
@@ -353,7 +358,9 @@ export async function buildProductFields(
       _type: "image",
       _key: `img-${i}`,
       asset: { _type: "reference", _ref: await uploadShopifyImage(img.url) },
-      alt: Object.fromEntries(LOCALES.map(({ key }) => [key, img.altText ?? ""])),
+      alt: Object.fromEntries(
+        LOCALES.map(({ key }) => [key, img.altText ?? ""]),
+      ),
     })),
   );
   const [{ _key: _coverKey, ...imageCover } = {} as any, ...restImages] =
@@ -406,7 +413,9 @@ export async function buildProductFields(
             {
               _type: "keyVal",
               _key: "fiche-technique",
-              text: Object.fromEntries(LOCALES.map(({ key }) => [key, base.metas.value])),
+              text: Object.fromEntries(
+                LOCALES.map(({ key }) => [key, base.metas.value]),
+              ),
             },
           ],
         }
@@ -434,14 +443,18 @@ export async function buildProductFields(
       _ref: `shopify-collection-${coll.id.split("/").pop()}`,
     })),
     // Shopify-owned fields overwritten on every sync
-    title: Object.fromEntries(LOCALES.map(({ key }) => [key, localeData[key].title])),
+    title: Object.fromEntries(
+      LOCALES.map(({ key }) => [key, localeData[key].title]),
+    ),
     ...(imageCover._type ? { imageCover } : {}),
     images: restImages,
   };
 
   const initial = {
     slug: { _type: "slug", current: base.handle },
-    text: Object.fromEntries(LOCALES.map(({ key }) => [key, blocksByLocale[key]])),
+    text: Object.fromEntries(
+      LOCALES.map(({ key }) => [key, blocksByLocale[key]]),
+    ),
     ...(matchedArtist
       ? {
           artists: [
@@ -528,7 +541,10 @@ export async function syncProducts(
   failed: number;
   ids: string[];
 }> {
-  const products = await fetchShopifyProducts({ limit: opts.limit, sortByUpdated: opts.sortByUpdated });
+  const products = await fetchShopifyProducts({
+    limit: opts.limit,
+    sortByUpdated: opts.sortByUpdated,
+  });
   const client = getSanityClient();
   const artists: ArtistRef[] = await client.fetch(
     `*[_type == "artist" && defined(name)]{ _id, name }`,
@@ -562,11 +578,11 @@ export async function syncProducts(
 
     for (const { base, locale } of batch) {
       try {
-        const { id, synced: s, initial } = await buildProductFields(
-          base,
-          locale,
-          artists,
-        );
+        const {
+          id,
+          synced: s,
+          initial,
+        } = await buildProductFields(base, locale, artists);
 
         const docExists = existingIds === null || existingIds.has(id);
         if (!docExists) continue; // skip products deleted in Sanity
@@ -631,7 +647,11 @@ export async function syncProduct(shopifyId: string): Promise<{
 
   await upsertTagProducts(collectionsFromProduct(base, locale));
 
-  const { id, synced, initial } = await buildProductFields(base, locale, artists);
+  const { id, synced, initial } = await buildProductFields(
+    base,
+    locale,
+    artists,
+  );
 
   await client
     .transaction()
@@ -644,16 +664,15 @@ export async function syncProduct(shopifyId: string): Promise<{
     dataset,
     projectId,
     categoriesCount: (synced.categories ?? []).length,
-    collectionsRaw: (base.collections?.nodes ?? []).map((c: any) => `${c.handle} (${c.id})`),
+    collectionsRaw: (base.collections?.nodes ?? []).map(
+      (c: any) => `${c.handle} (${c.id})`,
+    ),
   };
 }
 
 // ─── HMAC validation ──────────────────────────────────────────────────────────
 
-export function verifyShopifyHmac(
-  body: string,
-  hmac: string | null,
-): boolean {
+export function verifyShopifyHmac(body: string, hmac: string | null): boolean {
   const webhookSecret = process.env.SHOPIFY_WEBHOOK_SECRET;
   if (!webhookSecret) {
     console.error("[shopify-sync] SHOPIFY_WEBHOOK_SECRET is not configured");
