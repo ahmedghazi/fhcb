@@ -1,10 +1,18 @@
 @use "../variables";
 
+header.is-up + main .filters {
+  top: 0;
+}
 .filters {
   border-bottom: var(--border);
   margin-bottom: var(--spacing-lg);
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-
+  position: sticky;
+  top: var(--header-h);
+  background-color: var(--color-bg);
+  z-index: 999;
+  transition: top 0.2s;
   .filters__controls {
     display: none;
   }

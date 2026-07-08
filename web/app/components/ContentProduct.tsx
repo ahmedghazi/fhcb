@@ -18,6 +18,8 @@ import Figure from "./ui/Figure";
 import Rebonds from "./Rebonds";
 import BtnAddToCart from "./ui/btns/BtnAddToCart";
 import { ProductExpanded } from "../sanity-api/types/sanity-expanded.types";
+import { PortableText } from "@portabletext/react";
+import portableTextComponents from "../sanity-api/portableTextComponents";
 
 type Props = {
   input: PRODUCT_QUERY_RESULT;
@@ -30,6 +32,7 @@ const ContentProduct = ({ input }: Props) => {
   const {
     imageCover,
     title,
+    text,
     price,
     inStock,
     artists,
@@ -68,7 +71,7 @@ const ContentProduct = ({ input }: Props) => {
   return (
     <div className='content content--product'>
       <div className='container-fluid'>
-        <div className='grid md:grid-cols-4 gap-gutter mb-lg'>
+        <div className='grid md:grid-cols-4 gap-gutter mb-lg items-start'>
           <div className='header'>
             <div>
               <h1 className='c-h2'>{_localizeField(title)}</h1>
@@ -177,7 +180,7 @@ const ContentProduct = ({ input }: Props) => {
             </ul>
           </div>
           {images && (
-            <div className='slider md:col-span-3'>
+            <div className='slider md:col-span-3 '>
               <KeenSlider perView={1} controlsFloating={true}>
                 {imageCover && (
                   <div
@@ -197,16 +200,20 @@ const ContentProduct = ({ input }: Props) => {
             </div>
           )}
         </div>
-        <div className='grid md:grid-cols-4 gap-gutter'>
-          <div className='md:col-span-3-'></div>
-          <div className='md:col-span-2'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa earum
-            at, doloribus quia commodi iure quas quis ad reprehenderit
-            dignissimos ullam natus, incidunt corporis, ducimus esse saepe sit
-            perspiciatis asperiores.
+        {text && (
+          <div className='grid md:grid-cols-4 gap-gutter'>
+            <div className='md:col-span-3-'></div>
+            <div className='md:col-span-2'>
+              <div className='text'>
+                <PortableText
+                  value={text}
+                  components={portableTextComponents}
+                />
+              </div>
+            </div>
+            <div className='md:col-span-1'></div>
           </div>
-          <div className='md:col-span-1'></div>
-        </div>
+        )}
       </div>
       {related && related.length > 0 && (
         <Rebonds input={related} title='aroundThertist' />
