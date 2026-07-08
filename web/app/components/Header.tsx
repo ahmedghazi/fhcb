@@ -13,6 +13,7 @@ import useHeader from "../context/HeaderContext";
 import clsx from "clsx";
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
+import { useScroll } from "../hooks/useScroll";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -20,13 +21,18 @@ type Props = {
 
 const Header = ({ settings }: Props) => {
   const { modalType, dispatchModalType } = useHeader();
+  const { scrollDirection } = useScroll();
   // const { cartCount, toggleCart } = useCart();
 
   if (!settings) return null;
 
   return (
     <header
-      className={clsx("header", modalType && "is-modal-open")}
+      className={clsx(
+        "header",
+        modalType && "is-modal-open",
+        scrollDirection && `is-${scrollDirection}`,
+      )}
       // onMouseEnter={() => dispatchModalType("base")}
       // onMouseLeave={() => dispatchModalType(null)}
     >

@@ -36,10 +36,16 @@ const portableTextComponents: PortableTextComponents = {
           )}
           {items?.map((item: KeyVal, i: number) => (
             <div key={i}>
-              <div className=''>{_localizeField(item.title)}</div>
-              <div className='c-body--tight'>{_localizeField(item.text)}</div>
-              {item.image && item.image.asset && (
-                <Figure asset={item.image.asset} />
+              {item.text && (
+                <>
+                  <div className=''>{_localizeField(item.title)}</div>
+                  <div className='c-body--tight'>
+                    {_localizeField(item.text)}
+                  </div>
+                  {item.image && item.image.asset && (
+                    <Figure asset={item.image.asset} />
+                  )}
+                </>
               )}
             </div>
           ))}

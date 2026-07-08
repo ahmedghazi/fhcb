@@ -91,11 +91,17 @@ const Sidebar = ({ input }: Props) => {
           <ul>
             {keyVal.map((item, i) => (
               <li key={i}>
-                {item.title && <div>{_localizeField(item.title) || ""}</div>}
-                {item.text && (
-                  <div className='c-body--tight'>
-                    {_localizeField(item.text) || ""}
-                  </div>
+                {item.text && _localizeField(item.text) && (
+                  <>
+                    {item.title && (
+                      <div>{_localizeField(item.title) || ""}</div>
+                    )}
+                    {item.text && (
+                      <div className='c-body--tight'>
+                        {_localizeField(item.text) || ""}
+                      </div>
+                    )}
+                  </>
                 )}
               </li>
             ))}

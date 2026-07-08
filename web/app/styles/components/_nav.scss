@@ -40,9 +40,9 @@ header.is-modal-open {
     right: 0;
     bottom: 0;
     max-width: calc(100% - 11.188rem);
-    overflow-x: auto;
-    overflow: clip;
-    padding-bottom: 3em;
+    // overflow-x: auto;
+    // overflow: clip;
+    // padding-bottom: 3em;
     figure.figure {
       &--is-landscape {
         width: 40vw;
