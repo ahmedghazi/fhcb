@@ -159,7 +159,7 @@ header.is-up + main .filters {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      text-transform: uppercase;
+      // text-transform: uppercase;
 
       svg {
         transition: transform 0.2s;
@@ -180,6 +180,7 @@ header.is-up + main .filters {
       padding-top: 1rem;
       left: 0;
       right: 0;
+      background-color: var(--color-bg);
       // left: var(--spacing-lg);
       // right: var(--spacing-lg);
       // max-width: 86rem;

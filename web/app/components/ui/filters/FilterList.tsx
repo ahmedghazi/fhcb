@@ -76,7 +76,7 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
           </svg>
           <span>{_localizeField(def.filterLabel)}</span>
         </label>
-        <div className='filters__value flex flex-col gap-0.5'>
+        <div className='filters__value sm-only flex flex-col gap-0.5'>
           {opts
             .filter((o) => activeValues.includes(o._id))
             .map((opt) => (
