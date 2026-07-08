@@ -75,6 +75,13 @@ export default defineType({
       of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',
     }),
+    defineField({
+      name: 'exhibition',
+      title: 'Exposition',
+      type: 'exhibition',
+      // of: [{type: 'reference', to: [{type: 'artist'}]}],
+      group: 'editorial',
+    }),
 
     defineField({
       name: 'dates',

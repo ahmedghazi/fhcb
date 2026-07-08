@@ -10,6 +10,7 @@ header.header {
   padding: var(--spacing-sm) 0;
   z-index: 50;
   transition:
+    background-color 0.2s var(--cubic),
     transform 0.2s var(--cubic),
     opacity 0.2s var(--cubic);
   color: var(--color-secondary);
@@ -170,6 +171,6 @@ body.nav-open {
   }
 }
 
-body:has(.template--exhibition) header {
+body:has(.template--exhibition) header.is-down {
   background-color: var(--color-mauve);
 }

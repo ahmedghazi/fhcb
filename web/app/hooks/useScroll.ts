@@ -36,7 +36,7 @@ export function useScroll() {
     );
     setScrollY(-bodyOffset.top);
     setScrollX(bodyOffset.left);
-    if (bodyOffset.top < -100) {
+    if (bodyOffset.top < -77) {
       setScrollDirection(lastScrollTop > -bodyOffset.top ? "down" : "up");
     } else {
       setScrollDirection("");

@@ -123,6 +123,8 @@ cards simili document
 - product new categorie to implement in filters
 - # product vartiant finish css
 - product meta fiche tech (trello)
+- autour de l'expo ex: produit avec tag catalog + artiste le même que celui de l'expo
+- ajouter champs expo dans event, ressources,
 
 ## card expos
 
