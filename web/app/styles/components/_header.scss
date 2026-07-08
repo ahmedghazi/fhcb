@@ -9,7 +9,6 @@ header.header {
   padding: var(--spacing-sm) var(--spacing-lg);
   padding: var(--spacing-sm) 0;
   z-index: 50;
-  background-color: var(--color-bg);
   transition:
     transform 0.2s var(--cubic),
     opacity 0.2s var(--cubic);
@@ -18,6 +17,9 @@ header.header {
   &.is-up {
     transform: translateY(-100%);
     opacity: 0;
+  }
+  &.is-down {
+    background-color: var(--color-bg);
   }
   a,
   button,

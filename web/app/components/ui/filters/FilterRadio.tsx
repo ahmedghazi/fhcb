@@ -15,7 +15,7 @@ const FilterRadio = ({ def, activeValue, onSelect }: Props) => {
 
   return (
     <div className='ui-filters ui-filter__wrapper ui-filter__radio'>
-      <div className='ui-filters__summary'>
+      <div className='ui-filters__summary uppercase'>
         {def.filterLabel && (
           <span className='ui-filter__label'>
             {_localizeField(def.filterLabel)}

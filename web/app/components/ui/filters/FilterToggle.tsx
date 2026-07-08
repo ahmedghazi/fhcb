@@ -13,7 +13,7 @@ type Props = {
 const FilterToggle = ({ def, active, onChange }: Props) => {
   return (
     <div className='ui-filters ui-filter__wrapper ui-filter__toggle'>
-      <div className='ui-filters__summary'>
+      <div className='ui-filters__summary uppercase'>
         <label>
           <input
             className='ui-checkbox'

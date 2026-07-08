@@ -16,6 +16,7 @@ type Props = {
 const FilterBar = ({ filterDefs, onChange }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [active, setActive] = useState<ActiveFilters>({});
+  const [openListKey, setOpenListKey] = useState<string | null>(null);
   const isFiltering = Object.keys(active).length != 0;
   const localizedResetFilters = _localizeText("resetFilters");
   const localizedClose = _localizeText("close");
@@ -72,7 +73,9 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                       value={active["sort"] ?? ""}
                       onChange={(e) => _update("sort", e.target.value)}
                       aria-label={_localizeText("sort")}>
-                      <option value=''>{_localizeText("sort")}</option>
+                      <option value='' className='uppercase'>
+                        {_localizeText("sort")}
+                      </option>
                       {def.sortOptions?.map((opt) => (
                         <option
                           key={opt._key}
@@ -96,13 +99,13 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                 <div
                   className='ui-filters ui-filter__wrapper ui-filter__search'
                   key={def._key}>
-                  <div className='ui-filters__summary'>
+                  <div className='ui-filters__summary uppercase'>
                     <input
                       type='search'
                       value={active["search"] ?? ""}
                       onChange={(e) => _update("search", e.target.value)}
                       placeholder={_localizeText("search")}
-                      className='ui-filters__search'
+                      className='ui-filters__search uppercase'
                     />
                     {active["search"] && (
                       <div className='filters__value sm-only'>
@@ -127,6 +130,10 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                   key={def._key}
                   def={def}
                   opts={opts}
+                  isOpen={openListKey === def._key}
+                  onOpen={(key) =>
+                    setOpenListKey((prev) => (prev === key ? null : key))
+                  }
                   activeValues={
                     Array.isArray(active[def.filterKey])
                       ? (active[def.filterKey] as string[])

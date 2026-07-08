@@ -60,6 +60,9 @@ header.is-up + main .filters {
         padding: var(--spacing-xs);
         display: flex;
         justify-content: space-between;
+        & > label {
+          text-transform: uppercase;
+        }
         .filters__value {
           color: var(--color-accent);
           white-space: nowrap;
@@ -166,16 +169,21 @@ header.is-up + main .filters {
       }
     }
     &.is-open {
-      padding-bottom: 17rem;
+      padding-bottom: var(--detail-h, 17rem);
       label svg {
         transform: rotate(180deg);
       }
       .ui-filter__detail {
-        display: block;
+        // display: block;
+        opacity: 1;
+        pointer-events: all;
       }
     }
     .ui-filter__detail {
-      display: none;
+      // display: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
       position: absolute;
       padding-top: 1rem;
       left: 0;
@@ -198,7 +206,7 @@ header.is-up + main .filters {
     }
 
     &-items {
-      height: 13rem;
+      max-height: 13rem;
       overflow: auto;
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; /* IE et ancien Edge */

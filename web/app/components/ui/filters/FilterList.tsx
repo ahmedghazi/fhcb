@@ -1,7 +1,7 @@
 "use client";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { FilterRadioOption, SanityFilterDef } from "./filters.types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import clsx from "clsx";
 import { publish } from "pubsub-js";
@@ -12,16 +12,30 @@ type Props = {
   def: FilterListDef;
   opts: FilterRadioOption[];
   activeValues: string[];
+  isOpen: boolean;
+  onOpen: (key: string) => void;
   onToggle: (key: string, value: string) => void;
 };
 
-const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
-  const [open, setOpen] = useState<boolean>(false);
+const FilterList = ({ def, opts, activeValues, isOpen, onOpen, onToggle }: Props) => {
+  const open = isOpen;
   const [selectedLetter, setSelectedLetter] = useState<string[]>([]);
   const { locale } = useLocale();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     publish("TOGGLE_SCROLL", !open);
+  }, [open]);
+
+  useEffect(() => {
+    if (!wrapperRef.current || !detailRef.current) return;
+    if (open) {
+      const h = detailRef.current.getBoundingClientRect().height;
+      wrapperRef.current.style.setProperty("--detail-h", `${h}px`);
+    } else {
+      wrapperRef.current.style.removeProperty("--detail-h");
+    }
   }, [open]);
 
   // Pure localizer — no hook, safe to call in loops
@@ -30,7 +44,7 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
     if (typeof field === "string") return field;
     return field[locale] ?? field["fr"] ?? "";
   };
-
+  console.log(opts);
   const letters = Array.from(
     new Set(
       opts.map((o) =>
@@ -40,8 +54,6 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
       ),
     ),
   ).sort();
-
-  console.log({ activeValues });
 
   const activeLetters = new Set(
     opts
@@ -55,14 +67,15 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
 
   return (
     <div
+      ref={wrapperRef}
       className={clsx(
         "ui-filters ui-filter__wrapper ui-filter__list",
         open && "is-open",
       )}>
-      <div className='ui-filters__summary'>
+      <div className='ui-filters__summary uppercase'>
         <label
           htmlFor={`filter-list-${def._key}`}
-          onClick={() => setOpen(!open)}>
+          onClick={() => onOpen(def._key)}>
           <svg
             width='8'
             height='9'
@@ -85,7 +98,7 @@ const FilterList = ({ def, opts, activeValues, onToggle }: Props) => {
         </div>
       </div>
 
-      <div className='ui-filter__detail'>
+      <div ref={detailRef} className='ui-filter__detail'>
         <div className='container-fluid'>
           <div className='ui-filter__list-alpha hide-sb'>
             {letters.map((letter) => (

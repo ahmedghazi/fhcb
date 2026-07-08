@@ -15,7 +15,7 @@ const FilterCheckbox = ({ def, activeValues, onToggle }: Props) => {
 
   return (
     <div className='ui-filters ui-filter__wrapper ui-filter__checkbox'>
-      <div className='ui-filters__summary'>
+      <div className='ui-filters__summary uppercase'>
         {/* {def.radioLabel && (
         <span className='ui-filter__label'>
           {_localizeField(def.radioLabel)}

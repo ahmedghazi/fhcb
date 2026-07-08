@@ -85,6 +85,9 @@ button.btn--menu-toggle {
   &.is-active {
     background-color: var(--color-accent);
   }
+  &:empty {
+    // display: none;
+  }
 }
 
 .btn--cart-toggle {
