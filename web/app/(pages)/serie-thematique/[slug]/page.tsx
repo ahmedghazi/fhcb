@@ -14,6 +14,7 @@ import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import Embed from "@/app/components/ui/Embed";
 import Rebonds from "@/app/components/Rebonds";
 import { SERIE_THEMATIQUE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import EmbedVideo from "@/app/components/ui/EmbedVideo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -62,7 +63,7 @@ const SerieThematiqueTemplate: NextPage<PageProps> = async ({ params }) => {
         // subTitle={data.subTitle}
       />
       <div className='container-fluid'>
-        {data.video && <Embed input={data.video} />}
+        {data.video && <EmbedVideo input={data.video} />}
       </div>
       <ContentModulaire input={data} />
       {data.related && <Rebonds input={data.related} />}

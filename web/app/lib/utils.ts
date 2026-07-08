@@ -260,3 +260,52 @@ export const _collectFirstImagesFromNavItem = (item: PostTypes) => {
   const pageCover = (item as any)?.imageCover;
   return pageCover ? [pageCover] : [];
 };
+
+export function getYouTubeNoCookieUrl(url: string): string | null {
+  try {
+    const parsedUrl = new URL(url);
+
+    let videoId: string | null = null;
+
+    // youtu.be/<id>
+
+    if (parsedUrl.hostname === "youtu.be") {
+      videoId = parsedUrl.pathname.slice(1);
+    }
+
+    // youtube.com/watch?v=<id>
+
+    if (
+      parsedUrl.hostname.includes("youtube.com") &&
+      parsedUrl.pathname === "/watch"
+    ) {
+      videoId = parsedUrl.searchParams.get("v");
+    }
+
+    // youtube.com/embed/<id>
+
+    if (parsedUrl.hostname.includes("youtube.com")) {
+      const match = parsedUrl.pathname.match(/\/embed\/([^/]+)/);
+
+      if (match) {
+        videoId = match[1];
+      }
+    }
+
+    // youtube.com/shorts/<id>
+
+    if (parsedUrl.hostname.includes("youtube.com")) {
+      const match = parsedUrl.pathname.match(/\/shorts\/([^/]+)/);
+
+      if (match) {
+        videoId = match[1];
+      }
+    }
+
+    if (!videoId) return null;
+
+    return `https://www.youtube-nocookie.com/embed/${videoId}`;
+  } catch {
+    return null;
+  }
+}

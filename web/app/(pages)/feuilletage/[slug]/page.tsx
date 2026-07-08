@@ -20,6 +20,7 @@ import Embed from "@/app/components/ui/Embed";
 import { FEUILLETAGE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 // import Related from "@/app/components/Rebonds";
 import Rebonds from "@/app/components/Rebonds";
+import EmbedVideo from "@/app/components/ui/EmbedVideo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -68,7 +69,7 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
         subTitle={data.subTitle}
       />
       <div className='container-fluid'>
-        {data.video && <Embed input={data.video} />}
+        {data.video && <EmbedVideo input={data.video} />}
       </div>
       <ContentModulaire input={data} />
       {data.related && <Rebonds input={data.related} />}

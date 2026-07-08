@@ -3,6 +3,7 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { VideoUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import LogoFHCB from "../LogoFHCB";
+import { getYouTubeNoCookieUrl } from "@/app/lib/utils";
 
 type Props = {
   input: VideoUIExpanded;
@@ -10,15 +11,17 @@ type Props = {
 
 const ModuleVideoUI = ({ input }: Props) => {
   const video = input.video;
-
+  const youtubeUrlToYoutubeNoCookies = video?.embedUrl
+    ? getYouTubeNoCookieUrl(video.embedUrl)
+    : video?.embedUrl;
   return (
     <section className='module module--video-ui'>
       <div className='container-fluid'>
         <div className='module__inner'>
-          {video?.embedUrl && (
+          {video && youtubeUrlToYoutubeNoCookies && (
             <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
               <ReactPlayer
-                src={video.embedUrl}
+                src={youtubeUrlToYoutubeNoCookies}
                 light={video.placeholder?.asset?.url}
                 // controls={false}
                 style={{ width: "100%", height: "100%" }}

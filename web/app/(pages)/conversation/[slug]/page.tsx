@@ -14,6 +14,7 @@ import { _localizeField } from "@/app/sanity-api/utils";
 import Embed from "@/app/components/ui/Embed";
 import Rebonds from "@/app/components/Rebonds";
 import { CONVERSATION_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import EmbedVideo from "@/app/components/ui/EmbedVideo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -57,7 +58,7 @@ const ConversationTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <PageHeader h1={data.title} />
       <div className='container-fluid'>
-        {data.video && <Embed input={data.video} />}
+        {data.video && <EmbedVideo input={data.video} />}
       </div>
       <ContentModulaire input={data} />
       {data.related && <Rebonds input={data.related} />}

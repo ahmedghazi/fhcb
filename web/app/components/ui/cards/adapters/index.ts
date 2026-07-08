@@ -40,6 +40,7 @@ import {
   _isPastByDates,
 } from "@/app/lib/utils";
 import { usePathname } from "next/navigation";
+import EmbedVideo from "../../EmbedVideo";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -380,7 +381,9 @@ export function imageImagesToCard(input: ImageImagesExpanded): CardBaseProps {
     _type: input._type,
     layout: "col",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
-    mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
+    mediaSlot: video
+      ? React.createElement(EmbedVideo, { input: video })
+      : undefined,
     tags: index
       ? `une image, des images #${index}`
       : _localizeText(input._type),
@@ -405,7 +408,9 @@ export function conversationToCard(input: ConversationExpanded): CardBaseProps {
     layout: "col",
     // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
-    mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
+    mediaSlot: video
+      ? React.createElement(EmbedVideo, { input: video })
+      : undefined,
     tags: _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
     subTitle: chercheur?.name || undefined,
@@ -429,7 +434,9 @@ export function serieThematiqueToCard(
     _type: input._type,
     layout: "col",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
-    mediaSlot: video ? React.createElement(Embed, { input: video }) : undefined,
+    mediaSlot: video
+      ? React.createElement(EmbedVideo, { input: video })
+      : undefined,
     tags: index
       ? `une image, des images #${index}`
       : _localizeText(input._type),

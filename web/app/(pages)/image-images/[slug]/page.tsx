@@ -19,6 +19,7 @@ import Embed from "@/app/components/ui/Embed";
 import CardImageImages from "@/app/components/ui/cards/CardImageImages";
 import RelatedImageImages from "@/app/components/RebondsImageImages";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import EmbedVideo from "@/app/components/ui/EmbedVideo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -67,7 +68,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
         subTitle={(data.chercheur as unknown as Chercheur)?.name}
       />
       <div className='container-fluid'>
-        {data.video && <Embed input={data.video} />}
+        {data.video && <EmbedVideo input={data.video} />}
       </div>
       <ContentModulaire input={data} />
       {data.rebonds && (
