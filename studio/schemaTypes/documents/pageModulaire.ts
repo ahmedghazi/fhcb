@@ -105,6 +105,11 @@ export default defineType({
       group: 'editorial',
     }),
     defineField({
+      name: 'rebondsLabelLibre',
+      type: 'localeString',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'rebonds',
       title: 'Rebonds',
       type: 'array',

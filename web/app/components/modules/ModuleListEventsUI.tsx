@@ -16,7 +16,7 @@ type Props = {
 
 const ModuleListEventsUI = ({ input }: Props) => {
   const { cardSize, resolvedItems, filterTags, linkFallback } = input;
-
+  console.log(resolvedItems);
   return (
     <section className='module module--list-events'>
       <div className='container-fluid'>

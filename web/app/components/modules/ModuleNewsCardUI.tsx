@@ -32,6 +32,7 @@ const ModuleNewsCardUI = ({ input }: Props) => {
   const products = input.product || [];
   const feuilletages = input.feuilletage || [];
   const cols = gridSize || 12;
+
   return (
     <section className='module module--news-card-ui'>
       <div className='container-fluid'>
@@ -40,14 +41,14 @@ const ModuleNewsCardUI = ({ input }: Props) => {
             <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           )}
 
-          <div
-            className='grid--centered'
-            style={
-              {
-                // gridTemplateColumns: "repeat(auto-fit, var(--gridder-1_12))",
-                // justifyContent: "center",
-              }
-            }>
+          <div className='grid--centered'>
+            {events.map((item, index: number) => (
+              <CardEvent
+                key={`event-${item._id}-${index}`}
+                input={item}
+                size='md'
+              />
+            ))}
             {exhibitions.map((item, index: number) => (
               <CardExhibition
                 key={`exhibitions-${item._id}-${index}`}
@@ -55,13 +56,7 @@ const ModuleNewsCardUI = ({ input }: Props) => {
                 size='md'
               />
             ))}
-            {events.map((item, index: number) => (
-              <CardEvent
-                key={`event-${item._id}-${index}`}
-                input={item}
-                size='sm'
-              />
-            ))}
+
             {products.map((item, index: number) => (
               <CardProduct
                 key={`product-${item._id}-${index}`}

@@ -31,8 +31,6 @@
         gap: var(--spacing-xs);
         width: 100%;
       }
-      .card__body {
-      }
 
       .card__media {
         flex: 1;
@@ -56,6 +54,9 @@
         order: 1;
         flex: 0;
         min-width: 10rem;
+        .card__header {
+          flex: 2;
+        }
       }
     }
 

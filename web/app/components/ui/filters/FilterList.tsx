@@ -17,7 +17,14 @@ type Props = {
   onToggle: (key: string, value: string) => void;
 };
 
-const FilterList = ({ def, opts, activeValues, isOpen, onOpen, onToggle }: Props) => {
+const FilterList = ({
+  def,
+  opts,
+  activeValues,
+  isOpen,
+  onOpen,
+  onToggle,
+}: Props) => {
   const open = isOpen;
   const [selectedLetter, setSelectedLetter] = useState<string[]>([]);
   const { locale } = useLocale();
@@ -44,7 +51,6 @@ const FilterList = ({ def, opts, activeValues, isOpen, onOpen, onToggle }: Props
     if (typeof field === "string") return field;
     return field[locale] ?? field["fr"] ?? "";
   };
-  console.log(opts);
   const letters = Array.from(
     new Set(
       opts.map((o) =>

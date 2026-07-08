@@ -84,6 +84,7 @@ export default defineType({
       title: 'Dates',
       group: 'editorial',
       of: [{type: 'fhcbDate'}],
+      hidden: true,
     }),
 
     defineField({

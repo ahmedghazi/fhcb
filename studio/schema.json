@@ -1998,6 +1998,14 @@
             "value": "listsUI"
           }
         },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "localeString"
+          },
+          "optional": true
+        },
         "items": {
           "type": "objectAttribute",
           "value": {
@@ -7319,6 +7327,14 @@
         },
         "optional": true
       },
+      "rebondsLabelLibre": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
+        },
+        "optional": true
+      },
       "rebonds": {
         "type": "objectAttribute",
         "value": {
@@ -9257,6 +9273,14 @@
               "name": "artist.reference"
             }
           }
+        },
+        "optional": true
+      },
+      "exhibition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "exhibition.reference"
         },
         "optional": true
       },

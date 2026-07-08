@@ -16,6 +16,10 @@ export default defineType({
       title: 'Editorial',
     },
     {
+      name: 'viewCard',
+      title: 'Vue Carte',
+    },
+    {
       name: 'seo',
       title: 'SEO',
     },
@@ -78,8 +82,8 @@ export default defineType({
     defineField({
       name: 'exhibition',
       title: 'Exposition',
-      type: 'exhibition',
-      // of: [{type: 'reference', to: [{type: 'artist'}]}],
+      type: 'reference',
+      to: [{type: 'exhibition'}],
       group: 'editorial',
     }),
 

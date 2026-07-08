@@ -1,5 +1,6 @@
 import {defineField} from 'sanity'
 import {MdFormatListNumbered} from 'react-icons/md'
+import {baseLanguage} from '../../locale/supportedLanguages'
 
 export default defineField({
   name: 'listsUI',
@@ -7,6 +8,11 @@ export default defineField({
   type: 'object',
   icon: MdFormatListNumbered,
   fields: [
+    defineField({
+      name: 'title',
+      title: 'Titre',
+      type: 'localeString',
+    }),
     defineField({
       name: 'items',
       title: 'Items',
@@ -16,8 +22,11 @@ export default defineField({
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
   ],
   preview: {
-    prepare() {
-      return {title: 'Listes UI', subtitle: 'Listes UI'}
+    select: {
+      title: `title.${baseLanguage}`,
+    },
+    prepare({title}) {
+      return {title: title, subtitle: 'Listes UI'}
     },
   },
 })

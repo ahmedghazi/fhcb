@@ -20,6 +20,9 @@ const CardExhibitionFeatured = forwardRef<HTMLDivElement, Props>(
     const isTube =
       dates?.some((item: FhcbDate) => item.locationType === "inSite-tube") ??
       false;
+    const isCube =
+      dates?.some((item: FhcbDate) => item.locationType === "inSite-cube") ??
+      false;
 
     const props = exhibitionToCard(input, "md", true);
 
@@ -39,6 +42,7 @@ const CardExhibitionFeatured = forwardRef<HTMLDivElement, Props>(
           `card--${props.layout}`,
         )}>
         <CardBase {...props} />
+        {/* {dates && <pre>{JSON.stringify(dates, null, 2)}</pre>} */}
       </div>
     );
   },

@@ -214,8 +214,11 @@ export function eventToCard(
   const isHorsLeMurs = tags?.some(
     (tag: Tag) => tag.slug?.current === "hors-les-murs",
   );
+  const isTour = tags?.some(
+    (tag: Tag) => tag.slug?.current === "visite-commentee",
+  );
   const actions: CardAction[] = [];
-  if (!isHorsLeMurs) {
+  if (!isTour) {
     actions.push({
       label: _localizeText("discoverTheEvent") as string,
       href: _linkResolver(input),
@@ -331,7 +334,7 @@ export function pageModulaireToCard(
 // ─── Feuilletage ─────────────────────────────────────────────────────────────
 
 export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
-  const { imageCover, dates, tags, index, chercheur } = input;
+  const { imageCover, dates, tags, index, chercheur, description } = input;
 
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
@@ -351,7 +354,6 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     [_localizeField(input.subTitle), chercheur?.name]
       .filter(Boolean)
       .join(" — ") || undefined;
-
   return {
     _type: input._type,
     layout: isLandscape ? "col" : "row",
@@ -361,8 +363,8 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     tags: tagsLabel ? tagsLabel : _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
     subTitle,
-    description: (_localizeField(input.description) as string) || undefined,
-    infoNode: toInfoNode(dates),
+    description: (_localizeField(description) as string) || undefined,
+    // infoNode: toInfoNode(dates),
     actions: [
       {
         label: _localizeText("discover") as string,

@@ -259,21 +259,24 @@ const CardBase = ({
             <div className='card__media-inner' />
           </div>
         )}
-        {!isDetached && (description || infoNode || actions.length > 0 || actionsNode) && (
-          <div className='card__footer'>
-            {description && (
-              <div className='card__description c-body'>{description}</div>
-            )}
-            {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
-            {(actions.length > 0 || actionsNode) && (
-              <ActionButtons actions={actions} actionsNode={actionsNode} />
-            )}
-          </div>
-        )}
+        {!isDetached &&
+          (description || infoNode || actions.length > 0 || actionsNode) && (
+            <div className='card__footer'>
+              {description && (
+                <div className='card__description c-body-xs'>{description}</div>
+              )}
+              {infoNode && (
+                <div className='card__info c-body-xs'>{infoNode}</div>
+              )}
+              {(actions.length > 0 || actionsNode) && (
+                <ActionButtons actions={actions} actionsNode={actionsNode} />
+              )}
+            </div>
+          )}
         {isDetached && (description || infoNode) && (
           <div className='card__footer'>
             {description && (
-              <div className='card__description c-body'>{description}</div>
+              <div className='card__description c-body-xs'>{description}</div>
             )}
             {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
           </div>
@@ -293,7 +296,7 @@ const CardBase = ({
           <div className='card__body'>
             {headerSlot}
             {description && (
-              <div className='card__description c-body'>{description}</div>
+              <div className='card__description c-body-xs'>{description}</div>
             )}
             {(infoNode || actions.length > 0 || actionsNode) && (
               <div className='card__footer'>
@@ -324,7 +327,7 @@ const CardBase = ({
           <div className='card__body-header'>
             {headerSlot}
             {description && (
-              <div className='card__description c-body'>{description}</div>
+              <div className='card__description c-body-xs'>{description}</div>
             )}
           </div>
           <div className='card__body-footer'>

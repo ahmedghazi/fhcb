@@ -41,7 +41,7 @@ export const cardRefEvent = `
     ...,
     location->
   },
-  descripption,
+  description,
   artists[]->{
     _id,
     name
@@ -67,7 +67,7 @@ export const cardRefFeuilletage = `
     ${imageAsset}
   },
   dates,
-  descripption,
+  description,
   artists[]->{
     _id,
     name,
