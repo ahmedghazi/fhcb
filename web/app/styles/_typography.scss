@@ -71,6 +71,14 @@ p,
   .blockquote {
     margin-bottom: 1em;
   }
+  .embed {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    iframe {
+      width: 41rem;
+    }
+  }
 }
 
 ul {

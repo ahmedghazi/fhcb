@@ -2,31 +2,31 @@
 import React from "react";
 import clsx from "clsx";
 import ReactPlayer from "react-player";
-import { Video } from "@/app/sanity-api/types/sanity.types";
+import { Embed } from "@/app/sanity-api/types/sanity.types";
 
 type Props = {
-  input: Video;
+  input: Embed;
 };
 
-const Embed = ({ input }: Props) => {
+const EmbedComponent = ({ input }: Props) => {
   return (
     <div className='embed'>
-      {input.embedUrl && (
+      {input.url && (
         <div
           style={{ aspectRatio: "16 / 9" }}
           className={clsx("player-container")}>
           <ReactPlayer
-            src={input.embedUrl}
+            src={input.url}
             controls={true}
             style={{ width: "100%", height: "100%", aspectRatio: "16 / 9" }}
           />
         </div>
       )}
-      {/* {input?.iframe && (
+      {input?.iframe && (
         <div dangerouslySetInnerHTML={{ __html: input.iframe }} />
-      )} */}
+      )}
     </div>
   );
 };
 
-export default Embed;
+export default EmbedComponent;
