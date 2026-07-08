@@ -60,18 +60,19 @@ const ModuleRessourcesUI = ({ input }: Props) => {
           <div className='grid--centered mb-gutter'>
             {itemsFlatten.map((item, i) => (
               <Fragment key={i}>
-                {item?._type === "imageImages" && (
-                  <CardImageImages input={item} size='md' />
-                )}
                 {item?._type === "feuilletage" && (
                   <CardFeuilletage input={item} size='md' />
                 )}
-                {item?._type === "serieThematique" && (
+                {item?._type === "imageImages" && (
+                  <CardImageImages input={item} size='md' />
+                )}
+
+                {/* {item?._type === "serieThematique" && (
                   <CardSerieThematique input={item} size='md' />
                 )}
                 {item?._type === "conversation" && (
                   <CardConversation input={item} size='md' />
-                )}
+                )} */}
                 {/* <CardType input={item} /> */}
               </Fragment>
             ))}

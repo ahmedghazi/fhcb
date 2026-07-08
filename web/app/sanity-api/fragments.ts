@@ -382,16 +382,16 @@ export const newsCardUI = `
       ...
     },
     gridSize,
-    "exhibitions": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
+    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
-    "events": *[_type == "event" && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {
+    "events": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefEvent}
     },
-    "product": *[_type == "product" && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {
+    "product": *[_type == "product" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefProduct}
     },
-    "feuilletage": *[_type == "feuilletage" && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {
+    "feuilletage": *[_type == "feuilletage" && !(_id in path("drafts.**")) && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {
       ${cardRefFeuilletage}
     }
   }

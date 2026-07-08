@@ -252,6 +252,7 @@
       img {
         // max-height: 32.5rem;
         max-height: var(--max-img-h);
+        height: var(--max-img-h) !important;
       }
       @media all and (max-width: variables.$md) {
         .module__inner {
@@ -284,7 +285,8 @@
       }
       img {
         // max-height: 32.5rem;
-        max-height: var(--max-img-h);
+        min-height: var(--max-img-h);
+        height: var(--max-img-h) !important;
       }
       @media all and (max-width: variables.$md) {
         .module__inner {
