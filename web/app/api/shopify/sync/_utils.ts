@@ -53,12 +53,12 @@ const PRODUCT_FULL_FIELDS = `
   metas: metafield(namespace: "custom", key: "fiche_technique") { value }
   editeur: metafield(namespace: "custom", key: "editeur") { value }
   auteurs: metafield(namespace: "custom", key: "auteurs") { value }
-  traducteurs: metafield(namespace: "custom", key: "auteurs") { value }
-  direction_editoriale: metafield(namespace: "custom", key: "auteurs") { value }
+  traducteurs: metafield(namespace: "custom", key: "traducteurs") { value }
+  direction_editoriale: metafield(namespace: "custom", key: "direction_editoriale") { value }
   isbn: metafield(namespace: "custom", key: "isbn") { value }
-  reliure: metafield(namespace: "custom", key: "auteurs") { value }
-  dimensions: metafield(namespace: "custom", key: "auteurs") { value }
-  nombre_de_pages: metafield(namespace: "custom", key: "auteurs") { value }
+  reliure: metafield(namespace: "custom", key: "reliure") { value }
+  dimensions: metafield(namespace: "custom", key: "dimensions") { value }
+  nombre_de_pages: metafield(namespace: "custom", key: "nombre_de_pages") { value }
   publicationDate: metafield(namespace: "custom", key: "date_de_publication") { value }
   collections(first: 10) { nodes { id handle title } }
   priceRange { minVariantPrice { amount currencyCode } }
