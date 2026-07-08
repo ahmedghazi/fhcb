@@ -51,6 +51,8 @@ p,
   }
   a {
     text-decoration: underline;
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 0.15em;
   }
   br {
     // display: none;
@@ -191,6 +193,8 @@ ul {
     font-size: var(--text-2xs);
     line-height: var(--leading-lg);
     text-decoration: underline;
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 0.15em;
     text-transform: uppercase;
     font-weight: 200;
     letter-spacing: 5%;

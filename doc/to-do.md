@@ -110,7 +110,7 @@ cards simili document
 - catégorie produit depuis shopify
 - product cta hover que sur grid masonry
 - product masonry click
-- produit simple/variable > sur le champs langues afficher un add to cart sur la carte product
+- # produit simple/variable > sur le champs langues afficher un add to cart sur la carte product
 - dans search produit afficher le prix
 - bouton avec animation des expo > afficher que le 2e bouton, le reste de la carte click vers la page
 - pastille scenario
@@ -120,6 +120,9 @@ cards simili document
 - # product variant = langue
 - # product artist ne vient plus du titre mais du champs artiste
 - product low stock = afficher la pastille "bientot rupture"
+- product new categorie to implement in filters
+- product vartiant finish css
+- product meta fiche tech (trello)
 
 ## card expos
 
@@ -197,6 +200,7 @@ cards simili document
 - # page mf et hcb, ne seront pas les pages artistes?
 - # ordre éléments dans http://localhost:3000/image-images/teheran-1979-de-martine-franck-par-taous-dahmani
 - liste de course
+- soulignement pb, épaisseur
 
 # GO PREPROD
 

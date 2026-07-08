@@ -3,6 +3,9 @@
 .page-header {
   text-align: center;
   padding: var(--spacing-md) 0 var(--spacing-lg);
+  .flex.flex-col {
+    gap: 0.5rem;
+  }
 }
 
 .grid--centered {

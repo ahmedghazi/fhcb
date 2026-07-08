@@ -55,12 +55,12 @@ export const structure = (S: any) =>
       S.divider(),
 
       S.listItem()
-        .title('Programme')
+        .title('Programmes')
         .schemaType('programme')
         .child(S.documentTypeList('programme')),
 
       S.listItem()
-        .title('Expostions')
+        .title('Expositions')
         .schemaType('exhibition')
         .child(S.documentTypeList('exhibition')),
 

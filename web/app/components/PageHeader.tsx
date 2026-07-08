@@ -18,12 +18,16 @@ const PageHeader = ({ tag, h1, name, subTitle }: Props) => {
   return (
     <div className='page-header'>
       <div className='container-fluid'>
-        {tag && <div className='c-tag'>{_localizeField(tag)}</div>}
-        <h1 className='c-h1-lg'>
-          {h1 && _localizeField(h1)}
-          {name && name}
-        </h1>
-        {subTitle && <p className='c-title-expo'>{_localizeField(subTitle)}</p>}
+        <div className='flex flex-col'>
+          {tag && <div className='c-tag'>{_localizeField(tag)}</div>}
+          <h1 className='c-h1-lg'>
+            {h1 && _localizeField(h1)}
+            {name && name}
+          </h1>
+          {subTitle && (
+            <p className='c-title-expo'>{_localizeField(subTitle)}</p>
+          )}
+        </div>
       </div>
     </div>
   );

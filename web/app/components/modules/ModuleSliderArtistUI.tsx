@@ -24,7 +24,7 @@ const ModuleSliderArtistUI = ({ input }: Props) => {
         {items && (
           <SlickSlider
             settings={{
-              infinite: false,
+              infinite: true,
               // centerMode: true,
               variableWidth: true,
             }}>

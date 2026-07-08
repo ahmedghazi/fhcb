@@ -83,6 +83,8 @@ nav {
     width: 100%;
     &:hover {
       text-decoration: underline;
+      text-decoration-thickness: 0.04em;
+      text-underline-offset: 0.15em;
     }
   }
 

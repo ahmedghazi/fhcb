@@ -171,7 +171,7 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tagProduct'}]}],
       readOnly: true,
-      group: 'shop',
+      group: 'editorial',
     }),
 
     defineField({
@@ -185,6 +185,7 @@ export default defineType({
         },
       ],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({

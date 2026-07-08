@@ -65,9 +65,15 @@ main {
   padding-right: var(--spacing-sm);
   max-width: 86rem;
   margin: 0 auto;
-  @media all and (min-width: 1400px) {
+  @media all and (min-width: 1440px) {
     padding-left: 0;
     padding-right: 0;
+  }
+  @media all and (min-width: 1512px) {
+    max-width: 87rem;
+  }
+  @media all and (min-width: 1728px) {
+    max-width: 100.5rem;
   }
 }
 

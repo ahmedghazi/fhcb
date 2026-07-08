@@ -45,6 +45,8 @@ footer {
     font-size: var(--text-2xs);
     a {
       text-decoration: underline;
+      text-decoration-thickness: 0.04em;
+      text-underline-offset: 0.15em;
       margin-left: 0.5em;
     }
   }
