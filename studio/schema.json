@@ -3024,6 +3024,10 @@
               },
               {
                 "type": "string",
+                "value": "tagProduct"
+              },
+              {
+                "type": "string",
                 "value": "chercheur"
               },
               {

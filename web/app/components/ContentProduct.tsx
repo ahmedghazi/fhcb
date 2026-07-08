@@ -46,17 +46,17 @@ const ContentProduct = ({ input }: Props) => {
 
   const localizedTitle = (_localizeField(title) as string) || "";
 
-  const _handleAddToCart = () => {
-    const variantId = variants?.[0]?.shopifyVariantId || shopifyId;
-    if (!variantId) return;
-    addToCart({
-      id: variantId.split("/").pop()!,
-      title: localizedTitle,
-      price: variants?.[0]?.price ?? price ?? 0,
-      image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
-      href: _linkResolver(input),
-    });
-  };
+  // const _handleAddToCart = () => {
+  //   const variantId = variants?.[0]?.shopifyVariantId || shopifyId;
+  //   if (!variantId) return;
+  //   addToCart({
+  //     id: variantId.split("/").pop()!,
+  //     title: localizedTitle,
+  //     price: variants?.[0]?.price ?? price ?? 0,
+  //     image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
+  //     href: _linkResolver(input),
+  //   });
+  // };
 
   return (
     <div className='content content--product'>

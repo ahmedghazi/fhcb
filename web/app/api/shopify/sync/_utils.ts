@@ -81,12 +81,31 @@ const PRODUCTS_BATCH_QUERY = `
   }
 `;
 
+// Last-edited query — sorts by UPDATED_AT desc, no pagination needed for small limits
+const PRODUCTS_UPDATED_QUERY = `
+  query getProductsUpdated($first: Int!) {
+    products(first: $first, sortKey: UPDATED_AT, reverse: true) {
+      edges { node { ${PRODUCT_FULL_FIELDS} } }
+    }
+  }
+`;
+
 // Batch locale query — only locale-sensitive fields, with @inContext
 const PRODUCTS_LOCALE_BATCH_QUERY = `
   query getProductsLocale($cursor: String, $language: LanguageCode!, $country: CountryCode!)
   @inContext(language: $language, country: $country) {
     products(first: 50, after: $cursor) {
       pageInfo { hasNextPage endCursor }
+      edges { node { id title descriptionHtml category { id name } collections(first: 10) { nodes { id handle title } } } }
+    }
+  }
+`;
+
+// Last-edited locale query
+const PRODUCTS_UPDATED_LOCALE_QUERY = `
+  query getProductsUpdatedLocale($first: Int!, $language: LanguageCode!, $country: CountryCode!)
+  @inContext(language: $language, country: $country) {
+    products(first: $first, sortKey: UPDATED_AT, reverse: true) {
       edges { node { id title descriptionHtml category { id name } collections(first: 10) { nodes { id handle title } } } }
     }
   }
@@ -157,24 +176,28 @@ export async function fetchShopifyProduct(id: string): Promise<{
 // ─── Fetch all products (paginated, all locales) ──────────────────────────────
 
 export async function fetchShopifyProducts(
-  opts: { limit?: number } = {},
+  opts: { limit?: number; sortByUpdated?: boolean } = {},
 ): Promise<Array<{ base: any; locale: Record<LocaleKey, LocaleData> }>> {
-  // 1. Fetch all products in store default locale (FR) — includes all core fields
   const frById = new Map<string, any>();
-  let cursor: string | null = null;
-  let hasNextPage = true;
 
-  while (hasNextPage) {
-    const page = await shopifyFetch(PRODUCTS_BATCH_QUERY, {
-      cursor,
-    });
-    const { edges, pageInfo } = page.products;
-    for (const { node } of edges) {
+  if (opts.sortByUpdated && opts.limit) {
+    // Fast path: single query for the N most-recently edited products
+    const page = await shopifyFetch(PRODUCTS_UPDATED_QUERY, { first: opts.limit });
+    for (const { node } of page.products.edges) {
       frById.set(node.id, node);
     }
-    hasNextPage = pageInfo.hasNextPage;
-    cursor = pageInfo.endCursor;
-    if (opts.limit && frById.size >= opts.limit) break;
+  } else {
+    // Paginated path: fetch all products in store default locale (FR)
+    let cursor: string | null = null;
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const page = await shopifyFetch(PRODUCTS_BATCH_QUERY, { cursor });
+      const { edges, pageInfo } = page.products;
+      for (const { node } of edges) frById.set(node.id, node);
+      hasNextPage = pageInfo.hasNextPage;
+      cursor = pageInfo.endCursor;
+      if (opts.limit && frById.size >= opts.limit) break;
+    }
   }
 
   // 2. Fetch each secondary locale's title + description
@@ -183,17 +206,14 @@ export async function fetchShopifyProducts(
 
   for (const { key, language, country } of secondaryLocales) {
     const byId = new Map<string, LocaleData>();
-    let lCursor: string | null = null;
-    let lHasNextPage = true;
 
-    while (lHasNextPage) {
-      const page = await shopifyFetch(PRODUCTS_LOCALE_BATCH_QUERY, {
-        cursor: lCursor,
+    if (opts.sortByUpdated && opts.limit) {
+      const page = await shopifyFetch(PRODUCTS_UPDATED_LOCALE_QUERY, {
+        first: opts.limit,
         language,
         country,
       });
-      const { edges, pageInfo } = page.products;
-      for (const { node } of edges) {
+      for (const { node } of page.products.edges) {
         if (frById.has(node.id)) {
           byId.set(node.id, {
             title: node.title ?? "",
@@ -203,9 +223,30 @@ export async function fetchShopifyProducts(
           });
         }
       }
-      lHasNextPage = pageInfo.hasNextPage;
-      lCursor = pageInfo.endCursor;
-      if (byId.size >= frById.size) break;
+    } else {
+      let lCursor: string | null = null;
+      let lHasNextPage = true;
+      while (lHasNextPage) {
+        const page = await shopifyFetch(PRODUCTS_LOCALE_BATCH_QUERY, {
+          cursor: lCursor,
+          language,
+          country,
+        });
+        const { edges, pageInfo } = page.products;
+        for (const { node } of edges) {
+          if (frById.has(node.id)) {
+            byId.set(node.id, {
+              title: node.title ?? "",
+              descriptionHtml: node.descriptionHtml ?? "",
+              category: node.category ?? null,
+              collections: node.collections?.nodes ?? [],
+            });
+          }
+        }
+        lHasNextPage = pageInfo.hasNextPage;
+        lCursor = pageInfo.endCursor;
+        if (byId.size >= frById.size) break;
+      }
     }
     localeById.set(key, byId);
   }
@@ -481,13 +522,13 @@ async function upsertTagProducts(items: CollectionSyncItem[]): Promise<void> {
 // ─── Sync all products ────────────────────────────────────────────────────────
 
 export async function syncProducts(
-  opts: { limit?: number; upsert?: boolean } = {},
+  opts: { limit?: number; upsert?: boolean; sortByUpdated?: boolean } = {},
 ): Promise<{
   synced: number;
   failed: number;
   ids: string[];
 }> {
-  const products = await fetchShopifyProducts(opts);
+  const products = await fetchShopifyProducts({ limit: opts.limit, sortByUpdated: opts.sortByUpdated });
   const client = getSanityClient();
   const artists: ArtistRef[] = await client.fetch(
     `*[_type == "artist" && defined(name)]{ _id, name }`,

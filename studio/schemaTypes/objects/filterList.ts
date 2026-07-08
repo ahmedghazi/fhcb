@@ -15,6 +15,7 @@ export default {
         list: [
           {title: 'Artiste', value: 'artist'},
           {title: 'Tag', value: 'tag'},
+          {title: 'Tag Produit', value: 'tagProduct'},
           {title: 'Chercheur', value: 'chercheur'},
           {title: 'Langue', value: 'language'},
         ],

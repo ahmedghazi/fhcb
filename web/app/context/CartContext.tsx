@@ -14,6 +14,7 @@ const STORAGE_KEY = "fhcb_cart";
 export type CartLineItem = {
   id: string;
   title: string;
+  variant?: string;
   price: number;
   image?: string;
   href?: string;

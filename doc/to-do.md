@@ -121,7 +121,7 @@ cards simili document
 - # product artist ne vient plus du titre mais du champs artiste
 - product low stock = afficher la pastille "bientot rupture"
 - product new categorie to implement in filters
-- product vartiant finish css
+- # product vartiant finish css
 - product meta fiche tech (trello)
 
 ## card expos

@@ -1,0 +1,17 @@
+.form-add-to-cart {
+  .variants-list {
+    margin-bottom: var(--spacing-xs);
+    label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2xs);
+    }
+  }
+  .add-to-cart {
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.1;
+    }
+  }
+}

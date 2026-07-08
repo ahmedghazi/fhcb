@@ -428,6 +428,7 @@ const filterList = `
     "filterOptions": select(
       filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },
       filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
+      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },
       filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },
       filterKey == "language" => array::unique(*[_type == "product" && defined(languages)].languages[]) | order(@ asc),
       []

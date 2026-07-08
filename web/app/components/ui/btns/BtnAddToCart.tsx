@@ -2,7 +2,6 @@ import useCart from "@/app/context/CartContext";
 import { urlFor } from "@/app/sanity-api/sanity-utils";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import {
-  Product,
   PRODUCT_QUERY_RESULT,
   ProductVariant,
 } from "@/app/sanity-api/types/sanity.types";
@@ -11,7 +10,8 @@ import {
   _localizeField,
   _localizeText,
 } from "@/app/sanity-api/utils";
-import React from "react";
+import clsx from "clsx";
+import React, { useState } from "react";
 
 type VariantsListProps = {
   input: Array<
@@ -19,10 +19,12 @@ type VariantsListProps = {
       _key: string;
     } & ProductVariant
   >;
+  onChange: (variant: ProductVariant) => void;
 };
-const VariantsList = ({ input }: VariantsListProps) => {
-  const _onToggle = (value: string) => {
+const VariantsList = ({ input, onChange }: VariantsListProps) => {
+  const _onToggle = (value: ProductVariant) => {
     console.log(value);
+    onChange(value);
   };
   return (
     <ul className='variants-list'>
@@ -35,7 +37,7 @@ const VariantsList = ({ input }: VariantsListProps) => {
               name={"language"}
               value={item.title}
               // checked={activeValues.includes(opt._id)}
-              onChange={() => _onToggle(item.title || "")}
+              onChange={() => _onToggle(item || "")}
             />
             <span>{item.title}</span>
           </label>
@@ -54,14 +56,17 @@ const BtnAddToCart = ({ input }: Props) => {
   const { imageCover, title, price, shopifyId, variants } = input;
   const isSimpleProduct = !variants || variants.length === 0;
   const localizedTitle = (_localizeField(title) as string) || "";
+  const [variant, setVariant] = useState<ProductVariant | null>(null);
 
   const _handleAddToCart = () => {
-    const variantId = variants?.[0]?.shopifyVariantId || shopifyId;
+    const activeVariant = isSimpleProduct ? variants?.[0] : variant;
+    const variantId = activeVariant?.shopifyVariantId || shopifyId;
     if (!variantId) return;
     addToCart({
       id: variantId.split("/").pop()!,
       title: localizedTitle,
-      price: variants?.[0]?.price ?? price ?? 0,
+      variant: !isSimpleProduct ? (activeVariant?.title ?? undefined) : undefined,
+      price: activeVariant?.price ?? price ?? 0,
       image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
       href: _linkResolver(input),
     });
@@ -69,8 +74,15 @@ const BtnAddToCart = ({ input }: Props) => {
 
   return (
     <div className='form-add-to-cart'>
-      {!isSimpleProduct && <VariantsList input={variants || []} />}
-      <button className='add-to-cart btn' onClick={_handleAddToCart}>
+      {!isSimpleProduct && (
+        <VariantsList input={variants || []} onChange={setVariant} />
+      )}
+      <button
+        className={clsx(
+          "add-to-cart btn",
+          !isSimpleProduct && !variant && "disabled",
+        )}
+        onClick={_handleAddToCart}>
         {_localizeText("addToCart")}
       </button>
     </div>

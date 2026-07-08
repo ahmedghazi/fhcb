@@ -19,8 +19,8 @@ const CartProductItem = ({ line }: { line: any }) => {
       )}
       <div className='cart-modal__infos'>
         <div className='cart-modal__item__header'>
-          <div className='suptitle'>suptitle</div>
           <div className='cart-modal__title'>{line.title}</div>
+          {line.variant && <div className='suptitle'>{line.variant}</div>}
         </div>
         <div className='cart-modal__item__footer'>
           <div className='cart-modal__price'>{line.price}€</div>

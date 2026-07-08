@@ -25,13 +25,14 @@ export async function POST(req: Request) {
   const lengthParam = searchParams.get("length");
   const limit = lengthParam ? parseInt(lengthParam, 10) : undefined;
   const upsert = searchParams.get("upsert") === "true";
+  const sortByUpdated = searchParams.get("sort") === "updated";
 
   if (limit !== undefined && (isNaN(limit) || limit < 1)) {
     return new Response("Invalid length param", { status: 400 });
   }
 
   try {
-    const result = await syncProducts({ limit, upsert });
+    const result = await syncProducts({ limit, upsert, sortByUpdated });
     return new Response(JSON.stringify(result), {
       status: 200,
       headers: { "Content-Type": "application/json" },

@@ -37,7 +37,10 @@ export const cardRefEvent = `
   imageCover{
     ${imageAsset}
   },
-  dates,
+  dates[]{
+    ...,
+    location->
+  },
   descripption,
   artists[]->{
     _id,
