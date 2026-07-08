@@ -50,6 +50,16 @@ export const _localizeText = (text: string) => {
   return currentI18N[text] ? currentI18N[text] : text;
 };
 
+export const _parseJsonStringArray = (value: string | undefined | null, separator = ", "): string => {
+  if (!value) return "";
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.join(separator) : value;
+  } catch {
+    return value;
+  }
+};
+
 export const _localizeField = (field: any) => {
   const { locale } = useLocale();
   if (!field) return "";

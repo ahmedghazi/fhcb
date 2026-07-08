@@ -9,6 +9,7 @@ import {
   _linkResolver,
   _localizeField,
   _localizeText,
+  _parseJsonStringArray,
 } from "../sanity-api/utils";
 import { urlFor } from "../sanity-api/sanity-utils";
 import useCart from "../context/CartContext";
@@ -33,12 +34,18 @@ const ContentProduct = ({ input }: Props) => {
     inStock,
     artists,
     images,
-    isbn,
-    editeur,
-    languages,
+    // languages,
     metas,
     publicationDate,
     related,
+    editeur,
+    auteurs,
+    traducteurs,
+    direction_editoriale,
+    isbn,
+    reliure,
+    dimensions,
+    nombre_de_pages,
     shopifyId,
     variants,
     categories,
@@ -82,6 +89,7 @@ const ContentProduct = ({ input }: Props) => {
             </button> */}
             {/* <pre>{JSON.stringify(input.variants, null, 2)}</pre> */}
             <BtnAddToCart input={input as unknown as ProductExpanded} />
+
             <ul className='sidebar'>
               {editeur && (
                 <li className='sidebar__item'>
@@ -89,16 +97,24 @@ const ContentProduct = ({ input }: Props) => {
                   <div className='c-body--tight'>{editeur}</div>
                 </li>
               )}
-              {publicationDate && (
+              {auteurs && (
                 <li className='sidebar__item'>
-                  <div>{_localizeText("publicationDate")}</div>
-                  <div className='c-body--tight'>{publicationDate}</div>
+                  <div>{_localizeText("auteurs")}</div>
+                  <div className='c-body--tight'>
+                    {_parseJsonStringArray(auteurs)}
+                  </div>
                 </li>
               )}
-              {languages && (
+              {traducteurs && (
                 <li className='sidebar__item'>
-                  <div>{_localizeText("Langues")}</div>
-                  <div className='c-body--tight'>{languages}</div>
+                  <div>{_localizeText("traducteurs")}</div>
+                  <div className='c-body--tight'>{traducteurs}</div>
+                </li>
+              )}
+              {direction_editoriale && (
+                <li className='sidebar__item'>
+                  <div>{_localizeText("direction_editoriale")}</div>
+                  <div className='c-body--tight'>{direction_editoriale}</div>
                 </li>
               )}
               {isbn && (
@@ -107,6 +123,36 @@ const ContentProduct = ({ input }: Props) => {
                   <div className='c-body--tight'>{isbn}</div>
                 </li>
               )}
+              {reliure && (
+                <li className='sidebar__item'>
+                  <div>{_localizeText("reliure")}</div>
+                  <div className='c-body--tight'>{reliure}</div>
+                </li>
+              )}
+              {dimensions && (
+                <li className='sidebar__item'>
+                  <div>{_localizeText("dimensions")}</div>
+                  <div className='c-body--tight'>{dimensions}</div>
+                </li>
+              )}
+              {nombre_de_pages && (
+                <li className='sidebar__item'>
+                  <div>{_localizeText("nombre_de_pages")}</div>
+                  <div className='c-body--tight'>{nombre_de_pages}</div>
+                </li>
+              )}
+              {publicationDate && (
+                <li className='sidebar__item'>
+                  <div>{_localizeText("publicationDate")}</div>
+                  <div className='c-body--tight'>{publicationDate}</div>
+                </li>
+              )}
+              {/* {languages && (
+                <li className='sidebar__item'>
+                  <div>{_localizeText("Langues")}</div>
+                  <div className='c-body--tight'>{languages}</div>
+                </li>
+              )} */}
 
               {categories && categories.length > 0 && (
                 <li className='sidebar__item'>
