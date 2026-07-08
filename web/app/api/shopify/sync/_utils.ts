@@ -392,7 +392,17 @@ export async function buildProductFields(
     totalInventory: base.totalInventory ?? 0,
     syncedAt: new Date().toISOString(),
     ...(base.isbn?.value ? { isbn: base.isbn.value } : {}),
+    ...(base.traducteurs?.value ? { traducteurs: base.traducteurs.value } : {}),
+    ...(base.direction_editoriale?.value
+      ? { direction_editoriale: base.direction_editoriale.value }
+      : {}),
     ...(base.editeur?.value ? { editeur: base.editeur.value } : {}),
+    ...(base.reliure?.value ? { reliure: base.reliure.value } : {}),
+    ...(base.dimensions?.value ? { dimensions: base.dimensions.value } : {}),
+    ...(base.nombre_de_pages?.value
+      ? { nombre_de_pages: base.nombre_de_pages.value }
+      : {}),
+    ...(base.auteurs?.value ? { auteurs: base.auteurs.value } : {}),
     ...(base.publicationDate?.value
       ? { publicationDate: base.publicationDate.value.slice(0, 10) }
       : {}),
