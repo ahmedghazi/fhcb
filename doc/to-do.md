@@ -29,7 +29,7 @@ cards simili document
 - # aside à caller http://localhost:3000/exhibition/lettres-d-amour-a-la-photographie
 - # autour de l'expo > artiste, agenda à venir lié à l'artiste et l'expo, ressources liés à l'artiste et à l'expo, catalog (librairie)
 - - artiste, catalog, evt, ressources
-- autour de l'expo ordre
+- # autour de l'expo ordre
 - # i18n toDicscoverToo
 - ajouter rebonds label libre
 - # carte feuilletage afficher la description
@@ -130,8 +130,8 @@ cards simili document
 - add remaining cta in modules
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
 - contexte des cards (expos en cours, affiche la couleur + bouton), ...
-- rebonds page expo, ordre
-- autour de l'expo
+- # rebonds page expo, ordre
+- # autour de l'expo
 - couple titre sous titre > 450 / 200
 - page 404
 - mobile font sizes
@@ -139,26 +139,26 @@ cards simili document
 - updates doc icons
 - # test import produits avec les nx custom fields
 - # shopify sync si ajout nx produit déclenche le sync
-- shopify fiche technique en attente
+- # shopify fiche technique en attente
 - # shopify sync multilangue
-- catégorie produit depuis shopify
-- product cta hover que sur grid masonry
-- product masonry click
+- # catégorie produit depuis shopify collection
+- # product cta hover que sur grid masonry
+- # product masonry click
 - # produit simple/variable > sur le champs langues afficher un add to cart sur la carte product
 - dans search produit afficher le prix
 - bouton avec animation des expo > afficher que le 2e bouton, le reste de la carte click vers la page
 - pastille scenario
 - menu avec message, autoKill date
 - search desktop btn fermer
-- menu avec enfant:hover pas de sous ligné
+- # menu avec enfant:hover pas de sous ligné
 - # product variant = langue
 - # product artist ne vient plus du titre mais du champs artiste
 - product low stock = afficher la pastille "bientot rupture"
 - # product new categorie to implement in filters
 - # product vartiant finish css
-- product meta fiche tech (trello)
-- autour de l'expo ex: produit avec tag catalog + artiste le même que celui de l'expo
-- ajouter champs expo dans event, ressources,
+- # product meta fiche tech (trello)
+- # autour de l'expo ex: produit avec tag catalog + artiste le même que celui de l'expo
+- # ajouter champs expo dans event, ressources,
 
 ## card expos
 

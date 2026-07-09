@@ -430,22 +430,24 @@ export async function buildProductFields(
           ],
         }
       : {}),
-    variants: base.variants.edges.map(({ node: v }: any) => ({
-      _type: "productVariant",
-      _key: v.id.split("/").pop(),
-      shopifyVariantId: v.id,
-      title: v.title,
-      sku: v.sku,
-      price: parseFloat(v.price.amount),
-      compareAtPrice: v.compareAtPrice
-        ? parseFloat(v.compareAtPrice.amount)
-        : undefined,
-      inStock: v.availableForSale,
-      selectedOptions: v.selectedOptions.map((o: any, i: number) => ({
-        _key: `option-${i}`,
-        ...o,
+    variants: base.variants.edges
+      .filter(({ node: v }: any) => v.title !== "Default Title")
+      .map(({ node: v }: any) => ({
+        _type: "productVariant",
+        _key: v.id.split("/").pop(),
+        shopifyVariantId: v.id,
+        title: v.title,
+        sku: v.sku,
+        price: parseFloat(v.price.amount),
+        compareAtPrice: v.compareAtPrice
+          ? parseFloat(v.compareAtPrice.amount)
+          : undefined,
+        inStock: v.availableForSale,
+        selectedOptions: v.selectedOptions.map((o: any, i: number) => ({
+          _key: `option-${i}`,
+          ...o,
+        })),
       })),
-    })),
     // References to tagProduct documents (upserted before this runs)
     categories: (base.collections?.nodes ?? []).map((coll: any) => ({
       _type: "reference",
