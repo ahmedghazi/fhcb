@@ -18,9 +18,11 @@ import {
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardProduct from "./CardProduct";
 import CardArticle from "./CardArticle";
+import { _isCurrentByDates } from "@/app/lib/utils";
+import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
 type Context = "grid" | "slider" | "rebonds";
-type Size = "sm" | "md" | "lg";
+type Size = "sm" | "md" | "lg" | "md-alt";
 
 type Props = {
   input:
@@ -43,6 +45,7 @@ type Props = {
 const SIZES = {
   event: { grid: "sm", slider: "md", rebonds: "sm" },
   exhibition: { grid: "sm", slider: "md", rebonds: "md" },
+  exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md-alt" },
   product: { grid: "sm", slider: "sm", rebonds: "sm" },
   article: { grid: "sm", slider: "sm", rebonds: "md" },
   artist: { grid: "md", slider: "md", rebonds: "sm" },
@@ -60,9 +63,19 @@ const CardType = ({ input, context, size }: Props) => {
       {input._type === "event" && (
         <CardEvent input={input} size={sizeFor("event")} />
       )}
-      {input._type === "exhibition" && (
-        <CardExhibition input={input} size={sizeFor("exhibition")} />
-      )}
+      {input._type === "exhibition" &&
+        input.dates &&
+        !_isCurrentByDates(input.dates) && (
+          <CardExhibition input={input} size={sizeFor("exhibition")} />
+        )}
+      {input._type === "exhibition" &&
+        input.dates &&
+        _isCurrentByDates(input.dates) && (
+          <CardExhibitionFeatured
+            input={input}
+            // size={sizeFor("exhibitionFeatured")}
+          />
+        )}
       {input._type === "product" && (
         <CardProduct
           input={input}

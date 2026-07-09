@@ -18,7 +18,6 @@ import { CartContextProvider } from "./context/CartContext";
 import CartModal from "./components/CartModal";
 import Gridder from "./components/ui/Gridder";
 import BandeauContextuel from "./components/ui/BandeauContextuel";
-
 // const sourceSans = Source_Sans_3({
 //   subsets: ["latin"],
 // });
@@ -111,7 +110,9 @@ export default async function RootLayout({
                       dateExpiration={bandeauContextuel.dateExpiration}
                     />
                   )}
-                  <main>{children}</main>
+                  <main>
+                    {children}
+                  </main>
                   <Footer settings={settings} />
                   <CartModal />
                   {/* <Cursor color='black' size={20} /> */}

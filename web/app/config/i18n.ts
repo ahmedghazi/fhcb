@@ -65,7 +65,7 @@ const i18n = {
     bookTicket: "Réserver vos billets",
     artist: "Artiste",
     serieThematique: "Série thématique",
-    editeur: "Éditeur",
+    editor: "Éditeur",
     auteurs: "Auteurs",
     traducteurs: "Traducteurs",
     direction_editoriale: "Direction éditoriale",
@@ -74,6 +74,7 @@ const i18n = {
     dimensions: "Dimensions",
     nombre_de_pages: "Nombre de pages",
     isLowStock: "Derniers examplaires",
+    chooseOptions: "Choisir les options",
   },
   en: {
     default: false,
@@ -137,6 +138,8 @@ const i18n = {
     artist: "Artist",
     serieThematique: "Thematic series",
     isLowStock: "Last items",
+    chooseOptions: "Choose options",
+    editor: "Editor",
   },
 };
 

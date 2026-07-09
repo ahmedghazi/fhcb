@@ -16,6 +16,7 @@ a.btn {
   text-overflow: ellipsis;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
   &:hover {
     background-color: transparent;
     &::before {

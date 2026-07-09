@@ -28,7 +28,7 @@ cards simili document
 - # feuilletage virer la date
 - # aside à caller http://localhost:3000/exhibition/lettres-d-amour-a-la-photographie
 - # autour de l'expo > artiste, agenda à venir lié à l'artiste et l'expo, ressources liés à l'artiste et à l'expo, catalog (librairie)
-- - artiste, catalog, evt, ressources
+- - # artiste, catalog, evt, ressources
 - # autour de l'expo ordre
 - # i18n toDicscoverToo
 - ajouter rebonds label libre

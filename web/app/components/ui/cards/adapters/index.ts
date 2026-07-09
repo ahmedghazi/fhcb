@@ -172,7 +172,9 @@ export function productToCard(
 
   const actions: CardAction[] = [];
   actions.push({
-    label: _localizeText("discover") as string,
+    label: isProductVariable
+      ? _localizeText("chooseOptions")
+      : (_localizeText("discover") as string),
     href: _linkResolver(input),
     variant: "primary",
   });

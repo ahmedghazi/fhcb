@@ -52,21 +52,12 @@ const ContentProduct = ({ input }: Props) => {
     shopifyId,
     variants,
     categories,
+    totalInventory,
   } = input;
 
   const localizedTitle = (_localizeField(title) as string) || "";
 
-  // const _handleAddToCart = () => {
-  //   const variantId = variants?.[0]?.shopifyVariantId || shopifyId;
-  //   if (!variantId) return;
-  //   addToCart({
-  //     id: variantId.split("/").pop()!,
-  //     title: localizedTitle,
-  //     price: variants?.[0]?.price ?? price ?? 0,
-  //     image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
-  //     href: _linkResolver(input),
-  //   });
-  // };
+  const isLowStock = totalInventory && totalInventory < 10;
 
   return (
     <div className='content content--product'>
@@ -85,12 +76,9 @@ const ContentProduct = ({ input }: Props) => {
             </div>
             <div className='price c-h2'>{price}€</div>
             <div className='stock'>
-              {inStock ? _localizeText("inStock") : _localizeText("outOfStock")}
+              {isLowStock ? _localizeText("isLowStock") : ""}
             </div>
-            {/* <button className='add-to-cart btn' onClick={_handleAddToCart}>
-              {_localizeText("addToCart")}
-            </button> */}
-            {/* <pre>{JSON.stringify(input.variants, null, 2)}</pre> */}
+
             <BtnAddToCart input={input as unknown as ProductExpanded} />
 
             <ul className='sidebar'>
