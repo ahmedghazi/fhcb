@@ -73,6 +73,7 @@ const i18n = {
     reliure: "Reliure",
     dimensions: "Dimensions",
     nombre_de_pages: "Nombre de pages",
+    isLowStock: "Derniers examplaires",
   },
   en: {
     default: false,
@@ -135,6 +136,7 @@ const i18n = {
     bookTicket: "Book your tickets",
     artist: "Artist",
     serieThematique: "Thematic series",
+    isLowStock: "Last items",
   },
 };
 

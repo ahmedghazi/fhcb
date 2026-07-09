@@ -154,12 +154,11 @@ export function productToCard(
   input: ProductExpanded,
   size: "sm" | "md" | "lg" = "md",
 ): CardBaseProps {
-  const { imageCover, tags, price, artists, languages } = input;
+  const { imageCover, tags, price, artists, languages, totalInventory } = input;
   const artistName = artists?.map((a) => a?.name).join(", ") || "";
   const title = (_localizeField(input.title) as string) || "";
   const pathname = usePathname();
   const isOffShop = pathname.indexOf("librairie") === -1;
-
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
@@ -169,6 +168,8 @@ export function productToCard(
     layout = imagePortrait ? "row" : "col";
   }
   const isProductVariable = languages && languages?.length > 1;
+  const isLowStock = totalInventory && totalInventory < 10;
+
   const actions: CardAction[] = [];
   actions.push({
     label: _localizeText("discover") as string,
@@ -191,6 +192,9 @@ export function productToCard(
       ? React.createElement(BtnAddToCart, { input: input as any })
       : undefined,
     actions: actions,
+    badge: isLowStock
+      ? { label: _localizeText("isLowStock") as string }
+      : undefined,
   };
 }
 

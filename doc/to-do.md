@@ -153,7 +153,7 @@ cards simili document
 - # menu avec enfant:hover pas de sous ligné
 - # product variant = langue
 - # product artist ne vient plus du titre mais du champs artiste
-- product low stock = afficher la pastille "bientot rupture"
+- # product low stock = afficher la pastille "bientot rupture"
 - # product new categorie to implement in filters
 - # product vartiant finish css
 - # product meta fiche tech (trello)

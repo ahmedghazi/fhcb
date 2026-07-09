@@ -242,6 +242,21 @@
     //   }
     // }
 
+    &:not(.card--lg) {
+      .card__inner--row {
+        .grid {
+          gap: 0;
+        }
+        .card__body {
+          min-width: 15rem;
+        }
+        .card__media {
+          img {
+            max-height: unset;
+          }
+        }
+      }
+    }
     &.card--md.card--is-landscape {
       & > .card__footer {
         display: none;
@@ -302,6 +317,9 @@
       .card__inner .grid {
         display: flex;
         flex-direction: row-reverse;
+        @media all and (max-width: variables.$md) {
+          flex-direction: column-reverse;
+        }
       }
       .card__body {
         display: flex;

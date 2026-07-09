@@ -1,6 +1,7 @@
 @use "../variables";
 
-header.is-up + main .filters {
+body:has(header.is-up) .filters,
+header.is-up ~ main .filters {
   top: 0;
 }
 .filters {
