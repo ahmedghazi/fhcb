@@ -75,6 +75,7 @@ const i18n = {
     nombre_de_pages: "Nombre de pages",
     isLowStock: "Derniers examplaires",
     chooseOptions: "Choisir les options",
+    publicationDate: "Date de publication",
   },
   en: {
     default: false,
@@ -140,6 +141,7 @@ const i18n = {
     isLowStock: "Last items",
     chooseOptions: "Choose options",
     editor: "Editor",
+    publicationDate: "Publication date",
   },
 };
 

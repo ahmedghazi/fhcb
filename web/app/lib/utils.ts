@@ -16,6 +16,13 @@ import {
   Tag,
 } from "../sanity-api/types/sanity.types";
 
+export const _date = (d: string, locale = "fr") => {
+  return new Intl.DateTimeFormat(locale, {
+    // day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(d));
+};
 export const descriptionHtmlToBlocks = (html: string) => {
   return html
     .split(/<\/p>|<br\s*\/?>/i)

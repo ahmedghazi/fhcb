@@ -20,15 +20,16 @@ import BtnAddToCart from "./ui/btns/BtnAddToCart";
 import { ProductExpanded } from "../sanity-api/types/sanity-expanded.types";
 import { PortableText } from "@portabletext/react";
 import portableTextComponents from "../sanity-api/portableTextComponents";
+import { _date } from "../lib/utils";
+import useLocale from "../context/LocaleContext";
 
 type Props = {
   input: PRODUCT_QUERY_RESULT;
 };
 
 const ContentProduct = ({ input }: Props) => {
-  const { addToCart } = useCart();
-
   if (!input) return null;
+  const { locale } = useLocale();
   const {
     imageCover,
     title,
@@ -82,21 +83,65 @@ const ContentProduct = ({ input }: Props) => {
             <BtnAddToCart input={input as unknown as ProductExpanded} />
 
             <ul className='sidebar'>
+              artiste en premier, Éditeur, Auteur, Date de parution,
+              {artists && (
+                <li className='sidebar__item'>
+                  <div className='c-tag underline'>
+                    {_localizeText("artists")}
+                  </div>
+                  <div className='c-body--tight'>
+                    {artists.map((item, i) => (
+                      <span key={i}>{item.name}</span>
+                    ))}
+                  </div>
+                </li>
+              )}
               {editeur && (
                 <li className='sidebar__item'>
-                  <div>{_localizeText("editor")}</div>
+                  <div className='c-tag underline'>
+                    {_localizeText("editor")}
+                  </div>
                   <div className='c-body--tight'>{editeur}</div>
                 </li>
               )}
               {auteurs && (
                 <li className='sidebar__item'>
-                  <div>{_localizeText("auteurs")}</div>
+                  <div className='c-tag underline'>
+                    {_localizeText("auteurs")}
+                  </div>
                   <div className='c-body--tight'>
                     {_parseJsonStringArray(auteurs)}
                   </div>
                 </li>
               )}
-              {traducteurs && (
+              {publicationDate && (
+                <li className='sidebar__item'>
+                  <div className='c-tag underline'>
+                    {_localizeText("publicationDate")}
+                  </div>
+                  <div className='c-body--tight'>
+                    {_date(publicationDate, locale)}
+                  </div>
+                </li>
+              )}
+              <li className='sidebar__item'>
+                {/* <div>{_localizeText("traducteurs")}</div> */}
+                {isbn && <div className='c-body--tight'>{isbn}</div>}
+                {traducteurs && (
+                  <div className='c-body--tight'>{traducteurs}</div>
+                )}
+                {direction_editoriale && (
+                  <div className='c-body--tight'>{direction_editoriale}</div>
+                )}
+                {reliure && <div className='c-body--tight'>{reliure}</div>}
+                {dimensions && (
+                  <div className='c-body--tight'>{dimensions}</div>
+                )}
+                {nombre_de_pages && (
+                  <div className='c-body--tight'>{nombre_de_pages}</div>
+                )}
+              </li>
+              {/* {traducteurs && (
                 <li className='sidebar__item'>
                   <div>{_localizeText("traducteurs")}</div>
                   <div className='c-body--tight'>{traducteurs}</div>
@@ -122,30 +167,27 @@ const ContentProduct = ({ input }: Props) => {
               )}
               {dimensions && (
                 <li className='sidebar__item'>
-                  <div>{_localizeText("dimensions")}</div>
+                  <div className='c-tag underline'>
+                    {_localizeText("dimensions")}
+                  </div>
                   <div className='c-body--tight'>{dimensions}</div>
                 </li>
               )}
               {nombre_de_pages && (
                 <li className='sidebar__item'>
-                  <div>{_localizeText("nombre_de_pages")}</div>
+                  <div className='c-tag underline'>
+                    {_localizeText("nombre_de_pages")}
+                  </div>
                   <div className='c-body--tight'>{nombre_de_pages}</div>
                 </li>
-              )}
-              {publicationDate && (
-                <li className='sidebar__item'>
-                  <div>{_localizeText("publicationDate")}</div>
-                  <div className='c-body--tight'>{publicationDate}</div>
-                </li>
-              )}
+              )} */}
               {/* {languages && (
                 <li className='sidebar__item'>
                   <div>{_localizeText("Langues")}</div>
                   <div className='c-body--tight'>{languages}</div>
                 </li>
               )} */}
-
-              {categories && categories.length > 0 && (
+              {/* {categories && categories.length > 0 && (
                 <li className='sidebar__item'>
                   <div>{_localizeText("categories")}</div>
                   <div className='c-body--tight'>
@@ -155,7 +197,7 @@ const ContentProduct = ({ input }: Props) => {
                       .join(", ")}
                   </div>
                 </li>
-              )}
+              )} */}
               {metas?.map((item: KeyVal, i: number) => (
                 <li className='sidebar__item' key={i}>
                   {item && (
@@ -194,7 +236,7 @@ const ContentProduct = ({ input }: Props) => {
             <div className='md:col-span-2'>
               <div className='text'>
                 <PortableText
-                  value={text}
+                  value={_localizeField(text)}
                   components={portableTextComponents}
                 />
               </div>
