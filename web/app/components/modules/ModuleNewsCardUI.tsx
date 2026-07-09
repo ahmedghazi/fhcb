@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import { NewsCardUI } from "@/app/sanity-api/types/sanity.types";
 import {
+  ArticleExpanded,
   EventExpanded,
   ExhibitionExpanded,
   FeuilletageExpanded,
@@ -13,12 +14,14 @@ import CardProduct from "../ui/cards/CardProduct";
 import { _localizeField } from "@/app/sanity-api/utils";
 import CardExhibition from "../ui/cards/CardExhibition";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
+import CardArticle from "../ui/cards/CardArticle";
 
 type NewsCardUIResolved = NewsCardUI & {
-  exhibitions?: ExhibitionExpanded[];
   events?: EventExpanded[];
+  eventsVisite?: EventExpanded[];
   product?: ProductExpanded[];
-  feuilletage?: FeuilletageExpanded[];
+  articles?: ArticleExpanded[];
+  exhibitions?: ExhibitionExpanded[];
 };
 
 type Props = {
@@ -27,10 +30,12 @@ type Props = {
 
 const ModuleNewsCardUI = ({ input }: Props) => {
   const { gridSize, title } = input;
-  const exhibitions = input.exhibitions || [];
   const events = input.events || [];
-  const products = input.product || [];
-  const feuilletages = input.feuilletage || [];
+  const eventsVisite = input.eventsVisite || [];
+  const product = input.product || [];
+  const articles = input.articles || [];
+  const exhibitions = input.exhibitions || [];
+  // const feuilletages = input.feuilletage || [];
   const cols = gridSize || 12;
 
   return (
@@ -49,24 +54,30 @@ const ModuleNewsCardUI = ({ input }: Props) => {
                 size='md'
               />
             ))}
-            {exhibitions.map((item, index: number) => (
-              <CardExhibition
-                key={`exhibitions-${item._id}-${index}`}
+            {eventsVisite?.map((item, index: number) => (
+              <CardEvent
+                key={`event-${item._id}-${index}`}
                 input={item}
-                size='md'
+                size='sm'
               />
             ))}
-
-            {products.map((item, index: number) => (
+            {product.map((item, index: number) => (
               <CardProduct
                 key={`product-${item._id}-${index}`}
                 input={item}
                 size='sm'
               />
             ))}
-            {feuilletages.map((item, index: number) => (
-              <CardFeuilletage
+            {articles.map((item, index: number) => (
+              <CardArticle
                 key={`feuilletage-${item._id}-${index}`}
+                input={item}
+                size='md'
+              />
+            ))}
+            {exhibitions.map((item, index: number) => (
+              <CardExhibition
+                key={`exhibitions-${item._id}-${index}`}
                 input={item}
                 size='md'
               />

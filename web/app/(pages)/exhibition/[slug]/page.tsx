@@ -11,8 +11,12 @@ import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import HeroExhibition from "@/app/components/HeroExhibition";
-import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import {
+  ArtistExpanded,
+  ExhibitionExpanded,
+} from "@/app/sanity-api/types/sanity-expanded.types";
 import Rebonds from "@/app/components/Rebonds";
+import RebondsExhibition from "@/app/components/RebondsExhibition";
 
 type Params = Promise<{ slug: string }>;
 
@@ -57,8 +61,14 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <HeroExhibition input={data as unknown as ExhibitionExpanded} />
       <ContentModulaire input={data} />
-      {data.aroundTheExhibition && (
+      {/* {data.aroundTheExhibition && (
         <Rebonds input={data.aroundTheExhibition} title='aroundTheExhibition' />
+      )} */}
+      {data.relatedByExhibition && (
+        <RebondsExhibition
+          input={data.relatedByExhibition}
+          artists={data.artists as unknown as ArtistExpanded[]}
+        />
       )}
       {data.related && <Rebonds input={data.related} title='toDiscoverToo' />}
     </div>

@@ -334,8 +334,8 @@ export function pageModulaireToCard(
 // ─── Feuilletage ─────────────────────────────────────────────────────────────
 
 export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
-  const { imageCover, dates, tags, index, chercheur, description } = input;
-
+  const { imageCover, video, tags, index, chercheur, description } = input;
+  console.log(video);
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
@@ -359,7 +359,11 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     layout: isLandscape ? "col" : "row",
     footerPlacement: "detached",
     colorVar: "var(--color-gris-100)",
+    // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    mediaSlot: video
+      ? React.createElement(EmbedVideo, { input: video })
+      : undefined,
     tags: tagsLabel ? tagsLabel : _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
     subTitle,

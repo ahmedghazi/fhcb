@@ -224,6 +224,24 @@
     //     padding: var(--spacing-xs);
     //   }
     // }
+    // .card__inner {
+    //   &--row {
+    //     .card__body {
+    //       flex: 2;
+    //       max-width: 246px;
+    //     }
+    //     .card__media {
+    //       flex: 2;
+    //       img {
+    //         width: 100% !important;
+    //         object-position: left;
+    //         object-fit: unset;
+    //         height: auto !important;
+    //       }
+    //     }
+    //   }
+    // }
+
     &.card--md.card--is-landscape {
       & > .card__footer {
         display: none;

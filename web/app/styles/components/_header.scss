@@ -174,3 +174,7 @@ body.nav-open {
 body:has(.template--exhibition) header.is-down {
   background-color: var(--color-mauve);
 }
+
+body.has-bandeau header.is-down {
+  background-color: transparent;
+}

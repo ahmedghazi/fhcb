@@ -10,32 +10,33 @@ cards simili document
 - - cube
 - - video
 - -
-- actu
-  /_
+- # actu
+  <!-- /_
   events non visite
   events visite
   dernier livre du mois
   x derniers articles
   expos à venir
-  _/
+  _/ -->
 - pastille j-30 pastille apparait en home
-- j-15
-- donc à la date de fin d'expos en cours, les expos à venir viennent remplacer les expos en cours
-- on fait passer les expos à venir j-15 de actu à featured
-- check footer, pb nav
-- ressources overide la video si existe,
-- ressources convesation check les champs qui ne s'affichent pas
-- feuilletage virer la date
-- aside à caller http://localhost:3000/exhibition/lettres-d-amour-a-la-photographie
-- autour de l'expo > artiste, agenda à venir lié à l'artiste et l'expo, ressources liés à l'artiste et à l'expo, catalog (librairie)
+  j-15
+  donc à la date de fin d'expos en cours, les expos à venir viennent remplacer les expos en cours
+  on fait passer les expos à venir j-15 de actu à featured
+- # check footer, pb nav
+- # ressources overide la video si existe,
+- # ressources convesation check les champs qui ne s'affichent pas
+- # feuilletage virer la date
+- # aside à caller http://localhost:3000/exhibition/lettres-d-amour-a-la-photographie
+- # autour de l'expo > artiste, agenda à venir lié à l'artiste et l'expo, ressources liés à l'artiste et à l'expo, catalog (librairie)
 - - artiste, catalog, evt, ressources
-- i18n toDicscoverToo
+- autour de l'expo ordre
+- # i18n toDicscoverToo
 - ajouter rebonds label libre
 - # carte feuilletage afficher la description
 - # carte event ajouter champs description à afficher au dessus des dates
 - # modules listsUI ajouter champs titre
 - # visite commentées n'ont pas de page, pas de linkInternal sur la carte
-- modules Autour de l'expo/event qui convoque tous les types en mode grid liés à l'expo
+- # modules Autour de l'expo/event qui convoque tous les types en mode grid liés à l'expo
 
 - # ajouter le liens tickets dans exhibition
 - # afficher le bouton ticket sur cardExhibition

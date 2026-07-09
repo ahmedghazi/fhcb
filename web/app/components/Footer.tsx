@@ -36,7 +36,8 @@ const Footer = ({ settings }: Props) => {
   }, []);
 
   if (!settings) return null;
-
+  console.log(settings?.navSecondary);
+  console.log(settings?.navTertiary);
   return (
     <footer className='footer'>
       <div className='container-fluid'>
@@ -81,7 +82,7 @@ const Footer = ({ settings }: Props) => {
                         </li>
                       );
                     })}
-                    <li>
+                    {/* <li>
                       <h5 className='c-h2'>{_localizeText("contactTeam")}</h5>
                       {settings.navTertiary && (
                         <ul>
@@ -94,7 +95,7 @@ const Footer = ({ settings }: Props) => {
                           ))}
                         </ul>
                       )}
-                    </li>
+                    </li> */}
                   </ul>
                   <div className='credits-n-legals md:col-span-2'>
                     © {new Date().getFullYear()} {website.title}{" "}

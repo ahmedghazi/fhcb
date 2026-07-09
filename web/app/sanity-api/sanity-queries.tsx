@@ -11,6 +11,7 @@ import {
   relatedByArtists,
   listProductUI,
   cta,
+  relatedByExhibition,
 } from "./fragments";
 import {
   ARTICLE_QUERY_RESULT,
@@ -202,8 +203,7 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
       location->
     },
     artists[]->{
-      _id,
-      name
+      ${cardRefArtist}
     },
     tags[]->{
       _id,
@@ -216,6 +216,7 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     aroundTheExhibition[]->{
       ${cardTypes}
     },
+    "relatedByExhibition": ${relatedByExhibition},
     "related": ${relatedByTag}
   }`;
 

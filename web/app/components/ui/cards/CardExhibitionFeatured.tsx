@@ -36,7 +36,8 @@ const CardExhibitionFeatured = forwardRef<HTMLDivElement, Props>(
         }}
         className={clsx(
           "card card--exhibition card--exhibition-featured",
-          isTube ? "card--md-alt" : "card--sm-alt",
+          isCube && "card--is-cube",
+          isTube ? "card--is-tube card--md-alt" : "card--sm-alt",
           isCurrent && "card--is-current",
           isHorsLesMurs && "card--is-hors-les-murs",
           `card--${props.layout}`,

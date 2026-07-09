@@ -4665,6 +4665,14 @@
         },
         "optional": true
       },
+      "exhibition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "exhibition.reference"
+        },
+        "optional": true
+      },
       "dates": {
         "type": "objectAttribute",
         "value": {
@@ -5352,6 +5360,14 @@
               "name": "artist.reference"
             }
           }
+        },
+        "optional": true
+      },
+      "exhibition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "exhibition.reference"
         },
         "optional": true
       },
@@ -8445,6 +8461,14 @@
         },
         "optional": true
       },
+      "exhibition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "exhibition.reference"
+        },
+        "optional": true
+      },
       "subTitle": {
         "type": "objectAttribute",
         "value": {
@@ -10449,6 +10473,14 @@
         },
         "optional": true
       },
+      "exhibition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "exhibition.reference"
+        },
+        "optional": true
+      },
       "chercheur": {
         "type": "objectAttribute",
         "value": {
@@ -11063,6 +11095,14 @@
               "name": "artist.reference"
             }
           }
+        },
+        "optional": true
+      },
+      "exhibition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "exhibition.reference"
         },
         "optional": true
       },

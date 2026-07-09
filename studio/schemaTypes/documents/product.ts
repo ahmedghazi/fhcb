@@ -110,6 +110,13 @@ export default defineType({
       of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',
     }),
+    defineField({
+      name: 'exhibition',
+      title: 'Exposition',
+      type: 'reference',
+      to: [{type: 'exhibition'}],
+      group: 'editorial',
+    }),
 
     defineField({
       name: 'subTitle',

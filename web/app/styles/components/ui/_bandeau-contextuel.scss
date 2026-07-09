@@ -7,6 +7,10 @@
   background-color: var(--color-taupe);
   z-index: 49;
   text-align: center;
+  transition:
+    background-color 0.2s var(--cubic),
+    transform 0.2s var(--cubic),
+    opacity 0.2s var(--cubic);
   .footer {
     display: flex;
     flex-direction: column;
@@ -19,4 +23,9 @@
     button.underline {
     }
   }
+}
+
+header.is-up + .bandeau-contextuel {
+  transform: translateY(-100%);
+  opacity: 0;
 }

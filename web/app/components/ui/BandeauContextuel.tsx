@@ -23,6 +23,10 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
     setOpen(now < endDate);
   }, []);
 
+  useEffect(() => {
+    document.body.classList.toggle("has-bandeau", open);
+  }, [open]);
+
   const localizedText = _localizeField(text);
   const localizedClose = _localizeText("closeBanner");
 

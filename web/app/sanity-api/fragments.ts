@@ -387,18 +387,21 @@ export const newsCardUI = `
       ...
     },
     gridSize,
+    "events": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current != "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {
+      ${cardRefEvent}
+    },
+    "eventsVisite": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {
+      ${cardRefEvent}
+    },
+    "product": *[_type == "product" && !(_id in path("drafts.**")) && count(categories[_ref in *[_type == "tagProduct" && slug.current == "livre-du-mois"]._id]) > 0] | order(_createdAt asc) {
+      ${cardRefProduct}
+    },
+    "articles": *[_type == "article"][3] | order(_createdAt asc) {
+      ...
+    },
     "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
-    "events": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current in ["visite-commentee", "feuilletage"]]._id]) > 0] | order(dates[0].du asc) {
-      ${cardRefEvent}
-    },
-    "product": *[_type == "product" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "livre-du-mois"]._id]) > 0] | order(dates[0].du asc) {
-      ${cardRefProduct}
-    },
-    "feuilletage": *[_type == "feuilletage" && !(_id in path("drafts.**")) && count(artists[_ref in *[_type == "artist" && slug.current != ""]._id]) > 0 && dates[0].du >= now()] | order(dates[0].du asc) {
-      ${cardRefFeuilletage}
-    }
   }
 `;
 
@@ -734,6 +737,27 @@ const allPostType = [
   "serieThematique",
   "product",
 ];
+
+export const relatedByExhibition = `
+  *[
+    _id != ^._id &&
+    (
+      (
+        _type in ["event", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
+        references(^._id)
+      )
+      ||
+      (
+        _type == "product" &&
+        (references(^._id) || references(^.artists[]._ref))
+      )
+
+    )
+  ] | order(dates[0].du asc) {
+    ${cardTypes}
+  }
+`;
+
 export const relatedByArtists = `
   *[
     _id != ^._id &&

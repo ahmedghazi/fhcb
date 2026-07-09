@@ -95,7 +95,10 @@ const Sidebar = ({ input }: Props) => {
                 {item.title && _localizeField(item.title) && (
                   <>
                     {item.title && (
-                      <div>{_localizeField(item.title) || ""}</div>
+                      // <div>{_localizeField(item.title) || ""}</div>
+                      <h3 className='c-tag underline'>
+                        {_localizeField(item.title)}
+                      </h3>
                     )}
                     {item.text && (
                       <div className='c-body--tight'>

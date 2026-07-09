@@ -66,6 +66,7 @@ export const cardRefFeuilletage = `
   imageCover{
     ${imageAsset}
   },
+  video,
   dates,
   description,
   artists[]->{
@@ -158,6 +159,7 @@ export const cardRefConversation = `
   "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
+  video
 `;
 
 export const cardRefSerieThematique = `
@@ -179,6 +181,7 @@ export const cardRefSerieThematique = `
   "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
+  video
 `;
 
 export const cardRefArticle = `
