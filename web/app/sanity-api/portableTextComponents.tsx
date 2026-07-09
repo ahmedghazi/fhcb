@@ -4,6 +4,7 @@ import { _linkResolver, _localizeField } from "./utils";
 import Figure from "../components/ui/Figure";
 import Embed from "../components/ui/Embed";
 import { KeyVal } from "./types/sanity.types";
+import EmbedVideo from "../components/ui/EmbedVideo";
 
 const portableTextComponents: PortableTextComponents = {
   block: {
@@ -14,6 +15,9 @@ const portableTextComponents: PortableTextComponents = {
   types: {
     image: ({ value }) => {
       return <Figure asset={value.asset} />;
+    },
+    video: ({ value }) => {
+      return <EmbedVideo input={value} />;
     },
     embed: ({ value }) => {
       return <Embed input={value} />;

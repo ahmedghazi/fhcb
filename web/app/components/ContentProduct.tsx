@@ -83,7 +83,6 @@ const ContentProduct = ({ input }: Props) => {
             <BtnAddToCart input={input as unknown as ProductExpanded} />
 
             <ul className='sidebar'>
-              artiste en premier, Éditeur, Auteur, Date de parution,
               {artists && (
                 <li className='sidebar__item'>
                   <div className='c-tag underline'>
@@ -124,80 +123,25 @@ const ContentProduct = ({ input }: Props) => {
                   </div>
                 </li>
               )}
-              <li className='sidebar__item'>
-                {/* <div>{_localizeText("traducteurs")}</div> */}
-                {isbn && <div className='c-body--tight'>{isbn}</div>}
-                {traducteurs && (
-                  <div className='c-body--tight'>{traducteurs}</div>
-                )}
-                {direction_editoriale && (
-                  <div className='c-body--tight'>{direction_editoriale}</div>
-                )}
-                {reliure && <div className='c-body--tight'>{reliure}</div>}
-                {dimensions && (
-                  <div className='c-body--tight'>{dimensions}</div>
-                )}
-                {nombre_de_pages && (
-                  <div className='c-body--tight'>{nombre_de_pages}</div>
-                )}
-              </li>
-              {/* {traducteurs && (
-                <li className='sidebar__item'>
-                  <div>{_localizeText("traducteurs")}</div>
-                  <div className='c-body--tight'>{traducteurs}</div>
-                </li>
-              )}
-              {direction_editoriale && (
-                <li className='sidebar__item'>
-                  <div>{_localizeText("direction_editoriale")}</div>
-                  <div className='c-body--tight'>{direction_editoriale}</div>
-                </li>
-              )}
               {isbn && (
                 <li className='sidebar__item'>
-                  <div>ISBN</div>
-                  <div className='c-body--tight'>{isbn}</div>
+                  {isbn && <div className='c-body--tight'>{isbn}</div>}
+                  {traducteurs && (
+                    <div className='c-body--tight'>{traducteurs}</div>
+                  )}
+                  {direction_editoriale && (
+                    <div className='c-body--tight'>{direction_editoriale}</div>
+                  )}
+                  {reliure && <div className='c-body--tight'>{reliure}</div>}
+                  {dimensions && (
+                    <div className='c-body--tight'>{dimensions}</div>
+                  )}
+                  {nombre_de_pages && (
+                    <div className='c-body--tight'>{nombre_de_pages}</div>
+                  )}
                 </li>
               )}
-              {reliure && (
-                <li className='sidebar__item'>
-                  <div>{_localizeText("reliure")}</div>
-                  <div className='c-body--tight'>{reliure}</div>
-                </li>
-              )}
-              {dimensions && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>
-                    {_localizeText("dimensions")}
-                  </div>
-                  <div className='c-body--tight'>{dimensions}</div>
-                </li>
-              )}
-              {nombre_de_pages && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>
-                    {_localizeText("nombre_de_pages")}
-                  </div>
-                  <div className='c-body--tight'>{nombre_de_pages}</div>
-                </li>
-              )} */}
-              {/* {languages && (
-                <li className='sidebar__item'>
-                  <div>{_localizeText("Langues")}</div>
-                  <div className='c-body--tight'>{languages}</div>
-                </li>
-              )} */}
-              {/* {categories && categories.length > 0 && (
-                <li className='sidebar__item'>
-                  <div>{_localizeText("categories")}</div>
-                  <div className='c-body--tight'>
-                    {categories
-                      .map((cat) => cat && _localizeField(cat.title))
-                      .filter(Boolean)
-                      .join(", ")}
-                  </div>
-                </li>
-              )} */}
+
               {metas?.map((item: KeyVal, i: number) => (
                 <li className='sidebar__item' key={i}>
                   {item && (
