@@ -138,11 +138,13 @@ export async function GET(request: Request) {
     _id: string;
     dates: { du?: string; au?: string; locationType?: string }[] | null;
     tags: { _key: string; _ref: string }[] | null;
+    countdown: number | null;
   }[] = await client.fetch(
     `*[_type == "exhibition" && !(_id in path("drafts.**"))] {
       _id,
       "dates": dates[]{ du, au, locationType },
-      "tags": tags[]{ _key, _ref }
+      "tags": tags[]{ _key, _ref },
+      countdown
     }`,
   );
 
@@ -172,26 +174,6 @@ export async function GET(request: Request) {
     const firstStart = allStarts.sort()[0];
     const lastEnd = allEnds.sort().reverse()[0];
 
-    const now = new Date();
-    const lastEndDate = new Date(lastEnd);
-    const diffTime = Math.abs(now.getTime() - lastEndDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    let pastilleText = {
-      fr: "",
-      en: "",
-    };
-    /*
-    here compare date.now() width lastDate, implement pastille text ex: J -12
-    */
-    if (diffDays <= 10) {
-      pastilleText.fr = `J -${diffDays}`;
-      pastilleText.en = `J -${diffDays}`;
-    }
-    if (diffDays < 5) {
-      pastilleText.fr = `derniers jours`;
-      pastilleText.en = `last days`;
-    }
-
     const isCurrent = exhibition.dates.some(
       (d) =>
         isInSiteLocationType(d.locationType) &&
@@ -211,6 +193,31 @@ export async function GET(request: Request) {
     );
     const isPast = lastEnd < nowDate;
     const isUpcoming = firstStart > nowDate;
+
+    // Compute pastille and countdown based on exhibition status
+    const todayMs = new Date().setHours(0, 0, 0, 0);
+    let pastilleText = { fr: "", en: "" };
+    let countdown: number | null = null;
+
+    if (isCurrent) {
+      const daysUntilEnd = Math.ceil(
+        (new Date(lastEnd).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+      );
+      if (daysUntilEnd >= 0 && daysUntilEnd <= 10) {
+        pastilleText =
+          daysUntilEnd < 5
+            ? { fr: "derniers jours", en: "last days" }
+            : { fr: `J-${daysUntilEnd}`, en: `J-${daysUntilEnd}` };
+      }
+    } else if (isUpcoming) {
+      const daysUntilStart = Math.ceil(
+        (new Date(firstStart).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+      );
+      if (daysUntilStart <= 30) {
+        countdown = daysUntilStart;
+        pastilleText = { fr: `J-${daysUntilStart}`, en: `J-${daysUntilStart}` };
+      }
+    }
 
     const otherTags = (exhibition.tags || []).filter(
       (t) => !managedIds.has(t._ref),
@@ -242,6 +249,7 @@ export async function GET(request: Request) {
       _id: draftId,
       tags: tagRefs,
       pastille: pastilleText,
+      countdown,
     });
 
     // Publish the draft immediately via Actions API (bypasses direct-mutation ACL)

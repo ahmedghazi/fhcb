@@ -25,7 +25,9 @@
   }
 }
 
-header.is-up + .bandeau-contextuel {
+header.is-up + .bandeau-contextuel,
+body.scrolled .bandeau-contextuel {
   transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
 }

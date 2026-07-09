@@ -36,8 +36,7 @@ const Footer = ({ settings }: Props) => {
   }, []);
 
   if (!settings) return null;
-  console.log(settings?.navSecondary);
-  console.log(settings?.navTertiary);
+
   return (
     <footer className='footer'>
       <div className='container-fluid'>

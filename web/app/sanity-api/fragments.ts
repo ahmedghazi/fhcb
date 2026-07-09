@@ -365,7 +365,10 @@ export const featuredCardsUI = `
     ...,
     title,
     gridSize,
-    "items": *[_type == "exhibition" && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0] | order(dates[0].du asc) {
+    "items": *[_type == "exhibition" && !(_id in path("drafts.**")) && (
+      count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0
+      || (count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0 && defined(countdown) && countdown <= 15)
+    )] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
     cardVideoMux{
@@ -399,7 +402,7 @@ export const newsCardUI = `
     "articles": *[_type == "article"][3] | order(_createdAt asc) {
       ...
     },
-    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0] | order(dates[0].du asc) {
+    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0 && defined(countdown) && countdown > 15 && countdown <= 30] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
   }

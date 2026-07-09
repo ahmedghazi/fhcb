@@ -8098,6 +8098,13 @@
         },
         "optional": true
       },
+      "countdown": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "location": {
         "type": "objectAttribute",
         "value": {

@@ -89,6 +89,11 @@ export default defineType({
       of: [{type: 'fhcbDate'}],
     }),
     defineField({
+      name: 'countdown',
+      type: 'number',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'location',
       title: 'Lieux',
       type: 'string',

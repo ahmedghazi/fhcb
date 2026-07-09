@@ -23,6 +23,7 @@ export const cardRefExhibition = `
     slug
   },
   pastille,
+  countdown,
   links[]{
     ...
   }

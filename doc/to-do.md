@@ -6,11 +6,12 @@ cards simili document
 
 # Tache prio
 
-- exhib featured
-- - cube
-- - video
+- # exhib featured
+- - # cube
+- - # video
 - -
 - # actu
+
   <!-- /_
   events non visite
   events visite
@@ -18,10 +19,7 @@ cards simili document
   x derniers articles
   expos à venir
   _/ -->
-- pastille j-30 pastille apparait en home
-  j-15
-  donc à la date de fin d'expos en cours, les expos à venir viennent remplacer les expos en cours
-  on fait passer les expos à venir j-15 de actu à featured
+
 - # check footer, pb nav
 - # ressources overide la video si existe,
 - # ressources convesation check les champs qui ne s'affichent pas
@@ -31,7 +29,6 @@ cards simili document
 - - # artiste, catalog, evt, ressources
 - # autour de l'expo ordre
 - # i18n toDicscoverToo
-- ajouter rebonds label libre
 - # carte feuilletage afficher la description
 - # carte event ajouter champs description à afficher au dessus des dates
 - # modules listsUI ajouter champs titre
@@ -127,9 +124,9 @@ cards simili document
 - # ajout conversation
 - # page programme expo/event vide => afficher un message
 - # cron in preprod
-- add remaining cta in modules
+- # add remaining cta in modules
 - ne pas hardcoder les tags (branches-ressources, visite, ...). Les mettre dans global
-- contexte des cards (expos en cours, affiche la couleur + bouton), ...
+- # contexte des cards (expos en cours, affiche la couleur + bouton), ...
 - # rebonds page expo, ordre
 - # autour de l'expo
 - couple titre sous titre > 450 / 200
@@ -150,6 +147,12 @@ cards simili document
 - pastille scenario
 - menu avec message, autoKill date
 - search desktop btn fermer
+- pastille j-30 pastille apparait en home
+  j-15
+  donc à la date de fin d'expos en cours, les expos à venir viennent remplacer les expos en cours
+  on fait passer les expos à venir j-15 de actu à featured
+- ajouter rebonds label libre
+- rebonds artiste pour HCB et MF
 - # menu avec enfant:hover pas de sous ligné
 - # product variant = langue
 - # product artist ne vient plus du titre mais du champs artiste

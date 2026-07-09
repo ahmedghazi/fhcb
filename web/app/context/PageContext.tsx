@@ -79,13 +79,22 @@ export const PageContextProvider = (props: PageContextProps) => {
     document.body.classList.remove("is-loading");
   };
 
+  const _scroll = () => {
+    const scrollY = window.scrollY > 77;
+    if (scrollY) {
+      document.body.classList.add("scrolled");
+    }
+  };
+
   useEffect(() => {
     _format();
     window.addEventListener("resize", _format);
+    document.addEventListener("scroll", _scroll);
     document.documentElement.classList.remove("is-loading");
 
     return () => {
       window.removeEventListener("resize", _format);
+      document.removeEventListener("scroll", _scroll);
     };
   }, []);
 

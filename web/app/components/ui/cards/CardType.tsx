@@ -22,7 +22,7 @@ import { _isCurrentByDates } from "@/app/lib/utils";
 import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
 type Context = "grid" | "slider" | "rebonds";
-type Size = "sm" | "md" | "lg" | "md-alt";
+type Size = "sm" | "md" | "lg";
 
 type Props = {
   input:
@@ -45,7 +45,7 @@ type Props = {
 const SIZES = {
   event: { grid: "sm", slider: "md", rebonds: "sm" },
   exhibition: { grid: "sm", slider: "md", rebonds: "md" },
-  exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md-alt" },
+  exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md" },
   product: { grid: "sm", slider: "sm", rebonds: "sm" },
   article: { grid: "sm", slider: "sm", rebonds: "md" },
   artist: { grid: "md", slider: "md", rebonds: "sm" },
