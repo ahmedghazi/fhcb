@@ -53,6 +53,7 @@ const PRODUCT_FULL_FIELDS = `
   metas: metafield(namespace: "custom", key: "fiche_technique") { value }
   editeur: metafield(namespace: "custom", key: "editeur") { value }
   auteurs: metafield(namespace: "custom", key: "auteurs") { value }
+  artiste: metafield(namespace: "custom", key: "artiste") { value }
   traducteurs: metafield(namespace: "custom", key: "traducteurs") { value }
   direction_editoriale: metafield(namespace: "custom", key: "direction_editoriale") { value }
   isbn: metafield(namespace: "custom", key: "isbn") { value }
@@ -477,8 +478,8 @@ export async function buildProductFields(
             },
           ],
         }
-      : base.auteurs?.value
-        ? { artistName: base.auteurs.value }
+      : base.artiste?.value
+        ? { artistName: base.artiste.value }
         : {}),
     seo: {
       metaTitle: localeData[primaryKey].title,
