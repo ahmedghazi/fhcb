@@ -50,17 +50,16 @@ const PRODUCT_FULL_FIELDS = `
   id handle totalInventory
   title descriptionHtml
   category { id name }
-  metas: metafield(namespace: "custom", key: "fiche_technique") { value }
+  artists: metafield(namespace: "custom", key: "artists") { value }
   editeur: metafield(namespace: "custom", key: "editeur") { value }
-  auteurs: metafield(namespace: "custom", key: "auteurs") { value }
-  artiste: metafield(namespace: "custom", key: "artiste") { value }
-  traducteurs: metafield(namespace: "custom", key: "traducteurs") { value }
   direction_editoriale: metafield(namespace: "custom", key: "direction_editoriale") { value }
+  publicationDate: metafield(namespace: "custom", key: "date_de_publication") { value }
+  traducteurs: metafield(namespace: "custom", key: "traducteurs") { value }
+  metas: metafield(namespace: "custom", key: "fiche_technique") { value }
   isbn: metafield(namespace: "custom", key: "isbn") { value }
   reliure: metafield(namespace: "custom", key: "reliure") { value }
   dimensions: metafield(namespace: "custom", key: "dimensions") { value }
   nombre_de_pages: metafield(namespace: "custom", key: "nombre_de_pages") { value }
-  publicationDate: metafield(namespace: "custom", key: "date_de_publication") { value }
   collections(first: 10) { nodes { id handle title } }
   priceRange { minVariantPrice { amount currencyCode } }
   compareAtPriceRange { minVariantPrice { amount } }
@@ -403,7 +402,6 @@ export async function buildProductFields(
     ...(base.nombre_de_pages?.value
       ? { nombre_de_pages: base.nombre_de_pages.value }
       : {}),
-    ...(base.auteurs?.value ? { auteurs: base.auteurs.value } : {}),
     ...(base.publicationDate?.value
       ? { publicationDate: base.publicationDate.value.slice(0, 10) }
       : {}),
@@ -478,8 +476,8 @@ export async function buildProductFields(
             },
           ],
         }
-      : base.artiste?.value
-        ? { artistName: parseMetafieldList(base.artiste.value).join(", ") }
+      : base.artists?.value
+        ? { artistName: parseMetafieldList(base.artists.value).join(", ") }
         : {}),
     seo: {
       metaTitle: localeData[primaryKey].title,
