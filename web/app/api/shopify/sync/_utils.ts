@@ -457,6 +457,7 @@ export async function buildProductFields(
     title: Object.fromEntries(
       LOCALES.map(({ key }) => [key, localeData[key].title]),
     ),
+    artistName: base.artists?.value ?? null,
     ...(imageCover._type ? { imageCover } : {}),
     images: restImages,
   };
@@ -476,9 +477,7 @@ export async function buildProductFields(
             },
           ],
         }
-      : base.artists?.value
-        ? { artistName: base.artists.value }
-        : {}),
+      : {}),
     seo: {
       metaTitle: localeData[primaryKey].title,
       ...(primaryPlain ? { metaDescription: primaryPlain.slice(0, 155) } : {}),
