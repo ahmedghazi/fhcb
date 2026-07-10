@@ -124,7 +124,7 @@ const ModuleFormUI = ({ input }: Props) => {
             </div>
             <div className='md:col-span-2'></div>
           </div>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
         </div>
       </div>
     </section>
