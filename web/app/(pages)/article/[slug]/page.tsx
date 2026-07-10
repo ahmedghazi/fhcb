@@ -67,10 +67,11 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
         h1={data.title?.fr || data.title?.en || ""}
         // subTitle={data.subTitle}
       />
-
       {/* <pre>{JSON.stringify(data.related, null, 2)}</pre> */}
       <ContentModulaire input={data} />
+
       {data.related && <Related input={data.related} />}
+
       {/* {data.related && <Related input={data.related} />}
       {data.rebonds && <Related input={data.rebonds} />} */}
     </div>

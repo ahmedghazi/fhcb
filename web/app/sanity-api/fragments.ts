@@ -761,6 +761,18 @@ export const relatedByExhibition = `
   }
 `;
 
+export const relatedByArtist = `
+  *[
+    _id != ^._id &&
+    (
+      _type in ["event", "exhibition", "feuilletage", "imageImages", "serieThematique", "conversation", "product"] &&
+      references(^._id)
+    )
+  ] | order(dates[0].du asc) {
+    ${cardTypes}
+  }
+`;
+
 export const relatedByArtists = `
   *[
     _id != ^._id &&

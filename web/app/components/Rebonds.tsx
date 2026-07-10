@@ -1,5 +1,4 @@
 "use client";
-
 import CardType from "./ui/cards/CardType";
 import { _localizeText } from "../sanity-api/utils";
 
@@ -10,6 +9,7 @@ type Props = {
 };
 
 const Rebonds = ({ input, title = "discoverToo" }: Props) => {
+  console.log(input);
   if (!input || input.length === 0) return null;
   return (
     <section className='rebonds mb-lg'>

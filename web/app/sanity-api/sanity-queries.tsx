@@ -12,6 +12,7 @@ import {
   listProductUI,
   cta,
   relatedByExhibition,
+  relatedByArtist,
 } from "./fragments";
 import {
   ARTICLE_QUERY_RESULT,
@@ -157,7 +158,8 @@ export const ARTIST_QUERY = groq`*[_type == "artist" && slug.current == $slug][0
       ${imageAsset}
     },
     text,
-    links
+    links,
+    "relatedByArtist": ${relatedByArtist}
   }`;
 
 export async function getArtist(slug: string): Promise<ARTIST_QUERY_RESULT> {
