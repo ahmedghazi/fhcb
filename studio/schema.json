@@ -5565,6 +5565,14 @@
         },
         "optional": true
       },
+      "exhibition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "exhibition.reference"
+        },
+        "optional": true
+      },
       "modules": {
         "type": "objectAttribute",
         "value": {

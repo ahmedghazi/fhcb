@@ -32,7 +32,7 @@ const ModuleNewsCardUI = ({ input }: Props) => {
   const { gridSize, title } = input;
   const events = input.events || [];
   const eventsVisite = input.eventsVisite || [];
-  const product = input.product || {};
+  const product = input.product;
   const articles = input.articles || [];
   const exhibitions = input.exhibitions || [];
   // const feuilletages = input.feuilletage || [];
@@ -61,13 +61,7 @@ const ModuleNewsCardUI = ({ input }: Props) => {
                 size='sm'
               />
             ))}
-            {/* {product.map((item, index: number) => (
-              <CardProduct
-                key={`product-${item._id}-${index}`}
-                input={item}
-                size='sm'
-              />
-            ))} */}
+
             {product && <CardProduct input={product} size='sm' />}
             {articles.map((item, index: number) => (
               <CardArticle
