@@ -15,6 +15,7 @@ import Embed from "@/app/components/ui/Embed";
 import Rebonds from "@/app/components/Rebonds";
 import { CONVERSATION_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import EmbedVideo from "@/app/components/ui/EmbedVideo";
+import ContentConversation from "@/app/components/ContentConversation";
 
 type Params = Promise<{ slug: string }>;
 
@@ -60,6 +61,7 @@ const ConversationTemplate: NextPage<PageProps> = async ({ params }) => {
       <div className='container-fluid'>
         {data.video && <EmbedVideo input={data.video} />}
       </div>
+      <ContentConversation input={data} />
       <ContentModulaire input={data} />
       {data.related && <Rebonds input={data.related} />}
       {data.rebonds && <Rebonds input={data.rebonds} />}

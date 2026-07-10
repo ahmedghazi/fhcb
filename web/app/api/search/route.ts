@@ -52,6 +52,10 @@ export async function POST(request: NextRequest) {
       artists[]->{
         name
       },
+      tags[]->{
+        title
+      },
+      price,
       color
     } | order(_createdAt desc)
     `;

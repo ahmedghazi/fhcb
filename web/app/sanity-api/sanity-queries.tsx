@@ -414,6 +414,7 @@ export const CONVERSATION_QUERY = groq`*[_type == "conversation" && slug.current
   seo{
     ${seo}
   },
+  description,
   chercheur->{
     _id,
     name,

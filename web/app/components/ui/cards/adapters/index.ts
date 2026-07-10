@@ -438,7 +438,7 @@ export function conversationToCard(input: ConversationExpanded): CardBaseProps {
     subTitle: subTitle
       ? _localizeField(subTitle)
       : chercheur?.name || undefined,
-    description: _localizeField(description),
+    // description: _localizeField(description),
     actions: [
       {
         label: _localizeText("discover") as string,

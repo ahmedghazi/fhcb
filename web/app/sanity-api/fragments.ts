@@ -739,6 +739,7 @@ const allPostType = [
   "imageImages",
   "serieThematique",
   "product",
+  "article",
 ];
 
 export const relatedByExhibition = `
@@ -746,7 +747,7 @@ export const relatedByExhibition = `
     _id != ^._id &&
     (
       (
-        _type in ["event", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
+        _type in ["event", "feuilletage", "imageImages", "serieThematique", "conversation", "article"] &&
         references(^._id)
       )
       ||

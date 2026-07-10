@@ -37,8 +37,8 @@ const ContentProduct = ({ input }: Props) => {
     price,
     inStock,
     artists,
+    artistName,
     images,
-    // languages,
     metas,
     publicationDate,
     related,
@@ -50,9 +50,6 @@ const ContentProduct = ({ input }: Props) => {
     reliure,
     dimensions,
     nombre_de_pages,
-    shopifyId,
-    variants,
-    categories,
     totalInventory,
   } = input;
 
@@ -72,6 +69,8 @@ const ContentProduct = ({ input }: Props) => {
                   {(artists as unknown as Artist[])
                     .map((a) => a.name)
                     .join(", ")}
+                  {!artists && <span>{artistName}</span>}
+                  ici
                 </div>
               )}
             </div>

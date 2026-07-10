@@ -34,7 +34,12 @@ export default defineType({
       group: 'editorial',
     }),
     slug,
-
+    defineField({
+      name: 'subTitle',
+      title: 'Sous titre',
+      type: 'localeText',
+      group: 'editorial',
+    }),
     defineField({
       name: 'imageCover',
       type: 'image',
@@ -50,6 +55,13 @@ export default defineType({
       title: 'Tags',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'artists',
+      title: 'Artistes',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',
     }),
     defineField({

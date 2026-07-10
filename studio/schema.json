@@ -5496,6 +5496,14 @@
         },
         "optional": true
       },
+      "subTitle": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeText"
+        },
+        "optional": true
+      },
       "imageCover": {
         "type": "objectAttribute",
         "value": {
@@ -5560,6 +5568,28 @@
             "rest": {
               "type": "inline",
               "name": "tag.reference"
+            }
+          }
+        },
+        "optional": true
+      },
+      "artists": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "artist.reference"
             }
           }
         },
