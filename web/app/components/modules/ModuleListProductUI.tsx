@@ -30,7 +30,6 @@ const ModuleListProductUI = ({ input }: Props) => {
   );
 
   useEffect(() => {
-    console.log(activeFilters);
     const hasFilters = Object.keys(activeFilters).length > 0;
     publish("IS_FILTERING", hasFilters);
   }, [activeFilters]);

@@ -154,8 +154,17 @@ export function productToCard(
   input: ProductExpanded,
   size: "sm" | "md" | "lg" = "md",
 ): CardBaseProps {
-  const { imageCover, tags, price, artists, languages, totalInventory } = input;
-  const artistName = artists?.map((a) => a?.name).join(", ") || "";
+  const {
+    imageCover,
+    tags,
+    price,
+    artists,
+    artistName,
+    languages,
+    totalInventory,
+  } = input;
+  const artistsName = artists?.map((a) => a?.name).join(", ") || "";
+
   const title = (_localizeField(input.title) as string) || "";
   const pathname = usePathname();
   const isOffShop = pathname.indexOf("librairie") === -1;
@@ -188,7 +197,7 @@ export function productToCard(
       : toTags(tags),
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
-    subTitle: artistName,
+    subTitle: artistName ? artistName : artistsName,
     infoNode: price ? `${price}€` : undefined,
     actionsNode: !isProductVariable
       ? React.createElement(BtnAddToCart, { input: input as any })

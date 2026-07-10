@@ -106,7 +106,8 @@ export const cardRefProduct = `
   artists[]->{
     _id,
     name
-  }
+  },
+  artistName
 `;
 
 export const cardRefArtist = `

@@ -17,6 +17,9 @@ a.btn {
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
   &:hover {
     background-color: transparent;
     &::before {
@@ -28,10 +31,9 @@ a.btn {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    // background-color: var(--color-gris-100);
     border: var(--border);
-    // border-color: currentColor;
     opacity: 0;
+    transition: opacity 0.3s ease;
   }
   &--secondary {
     background-color: var(--color-white-0_5);
