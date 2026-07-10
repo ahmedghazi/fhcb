@@ -71,6 +71,8 @@ export default defineType({
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
+          {title: 'Superscript', value: 'sup'},
+          {title: 'Subscript', value: 'sub'},
           // {
           //   title: "Underline",
           //   value: "u",

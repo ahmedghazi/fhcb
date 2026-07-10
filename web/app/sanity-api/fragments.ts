@@ -1,4 +1,5 @@
 import {
+  cardRefArticle,
   cardRefConversation,
   cardRefEvent,
   cardRefExhibition,
@@ -389,7 +390,6 @@ export const newsCardUI = `
     title{
       ...
     },
-    gridSize,
     "events": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current != "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefEvent}
     },
@@ -399,8 +399,8 @@ export const newsCardUI = `
     "product": *[ _type == "product" && !(_id in path("drafts.**")) && count(categories[_ref in *[_type == "tagProduct" && slug.current == "livre-du-mois"]._id]) > 0 ] | order(_createdAt desc)[0] {
       ${cardRefProduct}
     },
-    "articles": *[_type == "article"][3] | order(_createdAt asc) {
-      ...
+    "articles": *[_type == "article"] | order(_createdAt desc)[0...3]{
+      ${cardRefArticle}
     },
     "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0 && defined(countdown) && countdown > 15 && countdown <= 30] | order(dates[0].du asc) {
       ${cardRefExhibition}

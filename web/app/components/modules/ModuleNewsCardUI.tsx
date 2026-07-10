@@ -29,15 +29,14 @@ type Props = {
 };
 
 const ModuleNewsCardUI = ({ input }: Props) => {
-  const { gridSize, title } = input;
+  const { title } = input;
   const events = input.events || [];
   const eventsVisite = input.eventsVisite || [];
   const product = input.product;
   const articles = input.articles || [];
   const exhibitions = input.exhibitions || [];
   // const feuilletages = input.feuilletage || [];
-  const cols = gridSize || 12;
-
+  console.log(articles);
   return (
     <section className='module module--news-card-ui'>
       <div className='container-fluid'>
@@ -56,16 +55,17 @@ const ModuleNewsCardUI = ({ input }: Props) => {
             ))}
             {eventsVisite?.map((item, index: number) => (
               <CardEvent
-                key={`event-${item._id}-${index}`}
+                key={`event-visite-${item._id}-${index}`}
                 input={item}
                 size='sm'
               />
             ))}
 
             {product && <CardProduct input={product} size='sm' />}
+            {/* <pre>{JSON.stringify(articles, null, 2)}</pre> */}
             {articles.map((item, index: number) => (
               <CardArticle
-                key={`feuilletage-${item._id}-${index}`}
+                key={`article-${item._id}-${index}`}
                 input={item}
                 size='md'
               />

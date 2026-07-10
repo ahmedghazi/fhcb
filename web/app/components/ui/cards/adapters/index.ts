@@ -220,11 +220,11 @@ export function eventToCard(
   const isHorsLeMurs = tags?.some(
     (tag: Tag) => tag.slug?.current === "hors-les-murs",
   );
-  const isTour = tags?.some(
+  const isVisite = tags?.some(
     (tag: Tag) => tag.slug?.current === "visite-commentee",
   );
   const actions: CardAction[] = [];
-  if (!isTour) {
+  if (!isVisite) {
     actions.push({
       label: _localizeText("discoverTheEvent") as string,
       href: _linkResolver(input),
@@ -237,7 +237,7 @@ export function eventToCard(
       actions.push({
         label: (_localizeField(link.label) as string) || "",
         href: link.link ?? "",
-        variant: "secondary",
+        variant: actions.length === 0 && isVisite ? "primary" : "secondary",
       });
     });
   }
