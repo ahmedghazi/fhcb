@@ -175,6 +175,10 @@ body:has(.template--exhibition) header.is-down {
   background-color: var(--color-mauve);
 }
 
-body.has-bandeau header.is-down {
+body.has-bandeau header {
   background-color: transparent;
 }
+
+// body:has(.template--library) header.is-down {
+//   background-color: var(--color-bg);
+// }

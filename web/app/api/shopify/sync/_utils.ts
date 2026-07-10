@@ -3,7 +3,10 @@ import { createClient, type SanityClient } from "@sanity/client";
 import { descriptionHtmlToBlocks } from "../../../lib/utils";
 
 // ─── Sanity ───────────────────────────────────────────────────────────────────
-
+/*
+graphql
+https://admin.shopify.com/store/fondation-henri-cartier-bresson/apps/shopify-graphiql-app?app_load_id=1d54d0be-2a7d-4b66-9b45-d95aca92ccdc&link_source=search
+*/
 let _sanity: SanityClient | null = null;
 export function getSanityClient(): SanityClient {
   if (!_sanity) {
@@ -587,7 +590,11 @@ export async function syncProducts(
 
     for (const { base, locale } of batch) {
       try {
-        const { id, synced: s } = await buildProductFields(base, locale, artists);
+        const { id, synced: s } = await buildProductFields(
+          base,
+          locale,
+          artists,
+        );
 
         const docExists = existingIds === null || existingIds.has(id);
         if (!docExists) continue; // skip products deleted in Sanity
