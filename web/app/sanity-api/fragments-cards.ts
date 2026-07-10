@@ -146,6 +146,8 @@ export const cardRefConversation = `
   _id,
   index,
   title,
+  subTitle,
+  description,
   slug,
   chercheur->{
     _id,

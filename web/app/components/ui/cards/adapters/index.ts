@@ -414,7 +414,8 @@ export function imageImagesToCard(input: ImageImagesExpanded): CardBaseProps {
 // ─── Conversation ─────────────────────────────────────────────────────────────
 
 export function conversationToCard(input: ConversationExpanded): CardBaseProps {
-  const { chercheur, imageCover, video } = input;
+  const { _type, title, subTitle, description, chercheur, imageCover, video } =
+    input;
   return {
     _type: input._type,
     layout: "col",
@@ -423,9 +424,12 @@ export function conversationToCard(input: ConversationExpanded): CardBaseProps {
     mediaSlot: video
       ? React.createElement(EmbedVideo, { input: video })
       : undefined,
-    tags: _localizeText(input._type),
-    title: (_localizeField(input.title) as string) || "",
-    subTitle: chercheur?.name || undefined,
+    tags: _localizeText(_type),
+    title: (_localizeField(title) as string) || "",
+    subTitle: subTitle
+      ? _localizeField(subTitle)
+      : chercheur?.name || undefined,
+    description: _localizeField(description),
     actions: [
       {
         label: _localizeText("discover") as string,

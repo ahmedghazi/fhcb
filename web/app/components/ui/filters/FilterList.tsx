@@ -77,6 +77,7 @@ const FilterList = ({
       className={clsx(
         "ui-filters ui-filter__wrapper ui-filter__list",
         open && "is-open",
+        `ui-filter__list-${def.filterKey}`,
       )}>
       <div className='ui-filters__summary uppercase'>
         <label

@@ -180,6 +180,13 @@ header.is-up ~ main .filters {
         pointer-events: all;
       }
     }
+    &.ui-filter__list-tag,
+    &.ui-filter__list-tagProduct,
+    &.ui-filter__list-language {
+      .ui-filter__list-alpha {
+        display: none;
+      }
+    }
     .ui-filter__detail {
       // display: none;
       opacity: 0;
