@@ -8468,6 +8468,13 @@
         },
         "optional": true
       },
+      "artistName": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "exhibition": {
         "type": "objectAttribute",
         "value": {
@@ -8727,14 +8734,6 @@
               }
             }
           }
-        },
-        "optional": true
-      },
-      "chapo": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "localeBlockContent"
         },
         "optional": true
       },

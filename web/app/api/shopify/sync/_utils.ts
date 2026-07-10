@@ -477,7 +477,9 @@ export async function buildProductFields(
             },
           ],
         }
-      : {}),
+      : base.auteurs?.value
+        ? { artistName: base.auteurs.value }
+        : {}),
     seo: {
       metaTitle: localeData[primaryKey].title,
       ...(primaryPlain ? { metaDescription: primaryPlain.slice(0, 155) } : {}),

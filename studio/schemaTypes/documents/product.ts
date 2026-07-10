@@ -106,8 +106,15 @@ export default defineType({
     defineField({
       name: 'artists',
       title: 'Artistes',
+      description: "Page artiste(s) liée (sélection d'une ou plusieurs pages existantes)",
       type: 'array',
       of: [{type: 'reference', to: [{type: 'artist'}]}],
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'artistName',
+      type: 'string',
+      description: "Nom de l'artiste (à renseigner uniquement si aucune page artiste n'existe)",
       group: 'editorial',
     }),
     defineField({
@@ -247,14 +254,6 @@ export default defineType({
       type: 'array',
       of: [{type: 'image', options: {hotspot: true}}],
       group: 'editorial',
-    }),
-
-    defineField({
-      name: 'chapo',
-      title: 'Chapo',
-      type: 'localeBlockContent',
-      group: 'editorial',
-      hidden: true,
     }),
 
     defineField({
