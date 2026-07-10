@@ -458,15 +458,6 @@ export async function buildProductFields(
       LOCALES.map(({ key }) => [key, localeData[key].title]),
     ),
     artistName: base.artists?.value ?? null,
-    ...(imageCover._type ? { imageCover } : {}),
-    images: restImages,
-  };
-
-  const initial = {
-    slug: { _type: "slug", current: base.handle },
-    text: Object.fromEntries(
-      LOCALES.map(({ key }) => [key, blocksByLocale[key]]),
-    ),
     ...(matchedArtist
       ? {
           artists: [
@@ -478,6 +469,10 @@ export async function buildProductFields(
           ],
         }
       : {}),
+    slug: { _type: "slug", current: base.handle },
+    text: Object.fromEntries(
+      LOCALES.map(({ key }) => [key, blocksByLocale[key]]),
+    ),
     seo: {
       metaTitle: localeData[primaryKey].title,
       ...(primaryPlain ? { metaDescription: primaryPlain.slice(0, 155) } : {}),
@@ -485,9 +480,11 @@ export async function buildProductFields(
         ? { metaImage: { _type: "image", asset: imageCover.asset } }
         : {}),
     },
+    ...(imageCover._type ? { imageCover } : {}),
+    images: restImages,
   };
 
-  return { id, synced, initial };
+  return { id, synced };
 }
 
 // ─── Upsert tagProduct documents for Shopify collections ──────────────────────
@@ -590,25 +587,16 @@ export async function syncProducts(
 
     for (const { base, locale } of batch) {
       try {
-        const {
-          id,
-          synced: s,
-          initial,
-        } = await buildProductFields(base, locale, artists);
+        const { id, synced: s } = await buildProductFields(base, locale, artists);
 
         const docExists = existingIds === null || existingIds.has(id);
         if (!docExists) continue; // skip products deleted in Sanity
 
         if (existingIds === null) {
           // upsert mode: create if missing
-          transaction.createIfNotExists({
-            _type: "product",
-            _id: id,
-            ...initial,
-            ...s,
-          });
+          transaction.createIfNotExists({ _type: "product", _id: id, ...s });
         }
-        transaction.patch(id, { set: s, setIfMissing: initial });
+        transaction.patch(id, { set: s });
         ids.push(base.id);
         queued++;
       } catch (err) {
@@ -659,16 +647,12 @@ export async function syncProduct(shopifyId: string): Promise<{
 
   await upsertTagProducts(collectionsFromProduct(base, locale));
 
-  const { id, synced, initial } = await buildProductFields(
-    base,
-    locale,
-    artists,
-  );
+  const { id, synced } = await buildProductFields(base, locale, artists);
 
   await client
     .transaction()
-    .createIfNotExists({ _type: "product", _id: id, ...initial, ...synced })
-    .patch(id, { set: synced, setIfMissing: initial })
+    .createIfNotExists({ _type: "product", _id: id, ...synced })
+    .patch(id, { set: synced })
     .commit();
 
   return {
