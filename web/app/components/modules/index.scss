@@ -40,11 +40,12 @@
         margin-bottom: var(--spacing-gutter);
       }
       p {
-        max-width: 41rem;
-        margin: 0 auto;
+        // max-width: 41rem;
+        // margin: 0 auto;
+        // padding-bottom: 1em;
       }
       &:has(.c-chapo) p {
-        max-width: 60rem;
+        // max-width: 60rem;
       }
       @media all and (max-width: variables.$md) {
       }

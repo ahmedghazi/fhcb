@@ -47,7 +47,7 @@ p,
     margin-bottom: 0;
   }
   &:empty {
-    display: none;
+    // display: none;
   }
   a {
     text-decoration: underline;
@@ -60,12 +60,19 @@ p,
 }
 .text {
   font-size: var(--text-xl);
+  &:has(.c-chapo) {
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+  max-width: 41rem;
+  margin: 0 auto;
+
   p {
     // max-width: 41rem;
     // margin: 0 auto;
     &.c-chapo {
-      max-width: 60rem;
-      margin: 0 auto;
+      // max-width: 60rem;
+      // margin: 0 auto;
     }
   }
   .blockquote {

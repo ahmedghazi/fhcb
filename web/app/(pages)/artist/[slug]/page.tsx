@@ -10,10 +10,10 @@ import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
-import { ARTIST_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import RebondsArtistes from "@/app/components/RebondsArtistes";
 import HeroArtist from "@/app/components/HeroArtist";
 import Rebonds from "@/app/components/Rebonds";
+import { ARTIST_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 
 type Params = Promise<{ slug: string }>;
 
