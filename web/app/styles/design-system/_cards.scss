@@ -138,6 +138,11 @@
         figure {
           display: flex;
           justify-content: flex-end;
+          img {
+            width: var(--gridder-7_12) !important;
+            min-height: unset;
+            max-height: unset;
+          }
         }
       }
     }
