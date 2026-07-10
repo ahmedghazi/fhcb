@@ -479,7 +479,7 @@ export async function buildProductFields(
           ],
         }
       : base.artiste?.value
-        ? { artistName: base.artiste.value }
+        ? { artistName: parseMetafieldList(base.artiste.value).join(", ") }
         : {}),
     seo: {
       metaTitle: localeData[primaryKey].title,
