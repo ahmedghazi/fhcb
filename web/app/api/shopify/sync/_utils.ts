@@ -316,9 +316,9 @@ export function matchArtist(
   p: any,
   artists: ArtistRef[],
 ): ArtistRef | undefined {
-  const auteurs = p.auteurs?.value;
+  const artistsValue = p.artists?.value;
   return (
-    (auteurs && findArtistRefByText(auteurs, artists)) ||
+    (artistsValue && findArtistRefByText(artistsValue, artists)) ||
     findArtistRefByText(p.title ?? "", artists)
   );
 }
@@ -477,7 +477,7 @@ export async function buildProductFields(
           ],
         }
       : base.artists?.value
-        ? { artistName: parseMetafieldList(base.artists.value).join(", ") }
+        ? { artistName: base.artists.value }
         : {}),
     seo: {
       metaTitle: localeData[primaryKey].title,
