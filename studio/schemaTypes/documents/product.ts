@@ -201,6 +201,12 @@ export default defineType({
       title: 'Date de publication',
       group: 'metas',
     }),
+    defineField({
+      name: 'langue',
+      type: 'string',
+      title: 'Version linguistique',
+      group: 'metas',
+    }),
 
     defineField({
       name: 'metas',

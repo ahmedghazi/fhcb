@@ -62,6 +62,7 @@ const PRODUCT_FULL_FIELDS = `
   isbn: metafield(namespace: "custom", key: "isbn") { value }
   reliure: metafield(namespace: "custom", key: "reliure") { value }
   dimensions: metafield(namespace: "custom", key: "dimensions") { value }
+  version_linguistique: metafield(namespace: "custom", key: "version_linguistique") { value }
   nombre_de_pages: metafield(namespace: "custom", key: "nombre_de_pages") { value }
   collections(first: 10) { nodes { id handle title } }
   priceRange { minVariantPrice { amount currencyCode } }
@@ -402,6 +403,10 @@ export async function buildProductFields(
     ...(base.editeur?.value ? { editeur: base.editeur.value } : {}),
     ...(base.reliure?.value ? { reliure: base.reliure.value } : {}),
     ...(base.dimensions?.value ? { dimensions: base.dimensions.value } : {}),
+    ...(base.version_linguistique?.value
+      ? { version_linguistique: base.version_linguistique.value }
+      : {}),
+
     ...(base.nombre_de_pages?.value
       ? { nombre_de_pages: base.nombre_de_pages.value }
       : {}),

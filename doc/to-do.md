@@ -164,7 +164,7 @@ cards simili document
 - # ajouter champs expo dans event, ressources,
 - # page conversation (afficher le texte)
 - # card conversation (title + subTitle)
-- article card afficher subtitle
+- # article card afficher subtitle
 - footer ico youtube
 - produit champs langue (à afficher dans la page de contenu)
 
