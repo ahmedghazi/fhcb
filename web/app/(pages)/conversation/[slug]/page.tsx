@@ -58,13 +58,13 @@ const ConversationTemplate: NextPage<PageProps> = async ({ params }) => {
       data-template='conversation'
       data-slug={data.slug?.current || ""}>
       <PageHeader h1={data.title} />
-      <div className='container-fluid'>
+      {/* <div className='container-fluid'>
         {data.video && <EmbedVideo input={data.video} />}
-      </div>
+      </div> */}
       <ContentConversation input={data} />
-      <ContentModulaire input={data} />
-      {data.related && <Rebonds input={data.related} />}
-      {data.rebonds && <Rebonds input={data.rebonds} />}
+      {/* <ContentModulaire input={data} /> */}
+      {/* {data.related && <Rebonds input={data.related} />}
+      {data.rebonds && <Rebonds input={data.rebonds} />} */}
     </div>
   );
 };

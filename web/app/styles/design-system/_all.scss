@@ -27,8 +27,10 @@
       width: var(--gridder-6_12);
     }
     &--md-alt {
-      // flex-basis: var(--gridder-1_3);
-      // width: var(--gridder-1_3);
+      &.card--exhibition-featured {
+        flex-basis: var(--gridder-2_3);
+        width: var(--gridder-2_3);
+      }
     }
   }
 

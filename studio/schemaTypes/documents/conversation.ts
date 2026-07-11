@@ -48,6 +48,13 @@ export default defineType({
       name: 'description',
       type: 'localeText',
       group: 'editorial',
+      hidden: true,
+    }),
+    defineField({
+      name: 'text',
+      title: 'Texte',
+      type: 'localeBlockContent',
+      group: 'editorial',
     }),
 
     defineField({

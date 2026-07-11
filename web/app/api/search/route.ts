@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { createClient } from "@sanity/client";
+import { cardTypes } from "@/app/sanity-api/fragments-cards";
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -27,20 +28,8 @@ export async function POST(request: NextRequest) {
     "serieThematique",
   ];
 
-  const query = `*[_type in $postTypes
-    && !(_id in path("drafts.**"))
-    && (
-      title.fr match $s + "*"
-      || title.en match $s + "*"
-      || text[].children[].text match $s + "*"
-      || name match $s + "*"
-      || tags[]->title match $s + "*"
-      || artists[]->name match $s + "*"
-      || chercheur->name match $s + "*"
-      )
-    ]
-    {
-      _type,
+  /*
+_type,
       slug,
       title,
       name,
@@ -57,6 +46,21 @@ export async function POST(request: NextRequest) {
       },
       price,
       color
+  */
+  const query = `*[_type in $postTypes
+    && !(_id in path("drafts.**"))
+    && (
+      title.fr match $s + "*"
+      || title.en match $s + "*"
+      || text[].children[].text match $s + "*"
+      || name match $s + "*"
+      || tags[]->title match $s + "*"
+      || artists[]->name match $s + "*"
+      || chercheur->name match $s + "*"
+      )
+    ]
+    {
+      ${cardTypes}
     } | order(_createdAt desc)
     `;
   console.log(query);

@@ -861,6 +861,7 @@ export type Conversation = {
   slug?: Slug;
   subTitle?: LocaleText;
   description?: LocaleText;
+  text?: LocaleBlockContent;
   chercheur?: ChercheurReference;
   imageCover?: {
     asset?: SanityImageAssetReference;
@@ -54266,6 +54267,7 @@ export type CONVERSATION_QUERY_RESULT = {
   slug?: Slug;
   subTitle?: LocaleText;
   description: LocaleText | null;
+  text?: LocaleBlockContent;
   chercheur: {
     _id: string;
     name: string | null;

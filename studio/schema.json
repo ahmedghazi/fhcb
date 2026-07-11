@@ -4580,6 +4580,14 @@
         },
         "optional": true
       },
+      "text": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeBlockContent"
+        },
+        "optional": true
+      },
       "chercheur": {
         "type": "objectAttribute",
         "value": {

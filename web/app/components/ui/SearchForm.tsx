@@ -4,7 +4,7 @@ import {
   _localizeField,
   _localizeText,
 } from "@/app/sanity-api/utils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import {
   MostSearchedItem,
   PostTypes,
@@ -18,6 +18,7 @@ import CardImageImages from "./cards/CardImageImages";
 import CardFeuilletage from "./cards/CardFeuilletage";
 import CardPageModulaire from "./cards/CardPageModulaire";
 import CardEvent from "./cards/CardEvent";
+import CardType from "./cards/CardType";
 
 /*
   | PageModulaire
@@ -183,7 +184,14 @@ const SearchForm = ({ settings }: Props) => {
         <div className={styles.searchResults}>
           <div className='inner'>
             <div className='body'>
-              <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter grid--centered'>
+              <div className='grid--centered'>
+                {searchResult?.map((item: PostTypes, index: number) => (
+                  <Fragment key={`${item && item._id}-${index}`}>
+                    <CardType input={item} context='grid' />
+                  </Fragment>
+                ))}
+              </div>
+              {/* <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter grid--centered'>
                 {searchResult?.map((item, i) => (
                   <SearchResultItem input={item} key={i} />
                 ))}
@@ -192,7 +200,7 @@ const SearchForm = ({ settings }: Props) => {
                     <p>{_localizeText("noResults")}</p>
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
