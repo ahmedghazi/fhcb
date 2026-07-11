@@ -298,17 +298,18 @@ export function artistToCard(
 // ─── Article ──────────────────────────────────────────────────────────────────
 
 export function articleToCard(input: ArticleExpanded): CardBaseProps {
-  const { imageCover, tags } = input;
+  const { _type, title, subTitle, imageCover, tags } = input;
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return {
-    _type: input._type,
+    _type: _type,
     layout: "col",
     colorVar: "var(--color-article)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
-    title: (_localizeField(input.title) as string) || "",
+    title: (_localizeField(title) as string) || "",
+    subTitle: (_localizeField(subTitle) as string) || "",
     actions: [
       {
         label: _localizeText("readTheArticle") as string,

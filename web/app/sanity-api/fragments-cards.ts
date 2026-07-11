@@ -192,6 +192,7 @@ export const cardRefArticle = `
     _type,
     _id,
     title,
+    subTitle,
     slug,
     imageCover{
       ${imageAsset}

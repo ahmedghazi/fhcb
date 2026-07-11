@@ -162,8 +162,8 @@ cards simili document
 - # product meta fiche tech (trello)
 - # autour de l'expo ex: produit avec tag catalog + artiste le même que celui de l'expo
 - # ajouter champs expo dans event, ressources,
-- page conversation (afficher le texte)
-- card conversation (title + subTitle)
+- # page conversation (afficher le texte)
+- # card conversation (title + subTitle)
 - article card afficher subtitle
 - footer ico youtube
 - produit champs langue (à afficher dans la page de contenu)
