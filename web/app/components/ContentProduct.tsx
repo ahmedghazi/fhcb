@@ -74,7 +74,7 @@ const ContentProduct = ({ input }: Props) => {
                 </div>
               )}
             </div>
-            <div className='price c-h2'>{price}€</div>
+            <div className='price c-h2'>{price} €</div>
             <div className='stock'>
               {isLowStock ? _localizeText("isLowStock") : ""}
             </div>

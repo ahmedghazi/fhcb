@@ -8660,6 +8660,14 @@
         },
         "optional": true
       },
+      "pastille": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
+        },
+        "optional": true
+      },
       "tags": {
         "type": "objectAttribute",
         "value": {

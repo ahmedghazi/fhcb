@@ -1616,6 +1616,7 @@ export type Product = {
   nombre_de_pages?: string;
   languages?: Array<string>;
   publicationDate?: string;
+  version_linguistique?: string;
   metas?: Array<
     {
       _key: string;
@@ -1626,6 +1627,7 @@ export type Product = {
       _key: string;
     } & TagProductReference
   >;
+  pastille?: LocaleString;
   tags?: Array<
     {
       _key: string;
@@ -3235,6 +3237,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -3245,6 +3248,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -4141,6 +4145,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -4151,6 +4156,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -5301,6 +5307,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -5311,6 +5318,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -6207,6 +6215,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -6217,6 +6226,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -7255,6 +7265,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -7265,6 +7276,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -8161,6 +8173,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -8171,6 +8184,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -9209,6 +9223,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -9219,6 +9234,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -10115,6 +10131,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -10125,6 +10142,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -11163,6 +11181,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -11173,6 +11192,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -12069,6 +12089,7 @@ export type SETTINGS_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -12079,6 +12100,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -14143,6 +14165,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -14153,6 +14176,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -17266,6 +17290,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -17276,6 +17301,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -18054,6 +18080,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -18064,6 +18091,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -18960,6 +18988,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -18970,6 +18999,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -19874,6 +19904,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -19884,6 +19915,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -20780,6 +20812,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -20790,6 +20823,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -21824,6 +21858,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -21834,6 +21869,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -22730,6 +22766,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -22740,6 +22777,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -24520,6 +24558,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -24530,6 +24569,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -25426,6 +25466,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -25436,6 +25477,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -27453,6 +27495,7 @@ export type EVENT_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -27463,6 +27506,7 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -28359,6 +28403,7 @@ export type EVENT_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -28369,6 +28414,7 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -30161,6 +30207,7 @@ export type PROGRAMME_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -30171,6 +30218,7 @@ export type PROGRAMME_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -33284,6 +33332,7 @@ export type PROGRAMME_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -33294,6 +33343,7 @@ export type PROGRAMME_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -34072,6 +34122,7 @@ export type PROGRAMME_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -34082,6 +34133,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -34978,6 +35030,7 @@ export type PROGRAMME_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -34988,6 +35041,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -35892,6 +35946,7 @@ export type PROGRAMME_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -35902,6 +35957,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -36798,6 +36854,7 @@ export type PROGRAMME_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -36808,6 +36865,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -37842,6 +37900,7 @@ export type PROGRAMME_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -37852,6 +37911,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -38748,6 +38808,7 @@ export type PROGRAMME_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -38758,6 +38819,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -39890,6 +39952,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -39900,6 +39963,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -40796,6 +40860,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -40806,6 +40871,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -42236,6 +42302,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -42246,6 +42313,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -45359,6 +45427,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -45369,6 +45438,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -46147,6 +46217,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -46157,6 +46228,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -47053,6 +47125,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -47063,6 +47136,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -47967,6 +48041,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -47977,6 +48052,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -48873,6 +48949,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -48883,6 +48960,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -49917,6 +49995,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -49927,6 +50006,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -50823,6 +50903,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -50833,6 +50914,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -52518,6 +52600,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -52528,6 +52611,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -53424,6 +53508,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -53434,6 +53519,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -55219,6 +55305,7 @@ export type CONVERSATION_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -55229,6 +55316,7 @@ export type CONVERSATION_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -58342,6 +58430,7 @@ export type CONVERSATION_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -58352,6 +58441,7 @@ export type CONVERSATION_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -59130,6 +59220,7 @@ export type CONVERSATION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -59140,6 +59231,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -60036,6 +60128,7 @@ export type CONVERSATION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -60046,6 +60139,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -60950,6 +61044,7 @@ export type CONVERSATION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -60960,6 +61055,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -61856,6 +61952,7 @@ export type CONVERSATION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -61866,6 +61963,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -62900,6 +62998,7 @@ export type CONVERSATION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -62910,6 +63009,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -63806,6 +63906,7 @@ export type CONVERSATION_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -63816,6 +63917,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -65781,6 +65883,7 @@ export type ARTICLE_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -65791,6 +65894,7 @@ export type ARTICLE_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -68904,6 +69008,7 @@ export type ARTICLE_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -68914,6 +69019,7 @@ export type ARTICLE_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -69692,6 +69798,7 @@ export type ARTICLE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -69702,6 +69809,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -70598,6 +70706,7 @@ export type ARTICLE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -70608,6 +70717,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -71512,6 +71622,7 @@ export type ARTICLE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -71522,6 +71633,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -72418,6 +72530,7 @@ export type ARTICLE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -72428,6 +72541,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -73462,6 +73576,7 @@ export type ARTICLE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -73472,6 +73587,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -74368,6 +74484,7 @@ export type ARTICLE_QUERY_RESULT = {
                             nombre_de_pages?: string;
                             languages?: Array<string>;
                             publicationDate?: string;
+                            version_linguistique?: string;
                             metas?: Array<
                               {
                                 _key: string;
@@ -74378,6 +74495,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagProductReference
                             >;
+                            pastille?: LocaleString;
                             tags?: Array<
                               {
                                 _key: string;
@@ -75774,6 +75892,7 @@ export type LIBRARY_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -75784,6 +75903,7 @@ export type LIBRARY_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -76900,6 +77020,7 @@ export type LIBRARY_QUERY_RESULT = {
               nombre_de_pages?: string;
               languages: Array<string> | null;
               publicationDate?: string;
+              version_linguistique?: string;
               metas?: Array<
                 {
                   _key: string;
@@ -76910,6 +77031,7 @@ export type LIBRARY_QUERY_RESULT = {
                   _key: string;
                 } & TagProductReference
               >;
+              pastille?: LocaleString;
               tags: Array<{
                 title: LocaleString | null;
               }> | null;
@@ -77234,6 +77356,7 @@ export type PRODUCT_QUERY_RESULT = {
   nombre_de_pages?: string;
   languages?: Array<string>;
   publicationDate?: string;
+  version_linguistique?: string;
   metas?: Array<
     {
       _key: string;
@@ -77245,6 +77368,7 @@ export type PRODUCT_QUERY_RESULT = {
     slug: Slug | null;
     handle: string | null;
   }> | null;
+  pastille?: LocaleString;
   tags?: Array<
     {
       _key: string;

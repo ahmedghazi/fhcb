@@ -162,6 +162,7 @@ export function productToCard(
     artistName,
     languages,
     totalInventory,
+    pastille,
   } = input;
   const artistsName = artists?.map((a) => a?.name).join(", ") || "";
 
@@ -198,14 +199,12 @@ export function productToCard(
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
     subTitle: artistName ? artistName : artistsName,
-    infoNode: price ? `${price}€` : undefined,
+    infoNode: price ? `${price} €` : undefined,
     actionsNode: !isProductVariable
       ? React.createElement(BtnAddToCart, { input: input as any })
       : undefined,
     actions: actions,
-    badge: isLowStock
-      ? { label: _localizeText("isLowStock") as string }
-      : undefined,
+    badge: pastille ? { label: _localizeField(pastille) as string } : undefined,
   };
 }
 

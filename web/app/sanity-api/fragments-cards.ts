@@ -93,6 +93,7 @@ export const cardRefProduct = `
   "imageCover": coalesce(imageCover, image){
     ${imageAsset}
   },
+  pastille,
   shopifyId,
   shopifyHandle,
   price,

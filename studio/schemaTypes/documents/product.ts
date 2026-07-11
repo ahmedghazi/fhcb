@@ -227,6 +227,11 @@ export default defineType({
       readOnly: true,
       group: 'editorial',
     }),
+    defineField({
+      name: 'pastille',
+      type: 'localeString',
+      group: 'editorial',
+    }),
 
     defineField({
       name: 'tags',
