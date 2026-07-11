@@ -8609,6 +8609,13 @@
         },
         "optional": true
       },
+      "version_linguistique": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "metas": {
         "type": "objectAttribute",
         "value": {

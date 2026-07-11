@@ -202,7 +202,7 @@ export default defineType({
       group: 'metas',
     }),
     defineField({
-      name: 'langue',
+      name: 'version_linguistique',
       type: 'string',
       title: 'Version linguistique',
       group: 'metas',

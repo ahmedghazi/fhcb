@@ -166,7 +166,7 @@ cards simili document
 - # card conversation (title + subTitle)
 - # article card afficher subtitle
 - footer ico youtube
-- produit champs langue (à afficher dans la page de contenu)
+- # produit champs langue (à afficher dans la page de contenu)
 
 ## card expos
 
