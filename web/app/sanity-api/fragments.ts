@@ -645,7 +645,13 @@ export const listProductUI = `
       ${filterList},
       ${filterCheckbox}
     },
-    "resolvedItems": *[_type == "product"] | order(publicationDate asc) {
+    "resolvedItems": *[_type == "product"] | order(
+      select(
+      "livre-du-mois" in categories[]->slug.current => 1,
+      0
+    ) desc,
+      _createdAt asc
+    ) {
       ${cardRefProduct}
     },
     cta{
@@ -653,6 +659,7 @@ export const listProductUI = `
     }
   }
 `;
+//    // "resolvedItems": *[_type == "product"] | order(publicationDate asc) {
 
 export const supportUI = `
   _type == "supportUI" => {
