@@ -12,24 +12,24 @@ type Props = {
 };
 
 const ContentConversation = ({ input }: Props) => {
-  const { text, video, related, rebonds } = input;
+  // const { text, video, related, rebonds } = input;
 
   return (
     <div className='content content--conversation'>
       <div className='container-fluid'>
-        {video && (
+        {input?.video && (
           <div className='mb-md'>
-            <EmbedVideo input={video} />
+            <EmbedVideo input={input?.video} />
           </div>
         )}
 
-        {text && (
+        {input?.text && (
           <div className='grid md:grid-cols-4 gap-gutter'>
             <div className='md:col-span-3-'></div>
             <div className='md:col-span-2'>
               <div className='text'>
                 <PortableText
-                  value={_localizeField(text)}
+                  value={_localizeField(input?.text)}
                   components={portableTextComponents}
                 />
               </div>
@@ -38,8 +38,8 @@ const ContentConversation = ({ input }: Props) => {
           </div>
         )}
 
-        {related && <Rebonds input={related} />}
-        {rebonds && <Rebonds input={rebonds} />}
+        {input?.related && <Rebonds input={input?.related} />}
+        {input?.rebonds && <Rebonds input={input?.rebonds} />}
       </div>
     </div>
   );
