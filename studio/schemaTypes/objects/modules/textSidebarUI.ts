@@ -8,6 +8,10 @@ export default defineField({
   type: 'object',
   icon: FiColumns,
   fields: [
+    defineField({
+      name: 'title',
+      type: 'localeString',
+    }),
     defineField({name: 'text', type: 'localeBlockContent', title: 'Texte principal'}),
     defineField({
       name: 'sidebar',
@@ -17,14 +21,15 @@ export default defineField({
   ],
   preview: {
     select: {
+      title: `title.${baseLanguage}`,
       text: `text.${baseLanguage}`,
     },
     prepare(selection) {
-      const {text} = selection
+      const {title, text} = selection
       const firstSenteceOfText = text?.[0]?.children?.[0]?.text?.split('.')[0]
       return {
-        title: firstSenteceOfText ? firstSenteceOfText : 'Texte + Sidebar (générique) UI',
-        subtitle: 'Texte + Sidebar (générique) UI',
+        title: title || 'Texte + Sidebar (générique) UI',
+        subtitle: firstSenteceOfText ? firstSenteceOfText : 'Texte + Sidebar (générique) UI',
       }
     },
   },

@@ -11,7 +11,9 @@ type Props = {
 };
 
 const ModuleTextSidebarUI = ({ input }: Props) => {
-  const { text, sidebar } = input;
+  const { title, text, sidebar } = input;
+  // const titleLocalized = _localizeField(input.title);
+
   return (
     <section className='module module--text-sidebar-ui'>
       <div className='container-fluid'>
@@ -23,16 +25,22 @@ const ModuleTextSidebarUI = ({ input }: Props) => {
               </div>
             )}
 
-            {text && (
-              <div className='module__text md:col-span-7'>
+            <div className='module__text md:col-span-7'>
+              {title && (
+                <h2 className='module__title c-h1_5'>
+                  {_localizeField(title)}
+                </h2>
+              )}
+
+              {text && (
                 <div className='text'>
                   <PortableText
                     value={_localizeField(text)}
                     components={portableTextComponents}
                   />
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
