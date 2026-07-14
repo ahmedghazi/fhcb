@@ -123,19 +123,20 @@ const ContentProduct = ({ input }: Props) => {
               )}
               {isbn && (
                 <li className='sidebar__item'>
+                  {dimensions && (
+                    <div className='c-body--tight'>{dimensions}</div>
+                  )}
+                  {nombre_de_pages && (
+                    <div className='c-body--tight'>{nombre_de_pages}</div>
+                  )}
+                  {reliure && <div className='c-body--tight'>{reliure}</div>}
+
                   {isbn && <div className='c-body--tight'>{isbn}</div>}
                   {traducteurs && (
                     <div className='c-body--tight'>{traducteurs}</div>
                   )}
                   {direction_editoriale && (
                     <div className='c-body--tight'>{direction_editoriale}</div>
-                  )}
-                  {reliure && <div className='c-body--tight'>{reliure}</div>}
-                  {dimensions && (
-                    <div className='c-body--tight'>{dimensions}</div>
-                  )}
-                  {nombre_de_pages && (
-                    <div className='c-body--tight'>{nombre_de_pages}</div>
                   )}
                 </li>
               )}
