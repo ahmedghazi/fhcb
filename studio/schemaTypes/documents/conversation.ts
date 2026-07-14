@@ -82,7 +82,7 @@ export default defineType({
 
     defineField({
       name: 'artists',
-      title: 'Artistes',
+      title: 'Artiste(s)',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',

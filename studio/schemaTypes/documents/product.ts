@@ -105,7 +105,7 @@ export default defineType({
 
     defineField({
       name: 'artists',
-      title: 'Artistes',
+      title: 'Artiste(s)',
       description: "Page artiste(s) liée (sélection d'une ou plusieurs pages existantes)",
       type: 'array',
       of: [{type: 'reference', to: [{type: 'artist'}]}],
@@ -220,8 +220,17 @@ export default defineType({
     }),
 
     defineField({
+      name: 'tagsProduct',
+      title: 'Catégories Produit',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'tagProduct'}]}],
+      readOnly: true,
+      group: 'editorial',
+    }),
+    defineField({
       name: 'categories',
       title: 'Catégories Produit',
+      description: 'ancien champs (à supprimer)',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tagProduct'}]}],
       readOnly: true,

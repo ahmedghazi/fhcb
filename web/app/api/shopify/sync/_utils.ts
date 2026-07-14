@@ -461,6 +461,11 @@ export async function buildProductFields(
       _key: `col-${coll.id.split("/").pop()}`,
       _ref: `shopify-collection-${coll.id.split("/").pop()}`,
     })),
+    tagsProduct: (base.collections?.nodes ?? []).map((coll: any) => ({
+      _type: "reference",
+      _key: `col-${coll.id.split("/").pop()}`,
+      _ref: `shopify-collection-${coll.id.split("/").pop()}`,
+    })),
     // Shopify-owned fields overwritten on every sync
     title: Object.fromEntries(
       LOCALES.map(({ key }) => [key, localeData[key].title]),

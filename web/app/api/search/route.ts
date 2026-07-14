@@ -60,6 +60,7 @@ _type,
       || name match $s + "*"
       || tags[]->title match $s + "*"
       || categories[]->title match $s + "*"
+      || tagsProduct[]->title match $s + "*"
       || artists[]->name match $s + "*"
       || chercheur->name match $s + "*"
       || editeur match $s + "*"
