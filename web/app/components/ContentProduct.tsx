@@ -3,6 +3,7 @@ import React from "react";
 import {
   Artist,
   KeyVal,
+  Product,
   PRODUCT_QUERY_RESULT,
 } from "../sanity-api/types/sanity.types";
 import {
@@ -25,9 +26,10 @@ import useLocale from "../context/LocaleContext";
 
 type Props = {
   input: PRODUCT_QUERY_RESULT;
+  randomProducts?: Product[];
 };
 
-const ContentProduct = ({ input }: Props) => {
+const ContentProduct = ({ input, randomProducts }: Props) => {
   if (!input) return null;
   const { locale } = useLocale();
   const {
@@ -42,6 +44,8 @@ const ContentProduct = ({ input }: Props) => {
     metas,
     publicationDate,
     related,
+    relatedProductsByArtist,
+    relatedProductsByTag,
     editeur,
     auteurs,
     traducteurs,
@@ -52,8 +56,11 @@ const ContentProduct = ({ input }: Props) => {
     nombre_de_pages,
     totalInventory,
   } = input;
-
-  const localizedTitle = (_localizeField(title) as string) || "";
+  const mergedRelated = [
+    ...(relatedProductsByArtist || []),
+    ...(relatedProductsByTag || []),
+    ...(randomProducts || []),
+  ];
 
   const isLowStock = totalInventory && totalInventory < 10;
 
@@ -178,18 +185,29 @@ const ContentProduct = ({ input }: Props) => {
             <div className='md:col-span-3-'></div>
             <div className='md:col-span-2'>
               <div className='text'>
-                <PortableText
+                {/* <PortableText
                   value={_localizeField(text)}
                   components={portableTextComponents}
-                />
+                /> */}
               </div>
             </div>
             <div className='md:col-span-1'></div>
           </div>
         )}
       </div>
+
       {related && related.length > 0 && (
         <Rebonds input={related} title='aroundThertist' />
+      )}
+
+      {/* <pre>{JSON.stringify(relatedProductsByArtist, null, 2)}</pre> */}
+      {/* {relatedProductsByArtist && (
+        <Rebonds input={relatedProductsByArtist} title='sameArtist' />
+      )} */}
+      {/* <pre>{JSON.stringify(relatedProductsByArtist, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(mergedRelated[0], null, 2)}</pre> */}
+      {mergedRelated && mergedRelated.length > 0 && (
+        <Rebonds input={mergedRelated} title='discoverToo' />
       )}
       {/* <pre>{JSON.stringify(related, null, 2)}</pre> */}
     </div>

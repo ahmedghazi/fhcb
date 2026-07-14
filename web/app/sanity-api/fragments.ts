@@ -800,6 +800,26 @@ export const relatedByArtists = `
   }
 `;
 
+export const relatedProductsByArtist = `
+  *[
+    _type == "product" &&
+    _id != ^._id &&
+    count(artists[@._ref in ^.^.artists[]._ref]) > 0
+  ] | order(_createdAt desc)[0...1] {
+    ${cardTypes}
+  }
+`;
+
+export const relatedProductsByTag = `
+  *[
+    _type == "product" &&
+    _id != ^._id &&
+    count(categories[@._ref in ^.^.categories[]._ref]) > 0
+  ] | order(_createdAt desc)[0...1] {
+    ${cardTypes}
+  }
+`;
+
 export const relatedByTag = `
   *[
     _id != ^._id &&

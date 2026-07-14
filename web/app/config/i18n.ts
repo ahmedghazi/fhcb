@@ -25,6 +25,7 @@ const i18n = {
     discoverToo: "Découvrir aussi",
     toDiscoverToo: "À découvrir aussi",
     discoverTheArtist: "Découvrir l'artiste",
+    sameArtist: "Du même artiste",
     aroundThertist: "Autour de l'artiste",
     readTheArticle: "Lire l'article",
 
@@ -126,6 +127,7 @@ const i18n = {
     allProducts: "All products",
     addToCart: "Add to cart",
     aroundThertist: "Around the artist",
+    sameArtist: "Same artist",
     cart: "Cart",
     cartEmpty: "Your cart is empty",
     checkout: "Checkout",

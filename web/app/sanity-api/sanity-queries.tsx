@@ -13,6 +13,8 @@ import {
   cta,
   relatedByExhibition,
   relatedByArtist,
+  relatedProductsByArtist,
+  relatedProductsByTag,
 } from "./fragments";
 import {
   ARTICLE_QUERY_RESULT,
@@ -503,6 +505,8 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   images[]{
     ${imageAsset}
   },
+  "relatedProductsByArtist": ${relatedProductsByArtist},
+  "relatedProductsByTag": ${relatedProductsByTag},
   "related": ${relatedByArtists}
 }`;
 
@@ -514,7 +518,7 @@ export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
   });
 }
 
-export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && slug.current != $slug]{
+export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && slug.current != $slug][0...2]{
   ${cardRefProduct}
 }`;
 

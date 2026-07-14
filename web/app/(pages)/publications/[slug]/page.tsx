@@ -49,8 +49,8 @@ const ProductPage: NextPage<PageProps> = async ({ params }) => {
   return (
     <div className='template template--product' data-template='product'>
       {/* <PageHeader h1={data.title} /> */}
-      <ContentProduct input={data} />
-      <RebondsProducts input={randomProducts} />
+      <ContentProduct input={data} randomProducts={randomProducts} />
+      {/* <RebondsProducts input={randomProducts} /> */}
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </div>
   );
