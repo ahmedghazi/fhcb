@@ -64,15 +64,14 @@ const ContentProduct = ({ input }: Props) => {
           <div className='header'>
             <div>
               <h1 className='c-h2'>{_localizeField(title)}</h1>
-              {artists && artists.length > 0 && (
-                <div className='subtitle c-chapo c-chapo--i'>
-                  {(artists as unknown as Artist[])
+              <div className='subtitle c-chapo c-chapo--i'>
+                {artists &&
+                  artists.length > 0 &&
+                  (artists as unknown as Artist[])
                     .map((a) => a.name)
                     .join(", ")}
-                  {!artists && <span>{artistName}</span>}
-                  ici
-                </div>
-              )}
+                {!artists && <span>{_parseJsonStringArray(artistName)}</span>}
+              </div>
             </div>
             <div className='price c-h2'>{price} €</div>
             <div className='stock'>

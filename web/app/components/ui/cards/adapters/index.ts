@@ -27,6 +27,7 @@ import {
   _linkResolver,
   _localizeField,
   _localizeText,
+  _parseJsonStringArray,
 } from "@/app/sanity-api/utils";
 import { CardAction, CardBaseProps } from "../CardBase";
 import BtnAddToCart from "../../btns/BtnAddToCart";
@@ -198,7 +199,7 @@ export function productToCard(
       : toTags(tags),
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
-    subTitle: artistName ? artistName : artistsName,
+    subTitle: artistName ? _parseJsonStringArray(artistName) : artistsName,
     infoNode: price ? `${price} €` : undefined,
     actionsNode: !isProductVariable
       ? React.createElement(BtnAddToCart, { input: input as any })

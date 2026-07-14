@@ -7,6 +7,7 @@ import { ListFeuilletageUI } from "@/app/sanity-api/types/sanity.types";
 import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
+import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 
 type Props = {
   input: ListFeuilletageUI & {
@@ -19,7 +20,10 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
 
-  const filterDefs = input.filters ?? [];
+  const filterDefs = withResolvedOptions(
+    input.filters ?? [],
+    input.items ?? [],
+  );
   const filteredItems = applyFilters(
     input.items ?? [],
     filterDefs,

@@ -7,6 +7,7 @@ import { ListProductUI } from "@/app/sanity-api/types/sanity.types";
 import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
+import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { publish } from "pubsub-js";
 import GridMasonryDessandro from "../ui/GridMasonryDessandro";
 
@@ -21,7 +22,11 @@ const ModuleListProductUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
 
-  const filterDefs = input.filters ?? [];
+  const rawFilterDefs: SanityFilterDef[] = input.filters ?? [];
+  const filterDefs = withResolvedOptions(
+    rawFilterDefs,
+    input.resolvedItems ?? [],
+  );
   const filteredItems = applyFilters(
     input.resolvedItems ?? [],
     filterDefs,

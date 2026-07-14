@@ -10,6 +10,7 @@ import {
 import FilterBar from "../ui/filters/FilterBar";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
+import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import GridMasonryDessandro from "../ui/GridMasonryDessandro";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 
@@ -24,7 +25,10 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
   const { isMobile } = useDeviceDetect();
-  const filterDefs = input.filters ?? [];
+  const filterDefs = withResolvedOptions(
+    input.filters ?? [],
+    input.resolvedItems ?? [],
+  );
   const filteredItems = applyFilters(
     input.resolvedItems ?? [],
     filterDefs,

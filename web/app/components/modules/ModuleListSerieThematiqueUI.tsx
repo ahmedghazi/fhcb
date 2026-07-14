@@ -13,6 +13,7 @@ import {
 import CardSerieThematique from "../ui/cards/CardSerieThematique";
 import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
+import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import FilterBar from "../ui/filters/FilterBar";
 
 type Props = {
@@ -27,7 +28,10 @@ const ModuleListSerieThematiqueUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
 
-  const filterDefs = input.filters ?? [];
+  const filterDefs = withResolvedOptions(
+    input.filters ?? [],
+    input.items ?? [],
+  );
   const filteredItems = applyFilters(
     input.items ?? [],
     filterDefs,

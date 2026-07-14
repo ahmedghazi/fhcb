@@ -50,11 +50,19 @@ export const _localizeText = (text: string) => {
   return currentI18N[text] ? currentI18N[text] : text;
 };
 
+// Shopify-synced list fields are stored as a JSON-stringified array, and can
+// pack multiple comma-separated values into a single array element (with a
+// trailing ", ") instead of one value per element — split and trim both levels.
 export const _parseJsonStringArray = (value: string | undefined | null, separator = ", "): string => {
   if (!value) return "";
   try {
     const parsed = JSON.parse(value);
-    return Array.isArray(parsed) ? parsed.join(separator) : value;
+    const items = Array.isArray(parsed) ? parsed : [parsed];
+    return items
+      .flatMap((item) => String(item).split(","))
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .join(separator);
   } catch {
     return value;
   }
