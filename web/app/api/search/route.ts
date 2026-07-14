@@ -52,11 +52,21 @@ _type,
     && (
       title.fr match $s + "*"
       || title.en match $s + "*"
+      || subTitle.fr match $s + "*"
+      || subTitle.en match $s + "*"
+      || description.fr match $s + "*"
+      || description.en match $s + "*"
       || text[].children[].text match $s + "*"
       || name match $s + "*"
       || tags[]->title match $s + "*"
+      || categories[]->title match $s + "*"
       || artists[]->name match $s + "*"
       || chercheur->name match $s + "*"
+      || editeur match $s + "*"
+      || auteurs match $s + "*"
+      || traducteurs match $s + "*"
+      || direction_editoriale match $s + "*"
+      || isbn match $s + "*"
       )
     ]
     {
