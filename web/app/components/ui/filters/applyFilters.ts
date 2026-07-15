@@ -108,13 +108,20 @@ export const applyFilters = <T extends Record<string, any>>(
           if (def.filterKey === "tag") {
             return item.tags?.some((t: any) => ids.includes(t._id)) ?? false;
           }
+          if (def.filterKey === "tagProduct") {
+            return (
+              item.tagsProduct?.some((t: any) => ids.includes(t._id)) ?? false
+            );
+          }
           if (def.filterKey === "chercheur") {
             return item.chercheur?._id
               ? ids.includes(item.chercheur._id)
               : false;
           }
           if (def.filterKey === "language") {
-            return item.languages?.some((l: string) => ids.includes(l)) ?? false;
+            return (
+              item.languages?.some((l: string) => ids.includes(l)) ?? false
+            );
           }
           return true;
         });

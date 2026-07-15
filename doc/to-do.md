@@ -167,6 +167,7 @@ cards simili document
 - # article card afficher subtitle
 - footer ico youtube
 - # produit champs langue (à afficher dans la page de contenu)
+- # tagsProduct refurb
 
 ## card expos
 

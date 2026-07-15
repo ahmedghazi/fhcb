@@ -42,7 +42,7 @@ export type SanityFilterDef =
   | {
       _key: string;
       _type: "filterList";
-      filterKey: "artist" | "tag" | "chercheur" | "language";
+      filterKey: "artist" | "tag" | "tagProduct" | "chercheur" | "language";
       filterLabel?: LocaleString;
       // Referenced docs for artist/tag/chercheur, or plain language codes for "language"
       filterOptions?: FilterRadioOption[] | string[];

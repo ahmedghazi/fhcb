@@ -30,7 +30,6 @@ const FilterList = ({
   const { locale } = useLocale();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const detailRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     publish("TOGGLE_SCROLL", !open);
   }, [open]);

@@ -56,195 +56,377 @@ import type {
   TextSidebarUI,
   SanityImageAsset,
   MuxVideo,
-  MuxVideoAsset
-} from './sanity.types'
+  MuxVideoAsset,
+  TagProduct,
+} from "./sanity.types";
 
 export type SanityImageAssetFull = SanityImageAsset & {
   creditLine?: string;
 };
 
-export type MuxVideoExpanded = Omit<MuxVideo, 'asset'> & {
+export type MuxVideoExpanded = Omit<MuxVideo, "asset"> & {
   asset?: MuxVideoAsset | null;
 };
 
-export type ArtistExpanded = Omit<Artist, 'imageCover'> & {
-  imageCover?: (Omit<NonNullable<NonNullable<Artist>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type ArtistExpanded = Omit<Artist, "imageCover"> & {
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Artist>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type ImageImagesExpanded = Omit<ImageImages, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
+export type ImageImagesExpanded = Omit<
+  ImageImages,
+  "chercheur" | "artists" | "rebonds" | "imageCover"
+> & {
   chercheur?: Chercheur | null;
   artists?: Array<ArtistExpanded> | null;
   rebonds?: Array<ImageImagesExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<ImageImages>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<ImageImages>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type SerieThematiqueExpanded = Omit<SerieThematique, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
+export type SerieThematiqueExpanded = Omit<
+  SerieThematique,
+  "chercheur" | "artists" | "rebonds" | "imageCover"
+> & {
   chercheur?: Chercheur | null;
   artists?: Array<ArtistExpanded> | null;
   rebonds?: Array<ImageImagesExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<SerieThematique>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<
+        NonNullable<NonNullable<SerieThematique>["imageCover"]>,
+        "asset"
+      > & { asset?: SanityImageAssetFull | null })
+    | null;
 };
 
-export type ConversationExpanded = Omit<Conversation, 'chercheur' | 'artists' | 'rebonds' | 'imageCover'> & {
+export type ConversationExpanded = Omit<
+  Conversation,
+  "chercheur" | "artists" | "rebonds" | "imageCover"
+> & {
   chercheur?: Chercheur | null;
   artists?: Array<ArtistExpanded> | null;
   rebonds?: Array<ImageImagesExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Conversation>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Conversation>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type ArticleExpanded = Omit<Article, 'tags' | 'imageCover'> & {
+export type ArticleExpanded = Omit<Article, "tags" | "imageCover"> & {
   tags?: Array<Tag> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Article>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Article>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type PartenaireExpanded = Omit<Partenaire, 'imageCover'> & {
-  imageCover?: (Omit<NonNullable<NonNullable<Partenaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type PartenaireExpanded = Omit<Partenaire, "imageCover"> & {
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Partenaire>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type PageModulaireExpanded = Omit<PageModulaire, 'tags' | 'rebonds' | 'imageCover' | 'videoCover'> & {
+export type PageModulaireExpanded = Omit<
+  PageModulaire,
+  "tags" | "rebonds" | "imageCover" | "videoCover"
+> & {
   tags?: Array<Tag> | null;
   rebonds?: PageModulaireExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<PageModulaire>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<PageModulaire>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
   videoCover?: MuxVideoExpanded | null;
 };
 
-export type SettingsExpanded = Omit<Settings, 'mostSearched'> & {
+export type SettingsExpanded = Omit<Settings, "mostSearched"> & {
   mostSearched?: PageModulaireExpanded | null;
 };
 
-export type ExhibitionExpanded = Omit<Exhibition, 'artists' | 'tags' | 'rebonds' | 'imageCover'> & {
+export type ExhibitionExpanded = Omit<
+  Exhibition,
+  "artists" | "tags" | "rebonds" | "imageCover"
+> & {
   artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
   rebonds?: PageModulaireExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Exhibition>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Exhibition>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type ProductExpanded = Omit<Product, 'artists' | 'tags' | 'rebonds' | 'imageCover' | 'images'> & {
+export type ProductExpanded = Omit<
+  Product,
+  "artists" | "tags" | "tagsProduct" | "rebonds" | "imageCover" | "images"
+> & {
+  artists?: Array<ArtistExpanded> | null;
+  tags?: Array<Tag> | null;
+  tagsProduct?: Array<TagProduct> | null;
+  rebonds?: PageModulaireExpanded | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Product>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
+  images?:
+    | (Omit<NonNullable<NonNullable<Product>["images"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
+};
+
+export type EventExpanded = Omit<
+  Event,
+  "artists" | "tags" | "rebonds" | "imageCover"
+> & {
   artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
   rebonds?: PageModulaireExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Product>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
-  images?: (Omit<NonNullable<NonNullable<Product>['images']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Event>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type EventExpanded = Omit<Event, 'artists' | 'tags' | 'rebonds' | 'imageCover'> & {
-  artists?: Array<ArtistExpanded> | null;
-  tags?: Array<Tag> | null;
-  rebonds?: PageModulaireExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Event>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
-};
-
-export type ProgrammeExpanded = Omit<Programme, 'filterTags' | 'excludeTags' | 'imageCover'> & {
+export type ProgrammeExpanded = Omit<
+  Programme,
+  "filterTags" | "excludeTags" | "imageCover"
+> & {
   filterTags?: Array<Tag> | null;
   excludeTags?: Array<Tag> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Programme>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Programme>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type FeuilletageExpanded = Omit<Feuilletage, 'artists' | 'chercheur' | 'tags' | 'rebonds' | 'imageCover'> & {
+export type FeuilletageExpanded = Omit<
+  Feuilletage,
+  "artists" | "chercheur" | "tags" | "rebonds" | "imageCover"
+> & {
   artists?: Array<ArtistExpanded> | null;
   chercheur?: Chercheur | null;
   tags?: Array<Tag> | null;
   rebonds?: PageModulaireExpanded | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Feuilletage>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Feuilletage>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type LibraryExpanded = Omit<Library, 'miseEnAvant' | 'sliderSelection' | 'items' | 'imageCover'> & {
+export type LibraryExpanded = Omit<
+  Library,
+  "miseEnAvant" | "sliderSelection" | "items" | "imageCover"
+> & {
   miseEnAvant?: Array<ProductExpanded> | null;
   sliderSelection?: Array<ProductExpanded> | null;
   items?: Array<ProductExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<Library>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<NonNullable<NonNullable<Library>["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type PAGE_MODULAIRE_QUERY_RESULTExpanded = Omit<PAGE_MODULAIRE_QUERY_RESULT, 'imageCover'> & {
-  imageCover?: (Omit<NonNullable<NonNullable<PAGE_MODULAIRE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type PAGE_MODULAIRE_QUERY_RESULTExpanded = Omit<
+  PAGE_MODULAIRE_QUERY_RESULT,
+  "imageCover"
+> & {
+  imageCover?:
+    | (Omit<
+        NonNullable<NonNullable<PAGE_MODULAIRE_QUERY_RESULT>["imageCover"]>,
+        "asset"
+      > & { asset?: SanityImageAssetFull | null })
+    | null;
 };
 
-export type ARTIST_QUERY_RESULTExpanded = Omit<ARTIST_QUERY_RESULT, 'imageCover'> & {
-  imageCover?: (Omit<NonNullable<NonNullable<ARTIST_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type ARTIST_QUERY_RESULTExpanded = Omit<
+  ARTIST_QUERY_RESULT,
+  "imageCover"
+> & {
+  imageCover?:
+    | (Omit<
+        NonNullable<NonNullable<ARTIST_QUERY_RESULT>["imageCover"]>,
+        "asset"
+      > & { asset?: SanityImageAssetFull | null })
+    | null;
 };
 
-export type EXPHIBITION_QUERY_RESULTExpanded = Omit<EXPHIBITION_QUERY_RESULT, 'rebonds'> & {
+export type EXPHIBITION_QUERY_RESULTExpanded = Omit<
+  EXPHIBITION_QUERY_RESULT,
+  "rebonds"
+> & {
   rebonds?: PageModulaireExpanded | null;
 };
 
-export type EVENT_QUERY_RESULTExpanded = Omit<EVENT_QUERY_RESULT, 'rebonds'> & {
+export type EVENT_QUERY_RESULTExpanded = Omit<EVENT_QUERY_RESULT, "rebonds"> & {
   rebonds?: PageModulaireExpanded | null;
 };
 
-export type PROGRAMME_QUERY_RESULTExpanded = Omit<PROGRAMME_QUERY_RESULT, 'filterTags' | 'excludeTags' | 'imageCover'> & {
+export type PROGRAMME_QUERY_RESULTExpanded = Omit<
+  PROGRAMME_QUERY_RESULT,
+  "filterTags" | "excludeTags" | "imageCover"
+> & {
   filterTags?: Array<Tag> | null;
   excludeTags?: Array<Tag> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<PROGRAMME_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<
+        NonNullable<NonNullable<PROGRAMME_QUERY_RESULT>["imageCover"]>,
+        "asset"
+      > & { asset?: SanityImageAssetFull | null })
+    | null;
 };
 
-export type IMAGE_IMAGES_QUERY_RESULTExpanded = Omit<IMAGE_IMAGES_QUERY_RESULT, 'artists' | 'imageCover'> & {
+export type IMAGE_IMAGES_QUERY_RESULTExpanded = Omit<
+  IMAGE_IMAGES_QUERY_RESULT,
+  "artists" | "imageCover"
+> & {
   artists?: Array<ArtistExpanded> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<IMAGE_IMAGES_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<
+        NonNullable<NonNullable<IMAGE_IMAGES_QUERY_RESULT>["imageCover"]>,
+        "asset"
+      > & { asset?: SanityImageAssetFull | null })
+    | null;
 };
 
-export type FEUILLETAGE_QUERY_RESULTExpanded = Omit<FEUILLETAGE_QUERY_RESULT, 'artists' | 'tags' | 'imageCover'> & {
+export type FEUILLETAGE_QUERY_RESULTExpanded = Omit<
+  FEUILLETAGE_QUERY_RESULT,
+  "artists" | "tags" | "imageCover"
+> & {
   artists?: Array<ArtistExpanded> | null;
   tags?: Array<Tag> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<FEUILLETAGE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<
+        NonNullable<NonNullable<FEUILLETAGE_QUERY_RESULT>["imageCover"]>,
+        "asset"
+      > & { asset?: SanityImageAssetFull | null })
+    | null;
 };
 
-export type ARTICLE_QUERY_RESULTExpanded = Omit<ARTICLE_QUERY_RESULT, 'tags' | 'imageCover'> & {
+export type ARTICLE_QUERY_RESULTExpanded = Omit<
+  ARTICLE_QUERY_RESULT,
+  "tags" | "imageCover"
+> & {
   tags?: Array<Tag> | null;
-  imageCover?: (Omit<NonNullable<NonNullable<ARTICLE_QUERY_RESULT>['imageCover']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+  imageCover?:
+    | (Omit<
+        NonNullable<NonNullable<ARTICLE_QUERY_RESULT>["imageCover"]>,
+        "asset"
+      > & { asset?: SanityImageAssetFull | null })
+    | null;
 };
 
-export type LIBRARY_QUERY_RESULTExpanded = Omit<LIBRARY_QUERY_RESULT, 'miseEnAvant' | 'sliderSelection' | 'items'> & {
+export type LIBRARY_QUERY_RESULTExpanded = Omit<
+  LIBRARY_QUERY_RESULT,
+  "miseEnAvant" | "sliderSelection" | "items"
+> & {
   miseEnAvant?: Array<ProductExpanded> | null;
   sliderSelection?: Array<ProductExpanded> | null;
   items?: Array<ProductExpanded> | null;
 };
 
-export type PRODUCT_QUERY_RESULTExpanded = Omit<PRODUCT_QUERY_RESULT, 'tags' | 'rebonds'> & {
+export type PRODUCT_QUERY_RESULTExpanded = Omit<
+  PRODUCT_QUERY_RESULT,
+  "tags" | "rebonds"
+> & {
   tags?: Array<Tag> | null;
   rebonds?: PageModulaireExpanded | null;
 };
 
-export type NewsletterUIExpanded = Omit<NewsletterUI, 'image'> & {
-  image?: (Omit<NonNullable<NonNullable<NewsletterUI>['image']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type NewsletterUIExpanded = Omit<NewsletterUI, "image"> & {
+  image?:
+    | (Omit<NonNullable<NonNullable<NewsletterUI>["image"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type SupportUIExpanded = Omit<SupportUI, 'image'> & {
-  image?: (Omit<NonNullable<NonNullable<SupportUI>['image']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type SupportUIExpanded = Omit<SupportUI, "image"> & {
+  image?:
+    | (Omit<NonNullable<NonNullable<SupportUI>["image"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type TextImageUIExpanded = Omit<TextImageUI, 'image'> & {
-  image?: (Omit<NonNullable<NonNullable<TextImageUI>['image']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type TextImageUIExpanded = Omit<TextImageUI, "image"> & {
+  image?:
+    | (Omit<NonNullable<NonNullable<TextImageUI>["image"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type KeyValExpanded = Omit<KeyVal, 'image'> & {
-  image?: (Omit<NonNullable<NonNullable<KeyVal>['image']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type KeyValExpanded = Omit<KeyVal, "image"> & {
+  image?:
+    | (Omit<NonNullable<NonNullable<KeyVal>["image"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type ImageInGridExpanded = Omit<ImageInGrid, 'image'> & {
-  image?: (Omit<NonNullable<NonNullable<ImageInGrid>['image']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type ImageInGridExpanded = Omit<ImageInGrid, "image"> & {
+  image?:
+    | (Omit<NonNullable<NonNullable<ImageInGrid>["image"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type VideoExpanded = Omit<Video, 'placeholder'> & {
-  placeholder?: (Omit<NonNullable<NonNullable<Video>['placeholder']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type VideoExpanded = Omit<Video, "placeholder"> & {
+  placeholder?:
+    | (Omit<NonNullable<NonNullable<Video>["placeholder"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type LinkIconExpanded = Omit<LinkIcon, 'icon'> & {
-  icon?: (Omit<NonNullable<NonNullable<LinkIcon>['icon']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type LinkIconExpanded = Omit<LinkIcon, "icon"> & {
+  icon?:
+    | (Omit<NonNullable<NonNullable<LinkIcon>["icon"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type EmbedExpanded = Omit<Embed, 'placeholder'> & {
-  placeholder?: (Omit<NonNullable<NonNullable<Embed>['placeholder']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type EmbedExpanded = Omit<Embed, "placeholder"> & {
+  placeholder?:
+    | (Omit<NonNullable<NonNullable<Embed>["placeholder"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type SeoExpanded = Omit<Seo, 'metaImage'> & {
-  metaImage?: (Omit<NonNullable<NonNullable<Seo>['metaImage']>, 'asset'> & { asset?: SanityImageAssetFull | null }) | null;
+export type SeoExpanded = Omit<Seo, "metaImage"> & {
+  metaImage?:
+    | (Omit<NonNullable<NonNullable<Seo>["metaImage"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
 };
 
-export type VideoUIExpanded = Omit<VideoUI, 'video'> & {
+export type VideoUIExpanded = Omit<VideoUI, "video"> & {
   video?: VideoExpanded | null;
 };
 
-export type ImagesUIExpanded = Omit<ImagesUI, 'items'> & {
+export type ImagesUIExpanded = Omit<ImagesUI, "items"> & {
   items?: Array<
     {
       _key: string;
@@ -252,7 +434,10 @@ export type ImagesUIExpanded = Omit<ImagesUI, 'items'> & {
   > | null;
 };
 
-export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | 'coProduction' | 'partenaires' | 'products' | 'keyVal'> & {
+export type SidebarGeneriqueExpanded = Omit<
+  SidebarGenerique,
+  "commissariat" | "coProduction" | "partenaires" | "products" | "keyVal"
+> & {
   commissariat?: Array<
     {
       _key: string;
@@ -286,7 +471,7 @@ export type SidebarGeneriqueExpanded = Omit<SidebarGenerique, 'commissariat' | '
   > | null;
 };
 
-export type KeyValGroupExpanded = Omit<KeyValGroup, 'items'> & {
+export type KeyValGroupExpanded = Omit<KeyValGroup, "items"> & {
   items?: Array<
     | ({
         _key: string;
@@ -297,6 +482,6 @@ export type KeyValGroupExpanded = Omit<KeyValGroup, 'items'> & {
   > | null;
 };
 
-export type TextSidebarUIExpanded = Omit<TextSidebarUI, 'sidebar'> & {
+export type TextSidebarUIExpanded = Omit<TextSidebarUI, "sidebar"> & {
   sidebar?: SidebarGeneriqueExpanded | null;
 };

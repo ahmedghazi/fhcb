@@ -9,10 +9,10 @@ type Props = {
 };
 
 const CardProduct = ({ input, size = "md" }: Props) => {
-  const { imageCover } = input;
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  // const { imageCover, tagsProduct } = input;
+  // const isLandscape =
+  //   (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+  //   (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const props = productToCard(input, size);
   return (
     <div
@@ -24,9 +24,14 @@ const CardProduct = ({ input, size = "md" }: Props) => {
         size === "sm" ? "card--footer-hover-" : "",
       )}>
       <CardBase {...props} />
-      {size === "md" && (!!props.actions?.length || props.actionsNode) && props.layout === "row" && (
-        <CardFooter actions={props.actions ?? []} actionsNode={props.actionsNode} />
-      )}
+      {size === "md" &&
+        (!!props.actions?.length || props.actionsNode) &&
+        props.layout === "row" && (
+          <CardFooter
+            actions={props.actions ?? []}
+            actionsNode={props.actionsNode}
+          />
+        )}
     </div>
   );
 };
