@@ -90,6 +90,8 @@ export default defineType({
     }),
     defineField({
       name: 'countdown',
+      title: 'Compte à rebours',
+      description: 'Sert en homePage pour faire passer une expo en zone actu ou zone mise en avant',
       type: 'number',
       group: 'editorial',
     }),

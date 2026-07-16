@@ -50,9 +50,37 @@ p,
     // display: none;
   }
   a {
-    text-decoration: underline;
-    text-decoration-thickness: 0.04em;
-    text-underline-offset: 0.15em;
+    // text-decoration: underline;
+    // text-decoration-thickness: 0.04em;
+    // text-underline-offset: 0.15em;
+    background: linear-gradient(currentColor 0 0) left bottom / 100% 0.08em
+      no-repeat;
+
+    transition:
+      background-size 0.25s ease,
+      background-position 0s 0.25s;
+
+    &:hover {
+      background-size: 0% 0.08em;
+
+      background-position: left bottom;
+    }
+
+    &:not(:hover) {
+      background-position: right bottom;
+
+      background-size: 100% 0.08em;
+    }
+    // background: linear-gradient(currentColor 0 0) bottom left/
+    //   var(--underline-width, 0%) 0.1em no-repeat;
+    // color: var(--color-primary);
+    // display: inline-block;
+    // // padding: 0 0.5em 0.2em;
+    // text-decoration: none;
+    // transition: background-size 0.5s;
+    // &:hover {
+    //   --underline-width: 100%;
+    // }
   }
   br {
     // display: none;

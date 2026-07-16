@@ -48,7 +48,7 @@ const SIZES = {
   exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md" },
   product: { grid: "sm", slider: "sm", rebonds: "sm" },
   article: { grid: "sm", slider: "sm", rebonds: "md" },
-  artist: { grid: "md", slider: "md", rebonds: "sm" },
+  artist: { grid: "sm", slider: "sm", rebonds: "sm" },
   imageImages: { grid: "md", slider: "md", rebonds: "md" },
   feuilletage: { grid: "md", slider: "md", rebonds: "md" },
   conversation: { grid: "md", slider: "md", rebonds: "md" },

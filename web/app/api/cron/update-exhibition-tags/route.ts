@@ -163,6 +163,12 @@ export async function GET(request: Request) {
   for (const exhibition of exhibitions) {
     if (!exhibition.dates?.length) continue;
 
+    // Already marked as past: it stays past forever, no need to re-tag it
+    const alreadyPast = (exhibition.tags || []).some(
+      (t) => t._ref === pastTagId,
+    );
+    if (alreadyPast) continue;
+
     const allStarts = exhibition.dates
       .map((d) => d.du)
       .filter(Boolean) as string[];
