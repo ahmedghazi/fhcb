@@ -1,5 +1,6 @@
 import {defineField} from 'sanity'
 import {GrSend} from 'react-icons/gr'
+import {baseLanguage} from '../../locale/supportedLanguages'
 export default defineField({
   name: 'formUI',
   title: 'Form UI',
@@ -16,15 +17,22 @@ export default defineField({
           type: 'object',
           name: 'subectItem',
           fields: [
-            {
+            defineField({name: 'to', type: 'string', title: 'Destinataire', description: 'E-mail'}),
+
+            defineField({
               name: 'title',
               type: 'localeString',
-            },
-            {
+            }),
+            defineField({
               name: 'description',
               type: 'localeString',
-            },
+            }),
           ],
+          preview: {
+            select: {
+              title: `title.${baseLanguage}`,
+            },
+          },
         },
       ],
     }),

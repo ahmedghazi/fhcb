@@ -120,6 +120,13 @@
             "of": {
               "type": "object",
               "attributes": {
+                "to": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
                 "title": {
                   "type": "objectAttribute",
                   "value": {
@@ -5561,6 +5568,13 @@
         "value": {
           "type": "inline",
           "name": "seo"
+        },
+        "optional": true
+      },
+      "date": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       },

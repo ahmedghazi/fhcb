@@ -25,7 +25,7 @@ const portableTextComponents: PortableTextComponents = {
     blockContentCta: ({ value }) => {
       const { align } = value;
       return (
-        <div className={`text-${align}`}>
+        <div className={`text-${align} `}>
           {value.internal && (
             <Link
               className='btn btn--cta'

@@ -177,7 +177,7 @@ export const _fhcbDates = (
   if (duYear !== auYear) {
     return {
       type: "different-years",
-      du: `${ordinal(duDate.getDate(), locale)} ${monthName(duDate, bcp47)}. ${duYear}`,
+      du: `${ordinal(duDate.getDate(), locale)} ${monthName(duDate, bcp47)} ${duYear}`,
       au: `${ordinal(auDate.getDate(), locale)} ${monthName(auDate, bcp47)} ${auYear}`,
       ...timeProps,
     };

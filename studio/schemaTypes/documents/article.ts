@@ -27,6 +27,11 @@ export default defineType({
       group: 'seo',
     }),
     defineField({
+      name: 'date',
+      type: 'date',
+      title: 'Date de publication',
+    }),
+    defineField({
       name: 'title',
       type: 'localeString',
       title: 'Titre',

@@ -50,6 +50,7 @@ const FHCBDates = ({ input }: Props) => {
               <>
                 <time dateTime={date.du ?? undefined}>{fmt.du}</time>
                 <br />
+
                 <time dateTime={date.au ?? undefined}>→ {fmt.au}</time>
                 {date.location && (
                   <LocationSlot
@@ -97,54 +98,6 @@ const FHCBDates = ({ input }: Props) => {
               )}
           </div>
         );
-        /*if (fmt.type === "different-years") {
-          return (
-            <div key={index} className='fhcb-date'>
-              <time dateTime={date.du ?? undefined}>{fmt.du}</time>
-              <br />
-              <time dateTime={date.au ?? undefined}>→ {fmt.au}</time>
-              {date.location && (
-                <LocationSlot location={date.location as unknown as Location} />
-              )}
-            </div>
-          );
-        }
-
-        if (fmt.type === "same-year") {
-          return (
-            <div key={index} className='fhcb-date'>
-              <time dateTime={date.du ?? undefined}>
-                {fmt.du} → {fmt.au} {fmt.year}
-              </time>
-              {date.location && (
-                <LocationSlot location={date.location as unknown as Location} />
-              )}
-            </div>
-          );
-        }
-
-        if (fmt.type === "with-time") {
-          return (
-            <div key={index} className='fhcb-date'>
-              <time dateTime={date.du ?? undefined}>
-                {fmt.date} | {fmt.timeStart}
-                {fmt.timeEnd ? `–${fmt.timeEnd}` : ""}
-              </time>
-              {date.location && (
-                <LocationSlot location={date.location as unknown as Location} />
-              )}
-            </div>
-          );
-        }*/
-
-        // return (
-        //   <div key={index} className='fhcb-date'>
-        //     <time dateTime={date.du ?? undefined}>{fmt.date}</time>
-        //     {date.location && (
-        //       <LocationSlot location={date.location as unknown as Location} />
-        //     )}
-        //   </div>
-        // );
       })}
     </div>
   );
