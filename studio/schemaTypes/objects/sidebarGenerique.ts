@@ -29,6 +29,12 @@ export default defineType({
       of: [{type: 'keyVal'}, {title: 'Mécène', type: 'reference', to: [{type: 'partenaire'}]}],
     }),
     defineField({
+      name: 'partenairesMedia',
+      title: 'Partenaire media',
+      type: 'array',
+      of: [{type: 'keyVal'}, {title: 'Mécène', type: 'reference', to: [{type: 'partenaire'}]}],
+    }),
+    defineField({
       name: 'products',
       title: 'Produits',
       type: 'array',
@@ -36,7 +42,7 @@ export default defineType({
     }),
     defineField({
       name: 'keyVal',
-      title: 'titre + texte',
+      title: 'Titre + Texte libre',
       description: 'Libre',
       type: 'array',
       of: [{type: 'keyVal'}],

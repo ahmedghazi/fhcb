@@ -64,6 +64,20 @@
       h2 {
         margin-bottom: var(--spacing-lg);
       }
+
+      @media (min-width: 768px) {
+        .images-ui__item,
+        .images-ui__item figure,
+        .images-ui__item picture,
+        .images-ui__item img {
+          height: 100%;
+        }
+
+        .images-ui__item img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
     }
     &--text-sidebar-ui {
       .module__inner {
@@ -100,6 +114,9 @@
     }
     &--list-ui {
       margin-bottom: var(--spacing-sm);
+      &:not(:has(+ .module--list-ui)) {
+        margin-bottom: var(--spacing-lg);
+      }
       h3,
       .list-item {
         border-bottom: var(--border);

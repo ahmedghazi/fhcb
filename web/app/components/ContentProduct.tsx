@@ -137,7 +137,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                     <div className='c-body--tight'>{nombre_de_pages}</div>
                   )}
                   {reliure && <div className='c-body--tight'>{reliure}</div>}
-                  {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>}
+                  {/* {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>} */}
 
                   {traducteurs && (
                     <div className='c-body--tight'>{traducteurs}</div>
@@ -145,6 +145,12 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                   {direction_editoriale && (
                     <div className='c-body--tight'>{direction_editoriale}</div>
                   )}
+                </li>
+              )}
+              {isbn && (
+                <li className='sidebar__item'>
+                  <div className='c-tag underline'>{_localizeText("isbn")}</div>
+                  <div className='c-body--tight'>{isbn}</div>
                 </li>
               )}
 

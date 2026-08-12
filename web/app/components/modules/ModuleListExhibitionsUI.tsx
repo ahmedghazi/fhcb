@@ -49,7 +49,7 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
                   Il n&apos;y a pas d&apos;
                   {filterTags?.map((tag) => (
                     <span key={tag._id} className='tag'>
-                      {_localizeField(tag.title)}
+                      {_localizeField(tag.title)}{" "}
                     </span>
                   ))}{" "}
                   actuellement.

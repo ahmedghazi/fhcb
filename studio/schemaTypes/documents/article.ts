@@ -30,6 +30,7 @@ export default defineType({
       name: 'date',
       type: 'date',
       title: 'Date de publication',
+      group: 'editorial',
     }),
     defineField({
       name: 'title',
