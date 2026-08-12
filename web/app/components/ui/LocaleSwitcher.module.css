@@ -5,5 +5,8 @@
 .button {
   &:global(.is-active) {
     text-decoration: underline;
+    /* text-decoration: underline; */
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 0.15em;
   }
 }

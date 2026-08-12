@@ -71,6 +71,7 @@ p,
 
       background-size: 100% 0.08em;
     }
+
     // background: linear-gradient(currentColor 0 0) bottom left/
     //   var(--underline-width, 0%) 0.1em no-repeat;
     // color: var(--color-primary);
@@ -102,6 +103,10 @@ p,
       // max-width: 60rem;
       // margin: 0 auto;
     }
+  }
+  .btn--cta {
+    display: inline-block;
+    width: auto;
   }
   .blockquote {
     margin-bottom: 1em;

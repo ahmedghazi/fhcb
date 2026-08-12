@@ -124,6 +124,9 @@ export default defineType({
     // as a block type.
 
     defineArrayMember({
+      type: 'blockContentCta',
+    }),
+    defineArrayMember({
       type: 'blockquote',
     }),
     defineArrayMember({

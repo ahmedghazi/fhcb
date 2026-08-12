@@ -61,7 +61,8 @@ header.is-modal-open {
     position: absolute;
     left: 0;
     bottom: 0;
-    max-width: 11.188rem;
+    // max-width: 11.188rem;
+    max-width: 15.188rem;
     .text {
       font-size: var(--text-md);
       line-height: var(--leading-2xl);

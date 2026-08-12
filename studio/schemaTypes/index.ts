@@ -23,6 +23,7 @@ import localeText from './locale/localeText'
 import localeBlockContent from './locale/localeBlockContent'
 
 import blockContent from './objects/blockContent'
+import blockContentCta from './objects/blockContentCta'
 import linkExternal from './objects/linkExternal'
 import linkInternal from './objects/linkInternal'
 import linkIcon from './objects/linkIcon'
@@ -79,6 +80,7 @@ import sidebarGenerique from './objects/sidebarGenerique'
 import productVariant from './objects/productVariant'
 import serieThematique from './documents/serieThematique'
 import conversation from './documents/conversation'
+import blockContentCta from './objects/blockContentCta'
 
 export const schemaTypes = [
   settings,
@@ -107,6 +109,7 @@ export const schemaTypes = [
 
   seoSchema,
   blockContent,
+  blockContentCta,
   blockquote,
   embed,
   linkExternal,

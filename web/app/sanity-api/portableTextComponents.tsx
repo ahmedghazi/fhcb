@@ -22,6 +22,29 @@ const portableTextComponents: PortableTextComponents = {
     embed: ({ value }) => {
       return <Embed input={value} />;
     },
+    blockContentCta: ({ value }) => {
+      const { align } = value;
+      return (
+        <div className={`text-${align}`}>
+          {value.internal && (
+            <Link
+              className='btn btn--cta'
+              href={_linkResolver(value.internal.link)}>
+              {_localizeField(value.internal.label)}
+            </Link>
+          )}
+          {value.external && (
+            <a
+              className='btn btn--cta'
+              href={value.external.link}
+              target='_blank'
+              rel='noopener noreferrer'>
+              {_localizeField(value.external.label)}
+            </a>
+          )}
+        </div>
+      );
+    },
     blockquote: ({ value }) => {
       const { text, author } = value;
       return (
@@ -78,6 +101,7 @@ const portableTextComponents: PortableTextComponents = {
     align_right: ({ children }) => (
       <span className='text-right block'>{children}</span>
     ),
+    sup: ({ children }) => <sup>{children}</sup>,
   },
 };
 
