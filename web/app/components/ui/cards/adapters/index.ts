@@ -262,6 +262,8 @@ export function eventToCard(
     tags: toTags(tags),
     title: (_localizeField(title) as string) || "",
     subTitle: _localizeField(subTitle),
+    // title: (_localizeField(subTitle) as string) || "",
+    // subTitle: (_localizeField(title) as string) || "",
     description: _localizeField(description),
     infoNode: toInfoNode(dates),
     actions: actions,

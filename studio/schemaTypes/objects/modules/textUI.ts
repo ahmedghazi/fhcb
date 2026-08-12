@@ -4,7 +4,7 @@ import {baseLanguage} from '../../locale/supportedLanguages'
 
 export default defineField({
   name: 'textUI',
-  title: 'Text',
+  title: 'Text UI',
   type: 'object',
   icon: FiAlignLeft,
   initialValue: {

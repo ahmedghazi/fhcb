@@ -18,7 +18,7 @@ type Props = {
 };
 
 const HeroEvent = ({ input }: Props) => {
-  const { title, artists, imageCover, dates, tags, links } = input;
+  const { title, subTitle, artists, imageCover, dates, tags, links } = input;
   const artistList = artists?.map((artist) => artist.name).join(", ");
   const isVisiteGuidee = _isVisiteGuidee(tags || []);
   // const isCurrentOrFuturByDates = _isCurrentOrFuturByDates(dates || []);
@@ -51,9 +51,14 @@ const HeroEvent = ({ input }: Props) => {
             <div className='top'>
               <CardTags input={tags || []} />
 
-              <h2 className='hero__title c-h1'>{artistList}</h2>
+              {/* <h2 className='hero__title c-h1'>{artistList}</h2>
               <div className='hero__subtitle c-title-expo'>
                 {_localizeField(title)}
+              </div> */}
+
+              <h2 className='hero__title c-h1'>{_localizeField(title)}</h2>
+              <div className='hero__subtitle c-title-expo'>
+                {_localizeField(subTitle)}
               </div>
             </div>
 

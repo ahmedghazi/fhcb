@@ -1565,6 +1565,9 @@ export type Exhibition = {
   modules?: Array<
     | ({
         _key: string;
+      } & TextUI)
+    | ({
+        _key: string;
       } & BlockquoteUI)
     | ({
         _key: string;
@@ -1792,6 +1795,9 @@ export type Event = {
   >;
   index?: string;
   modules?: Array<
+    | ({
+        _key: string;
+      } & TextUI)
     | ({
         _key: string;
       } & BlockquoteUI)
@@ -2826,6 +2832,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -2891,6 +2900,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -3747,6 +3759,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -3812,6 +3827,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -4922,6 +4940,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -4987,6 +5008,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -5843,6 +5867,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -5908,6 +5935,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -6906,6 +6936,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -6971,6 +7004,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -7827,6 +7863,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -7892,6 +7931,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -8890,6 +8932,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -8955,6 +9000,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -9811,6 +9859,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -9876,6 +9927,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -10874,6 +10928,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -10939,6 +10996,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -11795,6 +11855,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -11860,6 +11923,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -13869,6 +13935,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -13965,6 +14034,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -17012,6 +17084,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -17108,6 +17183,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -17836,6 +17914,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -17901,6 +17982,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -18757,6 +18841,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -18822,6 +18909,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -19687,6 +19777,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -19752,6 +19845,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -20608,6 +20704,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -20673,6 +20772,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -21674,6 +21776,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -21739,6 +21844,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -22595,6 +22703,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -22660,6 +22771,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -24415,6 +24529,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -24480,6 +24597,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -25336,6 +25456,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -25401,6 +25524,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -26223,6 +26349,1872 @@ export type EXPHIBITION_QUERY_RESULT = {
             } | null;
             text?: LocaleText;
           }> | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "textUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        text: {
+          _type: "localeBlockContent";
+          fr: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            last_name?: string;
+                            first_name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            text?: LocaleBlockContent;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            pastille?: LocaleString;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            linkTickets?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            countdown?: number;
+                            location?:
+                              | "inside-cube"
+                              | "inside-tube"
+                              | "inside"
+                              | "itinerant"
+                              | "outside";
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            pastille?: LocaleString;
+                            color?: Color;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            aroundTheExhibition?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | SerieThematiqueReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "feuilletage";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            chercheur?: ChercheurReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | ExhibitionReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | LibraryReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | ProgrammeReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "imageImages";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            index?: string;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            chercheur?: ChercheurReference;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                            >;
+                            rebonds?: Array<
+                              {
+                                _key: string;
+                              } & ImageImagesReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ListProductUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                            >;
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            videoCover?: MuxVideo;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "toDiscoverToo"
+                              | "viewMore";
+                            rebondsLabelLibre?: LocaleString;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            shopifyId?: string;
+                            shopifyHandle?: string;
+                            price?: number;
+                            compareAtPrice?: number;
+                            inStock?: boolean;
+                            totalInventory?: number;
+                            variants?: Array<
+                              {
+                                _key: string;
+                              } & ProductVariant
+                            >;
+                            syncedAt?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            artistName?: string;
+                            exhibition?: ExhibitionReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            auteurs?: string;
+                            traducteurs?: string;
+                            direction_editoriale?: string;
+                            isbn?: string;
+                            reliure?: string;
+                            dimensions?: string;
+                            nombre_de_pages?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            version_linguistique?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tagsProduct?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            categories?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            pastille?: LocaleString;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "exhibitions-past"
+                              | "guided-tours";
+                            filterTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            excludeTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            filters?: Array<
+                              | ({
+                                  _key: string;
+                                } & FilterList)
+                              | ({
+                                  _key: string;
+                                } & FilterSearch)
+                              | ({
+                                  _key: string;
+                                } & FilterSort)
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockContentCta";
+                internal?: LinkInternal;
+                external?: LinkExternal;
+                align?: "center" | "left" | "right";
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+          en: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            last_name?: string;
+                            first_name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            text?: LocaleBlockContent;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            pastille?: LocaleString;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            linkTickets?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            countdown?: number;
+                            location?:
+                              | "inside-cube"
+                              | "inside-tube"
+                              | "inside"
+                              | "itinerant"
+                              | "outside";
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            pastille?: LocaleString;
+                            color?: Color;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            aroundTheExhibition?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | SerieThematiqueReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "feuilletage";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            chercheur?: ChercheurReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | ExhibitionReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | LibraryReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | ProgrammeReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "imageImages";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            index?: string;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            chercheur?: ChercheurReference;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                            >;
+                            rebonds?: Array<
+                              {
+                                _key: string;
+                              } & ImageImagesReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ListProductUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                            >;
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            videoCover?: MuxVideo;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "toDiscoverToo"
+                              | "viewMore";
+                            rebondsLabelLibre?: LocaleString;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            shopifyId?: string;
+                            shopifyHandle?: string;
+                            price?: number;
+                            compareAtPrice?: number;
+                            inStock?: boolean;
+                            totalInventory?: number;
+                            variants?: Array<
+                              {
+                                _key: string;
+                              } & ProductVariant
+                            >;
+                            syncedAt?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            artistName?: string;
+                            exhibition?: ExhibitionReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            auteurs?: string;
+                            traducteurs?: string;
+                            direction_editoriale?: string;
+                            isbn?: string;
+                            reliure?: string;
+                            dimensions?: string;
+                            nombre_de_pages?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            version_linguistique?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tagsProduct?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            categories?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            pastille?: LocaleString;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "exhibitions-past"
+                              | "guided-tours";
+                            filterTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            excludeTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            filters?: Array<
+                              | ({
+                                  _key: string;
+                                } & FilterList)
+                              | ({
+                                  _key: string;
+                                } & FilterSearch)
+                              | ({
+                                  _key: string;
+                                } & FilterSort)
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockContentCta";
+                internal?: LinkInternal;
+                external?: LinkExternal;
+                align?: "center" | "left" | "right";
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
         } | null;
       }
     | {
@@ -27407,6 +29399,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -27472,6 +29467,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -28328,6 +30326,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -28393,6 +30394,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -29215,6 +31219,1872 @@ export type EVENT_QUERY_RESULT = {
             } | null;
             text?: LocaleText;
           }> | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "textUI";
+        title: {
+          _type: "localeString";
+          fr?: string;
+          en?: string;
+        } | null;
+        text: {
+          _type: "localeBlockContent";
+          fr: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            last_name?: string;
+                            first_name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            text?: LocaleBlockContent;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            pastille?: LocaleString;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            linkTickets?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            countdown?: number;
+                            location?:
+                              | "inside-cube"
+                              | "inside-tube"
+                              | "inside"
+                              | "itinerant"
+                              | "outside";
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            pastille?: LocaleString;
+                            color?: Color;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            aroundTheExhibition?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | SerieThematiqueReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "feuilletage";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            chercheur?: ChercheurReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | ExhibitionReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | LibraryReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | ProgrammeReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "imageImages";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            index?: string;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            chercheur?: ChercheurReference;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                            >;
+                            rebonds?: Array<
+                              {
+                                _key: string;
+                              } & ImageImagesReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ListProductUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                            >;
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            videoCover?: MuxVideo;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "toDiscoverToo"
+                              | "viewMore";
+                            rebondsLabelLibre?: LocaleString;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            shopifyId?: string;
+                            shopifyHandle?: string;
+                            price?: number;
+                            compareAtPrice?: number;
+                            inStock?: boolean;
+                            totalInventory?: number;
+                            variants?: Array<
+                              {
+                                _key: string;
+                              } & ProductVariant
+                            >;
+                            syncedAt?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            artistName?: string;
+                            exhibition?: ExhibitionReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            auteurs?: string;
+                            traducteurs?: string;
+                            direction_editoriale?: string;
+                            isbn?: string;
+                            reliure?: string;
+                            dimensions?: string;
+                            nombre_de_pages?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            version_linguistique?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tagsProduct?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            categories?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            pastille?: LocaleString;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "exhibitions-past"
+                              | "guided-tours";
+                            filterTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            excludeTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            filters?: Array<
+                              | ({
+                                  _key: string;
+                                } & FilterList)
+                              | ({
+                                  _key: string;
+                                } & FilterSearch)
+                              | ({
+                                  _key: string;
+                                } & FilterSort)
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockContentCta";
+                internal?: LinkInternal;
+                external?: LinkExternal;
+                align?: "center" | "left" | "right";
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
+          en: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "c-chapo" | "normal";
+                listItem?: "bullet";
+                markDefs: Array<
+                  | {
+                      href?: string;
+                      _type: "linkExternal";
+                      _key: string;
+                    }
+                  | {
+                      reference:
+                        | {
+                            _id: string;
+                            _type: "artist";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            name?: string;
+                            last_name?: string;
+                            first_name?: string;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            text?: LocaleBlockContent;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "event";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            pastille?: LocaleString;
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "exhibition";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            links?: Array<
+                              {
+                                _key: string;
+                              } & LinkExternal
+                            >;
+                            linkTickets?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            countdown?: number;
+                            location?:
+                              | "inside-cube"
+                              | "inside-tube"
+                              | "inside"
+                              | "itinerant"
+                              | "outside";
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            pastille?: LocaleString;
+                            color?: Color;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            aroundTheExhibition?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | SerieThematiqueReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "feuilletage";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            subTitle?: LocaleText;
+                            description?: LocaleText;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            chercheur?: ChercheurReference;
+                            dates?: Array<
+                              {
+                                _key: string;
+                              } & FhcbDate
+                            >;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            index?: string;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | ArtistReference
+                              | EventReference
+                              | ExhibitionReference
+                              | FeuilletageReference
+                              | ImageImagesReference
+                              | LibraryReference
+                              | PageModulaireReference
+                              | ProductReference
+                              | ProgrammeReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "imageImages";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            index?: string;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            chercheur?: ChercheurReference;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            video?: Video;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            exhibition?: ExhibitionReference;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                            >;
+                            rebonds?: Array<
+                              {
+                                _key: string;
+                              } & ImageImagesReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "library";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              caption?: LocaleString;
+                              alt?: LocaleString;
+                              author?: string;
+                              copyright?: string;
+                              _type: "image";
+                            };
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ListProductUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                            >;
+                            miseEnAvant?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            sliderSelection?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                            items?: Array<
+                              {
+                                _key: string;
+                              } & ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "pageModulaire";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            videoCover?: MuxVideo;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebondsLabel?:
+                              | "aroundThertist"
+                              | "discover"
+                              | "discoverTheArtist"
+                              | "discoverTheExhibition"
+                              | "discoverToo"
+                              | "readMore"
+                              | "toDiscoverToo"
+                              | "viewMore";
+                            rebondsLabelLibre?: LocaleString;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "product";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            shopifyId?: string;
+                            shopifyHandle?: string;
+                            price?: number;
+                            compareAtPrice?: number;
+                            inStock?: boolean;
+                            totalInventory?: number;
+                            variants?: Array<
+                              {
+                                _key: string;
+                              } & ProductVariant
+                            >;
+                            syncedAt?: string;
+                            artists?: Array<
+                              {
+                                _key: string;
+                              } & ArtistReference
+                            >;
+                            artistName?: string;
+                            exhibition?: ExhibitionReference;
+                            subTitle?: string;
+                            editeur?: string;
+                            auteurs?: string;
+                            traducteurs?: string;
+                            direction_editoriale?: string;
+                            isbn?: string;
+                            reliure?: string;
+                            dimensions?: string;
+                            nombre_de_pages?: string;
+                            languages?: Array<string>;
+                            publicationDate?: string;
+                            version_linguistique?: string;
+                            metas?: Array<
+                              {
+                                _key: string;
+                              } & KeyVal
+                            >;
+                            tagsProduct?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            categories?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            pastille?: LocaleString;
+                            tags?: Array<
+                              {
+                                _key: string;
+                              } & TagProductReference
+                            >;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            images?: Array<{
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                              _key: string;
+                            }>;
+                            text?: LocaleBlockContent;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                            rebonds?: ArrayOf<
+                              | EventReference
+                              | ExhibitionReference
+                              | PageModulaireReference
+                              | ProductReference
+                            >;
+                          }
+                        | {
+                            _id: string;
+                            _type: "programme";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            seo?: Seo;
+                            title?: LocaleString;
+                            slug?: Slug;
+                            imageCover?: {
+                              asset?: SanityImageAssetReference;
+                              media?: unknown;
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            items?:
+                              | "events"
+                              | "exhibitions-current"
+                              | "exhibitions-futur"
+                              | "exhibitions-out-of-the-box"
+                              | "exhibitions-past"
+                              | "guided-tours";
+                            filterTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            excludeTags?: Array<
+                              {
+                                _key: string;
+                              } & TagReference
+                            >;
+                            filters?: Array<
+                              | ({
+                                  _key: string;
+                                } & FilterList)
+                              | ({
+                                  _key: string;
+                                } & FilterSearch)
+                              | ({
+                                  _key: string;
+                                } & FilterSort)
+                            >;
+                            modules?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlockquoteUI)
+                              | ({
+                                  _key: string;
+                                } & FeaturedCardsUI)
+                              | ({
+                                  _key: string;
+                                } & FormUI)
+                              | ({
+                                  _key: string;
+                                } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & ImagesUI)
+                              | ({
+                                  _key: string;
+                                } & ListConversationUI)
+                              | ({
+                                  _key: string;
+                                } & ListEventsUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsPastUI)
+                              | ({
+                                  _key: string;
+                                } & ListExhibitionsUI)
+                              | ({
+                                  _key: string;
+                                } & ListFeuilletageUI)
+                              | ({
+                                  _key: string;
+                                } & ListImageImages)
+                              | ({
+                                  _key: string;
+                                } & ListSerieThematiqueUI)
+                              | ({
+                                  _key: string;
+                                } & ListsUI)
+                              | ({
+                                  _key: string;
+                                } & ListUI)
+                              | ({
+                                  _key: string;
+                                } & NewsCardUI)
+                              | ({
+                                  _key: string;
+                                } & ProgrammeUI)
+                              | ({
+                                  _key: string;
+                                } & RessourcesUI)
+                              | ({
+                                  _key: string;
+                                } & SliderArtistUI)
+                              | ({
+                                  _key: string;
+                                } & SliderCardUI)
+                              | ({
+                                  _key: string;
+                                } & TextImageUI)
+                              | ({
+                                  _key: string;
+                                } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
+                                } & VideoUI)
+                            >;
+                          }
+                        | null;
+                      _type: "linkInternal";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "blockContentCta";
+                internal?: LinkInternal;
+                external?: LinkExternal;
+                align?: "center" | "left" | "right";
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "blockquote";
+                text?: string;
+                author?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "embed";
+                title?: LocaleString;
+                placeholder?: {
+                  asset?: SanityImageAssetReference;
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  _type: "image";
+                };
+                url?: string;
+                iframe?: string;
+                aspectRatio?: string;
+                markDefs: null;
+              }
+            | {
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "keyValGroup";
+                title?: LocaleString;
+                items: Array<
+                  | {
+                      _key: string;
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      image: null;
+                    }
+                  | {
+                      _key: string;
+                      _type: "keyVal";
+                      title?: LocaleString;
+                      image: {
+                        asset: {
+                          _id: string;
+                          assetId: string | null;
+                          title: string | null;
+                          altText: string | null;
+                          description: string | null;
+                          creditLine: null;
+                          metadata: {
+                            lqip: string | null;
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      text?: LocaleText;
+                    }
+                > | null;
+                markDefs: null;
+              }
+          > | null;
         } | null;
       }
     | {
@@ -30137,6 +34007,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -30233,6 +34106,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -33280,6 +37156,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -33376,6 +37255,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -34104,6 +37986,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -34169,6 +38054,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -35025,6 +38913,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -35090,6 +38981,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -35955,6 +39849,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -36020,6 +39917,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -36876,6 +40776,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -36941,6 +40844,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -37942,6 +41848,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -38007,6 +41916,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -38863,6 +42775,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -38928,6 +42843,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -40021,6 +43939,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -40086,6 +44007,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -40942,6 +44866,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -41007,6 +44934,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -42382,6 +46312,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -42478,6 +46411,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -45525,6 +49461,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -45621,6 +49560,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -46349,6 +50291,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -46414,6 +50359,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -47270,6 +51218,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -47335,6 +51286,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -48200,6 +52154,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -48265,6 +52222,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -49121,6 +53081,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -49186,6 +53149,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -50187,6 +54153,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -50252,6 +54221,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -51108,6 +55080,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -51173,6 +55148,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -52833,6 +56811,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -52898,6 +56879,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -53754,6 +57738,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -53819,6 +57806,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -55556,6 +59546,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -55652,6 +59645,9 @@ export type CONVERSATION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -58699,6 +62695,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -58795,6 +62794,9 @@ export type CONVERSATION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -59523,6 +63525,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -59588,6 +63593,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -60444,6 +64452,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -60509,6 +64520,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -61374,6 +65388,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -61439,6 +65456,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -62295,6 +66315,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -62360,6 +66383,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -63361,6 +67387,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -63426,6 +67455,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -64282,6 +68314,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -64347,6 +68382,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -66269,6 +70307,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -66365,6 +70406,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -69412,6 +73456,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -69508,6 +73555,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -70236,6 +74286,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -70301,6 +74354,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -71157,6 +75213,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -71222,6 +75281,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -72087,6 +76149,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -72152,6 +76217,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -73008,6 +77076,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -73073,6 +77144,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -74074,6 +78148,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -74139,6 +78216,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -74995,6 +79075,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & TextSidebarUI)
                               | ({
                                   _key: string;
+                                } & TextUI)
+                              | ({
+                                  _key: string;
                                 } & VideoUI)
                             >;
                             rebonds?: ArrayOf<
@@ -75060,6 +79143,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & TextSidebarUI)
+                              | ({
+                                  _key: string;
+                                } & TextUI)
                               | ({
                                   _key: string;
                                 } & VideoUI)
@@ -76400,6 +80486,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -76496,6 +80585,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
@@ -77546,6 +81638,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & TextSidebarUI)
                 | ({
                     _key: string;
+                  } & TextUI)
+                | ({
+                    _key: string;
                   } & VideoUI)
               >;
               rebonds?: ArrayOf<
@@ -77642,6 +81737,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & TextSidebarUI)
+                | ({
+                    _key: string;
+                  } & TextUI)
                 | ({
                     _key: string;
                   } & VideoUI)
