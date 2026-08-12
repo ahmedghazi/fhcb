@@ -238,9 +238,15 @@ export const textSidebarUI = `
           ${imageAsset}
         }
       },
-      partenaires[]->{
+      partenaires[]{
         ...,
-        imageCover{
+        image{
+          ${imageAsset}
+        }
+      },
+      partenairesMedia[]{
+        ...,
+        image{
           ${imageAsset}
         }
       },

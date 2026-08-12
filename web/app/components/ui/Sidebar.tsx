@@ -13,7 +13,15 @@ type Props = {
 };
 
 const Sidebar = ({ input }: Props) => {
-  const { commissariat, coProduction, partenaires, products, keyVal } = input;
+  const {
+    commissariat,
+    coProduction,
+    partenaires,
+    partenairesMedia,
+    products,
+    keyVal,
+  } = input;
+  console.log(input);
   return (
     <aside className='sidebar'>
       {commissariat && (
@@ -62,6 +70,33 @@ const Sidebar = ({ input }: Props) => {
                   item.imageCover.asset && (
                     <Figure asset={item.imageCover.asset} />
                   )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {partenairesMedia && (
+        <div className='sidebar__item'>
+          <h3 className='c-tag underline'>Partenaires media</h3>
+          {/* <pre>{JSON.stringify(partenairesMedia, null, 2)}</pre> */}
+          <ul>
+            {partenairesMedia.map((item: any, i: number) => (
+              <li key={i}>
+                {item && (
+                  <>
+                    {item && item.title && (
+                      <div>{_localizeField(item.title) || ""}</div>
+                    )}
+                    {item.text && (
+                      <div className='c-body--tight'>
+                        {_localizeField(item.text) || ""}
+                      </div>
+                    )}
+                    {item.image && item.image.asset && (
+                      <Figure asset={item.image.asset} />
+                    )}
+                  </>
+                )}
               </li>
             ))}
           </ul>

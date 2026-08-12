@@ -460,6 +460,14 @@ export type SidebarGeneriqueExpanded = Omit<
         _key: string;
       } & PartenaireExpanded)
   > | null;
+  partenairesMedia?: Array<
+    | ({
+        _key: string;
+      } & KeyValExpanded)
+    | ({
+        _key: string;
+      } & PartenaireExpanded)
+  > | null;
   products?: Array<
     {
       _key: string;
