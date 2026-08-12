@@ -1,8 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import { FormUI } from "@/app/sanity-api/types/sanity.types";
+import { FormUI, LocaleString } from "@/app/sanity-api/types/sanity.types";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import clsx from "clsx";
+
+type SubjectProps = Array<{
+  to?: string;
+  title?: LocaleString;
+  description?: LocaleString;
+  _type: "subectItem";
+  _key: string;
+}>;
 
 type Props = {
   input: FormUI;
@@ -10,15 +18,21 @@ type Props = {
 
 const ModuleFormUI = ({ input }: Props) => {
   const { title, subject } = input;
+  const [selectedSubject, setSelectedSubject] = useState<SubjectProps | null>(
+    null,
+  );
   const [data, setData] = useState({});
   const _update = (key: string, val: any) => {
-    console.log(val);
+    // console.log(val);
+    if (key === "subject") {
+      setSelectedSubject(val);
+    }
     setData((pre) => ({ ...pre, [key]: val }));
   };
   const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(selectedSubject);
     console.log(data);
-    console.log(subject.to);
   };
   const fields = [
     {

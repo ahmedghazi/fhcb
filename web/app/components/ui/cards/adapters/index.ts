@@ -140,7 +140,7 @@ export function exhibitionToCard(
     tags: toTags(tags),
     // title: (_localizeField(title) as string) || "",
     // subTitle: artistList,
-    title: artistList,
+    title: (artistList as string) || "",
     subTitle: (_localizeField(title) as string) || "",
     infoNode: toInfoNode(dates),
     actions: actions,
