@@ -95,11 +95,11 @@ export const structure = (S: any) =>
         .schemaType('feuilletage')
         .child(S.documentTypeList('feuilletage')),
       S.listItem()
-        .title('Série Thématique')
+        .title('Focus')
         .schemaType('serieThematique')
         .child(S.documentTypeList('serieThematique')),
       S.listItem()
-        .title('Conversation')
+        .title('Paroles')
         .schemaType('conversation')
         .child(S.documentTypeList('conversation')),
 

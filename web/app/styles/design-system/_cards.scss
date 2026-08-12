@@ -146,6 +146,9 @@
         }
       }
     }
+    &.card--is-portrait .card__inner--row .grid figure img {
+      width: var(--gridder-4_12) !important;
+    }
     .grid {
       gap: 0;
       display: flex;
