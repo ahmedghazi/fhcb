@@ -138,8 +138,10 @@ export function exhibitionToCard(
     colorVar: "var(--color-exhibition)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
-    title: (_localizeField(title) as string) || "",
-    subTitle: artistList,
+    // title: (_localizeField(title) as string) || "",
+    // subTitle: artistList,
+    title: artistList,
+    subTitle: (_localizeField(title) as string) || "",
     infoNode: toInfoNode(dates),
     actions: actions,
     badge:

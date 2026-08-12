@@ -91,7 +91,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
               {artists && (
                 <li className='sidebar__item'>
                   <div className='c-tag underline'>
-                    {_localizeText("artists")}
+                    {_localizeText("artist_s")}
                   </div>
                   <div className='c-body--tight'>
                     {artists.map((item, i) => (
@@ -137,8 +137,8 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                     <div className='c-body--tight'>{nombre_de_pages}</div>
                   )}
                   {reliure && <div className='c-body--tight'>{reliure}</div>}
+                  {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>}
 
-                  {isbn && <div className='c-body--tight'>{isbn}</div>}
                   {traducteurs && (
                     <div className='c-body--tight'>{traducteurs}</div>
                   )}
@@ -185,10 +185,10 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
             <div className='md:col-span-3-'></div>
             <div className='md:col-span-2'>
               <div className='text'>
-                {/* <PortableText
+                <PortableText
                   value={_localizeField(text)}
                   components={portableTextComponents}
-                /> */}
+                />
               </div>
             </div>
             <div className='md:col-span-1'></div>

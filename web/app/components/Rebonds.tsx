@@ -9,7 +9,6 @@ type Props = {
 };
 
 const Rebonds = ({ input, title = "discoverToo" }: Props) => {
-  console.log(input);
   if (!input || input.length === 0) return null;
   return (
     <section className='rebonds mb-lg'>
