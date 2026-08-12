@@ -423,6 +423,9 @@
   }
 
   &--branche {
+    .mux-player-container mux-player {
+      aspect-ratio: 1;
+    }
     &:hover .card__footer {
       // display: block;
     }
