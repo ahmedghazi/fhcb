@@ -74,6 +74,10 @@
         margin-bottom: var(--spacing-gutter);
       }
       .module__text {
+        .text {
+          // max-width: unset;
+          margin: 0;
+        }
       }
 
       @media all and (max-width: variables.$md) {

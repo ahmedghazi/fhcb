@@ -110,9 +110,7 @@ export default async function RootLayout({
                       dateExpiration={bandeauContextuel.dateExpiration}
                     />
                   )}
-                  <main>
-                    {children}
-                  </main>
+                  <main>{children}</main>
                   <Footer settings={settings} />
                   <CartModal />
                   {/* <Cursor color='black' size={20} /> */}
