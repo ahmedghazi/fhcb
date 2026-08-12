@@ -14,7 +14,7 @@ const i18n = {
     message: "Message",
     telephone: "Téléphone",
     organiation: "Organisation / institution",
-    optional: "Optionel",
+    optional: "Optionnel",
     send: "Envoyer",
     loading: "Envoi en cours...",
     success: "Message envoyé avec succès",

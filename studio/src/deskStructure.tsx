@@ -102,6 +102,11 @@ export const structure = (S: any) =>
         .title('Conversation')
         .schemaType('conversation')
         .child(S.documentTypeList('conversation')),
+
+      S.listItem()
+        .title('Chercheurs')
+        .schemaType('chercheur')
+        .child(S.documentTypeList('chercheur')),
       // S.listItem().title('Série Thématique').schemaType('serie').child(S.documentTypeList('serie')),
 
       S.divider(),

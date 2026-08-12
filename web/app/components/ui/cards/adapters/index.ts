@@ -351,10 +351,9 @@ export function pageModulaireToCard(
 
 export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
   const { imageCover, video, tags, index, chercheur, description } = input;
-  console.log(video);
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  // const isLandscape =
+  //   (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+  //   (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
 
   const tagsLabel =
     tags
@@ -370,9 +369,11 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     [_localizeField(input.subTitle), chercheur?.name]
       .filter(Boolean)
       .join(" — ") || undefined;
+
   return {
     _type: input._type,
-    layout: isLandscape ? "col" : "row",
+    // layout: isLandscape ? "col" : "row",
+    layout: "col",
     footerPlacement: "detached",
     colorVar: "var(--color-gris-100)",
     // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],

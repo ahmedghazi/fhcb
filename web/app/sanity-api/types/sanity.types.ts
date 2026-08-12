@@ -44,6 +44,7 @@ export type FormUI = {
   _type: "formUI";
   title?: LocaleString;
   subject?: Array<{
+    to?: string;
     title?: LocaleString;
     description?: LocaleString;
     _type: "subectItem";
@@ -1045,6 +1046,7 @@ export type Article = {
   _updatedAt: string;
   _rev: string;
   seo?: Seo;
+  date?: string;
   title?: LocaleString;
   slug?: Slug;
   subTitle?: LocaleText;
@@ -13546,6 +13548,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
         _type: "formUI";
         title?: LocaleString;
         subject?: Array<{
+          to?: string;
           title?: LocaleString;
           description?: LocaleString;
           _type: "subectItem";
@@ -13569,6 +13572,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -16711,6 +16715,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -29811,6 +29816,7 @@ export type PROGRAMME_QUERY_RESULT = {
         _type: "formUI";
         title?: LocaleString;
         subject?: Array<{
+          to?: string;
           title?: LocaleString;
           description?: LocaleString;
           _type: "subectItem";
@@ -29834,6 +29840,7 @@ export type PROGRAMME_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -32976,6 +32983,7 @@ export type PROGRAMME_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -42053,6 +42061,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
         _type: "formUI";
         title?: LocaleString;
         subject?: Array<{
+          to?: string;
           title?: LocaleString;
           description?: LocaleString;
           _type: "subectItem";
@@ -42076,6 +42085,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -45218,6 +45228,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -55224,6 +55235,7 @@ export type CONVERSATION_QUERY_RESULT = {
         _type: "formUI";
         title?: LocaleString;
         subject?: Array<{
+          to?: string;
           title?: LocaleString;
           description?: LocaleString;
           _type: "subectItem";
@@ -55247,6 +55259,7 @@ export type CONVERSATION_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -58389,6 +58402,7 @@ export type CONVERSATION_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -65769,6 +65783,7 @@ export type ARTICLE_QUERY_RESULT = {
       } | null;
     } | null;
   } | null;
+  date?: string;
   title?: LocaleString;
   slug?: Slug;
   subTitle?: LocaleText;
@@ -65933,6 +65948,7 @@ export type ARTICLE_QUERY_RESULT = {
         _type: "formUI";
         title?: LocaleString;
         subject?: Array<{
+          to?: string;
           title?: LocaleString;
           description?: LocaleString;
           _type: "subectItem";
@@ -65956,6 +65972,7 @@ export type ARTICLE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -69098,6 +69115,7 @@ export type ARTICLE_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -76085,6 +76103,7 @@ export type LIBRARY_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;
@@ -77230,6 +77249,7 @@ export type LIBRARY_QUERY_RESULT = {
               _updatedAt: string;
               _rev: string;
               seo?: Seo;
+              date?: string;
               title: LocaleString | null;
               slug: Slug | null;
               subTitle: LocaleText | null;

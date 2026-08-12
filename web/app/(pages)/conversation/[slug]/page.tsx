@@ -57,7 +57,7 @@ const ConversationTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--conversation'
       data-template='conversation'
       data-slug={data.slug?.current || ""}>
-      <PageHeader h1={data.title} />
+      <PageHeader h1={data.title} subTitle={data.subTitle} />
       {/* <div className='container-fluid'>
         {data.video && <EmbedVideo input={data.video} />}
       </div> */}

@@ -28,7 +28,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     setActive(next);
     onChange(next);
   };
-  console.log(active);
+
   const _toggle = (key: string, value: string) => {
     const current = active[key];
     const arr = Array.isArray(current) ? current : current ? [current] : [];

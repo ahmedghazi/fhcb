@@ -18,7 +18,7 @@ export default defineType({
     defineField({
       name: 'name',
       type: 'string',
-      title: 'Nom',
+      title: 'Nom entier',
       validation: (Rule) => Rule.required(),
       group: 'editorial',
     }),
@@ -26,7 +26,7 @@ export default defineType({
       name: 'last_name',
       type: 'string',
       title: 'Nom',
-      description: 'Utilisé dans les filtres',
+      description: 'Utilisé dans les filtres (ex: "Grammont" => G)',
       group: 'editorial',
     }),
     defineField({

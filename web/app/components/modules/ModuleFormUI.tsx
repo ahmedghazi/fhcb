@@ -18,6 +18,7 @@ const ModuleFormUI = ({ input }: Props) => {
   const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(data);
+    console.log(subject.to);
   };
   const fields = [
     {
@@ -94,9 +95,12 @@ const ModuleFormUI = ({ input }: Props) => {
                     )}>
                     <label>
                       <span>{item.label}</span>
+                      <span> </span>
                       {item.required && "*"}
                       {!item.required && (
-                        <span>({_localizeText("optional")})</span>
+                        <span className='pr-0.5'>
+                          ({_localizeText("optional")})
+                        </span>
                       )}
                     </label>
                     {item.type !== "textarea" ? (

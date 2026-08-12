@@ -107,10 +107,11 @@ export type SerieThematiqueExpanded = Omit<
 
 export type ConversationExpanded = Omit<
   Conversation,
-  "chercheur" | "artists" | "rebonds" | "imageCover"
+  "chercheur" | "artists" | "tags" | "rebonds" | "imageCover"
 > & {
   chercheur?: Chercheur | null;
   artists?: Array<ArtistExpanded> | null;
+  tags?: Array<Tag> | null;
   rebonds?: Array<ImageImagesExpanded> | null;
   imageCover?:
     | (Omit<NonNullable<NonNullable<Conversation>["imageCover"]>, "asset"> & {

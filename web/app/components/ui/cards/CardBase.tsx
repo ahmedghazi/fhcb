@@ -118,6 +118,21 @@ const ActionButtons = ({
   </div>
 );
 
+// ─── CardLinkOverlay ──────────────────────────────────────────────────────────
+// Rend toute la carte cliquable vers l'action primaire (premier lien de `actions`).
+// Les boutons visibles (dont un éventuel bouton secondaire) restent cliquables
+// individuellement grâce au z-index appliqué sur `.card__btns` en CSS.
+
+const CardLinkOverlay = ({ href }: { href: string }) => (
+  <Link
+    href={href}
+    className='card__link-overlay'
+    aria-hidden
+    tabIndex={-1}
+    draggable={false}
+  />
+);
+
 // ─── CardBase ────────────────────────────────────────────────────────────────
 
 const CardBase = ({
@@ -220,12 +235,14 @@ const CardBase = ({
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
   };
+  const primaryAction = actions[0];
 
   // ── COL + image top ──────────────────────────────────────────────────────────
   // card__media → card__body(header + footer(infoNode + btns))
   if (layout === "col" && imagePlacement === "top") {
     return (
       <div className={cardInnerClass} style={cardStyle} {...handlers}>
+        {primaryAction && <CardLinkOverlay href={primaryAction.href} />}
         {hasMedia && mediaBlock}
         {badge && <CardBadge {...badge} />}
 
@@ -251,6 +268,7 @@ const CardBase = ({
   if (layout === "col") {
     return (
       <div className={cardInnerClass} style={cardStyle} {...handlers}>
+        {primaryAction && <CardLinkOverlay href={primaryAction.href} />}
         {badge && <CardBadge {...badge} />}
         {headerSlot}
         {hasMedia && mediaBlock}
@@ -290,6 +308,7 @@ const CardBase = ({
   if (!isDetached) {
     return (
       <div className={cardInnerClass} style={cardStyle} {...handlers}>
+        {primaryAction && <CardLinkOverlay href={primaryAction.href} />}
         {badge && <CardBadge {...badge} />}
 
         <div className='grid'>
@@ -320,6 +339,7 @@ const CardBase = ({
   // card__footer rendu par le parent via <CardFooter>
   return (
     <div className={cardInnerClass} style={cardStyle} {...handlers}>
+      {primaryAction && <CardLinkOverlay href={primaryAction.href} />}
       {badge && <CardBadge {...badge} />}
 
       <div className='grid'>

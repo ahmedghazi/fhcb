@@ -86,6 +86,12 @@
         }
       }
     }
+    &--images-ui {
+      h2 {
+        text-align: center;
+        margin-bottom: var(--spacing-gutter);
+      }
+    }
     &--lists-ui {
       h2 {
         text-align: center;

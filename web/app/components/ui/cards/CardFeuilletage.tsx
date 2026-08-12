@@ -25,7 +25,7 @@ const CardFeuilletage = ({ input, size = "md" }: Props) => {
       className={clsx(
         "card card--feuilletage",
         `card--${size}`,
-        isLandscape ? "card--is-landscape" : "card--is-portrait",
+        // isLandscape ? "card--is-landscape" : "card--is-portrait",
         // tagsClassList,
       )}>
       <CardBase {...props} />
