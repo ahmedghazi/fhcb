@@ -28,6 +28,10 @@ const FilterList = ({
   const open = isOpen;
   const [selectedLetter, setSelectedLetter] = useState<string[]>([]);
   const { locale } = useLocale();
+  // tagProduct is a small, curated set with an explicit business `order` —
+  // the A-Z index makes sense for long name lists (artist/tag/chercheur)
+  // but not here, so render it as a flat list in the given order instead.
+  const isFlatList = def.filterKey === "tagProduct";
   const wrapperRef = useRef<HTMLDivElement>(null);
   const detailRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -106,63 +110,79 @@ const FilterList = ({
 
       <div ref={detailRef} className='ui-filter__detail'>
         <div className='container-fluid'>
-          <div className='ui-filter__list-alpha hide-sb'>
-            {letters.map((letter) => (
-              <button
-                key={letter}
-                className={clsx(
-                  "ui-filter__list-alpha-btn btn--chip",
-                  (selectedLetter?.includes(letter) ||
-                    activeLetters.has(letter)) &&
-                    "is-active",
-                )}
-                onClick={() => {
-                  setSelectedLetter((prev) =>
-                    prev?.includes(letter)
-                      ? prev.filter((l) => l !== letter)
-                      : [...(prev || []), letter],
-                  );
-                }}>
-                {letter}
-              </button>
-            ))}
-          </div>
+          {!isFlatList && (
+            <div className='ui-filter__list-alpha hide-sb'>
+              {letters.map((letter) => (
+                <button
+                  key={letter}
+                  className={clsx(
+                    "ui-filter__list-alpha-btn btn--chip",
+                    (selectedLetter?.includes(letter) ||
+                      activeLetters.has(letter)) &&
+                      "is-active",
+                  )}
+                  onClick={() => {
+                    setSelectedLetter((prev) =>
+                      prev?.includes(letter)
+                        ? prev.filter((l) => l !== letter)
+                        : [...(prev || []), letter],
+                    );
+                  }}>
+                  {letter}
+                </button>
+              ))}
+            </div>
+          )}
           <div className='ui-filter__list-items'>
-            {letters.map((letter) => (
-              <div
-                key={letter}
-                id={`filter-list-${def._key}-${letter}`}
-                hidden={
-                  selectedLetter.length > 0 &&
-                  !selectedLetter.some((l) => l.startsWith(letter))
-                }>
-                {opts
-                  .filter(
-                    (o) =>
-                      loc(o.last_name ?? o.name ?? o.title)
-                        .charAt(0)
-                        .toUpperCase() === letter,
-                  )
-                  .sort((a, b) =>
-                    loc(a.last_name ?? a.name ?? a.title).localeCompare(
-                      loc(b.last_name ?? b.name ?? b.title),
-                    ),
-                  )
-                  .map((opt) => (
-                    <label key={opt._id} className='ui-filter__checkbox'>
-                      <input
-                        className='ui-checkbox'
-                        type='checkbox'
-                        name={def.filterKey}
-                        value={opt._id}
-                        checked={activeValues.includes(opt._id)}
-                        onChange={() => onToggle(def.filterKey, opt._id)}
-                      />
-                      <span>{loc(opt.name ?? opt.title)}</span>
-                    </label>
-                  ))}
-              </div>
-            ))}
+            {isFlatList
+              ? opts.map((opt) => (
+                  <label key={opt._id} className='ui-filter__checkbox'>
+                    <input
+                      className='ui-checkbox'
+                      type='checkbox'
+                      name={def.filterKey}
+                      value={opt._id}
+                      checked={activeValues.includes(opt._id)}
+                      onChange={() => onToggle(def.filterKey, opt._id)}
+                    />
+                    <span>{loc(opt.name ?? opt.title)}</span>
+                  </label>
+                ))
+              : letters.map((letter) => (
+                  <div
+                    key={letter}
+                    id={`filter-list-${def._key}-${letter}`}
+                    hidden={
+                      selectedLetter.length > 0 &&
+                      !selectedLetter.some((l) => l.startsWith(letter))
+                    }>
+                    {opts
+                      .filter(
+                        (o) =>
+                          loc(o.last_name ?? o.name ?? o.title)
+                            .charAt(0)
+                            .toUpperCase() === letter,
+                      )
+                      .sort((a, b) =>
+                        loc(a.last_name ?? a.name ?? a.title).localeCompare(
+                          loc(b.last_name ?? b.name ?? b.title),
+                        ),
+                      )
+                      .map((opt) => (
+                        <label key={opt._id} className='ui-filter__checkbox'>
+                          <input
+                            className='ui-checkbox'
+                            type='checkbox'
+                            name={def.filterKey}
+                            value={opt._id}
+                            checked={activeValues.includes(opt._id)}
+                            onChange={() => onToggle(def.filterKey, opt._id)}
+                          />
+                          <span>{loc(opt.name ?? opt.title)}</span>
+                        </label>
+                      ))}
+                  </div>
+                ))}
           </div>
         </div>
       </div>

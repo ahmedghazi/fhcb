@@ -17,14 +17,14 @@ export type FilterCheckboxOption = {
   slug?: { current?: string };
 };
 
-// Referenced artist, tag, or chercheur, resolved by GROQ `->`,
+// Referenced artist, tag, chercheur, or tagProduct, resolved by GROQ `->`,
 // or a plain language code normalized into the same shape on the client
 export type FilterRadioOption = {
   _id: string;
-  _type: "artist" | "tag" | "chercheur" | "language";
+  _type: "artist" | "tag" | "tagProduct" | "chercheur" | "language";
   name?: string; // artist, chercheur, language
   last_name?: string; // artist, chercheur
-  title?: LocaleString; // tag
+  title?: LocaleString; // tag, tagProduct
   slug?: { current?: string };
 };
 

@@ -105,6 +105,7 @@ export const cardRefProduct = `
     title
   },
   tagsProduct[]->{
+    order,
     _id, title, slug, handle
   },
   artists[]->{

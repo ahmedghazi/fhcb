@@ -21,12 +21,12 @@ type Props = {
 const ModuleListProductUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
-
   const rawFilterDefs: SanityFilterDef[] = input.filters ?? [];
   const filterDefs = withResolvedOptions(
     rawFilterDefs,
     input.resolvedItems ?? [],
   );
+
   const filteredItems = applyFilters(
     input.resolvedItems ?? [],
     filterDefs,
@@ -51,16 +51,6 @@ const ModuleListProductUI = ({ input }: Props) => {
             <GridMasonryDessandro>
               {filteredItems.map((item: ProductExpanded, index: number) => (
                 <CardProduct key={`--${index}`} input={item} size={"sm"} />
-                // <Fragment key={`--${index}`}>
-                //   <div
-                //     style={
-                //       {
-                //         // width: "var(--gridder-1_4)",
-                //       }
-                //     }>
-                //     <CardProduct input={item} size={"sm"} />
-                //   </div>
-                // </Fragment>
               ))}
             </GridMasonryDessandro>
           )}

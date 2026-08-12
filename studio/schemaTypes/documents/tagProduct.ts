@@ -17,6 +17,12 @@ export default defineType({
   ],
   fields: [
     defineField({
+      name: 'order',
+      title: 'Ordre',
+      type: 'number',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'title',
       title: 'Titre',
       type: 'localeString',
@@ -41,6 +47,7 @@ export default defineType({
   preview: {
     select: {
       title: `title.${baseLanguage}`,
+      subtitle: 'order',
     },
   },
   // orderings: [

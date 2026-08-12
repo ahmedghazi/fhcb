@@ -1,4 +1,8 @@
 import { ActiveFilters, SanityFilterDef } from "./filters.types";
+import {
+  isLanguageOptionName,
+  normalizeLanguageValue,
+} from "./collectFilterOptions";
 
 const localize = (field: any, locale: string): string => {
   if (!field) return "";
@@ -120,7 +124,14 @@ export const applyFilters = <T extends Record<string, any>>(
           }
           if (def.filterKey === "language") {
             return (
-              item.languages?.some((l: string) => ids.includes(l)) ?? false
+              item.variants?.some((v: any) =>
+                v.selectedOptions?.some(
+                  (o: any) =>
+                    isLanguageOptionName(o.name) &&
+                    o.value &&
+                    ids.includes(normalizeLanguageValue(o.value)),
+                ),
+              ) ?? false
             );
           }
           return true;
