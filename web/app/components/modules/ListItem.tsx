@@ -13,9 +13,9 @@ const ListItemComponent = ({ input }: Props) => {
     <div className='list-item'>
       <div className='title c-h3'>{_localizeField(input.title)}</div>
       {input.content && (
-        <div className='module__text text'>
+        <div className='content text'>
           <PortableText
-            value={input.content}
+            value={_localizeField(input.content)}
             components={portableTextComponents}
           />
         </div>
