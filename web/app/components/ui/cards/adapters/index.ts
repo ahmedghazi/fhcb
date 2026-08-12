@@ -161,6 +161,7 @@ export function productToCard(
     price,
     artists,
     artistName,
+    variants,
     languages,
     totalInventory,
     pastille,
@@ -178,12 +179,13 @@ export function productToCard(
   if (size === "md") {
     layout = imagePortrait ? "row" : "col";
   }
-  const isProductVariable = languages && languages?.length > 1;
-  const isLowStock = totalInventory && totalInventory < 10;
+  const isSimpleProduct = !variants || variants.length === 0;
+  // const isProductVariable = languages && languages?.length > 1;
+  // const isLowStock = totalInventory && totalInventory < 10;
 
   const actions: CardAction[] = [];
   actions.push({
-    label: isProductVariable
+    label: !isSimpleProduct
       ? _localizeText("chooseOptions")
       : (_localizeText("discover") as string),
     href: _linkResolver(input),
@@ -201,7 +203,7 @@ export function productToCard(
     title: title,
     subTitle: artistName ? _parseJsonStringArray(artistName) : artistsName,
     infoNode: price ? `${price} €` : undefined,
-    actionsNode: !isProductVariable
+    actionsNode: isSimpleProduct
       ? React.createElement(BtnAddToCart, { input: input as any })
       : undefined,
     actions: actions,
