@@ -78,10 +78,7 @@ const Modules = ({ modules }: ModulesList) => {
           );
         case "listConversationUI":
           return (
-            <ModuleListConversationUI
-              key={module._key}
-              input={module as any}
-            />
+            <ModuleListConversationUI key={module._key} input={module as any} />
           );
         case "listExhibitionsUI":
           return (

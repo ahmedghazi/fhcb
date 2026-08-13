@@ -14,15 +14,21 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
   if (!input) return null;
   const { slug } = input;
   const { settings } = usePageContext();
-
+  console.log(slug?.current);
   let supTitle = "";
   if (slug?.current?.includes("image")) {
     supTitle = `[${settings?.totalImageImages}]`;
   } else if (slug?.current?.includes("feuilletage")) {
     supTitle = `[${settings?.totalFeuilletages}]`;
-  } else if (slug?.current?.includes("series-thematique")) {
+  } else if (
+    slug?.current?.includes("series-thematique") ||
+    slug?.current?.includes("focus")
+  ) {
     supTitle = `[${settings?.totalSerieThematique}]`;
-  } else if (slug?.current?.includes("conversation")) {
+  } else if (
+    slug?.current?.includes("conversation") ||
+    slug?.current?.includes("paroles")
+  ) {
     supTitle = `[${settings?.totalConversation}]`;
   }
 
