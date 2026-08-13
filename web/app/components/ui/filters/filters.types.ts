@@ -68,8 +68,9 @@ export type SanityFilterDef =
       filterLabel?: LocaleString;
     };
 
-// Active filter state: filterKey → current value(s)
+// Active filter state: filterKey → current value. Filters are never
+// cumulated — each key holds at most one value at a time.
 // "sort"        → "index-asc"
 // "search"      → search term
-// "artist"/"tag"→ one or many referenced document _ids
-export type ActiveFilters = Record<string, string | string[]>;
+// "artist"/"tag"→ one referenced document _id
+export type ActiveFilters = Record<string, string>;

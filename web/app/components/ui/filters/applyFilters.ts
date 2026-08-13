@@ -56,7 +56,7 @@ export const applyFilters = <T extends Record<string, any>>(
   for (const def of filterDefs) {
     if (def._type === "filterSort") {
       const value = activeFilters["sort"];
-      if (typeof value === "string" && value) {
+      if (value) {
         const dashIdx = value.lastIndexOf("-");
         const field = value.substring(0, dashIdx);
         const direction = value.substring(dashIdx + 1) as "asc" | "desc";
@@ -91,8 +91,7 @@ export const applyFilters = <T extends Record<string, any>>(
     }
 
     if (def._type === "filterSearch") {
-      const raw = activeFilters["search"];
-      const term = typeof raw === "string" ? raw : "";
+      const term = activeFilters["search"] ?? "";
       if (term && def.searchIn?.length) {
         result = result.filter((item) =>
           matchesSearch(item, def.searchIn!, term, locale),
@@ -100,27 +99,22 @@ export const applyFilters = <T extends Record<string, any>>(
       }
     }
 
-    // filterList — checkbox multi-select: OR (item matches if ANY selected id matches)
+    // filterList — single select: exact match
     if (def._type === "filterList") {
-      const raw = activeFilters[def.filterKey];
-      const ids = Array.isArray(raw) ? raw : raw ? [raw] : [];
-      if (ids.length > 0) {
+      const id = activeFilters[def.filterKey];
+      if (id) {
         result = result.filter((item) => {
           if (def.filterKey === "artist") {
-            return item.artists?.some((a: any) => ids.includes(a._id)) ?? false;
+            return item.artists?.some((a: any) => a._id === id) ?? false;
           }
           if (def.filterKey === "tag") {
-            return item.tags?.some((t: any) => ids.includes(t._id)) ?? false;
+            return item.tags?.some((t: any) => t._id === id) ?? false;
           }
           if (def.filterKey === "tagProduct") {
-            return (
-              item.tagsProduct?.some((t: any) => ids.includes(t._id)) ?? false
-            );
+            return item.tagsProduct?.some((t: any) => t._id === id) ?? false;
           }
           if (def.filterKey === "chercheur") {
-            return item.chercheur?._id
-              ? ids.includes(item.chercheur._id)
-              : false;
+            return item.chercheur?._id === id;
           }
           if (def.filterKey === "language") {
             return (
@@ -129,7 +123,7 @@ export const applyFilters = <T extends Record<string, any>>(
                   (o: any) =>
                     isLanguageOptionName(o.name) &&
                     o.value &&
-                    ids.includes(normalizeLanguageValue(o.value)),
+                    normalizeLanguageValue(o.value) === id,
                 ),
               ) ?? false
             );
@@ -139,36 +133,26 @@ export const applyFilters = <T extends Record<string, any>>(
       }
     }
     if (def._type === "filterCheckbox") {
-      const raw = activeFilters[def.filterKey];
-      const ids = Array.isArray(raw) ? raw : raw ? [raw] : [];
-      // console.log(def);
-      // console.log(result);
-      if (ids.length > 0) {
-        console.log("result before", result);
+      const id = activeFilters[def.filterKey];
+      if (id) {
         result = result.filter((item) => {
           if (def.filterKey === "artist") {
-            return item.artists?.some((a: any) => ids.includes(a._id)) ?? false;
+            return item.artists?.some((a: any) => a._id === id) ?? false;
           }
           if (def.filterKey === "tag") {
-            return item.tags?.some((t: any) => ids.includes(t._id)) ?? false;
+            return item.tags?.some((t: any) => t._id === id) ?? false;
           }
           if (def.filterKey === "chercheur") {
-            return item.chercheur?._id
-              ? ids.includes(item.chercheur._id)
-              : false;
+            return item.chercheur?._id === id;
           }
           return true;
         });
-        console.log("result after", result);
       }
     }
 
     // filterRadio — single select: exact match (===)
     if (def._type === "filterRadio") {
-      const id =
-        typeof activeFilters[def.filterKey] === "string"
-          ? (activeFilters[def.filterKey] as string)
-          : "";
+      const id = activeFilters[def.filterKey];
       if (id) {
         result = result.filter((item) => {
           if (def.filterKey === "artist") {

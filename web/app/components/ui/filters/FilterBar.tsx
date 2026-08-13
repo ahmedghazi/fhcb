@@ -22,23 +22,28 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   const localizedClose = _localizeText("close");
   const localizedFilters = _localizeText("filters");
 
+  // Filters are mutually exclusive — selecting one clears every other
+  // active filter. "sort" is ordering, not filtering, so it's kept as-is.
+  const _base = (): ActiveFilters =>
+    active.sort ? { sort: active.sort } : {};
+
   const _update = (key: string, value: string) => {
-    const next = { ...active, [key]: value };
-    if (!value) delete next[key];
+    const next = key === "sort" ? { ...active } : _base();
+    if (value) {
+      next[key] = value;
+    } else {
+      delete next[key];
+    }
     setActive(next);
     onChange(next);
   };
+  console.log(active);
 
   const _toggle = (key: string, value: string) => {
-    const current = active[key];
-    const arr = Array.isArray(current) ? current : current ? [current] : [];
-    const next = {
-      ...active,
-      [key]: arr.includes(value)
-        ? arr.filter((v) => v !== value)
-        : [...arr, value],
-    };
-    if ((next[key] as string[]).length === 0) delete next[key];
+    const next = _base();
+    if (active[key] !== value) {
+      next[key] = value;
+    }
     setActive(next);
     onChange(next);
   };
@@ -134,13 +139,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                   onOpen={(key) =>
                     setOpenListKey((prev) => (prev === key ? null : key))
                   }
-                  activeValues={
-                    Array.isArray(active[def.filterKey])
-                      ? (active[def.filterKey] as string[])
-                      : active[def.filterKey]
-                        ? [active[def.filterKey] as string]
-                        : []
-                  }
+                  activeValue={active[def.filterKey] ?? ""}
                   onToggle={_toggle}
                 />
               );
@@ -151,13 +150,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                 <FilterCheckbox
                   key={def._key}
                   def={def}
-                  activeValues={
-                    Array.isArray(active[def.filterKey])
-                      ? (active[def.filterKey] as string[])
-                      : active[def.filterKey]
-                        ? [active[def.filterKey] as string]
-                        : []
-                  }
+                  activeValue={active[def.filterKey] ?? ""}
                   onToggle={_toggle}
                 />
               );
@@ -168,11 +161,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                 <FilterRadio
                   key={def._key}
                   def={def}
-                  activeValue={
-                    Array.isArray(active[def.filterKey])
-                      ? ""
-                      : ((active[def.filterKey] as string) ?? "")
-                  }
+                  activeValue={active[def.filterKey] ?? ""}
                   onSelect={_update}
                 />
               );

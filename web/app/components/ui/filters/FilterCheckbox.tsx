@@ -6,11 +6,11 @@ type FilterCheckboxDef = Extract<SanityFilterDef, { _type: "filterCheckbox" }>;
 
 type Props = {
   def: FilterCheckboxDef;
-  activeValues: string[];
+  activeValue: string;
   onToggle: (key: string, value: string) => void;
 };
 
-const FilterCheckbox = ({ def, activeValues, onToggle }: Props) => {
+const FilterCheckbox = ({ def, activeValue, onToggle }: Props) => {
   const opts = def.filterOptions ?? [];
 
   return (
@@ -30,7 +30,7 @@ const FilterCheckbox = ({ def, activeValues, onToggle }: Props) => {
                 type='checkbox'
                 name={def.filterKey}
                 value={opt._id}
-                checked={activeValues.includes(opt._id)}
+                checked={opt._id === activeValue}
                 // onChange={() => onSelect(def.filterKey, opt._id)}
                 onChange={() => onToggle(def.filterKey, opt._id)}
               />

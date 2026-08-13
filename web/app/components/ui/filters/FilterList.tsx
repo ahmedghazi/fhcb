@@ -11,7 +11,7 @@ type FilterListDef = Extract<SanityFilterDef, { _type: "filterList" }>;
 type Props = {
   def: FilterListDef;
   opts: FilterRadioOption[];
-  activeValues: string[];
+  activeValue: string;
   isOpen: boolean;
   onOpen: (key: string) => void;
   onToggle: (key: string, value: string) => void;
@@ -20,13 +20,13 @@ type Props = {
 const FilterList = ({
   def,
   opts,
-  activeValues,
+  activeValue,
   isOpen,
   onOpen,
   onToggle,
 }: Props) => {
   const open = isOpen;
-  const [selectedLetter, setSelectedLetter] = useState<string[]>([]);
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const { locale } = useLocale();
   // tagProduct is a small, curated set with an explicit business `order` —
   // the A-Z index makes sense for long name lists (artist/tag/chercheur)
@@ -66,7 +66,7 @@ const FilterList = ({
 
   const activeLetters = new Set(
     opts
-      .filter((o) => activeValues.includes(o._id))
+      .filter((o) => o._id === activeValue)
       .map((o) =>
         loc(o.last_name ?? o.name ?? o.title)
           .charAt(0)
@@ -101,7 +101,7 @@ const FilterList = ({
         </label>
         <div className='filters__value sm-only flex flex-col gap-0.5'>
           {opts
-            .filter((o) => activeValues.includes(o._id))
+            .filter((o) => o._id === activeValue)
             .map((opt) => (
               <span key={opt._id}>{loc(opt.name ?? opt.title)}</span>
             ))}
@@ -117,15 +117,12 @@ const FilterList = ({
                   key={letter}
                   className={clsx(
                     "ui-filter__list-alpha-btn btn--chip",
-                    (selectedLetter?.includes(letter) ||
-                      activeLetters.has(letter)) &&
+                    (selectedLetter === letter || activeLetters.has(letter)) &&
                       "is-active",
                   )}
                   onClick={() => {
                     setSelectedLetter((prev) =>
-                      prev?.includes(letter)
-                        ? prev.filter((l) => l !== letter)
-                        : [...(prev || []), letter],
+                      prev === letter ? null : letter,
                     );
                   }}>
                   {letter}
@@ -142,7 +139,7 @@ const FilterList = ({
                       type='checkbox'
                       name={def.filterKey}
                       value={opt._id}
-                      checked={activeValues.includes(opt._id)}
+                      checked={opt._id === activeValue}
                       onChange={() => onToggle(def.filterKey, opt._id)}
                     />
                     <span>{loc(opt.name ?? opt.title)}</span>
@@ -153,8 +150,7 @@ const FilterList = ({
                     key={letter}
                     id={`filter-list-${def._key}-${letter}`}
                     hidden={
-                      selectedLetter.length > 0 &&
-                      !selectedLetter.some((l) => l.startsWith(letter))
+                      selectedLetter !== null && selectedLetter !== letter
                     }>
                     {opts
                       .filter(
@@ -175,7 +171,7 @@ const FilterList = ({
                             type='checkbox'
                             name={def.filterKey}
                             value={opt._id}
-                            checked={activeValues.includes(opt._id)}
+                            checked={opt._id === activeValue}
                             onChange={() => onToggle(def.filterKey, opt._id)}
                           />
                           <span>{loc(opt.name ?? opt.title)}</span>
