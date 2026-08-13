@@ -11347,10 +11347,18 @@
           "type": "string"
         }
       },
-      "title": {
+      "name": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
         },
         "optional": true
       },
@@ -11361,10 +11369,6 @@
           "of": {
             "type": "union",
             "of": [
-              {
-                "type": "string",
-                "value": "artist"
-              },
               {
                 "type": "string",
                 "value": "artist-related"
@@ -11387,7 +11391,7 @@
               },
               {
                 "type": "string",
-                "value": "futur-event"
+                "value": "event-related-current-and-futur"
               },
               {
                 "type": "string",
@@ -11396,6 +11400,26 @@
               {
                 "type": "string",
                 "value": "ressources-related"
+              },
+              {
+                "type": "string",
+                "value": "articles-related"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-current-or-futur"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-past"
+              },
+              {
+                "type": "string",
+                "value": "event-futur"
+              },
+              {
+                "type": "string",
+                "value": "artist"
               }
             ]
           }

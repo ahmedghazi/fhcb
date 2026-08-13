@@ -1,13 +1,12 @@
 import {defineField, defineType} from 'sanity'
-import {TagIcon} from '@sanity/icons'
 import {baseLanguage} from '../locale/supportedLanguages'
-import slug from '../fields/slug'
+import {FaArrowsAltH} from 'react-icons/fa'
 
 export default defineType({
   name: 'rebond',
   title: 'Rebond',
   type: 'document',
-  icon: TagIcon,
+  icon: FaArrowsAltH,
   groups: [
     {
       default: true,
@@ -17,9 +16,16 @@ export default defineType({
   ],
   fields: [
     defineField({
+      name: 'name',
+      title: 'Nom du rebonds',
+      type: 'string',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'title',
       title: 'Titre',
-      type: 'string',
+      description: 'Titre du rebonds affiché',
+      type: 'localeString',
       group: 'editorial',
     }),
     defineField({
@@ -32,7 +38,6 @@ export default defineType({
           type: 'string',
           options: {
             list: [
-              {title: 'Artiste', value: 'artist'},
               {title: 'Artiste(s) Lié(s)', value: 'artist-related'},
               {title: 'Livre(s) lié(s)', value: 'book-related'},
               {title: 'Expo(s) liée(s)', value: 'exhibition-related'},
@@ -41,9 +46,18 @@ export default defineType({
                 value: 'exhibition-related-current-and-futur',
               },
               {title: 'Expo(s) lié(s) passés', value: 'exhibition-related-past'},
-              {title: 'Événement(s) à venir', value: 'futur-event'},
+              {
+                title: 'Événement(s) liée(s) en cours/à venir',
+                value: 'event-related-current-and-futur',
+              },
               {title: 'Article(s) lié(s)', value: 'article-related'},
               {title: 'Ressource(s) lié(s)', value: 'ressources-related'},
+              {title: 'Article(s) lié(s)', value: 'articles-related'},
+
+              {title: 'Expo(s) en cours ou à venir', value: 'exhibition-current-or-futur'},
+              {title: 'Expo(s) passés', value: 'exhibition-past'},
+              {title: 'Événement(s) à venir', value: 'event-futur'},
+              {title: 'Artiste', value: 'artist'},
             ],
           },
         },
@@ -52,7 +66,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title`,
+      title: `title.${baseLanguage}`,
     },
   },
   // orderings: [

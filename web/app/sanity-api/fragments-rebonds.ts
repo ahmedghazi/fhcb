@@ -86,15 +86,38 @@ export const rebondExhibitionPast = `
   }
 `;
 
-// scenario: "futur-event"
+// scenario: "event-futur"
+//    (references(^.^._id) || references(^.^.artists[]._ref)) &&
 export const rebondFuturEvent = `
   *[
     _type == "event" &&
     _id != ^.^._id &&
-    (references(^.^._id) || references(^.^.artists[]._ref)) &&
+
     count(dates[au >= now()]) > 0
   ] | order(dates[0].du asc) {
     ${cardRefEvent}
+  }
+`;
+
+// scenario: "exhibition-current-or-futur" — any current/upcoming exhibition, regardless of relation to the host
+export const rebondExhibitionCurrentOrFuturGlobal = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    count(dates[au >= now()]) > 0
+  ] | order(dates[0].du asc) {
+    ${cardRefExhibition}
+  }
+`;
+
+// scenario: "exhibition-past" — any past exhibition, regardless of relation to the host
+export const rebondExhibitionPastGlobal = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    count(dates[au >= now()]) == 0
+  ] | order(dates[0].du desc) {
+    ${cardRefExhibition}
   }
 `;
 
@@ -133,7 +156,9 @@ export const rebondsResolver = `
     + select("exhibition-related" in items => ${rebondExhibitionRelated}, [])
     + select("exhibition-related-current-and-futur" in items => ${rebondExhibitionCurrentFutur}, [])
     + select("exhibition-related-past" in items => ${rebondExhibitionPast}, [])
-    + select("futur-event" in items => ${rebondFuturEvent}, [])
+    + select("exhibition-current-or-futur" in items => ${rebondExhibitionCurrentOrFuturGlobal}, [])
+    + select("exhibition-past" in items => ${rebondExhibitionPastGlobal}, [])
+    + select("event-futur" in items => ${rebondFuturEvent}, [])
     + select("article-related" in items => ${rebondArticleRelated}, [])
     + select("ressources-related" in items => ${rebondRessourcesRelated}, [])
 `;

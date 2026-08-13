@@ -1,3 +1,4 @@
 - mail connect (mailjet, mailgun, ...) => Resend
 - slider ressource limit à 10
 - embed youtube en mode light
+- list text
