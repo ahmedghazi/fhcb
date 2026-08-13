@@ -3,6 +3,7 @@ import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 import { ListItem } from "@/app/sanity-api/types/sanity.types";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { PortableText } from "@portabletext/react";
+import clsx from "clsx";
 import React from "react";
 
 type Props = {
@@ -10,15 +11,18 @@ type Props = {
 };
 
 const ListItemComponent = ({ input }: Props) => {
+  const isText = input.text !== null;
   return (
-    <div className='list-item'>
-      <div className='title c-h3'>{_localizeField(input.title)}</div>
+    <div className={clsx("list-item", isText && "is-text")}>
+      <div className='title c-h3 md:col-span-4'>
+        {_localizeField(input.title)}
+      </div>
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
-      {!input.text && input.content && input.content._type === "localeText" && (
+      {!isText && input.content && input.content._type === "localeText" && (
         <div className='content'>{_localizeField(input.content)}</div>
       )}
-      {!input.content && input.text && (
-        <div className='content text'>
+      {isText && (
+        <div className='content text md:col-span-4'>
           <PortableText
             value={_localizeField(input.text)}
             components={portableTextComponents}

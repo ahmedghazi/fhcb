@@ -18,6 +18,7 @@ import {
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardProduct from "./CardProduct";
 import CardArticle from "./CardArticle";
+import CardConversation from "./CardConversation";
 import { _isCurrentByDates } from "@/app/lib/utils";
 import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
@@ -97,6 +98,7 @@ const CardType = ({ input, context, size }: Props) => {
       {input._type === "feuilletage" && (
         <CardFeuilletage input={input} size={sizeFor("feuilletage")} />
       )}
+      {input._type === "conversation" && <CardConversation input={input} />}
     </>
   );
 };

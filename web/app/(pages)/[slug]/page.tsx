@@ -62,12 +62,12 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <PageHeader h1={data.title} />
       <ContentModulaire input={data} />
-      {/* {isRessource && data.rebonds && (
+      {isRessource && data.rebonds && (
         <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} />
       )}
       {!isRessource && data.rebonds && (
         <Rebonds input={data.rebonds} title={data.rebondsLabel || ""} />
-      )} */}
+      )}
       {/* <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} /> */}
       {/* <pre>{JSON.stringify(data.rebondsType, null, 2)}</pre> */}
       <Rebonds

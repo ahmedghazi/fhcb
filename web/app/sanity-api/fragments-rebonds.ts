@@ -44,34 +44,38 @@ export const rebondArtistSelf = `
   }
 `;
 
-// scenario: "artist-related" — other artists sharing content with the host. Two deliberate choices:
-// - pivots on the host's OWN ARTISTS (coalesce(^.^.^.artists[]._ref, [^.^.^._id]) — falls back to the
-//   host's own _id when it has no \`artists\` field, i.e. the host IS an artist), not the host document's
-//   _id — otherwise unrelated cross-references between content (e.g. an exhibition linking to another
-//   exhibition via "aroundTheExhibition") would pull in artists with no real connection to the host.
-// - "event" is excluded from the pivot's type list: generic multi-exhibition events (guided tours, etc.)
-//   often list every artist currently on show and are too weak a signal for "these artists are related".
+// scenario: "artist-related" — other artists appearing in content directly tied to the host (not
+// broadened via the host's own artist — for a prolific artist like HCB, pivoting via "any other
+// content by the same artist anywhere on the site" pulls in every co-artist he's ever shared a show
+// with, site-wide, which is far too broad). Excludes "exhibition" and "event" from the candidate
+// type list: cross-exhibition links (e.g. the legacy \`rebonds\` reference field) and generic
+// multi-exhibition events (guided tours, etc.) are both too weak/noisy a signal for "related".
+// The exclusion of the host's OWN artist(s) from the result must go through coalesce(^.^.artists[]._ref,
+// [^.^._id]) (falls back to the host's own _id when it has no \`artists\` field, i.e. the host IS an
+// artist) — comparing directly against ^.^._id (the host DOCUMENT's id) never matches an artist's _id.
 export const rebondArtistRelated = `
   *[
     _type == "artist" &&
-    _id != ^.^._id &&
+    !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&
     "artist-related" in ^.items &&
     _id in *[
-      _type in ["exhibition", "product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
-      references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))
+      _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
+      references(^.^.^._id)
     ].artists[]._ref
   ] | order(name asc) {
     ${cardRefArtist}
   }
 `;
 
-// scenario: "book-related"
+// scenario: "book-related" — books directly linked to the host (via product.exhibition, etc.), not
+// broadened via the host's artist(s): otherwise a prolific artist's entire catalog shows up instead
+// of just the book tied to this specific exhibition/content.
 export const rebondBooks = `
   *[
     _type == "product" &&
     _id != ^.^._id &&
     "book-related" in ^.items &&
-    (references(^.^._id) || references(^.^.artists[]._ref))
+    references(^.^._id)
   ] | order(_createdAt desc) {
     ${cardRefProduct}
   }
@@ -112,26 +116,27 @@ export const rebondEvents = `
   }
 `;
 
-// scenario: "articles-related"
-// litmit 2
+// scenario: "articles-related" — articles directly linked to the host, not broadened via the host's
+// artist(s) (see rebondBooks above for why).
 export const rebondArticles = `
   *[
     _type == "article" &&
     _id != ^.^._id &&
     "articles-related" in ^.items &&
-    (references(^.^._id) || references(^.^.artists[]._ref))
+    references(^.^._id)
   ] | order(_createdAt desc) {
     ${cardRefArticle}
   }
 `;
 
 // scenario: "ressources-related" — imageImages / feuilletage / serieThematique / conversation
+// directly linked to the host, not broadened via the host's artist(s) (see rebondBooks above for why).
 export const rebondRessources = `
   *[
     _id != ^.^._id &&
     _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&
     "ressources-related" in ^.items &&
-    (references(^.^._id) || references(^.^.artists[]._ref))
+    references(^.^._id)
   ] | order(_createdAt desc) {
     ${cardTypesRessources}
   }

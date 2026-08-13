@@ -111,14 +111,28 @@
       justify-content: space-between;
       font-size: var(--text-md);
       line-height: var(--leading-2xl);
-      // font-weight: 600;
       font-weight: 200;
+      &.is-text {
+        display: grid;
+        gap: var(--spacing-gutter);
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        .title {
+          grid-column: span 4;
+        }
+        .text {
+          // background-color: red;
+          // grid-column: span 6;
+          width: auto;
+          max-width: unset;
+          margin: 0;
+        }
+      }
       .content {
         font-weight: 300;
         font-size: var(--text-base);
         &.text {
-          margin: 0;
-          width: 21rem;
+          // margin: 0;
+          // width: 21rem;
         }
       }
       @media all and (max-width: variables.$md) {

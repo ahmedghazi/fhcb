@@ -15,6 +15,7 @@ type Props = {
 
 const ModuleSliderArtistUI = ({ input }: Props) => {
   const { artist, items, cta } = input;
+  console.log(items);
   return (
     <section className='module module--slider-artist-ui'>
       <div className='module__inner'>

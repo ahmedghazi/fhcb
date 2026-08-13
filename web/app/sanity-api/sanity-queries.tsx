@@ -137,7 +137,9 @@ export const PAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire" && slug.curr
     modules[]{
       ${modules}
     },
-
+    rebonds[]->{
+      ${cardTypes}
+    },
     rebondsType->{
       ${rebondsResolver}
     }
