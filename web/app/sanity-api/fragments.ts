@@ -135,7 +135,60 @@ export const linkInternalWithImage = `
   ${linkInternal},
   imageCover{
     ${imageAsset}
+  },
+  withSubmenuImages
+`;
+export const linkInternalWithImages = `
+  ...,
+  link->{
+    _type,
+    slug,
+    modules[]{
+      ...,
+      _type == "listExhibitionsUI" => {
+        "items": *[
+          _type == "exhibition"
+          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+        ] | order(dates[0].du asc) {
+          "imageCover": imageCover{
+            ${imageAsset}
+          }
+        }
+      },
+      _type == "listExhibitionsPastUI" => {
+        "items": *[
+          _type == "exhibition"
+          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+        ] | order(dates[0].du asc) {
+          "imageCover": imageCover{
+            ${imageAsset}
+          }
+        }
+      },
+
+      _type == "listEventsUI" => {
+        "items": *[
+          _type == "event"
+          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+        ] | order(dates[0].du asc) {
+          "imageCover": imageCover{
+            ${imageAsset}
+          }
+        }
+      },
+      // _type in ["sliderCardUI", "gridCardUI"] => {
+      //   items[]->{
+      //     "imageCover": coalesce(imageCover, image){
+      //       ${imageAsset}
+      //     }
+      //   }
+      // }
+    }
   }
+
 `;
 
 export const nav = `
@@ -145,7 +198,8 @@ export const nav = `
     subMenu[]{
       ...,
       _type == 'linkInternal' => {
-        ${linkInternal},
+        ${linkInternalWithImages},
+
       }
     },
     withMessage,

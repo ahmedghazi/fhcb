@@ -66,6 +66,17 @@ const CardBadge = ({ label }: CardBadgeProps) => {
   );
 };
 
+// The primary action's href already covers the whole card via
+// `CardLinkOverlay`, so a visible button for it is only needed when it's the
+// sole action — otherwise it'd be a redundant duplicate of the overlay link.
+const withoutRedundantPrimary = (
+  actions: CardAction[],
+  actionsNode?: ReactNode,
+) =>
+  actions.length > 1 || actionsNode !== undefined
+    ? actions.slice(1)
+    : actions;
+
 // ─── CardFooter (mode detached — rendu par le parent) ────────────────────────
 
 export const CardFooter = ({
@@ -77,7 +88,7 @@ export const CardFooter = ({
 }) => (
   <div className='card__footer'>
     <div className='card__btns'>
-      {actions.map((action, i) => (
+      {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
         <Link
           key={i}
           href={action.href}
@@ -103,7 +114,7 @@ const ActionButtons = ({
   actionsNode?: ReactNode;
 }) => (
   <div className='card__btns'>
-    {actions.map((action, i) => (
+    {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
       <Link
         key={i}
         href={action.href}

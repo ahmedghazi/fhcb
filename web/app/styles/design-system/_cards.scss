@@ -298,13 +298,36 @@
     background-color: var(--color-beige);
     &.card--sm {
       &.card--footer-hover {
-        &:hover .card__footer .card__btns {
-          display: block;
+        // margin-bottom: 4rem;
+        &:hover .card__footer {
+          transform: translateY(0);
+          opacity: 1;
+          .card__btns {
+            // display: block;
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
         .card__footer {
           display: flex;
+          opacity: 1;
+          // position: absolute;
+          // bottom: 0;
+          // left: 0;
+          // right: 0;
+          // transition:
+          // opacity 0.2s var(--cubic),
+          // transform 0.2s var(--cubic);
+          // transform: translateY(100%);
+          // opacity: 0;
           .card__btns {
-            display: none;
+            // display: none;
+            // transition:
+            //   opacity 0.2s var(--cubic),
+            //   transform 0.2s var(--cubic);
+
+            // // transform: translateY(-100%);
+            // opacity: 0;
           }
         }
       }

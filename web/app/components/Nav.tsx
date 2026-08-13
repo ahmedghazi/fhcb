@@ -24,6 +24,8 @@ const NavGroup = ({ input }: NavGroupProps) => {
   } = useHeader();
   const { isMobile } = useDeviceDetect();
   const hasSubmenu = input._type === "linkInternal" && input.subMenu;
+  const displayChildrenMedia =
+    input._type === "linkInternal" && input.withSubmenuImages;
 
   const _onMouseEnter = () => {
     if (isMobile) return;
@@ -37,14 +39,7 @@ const NavGroup = ({ input }: NavGroupProps) => {
         ...input,
         images: [input.imageCover],
       } as NavMenuItem);
-    }
-    // if (input._type === "linkInternal" && input.link) {
-    //   const link = input.link as any;
-    //   const images = _collectFirstImagesFromNavItem(link);
-
-    //   dispatchCurrentMenuItem({ ...link, images } as NavMenuItem);
-    // }
-    else {
+    } else {
       dispatchModalType("menu");
     }
   };
@@ -76,7 +71,23 @@ const NavGroup = ({ input }: NavGroupProps) => {
             // dispatchModalType(null);
           }}>
           {input.subMenu?.map((subItem, i) => (
-            <li key={i} className=''>
+            <li
+              key={i}
+              className=''
+              onMouseEnter={() => {
+                if (isMobile) return;
+                if (displayChildrenMedia && subItem._type === "linkInternal") {
+                  const images = subItem.imageCover
+                    ? [subItem.imageCover]
+                    : _collectFirstImagesFromNavItem(subItem.link as any);
+                  if (images.length > 0) {
+                    dispatchCurrentMenuItem({
+                      ...subItem,
+                      images,
+                    } as NavMenuItem);
+                  }
+                }
+              }}>
               <NavItem item={subItem} />
             </li>
           ))}

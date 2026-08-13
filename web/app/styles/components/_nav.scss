@@ -44,6 +44,7 @@ header.is-modal-open {
     // overflow: clip;
     // padding-bottom: 3em;
     figure.figure {
+      position: relative;
       &--is-landscape {
         width: 40vw;
       }

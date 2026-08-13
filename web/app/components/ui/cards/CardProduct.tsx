@@ -19,9 +19,9 @@ const CardProduct = ({ input, size = "md" }: Props) => {
       className={clsx(
         "card card--product",
         `card--${size}`,
-        `card--${props.layout}`,
+        props.layout && `card--${props.layout}`,
         // isLandscape ? "card--is-landscape" : "card--is-portrait",
-        size === "sm" ? "card--footer-hover-" : "",
+        size === "sm" ? "card--footer-hover" : "",
       )}>
       <CardBase {...props} />
       {size === "md" &&

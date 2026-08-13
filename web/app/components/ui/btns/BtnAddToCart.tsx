@@ -11,7 +11,7 @@ import {
   _localizeText,
 } from "@/app/sanity-api/utils";
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type VariantsListProps = {
   input: Array<
@@ -23,9 +23,14 @@ type VariantsListProps = {
 };
 const VariantsList = ({ input, onChange }: VariantsListProps) => {
   const _onToggle = (value: ProductVariant) => {
-    console.log(value);
     onChange(value);
   };
+  useEffect(() => {
+    if (input.length === 1) {
+      _onToggle(input[0]);
+    }
+  }, [input]);
+
   return (
     <ul className='variants-list'>
       {input?.map((item, i) => (
@@ -36,6 +41,7 @@ const VariantsList = ({ input, onChange }: VariantsListProps) => {
               type='radio'
               name={"language"}
               value={item.title}
+              checked={input.length === 1}
               // checked={activeValues.includes(opt._id)}
               onChange={() => _onToggle(item || "")}
             />
@@ -65,7 +71,9 @@ const BtnAddToCart = ({ input }: Props) => {
     addToCart({
       id: variantId.split("/").pop()!,
       title: localizedTitle,
-      variant: !isSimpleProduct ? (activeVariant?.title ?? undefined) : undefined,
+      variant: !isSimpleProduct
+        ? (activeVariant?.title ?? undefined)
+        : undefined,
       price: activeVariant?.price ?? price ?? 0,
       image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
       href: _linkResolver(input),

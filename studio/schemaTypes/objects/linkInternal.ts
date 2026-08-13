@@ -41,13 +41,23 @@ export default defineField({
     }),
     defineField({
       name: 'imageCover',
-      type: 'image',
       title: 'Image clef',
+      type: 'image',
+      hidden: ({document}) => document?._type !== 'settings',
+    }),
+    defineField({
+      name: 'withSubmenuImages',
+      title: 'Avec les images clef des sous menu',
+      type: 'boolean',
+      hidden: ({document}) => document?._type !== 'settings',
     }),
     defineField({
       name: 'withSubmenu',
       type: 'boolean',
       title: 'Avec sous menu',
+      // linkInternal is embedded all over the site (CTAs, block content, sidebars...),
+      // but submenus only make sense in the settings page's nav fields.
+      hidden: ({document}) => document?._type !== 'settings',
     }),
     defineField({
       name: 'subMenu',
@@ -61,12 +71,13 @@ export default defineField({
           type: 'linkExternal',
         },
       ],
-      hidden: ({parent}) => !parent?.withSubmenu,
+      hidden: ({document, parent}) => document?._type !== 'settings' || !parent?.withSubmenu,
     }),
     defineField({
       name: 'withMessage',
       type: 'boolean',
       title: 'Avec message',
+      hidden: ({document}) => document?._type !== 'settings',
     }),
     defineField({
       name: 'navMessage',
