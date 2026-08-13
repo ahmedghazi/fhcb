@@ -43,18 +43,17 @@ export default defineType({
               {title: 'Expo(s) liée(s)', value: 'exhibition-related'},
               {
                 title: 'Expo(s) liée(s) en cours/à venir',
-                value: 'exhibition-related-current-and-futur',
+                value: 'exhibition-related-futur',
               },
               {title: 'Expo(s) lié(s) passés', value: 'exhibition-related-past'},
               {
                 title: 'Événement(s) liée(s) en cours/à venir',
-                value: 'event-related-current-and-futur',
+                value: 'event-related-futur',
               },
-              {title: 'Article(s) lié(s)', value: 'article-related'},
-              {title: 'Ressource(s) lié(s)', value: 'ressources-related'},
               {title: 'Article(s) lié(s)', value: 'articles-related'},
+              {title: 'Ressource(s) lié(s)', value: 'ressources-related'},
 
-              {title: 'Expo(s) en cours ou à venir', value: 'exhibition-current-or-futur'},
+              {title: 'Expo(s) en cours ou à venir', value: 'exhibition-futur'},
               {title: 'Expo(s) passés', value: 'exhibition-past'},
               {title: 'Événement(s) à venir', value: 'event-futur'},
               {title: 'Artiste', value: 'artist'},

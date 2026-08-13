@@ -29,7 +29,6 @@ const NavModal = ({ settings }: Props) => {
     dispatchCurrentMenuItem(null);
     dispatchModalType(null);
   };
-  console.log(currentMenuItem);
   return (
     <div
       className={clsx("nav-modal", modalType && `nav-modal--${modalType}`)}

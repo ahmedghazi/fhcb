@@ -254,3 +254,20 @@ export const cardTypes = `
     ${cardRefConversation}
   }
 `;
+
+// narrower than cardTypes — used where the source is already filtered to just these 4 types
+// (e.g. rebondRessourcesRelated), to keep the generated TS union small
+export const cardTypesRessources = `
+  _type == "imageImages" => {
+    ${cardRefImageImages}
+  },
+  _type == "feuilletage" => {
+    ${cardRefFeuilletage}
+  },
+  _type == "serieThematique" => {
+    ${cardRefSerieThematique}
+  },
+  _type == "conversation" => {
+    ${cardRefConversation}
+  }
+`;

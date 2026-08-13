@@ -11383,7 +11383,7 @@
               },
               {
                 "type": "string",
-                "value": "exhibition-related-current-and-futur"
+                "value": "exhibition-related-futur"
               },
               {
                 "type": "string",
@@ -11391,15 +11391,7 @@
               },
               {
                 "type": "string",
-                "value": "event-related-current-and-futur"
-              },
-              {
-                "type": "string",
-                "value": "article-related"
-              },
-              {
-                "type": "string",
-                "value": "ressources-related"
+                "value": "event-related-futur"
               },
               {
                 "type": "string",
@@ -11407,7 +11399,11 @@
               },
               {
                 "type": "string",
-                "value": "exhibition-current-or-futur"
+                "value": "ressources-related"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-futur"
               },
               {
                 "type": "string",

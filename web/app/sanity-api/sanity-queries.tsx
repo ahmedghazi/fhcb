@@ -125,6 +125,9 @@ export async function getHome(): Promise<HOME_QUERY_RESULT> {
 /*****************************************************************************************************
  * PAGE MODULAIRE
  */
+// rebonds[]->{
+//   ${cardTypes}
+// },
 export const PAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire" && slug.current == $slug][0]{
     ...,
     seo{
@@ -134,9 +137,7 @@ export const PAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire" && slug.curr
     modules[]{
       ${modules}
     },
-    rebonds[]->{
-      ${cardTypes}
-    },
+
     rebondsType->{
       ${rebondsResolver}
     }
@@ -155,6 +156,8 @@ export async function getPageModulaire(
 /*****************************************************************************************************
  * ARTIST
  */
+// "relatedByArtist": ${relatedByArtist},
+
 export const ARTIST_QUERY = groq`*[_type == "artist" && slug.current == $slug][0]{
     ...,
     seo{
@@ -165,7 +168,6 @@ export const ARTIST_QUERY = groq`*[_type == "artist" && slug.current == $slug][0
     },
     text,
     links,
-    "relatedByArtist": ${relatedByArtist},
     rebondsType->{
       ${rebondsResolver}
     }
@@ -200,6 +202,8 @@ export async function getRandomArtists(excludeSlug: string, count = 4) {
 /*****************************************************************************************************
  * EXPHIBITION
  */
+//"relatedByExhibition": ${relatedByExhibition},
+//"related": ${relatedByTag},
 export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current == $slug][0]{
     ...,
     seo{
@@ -227,8 +231,7 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     aroundTheExhibition[]->{
       ${cardTypes}
     },
-    "relatedByExhibition": ${relatedByExhibition},
-    "related": ${relatedByTag},
+
     rebondsType->{
       ${rebondsResolver}
     }
@@ -247,6 +250,7 @@ export async function getExhibition(
 /*****************************************************************************************************
  * EVENT
  */
+// "related": ${relatedByArtists},
 export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0]{
     ...,
     seo{
@@ -272,7 +276,7 @@ export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0]{
     modules[]{
       ${modules}
     },
-    "related": ${relatedByArtists},
+
     rebondsType->{
       ${rebondsResolver}
     }

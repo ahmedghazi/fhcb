@@ -18,6 +18,7 @@ const EmbedVideo = ({ input }: Props) => {
           <ReactPlayer
             src={input.embedUrl}
             controls={true}
+            light={true}
             style={{ width: "100%", height: "100%", aspectRatio: "16 / 9" }}
           />
         </div>
