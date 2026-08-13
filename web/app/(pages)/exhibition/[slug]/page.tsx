@@ -71,7 +71,7 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
         />
       )}
       {data.related && <Rebonds input={data.related} title='toDiscoverToo' />} */}
-      <pre>{JSON.stringify(data.rebondsType?.items, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(data.rebondsType?.items, null, 2)}</pre> */}
 
       <Rebonds
         title={data.rebondsType?.title || undefined}
