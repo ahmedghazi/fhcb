@@ -1,7 +1,1 @@
-- # carte clickable n'afficher que le bouton secondaire s'il y en a un
-- # Partenaire media à afficher en front
-- # carte branche video au format 1 / 1
-- # ordre dans tags produit
-- # list item text max width comme block content
-- # images grid
-- # listui si pas seul (ex dans [filmo](http://localhost:3000/chronologie-hcb)) gérer le même espace
+- mail connect (mailjet, mailgun, ...) => Resend

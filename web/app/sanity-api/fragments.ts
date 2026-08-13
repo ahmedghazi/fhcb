@@ -179,13 +179,6 @@ export const linkInternalWithImages = `
           }
         }
       },
-      // _type in ["sliderCardUI", "gridCardUI"] => {
-      //   items[]->{
-      //     "imageCover": coalesce(imageCover, image){
-      //       ${imageAsset}
-      //     }
-      //   }
-      // }
     }
   }
 
