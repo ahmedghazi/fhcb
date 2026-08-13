@@ -76,6 +76,7 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
       <Rebonds
         title={data.rebondsType?.title || undefined}
         input={data.rebondsType?.resolvedItems}
+        items={data.rebondsType?.items}
       />
     </div>
   );

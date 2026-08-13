@@ -73,6 +73,7 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
       <Rebonds
         input={data.rebondsType?.resolvedItems}
         title={data.rebondsType?.title || undefined}
+        items={data.rebondsType?.items}
       />
     </div>
   );
