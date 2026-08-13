@@ -2125,6 +2125,14 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
+            "name": "localeText"
+          },
+          "optional": true
+        },
+        "text": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
             "name": "localeBlockContent"
           },
           "optional": true
@@ -7012,6 +7020,36 @@
     }
   },
   {
+    "type": "type",
+    "name": "rebond.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "rebond"
+    }
+  },
+  {
     "name": "pageModulaire",
     "type": "document",
     "attributes": {
@@ -7584,6 +7622,14 @@
           }
         },
         "optional": true
+      },
+      "rebondsType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "rebond.reference"
+        },
+        "optional": true
       }
     }
   },
@@ -8092,6 +8138,14 @@
           }
         },
         "optional": true
+      },
+      "rebondsType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "rebond.reference"
+        },
+        "optional": true
       }
     }
   },
@@ -8502,6 +8556,14 @@
               }
             ]
           }
+        },
+        "optional": true
+      },
+      "rebondsType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "rebond.reference"
         },
         "optional": true
       }
@@ -9387,6 +9449,14 @@
           }
         },
         "optional": true
+      },
+      "rebondsType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "rebond.reference"
+        },
+        "optional": true
       }
     }
   },
@@ -9735,6 +9805,14 @@
               }
             ]
           }
+        },
+        "optional": true
+      },
+      "rebondsType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "rebond.reference"
         },
         "optional": true
       }
@@ -11218,6 +11296,106 @@
               {
                 "type": "inline",
                 "name": "imageImages.reference"
+              }
+            ]
+          }
+        },
+        "optional": true
+      },
+      "rebondsType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "rebond.reference"
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "rebond",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "rebond"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "items": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "artist"
+              },
+              {
+                "type": "string",
+                "value": "artist-related"
+              },
+              {
+                "type": "string",
+                "value": "book-related"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related-current-and-futur"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related-past"
+              },
+              {
+                "type": "string",
+                "value": "futur-event"
+              },
+              {
+                "type": "string",
+                "value": "article-related"
+              },
+              {
+                "type": "string",
+                "value": "ressources-related"
               }
             ]
           }

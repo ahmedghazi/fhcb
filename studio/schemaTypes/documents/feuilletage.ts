@@ -4,6 +4,7 @@ import slug from '../fields/slug'
 import {FiBookOpen} from 'react-icons/fi'
 import modulesList from '../objects/modules/modulesList'
 import linkInternalTypes from '../misc/linkInternalTypes'
+import rebondsTypeField from '../misc/rebondsTypeField'
 
 export default defineType({
   type: 'document',
@@ -130,6 +131,8 @@ export default defineType({
       ],
       group: 'editorial',
     }),
+
+    rebondsTypeField,
   ],
 
   preview: {

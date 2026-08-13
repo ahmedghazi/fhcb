@@ -4,6 +4,8 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import {IoPersonOutline} from 'react-icons/io5'
 import slug from '../fields/slug'
 import imageFields from '../misc/imageFields'
+import linkInternalTypes from '../misc/linkInternalTypes'
+import rebondsTypeField from '../misc/rebondsTypeField'
 
 export default defineType({
   type: 'document',
@@ -95,6 +97,8 @@ export default defineType({
       group: 'editorial',
       // hidden: true,
     }),
+
+    rebondsTypeField,
   ],
 
   preview: {

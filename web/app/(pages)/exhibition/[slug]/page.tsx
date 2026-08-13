@@ -64,13 +64,17 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
       {/* {data.aroundTheExhibition && (
         <Rebonds input={data.aroundTheExhibition} title='aroundTheExhibition' />
       )} */}
-      {data.relatedByExhibition && (
+      {/* {data.relatedByExhibition && (
         <RebondsExhibition
           input={data.relatedByExhibition}
           artists={data.artists as unknown as ArtistExpanded[]}
         />
       )}
-      {data.related && <Rebonds input={data.related} title='toDiscoverToo' />}
+      {data.related && <Rebonds input={data.related} title='toDiscoverToo' />} */}
+      <Rebonds
+        title={data.rebondsType?.title || undefined}
+        input={data.rebondsType?.resolvedItems}
+      />
     </div>
   );
 };

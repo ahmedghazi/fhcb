@@ -5,6 +5,7 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {SiElasticstack} from 'react-icons/si'
 import rebondsLabels from '../misc/rebondsLabels'
+import rebondsTypeField from '../misc/rebondsTypeField'
 
 const BRANCHES_RESSOURCES_TAG_ID = 'e9f34dd4-cc69-4ef2-83a7-71b38a79741f'
 
@@ -121,5 +122,7 @@ export default defineType({
       ],
       group: 'editorial',
     }),
+
+    rebondsTypeField,
   ],
 })

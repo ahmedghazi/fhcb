@@ -31,6 +31,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'feuilletage',
     'serieThematique',
     'conversation',
+    'rebond',
     'media.tag',
     'mux.videoAsset',
   ].includes(id)
@@ -107,6 +108,9 @@ export const structure = (S: any) =>
         .title('Chercheurs')
         .schemaType('chercheur')
         .child(S.documentTypeList('chercheur')),
+      S.divider(),
+
+      S.listItem().title('Rebonds').schemaType('rebond').child(S.documentTypeList('rebond')),
       // S.listItem().title('Série Thématique').schemaType('serie').child(S.documentTypeList('serie')),
 
       S.divider(),

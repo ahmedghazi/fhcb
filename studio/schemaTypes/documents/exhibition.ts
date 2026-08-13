@@ -3,6 +3,7 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import {LuGalleryHorizontal} from 'react-icons/lu'
 import slug from '../fields/slug'
 import modulesListExhibitionEvent from '../objects/modules/modulesListExhibitionEvent'
+import rebondsTypeField from '../misc/rebondsTypeField'
 
 export default defineType({
   type: 'document',
@@ -169,6 +170,8 @@ export default defineType({
       ],
       group: 'editorial',
     }),
+
+    rebondsTypeField,
   ],
 
   preview: {

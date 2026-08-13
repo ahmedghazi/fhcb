@@ -59,6 +59,10 @@ const EventTemplate: NextPage<PageProps> = async ({ params }) => {
       <HeroEvent input={data as unknown as EventExpanded} />
       <ContentModulaire input={data} />
       {data.related && <Rebonds input={data.related} />}
+      <Rebonds
+        input={data.rebondsType?.resolvedItems}
+        title={data.rebondsType?.title || undefined}
+      />
     </div>
   );
 };

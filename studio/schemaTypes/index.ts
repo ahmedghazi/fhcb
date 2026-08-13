@@ -15,6 +15,7 @@ import imageImages from './documents/imageImages'
 import feuilletage from './documents/feuilletage'
 import chercheur from './documents/chercheur'
 import location from './documents/location'
+import rebond from './documents/rebond'
 
 import {seoSchema} from './features/seo'
 
@@ -102,6 +103,7 @@ export const schemaTypes = [
   conversation,
   chercheur,
   location,
+  rebond,
 
   localeString,
   localeText,

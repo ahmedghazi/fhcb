@@ -3,6 +3,7 @@ import modulesList from '../objects/modules/modulesList'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {BiLogoShopify} from 'react-icons/bi'
+import rebondsTypeField from '../misc/rebondsTypeField'
 
 export default defineType({
   type: 'document',
@@ -305,6 +306,8 @@ export default defineType({
       ],
       group: 'editorial',
     }),
+
+    rebondsTypeField,
 
     // defineField({
     //   name: 'relatedProjects',

@@ -59,9 +59,15 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       data-template='artist'
       data-slug={data.slug?.current || ""}>
       <PageHeader name={data.name} />
-      <HeroArtist input={data} />
-      {data.relatedByArtist && <Rebonds input={data.relatedByArtist} />}
-      <RebondsArtistes input={randomArtists} />
+      {/* <HeroArtist input={data} /> */}
+      {/* {data.relatedByArtist && <Rebonds input={data.relatedByArtist} />} */}
+      {/* rebondsType */}
+      {/* <pre>{JSON.stringify(data.rebondsType, null, 2)}</pre> */}
+      <Rebonds
+        input={data.rebondsType?.resolvedItems}
+        title={data.rebondsType?.title || undefined}
+      />
+      {/* <RebondsArtistes input={randomArtists} /> */}
     </div>
   );
 };

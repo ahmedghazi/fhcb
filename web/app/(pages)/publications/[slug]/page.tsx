@@ -11,6 +11,7 @@ import {
 import { notFound } from "next/navigation";
 import ContentProduct from "@/app/components/ContentProduct";
 import RebondsProducts from "@/app/components/RebondsProducts";
+import Rebonds from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
 
@@ -52,6 +53,10 @@ const ProductPage: NextPage<PageProps> = async ({ params }) => {
       <ContentProduct input={data} randomProducts={randomProducts} />
       {/* <RebondsProducts input={randomProducts} /> */}
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+      <Rebonds
+        input={data.rebondsType?.resolvedItems}
+        title={data.rebondsType?.title || undefined}
+      />
     </div>
   );
 };
