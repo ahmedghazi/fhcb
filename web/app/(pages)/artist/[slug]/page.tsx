@@ -68,7 +68,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
         title={data.rebondsType?.title || undefined}
         items={data.rebondsType?.items}
       />
-      {/* <RebondsArtistes input={randomArtists} /> */}
+      <RebondsArtistes input={randomArtists} />
     </div>
   );
 };

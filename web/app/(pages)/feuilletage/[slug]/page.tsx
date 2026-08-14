@@ -72,14 +72,15 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
         {data.video && <EmbedVideo input={data.video} />}
       </div>
       <ContentModulaire input={data} />
-      {data.related && <Rebonds input={data.related} />}
+      {/* {/* {data.related && <Rebonds input={data.related} />} */}
       {data.rebonds && <Rebonds input={data.rebonds} />}
+      {/* {data.related && <Rebonds input={data.related} />} */}
+      {/* <pre>{JSON.stringify(data.rebondsType, null, 2)}</pre> */}
       <Rebonds
         input={data.rebondsType?.resolvedItems}
         title={data.rebondsType?.title || undefined}
         items={data.rebondsType?.items}
       />
-      {/* <pre>{JSON.stringify(data.rebonds, null, 2)}</pre> */}
     </div>
   );
 };

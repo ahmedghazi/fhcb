@@ -8,6 +8,7 @@ import CardImageImages from "../ui/cards/CardImageImages";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
 import { Link } from "next-view-transitions";
 import CardSerieThematique from "../ui/cards/CardSerieThematique";
+import CardConversation from "../ui/cards/CardConversation";
 
 type Props = {
   input: SliderArtistUI | any;
@@ -15,7 +16,6 @@ type Props = {
 
 const ModuleSliderArtistUI = ({ input }: Props) => {
   const { artist, items, cta } = input;
-  console.log(items);
   return (
     <section className='module module--slider-artist-ui'>
       <div className='module__inner'>
@@ -39,6 +39,9 @@ const ModuleSliderArtistUI = ({ input }: Props) => {
                 )}
                 {item && item._type === "serieThematique" && (
                   <CardSerieThematique input={item} />
+                )}
+                {item && item._type === "conversation" && (
+                  <CardConversation input={item} />
                 )}
               </div>
             ))}

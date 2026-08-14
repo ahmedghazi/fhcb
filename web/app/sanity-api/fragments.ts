@@ -14,6 +14,12 @@ import { imageAsset, videoAsset } from "./fragments-assets";
 
 export { imageAsset, videoAsset } from "./fragments-assets";
 
+export const ressourcesTypes = [
+  "feuilletage",
+  "imageImages",
+  "serieThematique",
+  "conversation",
+];
 export const seo = `
   ...,
   metaImage{
@@ -359,7 +365,7 @@ export const sliderArtistUI = `
       _id != ^._id &&
       (
         (
-          _type in [ "feuilletage", "imageImages", "serieThematique", "conversation"] &&
+          _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&
           references(^.artist._ref)
         )
         ||
@@ -368,7 +374,7 @@ export const sliderArtistUI = `
           _id == ^.artist._ref
         )
       )
-    ] | order(dates[0].du asc) {
+    ] | order(dates[0].du asc)[0...10] {
       ${cardTypes}
     },
     cta{
@@ -858,7 +864,7 @@ export const relatedProductsByArtist = `
     _type == "product" &&
     _id != ^._id &&
     count(artists[@._ref in ^.^.artists[]._ref]) > 0
-  ] | order(_createdAt desc)[0...1] {
+  ] | order(_createdAt desc)[0...2] {
     ${cardTypes}
   }
 `;
@@ -868,7 +874,7 @@ export const relatedProductsByTag = `
     _type == "product" &&
     _id != ^._id &&
     count(categories[@._ref in ^.^.categories[]._ref]) > 0
-  ] | order(_createdAt desc)[0...1] {
+  ] | order(_createdAt desc)[0...2] {
     ${cardTypes}
   }
 `;
@@ -880,6 +886,26 @@ export const relatedByTag = `
     count(^.tags) > 0 &&
     references(^.tags[]._ref)
   ] {
+    ${cardTypes}
+  }
+`;
+
+export const relatedRessourcesByArtists = `
+  *[
+    _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&
+    _id != ^._id &&
+    count(artists[@._ref in ^.^.artists[]._ref]) > 0
+  ] | order(_createdAt desc) {
+    ${cardTypes}
+  }
+`;
+
+export const randomRessources = `
+  *[
+    _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&
+    _id != ^._id &&
+    count(artists[@._ref in ^.^.artists[]._ref]) > 0
+  ] | order(_createdAt desc) {
     ${cardTypes}
   }
 `;

@@ -62,7 +62,15 @@ async function sendCronReport({
         updated > 0
           ? `<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-family:monospace;font-size:13px">
               <thead><tr><th>Document ID</th><th>Tags assignés</th></tr></thead>
-              <tbody>${log.map((l) => `<tr>${l.split(": ").map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>
+              <tbody>${log
+                .map(
+                  (l) =>
+                    `<tr>${l
+                      .split(": ")
+                      .map((c) => `<td>${c}</td>`)
+                      .join("")}</tr>`,
+                )
+                .join("")}</tbody>
             </table>`
           : `<p>Aucun document modifié.</p>`,
       ];
@@ -99,188 +107,191 @@ export async function GET(request: Request) {
   const now = new Date().toISOString();
 
   try {
-  // Resolve or create managed tags
-  const existingTags: { _id: string; slug: string }[] = await client.fetch(
-    `*[_type == "tag" && slug.current in [$current, $past, $upcoming, $horsLesMurs]]{ _id, "slug": slug.current }`,
-    {
-      current: TAG_CURRENT_SLUG,
-      past: TAG_PAST_SLUG,
-      upcoming: TAG_UPCOMING_SLUG,
-      horsLesMurs: TAG_HORS_LES_MURS_SLUG,
-    },
-  );
+    // Resolve or create managed tags
+    const existingTags: { _id: string; slug: string }[] = await client.fetch(
+      `*[_type == "tag" && slug.current in [$current, $past, $upcoming, $horsLesMurs]]{ _id, "slug": slug.current }`,
+      {
+        current: TAG_CURRENT_SLUG,
+        past: TAG_PAST_SLUG,
+        upcoming: TAG_UPCOMING_SLUG,
+        horsLesMurs: TAG_HORS_LES_MURS_SLUG,
+      },
+    );
 
-  const resolve = async (
-    slug: string,
-    titleFr: string,
-    titleEn: string,
-  ): Promise<string> => {
-    const found = existingTags.find((t) => t.slug === slug);
-    if (found) return found._id;
-    const doc = await client.create({
-      _type: "tag",
-      title: { fr: titleFr, en: titleEn },
-      slug: { _type: "slug", current: slug },
-    });
-    return doc._id;
-  };
+    const resolve = async (
+      slug: string,
+      titleFr: string,
+      titleEn: string,
+    ): Promise<string> => {
+      const found = existingTags.find((t) => t.slug === slug);
+      if (found) return found._id;
+      const doc = await client.create({
+        _type: "tag",
+        title: { fr: titleFr, en: titleEn },
+        slug: { _type: "slug", current: slug },
+      });
+      return doc._id;
+    };
 
-  const [currentTagId, pastTagId, upcomingTagId, horsLesMursTagId] =
-    await Promise.all([
-      resolve(TAG_CURRENT_SLUG, "Exposition en cours", "Current exhibition"),
-      resolve(TAG_PAST_SLUG, "Exposition passée", "Past exhibition"),
-      resolve(TAG_UPCOMING_SLUG, "Exposition à venir", "Upcoming exhibition"),
-      resolve(TAG_HORS_LES_MURS_SLUG, "Hors les murs", "Off-site"),
-    ]);
+    const [currentTagId, pastTagId, upcomingTagId, horsLesMursTagId] =
+      await Promise.all([
+        resolve(TAG_CURRENT_SLUG, "Exposition en cours", "Current exhibition"),
+        resolve(TAG_PAST_SLUG, "Exposition passée", "Past exhibition"),
+        resolve(TAG_UPCOMING_SLUG, "Exposition à venir", "Upcoming exhibition"),
+        resolve(TAG_HORS_LES_MURS_SLUG, "Hors les murs", "Off-site"),
+      ]);
 
-  // Fetch all published exhibitions with dates and tags
-  const exhibitions: {
-    _id: string;
-    dates: { du?: string; au?: string; locationType?: string }[] | null;
-    tags: { _key: string; _ref: string }[] | null;
-    countdown: number | null;
-  }[] = await client.fetch(
-    `*[_type == "exhibition" && !(_id in path("drafts.**"))] {
+    // Fetch all published exhibitions with dates and tags
+    const exhibitions: {
+      _id: string;
+      dates: { du?: string; au?: string; locationType?: string }[] | null;
+      tags: { _key: string; _ref: string }[] | null;
+      countdown: number | null;
+    }[] = await client.fetch(
+      `*[_type == "exhibition" && !(_id in path("drafts.**"))] {
       _id,
       "dates": dates[]{ du, au, locationType },
       "tags": tags[]{ _key, _ref },
       countdown
     }`,
-  );
-
-  const managedIds = new Set([
-    currentTagId,
-    pastTagId,
-    upcomingTagId,
-    horsLesMursTagId,
-  ]);
-  let updated = 0;
-  const log: string[] = [];
-
-  // Use date-only string for comparison with YYYY-MM-DD date fields
-  const nowDate = now.slice(0, 10);
-
-  for (const exhibition of exhibitions) {
-    if (!exhibition.dates?.length) continue;
-
-    // Already marked as past: it stays past forever, no need to re-tag it
-    const alreadyPast = (exhibition.tags || []).some(
-      (t) => t._ref === pastTagId,
     );
-    if (alreadyPast) continue;
 
-    const allStarts = exhibition.dates
-      .map((d) => d.du)
-      .filter(Boolean) as string[];
-    const allEnds = exhibition.dates
-      .map((d) => d.au)
-      .filter(Boolean) as string[];
-    if (!allStarts.length || !allEnds.length) continue;
+    const managedIds = new Set([
+      currentTagId,
+      pastTagId,
+      upcomingTagId,
+      horsLesMursTagId,
+    ]);
+    let updated = 0;
+    const log: string[] = [];
 
-    const firstStart = allStarts.sort()[0];
-    const lastEnd = allEnds.sort().reverse()[0];
+    // Use date-only string for comparison with YYYY-MM-DD date fields
+    const nowDate = now.slice(0, 10);
 
-    const isCurrent = exhibition.dates.some(
-      (d) =>
-        isInSiteLocationType(d.locationType) &&
-        d.du &&
-        d.au &&
-        d.du <= nowDate &&
-        d.au >= nowDate,
-    );
-    const isHorsLesMurs = exhibition.dates.some(
-      (d) =>
-        d.locationType &&
-        OFF_SITE_LOCATION_TYPES.includes(d.locationType) &&
-        d.du &&
-        d.au &&
-        d.du <= nowDate &&
-        d.au >= nowDate,
-    );
-    const isPast = lastEnd < nowDate;
-    const isUpcoming = firstStart > nowDate;
+    for (const exhibition of exhibitions) {
+      if (!exhibition.dates?.length) continue;
 
-    // Compute pastille and countdown based on exhibition status
-    const todayMs = new Date().setHours(0, 0, 0, 0);
-    let pastilleText = { fr: "", en: "" };
-    let countdown: number | null = null;
-
-    if (isCurrent) {
-      const daysUntilEnd = Math.ceil(
-        (new Date(lastEnd).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+      // Already marked as past: it stays past forever, no need to re-tag it
+      const alreadyPast = (exhibition.tags || []).some(
+        (t) => t._ref === pastTagId,
       );
-      if (daysUntilEnd >= 0 && daysUntilEnd <= 10) {
-        pastilleText =
-          daysUntilEnd < 5
-            ? { fr: "derniers jours", en: "last days" }
-            : { fr: `J-${daysUntilEnd}`, en: `J-${daysUntilEnd}` };
-      }
-    } else if (isUpcoming) {
-      const daysUntilStart = Math.ceil(
-        (new Date(firstStart).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+      if (alreadyPast) continue;
+
+      const allStarts = exhibition.dates
+        .map((d) => d.du)
+        .filter(Boolean) as string[];
+      const allEnds = exhibition.dates
+        .map((d) => d.au)
+        .filter(Boolean) as string[];
+      if (!allStarts.length || !allEnds.length) continue;
+
+      const firstStart = allStarts.sort()[0];
+      const lastEnd = allEnds.sort().reverse()[0];
+
+      const isCurrent = exhibition.dates.some(
+        (d) =>
+          isInSiteLocationType(d.locationType) &&
+          d.du &&
+          d.au &&
+          d.du <= nowDate &&
+          d.au >= nowDate,
       );
-      if (daysUntilStart <= 30) {
-        countdown = daysUntilStart;
-        pastilleText = { fr: `J-${daysUntilStart}`, en: `J-${daysUntilStart}` };
+      const isHorsLesMurs = exhibition.dates.some(
+        (d) =>
+          d.locationType &&
+          OFF_SITE_LOCATION_TYPES.includes(d.locationType) &&
+          d.du &&
+          d.au &&
+          d.du <= nowDate &&
+          d.au >= nowDate,
+      );
+      const isPast = lastEnd < nowDate;
+      const isUpcoming = firstStart > nowDate;
+
+      // Compute pastille and countdown based on exhibition status
+      const todayMs = new Date().setHours(0, 0, 0, 0);
+      let pastilleText = { fr: "", en: "" };
+      let countdown: number | null = null;
+
+      if (isCurrent) {
+        const daysUntilEnd = Math.ceil(
+          (new Date(lastEnd).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+        );
+        if (daysUntilEnd >= 0 && daysUntilEnd <= 10) {
+          pastilleText =
+            daysUntilEnd < 5
+              ? { fr: "derniers jours", en: "last days" }
+              : { fr: `J-${daysUntilEnd}`, en: `J-${daysUntilEnd}` };
+        }
+      } else if (isUpcoming) {
+        const daysUntilStart = Math.ceil(
+          (new Date(firstStart).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+        );
+        if (daysUntilStart <= 30) {
+          countdown = daysUntilStart;
+          pastilleText = {
+            fr: `J-${daysUntilStart}`,
+            en: `J-${daysUntilStart}`,
+          };
+        }
       }
+
+      const otherTags = (exhibition.tags || []).filter(
+        (t) => !managedIds.has(t._ref),
+      );
+      const nextTags = [...otherTags];
+      if (isCurrent) nextTags.push({ _key: randomKey(), _ref: currentTagId });
+      if (isHorsLesMurs)
+        nextTags.push({ _key: randomKey(), _ref: horsLesMursTagId });
+      if (isPast) nextTags.push({ _key: randomKey(), _ref: pastTagId });
+      if (isUpcoming) nextTags.push({ _key: randomKey(), _ref: upcomingTagId });
+
+      const tagRefs = nextTags.map((t) => ({
+        _type: "reference" as const,
+        _key: t._key || randomKey(),
+        _ref: t._ref,
+      }));
+
+      const draftId = `drafts.${exhibition._id}`;
+
+      // Fetch the full published document to seed the draft
+      const fullDoc = await client.getDocument<Record<string, unknown>>(
+        exhibition._id,
+      );
+      if (!fullDoc) continue;
+
+      // Write a draft with updated tags (create or replace)
+      await client.createOrReplace({
+        ...fullDoc,
+        _id: draftId,
+        tags: tagRefs,
+        pastille: pastilleText,
+        countdown,
+      });
+
+      // Publish the draft immediately via Actions API (bypasses direct-mutation ACL)
+      await client.request({
+        method: "POST",
+        url: `/data/actions/${dataset}`,
+        body: {
+          actions: [
+            {
+              actionType: "sanity.action.document.publish",
+              draftId,
+              publishedId: exhibition._id,
+            },
+          ],
+        },
+      });
+
+      updated++;
+      log.push(
+        `${exhibition._id}: ${[isCurrent && "current", isHorsLesMurs && "hors-les-murs", isPast && "past", isUpcoming && "upcoming"].filter(Boolean).join("+") || "none"}`,
+      );
     }
 
-    const otherTags = (exhibition.tags || []).filter(
-      (t) => !managedIds.has(t._ref),
-    );
-    const nextTags = [...otherTags];
-    if (isCurrent) nextTags.push({ _key: randomKey(), _ref: currentTagId });
-    if (isHorsLesMurs)
-      nextTags.push({ _key: randomKey(), _ref: horsLesMursTagId });
-    if (isPast) nextTags.push({ _key: randomKey(), _ref: pastTagId });
-    if (isUpcoming) nextTags.push({ _key: randomKey(), _ref: upcomingTagId });
-
-    const tagRefs = nextTags.map((t) => ({
-      _type: "reference" as const,
-      _key: t._key || randomKey(),
-      _ref: t._ref,
-    }));
-
-    const draftId = `drafts.${exhibition._id}`;
-
-    // Fetch the full published document to seed the draft
-    const fullDoc = await client.getDocument<Record<string, unknown>>(
-      exhibition._id,
-    );
-    if (!fullDoc) continue;
-
-    // Write a draft with updated tags (create or replace)
-    await client.createOrReplace({
-      ...fullDoc,
-      _id: draftId,
-      tags: tagRefs,
-      pastille: pastilleText,
-      countdown,
-    });
-
-    // Publish the draft immediately via Actions API (bypasses direct-mutation ACL)
-    await client.request({
-      method: "POST",
-      url: `/data/actions/${dataset}`,
-      body: {
-        actions: [
-          {
-            actionType: "sanity.action.document.publish",
-            draftId,
-            publishedId: exhibition._id,
-          },
-        ],
-      },
-    });
-
-    updated++;
-    log.push(
-      `${exhibition._id}: ${[isCurrent && "current", isHorsLesMurs && "hors-les-murs", isPast && "past", isUpcoming && "upcoming"].filter(Boolean).join("+") || "none"}`,
-    );
-  }
-
-  await sendCronReport({ updated, log });
-  return NextResponse.json({ updated, log });
+    // await sendCronReport({ updated, log });
+    return NextResponse.json({ updated, log });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     await sendCronReport({ updated: 0, log: [], error: message });

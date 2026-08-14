@@ -1,9 +1,15 @@
 import i18n from "../config/i18n";
 import useLocale from "../context/LocaleContext";
 import {
+  _isCurrentByDates,
+  _isCurrentOrFuturByDates,
+  _isPastByDates,
+} from "../lib/utils";
+import {
   Artist,
   Event,
   Exhibition,
+  FhcbDate,
   Library,
   PageModulaire,
   Product,
@@ -75,53 +81,55 @@ export const _localizeField = (field: any) => {
   return field[locale] ? field[locale] : field["fr"];
 };
 
-// Keep in sync with the groupings in fragments-rebonds.ts (rebondsResolver): each `rebond.items`
-// scenario resolves to one of these document-type groups.
-const REBOND_SCENARIO_GROUP: Record<string, string> = {
-  artist: "artist",
-  "artist-related": "artist",
-  "book-related": "book",
-  "exhibition-related": "exhibition",
-  "exhibition-related-futur": "exhibition",
-  "exhibition-related-past": "exhibition",
-  "exhibition-futur": "exhibition",
-  "exhibition-past": "exhibition",
-  "event-related-futur": "event",
-  "event-futur": "event",
-  "articles-related": "article",
-  "ressources-related": "ressources",
+type RebondCard = {
+  _type?: string;
+  dates?: FhcbDate[] | null;
 };
 
-const REBOND_TYPE_GROUP: Record<string, string> = {
-  artist: "artist",
-  product: "book",
-  exhibition: "exhibition",
-  event: "event",
-  article: "article",
-  imageImages: "ressources",
-  feuilletage: "ressources",
-  serieThematique: "ressources",
-  conversation: "ressources",
+const REBOND_RESSOURCES_TYPES = ["imageImages", "feuilletage", "serieThematique", "conversation"];
+
+// Keep in sync with fragments-rebonds.ts (rebondsResolver): whether a resolved card could have been
+// produced by a given `rebond.items` scenario. Needed (not just a _type check) because several
+// scenarios targeting the same _type are mutually exclusive by date — e.g. "exhibition-current" vs
+// "exhibition-futur" — and rebondsResolver's GROQ concatenates all exhibition scenarios into one
+// date-sorted array, so a plain type-based group can't tell an editor's "current" pick from "futur".
+const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = {
+  artist: (item) => item._type === "artist",
+  "artist-related": (item) => item._type === "artist",
+  "book-related": (item) => item._type === "product",
+  "exhibition-related": (item) => item._type === "exhibition",
+  "exhibition-related-by-artist": (item) => item._type === "exhibition",
+  "exhibition-related-current-or-futur": (item) =>
+    item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
+  "exhibition-related-past": (item) =>
+    item._type === "exhibition" && _isPastByDates(item.dates || []),
+  "exhibition-futur": (item) =>
+    item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
+  "exhibition-current": (item) =>
+    item._type === "exhibition" && _isCurrentByDates(item.dates || []),
+  "exhibition-past": (item) =>
+    item._type === "exhibition" && _isPastByDates(item.dates || []),
+  "event-related-current-or-futur": (item) =>
+    item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),
+  "event-futur": (item) => item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),
+  "articles-related": (item) => item._type === "article",
+  "ressources-related": (item) =>
+    !!item._type && REBOND_RESSOURCES_TYPES.includes(item._type),
 };
 
 // rebondsResolver's GROQ concatenates resolvedItems grouped by document type in a fixed order
 // (artist, book, exhibition, event, article, ressources) — this re-sorts to match the order the
-// editor actually picked in rebond.items instead, grouping by type and preserving each group's
-// internal (GROQ-side) ordering.
-export const _orderRebondsByItems = <T extends { _type?: string }>(
+// editor actually picked in rebond.items instead: each card ranks by the position of the first
+// items[] scenario it could have come from (see REBOND_SCENARIO_MATCHERS), ties broken by the
+// original (GROQ-side) order.
+export const _orderRebondsByItems = <T extends RebondCard>(
   items: string[] | null | undefined,
   resolvedItems: T[] | null | undefined,
 ): T[] | null | undefined => {
   if (!items || !resolvedItems) return resolvedItems;
-  const groupOrder: string[] = [];
-  items.forEach((item) => {
-    const group = REBOND_SCENARIO_GROUP[item];
-    if (group && !groupOrder.includes(group)) groupOrder.push(group);
-  });
   const rankOf = (item: T) => {
-    const group = item._type ? REBOND_TYPE_GROUP[item._type] : undefined;
-    const index = group ? groupOrder.indexOf(group) : -1;
-    return index === -1 ? groupOrder.length : index;
+    const index = items.findIndex((scenario) => REBOND_SCENARIO_MATCHERS[scenario]?.(item));
+    return index === -1 ? items.length : index;
   };
   return resolvedItems
     .map((item, i) => ({ item, i }))

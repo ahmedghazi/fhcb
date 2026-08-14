@@ -43,6 +43,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     images,
     metas,
     publicationDate,
+    rebondsType,
     related,
     relatedProductsByArtist,
     relatedProductsByTag,
@@ -202,9 +203,9 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
         )}
       </div>
 
-      {related && related.length > 0 && (
+      {/* {related && related.length > 0 && (
         <Rebonds input={related} title='aroundThertist' />
-      )}
+      )} */}
 
       {/* <pre>{JSON.stringify(relatedProductsByArtist, null, 2)}</pre> */}
       {/* {relatedProductsByArtist && (
@@ -212,10 +213,17 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
       )} */}
       {/* <pre>{JSON.stringify(relatedProductsByArtist, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(mergedRelated[0], null, 2)}</pre> */}
+      <pre>{JSON.stringify(rebondsType?.items, null, 2)}</pre>
+
+      <Rebonds
+        input={rebondsType?.resolvedItems}
+        title={rebondsType?.title || undefined}
+        items={rebondsType?.items}
+      />
+
       {mergedRelated && mergedRelated.length > 0 && (
         <Rebonds input={mergedRelated} title='discoverToo' />
       )}
-      {/* <pre>{JSON.stringify(related, null, 2)}</pre> */}
     </div>
   );
 };

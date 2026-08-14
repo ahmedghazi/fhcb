@@ -72,10 +72,11 @@ const CardType = ({ input, context, size }: Props) => {
       {input._type === "exhibition" &&
         input.dates &&
         _isCurrentByDates(input.dates) && (
-          <CardExhibitionFeatured
-            input={input}
-            // size={sizeFor("exhibitionFeatured")}
-          />
+          // <CardExhibitionFeatured
+          //   input={input}
+          //   // size={sizeFor("exhibitionFeatured")}
+          // />
+          <CardExhibition input={input} size={sizeFor("exhibition")} />
         )}
       {input._type === "product" && (
         <CardProduct

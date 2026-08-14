@@ -53,11 +53,11 @@ const ProductPage: NextPage<PageProps> = async ({ params }) => {
       <ContentProduct input={data} randomProducts={randomProducts} />
       {/* <RebondsProducts input={randomProducts} /> */}
       {/* <pre>{JSON.stringify(data.rebondsType?.items, null, 2)}</pre> */}
-      <Rebonds
+      {/* <Rebonds
         input={data.rebondsType?.resolvedItems}
         title={data.rebondsType?.title || undefined}
         items={data.rebondsType?.items}
-      />
+      /> */}
     </div>
   );
 };

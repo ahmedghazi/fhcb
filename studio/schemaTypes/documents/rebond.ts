@@ -43,18 +43,20 @@ export default defineType({
               {title: 'Expo(s) liée(s)', value: 'exhibition-related'},
               {
                 title: 'Expo(s) liée(s) en cours/à venir',
-                value: 'exhibition-related-futur',
+                value: 'exhibition-related-current-or-futur',
               },
               {title: 'Expo(s) lié(s) passés', value: 'exhibition-related-past'},
               {
                 title: 'Événement(s) liée(s) en cours/à venir',
-                value: 'event-related-futur',
+                value: 'event-related-current-or-futur',
               },
               {title: 'Article(s) lié(s)', value: 'articles-related'},
               {title: 'Ressource(s) lié(s)', value: 'ressources-related'},
 
-              {title: 'Expo(s) en cours ou à venir', value: 'exhibition-futur'},
+              {title: 'Expo(s) à venir', value: 'exhibition-futur'},
+              {title: 'Expo(s) en cours', value: 'exhibition-current'},
               {title: 'Expo(s) passés', value: 'exhibition-past'},
+              {title: 'Expo(s) du même artiste', value: 'exhibition-related-by-artist'},
               {title: 'Événement(s) à venir', value: 'event-futur'},
               {title: 'Artiste', value: 'artist'},
             ],
@@ -65,7 +67,8 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${baseLanguage}`,
+      subtitle: `title.${baseLanguage}`,
+      title: 'name',
     },
   },
   // orderings: [

@@ -20,6 +20,7 @@ import CardImageImages from "@/app/components/ui/cards/CardImageImages";
 import RelatedImageImages from "@/app/components/RebondsImageImages";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import EmbedVideo from "@/app/components/ui/EmbedVideo";
+import Rebonds from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
 
@@ -76,6 +77,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
           input={data.rebonds as unknown as ImageImagesExpanded[]}
         />
       )}
+      {data.related && <Rebonds input={data.related} layout='slider' />}
     </div>
   );
 };

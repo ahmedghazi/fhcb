@@ -35,7 +35,8 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
       backgroundColor: (color as any)?.hex || "var(--color-bleu)",
     };
   }
-  const props = exhibitionToCard(input, size, isCurrent);
+  // const props = exhibitionToCard(input, size, isCurrent);
+  const props = exhibitionToCard(input, size, false);
   return (
     <div
       className={clsx(

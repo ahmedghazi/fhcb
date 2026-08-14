@@ -459,6 +459,11 @@
       // display: none;
     }
   }
+  &--conversation {
+    .btn {
+      background-color: var(--color-bg);
+    }
+  }
   &--video-mux {
     // aspect-ratio: 16 / 9;
     position: relative;

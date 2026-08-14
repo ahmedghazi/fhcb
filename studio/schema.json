@@ -7623,6 +7623,28 @@
         },
         "optional": true
       },
+      "artists": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "artist.reference"
+            }
+          }
+        },
+        "optional": true
+      },
       "rebondsType": {
         "type": "objectAttribute",
         "value": {
@@ -11383,7 +11405,7 @@
               },
               {
                 "type": "string",
-                "value": "exhibition-related-futur"
+                "value": "exhibition-related-current-or-futur"
               },
               {
                 "type": "string",
@@ -11391,7 +11413,7 @@
               },
               {
                 "type": "string",
-                "value": "event-related-futur"
+                "value": "event-related-current-or-futur"
               },
               {
                 "type": "string",
@@ -11407,7 +11429,15 @@
               },
               {
                 "type": "string",
+                "value": "exhibition-current"
+              },
+              {
+                "type": "string",
                 "value": "exhibition-past"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related-by-artist"
               },
               {
                 "type": "string",

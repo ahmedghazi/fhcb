@@ -15,6 +15,8 @@ import {
   relatedByArtist,
   relatedProductsByArtist,
   relatedProductsByTag,
+  relatedRessourcesByArtists,
+  randomRessources,
 } from "./fragments";
 import { rebondsResolver } from "./fragments-rebonds";
 import {
@@ -351,6 +353,7 @@ export const IMAGE_IMAGES_QUERY = groq`*[_type == "imageImages" && slug.current 
   rebonds[]->{
     ${cardRefImageImages}
   },
+  "related": ${relatedRessourcesByArtists},
 }`;
 
 export async function getImageImages(
@@ -382,7 +385,7 @@ export const FEUILLETAGE_QUERY = groq`*[_type == "feuilletage" && slug.current =
   rebonds[]->{
     ${cardTypes}
   },
-  "related": ${relatedByArtists},
+  "related": ${randomRessources},
   rebondsType->{
     ${rebondsResolver}
   }

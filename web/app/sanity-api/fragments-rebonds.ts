@@ -28,31 +28,38 @@ import {
  * document, "futur"/"past" filters by date; either qualifier is optional.
  */
 
-// scenario: "artist" (self, via host's `artists[]`) — kept separate from artist-related below:
-// merging them into one OR'd filter makes the whole filter's inferred type collapse to `never`
-// on host types without an `artists` field (e.g. artist itself), which then poisons the entire
-// concatenated resolvedItems type. Two same-shape arrays concatenated with `+` don't have that
-// problem — an invalid/never operand is just dropped from the union.
+// scenario: "artist" (self, via host's \`artists[]\`) — also fires for "artist-related": editors expect
+// artist-related to include the host's own artist(s) directly (e.g. a book's own listed artist), not
+// only other, separately-connected artists (that part is rebondArtistRelated below). Kept as its own
+// fragment rather than merged into rebondArtistRelated's filter: merging them into one OR'd filter
+// makes the whole filter's inferred type collapse to \`never\` on host types without an \`artists\` field
+// (e.g. artist itself), which then poisons the entire concatenated resolvedItems type. Two same-shape
+// arrays concatenated with \`+\` don't have that problem — an invalid/never operand is just dropped
+// from the union. rebondArtistRelated excludes the host's own artist(s) from its own results, so
+// there's no duplicate card when both scenarios are selected together.
 export const rebondArtistSelf = `
   *[
     _type == "artist" &&
     _id != ^.^._id &&
-    "artist" in ^.items &&
+    ("artist" in ^.items || "artist-related" in ^.items) &&
     _id in ^.^.artists[]._ref
   ] {
     ${cardRefArtist}
   }
 `;
 
-// scenario: "artist-related" — other artists appearing in content directly tied to the host (not
-// broadened via the host's own artist — for a prolific artist like HCB, pivoting via "any other
-// content by the same artist anywhere on the site" pulls in every co-artist he's ever shared a show
-// with, site-wide, which is far too broad). Excludes "exhibition" and "event" from the candidate
-// type list: cross-exhibition links (e.g. the legacy \`rebonds\` reference field) and generic
-// multi-exhibition events (guided tours, etc.) are both too weak/noisy a signal for "related".
-// The exclusion of the host's OWN artist(s) from the result must go through coalesce(^.^.artists[]._ref,
-// [^.^._id]) (falls back to the host's own _id when it has no \`artists\` field, i.e. the host IS an
-// artist) — comparing directly against ^.^._id (the host DOCUMENT's id) never matches an artist's _id.
+// scenario: "artist-related" — other artists appearing in content genuinely tied to the host's own
+// artist(s). Pivots on the host's ARTIST (coalesce(^.^.^.artists[]._ref, [^.^.^._id]) — falls back to
+// the host's own _id when it has no \`artists\` field, i.e. the host IS an artist), not the host
+// DOCUMENT's own _id: every content type (product, feuilletage, imageImages, serieThematique,
+// conversation, event, pageModulaire...) has a generic, editor-curated "see also" \`rebonds\` reference
+// field, so "anything referencing this host document" catches unrelated cross-links through that field
+// (e.g. one feuilletage manually linked to another via \`rebonds\`, no shared artist at all) — pivoting
+// on the artist instead only matches through a REAL editorial connection (shared conversation, book,
+// resource, etc). Excludes "exhibition" and "event" from the candidate type list: cross-exhibition
+// links and generic multi-exhibition events (guided tours, etc.) are both too weak/noisy a signal.
+// The exclusion of the host's OWN artist(s) from the result must go through the same coalesce() —
+// comparing directly against ^.^._id (the host DOCUMENT's id) never matches an artist's _id.
 export const rebondArtistRelated = `
   *[
     _type == "artist" &&
@@ -60,7 +67,7 @@ export const rebondArtistRelated = `
     "artist-related" in ^.items &&
     _id in *[
       _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
-      references(^.^.^._id)
+      references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))
     ].artists[]._ref
   ] | order(name asc) {
     ${cardRefArtist}
@@ -69,19 +76,22 @@ export const rebondArtistRelated = `
 
 // scenario: "book-related" — books directly linked to the host (via product.exhibition, etc.), not
 // broadened via the host's artist(s): otherwise a prolific artist's entire catalog shows up instead
-// of just the book tied to this specific exhibition/content.
+// of just the book tied to this specific exhibition/content. Exception: a pageModulaire whose whole
+// purpose is representing an artist (e.g. a tribute page with no exhibition/event of its own to
+// distinguish itself from) has nothing that would ever reference it directly — broadened via its own
+// \`artists[]\` there instead (added specifically for that case, see pageModulaire.ts's \`artists\` field).
 export const rebondBooks = `
   *[
     _type == "product" &&
     _id != ^.^._id &&
     "book-related" in ^.items &&
-    references(^.^._id)
+    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
   ] | order(_createdAt desc) {
     ${cardRefProduct}
   }
 `;
 
-// scenarios: "exhibition-related", "exhibition-related-futur", "exhibition-related-past" (filtered to
+// scenarios: "exhibition-related", "exhibition-related-current-or-futur", "exhibition-related-past" (filtered to
 // the host) and "exhibition-futur", "exhibition-past" (global, any exhibition)
 // NB: \`au\` (end date) is intentionally left blank for single-day exhibitions/events (see
 // studio/schemaTypes/objects/fhcbDate.ts) — always fall back to \`du\` via coalesce(), otherwise
@@ -92,23 +102,39 @@ export const rebondExhibitions = `
     _id != ^.^._id &&
     (
       ("exhibition-related" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)))
-      || ("exhibition-related-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
+      || ("exhibition-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("exhibition-related-past" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) == 0)
       || ("exhibition-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("exhibition-past" in ^.items && count(dates[coalesce(au, du) >= now()]) == 0)
+      || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now()]) > 0)
     )
   ] | order(dates[0].du desc) {
     ${cardRefExhibition}
   }
 `;
 
-// scenarios: "event-related-futur" (filtered to the host) and "event-futur" (global, any event)
+// scenario: "exhibition-related-by-artist" — other exhibitions featuring the same artist(s) as the
+// host, capped at 4. Kept as its own fragment rather than folded into rebondExhibitions' OR branches
+// above: the [0...4] cap needs to apply only to this scenario's own matches, not to the combined
+// result of every exhibition scenario selected at once.
+export const rebondExhibitionsByArtist = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    "exhibition-related-by-artist" in ^.items &&
+    references(^.^.artists[]._ref)
+  ] | order(dates[0].du desc) [0...4] {
+    ${cardRefExhibition}
+  }
+`;
+
+// scenarios: "event-related-current-or-futur" (filtered to the host) and "event-futur" (global, any event)
 export const rebondEvents = `
   *[
     _type == "event" &&
     _id != ^.^._id &&
     (
-      ("event-related-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
+      ("event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
     )
   ] | order(dates[0].du asc) {
@@ -117,26 +143,27 @@ export const rebondEvents = `
 `;
 
 // scenario: "articles-related" — articles directly linked to the host, not broadened via the host's
-// artist(s) (see rebondBooks above for why).
+// artist(s), except for a pageModulaire artist page (see rebondBooks above for why).
 export const rebondArticles = `
   *[
     _type == "article" &&
     _id != ^.^._id &&
     "articles-related" in ^.items &&
-    references(^.^._id)
+    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
   ] | order(_createdAt desc) {
     ${cardRefArticle}
   }
 `;
 
 // scenario: "ressources-related" — imageImages / feuilletage / serieThematique / conversation
-// directly linked to the host, not broadened via the host's artist(s) (see rebondBooks above for why).
+// directly linked to the host, not broadened via the host's artist(s), except for a pageModulaire
+// artist page (see rebondBooks above for why).
 export const rebondRessources = `
   *[
     _id != ^.^._id &&
     _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&
     "ressources-related" in ^.items &&
-    references(^.^._id)
+    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
   ] | order(_createdAt desc) {
     ${cardTypesRessources}
   }
@@ -153,6 +180,7 @@ export const rebondsResolver = `
     + ${rebondArtistRelated}
     + ${rebondBooks}
     + ${rebondExhibitions}
+    + ${rebondExhibitionsByArtist}
     + ${rebondEvents}
     + ${rebondArticles}
     + ${rebondRessources}

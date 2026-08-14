@@ -122,7 +122,15 @@ export default defineType({
       ],
       group: 'editorial',
     }),
-
+    defineField({
+      name: 'artists',
+      title: 'Artiste(s)',
+      description:
+        'Renseigner si cette page représente un ou plusieurs artistes (ex: page hommage) — utilisé par les rebonds pour retrouver ses expositions, événements, livres...',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'artist'}]}],
+      group: 'editorial',
+    }),
     rebondsTypeField,
   ],
 })
