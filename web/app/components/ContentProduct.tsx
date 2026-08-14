@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import {
-  Artist,
   KeyVal,
   Product,
   PRODUCT_QUERY_RESULT,
@@ -21,7 +20,7 @@ import BtnAddToCart from "./ui/btns/BtnAddToCart";
 import { ProductExpanded } from "../sanity-api/types/sanity-expanded.types";
 import { PortableText } from "@portabletext/react";
 import portableTextComponents from "../sanity-api/portableTextComponents";
-import { _date } from "../lib/utils";
+import { _date, artistsToString } from "../lib/utils";
 import useLocale from "../context/LocaleContext";
 
 type Props = {
@@ -73,18 +72,14 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
             <div>
               <h1 className='c-h2'>{_localizeField(title)}</h1>
               <div className='subtitle c-chapo c-chapo--i'>
-                {artists &&
-                  artists.length > 0 &&
-                  (artists as unknown as Artist[])
-                    .map((a) => a.name)
-                    .join(", ")}
+                {artists && artists.length > 0 && artistsToString(artists)}
                 {!artists && <span>{_parseJsonStringArray(artistName)}</span>}
               </div>
             </div>
             <div className='price c-h2'>{price} €</div>
-            <div className='stock'>
+            {/* <div className='stock'>
               {isLowStock ? _localizeText("isLowStock") : ""}
-            </div>
+            </div> */}
 
             <BtnAddToCart input={input as unknown as ProductExpanded} />
 

@@ -10,6 +10,7 @@ import {
   _localizeField,
   _localizeText,
 } from "@/app/sanity-api/utils";
+import { artistsToString } from "@/app/lib/utils";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 
@@ -77,6 +78,7 @@ const BtnAddToCart = ({ input }: Props) => {
       price: activeVariant?.price ?? price ?? 0,
       image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
       href: _linkResolver(input),
+      artists: artistsToString(input.artists),
     });
   };
 

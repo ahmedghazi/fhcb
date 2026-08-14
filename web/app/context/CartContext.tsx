@@ -19,6 +19,7 @@ export type CartLineItem = {
   image?: string;
   href?: string;
   quantity: number;
+  artists?: string;
 };
 
 type ContextProps = {

@@ -48,7 +48,7 @@ const SIZES = {
   exhibition: { grid: "sm", slider: "md", rebonds: "md" },
   exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md" },
   product: { grid: "sm", slider: "sm", rebonds: "sm" },
-  article: { grid: "sm", slider: "sm", rebonds: "md" },
+  article: { grid: "sm", slider: "sm", rebonds: "sm" },
   artist: { grid: "sm", slider: "sm", rebonds: "sm" },
   imageImages: { grid: "md", slider: "md", rebonds: "md" },
   feuilletage: { grid: "md", slider: "md", rebonds: "md" },
@@ -76,7 +76,11 @@ const CardType = ({ input, context, size }: Props) => {
           //   input={input}
           //   // size={sizeFor("exhibitionFeatured")}
           // />
-          <CardExhibition input={input} size={sizeFor("exhibition")} />
+          <CardExhibition
+            input={input}
+            // size={sizeFor("exhibition")}
+            size='lg'
+          />
         )}
       {input._type === "product" && (
         <CardProduct

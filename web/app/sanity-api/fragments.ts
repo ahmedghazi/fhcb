@@ -291,9 +291,9 @@ export const textSidebarUI = `
           ${imageAsset}
         }
       },
-      partenaires[]{
+      partenaires[]->{
         ...,
-        image{
+        imageCover{
           ${imageAsset}
         }
       },
@@ -374,7 +374,7 @@ export const sliderArtistUI = `
           _id == ^.artist._ref
         )
       )
-    ] | order(dates[0].du asc)[0...10] {
+    ] | order(dates[0].du asc)[0...20] {
       ${cardTypes}
     },
     cta{

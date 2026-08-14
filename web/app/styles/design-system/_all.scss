@@ -32,6 +32,10 @@
         width: var(--gridder-2_3);
       }
     }
+    &--lg {
+      flex-basis: var(--gridder-3_3);
+      width: var(--gridder-3_3);
+    }
   }
 
   @media all and (max-width: variables.$md) {

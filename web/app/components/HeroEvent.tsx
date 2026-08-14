@@ -10,6 +10,7 @@ import {
   _isCurrentOrFuturByDates,
   _isPastByDates,
   _isVisiteGuidee,
+  artistsToString,
 } from "../lib/utils";
 import CardTags from "./ui/cards/CardTags";
 
@@ -19,7 +20,7 @@ type Props = {
 
 const HeroEvent = ({ input }: Props) => {
   const { title, subTitle, artists, imageCover, dates, tags, links } = input;
-  const artistList = artists?.map((artist) => artist.name).join(", ");
+  const artistList = artistsToString(artists);
   const isVisiteGuidee = _isVisiteGuidee(tags || []);
   // const isCurrentOrFuturByDates = _isCurrentOrFuturByDates(dates || []);
   const isPast = _isPastByDates(dates || []);

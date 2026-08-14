@@ -48,6 +48,14 @@ const FilterList = ({
     }
   }, [open]);
 
+  useEffect(() => {
+    if (!wrapperRef.current || !detailRef.current) return;
+    if (open) {
+      const h = detailRef.current.getBoundingClientRect().height;
+      wrapperRef.current.style.setProperty("--detail-h", `${h}px`);
+    }
+  }, [selectedLetter]);
+
   // Pure localizer — no hook, safe to call in loops
   const loc = (field: any): string => {
     if (!field) return "";

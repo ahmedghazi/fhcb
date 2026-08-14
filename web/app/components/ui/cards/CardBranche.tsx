@@ -14,7 +14,6 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
   if (!input) return null;
   const { slug } = input;
   const { settings } = usePageContext();
-  console.log(slug?.current);
   let supTitle = "";
   if (slug?.current?.includes("image")) {
     supTitle = `[${settings?.totalImageImages}]`;

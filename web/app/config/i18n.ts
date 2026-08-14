@@ -119,6 +119,7 @@ const i18n = {
     toDiscoverToo: "To discover too",
     discoverTheArtist: "Discover the artist",
     discoverTheExhibition: "Discover the exhibition",
+    aroundTheExhibition: "About the exhibition",
     discoverTheEvent: "Discover the event",
     readTheArticle: "read the article",
     currentExhibition: "Current exhibition",

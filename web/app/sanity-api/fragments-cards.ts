@@ -1,3 +1,4 @@
+import { blockContent, textUI } from "./fragments";
 import { imageAsset, videoAsset } from "./fragments-assets";
 
 export const cardRefExhibition = `
@@ -220,6 +221,12 @@ export const cardRefPageModulaire = `
     ${videoAsset}
   },
   tags[]->,
+  modules[]{
+    _type,
+    _type == "textUI" => {
+      text
+    }
+  }
 `;
 
 export const cardTypes = `

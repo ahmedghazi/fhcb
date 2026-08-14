@@ -16,6 +16,15 @@ import {
   Tag,
 } from "../sanity-api/types/sanity.types";
 
+export const artistsToString = (
+  artists?: Array<{ name?: string | null }> | null,
+): string => {
+  return (artists ?? [])
+    .map((artist) => artist?.name)
+    .filter(Boolean)
+    .join(", ");
+};
+
 export const _date = (d: string, locale = "fr") => {
   return new Intl.DateTimeFormat(locale, {
     // day: "numeric",

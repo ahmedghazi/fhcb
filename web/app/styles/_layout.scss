@@ -47,7 +47,7 @@ main {
 
   z-index: 1;
   .template {
-    padding-top: var(--header-h);
+    padding-top: calc(var(--header-h) + var(--spacing-lg));
     // padding-bottom: var(--header-h);
     &--exhibition,
     &--event {

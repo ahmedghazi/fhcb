@@ -69,7 +69,7 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
         <Rebonds input={data.rebonds} title={data.rebondsLabel || ""} />
       )}
       {/* <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} /> */}
-      <pre>{JSON.stringify(data.rebondsType?.items, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(data.rebondsType?.items, null, 2)}</pre> */}
       <Rebonds
         input={data.rebondsType?.resolvedItems}
         title={data.rebondsType?.title || undefined}

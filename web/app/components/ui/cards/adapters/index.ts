@@ -39,9 +39,11 @@ import {
   _isCurrentOrFuturByDates,
   _isPast,
   _isPastByDates,
+  artistsToString,
 } from "@/app/lib/utils";
 import { usePathname } from "next/navigation";
 import EmbedVideo from "../../EmbedVideo";
+import { toPlainText } from "@portabletext/react";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -76,7 +78,7 @@ export function exhibitionToCard(
     linkTickets,
     pastille,
   } = input;
-  const artistList = artists?.map((a) => a.name).join(", ");
+  const artistList = artistsToString(artists);
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
@@ -168,7 +170,7 @@ export function productToCard(
     totalInventory,
     pastille,
   } = input;
-  const artistsName = artists?.map((a) => a?.name).join(", ") || "";
+  const artistsName = artistsToString(artists);
 
   const title = (_localizeField(input.title) as string) || "";
   const pathname = usePathname();
@@ -494,6 +496,14 @@ export function brancheToCard(
 ): CardBaseProps {
   const { imageCover, videoCover } = input;
   const playbackId = videoCover?.asset?.playbackId;
+  let text = null;
+  const moduleText = input.modules?.filter((el) => el._type === "textUI");
+  if (moduleText) {
+    moduleText.forEach((el) => {
+      text = toPlainText(_localizeField(el?.text || "no text"));
+    });
+  }
+
   return {
     _type: input._type,
     layout: "col",
@@ -512,6 +522,8 @@ export function brancheToCard(
       : undefined,
     supTitle,
     title: (_localizeField(input.title) as string) || "",
+    infoNode: text ? text : undefined,
+
     contentCount,
     actions: [
       {

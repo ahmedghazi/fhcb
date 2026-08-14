@@ -5,7 +5,7 @@ import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
 import FHCBDates from "./ui/FHCBDates";
 import Figure from "./ui/Figure";
 import clsx from "clsx";
-import { _isCurrentByDates, _isPastByDates } from "../lib/utils";
+import { _isCurrentByDates, _isPastByDates, artistsToString } from "../lib/utils";
 import CardTags from "./ui/cards/CardTags";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 
 const HeroExhibition = ({ input }: Props) => {
   const { title, artists, imageCover, dates, tags, color, links } = input;
-  const artistList = artists?.map((artist) => artist.name).join(", ");
+  const artistList = artistsToString(artists);
   const isCurrentByDates = _isCurrentByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
 

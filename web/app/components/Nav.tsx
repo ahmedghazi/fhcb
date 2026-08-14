@@ -179,6 +179,8 @@ const Nav = ({ navPrimary, settings }: Props) => {
     <nav
       className={clsx(modalType != null && "is-open")}
       onMouseLeave={() => {
+        // return;
+
         dispatchCurrentMenuItem(null);
         dispatchModalType(null);
       }}>
