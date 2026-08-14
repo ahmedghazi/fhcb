@@ -213,7 +213,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
       )} */}
       {/* <pre>{JSON.stringify(relatedProductsByArtist, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(mergedRelated[0], null, 2)}</pre> */}
-      <pre>{JSON.stringify(rebondsType?.items, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(rebondsType?.items, null, 2)}</pre> */}
 
       <Rebonds
         input={rebondsType?.resolvedItems}
