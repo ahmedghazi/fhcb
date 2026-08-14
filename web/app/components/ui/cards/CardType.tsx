@@ -19,7 +19,7 @@ import {
 import CardProduct from "./CardProduct";
 import CardArticle from "./CardArticle";
 import CardConversation from "./CardConversation";
-import { _isCurrentByDates } from "@/app/lib/utils";
+import { _isCurrentByDates, _isPast, _isPastByDates } from "@/app/lib/utils";
 import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
 type Context = "grid" | "slider" | "rebonds";
@@ -46,6 +46,7 @@ type Props = {
 const SIZES = {
   event: { grid: "sm", slider: "md", rebonds: "sm" },
   exhibition: { grid: "sm", slider: "md", rebonds: "md" },
+  exhibitionPast: { grid: "sm", slider: "sm", rebonds: "sm" },
   exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md" },
   product: { grid: "sm", slider: "sm", rebonds: "sm" },
   article: { grid: "sm", slider: "sm", rebonds: "sm" },
@@ -59,11 +60,29 @@ const CardType = ({ input, context, size }: Props) => {
   if (!input) return null;
   const sizeFor = (type: keyof typeof SIZES) => SIZES[type][context];
 
+  const sizeForExhibition = (input: ExhibitionExpanded) => {
+    if (!input.dates) return SIZES["exhibition"][context];
+    const isPast = input.dates && _isPastByDates(input.dates);
+    const isCurrent = _isCurrentByDates(input.dates);
+    let size = "sm";
+    if (isPast) return SIZES["exhibitionPast"][context];
+    else if (isCurrent) return "lg";
+    else return SIZES["exhibition"][context];
+  };
   return (
     <>
       {input._type === "event" && (
         <CardEvent input={input} size={sizeFor("event")} />
       )}
+      {input._type === "exhibition" && (
+        <CardExhibition input={input} size={sizeForExhibition(input)} />
+      )}
+      {/* {input._type === "exhibition" &&
+        input.dates &&
+        _isPastByDates(input.dates) && (
+          <CardExhibition input={input} size={sizeFor("exhibitionPast")} />
+        )}
+
       {input._type === "exhibition" &&
         input.dates &&
         !_isCurrentByDates(input.dates) && (
@@ -81,7 +100,7 @@ const CardType = ({ input, context, size }: Props) => {
             // size={sizeFor("exhibition")}
             size='lg'
           />
-        )}
+        )} */}
       {input._type === "product" && (
         <CardProduct
           input={input}
