@@ -2,7 +2,10 @@
 
 body:has(header.is-up) .filters,
 header.is-up ~ main .filters {
-  top: 0;
+  top: unset;
+  @media all and (min-width: variables.$md) {
+    top: 0;
+  }
 }
 .filters {
   border-bottom: var(--border);
@@ -22,6 +25,7 @@ header.is-up ~ main .filters {
     bottom: 0;
     left: 0;
     right: 0;
+    top: unset;
     padding: 0;
     border: none;
     border-top: var(--border);
