@@ -10,6 +10,7 @@ import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { publish } from "pubsub-js";
 import GridMasonryDessandro from "../ui/GridMasonryDessandro";
+import { GridMasonryColumns } from "../ui/GridMasonryColumns";
 
 type Props = {
   input: ListProductUI & {
@@ -48,11 +49,12 @@ const ModuleListProductUI = ({ input }: Props) => {
           )}
 
           {filteredItems.length > 0 && (
-            <GridMasonryDessandro>
-              {filteredItems.map((item: ProductExpanded, index: number) => (
-                <CardProduct key={`--${index}`} input={item} size={"sm"} />
-              ))}
-            </GridMasonryDessandro>
+            // <GridMasonryDessandro>
+            //   {filteredItems.map((item: ProductExpanded, index: number) => (
+            //     <CardProduct key={`--${index}`} input={item} size={"sm"} />
+            //   ))}
+            // </GridMasonryDessandro>
+            <GridMasonryColumns items={filteredItems} />
           )}
         </div>
       </div>

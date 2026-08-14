@@ -250,7 +250,6 @@ export const _isPast = (item: ExhibitionExpanded) => {
 };
 
 export const _isVisiteGuidee = (tags: Tag[]) => {
-  console.log(tags);
   return (
     tags.filter((tag) => tag.slug?.current === "visite-commentee").length > 0
   );

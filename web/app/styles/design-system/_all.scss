@@ -81,6 +81,32 @@
   }
 }
 
+.grid-masonry-columns {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 4), minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+  align-items: start;
+
+  .exhibitionGrid__column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-gutter);
+    min-width: 0;
+
+    > .card {
+      width: 100%;
+    }
+  }
+
+  @media all and (max-width: variables.$md) {
+    gap: var(--spacing-sm);
+
+    .exhibitionGrid__column {
+      gap: var(--spacing-sm);
+    }
+  }
+}
+
 figure {
   figcaption {
     text-align: right;

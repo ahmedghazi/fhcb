@@ -13,6 +13,7 @@ import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import GridMasonryDessandro from "../ui/GridMasonryDessandro";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
+import { GridMasonryColumns } from "../ui/GridMasonryColumns";
 
 type Props = {
   input: ListExhibitionsPastUI & {
@@ -35,7 +36,7 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
     activeFilters,
     locale,
   );
-
+  console.log(input.resolvedItems);
   return (
     <section className='module module--list-exhibitions-past-ui'>
       <div className='container-fluid'>
@@ -45,24 +46,25 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
           )}
 
           {filteredItems.length > 0 && (
-            <GridMasonryDessandro>
-              {filteredItems.map((item: ExhibitionExpanded, index: number) => (
-                <Fragment key={`--${index}`}>
-                  <div
-                    style={{
-                      width: isMobile
-                        ? "var(--gridder-4_4)"
-                        : "var(--gridder-1_4)",
-                    }}>
-                    <CardExhibition
-                      input={item}
-                      size={"sm"}
-                      footerHover={true}
-                    />
-                  </div>
-                </Fragment>
-              ))}
-            </GridMasonryDessandro>
+            // <GridMasonryDessandro>
+            //   {filteredItems.map((item: ExhibitionExpanded, index: number) => (
+            //     <Fragment key={`--${index}`}>
+            //       <div
+            //         style={{
+            //           width: isMobile
+            //             ? "var(--gridder-4_4)"
+            //             : "var(--gridder-1_4)",
+            //         }}>
+            //         <CardExhibition
+            //           input={item}
+            //           size={"sm"}
+            //           footerHover={true}
+            //         />
+            //       </div>
+            //     </Fragment>
+            //   ))}
+            // </GridMasonryDessandro>
+            <GridMasonryColumns items={filteredItems} />
           )}
         </div>
       </div>

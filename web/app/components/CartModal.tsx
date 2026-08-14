@@ -10,7 +10,6 @@ const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
 
 const CartProductItem = ({ line }: { line: any }) => {
   const { removeFromCart, updateQuantity } = useCart();
-  console.log(line);
   return (
     <div className='cart-modal__item'>
       {line.image && (
