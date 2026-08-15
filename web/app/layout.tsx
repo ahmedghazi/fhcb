@@ -24,47 +24,47 @@ import BandeauContextuel from "./components/ui/BandeauContextuel";
 const PPRightGrotesk = localFont({
   src: [
     {
-      path: "./styles/fonts/PPRightGrotesk-WideLight.woff",
+      path: "./styles/fonts/PPRightGrotesk-WideLight.woff2",
       weight: "200",
       style: "normal",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-WideLightItalic.woff",
+      path: "./styles/fonts/PPRightGrotesk-WideLightItalic.woff2",
       weight: "200",
       style: "italic",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-WideRegular.woff",
+      path: "./styles/fonts/PPRightGrotesk-WideRegular.woff2",
       weight: "450",
       style: "normal",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-Light.woff",
+      path: "./styles/fonts/PPRightGrotesk-Light.woff2",
       weight: "300",
       style: "normal",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-LightItalic.woff",
+      path: "./styles/fonts/PPRightGrotesk-LightItalic.woff2",
       weight: "300",
       style: "italic",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-Regular.woff",
+      path: "./styles/fonts/PPRightGrotesk-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-RegularItalic.woff",
+      path: "./styles/fonts/PPRightGrotesk-RegularItalic.woff2",
       weight: "400",
       style: "italic",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-TightDark.woff",
+      path: "./styles/fonts/PPRightGrotesk-TightDark.woff2",
       weight: "800",
       style: "normal",
     },
     {
-      path: "./styles/fonts/PPRightGrotesk-TightDarkItalic.woff",
+      path: "./styles/fonts/PPRightGrotesk-TightDarkItalic.woff2",
       weight: "800",
       style: "italic",
     },

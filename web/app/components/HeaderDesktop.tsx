@@ -7,6 +7,7 @@ import LocalesSwitcher from "./ui/LocaleSwitcher";
 import SearchToggle from "./ui/SearchToggle";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
 import BtnCart from "./ui/btns/BtnCart";
+import website from "../config/website";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -18,7 +19,7 @@ const HeaderDesktop = ({ settings }: Props) => {
       {settings && (
         <div className='header__inner'>
           <div className='header__logo'>
-            <Link href='/'>
+            <Link href='/' title={website.title}>
               <LogoFHCB type='default' />
             </Link>
           </div>

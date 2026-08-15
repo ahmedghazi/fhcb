@@ -45,7 +45,10 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
             )}
           </div>
         </div>
-        <button className='underline btn-close' onClick={() => setOpen(false)}>
+        <button
+          aria-label='Fermer le bandeau'
+          className='underline btn-close'
+          onClick={() => setOpen(false)}>
           {/* {localizedClose} */}
           <Icon name='close' />
         </button>

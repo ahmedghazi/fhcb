@@ -1,5 +1,6 @@
 "use client";
 import { Fragment, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import useLocale from "@/app/context/LocaleContext";
 import CardProduct from "../ui/cards/CardProduct";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
@@ -9,8 +10,10 @@ import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { publish } from "pubsub-js";
-import GridMasonryDessandro from "../ui/GridMasonryDessandro";
-import { GridMasonryColumns } from "../ui/GridMasonryColumns";
+
+const GridMasonryColumns = dynamic(() =>
+  import("../ui/GridMasonryColumns").then((mod) => mod.GridMasonryColumns),
+);
 
 type Props = {
   input: ListProductUI & {

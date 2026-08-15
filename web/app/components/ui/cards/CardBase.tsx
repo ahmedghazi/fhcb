@@ -210,7 +210,12 @@ const CardBase = ({
           />
         ) : (
           images.map((asset, i) => (
-            <Figure key={i} asset={asset} width={1000} />
+            <Figure
+              key={i}
+              asset={asset}
+              width={1000}
+              sizes='(max-width: 767px) 100vw, 25vw'
+            />
           ))
         ))}
     </div>

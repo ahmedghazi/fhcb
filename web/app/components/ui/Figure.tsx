@@ -11,6 +11,7 @@ type Props = {
   caption?: string;
   author?: string;
   copyright?: string;
+  sizes?: string;
 };
 
 const Figure = ({
@@ -20,6 +21,7 @@ const Figure = ({
   caption,
   author,
   copyright,
+  sizes = "100vw",
 }: Props) => {
   const isLandscape =
     asset?.metadata?.dimensions?.width > asset?.metadata?.dimensions?.height;
@@ -35,7 +37,7 @@ const Figure = ({
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
         alt={alt || ""}
-        sizes='100vw'
+        sizes={sizes}
         style={{
           width: "100%",
           height: "auto",

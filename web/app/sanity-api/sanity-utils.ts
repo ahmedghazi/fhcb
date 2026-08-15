@@ -13,6 +13,5 @@ export function urlFor(source: any, maxWidth: number = 2000): any {
     .width(maxWidth)
     .auto("format")
     .fit("max")
-    .dpr(2)
     .url();
 }

@@ -10,6 +10,7 @@ import LogoFHCB from "./LogoFHCB";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import Icon from "./ui/Icon";
+import website from "../config/website";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -30,7 +31,7 @@ const HeaderMobile = ({ settings }: Props) => {
     <div className='header--mobile'>
       <div className='header__inner'>
         <div className='header__logo'>
-          <Link href='/'>
+          <Link href='/' title={website.title}>
             <LogoFHCB type='default' />
           </Link>
         </div>

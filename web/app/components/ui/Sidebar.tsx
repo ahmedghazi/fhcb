@@ -51,7 +51,7 @@ const Sidebar = ({ input }: Props) => {
                 {item._type === "partenaire" &&
                   item.imageCover &&
                   item.imageCover.asset && (
-                    <Figure asset={item.imageCover.asset} />
+                    <Figure asset={item.imageCover.asset} sizes='96px' />
                   )}
               </li>
             ))}
@@ -68,7 +68,7 @@ const Sidebar = ({ input }: Props) => {
                 {item._type === "partenaire" &&
                   item.imageCover &&
                   item.imageCover.asset && (
-                    <Figure asset={item.imageCover.asset} />
+                    <Figure asset={item.imageCover.asset} sizes='96px' />
                   )}
               </li>
             ))}
@@ -94,7 +94,7 @@ const Sidebar = ({ input }: Props) => {
                       </div>
                     )}
                     {item.image && item.image.asset && (
-                      <Figure asset={item.image.asset} />
+                      <Figure asset={item.image.asset} sizes='96px' />
                     )}
                   </>
                 )}
@@ -110,7 +110,10 @@ const Sidebar = ({ input }: Props) => {
               <li key={i} className='mb-md' title={_localizeField(item.title)}>
                 {item && (
                   <div className='flex flex-col gap-xs'>
-                    <Figure asset={item?.imageCover?.asset} />
+                    <Figure
+                      asset={item?.imageCover?.asset}
+                      sizes='(max-width: 767px) 100vw, 25vw'
+                    />
                     <Link className='btn' href={_linkResolver(item)}>
                       {_localizeText("buy")}
                     </Link>
@@ -142,7 +145,7 @@ const Sidebar = ({ input }: Props) => {
                       </div>
                     )}
                     {item.image && item.image.asset && (
-                      <Figure asset={item.image.asset} />
+                      <Figure asset={item.image.asset} sizes='96px' />
                     )}
                   </>
                 )}
