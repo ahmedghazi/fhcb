@@ -6,6 +6,7 @@ import {
   getYouTubeNoCookieUrl,
   getYouTubeThumbnailUrl,
 } from "@/app/lib/utils";
+import { useInView } from "@/app/hooks/useInView";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
@@ -15,6 +16,7 @@ type Props = {
 };
 
 const EmbedVideo = ({ embedUrl, placeholderUrl }: Props) => {
+  const { ref, isInView } = useInView<HTMLDivElement>();
   if (!embedUrl) return null;
   const src = getYouTubeNoCookieUrl(embedUrl) || embedUrl;
   const light = placeholderUrl || getYouTubeThumbnailUrl(embedUrl) || true;
@@ -22,14 +24,17 @@ const EmbedVideo = ({ embedUrl, placeholderUrl }: Props) => {
   return (
     <div className='embed'>
       <div
+        ref={ref}
         style={{ aspectRatio: "16 / 9" }}
         className={clsx("player-container")}>
-        <ReactPlayer
-          src={src}
-          controls={true}
-          light={light}
-          style={{ width: "100%", height: "100%", aspectRatio: "16 / 9" }}
-        />
+        {isInView && (
+          <ReactPlayer
+            src={src}
+            controls={true}
+            light={light}
+            style={{ width: "100%", height: "100%", aspectRatio: "16 / 9" }}
+          />
+        )}
       </div>
     </div>
   );
