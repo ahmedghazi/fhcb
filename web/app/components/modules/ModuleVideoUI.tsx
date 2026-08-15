@@ -3,7 +3,10 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { VideoUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import LogoFHCB from "../LogoFHCB";
-import { getYouTubeNoCookieUrl } from "@/app/lib/utils";
+import {
+  getYouTubeNoCookieUrl,
+  getYouTubeThumbnailUrl,
+} from "@/app/lib/utils";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
@@ -16,6 +19,10 @@ const ModuleVideoUI = ({ input }: Props) => {
   const youtubeUrlToYoutubeNoCookies = video?.embedUrl
     ? getYouTubeNoCookieUrl(video.embedUrl)
     : video?.embedUrl;
+  const lightThumbnail =
+    video?.placeholder?.asset?.url ||
+    (video?.embedUrl ? getYouTubeThumbnailUrl(video.embedUrl) : null) ||
+    true;
   return (
     <section className='module module--video-ui'>
       <div className='container-fluid'>
@@ -24,7 +31,7 @@ const ModuleVideoUI = ({ input }: Props) => {
             <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
               <ReactPlayer
                 src={youtubeUrlToYoutubeNoCookies}
-                light={video.placeholder?.asset?.url || true}
+                light={lightThumbnail}
                 // controls={false}
                 style={{ width: "100%", height: "100%" }}
               />

@@ -286,7 +286,7 @@ export const _collectFirstImagesFromNavItem = (item: PostTypes) => {
   return pageCover ? [pageCover] : [];
 };
 
-export function getYouTubeNoCookieUrl(url: string): string | null {
+export function getYouTubeVideoId(url: string): string | null {
   try {
     const parsedUrl = new URL(url);
 
@@ -327,10 +327,20 @@ export function getYouTubeNoCookieUrl(url: string): string | null {
       }
     }
 
-    if (!videoId) return null;
-
-    return `https://www.youtube-nocookie.com/embed/${videoId}`;
+    return videoId;
   } catch {
     return null;
   }
+}
+
+export function getYouTubeNoCookieUrl(url: string): string | null {
+  const videoId = getYouTubeVideoId(url);
+  if (!videoId) return null;
+  return `https://www.youtube-nocookie.com/embed/${videoId}`;
+}
+
+export function getYouTubeThumbnailUrl(url: string): string | null {
+  const videoId = getYouTubeVideoId(url);
+  if (!videoId) return null;
+  return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 }
