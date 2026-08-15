@@ -10,7 +10,7 @@ html {
   background-color: var(--color);
 
   &.is-loading {
-    opacity: 0;
+    // opacity: 0;
   }
   &.no-scroll {
     &,

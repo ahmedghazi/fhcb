@@ -74,9 +74,7 @@ const withoutRedundantPrimary = (
   actions: CardAction[],
   actionsNode?: ReactNode,
 ) =>
-  actions.length > 1 || actionsNode !== undefined
-    ? actions.slice(1)
-    : actions;
+  actions.length > 1 || actionsNode !== undefined ? actions.slice(1) : actions;
 
 // ─── CardFooter (mode detached — rendu par le parent) ────────────────────────
 
@@ -211,7 +209,9 @@ const CardBase = ({
             className='card__video card__video--hover'
           />
         ) : (
-          images.map((asset, i) => <Figure key={i} asset={asset} />)
+          images.map((asset, i) => (
+            <Figure key={i} asset={asset} width={1000} />
+          ))
         ))}
     </div>
   );
@@ -244,7 +244,8 @@ const CardBase = ({
   const cardStyle: React.CSSProperties | undefined =
     colorVar || style
       ? {
-          ...(colorVar && ({ "--card-color": colorVar } as React.CSSProperties)),
+          ...(colorVar &&
+            ({ "--card-color": colorVar } as React.CSSProperties)),
           ...style,
         }
       : undefined;

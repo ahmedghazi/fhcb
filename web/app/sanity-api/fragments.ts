@@ -297,10 +297,18 @@ export const textSidebarUI = `
           ${imageAsset}
         }
       },
-      partenairesMedia[]->{
-        ...,
-        "image": coalesce(imageCover, image){
-          ${imageAsset}
+      partenairesMedia[]{
+        _type == "reference" => @->{
+          ...,
+          "image": imageCover{
+            ${imageAsset}
+          }
+        },
+        _type == "keyVal" => {
+          ...,
+          "image": image{
+            ${imageAsset}
+          }
         }
       },
       products[]->{

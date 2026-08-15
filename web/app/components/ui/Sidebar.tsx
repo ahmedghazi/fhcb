@@ -21,7 +21,7 @@ const Sidebar = ({ input }: Props) => {
     products,
     keyVal,
   } = input;
-  console.log(input);
+  console.log(input.partenairesMedia);
   return (
     <aside className='sidebar'>
       {commissariat && (

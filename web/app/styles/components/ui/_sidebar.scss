@@ -18,12 +18,18 @@
       }
     }
   }
-  &__partenaires {
-  }
   figure {
     margin-top: 1rem;
     max-width: 10rem;
     max-width: 6rem;
+  }
+  &__partenaires {
+  }
+  &__products {
+    figure {
+      max-width: unset;
+      margin: 0;
+    }
   }
 
   @media all and (max-width: variables.$md) {
