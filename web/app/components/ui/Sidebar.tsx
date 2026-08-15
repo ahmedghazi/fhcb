@@ -21,6 +21,7 @@ const Sidebar = ({ input }: Props) => {
     products,
     keyVal,
   } = input;
+  console.log(input);
   return (
     <aside className='sidebar'>
       {commissariat && (
@@ -83,6 +84,7 @@ const Sidebar = ({ input }: Props) => {
               <li key={i}>
                 {item && (
                   <>
+                    {/* <pre>{JSON.stringify(item, null, 2)}</pre> */}
                     {item && item.title && (
                       <div>{_localizeField(item.title) || ""}</div>
                     )}

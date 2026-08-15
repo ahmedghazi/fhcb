@@ -99,21 +99,21 @@ export default async function RootLayout({
           <LocaleContextProvider>
             <PageContextProvider settings={settings}>
               <CartContextProvider>
-                <HeaderContextProvider>
-                  <Header settings={settings} />
-                </HeaderContextProvider>
-                {bandeauContextuel && (
-                  <BandeauContextuel
-                    cta={bandeauContextuel.cta}
-                    text={bandeauContextuel.text}
-                    dateExpiration={bandeauContextuel.dateExpiration}
-                  />
-                )}
                 <ViewTransitions>
+                  <HeaderContextProvider>
+                    <Header settings={settings} />
+                  </HeaderContextProvider>
+                  {bandeauContextuel && (
+                    <BandeauContextuel
+                      cta={bandeauContextuel.cta}
+                      text={bandeauContextuel.text}
+                      dateExpiration={bandeauContextuel.dateExpiration}
+                    />
+                  )}
                   <main>{children}</main>
+                  <Footer settings={settings} />
+                  <CartModal />
                 </ViewTransitions>
-                <Footer settings={settings} />
-                <CartModal />
                 {/* <Cursor color='black' size={20} /> */}
                 {isEnabled && <VisualEditing zIndex={1000} />}
               </CartContextProvider>

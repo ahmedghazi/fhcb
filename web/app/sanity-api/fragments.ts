@@ -297,9 +297,9 @@ export const textSidebarUI = `
           ${imageAsset}
         }
       },
-      partenairesMedia[]{
+      partenairesMedia[]->{
         ...,
-        image{
+        "image": coalesce(imageCover, image){
           ${imageAsset}
         }
       },

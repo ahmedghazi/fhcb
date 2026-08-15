@@ -117,7 +117,7 @@
         gap: var(--spacing-gutter);
         grid-template-columns: repeat(12, minmax(0, 1fr));
         .title {
-          grid-column: span 4;
+          // grid-column: span 3;
         }
         .text {
           // background-color: red;

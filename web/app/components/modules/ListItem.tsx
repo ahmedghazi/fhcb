@@ -14,7 +14,7 @@ const ListItemComponent = ({ input }: Props) => {
   const isText = input.text !== null;
   return (
     <div className={clsx("list-item", isText && "is-text")}>
-      <div className='title c-h3 md:col-span-4'>
+      <div className='title c-h3 md:col-span-3'>
         {_localizeField(input.title)}
       </div>
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
@@ -22,7 +22,7 @@ const ListItemComponent = ({ input }: Props) => {
         <div className='content'>{_localizeField(input.content)}</div>
       )}
       {isText && (
-        <div className='content text md:col-span-4'>
+        <div className='content text md:col-span-6'>
           <PortableText
             value={_localizeField(input.text)}
             components={portableTextComponents}
