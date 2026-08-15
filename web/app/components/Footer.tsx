@@ -42,7 +42,7 @@ const Footer = ({ settings }: Props) => {
       <div className='container-fluid'>
         <div className='footer__inner'>
           <div className='footer__logo'>
-            <Link href='/'>
+            <Link href='/' title={website.title}>
               <LogoFHCB type='long' />
             </Link>
           </div>

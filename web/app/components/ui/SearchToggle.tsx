@@ -54,6 +54,7 @@ const SearchToggle = () => {
         // onMouseEnter={() => {
         //   dispatchModalType("search");
         // }}
+        aria-label='Rechercher'
         onClick={() => setActive(!active)}>
         <svg
           width='24'

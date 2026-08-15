@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
 import { VideoUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import LogoFHCB from "../LogoFHCB";
 import { getYouTubeNoCookieUrl } from "@/app/lib/utils";
+
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 type Props = {
   input: VideoUIExpanded;
@@ -22,7 +24,7 @@ const ModuleVideoUI = ({ input }: Props) => {
             <div style={{ aspectRatio: "16 / 9" }} className='player-container'>
               <ReactPlayer
                 src={youtubeUrlToYoutubeNoCookies}
-                light={video.placeholder?.asset?.url}
+                light={video.placeholder?.asset?.url || true}
                 // controls={false}
                 style={{ width: "100%", height: "100%" }}
               />
