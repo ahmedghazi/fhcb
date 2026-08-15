@@ -2,7 +2,6 @@
 import { Fragment, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import useLocale from "@/app/context/LocaleContext";
-import CardProduct from "../ui/cards/CardProduct";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ListProductUI } from "@/app/sanity-api/types/sanity.types";
 import FilterBar from "../ui/filters/FilterBar";

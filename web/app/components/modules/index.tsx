@@ -1,32 +1,44 @@
 "use client";
 import React from "react";
+import dynamic from "next/dynamic";
 import { ModulesList } from "@/app/sanity-api/types/extra-types";
-import ModuleTextUI from "./ModuleTextUI";
-import ModuleImagesUI from "./ModuleImagesUI";
-import ModuleVideoUI from "./ModuleVideoUI";
-import ModuleTextImageUI from "./ModuleTextImageUI";
-import ModuleTextSidebarUI from "./ModuleTextSidebarUI";
-import ModuleListUI from "./ModuleListUI";
-import ModuleListsUI from "./ModuleListsUI";
-import ModuleSliderCardUI from "./ModuleSliderCardUI";
-import ModuleGridCardUI from "./ModuleGridCardUI";
-import ModuleProgrammeUI from "./ModuleProgrammeUI";
-import ModuleFeaturedCardsUI from "./ModuleFeaturedCardsUI";
-import ModuleNewsCardUI from "./ModuleNewsCardUI";
-import ModuleListFeuilletageUI from "./ModuleListFeuilletageUI";
-import ModuleListImageImages from "./ModuleListImageImages";
-import ModuleListSerieThematiqueUI from "./ModuleListSerieThematiqueUI";
-import ModuleListConversationUI from "./ModuleListConversationUI";
-import ModuleListExhibitionsUI from "./ModuleListExhibitionsUI";
-import ModuleListEventsUI from "./ModuleListEventsUI";
-import ModuleListExhibitionsPastUI from "./ModuleListExhibitionsPastUI";
-import ModuleSupportUI from "./ModuleSupportUI";
-import ModuleNewsletterUI from "./ModuleNewsletterUI";
-import ModuleRessourcesUI from "./ModuleRessourcesUI";
-import ModuleFormUI from "./ModuleFormUI";
-import ModuleBlockquoteUI from "./ModuleBlockquoteUI";
 import "./index.scss";
-import ModuleSliderArtistUI from "./ModuleSliderArtistUI";
+
+const ModuleTextUI = dynamic(() => import("./ModuleTextUI"));
+const ModuleImagesUI = dynamic(() => import("./ModuleImagesUI"));
+const ModuleVideoUI = dynamic(() => import("./ModuleVideoUI"));
+const ModuleTextImageUI = dynamic(() => import("./ModuleTextImageUI"));
+const ModuleTextSidebarUI = dynamic(() => import("./ModuleTextSidebarUI"));
+const ModuleListUI = dynamic(() => import("./ModuleListUI"));
+const ModuleListsUI = dynamic(() => import("./ModuleListsUI"));
+const ModuleSliderCardUI = dynamic(() => import("./ModuleSliderCardUI"));
+const ModuleGridCardUI = dynamic(() => import("./ModuleGridCardUI"));
+const ModuleProgrammeUI = dynamic(() => import("./ModuleProgrammeUI"));
+const ModuleFeaturedCardsUI = dynamic(() => import("./ModuleFeaturedCardsUI"));
+const ModuleNewsCardUI = dynamic(() => import("./ModuleNewsCardUI"));
+const ModuleListFeuilletageUI = dynamic(
+  () => import("./ModuleListFeuilletageUI"),
+);
+const ModuleListImageImages = dynamic(() => import("./ModuleListImageImages"));
+const ModuleListSerieThematiqueUI = dynamic(
+  () => import("./ModuleListSerieThematiqueUI"),
+);
+const ModuleListConversationUI = dynamic(
+  () => import("./ModuleListConversationUI"),
+);
+const ModuleListExhibitionsUI = dynamic(
+  () => import("./ModuleListExhibitionsUI"),
+);
+const ModuleListEventsUI = dynamic(() => import("./ModuleListEventsUI"));
+const ModuleListExhibitionsPastUI = dynamic(
+  () => import("./ModuleListExhibitionsPastUI"),
+);
+const ModuleSupportUI = dynamic(() => import("./ModuleSupportUI"));
+const ModuleNewsletterUI = dynamic(() => import("./ModuleNewsletterUI"));
+const ModuleRessourcesUI = dynamic(() => import("./ModuleRessourcesUI"));
+const ModuleFormUI = dynamic(() => import("./ModuleFormUI"));
+const ModuleBlockquoteUI = dynamic(() => import("./ModuleBlockquoteUI"));
+const ModuleSliderArtistUI = dynamic(() => import("./ModuleSliderArtistUI"));
 
 const Modules = ({ modules }: ModulesList) => {
   const _renderModules = () => {

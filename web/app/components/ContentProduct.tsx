@@ -13,7 +13,6 @@ import {
 } from "../sanity-api/utils";
 import { urlFor } from "../sanity-api/sanity-utils";
 import useCart from "../context/CartContext";
-import KeenSlider from "./ui/KeenSlider";
 import Figure from "./ui/Figure";
 import Rebonds from "./Rebonds";
 import BtnAddToCart from "./ui/btns/BtnAddToCart";
@@ -22,6 +21,7 @@ import { PortableText } from "@portabletext/react";
 import portableTextComponents from "../sanity-api/portableTextComponents";
 import { _date, artistsToString } from "../lib/utils";
 import useLocale from "../context/LocaleContext";
+import SlickSlider from "./ui/SlickSlider";
 
 type Props = {
   input: PRODUCT_QUERY_RESULT;
@@ -163,22 +163,28 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
           </div>
           {images && (
             <div className='slider md:col-span-3 '>
-              <KeenSlider perView={1} controlsFloating={true}>
+              <SlickSlider
+                controlsFloating
+                settings={{
+                  infinite: true,
+                  centerMode: true,
+                  variableWidth: true,
+                }}>
                 {imageCover && (
                   <div
                     key={`${imageCover && imageCover.asset?._id}-00`}
-                    className='keen-slider__slide'>
+                    className='product-slider__slide'>
                     <Figure asset={imageCover.asset} width={2000} />
                   </div>
                 )}
                 {images.map((item, index: number) => (
                   <div
                     key={`${item && item.asset?._id}-${index}`}
-                    className='keen-slider__slide'>
+                    className='product-slider__slide'>
                     <Figure asset={item.asset} />
                   </div>
                 ))}
-              </KeenSlider>
+              </SlickSlider>
             </div>
           )}
         </div>

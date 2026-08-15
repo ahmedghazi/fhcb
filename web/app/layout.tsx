@@ -7,7 +7,7 @@ import { PageContextProvider } from "./context/PageContext";
 import { getSettings } from "./sanity-api/sanity-queries";
 import { LocaleContextProvider } from "./context/LocaleContext";
 import { draftMode } from "next/headers";
-import { VisualEditing } from "next-sanity/visual-editing";
+import VisualEditing from "./components/ui/VisualEditingLazy";
 import localFont from "next/font/local";
 import clsx from "clsx";
 import LenisScrollProvider from "./components/ui/LenisScrollProvider";
@@ -15,7 +15,7 @@ import { ViewTransitions } from "next-view-transitions";
 import Cursor from "./components/ui/Cursor";
 import { HeaderContextProvider } from "./context/HeaderContext";
 import { CartContextProvider } from "./context/CartContext";
-import CartModal from "./components/CartModal";
+import CartModal from "./components/ui/CartModalLazy";
 import Gridder from "./components/ui/Gridder";
 import BandeauContextuel from "./components/ui/BandeauContextuel";
 // const sourceSans = Source_Sans_3({
