@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
+import { _shuffle } from "@/app/lib/utils";
 import { SliderArtistUI } from "@/app/sanity-api/types/sanity.types";
 import { PostTypes } from "@/app/sanity-api/types/extra-types";
 import SlickSlider from "../ui/SlickSlider";
@@ -24,12 +25,7 @@ const ModuleSliderArtistUI = ({ input, limit = 10 }: Props) => {
 
   useEffect(() => {
     if (!items) return;
-    const shuffled = [...items];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    setShuffledItems(shuffled.slice(0, limit));
+    setShuffledItems(_shuffle(items).slice(0, limit));
   }, [items, limit]);
   return (
     <section className='module module--slider-artist-ui'>

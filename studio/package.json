@@ -32,6 +32,7 @@
     "sanity": "^5.31.1",
     "sanity-plugin-media": "^4.2.0",
     "sanity-plugin-mux-input": "^2.18.0",
+    "sanity-plugin-references": "^1.1.0",
     "styled-components": "^6.4.1"
   },
   "devDependencies": {

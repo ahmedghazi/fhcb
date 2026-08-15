@@ -40,17 +40,20 @@ export function getClient(preview?: { token?: string }): SanityClient {
   return client;
 }
 
+// ISR: cached for `revalidate` seconds as a safety net, refreshed instantly
+// on publish via the /api/revalidate webhook calling revalidateTag(tag).
 export async function sanityFetch<QueryResponse>({
   query,
   qParams = {},
   tags,
+  revalidate = 3600,
 }: {
   query: string;
   qParams?: QueryParams;
   tags: string[];
+  revalidate?: number | false;
 }): Promise<QueryResponse> {
   return client.fetch<QueryResponse>(query, qParams, {
-    cache: "no-store",
-    next: { tags },
+    next: { revalidate, tags },
   });
 }

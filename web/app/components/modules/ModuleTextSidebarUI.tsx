@@ -19,19 +19,23 @@ const ModuleTextSidebarUI = ({ input }: Props) => {
       <div className='container-fluid'>
         <div className='module__inner'>
           <div className='grid md:grid-cols-12 gap-gutter'>
-            {sidebar && (
-              <div className='md:col-span-3 modile__aside'>
-                <Sidebar input={sidebar} />
-              </div>
-            )}
-
-            <div className='module__text md:col-span-7'>
+            <div className='md:col-span-3 '></div>
+            <div className='module__header md:col-span-7'>
               {title && (
                 <h2 className='module__title c-h1_5'>
                   {_localizeField(title)}
                 </h2>
               )}
+            </div>
+          </div>
+          <div className='grid md:grid-cols-12 gap-gutter'>
+            {sidebar && (
+              <div className='md:col-span-3 module__aside'>
+                <Sidebar input={sidebar} />
+              </div>
+            )}
 
+            <div className='module__text md:col-span-7'>
               {text && (
                 <div className='text'>
                   <PortableText

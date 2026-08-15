@@ -49,11 +49,6 @@ const ModuleListProductUI = ({ input }: Props) => {
           )}
 
           {filteredItems.length > 0 && (
-            // <GridMasonryDessandro>
-            //   {filteredItems.map((item: ProductExpanded, index: number) => (
-            //     <CardProduct key={`--${index}`} input={item} size={"sm"} />
-            //   ))}
-            // </GridMasonryDessandro>
             <GridMasonryColumns items={filteredItems} />
           )}
         </div>

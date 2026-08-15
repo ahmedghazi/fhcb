@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
     "imageImages",
     "feuilletage",
     "serieThematique",
+    "article",
   ];
 
   /*
@@ -59,7 +60,6 @@ _type,
       || text[].children[].text match $s + "*"
       || name match $s + "*"
       || tags[]->title match $s + "*"
-      || categories[]->title match $s + "*"
       || tagsProduct[]->title match $s + "*"
       || artists[]->name match $s + "*"
       || chercheur->name match $s + "*"
@@ -72,7 +72,7 @@ _type,
     ]
     {
       ${cardTypes}
-    } | order(_createdAt desc)
+    } | order(coalesce(dates[0].du, _createdAt) desc)
     `;
   console.log(query);
 

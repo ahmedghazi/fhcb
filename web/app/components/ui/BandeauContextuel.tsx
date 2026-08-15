@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import BtnCta from "./btns/BtnCta";
 import BtnCtaExternal from "./btns/BtnCtaExternal";
+import Icon from "./Icon";
 
 type Props = NonNullable<
   NonNullable<SETTINGS_QUERY_RESULT>["bandeauContextuel"]
@@ -33,18 +34,21 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
   return !open ? null : (
     <div className='bandeau-contextuel'>
       <div className='container-fluid'>
-        <p className='c-body-sm'>{localizedText}</p>
+        <div className='inner'>
+          <p className='c-body-sm'>{localizedText}</p>
 
-        <div className='footer'>
-          {cta?.internal && <BtnCta input={cta.internal as unknown as any} />}
+          <div className='footer'>
+            {cta?.internal && <BtnCta input={cta.internal as unknown as any} />}
 
-          {cta?.external && (
-            <BtnCtaExternal input={cta.external as unknown as any} />
-          )}
-          <button className='underline' onClick={() => setOpen(false)}>
-            {localizedClose}
-          </button>
+            {cta?.external && (
+              <BtnCtaExternal input={cta.external as unknown as any} />
+            )}
+          </div>
         </div>
+        <button className='underline btn-close' onClick={() => setOpen(false)}>
+          {/* {localizedClose} */}
+          <Icon name='close' />
+        </button>
       </div>
     </div>
   );

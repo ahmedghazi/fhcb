@@ -16,6 +16,16 @@ import {
   Tag,
 } from "../sanity-api/types/sanity.types";
 
+// Fisher-Yates, returns a new array (leaves the input untouched)
+export const _shuffle = <T>(items: T[]): T[] => {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export const artistsToString = (
   artists?: Array<{ name?: string | null }> | null,
 ): string => {

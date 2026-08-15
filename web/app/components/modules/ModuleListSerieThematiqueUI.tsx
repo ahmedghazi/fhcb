@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import CardArticle from "../ui/cards/CardArticle";
 import {
@@ -15,6 +15,7 @@ import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import FilterBar from "../ui/filters/FilterBar";
+import { _shuffle } from "@/app/lib/utils";
 
 type Props = {
   // input: ListSerieThematiqueUI & { items?: SerieThematique[] };
@@ -38,6 +39,17 @@ const ModuleListSerieThematiqueUI = ({ input }: Props) => {
     activeFilters,
     locale,
   );
+
+  // start with the original (server-rendered) order to avoid a hydration
+  // mismatch, then shuffle client-side after mount / when filters change
+  const [shuffledItems, setShuffledItems] = useState(filteredItems);
+  const filteredItemsKey = filteredItems.map((item) => item._id).join(",");
+
+  useEffect(() => {
+    setShuffledItems(_shuffle(filteredItems));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredItemsKey]);
+
   return (
     <section className='module module--list-serie-thematique-ui'>
       <div className='container-fluid'>
@@ -46,9 +58,9 @@ const ModuleListSerieThematiqueUI = ({ input }: Props) => {
             <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
           )}
 
-          {filteredItems.length > 0 && (
+          {shuffledItems.length > 0 && (
             <div className='grid md:grid-cols-12 items-start gap-gutter'>
-              {filteredItems.map(
+              {shuffledItems.map(
                 (item: SerieThematiqueExpanded, index: number) => (
                   <Fragment key={`${item._id}-${index}`}>
                     <CardSerieThematique input={item} size='md' />

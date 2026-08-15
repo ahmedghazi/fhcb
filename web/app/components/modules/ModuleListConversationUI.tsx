@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import CardConversation from "../ui/cards/CardConversation";
 import { ConversationExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
@@ -8,6 +8,7 @@ import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import FilterBar from "../ui/filters/FilterBar";
+import { _shuffle } from "@/app/lib/utils";
 
 type Props = {
   input: ListConversationUI & {
@@ -32,6 +33,16 @@ const ModuleListConversationUI = ({ input }: Props) => {
     locale,
   );
 
+  // start with the original (server-rendered) order to avoid a hydration
+  // mismatch, then shuffle client-side after mount / when filters change
+  const [shuffledItems, setShuffledItems] = useState(filteredItems);
+  const filteredItemsKey = filteredItems.map((item) => item._id).join(",");
+
+  useEffect(() => {
+    setShuffledItems(_shuffle(filteredItems));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredItemsKey]);
+
   return (
     <section className='module module--list-conversation-ui'>
       <div className='container-fluid'>
@@ -40,9 +51,9 @@ const ModuleListConversationUI = ({ input }: Props) => {
             <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
           )}
 
-          {filteredItems.length > 0 && (
+          {shuffledItems.length > 0 && (
             <div className='grid md:grid-cols-12 items-start gap-gutter'>
-              {filteredItems.map(
+              {shuffledItems.map(
                 (item: ConversationExpanded, index: number) => (
                   <Fragment key={`${item._id}-${index}`}>
                     <CardConversation input={item} size='md' />

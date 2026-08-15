@@ -2,7 +2,7 @@
   position: fixed;
   left: 0;
   right: 0;
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) 0;
   padding-top: var(--header-h);
   // background-color: var(--color-taupe);
   background-color: var(--color-coquille);
@@ -12,6 +12,10 @@
     background-color 0.2s var(--cubic),
     transform 0.2s var(--cubic),
     opacity 0.2s var(--cubic);
+  .inner {
+    max-width: 52rem;
+    margin: 0 auto;
+  }
   .footer {
     display: flex;
     flex-direction: column;
@@ -22,6 +26,17 @@
       display: inline-block;
     }
     button.underline {
+    }
+  }
+  .container-fluid {
+    position: relative;
+  }
+  .btn-close {
+    position: absolute;
+    right: var(--spacing-md);
+    top: 0;
+    line {
+      stroke: var(--color-primary);
     }
   }
 }

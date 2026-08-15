@@ -456,11 +456,6 @@ export async function buildProductFields(
         })),
       })),
     // References to tagProduct documents (upserted before this runs)
-    categories: (base.collections?.nodes ?? []).map((coll: any) => ({
-      _type: "reference",
-      _key: `col-${coll.id.split("/").pop()}`,
-      _ref: `shopify-collection-${coll.id.split("/").pop()}`,
-    })),
     tagsProduct: (base.collections?.nodes ?? []).map((coll: any) => ({
       _type: "reference",
       _key: `col-${coll.id.split("/").pop()}`,
@@ -643,7 +638,7 @@ export async function syncProduct(shopifyId: string): Promise<{
   sanityId: string;
   dataset: string;
   projectId: string;
-  categoriesCount: number;
+  tagsProductCount: number;
   collectionsRaw: string[];
 }> {
   const client = getSanityClient();
@@ -676,7 +671,7 @@ export async function syncProduct(shopifyId: string): Promise<{
     sanityId: id,
     dataset,
     projectId,
-    categoriesCount: (synced.categories ?? []).length,
+    tagsProductCount: (synced.tagsProduct ?? []).length,
     collectionsRaw: (base.collections?.nodes ?? []).map(
       (c: any) => `${c.handle} (${c.id})`,
     ),

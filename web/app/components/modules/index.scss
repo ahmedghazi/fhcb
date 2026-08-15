@@ -87,6 +87,12 @@
       h2 {
         margin-bottom: var(--spacing-gutter);
       }
+      .module__sidebar {
+        aside.sidebar {
+          position: sticky;
+          top: var(--header-h);
+        }
+      }
       .module__text {
         .text {
           // max-width: unset;

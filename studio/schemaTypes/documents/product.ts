@@ -236,6 +236,7 @@ export default defineType({
       of: [{type: 'reference', to: [{type: 'tagProduct'}]}],
       readOnly: true,
       group: 'editorial',
+      hidden: true,
     }),
     defineField({
       name: 'pastille',

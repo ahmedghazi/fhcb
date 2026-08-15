@@ -10,6 +10,7 @@ import {structure} from './src/deskStructure'
 import {media} from 'sanity-plugin-media'
 import {frFRLocale} from '@sanity/locale-fr-fr'
 import {customPublishAction} from './src/actions/countDocs'
+import {references} from 'sanity-plugin-references'
 
 const remoteURL = 'https://fhcb-preprod.vercel.app'
 const localURL = 'http://localhost:3000'
@@ -44,6 +45,7 @@ const plugins = [
   }),
   muxInput(),
   colorInput(),
+  references(),
 ]
 if (isDev) plugins.push(visionTool())
 
