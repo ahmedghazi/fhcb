@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import {
   _isCurrentByDates,
@@ -29,16 +29,54 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
   const isCurrent = _isCurrentByDates(dates || []);
   const isFutur = _isFuturByDates(dates || []);
 
-  let style = {};
-  if (isCurrent) {
-    style = {
-      backgroundColor: (color as any)?.hex || "var(--color-bleu)",
-    };
-  }
-  // const props = exhibitionToCard(input, size, isCurrent);
-  const props = exhibitionToCard(input, size, false);
+  // let style = {};
+
+  const ref = useRef<HTMLDivElement>(null);
+  const [style, setStyle] = useState<React.CSSProperties | null>(null);
+
+  // if (isCurrent) {
+  // style = {
+  //   backgroundColor: (color as any)?.hex || "var(--color-bleu)",
+  // };
+
+  // }
+
+  useEffect(() => {
+    if (isCurrent) {
+      setStyle(
+        (prev) =>
+          ({
+            ...prev,
+            backgroundColor: (color as any)?.hex || "var(--color-bleu)",
+          }) as React.CSSProperties,
+      );
+    }
+  }, [isCurrent]);
+
+  useEffect(() => {
+    if (!ref) return;
+    setTimeout(() => {
+      const footerInfo = ref.current?.querySelector(
+        ".card__footer .card__info",
+      );
+      if (footerInfo) {
+        const footerInfoBounding = footerInfo.getBoundingClientRect();
+
+        setStyle(
+          (prev) =>
+            ({
+              ...prev,
+              "--footer-max-height": `${footerInfoBounding.height + 30 + 12}px`,
+            }) as React.CSSProperties,
+        );
+      }
+    }, 500);
+  }, []);
+  const props = exhibitionToCard(input, size, isCurrent);
+
   return (
     <div
+      ref={ref}
       className={clsx(
         "card card--exhibition",
         `card--${size}`,
@@ -51,7 +89,8 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
         isFutur && "card--is-futur",
         location && `card--is-${location}`,
       )}
-      style={style}>
+      // style={style}
+      style={style ?? undefined}>
       {/* <pre>{JSON.stringify({ isPast, isCurrent, isFutur }, null, 2)}</pre> */}
       <CardBase {...props} />
       {size === "md" && !!props.actions?.length && (

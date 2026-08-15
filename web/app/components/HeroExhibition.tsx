@@ -5,7 +5,11 @@ import { ExhibitionExpanded } from "../sanity-api/types/sanity-expanded.types";
 import FHCBDates from "./ui/FHCBDates";
 import Figure from "./ui/Figure";
 import clsx from "clsx";
-import { _isCurrentByDates, _isPastByDates, artistsToString } from "../lib/utils";
+import {
+  _isCurrentByDates,
+  _isPastByDates,
+  artistsToString,
+} from "../lib/utils";
 import CardTags from "./ui/cards/CardTags";
 
 type Props = {
@@ -31,8 +35,8 @@ const HeroExhibition = ({ input }: Props) => {
           : "var(--color-mauve)",
       }}>
       <div className='container-fluid'>
-        <div className='grid md:grid-cols-2 gap-gutter'>
-          <div className='hero__figure'>
+        <div className='grid md:grid-cols-2 md:grid-rows-2 gap-gutter'>
+          <div className='hero__figure row-span-2'>
             <Figure
               asset={imageCover?.asset}
               caption={_localizeField(imageCover?.asset?.title || "")}
@@ -51,7 +55,7 @@ const HeroExhibition = ({ input }: Props) => {
               </div>
             </div>
 
-            <div className='bottom'>
+            {/* <div className='bottom'>
               {dates && (
                 <div className='hero__info'>
                   <FHCBDates input={dates} />
@@ -71,7 +75,28 @@ const HeroExhibition = ({ input }: Props) => {
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
+          </div>
+          <div className='hero__footer'>
+            {dates && (
+              <div className='hero__info'>
+                <FHCBDates input={dates} />
+              </div>
+            )}
+            {!isPast && links && (
+              <div className='pt-sm-'>
+                {links?.map((item, i: number) => (
+                  <a
+                    key={i}
+                    className='btn '
+                    href={item.link}
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    {_localizeField(item.label)}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

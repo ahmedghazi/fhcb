@@ -91,37 +91,37 @@ export default async function RootLayout({
   const bandeauContextuel = settings?.bandeauContextuel;
   const { isEnabled } = await draftMode();
   return (
-    <ViewTransitions>
-      <html lang='fr' className={clsx("is-loading", PPRightGrotesk.className)}>
-        <body className={clsx("is-loading")} data-theme='theme-fhcb'>
-          {/* <LenisScrollProvider> */}
-          <div id='page'>
-            <Gridder />
-            <LocaleContextProvider>
-              <PageContextProvider settings={settings}>
-                <CartContextProvider>
-                  <HeaderContextProvider>
-                    <Header settings={settings} />
-                  </HeaderContextProvider>
-                  {bandeauContextuel && (
-                    <BandeauContextuel
-                      cta={bandeauContextuel.cta}
-                      text={bandeauContextuel.text}
-                      dateExpiration={bandeauContextuel.dateExpiration}
-                    />
-                  )}
+    <html lang='fr' className={clsx("is-loading", PPRightGrotesk.className)}>
+      <body className={clsx("is-loading")} data-theme='theme-fhcb'>
+        {/* <LenisScrollProvider> */}
+        <div id='page'>
+          <Gridder />
+          <LocaleContextProvider>
+            <PageContextProvider settings={settings}>
+              <CartContextProvider>
+                <HeaderContextProvider>
+                  <Header settings={settings} />
+                </HeaderContextProvider>
+                {bandeauContextuel && (
+                  <BandeauContextuel
+                    cta={bandeauContextuel.cta}
+                    text={bandeauContextuel.text}
+                    dateExpiration={bandeauContextuel.dateExpiration}
+                  />
+                )}
+                <ViewTransitions>
                   <main>{children}</main>
-                  <Footer settings={settings} />
-                  <CartModal />
-                  {/* <Cursor color='black' size={20} /> */}
-                  {isEnabled && <VisualEditing zIndex={1000} />}
-                </CartContextProvider>
-              </PageContextProvider>
-            </LocaleContextProvider>
-          </div>
-          {/* </LenisScrollProvider> */}
-        </body>
-      </html>
-    </ViewTransitions>
+                </ViewTransitions>
+                <Footer settings={settings} />
+                <CartModal />
+                {/* <Cursor color='black' size={20} /> */}
+                {isEnabled && <VisualEditing zIndex={1000} />}
+              </CartContextProvider>
+            </PageContextProvider>
+          </LocaleContextProvider>
+        </div>
+        {/* </LenisScrollProvider> */}
+      </body>
+    </html>
   );
 }

@@ -41,6 +41,7 @@ export type CardBaseProps = {
   mediaSlot?: ReactNode;
   contentCount?: number;
   className?: string;
+  style?: React.CSSProperties;
   _type?: string;
 };
 
@@ -167,6 +168,7 @@ const CardBase = ({
   mediaSlot: customMediaSlot,
   contentCount,
   className,
+  style,
 }: CardBaseProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -239,9 +241,13 @@ const CardBase = ({
     noPadding && "card__inner--no-padding",
     className,
   );
-  const cardStyle = colorVar
-    ? ({ "--card-color": colorVar } as React.CSSProperties)
-    : undefined;
+  const cardStyle: React.CSSProperties | undefined =
+    colorVar || style
+      ? {
+          ...(colorVar && ({ "--card-color": colorVar } as React.CSSProperties)),
+          ...style,
+        }
+      : undefined;
   const handlers = {
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,

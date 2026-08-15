@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { productToCard } from "./adapters";
 import CardBase, { CardFooter } from "./CardBase";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   input: ProductExpanded;
@@ -9,21 +10,34 @@ type Props = {
 };
 
 const CardProduct = ({ input, size = "md" }: Props) => {
-  // const { imageCover, tagsProduct } = input;
-  // const isLandscape =
-  //   (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-  //   (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  const ref = useRef<HTMLDivElement>(null);
+  const [style, setStyle] = useState<React.CSSProperties | null>(null);
+  useEffect(() => {
+    if (!ref) return;
+    setTimeout(() => {
+      const footerInfo = ref.current?.querySelector(
+        ".card__footer .card__info",
+      );
+      if (footerInfo) {
+        const footerInfoBounding = footerInfo.getBoundingClientRect();
+        setStyle({
+          "--footer-max-height": `${footerInfoBounding.height + 30 + 12}px`,
+        } as React.CSSProperties);
+      }
+    }, 500);
+  }, []);
+
   const props = productToCard(input, size);
   return (
     <div
+      ref={ref}
       className={clsx(
         "card card--product",
         `card--${size}`,
         props.layout && `card--${props.layout}`,
-        // isLandscape ? "card--is-landscape" : "card--is-portrait",
         size === "sm" ? "card--footer-hover" : "",
       )}>
-      <CardBase {...props} />
+      <CardBase {...props} style={style ?? undefined} />
       {size === "md" &&
         (!!props.actions?.length || props.actionsNode) &&
         props.layout === "row" && (

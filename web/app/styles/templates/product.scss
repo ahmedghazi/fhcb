@@ -1,3 +1,5 @@
+@use "../variables";
+
 .template--product {
   .header {
     display: flex;
@@ -17,6 +19,15 @@
           object-fit: contain;
         }
       }
+    }
+  }
+
+  @media all and (max-width: variables.$md) {
+    .header {
+      order: 2;
+    }
+    .slider {
+      order: 1;
     }
   }
 }

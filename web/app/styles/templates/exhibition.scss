@@ -18,6 +18,13 @@
         }
       }
     }
+    .hero__footer {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
 
     figure {
       img {
@@ -36,8 +43,19 @@
   }
 
   @media all and (max-width: variables.$md) {
-    .hero-exhibition .hero__header .bottom .btn {
-      width: 100%;
+    .hero-exhibition {
+      .hero__header {
+        order: 1;
+      }
+      .hero__figure {
+        order: 2;
+      }
+      .hero__footer {
+        order: 3;
+      }
+      .hero__header .bottom .btn {
+        width: 100%;
+      }
     }
   }
 }

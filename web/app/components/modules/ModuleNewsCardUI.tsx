@@ -36,7 +36,6 @@ const ModuleNewsCardUI = ({ input }: Props) => {
   const articles = input.articles || [];
   const exhibitions = input.exhibitions || [];
   // const feuilletages = input.feuilletage || [];
-  console.log(articles);
   return (
     <section className='module module--news-card-ui'>
       <div className='container-fluid'>

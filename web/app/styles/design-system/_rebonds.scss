@@ -1,3 +1,5 @@
+@use "../variables";
+
 .rebonds {
   padding-top: var(--spacing-xl);
 
@@ -7,18 +9,20 @@
   }
 
   .card {
-    &.card--sm-alt {
-      flex-basis: var(--gridder-1_3);
-      width: var(--gridder-1_3);
-    }
-    &.card--md-alt {
-      flex-basis: var(--gridder-2_3);
-      width: var(--gridder-2_3);
-    }
-    &--page-modulaire {
-      &.card--md-alt {
+    @media all and (min-width: variables.$md) {
+      &.card--sm-alt {
         flex-basis: var(--gridder-1_3);
         width: var(--gridder-1_3);
+      }
+      &.card--md-alt {
+        flex-basis: var(--gridder-2_3);
+        width: var(--gridder-2_3);
+      }
+      &--page-modulaire {
+        &.card--md-alt {
+          flex-basis: var(--gridder-1_3);
+          width: var(--gridder-1_3);
+        }
       }
     }
   }

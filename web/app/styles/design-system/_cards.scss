@@ -10,9 +10,6 @@
   flex-direction: column;
 
   .card__inner {
-  }
-
-  .card__inner {
     position: relative;
     display: flex;
     padding: var(--spacing-xs);
@@ -45,7 +42,9 @@
           z-index: 1;
         }
         img {
-          object-position: right;
+          @media all and (min-width: variables.$md) {
+            object-position: right;
+          }
         }
       }
 
@@ -136,12 +135,15 @@
         gap: var(--spacing-xs);
 
         figure {
-          display: flex;
-          justify-content: flex-end;
-          img {
-            width: var(--gridder-7_12) !important;
-            min-height: unset;
-            max-height: unset;
+          @media all and (min-width: variables.$md) {
+            display: flex;
+            justify-content: flex-end;
+
+            img {
+              width: var(--gridder-7_12) !important;
+              min-height: unset;
+              max-height: unset;
+            }
           }
         }
       }

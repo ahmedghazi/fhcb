@@ -26,6 +26,7 @@ header.header {
   button,
   .menu-label {
     color: var(--color-secondary);
+    white-space: nowrap;
   }
   svg path {
     // fill: var(--color-secondary);

@@ -14,6 +14,9 @@
   justify-content: center;
   gap: var(--spacing-gutter);
   flex-wrap: wrap;
+  @media all and (max-width: variables.$md) {
+    flex-direction: column;
+  }
   .card {
     flex-basis: var(--gridder-3_12);
     width: var(--gridder-3_12);
@@ -22,17 +25,23 @@
     This next line makes card same height
     */
     height: auto;
-    &--md {
-      flex-basis: var(--gridder-6_12);
-      width: var(--gridder-6_12);
-    }
-    &--md-alt {
-      &.card--exhibition-featured {
-        flex-basis: var(--gridder-2_3);
-        width: var(--gridder-2_3);
+    @media all and (min-width: variables.$md) {
+      &--md {
+        flex-basis: var(--gridder-6_12);
+        width: var(--gridder-6_12);
+      }
+      &--md-alt {
+        &.card--exhibition-featured {
+          flex-basis: var(--gridder-2_3);
+          width: var(--gridder-2_3);
+        }
+      }
+      &--lg {
+        flex-basis: var(--gridder-3_3);
+        width: var(--gridder-3_3);
       }
     }
-    &--lg {
+    @media all and (max-width: variables.$md) {
       flex-basis: var(--gridder-3_3);
       width: var(--gridder-3_3);
     }

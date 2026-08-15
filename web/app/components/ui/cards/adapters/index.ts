@@ -501,6 +501,7 @@ export function brancheToCard(
   if (moduleText) {
     moduleText.forEach((el) => {
       text = toPlainText(_localizeField(el?.text || "no text"));
+      text = text.split(".")[0] + "...";
     });
   }
 
