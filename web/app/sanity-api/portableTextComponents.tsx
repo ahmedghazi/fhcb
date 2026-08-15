@@ -17,7 +17,7 @@ const portableTextComponents: PortableTextComponents = {
       return <Figure asset={value.asset} />;
     },
     video: ({ value }) => {
-      return <EmbedVideo input={value} />;
+      return <EmbedVideo embedUrl={value.embedUrl} />;
     },
     embed: ({ value }) => {
       return <Embed input={value} />;

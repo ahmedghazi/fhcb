@@ -7,14 +7,10 @@ import {
 } from "@/app/sanity-api/sanity-queries";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
 import { _localizeField } from "@/app/sanity-api/utils";
-import Embed from "@/app/components/ui/Embed";
-import Rebonds from "@/app/components/Rebonds";
 import { CONVERSATION_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
-import EmbedVideo from "@/app/components/ui/EmbedVideo";
 import ContentConversation from "@/app/components/ContentConversation";
 
 type Params = Promise<{ slug: string }>;
@@ -59,7 +55,7 @@ const ConversationTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <PageHeader h1={data.title} subTitle={data.subTitle} />
       {/* <div className='container-fluid'>
-        {data.video && <EmbedVideo input={data.video} />}
+        {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
       </div> */}
       <ContentConversation input={data} />
       {/* <ContentModulaire input={data} /> */}

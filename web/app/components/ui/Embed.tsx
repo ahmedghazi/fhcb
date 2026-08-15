@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
-import clsx from "clsx";
-import ReactPlayer from "react-player";
 import { Embed } from "@/app/sanity-api/types/sanity.types";
+import EmbedVideo from "./EmbedVideo";
 
 type Props = {
   input: Embed;
@@ -10,23 +9,12 @@ type Props = {
 
 const EmbedComponent = ({ input }: Props) => {
   return (
-    <div className='embed'>
-      {input.url && (
-        <div
-          style={{ aspectRatio: "16 / 9" }}
-          className={clsx("player-container")}>
-          <ReactPlayer
-            src={input.url}
-            controls={true}
-            light={true}
-            style={{ width: "100%", height: "100%", aspectRatio: "16 / 9" }}
-          />
-        </div>
-      )}
+    <>
+      <EmbedVideo embedUrl={input.url} />
       {input?.iframe && (
-        <div dangerouslySetInnerHTML={{ __html: input.iframe }} />
+        <div className='embed' dangerouslySetInnerHTML={{ __html: input.iframe }} />
       )}
-    </div>
+    </>
   );
 };
 

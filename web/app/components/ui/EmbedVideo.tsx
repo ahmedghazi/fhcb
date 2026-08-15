@@ -1,28 +1,36 @@
 "use client";
 import React from "react";
 import clsx from "clsx";
-import ReactPlayer from "react-player";
-import { Embed, Video } from "@/app/sanity-api/types/sanity.types";
+import dynamic from "next/dynamic";
+import {
+  getYouTubeNoCookieUrl,
+  getYouTubeThumbnailUrl,
+} from "@/app/lib/utils";
+
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 type Props = {
-  input: Video;
+  embedUrl?: string | null;
+  placeholderUrl?: string | null;
 };
 
-const EmbedVideo = ({ input }: Props) => {
+const EmbedVideo = ({ embedUrl, placeholderUrl }: Props) => {
+  if (!embedUrl) return null;
+  const src = getYouTubeNoCookieUrl(embedUrl) || embedUrl;
+  const light = placeholderUrl || getYouTubeThumbnailUrl(embedUrl) || true;
+
   return (
     <div className='embed'>
-      {input.embedUrl && (
-        <div
-          style={{ aspectRatio: "16 / 9" }}
-          className={clsx("player-container")}>
-          <ReactPlayer
-            src={input.embedUrl}
-            controls={true}
-            light={true}
-            style={{ width: "100%", height: "100%", aspectRatio: "16 / 9" }}
-          />
-        </div>
-      )}
+      <div
+        style={{ aspectRatio: "16 / 9" }}
+        className={clsx("player-container")}>
+        <ReactPlayer
+          src={src}
+          controls={true}
+          light={light}
+          style={{ width: "100%", height: "100%", aspectRatio: "16 / 9" }}
+        />
+      </div>
     </div>
   );
 };

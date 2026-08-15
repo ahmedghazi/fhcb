@@ -63,7 +63,7 @@ const SerieThematiqueTemplate: NextPage<PageProps> = async ({ params }) => {
         // subTitle={data.subTitle}
       />
       <div className='container-fluid'>
-        {data.video && <EmbedVideo input={data.video} />}
+        {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
       </div>
       <ContentModulaire input={data} />
       {data.related && <Rebonds input={data.related} />}

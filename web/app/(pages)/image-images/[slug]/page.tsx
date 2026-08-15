@@ -69,7 +69,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
         subTitle={(data.chercheur as unknown as Chercheur)?.name}
       />
       <div className='container-fluid'>
-        {data.video && <EmbedVideo input={data.video} />}
+        {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
       </div>
       <ContentModulaire input={data} />
       {data.rebonds && (

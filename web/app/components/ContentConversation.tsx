@@ -19,7 +19,7 @@ const ContentConversation = ({ input }: Props) => {
       <div className='container-fluid'>
         {input?.video && (
           <div className='mb-md'>
-            <EmbedVideo input={input?.video} />
+            <EmbedVideo embedUrl={input.video.embedUrl} />
           </div>
         )}
 

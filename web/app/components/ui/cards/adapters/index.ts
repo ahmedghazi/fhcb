@@ -387,7 +387,7 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video
-      ? React.createElement(EmbedVideo, { input: video })
+      ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
       : undefined,
     tags: tagsLabel ? tagsLabel : _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
@@ -413,7 +413,7 @@ export function imageImagesToCard(input: ImageImagesExpanded): CardBaseProps {
     layout: "col",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video
-      ? React.createElement(EmbedVideo, { input: video })
+      ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
       : undefined,
     tags: index
       ? `une image, des images #${index}`
@@ -441,7 +441,7 @@ export function conversationToCard(input: ConversationExpanded): CardBaseProps {
     // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video
-      ? React.createElement(EmbedVideo, { input: video })
+      ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
       : undefined,
     tags: _localizeText(_type),
     title: (_localizeField(title) as string) || "",
@@ -470,7 +470,7 @@ export function serieThematiqueToCard(
     layout: "col",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video
-      ? React.createElement(EmbedVideo, { input: video })
+      ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
       : undefined,
     tags: index
       ? `une image, des images #${index}`
