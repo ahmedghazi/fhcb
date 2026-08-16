@@ -10,10 +10,11 @@ import { CSSProperties, forwardRef } from "react";
 type Props = {
   input: ExhibitionExpanded;
   style?: CSSProperties;
+  imageSizes?: string;
 };
 
 const CardExhibitionFeatured = forwardRef<HTMLDivElement, Props>(
-  ({ input, style }, ref) => {
+  ({ input, style, imageSizes }, ref) => {
     const { dates, tags, color } = input;
     const isCurrent = _isCurrentByDates(dates || []);
     const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
@@ -42,7 +43,7 @@ const CardExhibitionFeatured = forwardRef<HTMLDivElement, Props>(
           isHorsLesMurs && "card--is-hors-les-murs",
           `card--${props.layout}`,
         )}>
-        <CardBase {...props} />
+        <CardBase {...props} imageSizes={imageSizes} />
         {/* {dates && <pre>{JSON.stringify(dates, null, 2)}</pre>} */}
       </div>
     );

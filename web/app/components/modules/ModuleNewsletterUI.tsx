@@ -49,6 +49,7 @@ const ModuleNewsletterUI = ({ input }: Props) => {
                 alt={_localizeField(image.asset?.altText)}
                 author={_localizeField(image.asset?.description)}
                 copyright={_localizeField(image.asset?.creditLine)}
+                sizes='(max-width: 767px) 90vw, 45vw'
               />
             </div>
           )}

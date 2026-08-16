@@ -43,6 +43,7 @@ export type CardBaseProps = {
   className?: string;
   style?: React.CSSProperties;
   _type?: string;
+  imageSizes?: string;
 };
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
@@ -167,6 +168,7 @@ const CardBase = ({
   contentCount,
   className,
   style,
+  imageSizes = "(max-width: 767px) 100vw, 25vw",
 }: CardBaseProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -210,12 +212,7 @@ const CardBase = ({
           />
         ) : (
           images.map((asset, i) => (
-            <Figure
-              key={i}
-              asset={asset}
-              width={1000}
-              sizes='(max-width: 767px) 100vw, 25vw'
-            />
+            <Figure key={i} asset={asset} width={1000} sizes={imageSizes} />
           ))
         ))}
     </div>
