@@ -174,14 +174,18 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                   <div
                     key={`${imageCover && imageCover.asset?._id}-00`}
                     className='product-slider__slide'>
-                    <Figure asset={imageCover.asset} width={2000} />
+                    <Figure
+                      asset={imageCover.asset}
+                      width={2000}
+                      sizes='800px'
+                    />
                   </div>
                 )}
                 {images.map((item, index: number) => (
                   <div
                     key={`${item && item.asset?._id}-${index}`}
                     className='product-slider__slide'>
-                    <Figure asset={item.asset} />
+                    <Figure asset={item.asset} sizes='800px' />
                   </div>
                 ))}
               </SlickSlider>

@@ -15,7 +15,7 @@ const CardVideoMux = forwardRef<HTMLDivElement, Props>(
       <div
         ref={ref}
         style={style}
-        className='card card--video-mux card--md-alt'>
+        className='card card--video-mux card--md-alt aspect-video'>
         <MuxVideoPlayer playbackId={video?.asset?.playbackId} loop />
         {cta && (
           <div className='card__footer'>

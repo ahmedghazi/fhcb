@@ -18,11 +18,28 @@
         }
       }
 
-      @media all and (min-width: variables.$md) {
-        .grid {
-          grid-template-columns: repeat(3, 1fr);
+      // cards self-apply width modifiers (--sm-alt/--md-alt) meant for the
+      // old masonry layout; this module controls width via the grid instead.
+      .card {
+        width: 100% !important;
+      }
+
+      .featured-cards-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-gutter);
+
+        &__secondary {
+          display: flex;
+          flex-direction: column;
           gap: var(--spacing-gutter);
-          grid-auto-rows: 18px;
+        }
+      }
+
+      @media all and (min-width: variables.$md) {
+        .featured-cards-grid {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
         }
       }
     }

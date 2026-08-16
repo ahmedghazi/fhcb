@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,6 +19,32 @@ const SlickSlider = ({
   settings: settingsOverride = {},
 }: Props) => {
   const sliderRef = useRef<Slider>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // react-slick clones slides for the infinite loop and marks them
+  // aria-hidden, but doesn't stop focusable descendants (links, buttons)
+  // inside those clones from being tabbed to. `inert` blocks focus on the
+  // whole subtree, which aria-hidden alone doesn't.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const applyInert = () => {
+      container
+        .querySelectorAll<HTMLElement>(".slick-slide.slick-cloned")
+        .forEach((slide) => slide.setAttribute("inert", ""));
+    };
+
+    applyInert();
+    const observer = new MutationObserver(applyInert);
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const isAuto = perView === "auto";
 
@@ -37,7 +63,7 @@ const SlickSlider = ({
   };
 
   return (
-    <div className='slick-slider-container'>
+    <div className='slick-slider-container' ref={containerRef}>
       <Slider ref={sliderRef} {...settings}>
         {children}
       </Slider>
