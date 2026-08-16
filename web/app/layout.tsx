@@ -18,6 +18,7 @@ import { CartContextProvider } from "./context/CartContext";
 import CartModal from "./components/ui/CartModalLazy";
 import Gridder from "./components/ui/Gridder";
 import BandeauContextuel from "./components/ui/BandeauContextuel";
+import NavigationProgressBar from "./components/ui/NavigationProgressBar";
 // const sourceSans = Source_Sans_3({
 //   subsets: ["latin"],
 // });
@@ -93,6 +94,7 @@ export default async function RootLayout({
   return (
     <html lang='fr' className={clsx("is-loading", PPRightGrotesk.className)}>
       <body className={clsx("is-loading")} data-theme='theme-fhcb'>
+        <NavigationProgressBar />
         {/* <LenisScrollProvider> */}
         <div id='page'>
           <Gridder />

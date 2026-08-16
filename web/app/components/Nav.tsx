@@ -5,12 +5,13 @@ import {
   SETTINGS_QUERY_RESULT,
 } from "../sanity-api/types/sanity.types";
 import clsx from "clsx";
-import Link from "next/link";
+// import Link from "next/link";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
 import useHeader, { NavMenuItem } from "../context/HeaderContext";
 import { usePathname } from "next/navigation";
 import { _collectFirstImagesFromNavItem } from "../lib/utils";
 import useDeviceDetect from "../hooks/useDeviceDetect";
+import { Link } from "next-view-transitions";
 
 type NavGroupProps = {
   input: LinkInternal | LinkExternal;

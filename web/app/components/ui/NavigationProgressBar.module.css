@@ -1,0 +1,31 @@
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  height: var(--border-width);
+  width: 0%;
+  background: var(--color-primary);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading {
+  width: 80%;
+  opacity: 1;
+  transition:
+    width 6s var(--cubic),
+    opacity 0.15s ease;
+}
+
+.done {
+  width: 100%;
+  opacity: 1;
+  transition: width 0.2s ease-out;
+}
+
+.fading {
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
