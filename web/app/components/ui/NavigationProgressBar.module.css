@@ -4,8 +4,9 @@
   left: 0;
   z-index: 2000;
   height: var(--border-width);
+  /* height: 100dvh; */
   width: 0%;
-  background: var(--color-primary);
+  background: var(--color-accent);
   opacity: 0;
   pointer-events: none;
 }

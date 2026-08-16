@@ -41,6 +41,9 @@ export default function ImagePixelated({
         backgroundPosition: "center",
         // this is the part that gives you the pixelated look
         imageRendering: "pixelated",
+        // width: "100%",
+        height: "auto",
+        aspectRatio: `${imageProps.width} / ${imageProps.height}`,
         ...wrapperStyle,
       }}>
       <Image
@@ -54,6 +57,7 @@ export default function ImagePixelated({
         style={{
           width: "100%",
           height: "auto",
+          aspectRatio: `${imageProps.width} / ${imageProps.height}`,
           opacity: loaded ? 1 : 0,
           transition: "opacity 300ms ease",
           ...style,

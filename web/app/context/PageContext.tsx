@@ -24,58 +24,59 @@ export const PageContextProvider = (props: PageContextProps) => {
   // const settings = { pathname };
 
   const _format = () => {
+    // Read every measurement first, then write the CSS vars after — reading
+    // a bounding rect right after writing an inline style forces a
+    // synchronous reflow, so interleaving reads/writes here (as this used
+    // to) triggers one per line instead of a single batched layout pass.
     const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
     const vw = window.innerWidth * 0.01;
-    document.documentElement.style.setProperty("--vw", `${vw}px`);
-
-    const docHeight = document.documentElement.scrollHeight;
-    document.documentElement.style.setProperty("--doc-h", `${docHeight}px`);
 
     const header = document.querySelector("header");
-    if (header) {
-      const headerBounding = header.getBoundingClientRect();
-      document.documentElement.style.setProperty(
-        "--header-h",
-        headerBounding.height + "px",
-      );
-    }
+    const headerHeight = header?.getBoundingClientRect().height;
 
     const footer = document.querySelector("footer");
-    if (footer) {
-      const footerBounding = footer.getBoundingClientRect();
-      document.documentElement.style.setProperty(
-        "--footer-h",
-        footerBounding.height + "px",
-      );
-    }
+    const footerHeight = footer?.getBoundingClientRect().height;
 
     const containerFluid = document.querySelector(".container-fluid");
-    if (containerFluid) {
-      const bodyBounding = document.body.getBoundingClientRect();
-      const containerFluidBounding = containerFluid.getBoundingClientRect();
-      document.documentElement.style.setProperty(
-        "--container-fluid-w",
-        containerFluidBounding.width + "px",
-      );
-      const edges = (bodyBounding.width - containerFluidBounding.width) / 2;
-      document.documentElement.style.setProperty("--edge-w", edges + "px");
-    }
+    const bodyBounding = containerFluid
+      ? document.body.getBoundingClientRect()
+      : null;
+    const containerFluidBounding = containerFluid?.getBoundingClientRect();
 
     const gridder = document.querySelector(".gridder");
-    if (gridder) {
-      const children = gridder.querySelectorAll(".gridder__item");
-      if (children.length > 0) {
-        Array.from(children).forEach((element) => {
-          const bounding = element.getBoundingClientRect();
-          const size = element.getAttribute("data-size");
-          document.documentElement.style.setProperty(
-            `--gridder-${size}`,
-            bounding.width + "px",
-          );
-        });
-      }
+    const gridderItems = gridder
+      ? Array.from(gridder.querySelectorAll(".gridder__item")).map(
+          (element) => ({
+            size: element.getAttribute("data-size"),
+            width: element.getBoundingClientRect().width,
+          }),
+        )
+      : [];
+
+    const docHeight = document.documentElement.scrollHeight;
+
+    const root = document.documentElement.style;
+    root.setProperty("--vh", `${vh}px`);
+    root.setProperty("--vw", `${vw}px`);
+    root.setProperty("--doc-h", `${docHeight}px`);
+    if (headerHeight !== undefined) {
+      root.setProperty("--header-h", `${headerHeight}px`);
     }
+    if (footerHeight !== undefined) {
+      root.setProperty("--footer-h", `${footerHeight}px`);
+    }
+    if (bodyBounding && containerFluidBounding) {
+      root.setProperty(
+        "--container-fluid-w",
+        `${containerFluidBounding.width}px`,
+      );
+      const edges = (bodyBounding.width - containerFluidBounding.width) / 2;
+      root.setProperty("--edge-w", `${edges}px`);
+    }
+    gridderItems.forEach(({ size, width }) => {
+      root.setProperty(`--gridder-${size}`, `${width}px`);
+    });
+
     document.body.classList.remove("is-loading");
   };
 

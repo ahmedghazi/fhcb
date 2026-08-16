@@ -33,7 +33,7 @@ const Figure = ({
         isLandscape && "figure--is-landscape",
         !isLandscape && "figure--is-portrait",
       )}>
-      {/* <Image
+      <Image
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
@@ -43,11 +43,12 @@ const Figure = ({
           width: "100%",
           height: "auto",
           aspectRatio: `${asset?.metadata?.dimensions?.width} / ${asset?.metadata?.dimensions?.height}`,
+          imageRendering: "pixelated",
         }}
         placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
         blurDataURL={asset?.metadata?.lqip}
-      /> */}
-      <ImagePixelated
+      />
+      {/* <ImagePixelated
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
@@ -60,7 +61,7 @@ const Figure = ({
         }}
         // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
         blurDataURL={asset?.metadata?.lqip}
-      />
+      /> */}
       {caption && (
         <figcaption>
           <span className='c-caption caption'>{caption}</span>
