@@ -14,7 +14,7 @@
     display: flex;
     padding: var(--spacing-xs);
     flex: 1;
-    img {
+    .card__inner--row img {
       max-height: calc(var(--main-h) / 1.3);
       object-fit: contain;
     }
