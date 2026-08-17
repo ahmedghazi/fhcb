@@ -94,6 +94,11 @@ main {
   .hidden-sm {
     display: none;
   }
+  main {
+    .template {
+      padding-top: var(--header-h);
+    }
+  }
 }
 
 @media (width >= 10rem) {

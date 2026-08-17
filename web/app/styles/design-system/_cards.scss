@@ -292,6 +292,11 @@
     //     }
     //   }
     // }
+    @media all and (max-width: variables.$md) {
+      .card__inner--col {
+        gap: var(--spacing-xs);
+      }
+    }
   }
   &--pret,
   &--exhibition {
@@ -391,7 +396,11 @@
   }
   &--article,
   &--page,
-  &--page-modulaire {
+  &--page-modulaire,
+  &--feuilletage,
+  &--image-images,
+  &--serie-thematique,
+  &--conversation {
     .btn {
       background-color: var(--color-gris-50);
     }

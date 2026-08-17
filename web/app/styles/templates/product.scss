@@ -9,17 +9,25 @@
   .slider {
     background-color: var(--color-beige);
     border-radius: var(--radius);
-    padding: var(--spacing-md);
+    // padding: var(--spacing-md) 0;
     .slick-slider-container .slick-slider {
       padding: 0;
+      .slick-list {
+        padding: 0 !important;
+      }
     }
     .slick-slide {
       width: 100%;
     }
     .product-slider__slide {
+      padding: var(--spacing-md);
       width: 100%;
+      min-height: calc(var(--main-h) - var(--spacing-lg)) !important;
+      figure div {
+        overflow: unset !important;
+      }
       img {
-        max-height: var(--main-h);
+        // max-height: var(--main-h);
         height: calc(var(--main-h) - var(--spacing-lg)) !important;
         object-fit: contain;
       }

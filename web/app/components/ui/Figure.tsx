@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
 import ImagePixelated from "./ImagePixelated";
-import ImageDarkroom from "./ImageDarkRoom";
+import ImageDarkroom from "./ImageDarkRoom4";
 
 type Props = {
   asset: any;
@@ -34,7 +34,7 @@ const Figure = ({
         isLandscape && "figure--is-landscape",
         !isLandscape && "figure--is-portrait",
       )}>
-      <Image
+      {/* <Image
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
@@ -48,7 +48,7 @@ const Figure = ({
         }}
         placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
         blurDataURL={asset?.metadata?.lqip}
-      />
+      /> */}
       {/* <ImagePixelated
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
@@ -63,8 +63,9 @@ const Figure = ({
         // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
         blurDataURL={asset?.metadata?.lqip}
       /> */}
-      {/* <ImageDarkroom
-        speed={6}
+      <ImageDarkroom
+        // speed={10}
+        duration={500}
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
@@ -77,7 +78,7 @@ const Figure = ({
         }}
         // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
         blurDataURL={asset?.metadata?.lqip}
-      /> */}
+      />
       {(caption || author || copyright) && (
         <figcaption>
           <span className='c-caption caption'>{caption}</span>

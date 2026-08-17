@@ -351,6 +351,10 @@
         .module__inner {
           flex-direction: column;
         }
+        img {
+          min-height: unset;
+          height: auto !important;
+        }
       }
     }
     &--newsletter-ui {
@@ -384,6 +388,10 @@
       @media all and (max-width: variables.$md) {
         .module__inner {
           flex-direction: column;
+        }
+        img {
+          min-height: unset;
+          height: auto !important;
         }
       }
     }

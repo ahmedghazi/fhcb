@@ -8,6 +8,7 @@ import {
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import { _localizeField } from "@/app/sanity-api/utils";
 import clsx from "clsx";
+import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 
 type Props = {
   input: ImagesUIExpanded;
@@ -17,6 +18,7 @@ const GUTTER = 20; // même valeur que ta variable CSS gap-gutter
 
 const ModuleImagesUI = ({ input }: Props) => {
   const { title, items } = input;
+  const { isMobile } = useDeviceDetect();
   const mosaicRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<boolean>(false);
   const [height, setHeight] = useState<number>();
@@ -42,6 +44,7 @@ const ModuleImagesUI = ({ input }: Props) => {
   );
 
   useLayoutEffect(() => {
+    if (isMobile) return;
     const mosaic = mosaicRef.current;
     if (!mosaic || !ratios.length) return;
 
@@ -81,7 +84,7 @@ const ModuleImagesUI = ({ input }: Props) => {
             ref={mosaicRef}
             className={clsx(
               "images-ui__mosaic flex flex-col gap-gutter md:flex-row",
-              active ? "opacity-100" : "opacity-0",
+              active || isMobile ? "opacity-100" : "opacity-0",
             )}>
             {images.map((item: ImageInGridExpanded, i: number) => (
               <div

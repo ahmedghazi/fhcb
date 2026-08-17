@@ -32,10 +32,18 @@ export const patchViewTransitionProgress = () => {
 
     const transition = nativeStartViewTransition(callback);
 
-    transition.finished.finally(() => {
-      pending = false;
-      emit();
-    });
+    // A slow route render can exceed the browser's internal DOM-update
+    // timeout, rejecting these promises with a TimeoutError. We only care
+    // about clearing the pending flag, but an uncaught rejection would
+    // otherwise spam the console — so swallow it explicitly.
+    transition.ready.catch(() => {});
+    transition.updateCallbackDone.catch(() => {});
+    transition.finished
+      .catch(() => {})
+      .finally(() => {
+        pending = false;
+        emit();
+      });
 
     return transition;
   }) as typeof document.startViewTransition;

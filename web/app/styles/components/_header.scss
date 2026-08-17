@@ -107,7 +107,14 @@ header.header {
       .menu a,
       & {
         color: white;
+        hyphens: auto;
+        overflow-wrap: break-word;
+        white-space: unset;
+        &:not(::first-line) {
+          background-color: red;
+        }
       }
+
       &--open {
         display: block;
       }
@@ -167,6 +174,14 @@ body.nav-open {
       }
       span {
         color: var(--color-secondary);
+      }
+    }
+    @media all and (max-width: variables.$md) {
+      .header--mobile {
+        button.btn:hover,
+        button.btn:active {
+          background-color: white;
+        }
       }
     }
   }

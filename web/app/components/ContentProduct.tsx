@@ -36,14 +36,12 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     title,
     text,
     price,
-    inStock,
     artists,
     artistName,
     images,
     metas,
     publicationDate,
     rebondsAuto,
-    related,
     relatedProductsByArtist,
     relatedProductsByTag,
     editeur,
@@ -167,8 +165,9 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                 controlsFloating
                 settings={{
                   infinite: true,
-                  centerMode: true,
-                  variableWidth: true,
+                  adaptiveHeight: true,
+                  // centerMode: true,
+                  // variableWidth: true,
                 }}>
                 {imageCover && (
                   <div
