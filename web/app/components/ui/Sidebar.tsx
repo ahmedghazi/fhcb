@@ -21,7 +21,6 @@ const Sidebar = ({ input }: Props) => {
     products,
     keyVal,
   } = input;
-  console.log(input.partenairesMedia);
   return (
     <aside className='sidebar'>
       {commissariat && (
@@ -44,23 +43,22 @@ const Sidebar = ({ input }: Props) => {
       {coProduction && (
         <div className='sidebar__item sidebar__coproduction'>
           <h3 className='c-tag underline'>Co-production</h3>
+          {/* <pre>{JSON.stringify(coProduction, null, 2)}</pre> */}
           <ul>
             {coProduction.map((item, i) => (
               <li key={i}>
-                {item && (
-                  <>
-                    {item.text && (
-                      <div className='c-body--tight'>
-                        {_localizeField(item.text)}
-                      </div>
+                <>
+                  {item?.text && (
+                    <div className='c-body--tight'>
+                      {_localizeField(item?.text)}
+                    </div>
+                  )}
+                  {item?._type === "partenaire" &&
+                    item?.imageCover &&
+                    item?.imageCover?.asset && (
+                      <Figure asset={item.imageCover.asset} sizes='96px' />
                     )}
-                    {item._type === "partenaire" &&
-                      item.imageCover &&
-                      item.imageCover.asset && (
-                        <Figure asset={item.imageCover.asset} sizes='96px' />
-                      )}
-                  </>
-                )}
+                </>
               </li>
             ))}
           </ul>

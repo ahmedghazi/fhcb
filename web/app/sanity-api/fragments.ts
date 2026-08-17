@@ -285,12 +285,21 @@ export const textSidebarUI = `
     },
     sidebar{
       commissariat,
-      coProduction[]->{
-        ...,
-        imageCover{
-          ${imageAsset}
+      coProduction[]{
+        _type == "reference" => @->{
+          ...,
+          "image": imageCover{
+            ${imageAsset}
+          }
+        },
+        _type == "keyVal" => {
+          ...,
+          "image": image{
+            ${imageAsset}
+          }
         }
       },
+
       partenaires[]->{
         ...,
         imageCover{
