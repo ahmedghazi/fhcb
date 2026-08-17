@@ -26,22 +26,24 @@ export const _shuffle = <T>(items: T[]): T[] => {
   return shuffled;
 };
 
-// "priority same artist, random fill" for the "exhibition-discover-past" rebond scenario: GROQ has no
-// random(), so rebondExhibitionsDiscoverPast (fragments-rebonds.ts) returns a deterministic candidate
-// pool (capped at 12, same-artist-first) with an `isSameArtist` flag — this shuffles each bucket
-// independently and caps the result, so same-artist exhibitions are favored but the fill is genuinely
-// randomized (and re-rolled on every request, unlike a GROQ-side sort).
-export const _pickDiscoverExhibitions = <T>(
+// "priority X, random fill" for the rebond "discover" scenarios (currently just exhibition-discover-past):
+// GROQ has no random(), so the fragment (fragments-rebonds.ts) returns a deterministic candidate pool
+// with a boolean priority flag already computed server-side (e.g. same-artist) — this shuffles the
+// priority and fill buckets independently and caps the result, so priority items are favored but the
+// fill is genuinely randomized (and re-rolled on every request, unlike a GROQ-side sort).
+export const _pickWithPriorityFill = <T>(
   items: T[] | null | undefined,
+  isPriority: (item: T) => boolean,
   cap = 2,
 ): T[] => {
   if (!items || items.length === 0) return [];
-  const isSameArtist = (item: T) =>
-    Boolean((item as { isSameArtist?: boolean | null }).isSameArtist);
-  const sameArtist = items.filter(isSameArtist);
-  const other = items.filter((item) => !isSameArtist(item));
-  return [..._shuffle(sameArtist), ..._shuffle(other)].slice(0, cap);
+  const priority = items.filter(isPriority);
+  const other = items.filter((item) => !isPriority(item));
+  return [..._shuffle(priority), ..._shuffle(other)].slice(0, cap);
 };
+
+export const _isSameArtistFlag = <T>(item: T) =>
+  Boolean((item as { isSameArtist?: boolean | null }).isSameArtist);
 
 export const artistsToString = (
   artists?: Array<{ name?: string | null }> | null,

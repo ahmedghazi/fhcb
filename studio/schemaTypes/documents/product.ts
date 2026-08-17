@@ -199,7 +199,7 @@ export default defineType({
     defineField({
       name: 'publicationDate',
       type: 'date',
-      title: 'Date de publication',
+      title: 'Date de parution',
       group: 'metas',
     }),
     defineField({

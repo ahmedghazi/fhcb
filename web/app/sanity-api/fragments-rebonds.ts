@@ -92,6 +92,15 @@ export const rebondBooks = `
   }
 `;
 
+// A date range counts as "at the Foundation" the same way isInSiteLocationType (app/lib/utils.ts) and
+// the cron job's `isCurrent` (app/api/cron/update-exhibition-tags/route.ts) treat it: absent
+// locationType counts as in-site (backward compat with the old inSite boolean field). "futur"/"current"
+// scenarios must only count in-site dates — an itinerant/hors-les-murs leg shouldn't make an exhibition
+// show up as "upcoming at the Foundation" (e.g. Les Européens touring after its Foundation run ends is
+// NOT an upcoming Foundation show). "past" scenarios are intentionally left location-agnostic: whether
+// the whole exhibition's run has ended doesn't depend on where any one leg of it took place.
+const IN_SITE_DATE = `(!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])`;
+
 // scenarios: "exhibition-related", "exhibition-related-current-or-futur", "exhibition-related-past" (filtered to
 // the host) and "exhibition-futur", "exhibition-past" (global, any exhibition)
 // NB: \`au\` (end date) is intentionally left blank for single-day exhibitions/events (see
@@ -103,11 +112,11 @@ export const rebondExhibitions = `
     _id != ^.^._id &&
     (
       ("exhibition-related" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)))
-      || ("exhibition-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
+      || ("exhibition-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-related-past" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) == 0)
-      || ("exhibition-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
+      || ("exhibition-futur" in ^.items && count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-past" in ^.items && count(dates[coalesce(au, du) >= now()]) == 0)
-      || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now()]) > 0)
+      || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
     )
   ] | order(dates[0].du desc) {
     ${cardRefExhibition}
@@ -146,7 +155,7 @@ export const rebondEvents = `
 // scenario: "exhibition-discover-past" — Block 2 ("À découvrir aussi") for exhibitions: past
 // exhibitions, prioritizing ones sharing an artist with the host, backfilled with others. GROQ has no
 // random() — `isSameArtist` is computed here so the priority split can happen deterministically, and
-// the actual random shuffle-then-cap(2) happens in JS (see _pickDiscoverExhibitions in app/lib/utils.ts),
+// the actual random shuffle-then-cap(2) happens in JS (see _pickWithPriorityFill in app/lib/utils.ts),
 // mirroring getRandomArtists' fetch-a-pool-then-shuffle pattern. Capped at 12 candidates so the pool
 // stays small regardless of how many past exhibitions exist.
 export const rebondExhibitionsDiscoverPast = `
@@ -159,6 +168,22 @@ export const rebondExhibitionsDiscoverPast = `
     ${cardRefExhibition},
     "isSameArtist": count(artists[@._ref in ^.^.artists[]._ref]) > 0
   } | order(isSameArtist desc, dates[0].du desc) [0...12]
+`;
+
+// scenario: "exhibition-discover-current-or-futur" — Block 2 ("À découvrir en ce moment") for pages
+// with no natural relation to a specific exhibition (e.g. the "Missions" / Tarifs / Accès pages): any
+// exhibition currently on or about to open AT THE FOUNDATION — hors-les-murs/itinerant legs don't
+// count (see IN_SITE_DATE above), even for an exhibition that also has an in-site run. Random-filled,
+// capped at 2, via JS shuffle (see _shuffle in app/lib/utils.ts) since GROQ has no random().
+export const rebondExhibitionsDiscoverCurrent = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    "exhibition-discover-current-or-futur" in ^.items &&
+    count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0
+  ] {
+    ${cardRefExhibition}
+  } | order(dates[0].du asc) [0...12]
 `;
 
 // scenario: "articles-related" — articles directly linked to the host, not broadened via the host's
@@ -202,6 +227,7 @@ export const rebondsResolver = `
     + ${rebondExhibitions}
     + ${rebondExhibitionsByArtist}
     + ${rebondExhibitionsDiscoverPast}
+    + ${rebondExhibitionsDiscoverCurrent}
     + ${rebondEvents}
     + ${rebondArticles}
     + ${rebondRessources}

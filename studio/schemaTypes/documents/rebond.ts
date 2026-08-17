@@ -63,6 +63,11 @@ export default defineType({
                 title: 'Expo(s) passée(s) à découvrir (prio. même artiste, complété au hasard)',
                 value: 'exhibition-discover-past',
               },
+              {
+                title:
+                  'Expo(s) en cours/à venir à découvrir (prio. fondation, complété au hasard)',
+                value: 'exhibition-discover-current-or-futur',
+              },
             ],
           },
         },

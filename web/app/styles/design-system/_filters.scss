@@ -80,7 +80,11 @@ header.is-up ~ main .filters {
       }
       &.ui-filter__list.is-open {
         padding: 0;
+        .ui-filters__summary {
+          color: var(--color-accent);
+        }
         .ui-filter__detail {
+          background-color: red;
           position: initial;
           padding: 0;
         }
@@ -177,6 +181,12 @@ header.is-up ~ main .filters {
       padding-bottom: var(--detail-h, 17rem);
       label svg {
         transform: rotate(180deg);
+      }
+      .ui-filters__summary {
+        color: var(--color-accent);
+        path {
+          fill: var(--color-accent);
+        }
       }
       .ui-filter__detail {
         // display: block;

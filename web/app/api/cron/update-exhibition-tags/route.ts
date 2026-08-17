@@ -177,24 +177,25 @@ export async function GET(request: Request) {
       );
       if (alreadyPast) continue;
 
-      const allStarts = exhibition.dates
-        .map((d) => d.du)
-        .filter(Boolean) as string[];
       const allEnds = exhibition.dates
         .map((d) => d.au)
         .filter(Boolean) as string[];
-      if (!allStarts.length || !allEnds.length) continue;
+      const anyStart = exhibition.dates.some((d) => d.du);
+      if (!anyStart || !allEnds.length) continue;
 
-      const firstStart = allStarts.sort()[0];
       const lastEnd = allEnds.sort().reverse()[0];
 
-      const isCurrent = exhibition.dates.some(
-        (d) =>
-          isInSiteLocationType(d.locationType) &&
-          d.du &&
-          d.au &&
-          d.du <= nowDate &&
-          d.au >= nowDate,
+      // "current"/"upcoming" (and their pastilles/countdown) only care about the Foundation's own
+      // dates — a touring/hors-les-murs leg shouldn't make an exhibition look "upcoming" once its
+      // Foundation run is over, or drive the countdown off a leg that isn't at the Foundation. Same
+      // rule as IN_SITE_DATE in web/app/sanity-api/fragments-rebonds.ts. "past" stays location-agnostic:
+      // whether the whole exhibition's run has ended doesn't depend on where any one leg took place.
+      const inSiteDates = exhibition.dates.filter((d) =>
+        isInSiteLocationType(d.locationType),
+      );
+
+      const isCurrent = inSiteDates.some(
+        (d) => d.du && d.au && d.du <= nowDate && d.au >= nowDate,
       );
       const isHorsLesMurs = exhibition.dates.some(
         (d) =>
@@ -206,7 +207,12 @@ export async function GET(request: Request) {
           d.au >= nowDate,
       );
       const isPast = lastEnd < nowDate;
-      const isUpcoming = firstStart > nowDate;
+
+      const inSiteUpcomingStarts = inSiteDates
+        .filter((d) => d.du && d.du > nowDate)
+        .map((d) => d.du as string)
+        .sort();
+      const isUpcoming = inSiteUpcomingStarts.length > 0;
 
       // Compute pastille and countdown based on exhibition status
       const todayMs = new Date().setHours(0, 0, 0, 0);
@@ -214,8 +220,13 @@ export async function GET(request: Request) {
       let countdown: number | null = null;
 
       if (isCurrent) {
+        const currentInSiteEnd = inSiteDates
+          .filter((d) => d.du && d.au && d.du <= nowDate && d.au >= nowDate)
+          .map((d) => d.au as string)
+          .sort()
+          .reverse()[0];
         const daysUntilEnd = Math.ceil(
-          (new Date(lastEnd).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+          (new Date(currentInSiteEnd).setHours(0, 0, 0, 0) - todayMs) / 86400000,
         );
         if (daysUntilEnd >= 0 && daysUntilEnd <= 10) {
           pastilleText =
@@ -224,8 +235,9 @@ export async function GET(request: Request) {
               : { fr: `J-${daysUntilEnd}`, en: `J-${daysUntilEnd}` };
         }
       } else if (isUpcoming) {
+        const nextInSiteStart = inSiteUpcomingStarts[0];
         const daysUntilStart = Math.ceil(
-          (new Date(firstStart).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+          (new Date(nextInSiteStart).setHours(0, 0, 0, 0) - todayMs) / 86400000,
         );
         if (daysUntilStart <= 30) {
           countdown = daysUntilStart;

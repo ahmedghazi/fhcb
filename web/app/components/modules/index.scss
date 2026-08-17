@@ -4,6 +4,20 @@
   width: 100%;
   section.module {
     margin-bottom: var(--spacing-lg);
+    &--list-product-ui,
+    &--list-conversation-ui,
+    &--list-exhibitions-past-ui,
+    &--list-image-images,
+    &--list-feuilletage-ui {
+      .load-more {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--spacing-lg);
+        .btn {
+          width: auto;
+        }
+      }
+    }
     &--featured-cards-ui {
       .card--is-landscape {
         grid-column: span 2 / span 2;
@@ -305,8 +319,6 @@
       .react-player__shadow {
         background-color: var(--color-secondary);
       }
-    }
-    &--list-exhibitions-past-ui {
     }
     &--support-ui {
       background-color: var(--color-rose-50);

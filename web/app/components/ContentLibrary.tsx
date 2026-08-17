@@ -15,13 +15,6 @@ type Props = {
 const ContentLibrary = ({ input }: Props) => {
   if (!input) return null;
   const [isFiltering, setIsFiltering] = React.useState(false);
-  // const {
-  //   items: moreItems,
-  //   hasMore,
-  //   sentinelRef,
-  // } = useInfiniteScroll<ProductExpanded>({
-  //   url: "/api/library/items",
-  // });
 
   useEffect(() => {
     const token = subscribe("IS_FILTERING", (e, d) => {

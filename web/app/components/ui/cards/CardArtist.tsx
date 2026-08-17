@@ -5,7 +5,7 @@ import CardBase from "./CardBase";
 
 type Props = {
   input: ArtistExpanded;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
 };
 
 const CardArtist = ({ input, size = "md" }: Props) => {

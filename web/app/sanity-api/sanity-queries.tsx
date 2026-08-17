@@ -19,6 +19,7 @@ import {
   randomRessources,
 } from "./fragments";
 import { rebondsResolver } from "./fragments-rebonds";
+import { _shuffle } from "../lib/utils";
 import {
   ARTICLE_QUERY_RESULT,
   ARTIST_QUERY_RESULT,
@@ -546,7 +547,9 @@ export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
   });
 }
 
-export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && slug.current != $slug][0...2]{
+// capped at 30 (not `count`) so there's an actual pool to shuffle — capping in GROQ before
+// shuffling always returned the same [0...count] products in a merely-reordered pair/trio
+export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && slug.current != $slug] | order(_createdAt desc) [0...30]{
   ${cardRefProduct}
 }`;
 
@@ -557,11 +560,7 @@ export async function getRandomProductss(excludeSlug: string, count = 4) {
     qParams: { slug: excludeSlug },
   });
   if (!Array.isArray(all)) return [];
-  for (let i = all.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [all[i], all[j]] = [all[j], all[i]];
-  }
-  return all.slice(0, count);
+  return _shuffle(all).slice(0, count);
 }
 
 /*

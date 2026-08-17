@@ -1,6 +1,7 @@
 import website from "@/app/config/website";
 import { Metadata, NextPage } from "next";
 import { draftMode } from "next/headers";
+import { Suspense } from "react";
 
 import PageHeader from "@/app/components/PageHeader";
 import { getClient } from "@/app/sanity-api/sanity.client";
@@ -32,7 +33,11 @@ const LibrairiePage: NextPage = async () => {
   return (
     <div className='template template--library' data-template='library'>
       <PageHeader h1={data.title} />
-      <ContentLibrary input={data} />
+      {/* the product grid can be large — give React a boundary to stream/flush it separately
+      from the header instead of one large un-Suspense'd document */}
+      <Suspense fallback={null}>
+        <ContentLibrary input={data} />
+      </Suspense>
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </div>
   );

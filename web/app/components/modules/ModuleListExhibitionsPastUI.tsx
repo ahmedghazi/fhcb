@@ -14,6 +14,13 @@ import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import GridMasonryDessandro from "../ui/GridMasonryDessandro";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 import { GridMasonryColumns } from "../ui/GridMasonryColumns";
+import { _localizeText } from "../../sanity-api/utils";
+
+// Filtering already runs over the full resolvedItems set fetched at page-load (see applyFilters
+// below) — this just caps how many of the (possibly filtered) results get rendered into the DOM at
+// once, revealed via the "load more" button. Keeps the initial HTML small without ever limiting
+// what filters can match.
+const PAGE_SIZE = 24;
 
 type Props = {
   input: ListExhibitionsPastUI & {
@@ -25,6 +32,7 @@ type Props = {
 const ModuleListExhibitionsPastUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const { isMobile } = useDeviceDetect();
   const filterDefs = withResolvedOptions(
     input.filters ?? [],
@@ -36,18 +44,25 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
     activeFilters,
     locale,
   );
-  console.log(input.resolvedItems);
+  const visibleItems = filteredItems.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredItems.length;
+
+  const handleFilterChange = (next: ActiveFilters) => {
+    setActiveFilters(next);
+    setVisibleCount(PAGE_SIZE);
+  };
+
   return (
     <section className='module module--list-exhibitions-past-ui'>
       <div className='container-fluid'>
         <div className='module__inner'>
           {filterDefs.length > 0 && (
-            <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
+            <FilterBar filterDefs={filterDefs} onChange={handleFilterChange} />
           )}
 
-          {filteredItems.length > 0 && (
+          {visibleItems.length > 0 && (
             // <GridMasonryDessandro>
-            //   {filteredItems.map((item: ExhibitionExpanded, index: number) => (
+            //   {visibleItems.map((item: ExhibitionExpanded, index: number) => (
             //     <Fragment key={`--${index}`}>
             //       <div
             //         style={{
@@ -64,7 +79,18 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
             //     </Fragment>
             //   ))}
             // </GridMasonryDessandro>
-            <GridMasonryColumns items={filteredItems} />
+            <GridMasonryColumns items={visibleItems} />
+          )}
+
+          {hasMore && (
+            <div className='load-more'>
+              <button
+                type='button'
+                className='btn'
+                onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>
+                {_localizeText("loadMore")}
+              </button>
+            </div>
           )}
         </div>
       </div>

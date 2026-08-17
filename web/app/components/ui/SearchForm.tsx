@@ -187,19 +187,20 @@ const SearchForm = ({ settings }: Props) => {
               <div className='grid--centered'>
                 {searchResult?.map((item: PostTypes, index: number) => (
                   <Fragment key={`${item && item._id}-${index}`}>
-                    <CardType input={item} context='grid' />
+                    <CardType input={item} context='search' />
                   </Fragment>
-                ))}
-              </div>
-              {/* <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter grid--centered'>
-                {searchResult?.map((item, i) => (
-                  <SearchResultItem input={item} key={i} />
                 ))}
                 {searchResult.length === 0 && term && (
                   <div className='col-span-full'>
                     <p>{_localizeText("noResults")}</p>
                   </div>
                 )}
+              </div>
+              {/* <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter grid--centered'>
+                {searchResult?.map((item, i) => (
+                  <SearchResultItem input={item} key={i} />
+                ))}
+
               </div> */}
             </div>
           </div>

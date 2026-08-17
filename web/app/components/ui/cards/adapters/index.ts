@@ -280,7 +280,7 @@ export function eventToCard(
 
 export function artistToCard(
   input: ArtistExpanded,
-  size: "sm" | "md",
+  size: "sm" | "md" | "lg",
 ): CardBaseProps {
   const { imageCover } = input;
   const isLandscape =

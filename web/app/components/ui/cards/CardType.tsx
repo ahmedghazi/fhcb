@@ -22,7 +22,7 @@ import CardConversation from "./CardConversation";
 import { _isCurrentByDates, _isPast, _isPastByDates } from "@/app/lib/utils";
 import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
-type Context = "grid" | "slider" | "rebonds";
+type Context = "grid" | "slider" | "rebonds" | "search";
 type Size = "sm" | "md" | "lg";
 
 type Props = {
@@ -44,16 +44,16 @@ type Props = {
 // default size per card type, per usage context (mirrors the per-context sizes that
 // previously lived duplicated across ModuleGridCardUI, ModuleSliderCardUI and Rebonds)
 const SIZES = {
-  event: { grid: "sm", slider: "md", rebonds: "sm" },
-  exhibition: { grid: "sm", slider: "md", rebonds: "md" },
-  exhibitionPast: { grid: "sm", slider: "sm", rebonds: "sm" },
-  exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md" },
-  product: { grid: "sm", slider: "sm", rebonds: "sm" },
-  article: { grid: "sm", slider: "sm", rebonds: "sm" },
-  artist: { grid: "sm", slider: "sm", rebonds: "sm" },
-  imageImages: { grid: "md", slider: "md", rebonds: "md" },
-  feuilletage: { grid: "md", slider: "md", rebonds: "md" },
-  conversation: { grid: "md", slider: "md", rebonds: "md" },
+  event: { grid: "sm", slider: "md", rebonds: "sm", search: "sm" },
+  exhibition: { grid: "sm", slider: "md", rebonds: "md", search: "md" },
+  exhibitionPast: { grid: "sm", slider: "sm", rebonds: "sm", search: "md" },
+  exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md", search: "lg" },
+  product: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
+  article: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
+  artist: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
+  imageImages: { grid: "md", slider: "md", rebonds: "md", search: "md" },
+  feuilletage: { grid: "md", slider: "md", rebonds: "md", search: "md" },
+  conversation: { grid: "md", slider: "md", rebonds: "md", search: "md" },
 } satisfies Record<string, Record<Context, Size>>;
 
 const CardType = ({ input, context, size }: Props) => {

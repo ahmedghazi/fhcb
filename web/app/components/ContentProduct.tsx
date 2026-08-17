@@ -60,7 +60,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     ...(relatedProductsByArtist || []),
     ...(relatedProductsByTag || []),
     ...(randomProducts || []),
-  ];
+  ].slice(0, 4);
 
   const isLowStock = totalInventory && totalInventory < 10;
 

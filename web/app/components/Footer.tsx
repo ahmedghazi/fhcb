@@ -61,7 +61,7 @@ const Footer = ({ settings }: Props) => {
             </address>
             {settings?.navSecondary && (
               <nav className='footer__nav'>
-                <div className='grid md:grid-cols-3 gap-sm md:gap-gutter'>
+                <div className='grid md:grid-cols-3 gap-sm md:gap-gutter mb-md'>
                   <ul className='md:col-span-3 grid md:grid-cols-3 gap-gutter'>
                     {settings.navSecondary.map((item: any) => {
                       return (
@@ -81,21 +81,9 @@ const Footer = ({ settings }: Props) => {
                         </li>
                       );
                     })}
-                    {/* <li>
-                      <h5 className='c-h2'>{_localizeText("contactTeam")}</h5>
-                      {settings.navTertiary && (
-                        <ul>
-                          {settings.navTertiary?.map((item: any) => (
-                            <li key={item._key}>
-                              <Link href={_linkResolver(item.link)}>
-                                {_localizeField(item.label)}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li> */}
                   </ul>
+                </div>
+                <div className='grid md:grid-cols-3 gap-sm md:gap-gutter items-baseline'>
                   <div className='credits-n-legals md:col-span-2'>
                     © {new Date().getFullYear()} {website.title}{" "}
                     {_localizeText("allRightsReserved")}
