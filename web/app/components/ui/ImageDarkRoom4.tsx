@@ -45,11 +45,7 @@ export default function ImageDarkroom({
         overflow: "hidden",
         width: "100%",
         aspectRatio: width && height ? `${width} / ${height}` : undefined,
-        // "blackroom" : fond noir par défaut. Le LQIP, si fourni, ne sert
-        // que de texture de transition avant que l'image ait chargé — le
-        // reveal lui-même vient uniquement du filter ci-dessous, pas d'un
-        // masque ou d'un calque séparé.
-        // backgroundColor: "#000",
+        backgroundColor: "#f5f2ec",
         // backgroundImage: blurDataURL ? `url(${blurDataURL})` : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -79,23 +75,23 @@ export default function ImageDarkroom({
       <style jsx>{`
         :global(.darkroom-image) {
           /*
-            Seul un contraste + luminosité extrêmes suffisent à faire
-            émerger l'image des ombres vers les hautes lumières : avec un
-            contraste très élevé, tout pixel dont la luminance est sous un
-            certain seuil est écrasé à noir ; ce seuil dépend à la fois de
-            brightness() et contrast() (cf. les formules du spec Filter
-            Effects). En animant contrast -> 1 et brightness -> 1, ce seuil
-            descend progressivement dans la gamme tonale : les pixels les
-            plus clairs de la photo deviennent visibles en premier, les plus
-            sombres en dernier — sans masque, sans SVG, juste ces deux
-            filtres CSS. grayscale() ajoute l'idée qu'un tirage n'a pas
-            encore "pris" ses couleurs tant qu'il n'est pas développé.
+            Même principe qu'avant (contraste extrême = seuil d'écrasement
+            qui glisse le long de la gamme tonale au fil de l'anim), mais
+            inversé : au lieu d'une brightness basse qui écrase les ombres
+            à NOIR, on part d'une brightness très HAUTE qui écrase les
+            hautes lumières et les tons moyens à BLANC — seuls les pixels
+            déjà très sombres du départ commencent à transparaître. En
+            animant brightness -> 1 (au lieu de rester basse), ce seuil de
+            blanc redescend progressivement dans la gamme tonale : les
+            ombres apparaissent en premier, les tons clairs/couleurs en
+            dernier — comme un papier blanc qui laisse une image émerger,
+            plutôt qu'une image qui sort du noir.
           */
-          filter: brightness(0.22) contrast(13) grayscale(1) saturate(0.5);
+          filter: brightness(12) contrast(13) grayscale(1) saturate(0.5);
           /* opacity : fondu rapide et séparé, juste pour éviter que l'image
-             (déjà dans son état sombre du filtre) ne s'affiche d'un coup en
-             pleine opacité par-dessus le LQIP -> ce cut brutal est le
-             "flash noir". filter : le sweep long qui fait le reveal. */
+             (déjà dans son état écrasé du filtre) ne s'affiche d'un coup en
+             pleine opacité -> ce cut brutal est le "flash". filter : le
+             sweep long qui fait le reveal. */
           opacity: 0;
           transition:
             opacity 220ms ease-out,

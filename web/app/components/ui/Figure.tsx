@@ -66,6 +66,7 @@ const Figure = ({
       <ImageDarkroom
         // speed={10}
         duration={500}
+        // revealFrom='light'
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
