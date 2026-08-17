@@ -17,6 +17,7 @@ import {
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import Rebonds from "@/app/components/Rebonds";
 import RebondsExhibition from "@/app/components/RebondsExhibition";
+import { _pickDiscoverExhibitions } from "@/app/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -71,13 +72,22 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
         />
       )}
       {data.related && <Rebonds input={data.related} title='toDiscoverToo' />} */}
-      {/* <pre>{JSON.stringify(data.rebondsType?.items, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
 
-      <Rebonds
-        title={data.rebondsType?.title || undefined}
-        input={data.rebondsType?.resolvedItems}
-        items={data.rebondsType?.items}
-      />
+      {data.rebondsAuto?.map((rebond, i) => {
+        const isDiscoverPast = rebond?.items?.includes("exhibition-discover-past");
+        const input = isDiscoverPast
+          ? _pickDiscoverExhibitions(rebond?.resolvedItems, 2)
+          : rebond?.resolvedItems;
+        return (
+          <Rebonds
+            key={i}
+            title={rebond?.title || undefined}
+            input={input}
+            items={rebond?.items}
+          />
+        );
+      })}
     </div>
   );
 };

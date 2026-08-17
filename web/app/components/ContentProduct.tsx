@@ -42,7 +42,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     images,
     metas,
     publicationDate,
-    rebondsType,
+    rebondsAuto,
     related,
     relatedProductsByArtist,
     relatedProductsByTag,
@@ -218,13 +218,16 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
       )} */}
       {/* <pre>{JSON.stringify(relatedProductsByArtist, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(mergedRelated[0], null, 2)}</pre> */}
-      {/* <pre>{JSON.stringify(rebondsType?.items, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(rebondsAuto, null, 2)}</pre> */}
 
-      <Rebonds
-        input={rebondsType?.resolvedItems}
-        title={rebondsType?.title || undefined}
-        items={rebondsType?.items}
-      />
+      {rebondsAuto?.map((rebond, i) => (
+        <Rebonds
+          key={i}
+          input={rebond?.resolvedItems}
+          title={rebond?.title || undefined}
+          items={rebond?.items}
+        />
+      ))}
 
       {mergedRelated && mergedRelated.length > 0 && (
         <Rebonds input={mergedRelated} title='discoverToo' />

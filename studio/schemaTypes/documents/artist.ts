@@ -5,7 +5,7 @@ import {IoPersonOutline} from 'react-icons/io5'
 import slug from '../fields/slug'
 import imageFields from '../misc/imageFields'
 import linkInternalTypes from '../misc/linkInternalTypes'
-import rebondsTypeField from '../misc/rebondsTypeField'
+import rebondsAutoField from '../misc/rebondsAutoField'
 
 export default defineType({
   type: 'document',
@@ -98,7 +98,7 @@ export default defineType({
       // hidden: true,
     }),
 
-    rebondsTypeField,
+    rebondsAutoField,
   ],
 
   preview: {

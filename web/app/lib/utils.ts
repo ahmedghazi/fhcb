@@ -26,6 +26,23 @@ export const _shuffle = <T>(items: T[]): T[] => {
   return shuffled;
 };
 
+// "priority same artist, random fill" for the "exhibition-discover-past" rebond scenario: GROQ has no
+// random(), so rebondExhibitionsDiscoverPast (fragments-rebonds.ts) returns a deterministic candidate
+// pool (capped at 12, same-artist-first) with an `isSameArtist` flag — this shuffles each bucket
+// independently and caps the result, so same-artist exhibitions are favored but the fill is genuinely
+// randomized (and re-rolled on every request, unlike a GROQ-side sort).
+export const _pickDiscoverExhibitions = <T>(
+  items: T[] | null | undefined,
+  cap = 2,
+): T[] => {
+  if (!items || items.length === 0) return [];
+  const isSameArtist = (item: T) =>
+    Boolean((item as { isSameArtist?: boolean | null }).isSameArtist);
+  const sameArtist = items.filter(isSameArtist);
+  const other = items.filter((item) => !isSameArtist(item));
+  return [..._shuffle(sameArtist), ..._shuffle(other)].slice(0, cap);
+};
+
 export const artistsToString = (
   artists?: Array<{ name?: string | null }> | null,
 ): string => {

@@ -4586,6 +4586,130 @@
     }
   },
   {
+    "name": "rebond",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "rebond"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "name": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
+        },
+        "optional": true
+      },
+      "items": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "artist-related"
+              },
+              {
+                "type": "string",
+                "value": "book-related"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related-current-or-futur"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related-past"
+              },
+              {
+                "type": "string",
+                "value": "event-related-current-or-futur"
+              },
+              {
+                "type": "string",
+                "value": "articles-related"
+              },
+              {
+                "type": "string",
+                "value": "ressources-related"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-futur"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-current"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-past"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-related-by-artist"
+              },
+              {
+                "type": "string",
+                "value": "event-futur"
+              },
+              {
+                "type": "string",
+                "value": "artist"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-discover-past"
+              }
+            ]
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  {
     "name": "location",
     "type": "document",
     "attributes": {
@@ -7645,11 +7769,25 @@
         },
         "optional": true
       },
-      "rebondsType": {
+      "rebondsAuto": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "rebond.reference"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
+            }
+          }
         },
         "optional": true
       }
@@ -8161,11 +8299,25 @@
         },
         "optional": true
       },
-      "rebondsType": {
+      "rebondsAuto": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "rebond.reference"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
+            }
+          }
         },
         "optional": true
       }
@@ -8581,11 +8733,25 @@
         },
         "optional": true
       },
-      "rebondsType": {
+      "rebondsAuto": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "rebond.reference"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
+            }
+          }
         },
         "optional": true
       }
@@ -9472,11 +9638,25 @@
         },
         "optional": true
       },
-      "rebondsType": {
+      "rebondsAuto": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "rebond.reference"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
+            }
+          }
         },
         "optional": true
       }
@@ -9830,11 +10010,25 @@
         },
         "optional": true
       },
-      "rebondsType": {
+      "rebondsAuto": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "rebond.reference"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
+            }
+          }
         },
         "optional": true
       }
@@ -11324,130 +11518,24 @@
         },
         "optional": true
       },
-      "rebondsType": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "rebond.reference"
-        },
-        "optional": true
-      }
-    }
-  },
-  {
-    "name": "rebond",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "rebond"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "name": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "localeString"
-        },
-        "optional": true
-      },
-      "items": {
+      "rebondsAuto": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
           "of": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "artist-related"
-              },
-              {
-                "type": "string",
-                "value": "book-related"
-              },
-              {
-                "type": "string",
-                "value": "exhibition-related"
-              },
-              {
-                "type": "string",
-                "value": "exhibition-related-current-or-futur"
-              },
-              {
-                "type": "string",
-                "value": "exhibition-related-past"
-              },
-              {
-                "type": "string",
-                "value": "event-related-current-or-futur"
-              },
-              {
-                "type": "string",
-                "value": "articles-related"
-              },
-              {
-                "type": "string",
-                "value": "ressources-related"
-              },
-              {
-                "type": "string",
-                "value": "exhibition-futur"
-              },
-              {
-                "type": "string",
-                "value": "exhibition-current"
-              },
-              {
-                "type": "string",
-                "value": "exhibition-past"
-              },
-              {
-                "type": "string",
-                "value": "exhibition-related-by-artist"
-              },
-              {
-                "type": "string",
-                "value": "event-futur"
-              },
-              {
-                "type": "string",
-                "value": "artist"
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
               }
-            ]
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
+            }
           }
         },
         "optional": true

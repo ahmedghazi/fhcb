@@ -142,7 +142,7 @@ export const PAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire" && slug.curr
     rebonds[]->{
       ${cardTypes}
     },
-    rebondsType->{
+    rebondsAuto[]->{
       ${rebondsResolver}
     }
   }`;
@@ -172,7 +172,7 @@ export const ARTIST_QUERY = groq`*[_type == "artist" && slug.current == $slug][0
     },
     text,
     links,
-    rebondsType->{
+    rebondsAuto[]->{
       ${rebondsResolver}
     }
   }`;
@@ -236,7 +236,7 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
       ${cardTypes}
     },
 
-    rebondsType->{
+    rebondsAuto[]->{
       ${rebondsResolver}
     }
   }`;
@@ -281,7 +281,7 @@ export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0]{
       ${modules}
     },
 
-    rebondsType->{
+    rebondsAuto[]->{
       ${rebondsResolver}
     }
   }`;
@@ -386,7 +386,7 @@ export const FEUILLETAGE_QUERY = groq`*[_type == "feuilletage" && slug.current =
     ${cardTypes}
   },
   "related": ${randomRessources},
-  rebondsType->{
+  rebondsAuto[]->{
     ${rebondsResolver}
   }
 }`;
@@ -533,7 +533,7 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   "relatedProductsByArtist": ${relatedProductsByArtist},
   "relatedProductsByTag": ${relatedProductsByTag},
   "related": ${relatedByArtists},
-  rebondsType->{
+  rebondsAuto[]->{
     ${rebondsResolver}
   }
 }`;

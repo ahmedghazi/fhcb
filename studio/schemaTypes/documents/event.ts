@@ -3,7 +3,7 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import {BsCalendar2Event} from 'react-icons/bs'
 import slug from '../fields/slug'
 import modulesListExhibitionEvent from '../objects/modules/modulesListExhibitionEvent'
-import rebondsTypeField from '../misc/rebondsTypeField'
+import rebondsAutoField from '../misc/rebondsAutoField'
 
 export default defineType({
   type: 'document',
@@ -133,7 +133,7 @@ export default defineType({
       group: 'editorial',
     }),
 
-    rebondsTypeField,
+    rebondsAutoField,
   ],
 
   preview: {

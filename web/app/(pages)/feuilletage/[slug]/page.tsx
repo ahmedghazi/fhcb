@@ -75,12 +75,15 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       {/* {/* {data.related && <Rebonds input={data.related} />} */}
       {data.rebonds && <Rebonds input={data.rebonds} />}
       {/* {data.related && <Rebonds input={data.related} />} */}
-      {/* <pre>{JSON.stringify(data.rebondsType, null, 2)}</pre> */}
-      <Rebonds
-        input={data.rebondsType?.resolvedItems}
-        title={data.rebondsType?.title || undefined}
-        items={data.rebondsType?.items}
-      />
+      {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
+      {data.rebondsAuto?.map((rebond, i) => (
+        <Rebonds
+          key={i}
+          input={rebond?.resolvedItems}
+          title={rebond?.title || undefined}
+          items={rebond?.items}
+        />
+      ))}
     </div>
   );
 };

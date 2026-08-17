@@ -109,6 +109,8 @@ const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = 
     item._type === "exhibition" && _isCurrentByDates(item.dates || []),
   "exhibition-past": (item) =>
     item._type === "exhibition" && _isPastByDates(item.dates || []),
+  "exhibition-discover-past": (item) =>
+    item._type === "exhibition" && _isPastByDates(item.dates || []),
   "event-related-current-or-futur": (item) =>
     item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),
   "event-futur": (item) => item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),

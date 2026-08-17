@@ -59,12 +59,15 @@ const EventTemplate: NextPage<PageProps> = async ({ params }) => {
       <HeroEvent input={data as unknown as EventExpanded} />
       <ContentModulaire input={data} />
       {/* {data.related && <Rebonds input={data.related} />} */}
-      {/* <pre>{JSON.stringify(data.rebondsType, null, 2)}</pre> */}
-      <Rebonds
-        input={data.rebondsType?.resolvedItems}
-        title={data.rebondsType?.title || undefined}
-        items={data.rebondsType?.items}
-      />
+      {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
+      {data.rebondsAuto?.map((rebond, i) => (
+        <Rebonds
+          key={i}
+          input={rebond?.resolvedItems}
+          title={rebond?.title || undefined}
+          items={rebond?.items}
+        />
+      ))}
     </div>
   );
 };

@@ -59,6 +59,10 @@ export default defineType({
               {title: 'Expo(s) du même artiste', value: 'exhibition-related-by-artist'},
               {title: 'Événement(s) à venir', value: 'event-futur'},
               {title: 'Artiste', value: 'artist'},
+              {
+                title: 'Expo(s) passée(s) à découvrir (prio. même artiste, complété au hasard)',
+                value: 'exhibition-discover-past',
+              },
             ],
           },
         },

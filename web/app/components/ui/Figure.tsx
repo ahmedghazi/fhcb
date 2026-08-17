@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
 import ImagePixelated from "./ImagePixelated";
+import ImageDarkroom from "./ImageDarkRoom";
 
 type Props = {
   asset: any;
@@ -49,6 +50,21 @@ const Figure = ({
         blurDataURL={asset?.metadata?.lqip}
       />
       {/* <ImagePixelated
+        src={urlFor(asset, width)}
+        width={asset?.metadata?.dimensions?.width || width}
+        height={asset?.metadata?.dimensions?.height || width}
+        alt={alt || ""}
+        sizes={sizes}
+        style={{
+          width: "100%",
+          height: "auto",
+          aspectRatio: `${asset?.metadata?.dimensions?.width} / ${asset?.metadata?.dimensions?.height}`,
+        }}
+        // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
+        blurDataURL={asset?.metadata?.lqip}
+      /> */}
+      {/* <ImageDarkroom
+        speed={6}
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}

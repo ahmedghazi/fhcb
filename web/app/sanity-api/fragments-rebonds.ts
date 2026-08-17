@@ -9,9 +9,10 @@ import {
 
 /*****************************************************************************************************
  * Fragments used to resolve a `rebond` document's `items` (see studio/schemaTypes/documents/rebond.ts).
- * Called from inside a `rebondsType->{ ${rebondsResolver} }` projection, so `^.^` is the host document
- * (artist, exhibition, event, product, feuilletage, pageModulaire, ...) — one hop for the `rebondsType->`
- * dereference, one more for the nested `*[]` filter itself. `^.items` is the `rebond` document's own
+ * Called from inside a `rebondsAuto[]->{ ${rebondsResolver} }` projection (each host document has an
+ * array of `rebond` references, rendered as one auto block each — see rebondsAutoField.ts), so `^.^` is
+ * the host document (artist, exhibition, event, product, feuilletage, pageModulaire, ...) — one hop for
+ * the `->` dereference, one more for the nested `*[]` filter itself. `^.items` is the `rebond` document's own
  * `items` array (one hop, since each fragment's `*[]` filter is itself a new scope — bare `items`
  * inside it would wrongly resolve to the *candidate* document's own field, which doesn't exist on
  * product/exhibition/etc. and silently matches nothing). See relatedByArtist / relatedByExhibition in
@@ -142,6 +143,24 @@ export const rebondEvents = `
   }
 `;
 
+// scenario: "exhibition-discover-past" — Block 2 ("À découvrir aussi") for exhibitions: past
+// exhibitions, prioritizing ones sharing an artist with the host, backfilled with others. GROQ has no
+// random() — `isSameArtist` is computed here so the priority split can happen deterministically, and
+// the actual random shuffle-then-cap(2) happens in JS (see _pickDiscoverExhibitions in app/lib/utils.ts),
+// mirroring getRandomArtists' fetch-a-pool-then-shuffle pattern. Capped at 12 candidates so the pool
+// stays small regardless of how many past exhibitions exist.
+export const rebondExhibitionsDiscoverPast = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    "exhibition-discover-past" in ^.items &&
+    count(dates[coalesce(au, du) >= now()]) == 0
+  ] {
+    ${cardRefExhibition},
+    "isSameArtist": count(artists[@._ref in ^.^.artists[]._ref]) > 0
+  } | order(isSameArtist desc, dates[0].du desc) [0...12]
+`;
+
 // scenario: "articles-related" — articles directly linked to the host, not broadened via the host's
 // artist(s), except for a pageModulaire artist page (see rebondBooks above for why).
 export const rebondArticles = `
@@ -169,9 +188,10 @@ export const rebondRessources = `
   }
 `;
 
-// body of a `rebondsType->{ ... }` projection — resolves `items` (the scenario keys picked by
-// the editor on the `rebond` document) into a single array of cards, grouped by document type.
-// Used the same way from any host document type — see rebondsType field usage across the schemas.
+// body of a `rebondsAuto[]->{ ... }` projection — resolves `items` (the scenario keys picked by
+// the editor on each `rebond` document in the host's `rebondsAuto` array) into a single array of
+// cards, grouped by document type. Used the same way from any host document type — see rebondsAuto
+// field usage across the schemas.
 export const rebondsResolver = `
   title,
   items,
@@ -181,6 +201,7 @@ export const rebondsResolver = `
     + ${rebondBooks}
     + ${rebondExhibitions}
     + ${rebondExhibitionsByArtist}
+    + ${rebondExhibitionsDiscoverPast}
     + ${rebondEvents}
     + ${rebondArticles}
     + ${rebondRessources}
