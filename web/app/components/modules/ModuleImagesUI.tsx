@@ -46,7 +46,6 @@ const ModuleImagesUI = ({ input }: Props) => {
   useLayoutEffect(() => {
     if (isMobile) return;
     if (images.length > 4) return;
-    console.log(images.length);
     const mosaic = mosaicRef.current;
     if (!mosaic || !ratios.length) return;
 
@@ -85,7 +84,7 @@ const ModuleImagesUI = ({ input }: Props) => {
           <div
             ref={mosaicRef}
             className={clsx(
-              "images-ui__mosaic flex flex-col gap-gutter md:flex-row",
+              "images-ui__mosaic flex flex-col gap-gutter md:flex-row transition-all",
               active || isMobile ? "opacity-100" : "opacity-0",
             )}>
             {images.map((item: ImageInGridExpanded, i: number) => (
