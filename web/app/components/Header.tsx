@@ -14,6 +14,7 @@ import clsx from "clsx";
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
 import { useScroll } from "../hooks/useScroll";
+import { usePageContext } from "../context/PageContext";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -22,6 +23,7 @@ type Props = {
 const Header = ({ settings }: Props) => {
   const { modalType, dispatchModalType } = useHeader();
   const { scrollDirection } = useScroll();
+  const { color } = usePageContext();
   // const { cartCount, toggleCart } = useCart();
 
   if (!settings) return null;
@@ -33,11 +35,8 @@ const Header = ({ settings }: Props) => {
         modalType && "is-modal-open",
         scrollDirection && `is-${scrollDirection}`,
       )}
-      // onMouseEnter={() => dispatchModalType("base")}
-      // onMouseLeave={() => dispatchModalType(null)}
-    >
+      style={{ backgroundColor: color ? color : "" }}>
       <NavModal settings={settings} />
-
       <div className='container-fluid'>
         <HeaderMobile settings={settings} />
         <HeaderDesktop settings={settings} />

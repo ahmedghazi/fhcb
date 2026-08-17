@@ -75,7 +75,9 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
       {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
 
       {data.rebondsAuto?.map((rebond, i) => {
-        const isDiscoverPast = rebond?.items?.includes("exhibition-discover-past");
+        const isDiscoverPast = rebond?.items?.includes(
+          "exhibition-discover-past",
+        );
         const input = isDiscoverPast
           ? _pickWithPriorityFill(rebond?.resolvedItems, _isSameArtistFlag, 2)
           : rebond?.resolvedItems;

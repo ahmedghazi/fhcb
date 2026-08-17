@@ -97,6 +97,10 @@ main {
   main {
     .template {
       padding-top: var(--header-h);
+      &--exhibition,
+      &--event {
+        padding-top: 0;
+      }
     }
   }
 }

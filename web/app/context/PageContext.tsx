@@ -9,9 +9,17 @@ import React, {
 import { usePathname } from "next/navigation";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 
-const PageContext = createContext({
-  settings: {} as SETTINGS_QUERY_RESULT,
-});
+type ContextProps = {
+  settings: SETTINGS_QUERY_RESULT;
+  color: string;
+  setColor: React.Dispatch<React.SetStateAction<string>>;
+};
+
+// const PageContext = createContext({
+//   settings: {} as SETTINGS_QUERY_RESULT,
+
+// });
+const PageContext = createContext<ContextProps>({} as ContextProps);
 
 interface PageContextProps {
   children: ReactNode;
@@ -21,6 +29,7 @@ interface PageContextProps {
 export const PageContextProvider = (props: PageContextProps) => {
   const { children, settings } = props;
   const pathname = usePathname();
+  const [color, setColor] = useState<string>("");
   // const settings = { pathname };
 
   const _format = () => {
@@ -101,10 +110,13 @@ export const PageContextProvider = (props: PageContextProps) => {
 
   useEffect(() => {
     document.body.dataset.slug = pathname;
+    setColor("");
   }, [pathname]);
 
   return (
-    <PageContext.Provider value={{ settings }}>{children}</PageContext.Provider>
+    <PageContext.Provider value={{ settings, color, setColor }}>
+      {children}
+    </PageContext.Provider>
   );
 };
 

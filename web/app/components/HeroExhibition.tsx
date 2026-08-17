@@ -11,6 +11,7 @@ import {
   artistsToString,
 } from "../lib/utils";
 import CardTags from "./ui/cards/CardTags";
+import { usePageContext } from "../context/PageContext";
 
 type Props = {
   input: ExhibitionExpanded;
@@ -21,7 +22,8 @@ const HeroExhibition = ({ input }: Props) => {
   const artistList = artistsToString(artists);
   const isCurrentByDates = _isCurrentByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
-
+  const { setColor } = usePageContext();
+  setColor((color as any)?.hex || "");
   return (
     <section
       className={clsx(
