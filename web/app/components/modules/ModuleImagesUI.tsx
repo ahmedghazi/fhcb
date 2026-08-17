@@ -45,6 +45,7 @@ const ModuleImagesUI = ({ input }: Props) => {
 
   useLayoutEffect(() => {
     if (isMobile) return;
+    if (images.length > 4) return;
     const mosaic = mosaicRef.current;
     if (!mosaic || !ratios.length) return;
 
