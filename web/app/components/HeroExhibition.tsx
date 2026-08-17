@@ -23,7 +23,10 @@ const HeroExhibition = ({ input }: Props) => {
   const isCurrentByDates = _isCurrentByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
   const { setColor } = usePageContext();
-  setColor((color as any)?.hex || "");
+  setTimeout(() => {
+    setColor((color as any)?.hex || "");
+  }, 250);
+
   return (
     <section
       className={clsx(
