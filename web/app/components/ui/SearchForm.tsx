@@ -37,7 +37,7 @@ type SearchResultItemProps = {
 };
 
 const SearchResultItem = ({ input }: SearchResultItemProps) => {
-  console.log(input._type);
+  // console.log(input._type);
   if (input._type === "pageModulaire") {
     return <CardPageModulaire input={input} size='md' />;
   }
@@ -95,7 +95,6 @@ const SearchForm = ({ settings }: Props) => {
 
   const _handleSearch = async () => {
     const body = { s: term };
-    console.log(body);
     // return;
     setStatus("searching");
     document.body.classList.add("is-fetching");
@@ -105,7 +104,6 @@ const SearchForm = ({ settings }: Props) => {
         body: JSON.stringify(body),
       });
       const data = await res.json();
-      console.log(data);
       // if (setSearchResult)
       setSearchResult(data);
       document.body.classList.remove("is-fetching");

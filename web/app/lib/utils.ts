@@ -93,7 +93,8 @@ const suffixesEn: Record<string, string> = {
   few: "rd",
   other: "th",
 };
-const ordinalEn = (day: number) => `${day}${suffixesEn[prEn.select(day)]}`;
+// const ordinalEn = (day: number) => `${day}${suffixesEn[prEn.select(day)]}`;
+const ordinalEn = (day: number) => `${day}`;
 
 const ordinal = (day: number, locale: string) =>
   locale === "fr" ? ordinalFr(day) : ordinalEn(day);

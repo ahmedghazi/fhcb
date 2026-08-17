@@ -21,6 +21,11 @@ type ArrayOf<T> = Array<
 >;
 
 // Source: schema.json
+export type HrUI = {
+  _type: "hrUI";
+  title?: string;
+};
+
 export type ArtistReference = {
   _ref: string;
   _type: "reference";
@@ -1003,6 +1008,9 @@ export type Conversation = {
     | ({
         _key: string;
       } & VideoUI)
+    | ({
+        _key: string;
+      } & HrUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -1176,6 +1184,9 @@ export type Article = {
     | ({
         _key: string;
       } & VideoUI)
+    | ({
+        _key: string;
+      } & HrUI)
   >;
 };
 
@@ -1439,6 +1450,9 @@ export type PageModulaire = {
     | ({
         _key: string;
       } & VideoUI)
+    | ({
+        _key: string;
+      } & HrUI)
   >;
   rebondsLabel?:
     | "readMore"
@@ -1563,6 +1577,9 @@ export type Artist = {
     | ({
         _key: string;
       } & VideoUI)
+    | ({
+        _key: string;
+      } & HrUI)
   >;
   rebondsAuto?: Array<
     {
@@ -1806,6 +1823,9 @@ export type Product = {
     | ({
         _key: string;
       } & VideoUI)
+    | ({
+        _key: string;
+      } & HrUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -2053,6 +2073,9 @@ export type Programme = {
     | ({
         _key: string;
       } & VideoUI)
+    | ({
+        _key: string;
+      } & HrUI)
   >;
 };
 
@@ -2163,6 +2186,9 @@ export type Feuilletage = {
     | ({
         _key: string;
       } & VideoUI)
+    | ({
+        _key: string;
+      } & HrUI)
   >;
   rebonds?: ArrayOf<
     | PageModulaireReference
@@ -2477,6 +2503,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | HrUI
   | ArtistReference
   | SliderArtistUI
   | BlockquoteUI
@@ -2736,6 +2763,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -3184,6 +3216,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -3639,6 +3676,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -4005,6 +4047,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -4368,6 +4415,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -4765,6 +4817,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -5027,6 +5082,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -5223,6 +5281,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -5398,6 +5459,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -5523,6 +5587,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -5727,6 +5794,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -5989,6 +6059,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -6185,6 +6258,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -6360,6 +6436,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -6485,6 +6564,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -6882,6 +6964,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -7327,6 +7414,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -7782,6 +7874,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -8148,6 +8245,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -8511,6 +8613,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -8908,6 +9015,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -9170,6 +9280,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -9366,6 +9479,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -9541,6 +9657,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -9666,6 +9785,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -9870,6 +9992,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -10132,6 +10257,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -10328,6 +10456,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -10503,6 +10634,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -10628,6 +10762,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -10912,6 +11049,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -11357,6 +11499,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -11812,6 +11959,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -12178,6 +12330,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -12541,6 +12698,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -12938,6 +13100,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -13200,6 +13365,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -13396,6 +13564,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -13571,6 +13742,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -13696,6 +13870,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -13900,6 +14077,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -14162,6 +14342,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -14358,6 +14541,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -14533,6 +14719,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -14658,6 +14847,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -14942,6 +15134,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -15387,6 +15584,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -15842,6 +16044,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -16208,6 +16415,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -16571,6 +16783,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -16968,6 +17185,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -17230,6 +17450,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -17426,6 +17649,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -17601,6 +17827,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -17726,6 +17955,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -17930,6 +18162,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -18192,6 +18427,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -18388,6 +18626,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -18563,6 +18804,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -18688,6 +18932,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -18972,6 +19219,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -19417,6 +19669,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -19872,6 +20129,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -20238,6 +20500,11 @@ export type SETTINGS_QUERY_RESULT = {
                         }
                       | {
                           _key: string;
+                          _type: "hrUI";
+                          title?: string;
+                        }
+                      | {
+                          _key: string;
                           _type: "imagesUI";
                           title?: string;
                           gridSize?: number;
@@ -20601,6 +20868,11 @@ export type SETTINGS_QUERY_RESULT = {
                             | ProductReference
                           >;
                           cta?: Cta;
+                        }
+                      | {
+                          _key: string;
+                          _type: "hrUI";
+                          title?: string;
                         }
                       | {
                           _key: string;
@@ -20998,6 +21270,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -21260,6 +21535,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -21456,6 +21734,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -21631,6 +21912,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -21756,6 +22040,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -21960,6 +22247,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -22222,6 +22512,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -22418,6 +22711,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -22593,6 +22889,9 @@ export type SETTINGS_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -22718,6 +23017,9 @@ export type SETTINGS_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -23471,6 +23773,9 @@ export type HOME_QUERY_RESULT = {
                 _type: "gridCardUI";
               }
             | {
+                _type: "hrUI";
+              }
+            | {
                 _type: "imagesUI";
               }
             | {
@@ -24011,6 +24316,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -24115,6 +24423,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -24454,6 +24765,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -24632,6 +24946,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -24820,6 +25137,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -24934,6 +25254,11 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
           } | null;
           external?: LinkExternal;
         } | null;
+      }
+    | {
+        _key: string;
+        _type: "hrUI";
+        title?: string;
       }
     | {
         _key: string;
@@ -26740,6 +27065,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 _type: "gridCardUI";
               }
             | {
+                _type: "hrUI";
+              }
+            | {
                 _type: "imagesUI";
               }
             | {
@@ -27256,6 +27584,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -27360,6 +27691,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -27699,6 +28033,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -27877,6 +28214,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -28063,6 +28403,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -28258,6 +28601,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -28522,6 +28868,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -28718,6 +29067,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -28893,6 +29245,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -29018,6 +29373,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -29222,6 +29580,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -29484,6 +29845,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -29680,6 +30044,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -29855,6 +30222,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -29980,6 +30350,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -30193,6 +30566,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -30455,6 +30831,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -30651,6 +31030,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -30826,6 +31208,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -30951,6 +31336,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -31155,6 +31543,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -31417,6 +31808,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -31613,6 +32007,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -31788,6 +32185,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -31913,6 +32313,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -32322,6 +32725,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -32584,6 +32990,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -32780,6 +33189,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -32955,6 +33367,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -33080,6 +33495,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -33284,6 +33702,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -33546,6 +33967,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -33742,6 +34166,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -33917,6 +34344,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -34042,6 +34472,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -34411,6 +34844,9 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             }
           | {
               _type: "gridCardUI";
+            }
+          | {
+              _type: "hrUI";
             }
           | {
               _type: "imagesUI";
@@ -35069,6 +35505,9 @@ export type ARTIST_QUERY_RESULT = {
     | ({
         _key: string;
       } & GridCardUI)
+    | ({
+        _key: string;
+      } & HrUI)
     | ({
         _key: string;
       } & ImagesUI)
@@ -35832,6 +36271,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -36094,6 +36536,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -36290,6 +36735,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -36465,6 +36913,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -36590,6 +37041,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -36794,6 +37248,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -37056,6 +37513,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -37252,6 +37712,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -37427,6 +37890,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -37552,6 +38018,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -37961,6 +38430,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -38223,6 +38695,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -38419,6 +38894,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -38594,6 +39072,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -38719,6 +39200,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -38923,6 +39407,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -39185,6 +39672,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -39381,6 +39871,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -39556,6 +40049,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -39681,6 +40177,9 @@ export type EXPHIBITION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -40081,6 +40580,9 @@ export type EXPHIBITION_QUERY_RESULT = {
             }
           | {
               _type: "gridCardUI";
+            }
+          | {
+              _type: "hrUI";
             }
           | {
               _type: "imagesUI";
@@ -40887,6 +41389,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -41149,6 +41654,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -41345,6 +41853,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -41520,6 +42031,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -41645,6 +42159,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -41849,6 +42366,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -42111,6 +42631,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -42307,6 +42830,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -42482,6 +43008,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -42607,6 +43136,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -43016,6 +43548,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -43278,6 +43813,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -43474,6 +44012,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -43649,6 +44190,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -43774,6 +44318,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -43978,6 +44525,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -44240,6 +44790,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -44436,6 +44989,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -44611,6 +45167,9 @@ export type EVENT_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -44736,6 +45295,9 @@ export type EVENT_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -45676,6 +46238,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -45780,6 +46345,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -46119,6 +46687,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -46297,6 +46868,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -46485,6 +47059,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -46599,6 +47176,11 @@ export type PROGRAMME_QUERY_RESULT = {
           } | null;
           external?: LinkExternal;
         } | null;
+      }
+    | {
+        _key: string;
+        _type: "hrUI";
+        title?: string;
       }
     | {
         _key: string;
@@ -48405,6 +48987,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 _type: "gridCardUI";
               }
             | {
+                _type: "hrUI";
+              }
+            | {
                 _type: "imagesUI";
               }
             | {
@@ -48921,6 +49506,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -49025,6 +49613,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -49364,6 +49955,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -49542,6 +50136,9 @@ export type PROGRAMME_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -49728,6 +50325,9 @@ export type PROGRAMME_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -49923,6 +50523,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -50187,6 +50790,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -50383,6 +50989,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -50558,6 +51167,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -50683,6 +51295,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -50887,6 +51502,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -51149,6 +51767,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -51345,6 +51966,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -51520,6 +52144,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -51645,6 +52272,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -51858,6 +52488,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -52120,6 +52753,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -52316,6 +52952,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -52491,6 +53130,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -52616,6 +53258,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -52820,6 +53465,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -53082,6 +53730,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -53278,6 +53929,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -53453,6 +54107,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -53578,6 +54235,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -53987,6 +54647,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -54249,6 +54912,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -54445,6 +55111,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -54620,6 +55289,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -54745,6 +55417,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -54949,6 +55624,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -55211,6 +55889,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -55407,6 +56088,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -55582,6 +56266,9 @@ export type PROGRAMME_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -55707,6 +56394,9 @@ export type PROGRAMME_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -55941,6 +56631,9 @@ export type ALLPAGE_MODULAIRE_QUERY_RESULT = Array<{
       } & GridCardUI)
     | ({
         _key: string;
+      } & HrUI)
+    | ({
+        _key: string;
       } & ImagesUI)
     | ({
         _key: string;
@@ -56158,6 +56851,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -56420,6 +57116,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -56616,6 +57315,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -56791,6 +57493,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -56916,6 +57621,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -57120,6 +57828,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -57382,6 +58093,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -57578,6 +58292,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -57753,6 +58470,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -57878,6 +58598,9 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -58679,6 +59402,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -58783,6 +59509,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -59122,6 +59851,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -59300,6 +60032,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -59488,6 +60223,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -59602,6 +60340,11 @@ export type FEUILLETAGE_QUERY_RESULT = {
           } | null;
           external?: LinkExternal;
         } | null;
+      }
+    | {
+        _key: string;
+        _type: "hrUI";
+        title?: string;
       }
     | {
         _key: string;
@@ -61408,6 +62151,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 _type: "gridCardUI";
               }
             | {
+                _type: "hrUI";
+              }
+            | {
                 _type: "imagesUI";
               }
             | {
@@ -61924,6 +62670,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -62028,6 +62777,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -62367,6 +63119,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -62545,6 +63300,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -62731,6 +63489,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -62926,6 +63687,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -63190,6 +63954,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -63386,6 +64153,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -63561,6 +64331,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -63686,6 +64459,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -63890,6 +64666,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -64152,6 +64931,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -64348,6 +65130,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -64523,6 +65308,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -64648,6 +65436,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -64861,6 +65652,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -65123,6 +65917,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -65319,6 +66116,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -65494,6 +66294,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -65619,6 +66422,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -65823,6 +66629,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -66085,6 +66894,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -66281,6 +67093,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -66456,6 +67271,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -66581,6 +67399,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -66990,6 +67811,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -67252,6 +68076,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -67448,6 +68275,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -67623,6 +68453,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -67748,6 +68581,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -67952,6 +68788,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -68214,6 +69053,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -68410,6 +69252,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -68585,6 +69430,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -68710,6 +69558,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -69173,6 +70024,9 @@ export type FEUILLETAGE_QUERY_RESULT = {
             }
           | {
               _type: "gridCardUI";
+            }
+          | {
+              _type: "hrUI";
             }
           | {
               _type: "imagesUI";
@@ -70056,6 +70910,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -70318,6 +71175,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -70514,6 +71374,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -70689,6 +71552,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -70814,6 +71680,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -71018,6 +71887,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -71280,6 +72152,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -71476,6 +72351,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -71651,6 +72529,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -71776,6 +72657,9 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -72777,6 +73661,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -72881,6 +73768,9 @@ export type CONVERSATION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -73220,6 +74110,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -73398,6 +74291,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -73586,6 +74482,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -73700,6 +74599,11 @@ export type CONVERSATION_QUERY_RESULT = {
           } | null;
           external?: LinkExternal;
         } | null;
+      }
+    | {
+        _key: string;
+        _type: "hrUI";
+        title?: string;
       }
     | {
         _key: string;
@@ -75506,6 +76410,9 @@ export type CONVERSATION_QUERY_RESULT = {
                 _type: "gridCardUI";
               }
             | {
+                _type: "hrUI";
+              }
+            | {
                 _type: "imagesUI";
               }
             | {
@@ -76022,6 +76929,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -76126,6 +77036,9 @@ export type CONVERSATION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -76465,6 +77378,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -76643,6 +77559,9 @@ export type CONVERSATION_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -76829,6 +77748,9 @@ export type CONVERSATION_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -77024,6 +77946,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -77288,6 +78213,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -77484,6 +78412,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -77659,6 +78590,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -77784,6 +78718,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -77988,6 +78925,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -78250,6 +79190,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -78446,6 +79389,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -78621,6 +79567,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -78746,6 +79695,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -78959,6 +79911,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -79221,6 +80176,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -79417,6 +80375,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -79592,6 +80553,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -79717,6 +80681,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -79921,6 +80888,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -80183,6 +81153,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -80379,6 +81352,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -80554,6 +81530,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -80679,6 +81658,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -81088,6 +82070,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -81350,6 +82335,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -81546,6 +82534,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -81721,6 +82712,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -81846,6 +82840,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -82050,6 +83047,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -82312,6 +83312,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -82508,6 +83511,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -82683,6 +83689,9 @@ export type CONVERSATION_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -82808,6 +83817,9 @@ export type CONVERSATION_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -83271,6 +84283,9 @@ export type CONVERSATION_QUERY_RESULT = {
             }
           | {
               _type: "gridCardUI";
+            }
+          | {
+              _type: "hrUI";
             }
           | {
               _type: "imagesUI";
@@ -83999,6 +85014,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -84103,6 +85121,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -84442,6 +85463,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -84620,6 +85644,9 @@ export type ARTICLE_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -84808,6 +85835,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -84922,6 +85952,11 @@ export type ARTICLE_QUERY_RESULT = {
           } | null;
           external?: LinkExternal;
         } | null;
+      }
+    | {
+        _key: string;
+        _type: "hrUI";
+        title?: string;
       }
     | {
         _key: string;
@@ -86728,6 +87763,9 @@ export type ARTICLE_QUERY_RESULT = {
                 _type: "gridCardUI";
               }
             | {
+                _type: "hrUI";
+              }
+            | {
                 _type: "imagesUI";
               }
             | {
@@ -87244,6 +88282,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -87348,6 +88389,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -87687,6 +88731,9 @@ export type ARTICLE_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -87865,6 +88912,9 @@ export type ARTICLE_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -88051,6 +89101,9 @@ export type ARTICLE_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -88246,6 +89299,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -88510,6 +89566,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -88706,6 +89765,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -88881,6 +89943,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -89006,6 +90071,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -89210,6 +90278,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -89472,6 +90543,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -89668,6 +90742,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -89843,6 +90920,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -89968,6 +91048,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -90181,6 +91264,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -90443,6 +91529,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -90639,6 +91728,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -90814,6 +91906,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -90939,6 +92034,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -91143,6 +92241,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -91405,6 +92506,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -91601,6 +92705,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -91776,6 +92883,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -91901,6 +93011,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -92310,6 +93423,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -92572,6 +93688,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -92768,6 +93887,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -92943,6 +94065,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -93068,6 +94193,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -93272,6 +94400,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -93534,6 +94665,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -93730,6 +94864,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -93905,6 +95042,9 @@ export type ARTICLE_QUERY_RESULT = {
                                 } & GridCardUI)
                               | ({
                                   _key: string;
+                                } & HrUI)
+                              | ({
+                                  _key: string;
                                 } & ImagesUI)
                               | ({
                                   _key: string;
@@ -94030,6 +95170,9 @@ export type ARTICLE_QUERY_RESULT = {
                               | ({
                                   _key: string;
                                 } & GridCardUI)
+                              | ({
+                                  _key: string;
+                                } & HrUI)
                               | ({
                                   _key: string;
                                 } & ImagesUI)
@@ -94574,6 +95717,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -94678,6 +95824,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -95017,6 +96166,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -95195,6 +96347,9 @@ export type LIBRARY_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -95381,6 +96536,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -95761,6 +96919,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -95865,6 +97026,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -96204,6 +97368,9 @@ export type LIBRARY_QUERY_RESULT = {
                   } & GridCardUI)
                 | ({
                     _key: string;
+                  } & HrUI)
+                | ({
+                    _key: string;
                   } & ImagesUI)
                 | ({
                     _key: string;
@@ -96382,6 +97549,9 @@ export type LIBRARY_QUERY_RESULT = {
                   }
                 | {
                     _type: "gridCardUI";
+                  }
+                | {
+                    _type: "hrUI";
                   }
                 | {
                     _type: "imagesUI";
@@ -96568,6 +97738,9 @@ export type LIBRARY_QUERY_RESULT = {
                 | ({
                     _key: string;
                   } & GridCardUI)
+                | ({
+                    _key: string;
+                  } & HrUI)
                 | ({
                     _key: string;
                   } & ImagesUI)
@@ -96787,6 +97960,9 @@ export type PRODUCT_QUERY_RESULT = {
         } & GridCardUI)
       | ({
           _key: string;
+        } & HrUI)
+      | ({
+          _key: string;
         } & ImagesUI)
       | ({
           _key: string;
@@ -96933,6 +98109,9 @@ export type PRODUCT_QUERY_RESULT = {
     | ({
         _key: string;
       } & GridCardUI)
+    | ({
+        _key: string;
+      } & HrUI)
     | ({
         _key: string;
       } & ImagesUI)

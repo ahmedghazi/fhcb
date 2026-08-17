@@ -22,4 +22,5 @@ export default [
   {type: 'textSidebarUI'},
   {type: 'textUI'},
   {type: 'videoUI'},
+  {type: 'hrUI'},
 ]

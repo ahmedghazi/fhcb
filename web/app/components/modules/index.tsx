@@ -2,7 +2,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { ModulesList } from "@/app/sanity-api/types/extra-types";
-import "./index.scss";
 
 const ModuleTextUI = dynamic(() => import("./ModuleTextUI"));
 const ModuleImagesUI = dynamic(() => import("./ModuleImagesUI"));
@@ -39,6 +38,9 @@ const ModuleRessourcesUI = dynamic(() => import("./ModuleRessourcesUI"));
 const ModuleFormUI = dynamic(() => import("./ModuleFormUI"));
 const ModuleBlockquoteUI = dynamic(() => import("./ModuleBlockquoteUI"));
 const ModuleSliderArtistUI = dynamic(() => import("./ModuleSliderArtistUI"));
+const ModuleHrUI = dynamic(() => import("./ModuleHrUI"));
+
+import "./index.scss";
 
 const Modules = ({ modules }: ModulesList) => {
   const _renderModules = () => {
@@ -117,6 +119,8 @@ const Modules = ({ modules }: ModulesList) => {
           return (
             <ModuleSliderArtistUI key={module._key} input={module as any} />
           );
+        case "hrUI":
+          return <ModuleHrUI key={module._key} />;
         default:
           return null;
       }

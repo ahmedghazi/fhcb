@@ -62,11 +62,7 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       className='template template--article'
       data-template='article'
       data-slug={data.slug?.current || ""}>
-      <PageHeader
-        // tag={`FEUILLETAGE #${data.index}`}
-        h1={data.title?.fr || data.title?.en || ""}
-        // subTitle={data.subTitle}
-      />
+      <PageHeader h1={data.title} />
       {/* <pre>{JSON.stringify(data.related, null, 2)}</pre> */}
       <ContentModulaire input={data} />
 

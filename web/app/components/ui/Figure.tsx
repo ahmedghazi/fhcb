@@ -78,11 +78,12 @@ const Figure = ({
         // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
         blurDataURL={asset?.metadata?.lqip}
       /> */}
-      {caption && (
+      {(caption || author || copyright) && (
         <figcaption>
           <span className='c-caption caption'>{caption}</span>
           {author && <span className='c-caption'>, {author}</span>}
-          {copyright && <span className='c-credits'> | © {copyright}</span>}
+          {author && copyright && <span className='c-credits'> | </span>}
+          {copyright && <span className='c-credits'> © {copyright}</span>}
         </figcaption>
       )}
     </figure>

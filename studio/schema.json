@@ -1,5 +1,28 @@
 [
   {
+    "name": "hrUI",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "hrUI"
+          }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "type": "type",
     "name": "artist.reference",
     "value": {
@@ -5344,6 +5367,21 @@
                   "type": "inline",
                   "name": "videoUI"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "hrUI"
+                }
               }
             ]
           }
@@ -6250,6 +6288,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "videoUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "hrUI"
                 }
               }
             ]
@@ -7664,6 +7717,21 @@
                   "type": "inline",
                   "name": "videoUI"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "hrUI"
+                }
               }
             ]
           }
@@ -8296,6 +8364,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "videoUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "hrUI"
                 }
               }
             ]
@@ -9608,6 +9691,21 @@
                   "type": "inline",
                   "name": "videoUI"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "hrUI"
+                }
               }
             ]
           }
@@ -10890,6 +10988,21 @@
                   "type": "inline",
                   "name": "videoUI"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "hrUI"
+                }
               }
             ]
           }
@@ -11467,6 +11580,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "videoUI"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "hrUI"
                 }
               }
             ]

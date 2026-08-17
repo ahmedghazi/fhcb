@@ -95,7 +95,7 @@ export default defineType({
       type: 'array',
       of: modulesList,
       group: 'editorial',
-      // hidden: true,
+      hidden: true,
     }),
 
     rebondsAutoField,

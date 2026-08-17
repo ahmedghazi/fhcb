@@ -22,7 +22,6 @@ import {seoSchema} from './features/seo'
 import localeString from './locale/localeString'
 import localeText from './locale/localeText'
 import localeBlockContent from './locale/localeBlockContent'
-
 import blockContent from './objects/blockContent'
 import blockContentCta from './objects/blockContentCta'
 import linkExternal from './objects/linkExternal'
@@ -81,7 +80,7 @@ import sidebarGenerique from './objects/sidebarGenerique'
 import productVariant from './objects/productVariant'
 import serieThematique from './documents/serieThematique'
 import conversation from './documents/conversation'
-import blockContentCta from './objects/blockContentCta'
+import hrUI from './objects/modules/hrUI'
 
 export const schemaTypes = [
   settings,
@@ -162,5 +161,6 @@ export const schemaTypes = [
   formUI,
   blockquoteUI,
   sliderArtistUI,
+  hrUI,
 ]
 export default schemaTypes

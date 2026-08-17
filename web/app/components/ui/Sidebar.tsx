@@ -47,12 +47,20 @@ const Sidebar = ({ input }: Props) => {
           <ul>
             {coProduction.map((item, i) => (
               <li key={i}>
-                <div className='c-body--tight'>{_localizeField(item.text)}</div>
-                {item._type === "partenaire" &&
-                  item.imageCover &&
-                  item.imageCover.asset && (
-                    <Figure asset={item.imageCover.asset} sizes='96px' />
-                  )}
+                {item && (
+                  <>
+                    {item.text && (
+                      <div className='c-body--tight'>
+                        {_localizeField(item.text)}
+                      </div>
+                    )}
+                    {item._type === "partenaire" &&
+                      item.imageCover &&
+                      item.imageCover.asset && (
+                        <Figure asset={item.imageCover.asset} sizes='96px' />
+                      )}
+                  </>
+                )}
               </li>
             ))}
           </ul>
