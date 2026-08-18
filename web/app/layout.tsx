@@ -18,7 +18,6 @@ import CartModal from "./components/ui/CartModalLazy";
 import Gridder from "./components/ui/Gridder";
 import BandeauContextuel from "./components/ui/BandeauContextuel";
 import NavigationProgressBar from "./components/ui/NavigationProgressBar";
-import GoogleAnalytics from "./components/ui/GoogleAnalytics";
 import CookieWrapper from "./components/ui/CookieWrapper";
 // const sourceSans = Source_Sans_3({
 //   subsets: ["latin"],
@@ -98,8 +97,8 @@ export default async function RootLayout({
         <NavigationProgressBar />
         <div id='page'>
           <Gridder />
-          <CookieWrapper>
-            <LocaleContextProvider>
+          <LocaleContextProvider>
+            <CookieWrapper settings={settings}>
               <PageContextProvider settings={settings}>
                 <CartContextProvider>
                   <ViewTransitions>
@@ -107,12 +106,12 @@ export default async function RootLayout({
                       <Header settings={settings} />
                     </HeaderContextProvider>
                     {/* {bandeauContextuel && (
-                    <BandeauContextuel
-                      cta={bandeauContextuel.cta}
-                      text={bandeauContextuel.text}
-                      dateExpiration={bandeauContextuel.dateExpiration}
-                    />
-                  )} */}
+                      <BandeauContextuel
+                        cta={bandeauContextuel.cta}
+                        text={bandeauContextuel.text}
+                        dateExpiration={bandeauContextuel.dateExpiration}
+                      />
+                    )} */}
                     <main>{children}</main>
                     <Footer settings={settings} />
                     <CartModal />
@@ -121,10 +120,8 @@ export default async function RootLayout({
                   {isEnabled && <VisualEditing zIndex={1000} />}
                 </CartContextProvider>
               </PageContextProvider>
-            </LocaleContextProvider>
-          </CookieWrapper>
-          {/* <GoogleAnalytics ga_id='G-0VK473DSNZ' /> */}
-          {/* UA-52484966-1 */}
+            </CookieWrapper>
+          </LocaleContextProvider>
         </div>
       </body>
     </html>

@@ -1,5 +1,7 @@
+"use client";
 import MuxPlayer from "@mux/mux-player-react";
 import React, { useEffect, useRef, useState } from "react";
+import { useConsent } from "react-hook-consent";
 import Controls from "./controls";
 import "./_index.scss";
 type Props = {
@@ -25,6 +27,7 @@ const MuxVideoPlayer = ({
   const [muted, setMuted] = useState<boolean>(true);
   const [hovered, setHovered] = useState<boolean>(false);
   const playerRef = useRef<React.ComponentRef<typeof MuxPlayer>>(null);
+  const { hasConsent } = useConsent();
 
   useEffect(() => {
     setReady(true);
@@ -57,6 +60,7 @@ const MuxVideoPlayer = ({
             ref={playerRef}
             playbackId={playbackId}
             metadata={title ? { video_title: title } : undefined}
+            disableTracking={!hasConsent("mux-data")}
             autoPlay={hoverPlay ? false : "muted"}
             muted={muted}
             paused={hoverPlay ? !hovered : paused}

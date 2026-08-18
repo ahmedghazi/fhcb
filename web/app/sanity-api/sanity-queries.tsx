@@ -17,6 +17,7 @@ import {
   relatedProductsByTag,
   relatedRessourcesByArtists,
   randomRessources,
+  linkInternal,
 } from "./fragments";
 import { rebondsResolver } from "./fragments-rebonds";
 import { _shuffle } from "../lib/utils";
@@ -95,6 +96,13 @@ export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
   baseline{
     ...
   },
+  messageCookies,
+  urlLegals{
+    ${linkInternal}
+  },
+  urlPrivacy{
+    ${linkInternal}
+  }
 }`;
 
 export async function getSettings(): Promise<SETTINGS_QUERY_RESULT> {

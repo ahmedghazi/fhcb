@@ -89,6 +89,23 @@ const i18n = {
     rebondFuturEvent: "Événements à venir",
     rebondArticleRelated: "Articles liés",
     rebondRessourcesRelated: "Ressources liées",
+    mentionsLegales: "Mentions légales",
+    politiqueConfidentialite: "Politique de confidentialité",
+    manageCookies: "Gérer les cookies",
+    cookieServiceAnalyticsName: "Mesure d'audience",
+    cookieServiceAnalyticsDescription:
+      "Google Analytics nous aide à comprendre comment le site est utilisé, de manière anonyme, afin de l'améliorer.",
+    cookieServiceMuxName: "Statistiques vidéo",
+    cookieServiceMuxDescription:
+      "Mux collecte des données de lecture anonymisées sur nos vidéos afin d'en mesurer la qualité et l'audience.",
+    cookieBannerMessage:
+      "Nous utilisons des cookies pour analyser et améliorer ce site pour vous. Vous avez le contrôle sur ce que vous souhaitez activer.",
+    cookiePersonalize: "Personnaliser",
+    cookieDeclineShort: "Non",
+    cookieApproveAll: "OK, tout accepter",
+    cookieDecline: "Refuser",
+    cookieApprove: "OK",
+    cookieApproveAllModal: "Tout accepter",
   },
   en: {
     default: false,
@@ -174,6 +191,23 @@ const i18n = {
     rebondFuturEvent: "Upcoming events",
     rebondArticleRelated: "Related articles",
     rebondRessourcesRelated: "Related resources",
+    mentionsLegales: "Legal notice",
+    politiqueConfidentialite: "Privacy policy",
+    manageCookies: "Manage cookies",
+    cookieServiceAnalyticsName: "Audience measurement",
+    cookieServiceAnalyticsDescription:
+      "Google Analytics helps us understand how the site is used, anonymously, so we can improve it.",
+    cookieServiceMuxName: "Video statistics",
+    cookieServiceMuxDescription:
+      "Mux collects anonymised playback data on our videos to measure quality and audience.",
+    cookieBannerMessage:
+      "We use cookies to analyse and improve this site for you. You are in control of what you want to enable.",
+    cookiePersonalize: "Customise",
+    cookieDeclineShort: "No",
+    cookieApproveAll: "OK, accept all",
+    cookieDecline: "Decline",
+    cookieApprove: "OK",
+    cookieApproveAllModal: "Accept all",
   },
 };
 

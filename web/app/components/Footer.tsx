@@ -11,6 +11,7 @@ import LogoFHCB from "./LogoFHCB";
 import { PortableText } from "@portabletext/react";
 import website from "../config/website";
 import Image from "next/image";
+import { useConsent } from "react-hook-consent";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -18,6 +19,7 @@ type Props = {
 
 const Footer = ({ settings }: Props) => {
   const [logoTypeWidth, setLogoTypeWidth] = React.useState(0);
+  const { toggleDetails } = useConsent();
   const _onResize = () => {
     const logoType = document.querySelector(".logo-type");
     const logoTypeBounding = logoType?.getBoundingClientRect();
@@ -99,6 +101,31 @@ const Footer = ({ settings }: Props) => {
                         [],
                       )
                       .slice(0, -1)}
+                    {settings.urlLegals?.link && (
+                      <>
+                        {"  "}
+                        <Link href={_linkResolver(settings.urlLegals.link)}>
+                          {_localizeField(settings.urlLegals.label) ||
+                            _localizeText("mentionsLegales")}
+                        </Link>
+                      </>
+                    )}
+                    {settings.urlPrivacy?.link && (
+                      <>
+                        {"  "}
+                        <Link href={_linkResolver(settings.urlPrivacy.link)}>
+                          {_localizeField(settings.urlPrivacy.label) ||
+                            _localizeText("politiqueConfidentialite")}
+                        </Link>
+                      </>
+                    )}
+                    {"  "}
+                    <button
+                      type='button'
+                      className='footer__cookie-settings'
+                      onClick={toggleDetails}>
+                      {_localizeText("manageCookies")}
+                    </button>
                   </div>
                   <ul className='nav-actions flex gap-2xs items-center'>
                     <li>

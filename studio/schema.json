@@ -7109,6 +7109,30 @@
         },
         "optional": true
       },
+      "messageCookies": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "blockContent"
+        },
+        "optional": true
+      },
+      "urlLegals": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "linkInternal"
+        },
+        "optional": true
+      },
+      "urlPrivacy": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "linkInternal"
+        },
+        "optional": true
+      },
       "bandeauContextuel": {
         "type": "objectAttribute",
         "value": {

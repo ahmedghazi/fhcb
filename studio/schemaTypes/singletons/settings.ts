@@ -182,6 +182,24 @@ export default defineType({
       type: 'localeText',
       group: 'footer',
     }),
+    defineField({
+      name: 'messageCookies',
+      title: 'Message Cookies',
+      type: 'blockContent',
+      group: 'footer',
+    }),
+    defineField({
+      name: 'urlLegals',
+      title: 'URL page Mentions légales',
+      type: 'linkInternal',
+      group: 'footer',
+    }),
+    defineField({
+      name: 'urlPrivacy',
+      title: 'URL page Politique de confidentialité',
+      type: 'linkInternal',
+      group: 'footer',
+    }),
 
     defineField({
       name: 'bandeauContextuel',
