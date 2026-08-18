@@ -6,7 +6,7 @@ import Nav from "./Nav";
 import LocalesSwitcher from "./ui/LocaleSwitcher";
 import SearchToggle from "./ui/SearchToggle";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
-import BtnCart from "./ui/btns/BtnCart";
+import BtnCart from "./shop/BtnCart";
 import website from "../config/website";
 
 type Props = {

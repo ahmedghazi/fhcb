@@ -1,0 +1,21 @@
+.embed-video {
+  .react-player__preview {
+    .react-player__shadow {
+      background: var(--color-white) !important;
+      .react-player__play-icon {
+        border-color: transparent transparent transparent var(--color-accent) !important;
+      }
+    }
+  }
+
+  // &:hover {
+  //   .react-player__preview {
+  //     .react-player__shadow {
+  //       background: var(--color-accent) !important;
+  //       .react-player__play-icon {
+  //         border-color: transparent transparent transparent var(--color-white) !important;
+  //       }
+  //     }
+  //   }
+  // }
+}

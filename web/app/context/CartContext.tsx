@@ -41,6 +41,7 @@ const CartContext = createContext<ContextProps>({} as ContextProps);
 export const CartContextProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartLineItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     try {
@@ -48,16 +49,22 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
       if (stored) setItems(JSON.parse(stored));
     } catch {
       // ignore malformed storage
+    } finally {
+      setHydrated(true);
     }
   }, []);
 
   useEffect(() => {
+    // Skip until the initial read above has run, otherwise this fires on
+    // mount with the still-empty initial state and wipes localStorage
+    // before the hydrated value ever gets applied.
+    if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {
       // ignore storage errors (e.g. private browsing)
     }
-  }, [items]);
+  }, [items, hydrated]);
 
   const addToCart = useCallback(
     (item: Omit<CartLineItem, "quantity">, quantity = 1) => {

@@ -2,10 +2,7 @@
 import React from "react";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
-import {
-  getYouTubeNoCookieUrl,
-  getYouTubeThumbnailUrl,
-} from "@/app/lib/utils";
+import { getYouTubeNoCookieUrl, getYouTubeThumbnailUrl } from "@/app/lib/utils";
 import { useInView } from "@/app/hooks/useInView";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
@@ -22,7 +19,7 @@ const EmbedVideo = ({ embedUrl, placeholderUrl }: Props) => {
   const light = placeholderUrl || getYouTubeThumbnailUrl(embedUrl) || true;
 
   return (
-    <div className='embed'>
+    <div className='embed-video'>
       <div
         ref={ref}
         style={{ aspectRatio: "16 / 9" }}

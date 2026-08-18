@@ -1,0 +1,50 @@
+@use "../variables";
+
+.template--order-confirmation {
+  &.is-failure .page-header h1 {
+    color: var(--color-orange);
+  }
+
+  .order-recap {
+    &__title {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    &__list {
+      border-top: var(--border);
+      padding-top: var(--spacing-xs);
+    }
+
+    &__totals {
+      margin-top: var(--spacing-md);
+    }
+
+    &__grand-total {
+      font-weight: 500;
+      border-top: var(--border);
+      padding-top: var(--spacing-xs);
+    }
+
+    &__cta {
+      margin-top: var(--spacing-lg);
+      display: inline-block;
+    }
+  }
+
+  .cart-modal__qty--static {
+    border: none;
+    padding: 0;
+  }
+
+  .cart-modal__item {
+    border-bottom: var(--border);
+    padding-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  @media all and (max-width: variables.$md) {
+    .module__aside {
+      margin-bottom: var(--spacing-lg);
+    }
+  }
+}

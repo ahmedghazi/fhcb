@@ -15,7 +15,7 @@ import { urlFor } from "../sanity-api/sanity-utils";
 import useCart from "../context/CartContext";
 import Figure from "./ui/Figure";
 import Rebonds from "./Rebonds";
-import BtnAddToCart from "./ui/btns/BtnAddToCart";
+import BtnAddToCart from "./shop/BtnAddToCart";
 import { ProductExpanded } from "../sanity-api/types/sanity-expanded.types";
 import { PortableText } from "@portabletext/react";
 import portableTextComponents from "../sanity-api/portableTextComponents";

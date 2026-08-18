@@ -20,6 +20,7 @@
 @use "components/ui/cart";
 @use "components/ui/bandeau-contextuel";
 @use "components/ui/cookies";
+@use "components/ui/embed-video";
 
 @use "templates/exhibition";
 @use "templates/event";
@@ -28,3 +29,4 @@
 @use "templates/product";
 @use "templates/artist";
 @use "templates/ressources";
+@use "templates/order-confirmation";

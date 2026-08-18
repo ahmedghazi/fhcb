@@ -30,7 +30,7 @@ import {
   _parseJsonStringArray,
 } from "@/app/sanity-api/utils";
 import { CardAction, CardBaseProps } from "../CardBase";
-import BtnAddToCart from "../../btns/BtnAddToCart";
+import BtnAddToCart from "../../../shop/BtnAddToCart";
 import CardTags from "../CardTags";
 import FHCBDates from "../../FHCBDates";
 import Embed from "../../Embed";

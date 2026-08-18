@@ -1,64 +1,23 @@
 "use client";
 import React from "react";
 import clsx from "clsx";
-import Image from "next/image";
-import useCart from "../context/CartContext";
-import { _localizeText } from "../sanity-api/utils";
-import Icon from "./ui/Icon";
+import useCart from "../../context/CartContext";
+import { _localizeText } from "../../sanity-api/utils";
+import Icon from "../ui/Icon";
+import CartProductItem from "./CartProductItem";
+import { useRouter } from "next/navigation";
 
 const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
 
-const CartProductItem = ({ line }: { line: any }) => {
-  const { removeFromCart, updateQuantity } = useCart();
-  return (
-    <div className='cart-modal__item'>
-      {line.image && (
-        <div className='cart-modal__image'>
-          <Image src={line.image} alt={line.title} width={80} height={80} />
-        </div>
-      )}
-      <div className='cart-modal__infos'>
-        <div className='cart-modal__item__header'>
-          <div className='cart-modal__title'>{line.title}</div>
-          {line.artists && <div className='suptitle'>{line.artists}</div>}
-          {line.variant && <div className='suptitle'>{line.variant}</div>}
-        </div>
-        <div className='cart-modal__item__footer'>
-          <div className='cart-modal__price'>{line.price}€</div>
-          <div className='flex gap-sm '>
-            <button
-              className='cart-modal__delete c-tag'
-              onClick={() => removeFromCart(line.id)}>
-              {_localizeText("delete")}
-            </button>
-            <div className='cart-modal__qty c-tag'>
-              <button
-                onClick={() => updateQuantity(line.id, line.quantity - 1)}
-                disabled={line.quantity <= 1}>
-                —
-              </button>
-              <span>{line.quantity}</span>
-              <button
-                onClick={() => updateQuantity(line.id, line.quantity + 1)}>
-                +
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* <button
-        className='cart-modal__remove'
-        onClick={() => removeFromCart(line.id)}
-        aria-label={_localizeText("remove")}>
-        ×
-      </button> */}
-    </div>
-  );
-};
 const CartModal = () => {
+  const router = useRouter();
   const { items, isOpen, closeCart, cartTotal } = useCart();
 
   const handleCheckout = () => {
+    // http://localhost:3000/shopify/confirmation?status=success
+    router.push("http://localhost:3000/shopify/confirmation?status=success");
+    return;
+
     if (!items.length || !SHOPIFY_DOMAIN) return;
     const cartPath = items
       .map((line) => `${line.id}:${line.quantity}`)
