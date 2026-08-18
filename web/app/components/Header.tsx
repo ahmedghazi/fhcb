@@ -25,7 +25,6 @@ const Header = ({ settings }: Props) => {
   const { scrollDirection } = useScroll();
   const { color } = usePageContext();
   // const { cartCount, toggleCart } = useCart();
-  console.log(color);
   if (!settings) return null;
 
   return (

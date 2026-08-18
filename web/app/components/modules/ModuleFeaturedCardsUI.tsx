@@ -9,7 +9,6 @@ type Props = {
 };
 
 const ModuleFeaturedCardsUI = ({ input }: Props) => {
-  console.log(input);
   const items = input.items as unknown as ExhibitionExpanded[];
   const video = input.cardVideoMux;
   const [primary, secondary] = items ?? [];

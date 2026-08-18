@@ -27,6 +27,8 @@ const Figure = ({
 }: Props) => {
   const isLandscape =
     asset?.metadata?.dimensions?.width > asset?.metadata?.dimensions?.height;
+  const src = urlFor(asset, width);
+  if (!src) return null;
   return (
     <figure
       className={clsx(
@@ -34,39 +36,8 @@ const Figure = ({
         isLandscape && "figure--is-landscape",
         !isLandscape && "figure--is-portrait",
       )}>
-      {/* <Image
-        src={urlFor(asset, width)}
-        width={asset?.metadata?.dimensions?.width || width}
-        height={asset?.metadata?.dimensions?.height || width}
-        alt={alt || ""}
-        sizes={sizes}
-        style={{
-          width: "100%",
-          height: "auto",
-          aspectRatio: `${asset?.metadata?.dimensions?.width} / ${asset?.metadata?.dimensions?.height}`,
-          imageRendering: "pixelated",
-        }}
-        placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
-        blurDataURL={asset?.metadata?.lqip}
-      /> */}
-      {/* <ImagePixelated
-        src={urlFor(asset, width)}
-        width={asset?.metadata?.dimensions?.width || width}
-        height={asset?.metadata?.dimensions?.height || width}
-        alt={alt || ""}
-        sizes={sizes}
-        style={{
-          width: "100%",
-          height: "auto",
-          aspectRatio: `${asset?.metadata?.dimensions?.width} / ${asset?.metadata?.dimensions?.height}`,
-        }}
-        // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
-        blurDataURL={asset?.metadata?.lqip}
-      /> */}
       <ImageDarkroom
-        // speed={10}
         duration={500}
-        // revealFrom='light'
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
@@ -93,3 +64,37 @@ const Figure = ({
 };
 
 export default Figure;
+
+{
+  /* <Image
+        src={urlFor(asset, width)}
+        width={asset?.metadata?.dimensions?.width || width}
+        height={asset?.metadata?.dimensions?.height || width}
+        alt={alt || ""}
+        sizes={sizes}
+        style={{
+          width: "100%",
+          height: "auto",
+          aspectRatio: `${asset?.metadata?.dimensions?.width} / ${asset?.metadata?.dimensions?.height}`,
+          imageRendering: "pixelated",
+        }}
+        placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
+        blurDataURL={asset?.metadata?.lqip}
+      /> */
+}
+{
+  /* <ImagePixelated
+        src={urlFor(asset, width)}
+        width={asset?.metadata?.dimensions?.width || width}
+        height={asset?.metadata?.dimensions?.height || width}
+        alt={alt || ""}
+        sizes={sizes}
+        style={{
+          width: "100%",
+          height: "auto",
+          aspectRatio: `${asset?.metadata?.dimensions?.width} / ${asset?.metadata?.dimensions?.height}`,
+        }}
+        // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
+        blurDataURL={asset?.metadata?.lqip}
+      /> */
+}

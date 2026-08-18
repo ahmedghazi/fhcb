@@ -21,14 +21,18 @@
     }
     .product-slider__slide {
       padding: var(--spacing-md);
-      width: 100%;
+      // width: 100%;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
       min-height: calc(var(--main-h) - var(--spacing-lg)) !important;
       figure div {
-        overflow: unset !important;
+        // overflow: unset !important;
+        // background-color: red !important;
       }
       img {
-        // max-height: var(--main-h);
-        height: calc(var(--main-h) - var(--spacing-lg)) !important;
+        max-height: calc(var(--main-h) - var(--spacing-xl));
+        // height: calc(var(--main-h) - var(--spacing-lg)) !important;
         object-fit: contain;
       }
     }

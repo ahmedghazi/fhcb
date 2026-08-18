@@ -7,7 +7,9 @@ export function urlFor(source: any, maxWidth: number = 2000): any {
   if (!source) {
     return "/placeholder.png";
   }
-  // console.log(source);
+  const sourceId = source?._id || source?.ref;
+  console.log(sourceId);
+  if (!sourceId) return "/placeholder.png";
   // return source.assetId;
   return imageBuilder
     ?.image(source._id)

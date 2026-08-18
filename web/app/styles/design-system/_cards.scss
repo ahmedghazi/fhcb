@@ -8,7 +8,15 @@
   container-type: inline-size;
   display: flex;
   flex-direction: column;
-
+  &:hover .btn {
+    background-color: transparent;
+    &::before {
+      opacity: 1;
+    }
+  }
+  &--video-mux:hover .btn {
+    background-color: white;
+  }
   .card__inner {
     position: relative;
     display: flex;

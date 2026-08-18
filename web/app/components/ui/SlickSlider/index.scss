@@ -1,7 +1,11 @@
 .slick-slider-container {
   --arrow-size: 2.75rem;
   position: relative;
-
+  &[data-issingle="true"] {
+    .slick-slider__controls {
+      display: none;
+    }
+  }
   .slick-slider {
     padding-bottom: calc(var(--spacing-md) + var(--arrow-size));
 

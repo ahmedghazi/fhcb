@@ -163,6 +163,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
             <div className='slider md:col-span-3 '>
               <SlickSlider
                 controlsFloating
+                isSingle={images.length === 0}
                 settings={{
                   infinite: true,
                   adaptiveHeight: true,

@@ -10,6 +10,7 @@ type Props = {
   perView?: number | "auto";
   controlsFloating?: boolean;
   settings?: Partial<Settings>;
+  isSingle?: boolean;
 };
 
 const SlickSlider = ({
@@ -17,6 +18,7 @@ const SlickSlider = ({
   perView = "auto",
   controlsFloating = false,
   settings: settingsOverride = {},
+  isSingle = false,
 }: Props) => {
   const sliderRef = useRef<Slider>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -63,7 +65,10 @@ const SlickSlider = ({
   };
 
   return (
-    <div className='slick-slider-container' ref={containerRef}>
+    <div
+      className='slick-slider-container'
+      ref={containerRef}
+      data-isSingle={isSingle}>
       <Slider ref={sliderRef} {...settings}>
         {children}
       </Slider>
