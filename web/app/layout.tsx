@@ -10,7 +10,6 @@ import { draftMode } from "next/headers";
 import VisualEditing from "./components/ui/VisualEditingLazy";
 import localFont from "next/font/local";
 import clsx from "clsx";
-import LenisScrollProvider from "./components/ui/LenisScrollProvider";
 import { ViewTransitions } from "next-view-transitions";
 import Cursor from "./components/ui/Cursor";
 import { HeaderContextProvider } from "./context/HeaderContext";
@@ -19,6 +18,8 @@ import CartModal from "./components/ui/CartModalLazy";
 import Gridder from "./components/ui/Gridder";
 import BandeauContextuel from "./components/ui/BandeauContextuel";
 import NavigationProgressBar from "./components/ui/NavigationProgressBar";
+import GoogleAnalytics from "./components/ui/GoogleAnalytics";
+import CookieWrapper from "./components/ui/CookieWrapper";
 // const sourceSans = Source_Sans_3({
 //   subsets: ["latin"],
 // });
@@ -95,34 +96,36 @@ export default async function RootLayout({
     <html lang='fr' className={clsx("is-loading", PPRightGrotesk.className)}>
       <body className={clsx("is-loading")} data-theme='theme-fhcb'>
         <NavigationProgressBar />
-        {/* <LenisScrollProvider> */}
         <div id='page'>
           <Gridder />
-          <LocaleContextProvider>
-            <PageContextProvider settings={settings}>
-              <CartContextProvider>
-                <ViewTransitions>
-                  <HeaderContextProvider>
-                    <Header settings={settings} />
-                  </HeaderContextProvider>
-                  {/* {bandeauContextuel && (
+          <CookieWrapper>
+            <LocaleContextProvider>
+              <PageContextProvider settings={settings}>
+                <CartContextProvider>
+                  <ViewTransitions>
+                    <HeaderContextProvider>
+                      <Header settings={settings} />
+                    </HeaderContextProvider>
+                    {/* {bandeauContextuel && (
                     <BandeauContextuel
                       cta={bandeauContextuel.cta}
                       text={bandeauContextuel.text}
                       dateExpiration={bandeauContextuel.dateExpiration}
                     />
                   )} */}
-                  <main>{children}</main>
-                  <Footer settings={settings} />
-                  <CartModal />
-                </ViewTransitions>
-                {/* <Cursor color='black' size={20} /> */}
-                {isEnabled && <VisualEditing zIndex={1000} />}
-              </CartContextProvider>
-            </PageContextProvider>
-          </LocaleContextProvider>
+                    <main>{children}</main>
+                    <Footer settings={settings} />
+                    <CartModal />
+                  </ViewTransitions>
+                  {/* <Cursor color='black' size={20} /> */}
+                  {isEnabled && <VisualEditing zIndex={1000} />}
+                </CartContextProvider>
+              </PageContextProvider>
+            </LocaleContextProvider>
+          </CookieWrapper>
+          {/* <GoogleAnalytics ga_id='G-0VK473DSNZ' /> */}
+          {/* UA-52484966-1 */}
         </div>
-        {/* </LenisScrollProvider> */}
       </body>
     </html>
   );

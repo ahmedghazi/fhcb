@@ -12,6 +12,8 @@ export default defineField({
   fields: [
     defineField({
       name: 'title',
+      title: 'Titre',
+      description: 'interne',
       type: 'string',
     }),
 
@@ -19,7 +21,8 @@ export default defineField({
       name: 'gridSize',
       type: 'number',
       title: 'Taille de la grille',
-      description: "Nombre d'éléments par ligne",
+      description:
+        "Nombre d'éléments par ligne, si ce champs est vide, les images se callent sur la même hauteur.",
     }),
     defineField({
       name: 'items',
@@ -34,7 +37,7 @@ export default defineField({
 
   preview: {
     select: {
-      image: 'items.0',
+      image: 'items.0.image',
       title: 'title',
     },
     prepare(selection) {

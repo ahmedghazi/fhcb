@@ -1,47 +1,47 @@
-"use client";
-import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
-import { subscribe, unsubscribe } from "pubsub-js";
-import { useRef, ReactNode, useEffect } from "react";
+// "use client";
+// import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
+// import { subscribe, unsubscribe } from "pubsub-js";
+// import { useRef, ReactNode, useEffect } from "react";
 
-interface LenisScrollProviderProps {
-  children: ReactNode;
-}
+// interface LenisScrollProviderProps {
+//   children: ReactNode;
+// }
 
-const LenisScrollProvider = ({ children }: LenisScrollProviderProps) => {
-  const lenisRef = useRef<null>(null);
+// const LenisScrollProvider = ({ children }: LenisScrollProviderProps) => {
+//   const lenisRef = useRef<null>(null);
 
-  const lenis = useLenis((_lenis) => {});
+//   const lenis = useLenis((_lenis) => {});
 
-  useEffect(() => {
-    const token = subscribe("TOGGLE_SCROLL", (_e: any, on: boolean) => {
-      console.log(_e, on);
-      if (on) {
-        lenis?.start();
-        // document.body.style.overflow = "auto";
-        document.body.classList.remove("no-scroll");
-      } else {
-        lenis?.stop();
-        // document.body.style.overflow = "hidden";
-        document.body.classList.add("no-scroll");
-      }
-    });
-    return () => {
-      unsubscribe(token);
-    };
-  }, [lenis]);
+//   useEffect(() => {
+//     const token = subscribe("TOGGLE_SCROLL", (_e: any, on: boolean) => {
+//       console.log(_e, on);
+//       if (on) {
+//         lenis?.start();
+//         // document.body.style.overflow = "auto";
+//         document.body.classList.remove("no-scroll");
+//       } else {
+//         lenis?.stop();
+//         // document.body.style.overflow = "hidden";
+//         document.body.classList.add("no-scroll");
+//       }
+//     });
+//     return () => {
+//       unsubscribe(token);
+//     };
+//   }, [lenis]);
 
-  return (
-    <ReactLenis
-      ref={lenisRef}
-      root
-      options={{
-        lerp: 0.1,
-        duration: 1.5,
-        smoothWheel: true,
-      }}>
-      <div>{children}</div>
-    </ReactLenis>
-  );
-};
+//   return (
+//     <ReactLenis
+//       ref={lenisRef}
+//       root
+//       options={{
+//         lerp: 0.1,
+//         duration: 1.5,
+//         smoothWheel: true,
+//       }}>
+//       <div>{children}</div>
+//     </ReactLenis>
+//   );
+// };
 
-export default LenisScrollProvider;
+// export default LenisScrollProvider;

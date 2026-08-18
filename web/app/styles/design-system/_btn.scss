@@ -1,7 +1,9 @@
 @use "../variables";
 
 button.btn,
-a.btn {
+a.btn,
+.rhc-banner__content button,
+.rhc-settings__content__footer button {
   border-radius: var(--radius-sm);
   padding: 0em 1em;
   height: 2.31em;

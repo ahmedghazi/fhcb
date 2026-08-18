@@ -17,7 +17,7 @@ type Props = {
 const GUTTER = 20; // même valeur que ta variable CSS gap-gutter
 
 const ModuleImagesUI = ({ input }: Props) => {
-  const { title, items } = input;
+  const { title, items, gridSize } = input;
   const { isMobile } = useDeviceDetect();
   const mosaicRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<boolean>(false);
@@ -44,8 +44,11 @@ const ModuleImagesUI = ({ input }: Props) => {
   );
 
   useLayoutEffect(() => {
-    if (isMobile) return;
-    if (images.length > 4) return;
+    console.log(images.length);
+    if (isMobile || images.length > 4) {
+      setActive(true);
+      return;
+    }
     const mosaic = mosaicRef.current;
     if (!mosaic || !ratios.length) return;
 
@@ -84,7 +87,8 @@ const ModuleImagesUI = ({ input }: Props) => {
           <div
             ref={mosaicRef}
             className={clsx(
-              "images-ui__mosaic flex flex-col gap-gutter md:flex-row transition-all",
+              "images-ui__mosaic flex flex-col gap-gutter md:flex-row flex-wrap transition-opacity",
+              gridSize && `grid md:grid-cols-${gridSize}`,
               active || isMobile ? "opacity-100" : "opacity-0",
             )}>
             {images.map((item: ImageInGridExpanded, i: number) => (

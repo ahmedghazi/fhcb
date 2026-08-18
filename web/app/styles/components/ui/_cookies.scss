@@ -1,0 +1,218 @@
+@use "../../variables";
+
+.rhc-banner {
+  position: fixed;
+  z-index: 999;
+  bottom: var(--spacing-md);
+  right: var(--spacing-lg);
+  background-color: var(--color-accent);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius);
+  .rhc-banner__content {
+    // display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-xs);
+    @media all and (max-width: variables.$md) {
+      display: flex;
+      flex-direction: column;
+    }
+    .rhc-banner__content__message {
+      flex: 2;
+      grid-column: span 2 / span 2;
+      grid-row: span 3 / span 3;
+      max-width: 24rem;
+    }
+  }
+  button {
+    width: auto;
+    display: inline-block;
+    &.rhc-banner__content__primary {
+      background-color: black;
+      color: var(--color-accent);
+    }
+  }
+
+  @media all and (max-width: variables.$md) {
+    right: var(--spacing-sm);
+    left: var(--spacing-sm);
+  }
+}
+.rhc-settings__content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 999;
+  background-color: var(--color-accent);
+  border-radius: var(--radius);
+  @media all and (max-width: variables.$md) {
+    width: var(--gridder-3_3);
+  }
+  h1 {
+    font-family: var(--font-primary-b);
+    margin-bottom: 1em;
+  }
+
+  .rhc-settings__content__header {
+    padding: var(--spacing-sm);
+  }
+  .rhc-settings__content__main {
+    padding: 0 var(--spacing-sm) var(--spacing-sm);
+  }
+  .rhc-settings__content__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    @media all and (max-width: variables.$md) {
+      flex-direction: column;
+    }
+    button {
+      // padding: 1em;
+      // width: 33.333333%;
+      // border: 1px solid;
+      // &:first-child {
+      //   border-bottom-left-radius: var(--radius);
+      // }
+      // &:last-child {
+      //   border-bottom-right-radius: var(--radius);
+      // }
+      &.rhc-settings__content__footer__primary {
+        background-color: black;
+        color: var(--color-accent);
+      }
+    }
+  }
+}
+.rhc-settings__content__main__item {
+  display: flex;
+  gap: 2em;
+  flex-direction: row-reverse;
+  .rhc-settings__content__main__item__title {
+    display: flex;
+    gap: 1em;
+    label {
+      white-space: nowrap;
+    }
+  }
+}
+
+.react-toggle {
+  touch-action: pan-x;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-toggle-screenreader-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.react-toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transition: opacity 0.25s;
+}
+
+.react-toggle-track {
+  width: 50px;
+  height: 24px;
+  padding: 0;
+  border-radius: 30px;
+  background-color: #4d4d4d;
+  transition: all 0.2s ease;
+}
+
+.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #000;
+}
+
+.react-toggle--checked .react-toggle-track {
+  background-color: #19ab27;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #128d15;
+}
+
+.react-toggle-track-check {
+  position: absolute;
+  width: 14px;
+  height: 10px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 0;
+  left: 8px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-track-check {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.react-toggle-track-x {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 0;
+  right: 10px;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+  visibility: hidden;
+}
+
+.react-toggle--checked .react-toggle-track-x {
+  opacity: 0;
+}
+
+.react-toggle-thumb {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #4d4d4d;
+  border-radius: 50%;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-thumb {
+  left: 27px;
+  border-color: #19ab27;
+}
+
+.react-toggle--focus .react-toggle-thumb {
+  box-shadow: 0 0 2px 3px #0099e0;
+}
+
+.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {
+  box-shadow: 0 0 5px 5px #0099e0;
+}
