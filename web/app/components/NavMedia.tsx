@@ -16,7 +16,7 @@ const NavMedia = ({ input }: Props) => {
         {input.images.map((img, i) => (
           <div key={i} className='imageCover'>
             <Figure
-              width={300}
+              width={1000}
               asset={img.asset}
               caption={_localizeField(img.asset?.title) || ""}
               alt={_localizeField(img.asset?.altText)}
