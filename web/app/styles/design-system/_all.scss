@@ -1,5 +1,17 @@
 @use "../variables";
 
+.img-resized {
+  figure,
+  div,
+  img {
+    height: 100%;
+    max-height: var(--h-app) !important;
+  }
+  img {
+    // max-height: var(--h-app) !important;
+    // width: auto !important;
+  }
+}
 .page-header {
   text-align: center;
   padding: var(--spacing-md) 0 var(--spacing-lg);

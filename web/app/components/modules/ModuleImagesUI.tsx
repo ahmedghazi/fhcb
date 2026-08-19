@@ -78,6 +78,8 @@ const ModuleImagesUI = ({ input }: Props) => {
     };
   }, [ratios]);
 
+  // const colSize = gridSize ? `w-1/${gridSize}` : "";
+
   return (
     <section className='module module--images-ui'>
       <div className='container-fluid'>
@@ -87,14 +89,18 @@ const ModuleImagesUI = ({ input }: Props) => {
           <div
             ref={mosaicRef}
             className={clsx(
-              "images-ui__mosaic flex flex-col gap-gutter md:flex-row flex-wrap transition-opacity",
-              gridSize && `grid md:grid-cols-${gridSize}`,
+              "images-ui__mosaic flex gap-gutter flex-col  md:flex-row  justify-center flex-wrap transition-opacity",
+              // gridSize && `grid md:grid-cols-${gridSize}`,
               active || isMobile ? "opacity-100" : "opacity-0",
             )}>
             {images.map((item: ImageInGridExpanded, i: number) => (
               <div
                 key={i}
-                className='images-ui__item w-full md:w-auto'
+                className={clsx(
+                  "images-ui__item w-full md:w-auto",
+                  height && "img-resized",
+                  // colSize,
+                )}
                 style={
                   height
                     ? {
