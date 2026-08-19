@@ -19,7 +19,7 @@ const CardEvent = ({ input, size = "md" }: Props) => {
     .join(" ");
   const props = eventToCard(input, size);
   const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
-
+  console.log(style);
   return (
     <div
       ref={ref}

@@ -315,23 +315,27 @@ const CardBase = ({
         {!isDetached &&
           (description || infoNode || actions.length > 0 || actionsNode) && (
             <div className='card__footer'>
-              {description && (
-                <div className='card__description c-body-xs'>{description}</div>
-              )}
-              {infoNode && (
-                <div className='card__info c-body-xs'>{infoNode}</div>
-              )}
-              {(actions.length > 0 || actionsNode) && (
-                <ActionButtons actions={actions} actionsNode={actionsNode} />
-              )}
+              <div className='card__footer-content'>
+                {description && (
+                  <div className='card__description c-body-xs'>{description}</div>
+                )}
+                {infoNode && (
+                  <div className='card__info c-body-xs'>{infoNode}</div>
+                )}
+                {(actions.length > 0 || actionsNode) && (
+                  <ActionButtons actions={actions} actionsNode={actionsNode} />
+                )}
+              </div>
             </div>
           )}
         {isDetached && (description || infoNode) && (
           <div className='card__footer'>
-            {description && (
-              <div className='card__description c-body-xs'>{description}</div>
-            )}
-            {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
+            <div className='card__footer-content'>
+              {description && (
+                <div className='card__description c-body-xs'>{description}</div>
+              )}
+              {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
+            </div>
           </div>
         )}
       </div>

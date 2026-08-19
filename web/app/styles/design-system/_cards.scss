@@ -362,6 +362,7 @@
         overflow: unset;
         .card__footer {
           display: flex;
+          flex-direction: column;
         }
       }
       .card__footer {
@@ -421,10 +422,10 @@
     }
   }
   &--page-modulaire {
-    h2 {
+    .card__inner--col h2 {
       text-align: center;
     }
-    .card__header {
+    .card__inner--col .card__header {
       text-align: center;
       .card__sup-title {
         font-weight: 800;
@@ -481,10 +482,15 @@
     }
   }
 
+  .card__inner--col .card__footer {
+    display: initial;
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+  }
   &__footer {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
     .card__btns {
       position: relative;
       z-index: 2;

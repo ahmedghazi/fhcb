@@ -6,16 +6,15 @@ export function useFooterMaxHeight<T extends HTMLElement = HTMLDivElement>() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const footerInfo = ref.current?.querySelector(
-        ".card__footer .card__info",
-      );
-      if (footerInfo) {
-        const footerInfoBounding = footerInfo.getBoundingClientRect();
+      const footerContent = ref.current?.querySelector(".card__footer-content");
+      console.log(footerContent);
+      if (footerContent) {
+        const footerContentBounding = footerContent.getBoundingClientRect();
         setStyle(
           (prev) =>
             ({
               ...prev,
-              "--footer-max-height": `${footerInfoBounding.height + 30 + 12}px`,
+              "--footer-max-height": `${footerContentBounding.height + 30 + 12}px`,
             }) as React.CSSProperties,
         );
       }

@@ -337,9 +337,12 @@ export function pageModulaireToCard(
   contentCount?: number,
 ): CardBaseProps {
   const { imageCover, tags } = input;
+  const isLandscape =
+    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return {
     _type: input._type,
-    layout: "col",
+    layout: isLandscape ? "col" : "row",
     colorVar: "var(--color-white)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     // videoUrl: (input as any).previewVideo?.asset?.url,
