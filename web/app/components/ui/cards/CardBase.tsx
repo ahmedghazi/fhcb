@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import clsx from "clsx";
 import { Link } from "next-view-transitions";
 import Figure from "../Figure";
@@ -171,24 +171,39 @@ const CardBase = ({
   imageSizes = "(max-width: 767px) 100vw, 25vw",
 }: CardBaseProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Tracked on this outer wrapper rather than inside mediaSlot itself: the
+  // full-card `CardLinkOverlay` (position: absolute, z-index: 1) sits on top
+  // of `.card__media` and wins hit-testing, so a mediaSlot component's own
+  // mouseenter/mouseleave never fire. This element is an ancestor of that
+  // overlay, so it still receives them — forward the state down instead.
+  const [mediaHovered, setMediaHovered] = useState(false);
 
   const handleMouseEnter = () => {
     if (videoBehavior === "hover" && videoRef.current) videoRef.current.play();
+    setMediaHovered(true);
   };
   const handleMouseLeave = () => {
     if (videoBehavior === "hover" && videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
+    setMediaHovered(false);
   };
 
   const hasVideo = Boolean(videoUrl);
   const isDetached = footerPlacement === "detached";
   const hasMedia = images.length > 0 || hasVideo || Boolean(customMediaSlot);
 
+  const hoverableMediaSlot =
+    customMediaSlot && React.isValidElement(customMediaSlot)
+      ? React.cloneElement(customMediaSlot as React.ReactElement<any>, {
+          hovered: mediaHovered,
+        })
+      : customMediaSlot;
+
   const mediaBlock = (
     <div className='card__media'>
-      {customMediaSlot ??
+      {hoverableMediaSlot ??
         (hasVideo && videoBehavior === "inline" ? (
           <div className='card__video-wrap'>
             <video

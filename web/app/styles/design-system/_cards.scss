@@ -142,11 +142,18 @@
       .grid {
         gap: var(--spacing-xs);
 
-        figure {
-          @media all and (min-width: variables.$md) {
+        @media all and (min-width: variables.$md) {
+          .card__media {
             display: flex;
             justify-content: flex-end;
-
+            flex-direction: row;
+          }
+          figure {
+            // display: flex;
+            // justify-content: flex-end;
+            &.figure--is-portrait {
+              width: var(--gridder-4_12);
+            }
             img {
               width: var(--gridder-7_12) !important;
               min-height: unset;
