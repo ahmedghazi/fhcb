@@ -22,7 +22,6 @@ const CookieWrapper = ({ children, settings }: Props) => {
   const privacyHref = settings?.urlPrivacy?.link
     ? _linkResolver(settings.urlPrivacy.link)
     : null;
-  console.log(privacyHref);
   const tAnalyticsName = _localizeText("cookieServiceAnalyticsName");
   const tAnalyticsDescription = _localizeText(
     "cookieServiceAnalyticsDescription",

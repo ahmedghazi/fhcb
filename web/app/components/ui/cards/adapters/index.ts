@@ -310,9 +310,11 @@ export function articleToCard(input: ArticleExpanded): CardBaseProps {
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  console.log(isLandscape);
   return {
     _type: _type,
-    layout: "col",
+    // layout: "col",
+    layout: isLandscape ? "col" : "row",
     colorVar: "var(--color-article)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),

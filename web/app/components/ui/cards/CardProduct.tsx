@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { productToCard } from "./adapters";
 import CardBase, { CardFooter } from "./CardBase";
-import { useEffect, useRef, useState } from "react";
+import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ProductExpanded;
@@ -10,22 +10,7 @@ type Props = {
 };
 
 const CardProduct = ({ input, size = "md" }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [style, setStyle] = useState<React.CSSProperties | null>(null);
-  useEffect(() => {
-    if (!ref) return;
-    setTimeout(() => {
-      const footerInfo = ref.current?.querySelector(
-        ".card__footer .card__info",
-      );
-      if (footerInfo) {
-        const footerInfoBounding = footerInfo.getBoundingClientRect();
-        setStyle({
-          "--footer-max-height": `${footerInfoBounding.height + 30 + 12}px`,
-        } as React.CSSProperties);
-      }
-    }, 500);
-  }, []);
+  const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
 
   const props = productToCard(input, size);
   return (

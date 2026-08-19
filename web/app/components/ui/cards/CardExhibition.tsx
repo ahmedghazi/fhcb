@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import {
   _isCurrentByDates,
@@ -10,6 +10,7 @@ import {
 } from "@/app/lib/utils";
 import { exhibitionToCard } from "./adapters";
 import CardBase, { CardFooter } from "./CardBase";
+import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ExhibitionExpanded;
@@ -29,49 +30,20 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
   const isCurrent = _isCurrentByDates(dates || []);
   const isFutur = _isFuturByDates(dates || []);
 
-  // let style = {};
-
-  const ref = useRef<HTMLDivElement>(null);
-  const [style, setStyle] = useState<React.CSSProperties | null>(null);
-
-  // if (isCurrent) {
-  // style = {
-  //   backgroundColor: (color as any)?.hex || "var(--color-bleu)",
-  // };
-
-  // }
+  const { ref, style: footerStyle } = useFooterMaxHeight<HTMLDivElement>();
+  const [colorStyle, setColorStyle] = useState<React.CSSProperties | null>(
+    null,
+  );
 
   useEffect(() => {
     if (isCurrent) {
-      setStyle(
-        (prev) =>
-          ({
-            ...prev,
-            backgroundColor: (color as any)?.hex || "var(--color-bleu)",
-          }) as React.CSSProperties,
-      );
+      setColorStyle({
+        backgroundColor: (color as any)?.hex || "var(--color-bleu)",
+      } as React.CSSProperties);
     }
-  }, [isCurrent]);
+  }, [isCurrent, color]);
 
-  useEffect(() => {
-    if (!ref) return;
-    setTimeout(() => {
-      const footerInfo = ref.current?.querySelector(
-        ".card__footer .card__info",
-      );
-      if (footerInfo) {
-        const footerInfoBounding = footerInfo.getBoundingClientRect();
-
-        setStyle(
-          (prev) =>
-            ({
-              ...prev,
-              "--footer-max-height": `${footerInfoBounding.height + 30 + 12}px`,
-            }) as React.CSSProperties,
-        );
-      }
-    }, 500);
-  }, []);
+  const style = { ...footerStyle, ...colorStyle } as React.CSSProperties;
   const props = exhibitionToCard(input, size, isCurrent);
 
   return (

@@ -29,12 +29,14 @@ const Figure = ({
     asset?.metadata?.dimensions?.width > asset?.metadata?.dimensions?.height;
   const src = urlFor(asset, width);
   if (!src) return null;
+  const withCaption = caption || author || copyright;
   return (
     <figure
       className={clsx(
         "figure",
         isLandscape && "figure--is-landscape",
         !isLandscape && "figure--is-portrait",
+        withCaption && "figure--with-caption",
       )}>
       <ImageDarkroom
         duration={500}
@@ -51,7 +53,7 @@ const Figure = ({
         // placeholder={asset?.metadata?.lqip ? "blur" : "empty"}
         blurDataURL={asset?.metadata?.lqip}
       />
-      {(caption || author || copyright) && (
+      {withCaption && (
         <figcaption>
           <span className='c-caption caption'>{caption}</span>
           {author && <span className='c-caption'>, {author}</span>}

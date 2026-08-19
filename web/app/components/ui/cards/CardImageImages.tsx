@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { imageImagesToCard } from "./adapters";
 import CardBase from "./CardBase";
+import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ImageImagesExpanded;
@@ -11,9 +12,16 @@ type Props = {
 
 const CardImageImages = ({ input, size = "md" }: Props) => {
   const props = imageImagesToCard(input);
+  const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
   return (
-    <div className={clsx("card card--image-images", `card--${size}`)}>
-      <CardBase {...props} />
+    <div
+      ref={ref}
+      className={clsx(
+        "card card--image-images",
+        `card--${size}`,
+        "card--footer-hover",
+      )}>
+      <CardBase {...props} style={style ?? undefined} />
     </div>
   );
 };
