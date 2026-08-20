@@ -8,7 +8,7 @@ import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ArticleExpanded;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
 };
 
 const CardArticle = ({ input, size = "md" }: Props) => {

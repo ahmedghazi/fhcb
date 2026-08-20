@@ -307,7 +307,7 @@ export function artistToCard(
 
 export function articleToCard(
   input: ArticleExpanded,
-  size: "sm" | "md",
+  size: "sm" | "md" | "lg",
 ): CardBaseProps {
   const { _type, title, subTitle, imageCover, tags } = input;
   const isLandscape =
