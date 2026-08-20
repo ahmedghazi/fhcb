@@ -5,11 +5,37 @@
   div,
   img {
     height: 100%;
-    max-height: var(--h-app) !important;
+    max-height: var(--max-img-h) !important;
   }
   img {
     // max-height: var(--h-app) !important;
     // width: auto !important;
+  }
+}
+
+.hero .hero__figure {
+  // display: flex;
+  // justify-content: flex-end;
+
+  .figure {
+    width: 100%;
+    &--is-landscape {
+      div,
+      img {
+        width: 100% !important;
+      }
+    }
+  }
+  div {
+    width: auto !important;
+  }
+  div,
+  img {
+    max-height: var(--max-img-h) !important;
+  }
+  figure,
+  div {
+    display: inline-block;
   }
 }
 .page-header {

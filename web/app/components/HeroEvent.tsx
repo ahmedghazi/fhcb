@@ -27,7 +27,7 @@ const HeroEvent = ({ input }: Props) => {
   return (
     <section
       className={clsx(
-        "hero-event bg-beige",
+        "hero hero-event bg-beige",
         // isCurrentOrFuturByDates && "hero-event--is-current",
         isPast && "hero-event--is-past",
         isVisiteGuidee && "bg-jaune",

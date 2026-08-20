@@ -30,14 +30,15 @@ const HeroExhibition = ({ input }: Props) => {
   return (
     <section
       className={clsx(
-        "hero-exhibition bg-mauve-",
+        "hero hero-exhibition bg-mauve-",
         isCurrentByDates && "hero-exhibition--is-current",
         isPast && "hero-exhibition--is-past",
       )}
       style={{
-        backgroundColor: !isPast
-          ? (color as any)?.hex || "var(--color-mauve)"
-          : "var(--color-mauve)",
+        // backgroundColor: !isPast
+        //   ? (color as any)?.hex || "var(--color-mauve)"
+        //   : "var(--color-mauve)",
+        backgroundColor: (color as any)?.hex || "var(--color-mauve)",
       }}>
       <div className='container-fluid'>
         <div className='grid md:grid-cols-2 md:grid-rows-2 gap-gutter'>

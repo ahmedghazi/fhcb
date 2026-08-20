@@ -45,7 +45,7 @@ export default function ImageDarkroom({
         overflow: "hidden",
         width: "100%",
         aspectRatio: width && height ? `${width} / ${height}` : undefined,
-        backgroundColor: "#f5f2ec",
+        backgroundColor: "rgba(245, 245, 245, 1)",
         // backgroundImage: blurDataURL ? `url(${blurDataURL})` : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
