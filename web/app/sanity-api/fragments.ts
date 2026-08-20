@@ -154,6 +154,7 @@ export const linkInternalWithImages = `
       _type == "listExhibitionsUI" => {
         "items": *[
           _type == "exhibition"
+          && !(_id in path("drafts.**"))
           && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
           && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
         ] | order(dates[0].du asc) {
@@ -165,6 +166,7 @@ export const linkInternalWithImages = `
       _type == "listExhibitionsPastUI" => {
         "items": *[
           _type == "exhibition"
+          && !(_id in path("drafts.**"))
           && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
           && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
         ] | order(dates[0].du asc) {
@@ -177,6 +179,7 @@ export const linkInternalWithImages = `
       _type == "listEventsUI" => {
         "items": *[
           _type == "event"
+          && !(_id in path("drafts.**"))
           && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
           && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
         ] | order(dates[0].du asc) {
@@ -380,6 +383,7 @@ export const sliderArtistUI = `
     },
     "items": *[
       _id != ^._id &&
+      !(_id in path("drafts.**")) &&
       (
         (
           _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&
@@ -529,7 +533,7 @@ export const listFeuilletageUI = `
       ${filterList},
       ${filterCheckbox}
     },
-    "items": *[_type == "feuilletage"] | order(index asc) {
+    "items": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(index asc) {
       ${cardRefFeuilletage}
     },
     cta{
@@ -549,7 +553,7 @@ export const listImageImages = `
       ${filterList},
       ${filterCheckbox}
     },
-    "items": *[_type == "imageImages"] | order(_createdAt desc) {
+    "items": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc) {
       ${cardRefImageImages}
     },
     cta{
@@ -569,7 +573,7 @@ export const listSerieThematiqueUI = `
       ${filterList},
       ${filterCheckbox}
     },
-    "items": *[_type == "serieThematique" ] | order(_createdAt desc) {
+    "items": *[_type == "serieThematique" && !(_id in path("drafts.**"))] | order(_createdAt desc) {
       ${cardRefSerieThematique}
     },
     cta{
@@ -589,7 +593,7 @@ export const listConversationUI = `
       ${filterList},
       ${filterCheckbox}
     },
-    "items": *[_type == "conversation"] | order(_createdAt desc) {
+    "items": *[_type == "conversation" && !(_id in path("drafts.**"))] | order(_createdAt desc) {
       ${cardRefConversation}
     },
     cta{
@@ -609,6 +613,7 @@ export const listExhibitionsUI = `
     },
     "resolvedItems": *[
       _type == "exhibition"
+      && !(_id in path("drafts.**"))
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
     ] | order(dates[0].du asc) {
@@ -636,6 +641,7 @@ export const listExhibitionsPastUI = `
     },
     "resolvedItems": *[
       _type == "exhibition"
+      && !(_id in path("drafts.**"))
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
     ] | order(dates[0].du desc) {
@@ -663,6 +669,7 @@ export const listExhibitionsEventsUI = `
     },
     "exhibitions": *[
       _type == "exhibition"
+      && !(_id in path("drafts.**"))
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
     ] | order(dates[0].du asc) {
@@ -670,6 +677,7 @@ export const listExhibitionsEventsUI = `
     },
     "events": *[
       _type == "event"
+      && !(_id in path("drafts.**"))
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
     ] | order(coalesce(dates[0].du, _createdAt) asc) {
@@ -693,6 +701,7 @@ export const listEventsUI = `
     },
     "resolvedItems": *[
       _type == "event"
+      && !(_id in path("drafts.**"))
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
     ] | order(coalesce(dates[0].du, _createdAt) asc) {
@@ -721,7 +730,7 @@ export const listProductUI = `
       ${filterList},
       ${filterCheckbox}
     },
-    "resolvedItems": *[_type == "product"] | order(
+    "resolvedItems": *[_type == "product" && !(_id in path("drafts.**"))] | order(
       select(
       "livre-du-mois" in tagsProduct[]->slug.current => 1,
       0
@@ -761,16 +770,16 @@ export const newsletterUI = `
 export const ressourcesUI = `
   _type == "ressourcesUI" => {
     ...,
-    "imageImages": *[_type == "imageImages"] | order(_createdAt desc)[0] {
+    "imageImages": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {
       ${cardRefImageImages}
     },
-    "feuilletage": *[_type == "feuilletage"] | order(_createdAt desc)[0] {
+    "feuilletage": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {
       ${cardRefFeuilletage}
     },
-    "serieThematique": *[_type == "serieThematique"] | order(_createdAt desc)[0] {
+    "serieThematique": *[_type == "serieThematique" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {
       ${cardRefFeuilletage}
     },
-    "conversation": *[_type == "conversation"] | order(_createdAt desc)[0] {
+    "conversation": *[_type == "conversation" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {
       ${cardRefConversation}
     },
     branches[]->{
@@ -831,6 +840,7 @@ const allPostType = [
 export const relatedByExhibition = `
   *[
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     (
       (
         _type in ["event", "feuilletage", "imageImages", "serieThematique", "conversation", "article"] &&
@@ -851,6 +861,7 @@ export const relatedByExhibition = `
 export const relatedByArtist = `
   *[
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     (
       _type in ["event", "exhibition", "feuilletage", "imageImages", "serieThematique", "conversation", "product"] &&
       references(^._id)
@@ -863,6 +874,7 @@ export const relatedByArtist = `
 export const relatedByArtists = `
   *[
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     (
       (
         _type in ["event", "exhibition", "feuilletage", "imageImages", "serieThematique", "conversation", "product"] &&
@@ -883,6 +895,7 @@ export const relatedProductsByArtist = `
   *[
     _type == "product" &&
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     count(artists[@._ref in ^.^.artists[]._ref]) > 0
   ] | order(_createdAt desc)[0...2] {
     ${cardTypes}
@@ -893,6 +906,7 @@ export const relatedProductsByTag = `
   *[
     _type == "product" &&
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     count(tagsProduct[@._ref in ^.^.tagsProduct[]._ref]) > 0
   ] | order(_createdAt desc)[0...2] {
     ${cardTypes}
@@ -902,6 +916,7 @@ export const relatedProductsByTag = `
 export const relatedByTag = `
   *[
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     _type in ["exhibition", "event", "product", "article", "feuilletage"] &&
     count(^.tags) > 0 &&
     references(^.tags[]._ref)
@@ -914,6 +929,7 @@ export const relatedRessourcesByArtists = `
   *[
     _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     count(artists[@._ref in ^.^.artists[]._ref]) > 0
   ] | order(_createdAt desc) {
     ${cardTypes}
@@ -924,6 +940,7 @@ export const randomRessources = `
   *[
     _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&
     _id != ^._id &&
+    !(_id in path("drafts.**")) &&
     count(artists[@._ref in ^.^.artists[]._ref]) > 0
   ] | order(_createdAt desc) {
     ${cardTypes}

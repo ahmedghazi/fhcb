@@ -194,7 +194,7 @@ export async function getArtist(slug: string): Promise<ARTIST_QUERY_RESULT> {
   });
 }
 
-export const RANDOM_ARTISTS_QUERY = groq`*[_type == "artist" && slug.current != $slug]{
+export const RANDOM_ARTISTS_QUERY = groq`*[_type == "artist" && !(_id in path("drafts.**")) && slug.current != $slug]{
   ${cardRefArtist}
 }`;
 
@@ -329,7 +329,7 @@ export async function getProgramme(
 /*****************************************************************************************************
  * ALL PAGES (for sitemap)
  */
-export const ALLPAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire"]{
+export const ALLPAGE_MODULAIRE_QUERY = groq`*[_type == "pageModulaire" && !(_id in path("drafts.**"))]{
   ...,
   seo{
     ${seo}
@@ -557,7 +557,7 @@ export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
 
 // capped at 30 (not `count`) so there's an actual pool to shuffle — capping in GROQ before
 // shuffling always returned the same [0...count] products in a merely-reordered pair/trio
-export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && slug.current != $slug] | order(_createdAt desc) [0...30]{
+export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && !(_id in path("drafts.**")) && slug.current != $slug] | order(_createdAt desc) [0...30]{
   ${cardRefProduct}
 }`;
 

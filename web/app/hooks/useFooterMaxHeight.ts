@@ -9,11 +9,12 @@ export function useFooterMaxHeight<T extends HTMLElement = HTMLDivElement>() {
       const footerContent = ref.current?.querySelector(".card__footer-content");
       if (footerContent) {
         const footerContentBounding = footerContent.getBoundingClientRect();
+        console.log(footerContentBounding);
         setStyle(
           (prev) =>
             ({
               ...prev,
-              "--footer-max-height": `${footerContentBounding.height + 30 + 12}px`,
+              "--footer-max-height": `${footerContentBounding.height}px`,
             }) as React.CSSProperties,
         );
       }
