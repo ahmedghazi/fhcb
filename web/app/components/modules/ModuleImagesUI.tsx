@@ -27,6 +27,7 @@ const ModuleImagesUI = ({ input }: Props) => {
     () => (items ?? []).filter((item) => item.image?.asset),
     [items],
   );
+  const isSingleRow = images.length <= 4;
 
   const ratios = useMemo(
     () =>
@@ -45,7 +46,7 @@ const ModuleImagesUI = ({ input }: Props) => {
 
   useLayoutEffect(() => {
     console.log(images.length);
-    if (isMobile || images.length > 4) {
+    if (isMobile || !isSingleRow) {
       setActive(true);
       return;
     }
@@ -90,7 +91,7 @@ const ModuleImagesUI = ({ input }: Props) => {
             ref={mosaicRef}
             className={clsx(
               "images-ui__mosaic flex gap-gutter flex-col  md:flex-row  justify-center flex-wrap transition-opacity",
-              // gridSize && `grid md:grid-cols-${gridSize}`,
+              !isSingleRow && gridSize && `grid md:grid-cols-${gridSize}`,
               active || isMobile ? "opacity-100" : "opacity-0",
             )}>
             {images.map((item: ImageInGridExpanded, i: number) => (
