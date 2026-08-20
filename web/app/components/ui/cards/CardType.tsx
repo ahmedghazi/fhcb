@@ -24,6 +24,7 @@ import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
 type Context = "grid" | "slider" | "rebonds" | "search";
 type Size = "sm" | "md" | "lg";
+type SizeAlt = "sm" | "md";
 
 type Props = {
   input:
@@ -49,7 +50,7 @@ const SIZES = {
   exhibitionPast: { grid: "sm", slider: "sm", rebonds: "sm", search: "md" },
   exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md", search: "lg" },
   product: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
-  article: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
+  article: { grid: "md", slider: "md", rebonds: "sm", search: "sm" },
   artist: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
   imageImages: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   feuilletage: { grid: "md", slider: "md", rebonds: "md", search: "md" },
@@ -77,30 +78,7 @@ const CardType = ({ input, context, size }: Props) => {
       {input._type === "exhibition" && (
         <CardExhibition input={input} size={sizeForExhibition(input)} />
       )}
-      {/* {input._type === "exhibition" &&
-        input.dates &&
-        _isPastByDates(input.dates) && (
-          <CardExhibition input={input} size={sizeFor("exhibitionPast")} />
-        )}
 
-      {input._type === "exhibition" &&
-        input.dates &&
-        !_isCurrentByDates(input.dates) && (
-          <CardExhibition input={input} size={sizeFor("exhibition")} />
-        )}
-      {input._type === "exhibition" &&
-        input.dates &&
-        _isCurrentByDates(input.dates) && (
-          // <CardExhibitionFeatured
-          //   input={input}
-          //   // size={sizeFor("exhibitionFeatured")}
-          // />
-          <CardExhibition
-            input={input}
-            // size={sizeFor("exhibition")}
-            size='lg'
-          />
-        )} */}
       {input._type === "product" && (
         <CardProduct
           input={input}

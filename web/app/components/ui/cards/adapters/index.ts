@@ -305,16 +305,18 @@ export function artistToCard(
 
 // ─── Article ──────────────────────────────────────────────────────────────────
 
-export function articleToCard(input: ArticleExpanded): CardBaseProps {
+export function articleToCard(
+  input: ArticleExpanded,
+  size: "sm" | "md",
+): CardBaseProps {
   const { _type, title, subTitle, imageCover, tags } = input;
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
-  console.log(isLandscape);
+  console.log(title, size);
   return {
     _type: _type,
-    // layout: "col",
-    layout: isLandscape ? "col" : "row",
+    layout: size === "md" && isLandscape ? "col" : "row",
     colorVar: "var(--color-article)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
@@ -334,7 +336,7 @@ export function articleToCard(input: ArticleExpanded): CardBaseProps {
 
 export function pageModulaireToCard(
   input: PageModulaireExpanded,
-  contentCount?: number,
+  size?: "sm" | "md",
 ): CardBaseProps {
   const { imageCover, tags } = input;
   const isLandscape =
@@ -342,14 +344,11 @@ export function pageModulaireToCard(
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return {
     _type: input._type,
-    layout: isLandscape ? "col" : "row",
+    layout: isLandscape ? "row" : "col",
     colorVar: "var(--color-white)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
-    // videoUrl: (input as any).previewVideo?.asset?.url,
-    // videoBehavior: "hover",
     title: (_localizeField(input.title) as string) || "",
     tags: toTags(tags),
-    // contentCount,
     actions: [
       {
         label: _localizeText("discover") as string,
@@ -364,9 +363,6 @@ export function pageModulaireToCard(
 
 export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
   const { imageCover, video, tags, index, chercheur, description } = input;
-  // const isLandscape =
-  //   (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-  //   (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
 
   const tagsLabel =
     tags
@@ -385,11 +381,9 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
 
   return {
     _type: input._type,
-    // layout: isLandscape ? "col" : "row",
     layout: "col",
     footerPlacement: "detached",
     colorVar: "var(--color-gris-100)",
-    // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video
       ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })

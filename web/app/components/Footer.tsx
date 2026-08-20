@@ -68,9 +68,9 @@ const Footer = ({ settings }: Props) => {
                     {settings.navSecondary.map((item: any) => {
                       return (
                         <li key={item._key}>
-                          <h5 className='title c-h2'>
+                          <h4 className='title c-h2'>
                             {_localizeField(item.label)}
-                          </h5>
+                          </h4>
                           <ul className='sub-menu'>
                             {item.subMenu?.map((subItem: any) => (
                               <li key={subItem._key}>

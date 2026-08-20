@@ -11,14 +11,16 @@ type Props = {
 };
 
 const ListItemComponent = ({ input }: Props) => {
-  const isText = input.text !== null;
+  const isText = input.text && !input.content;
+  console.log("text: ", input.text);
+  console.log("content: ", input.content);
   return (
     <div className={clsx("list-item", isText && "is-text")}>
       <div className='title c-h3 md:col-span-3'>
         {_localizeField(input.title)}
       </div>
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
-      {!isText && input.content && input.content._type === "localeText" && (
+      {!isText && input.content && (
         <div className='content'>{_localizeField(input.content)}</div>
       )}
       {isText && (

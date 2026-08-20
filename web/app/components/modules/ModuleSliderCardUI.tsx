@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Fragment } from "react";
 import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
 import { SliderCardUI } from "@/app/sanity-api/types/sanity.types";
 import { PostTypes } from "@/app/sanity-api/types/extra-types";
@@ -24,18 +24,31 @@ const ModuleSliderCardUI = ({ input }: Props) => {
         </div>
 
         {items && (
-          <SlickSlider
-            settings={{
-              infinite: true,
-              // centerMode: true,
-              variableWidth: true,
-            }}>
-            {items.map((item: PostTypes, index: number) => (
-              <div key={`${item && item._id}-${index}`}>
-                <CardType input={item} context='slider' />
+          <div className='items'>
+            {items.length > 2 && (
+              <SlickSlider
+                settings={{
+                  infinite: true,
+                  // centerMode: true,
+                  variableWidth: true,
+                }}>
+                {items.map((item: PostTypes, index: number) => (
+                  <div key={`${item && item._id}-${index}`}>
+                    <CardType input={item} context='slider' />
+                  </div>
+                ))}
+              </SlickSlider>
+            )}
+            {items.length <= 2 && (
+              <div className='grid--centered'>
+                {input.items.map((item: PostTypes, index: number) => (
+                  <Fragment key={`${item && item._id}-${index}`}>
+                    <CardType input={item} context='grid' size={input.size} />
+                  </Fragment>
+                ))}
               </div>
-            ))}
-          </SlickSlider>
+            )}
+          </div>
         )}
 
         {cta && (

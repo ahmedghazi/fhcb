@@ -8,7 +8,7 @@ import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ArticleExpanded;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md";
 };
 
 const CardArticle = ({ input, size = "md" }: Props) => {
@@ -16,7 +16,7 @@ const CardArticle = ({ input, size = "md" }: Props) => {
   const tagsClassList = tags
     ?.map((tag: Tag) => `card--${tag.slug?.current}`)
     .join(" ");
-  const props = articleToCard(input);
+  const props = articleToCard(input, size);
   const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
 
   return (
