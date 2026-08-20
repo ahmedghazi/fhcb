@@ -775,6 +775,9 @@ export const ressourcesUI = `
     },
     branches[]->{
       ${cardRefPageModulaire}
+    },
+    cta{
+      ${cta}
     }
   }
 `;

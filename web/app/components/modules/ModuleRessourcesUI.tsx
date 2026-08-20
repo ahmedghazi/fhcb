@@ -3,7 +3,7 @@ import { RessourcesUI } from "@/app/sanity-api/types/sanity.types";
 import React, { Fragment } from "react";
 import CardImageImages from "../ui/cards/CardImageImages";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
-import { _localizeField } from "@/app/sanity-api/utils";
+import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
 import {
   FeuilletageExpanded,
   ImageImagesExpanded,
@@ -16,6 +16,7 @@ import CardBranche from "../ui/cards/CardBranche";
 import CardSerieThematique from "../ui/cards/CardSerieThematique";
 import CardType from "../ui/cards/CardType";
 import CardConversation from "../ui/cards/CardConversation";
+import Link from "next/link";
 
 type Props = {
   input: RessourcesUI & {
@@ -35,6 +36,7 @@ const ModuleRessourcesUI = ({ input }: Props) => {
     imageImages,
     serieThematique,
     conversation,
+    cta,
   } = input;
   // const items: Array<
   //   FeuilletageExpanded | ImageImagesExpanded | SerieThematiqueExpanded
@@ -66,14 +68,6 @@ const ModuleRessourcesUI = ({ input }: Props) => {
                 {item?._type === "imageImages" && (
                   <CardImageImages input={item} size='md' />
                 )}
-
-                {/* {item?._type === "serieThematique" && (
-                  <CardSerieThematique input={item} size='md' />
-                )}
-                {item?._type === "conversation" && (
-                  <CardConversation input={item} size='md' />
-                )} */}
-                {/* <CardType input={item} /> */}
               </Fragment>
             ))}
           </div>
@@ -86,6 +80,16 @@ const ModuleRessourcesUI = ({ input }: Props) => {
               />
             ))}
           </div>
+
+          {cta && (
+            <div className='footer pt-md'>
+              {cta.internal && (
+                <Link className='btn' href={_linkResolver(cta.internal.link)}>
+                  {_localizeField(cta.internal.label)}
+                </Link>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

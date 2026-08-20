@@ -120,6 +120,7 @@ export function exhibitionToCard(
         label: (_localizeField(link.label) as string) || "",
         href: link.link ?? "",
         variant: "secondary",
+        type: link._type,
       });
     });
   }
@@ -128,6 +129,7 @@ export function exhibitionToCard(
       label: _localizeText("bookTickets") as string,
       href: linkTickets,
       variant: "primary",
+      type: "linkExternal",
     });
   }
 
@@ -253,6 +255,7 @@ export function eventToCard(
         label: (_localizeField(link.label) as string) || "",
         href: link.link ?? "",
         variant: actions.length === 0 && isVisite ? "primary" : "secondary",
+        type: link._type,
       });
     });
   }
@@ -264,8 +267,6 @@ export function eventToCard(
     tags: toTags(tags),
     title: (_localizeField(title) as string) || "",
     subTitle: _localizeField(subTitle),
-    // title: (_localizeField(subTitle) as string) || "",
-    // subTitle: (_localizeField(title) as string) || "",
     description: _localizeField(description),
     infoNode: toInfoNode(dates),
     actions: actions,

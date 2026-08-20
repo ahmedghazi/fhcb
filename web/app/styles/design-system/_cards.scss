@@ -38,7 +38,6 @@
       }
 
       .card__media {
-        flex: 1;
         flex: 2;
         order: 2;
         position: relative;
@@ -57,7 +56,6 @@
       }
 
       .card__body {
-        flex: 1;
         order: 1;
         flex: 0;
         min-width: 10rem;
@@ -136,8 +134,6 @@
   }
 
   &--lg {
-    // grid-column: span 12;
-
     .card__inner--row {
       .grid {
         gap: var(--spacing-xs);
@@ -149,8 +145,6 @@
             flex-direction: row;
           }
           figure {
-            // display: flex;
-            // justify-content: flex-end;
             &.figure--is-portrait {
               width: var(--gridder-4_12);
             }
@@ -174,25 +168,21 @@
       .card__body,
       .card__media {
         flex-shrink: 0;
-        flex: 0;
         flex: 1;
       }
       .card__body {
-        // flex: 1;
         min-width: 20rem !important;
       }
     }
 
     img {
       min-height: calc(var(--main-h) / 1.3);
-      // max-height: var(--main-h);
       max-height: calc(var(--main-h) / 1.3);
       object-fit: unset;
       width: auto !important;
       max-width: unset;
       aspect-ratio: unset !important;
       display: inline-block;
-      // object-position: right;
     }
     .card__footer .btn {
       width: auto;
@@ -233,40 +223,10 @@
       .card__inner {
         display: block;
       }
-      .card__body {
-        // display: flex;
-        // flex-direction: column;
-        // justify-content: space-between;
-        // gap: var(--spacing-xs);
-      }
     }
   }
 
   &--is-current {
-    // .card__inner {
-    //   padding: 0;
-    //   .card__body {
-    //     padding: var(--spacing-xs);
-    //   }
-    // }
-    // .card__inner {
-    //   &--row {
-    //     .card__body {
-    //       flex: 2;
-    //       max-width: 246px;
-    //     }
-    //     .card__media {
-    //       flex: 2;
-    //       img {
-    //         width: 100% !important;
-    //         object-position: left;
-    //         object-fit: unset;
-    //         height: auto !important;
-    //       }
-    //     }
-    //   }
-    // }
-
     &:not(.card--lg) {
       .card__inner--row {
         .grid {
@@ -299,14 +259,6 @@
 
   &--product {
     background-color: var(--color-beige);
-    // &.card--sm {
-    //   &.card--footer-hover {
-    //     // margin-bottom: 4rem;
-    //     & .card__footer {
-    //       display: flex;
-    //     }
-    //   }
-    // }
     @media all and (max-width: variables.$md) {
       .card__inner--col {
         gap: var(--spacing-xs);
@@ -365,17 +317,7 @@
           flex-direction: column;
         }
       }
-      .card__footer {
-        // display: none;
-      }
     }
-    .badge {
-    }
-    // &.card--sm.card--is-past {
-    //   .card__footer {
-    //     display: none;
-    //   }
-    // }
   }
   &--visites {
     background-color: var(--color-jaune);
@@ -407,9 +349,6 @@
       background-color: var(--color-bg);
     }
   }
-  &--feuilletage {
-    // background-color: var(--color-gris-100);
-  }
   &--article,
   &--page,
   &--page-modulaire,
@@ -437,12 +376,6 @@
     .mux-player-container mux-player {
       aspect-ratio: 1;
     }
-    &:hover .card__footer {
-      // display: block;
-    }
-    .card__footer {
-      // display: none;
-    }
   }
   &--conversation {
     .btn {
@@ -450,7 +383,6 @@
     }
   }
   &--video-mux {
-    // aspect-ratio: 16 / 9;
     position: relative;
     .card__footer {
       padding: var(--spacing-xs);
@@ -469,9 +401,6 @@
     justify-content: space-between;
     gap: var(--spacing-xs);
     height: stretch;
-    // display: flex;
-    // flex-direction: column;
-    // gap: var(--spacing-xs);
   }
   &__header {
     display: flex;
@@ -494,15 +423,17 @@
     }
   }
   &__footer {
+    .card_footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
     .card__btns {
       position: relative;
       z-index: 2;
       display: flex;
       flex-direction: column;
       gap: var(--spacing-xs);
-      .btn--secondary {
-        // opacity: 0.5;
-      }
     }
   }
 
@@ -533,87 +464,14 @@
       position: absolute;
       top: 0%;
       right: 0%;
-      // transform: translate(10%, 100%) rotate(47deg);
       transform: translate(16%, 105%) rotate(47deg);
-      transform: center top;
       text-align: center;
       width: 100%;
       padding: 0 var(--spacing-xs);
       line-height: 1.1;
-      // background-color: red;
       min-height: 2.2em;
     }
   }
-}
-
-// ─── card__inner modifiers ────────────────────────────────────────────────────
-
-.card .card__inner {
-  // position: relative;
-  // img {
-  //   max-height: calc(var(--main-h) / 1.3);
-  //   object-fit: contain;
-  // }
-  // &--col {
-  //   flex-direction: column;
-  //   figure {
-  //     // display: flex;
-  //     // justify-content: center;
-  //   }
-  // }
-
-  // &--row {
-  //   // flex-direction: row;
-  //   // align-items: flex-start;
-
-  //   .grid {
-  //     display: flex;
-  //     gap: var(--spacing-xs);
-  //     width: 100%;
-  //   }
-  //   .card__body {
-  //   }
-
-  //   .card__media {
-  //     flex: 1;
-  //     flex: 2;
-  //     order: 2;
-  //     position: relative;
-
-  //     .card__badge {
-  //       position: absolute;
-  //       top: var(--spacing-xs);
-  //       right: var(--spacing-xs);
-  //       z-index: 1;
-  //     }
-  //     img {
-  //       object-position: right;
-  //     }
-  //   }
-
-  //   .card__body {
-  //     flex: 1;
-  //     order: 1;
-  //     flex: 0;
-  //     min-width: 10rem;
-  //   }
-  // }
-
-  // &--no-padding {
-  //   padding: 0;
-  //   .card__body {
-  //     padding: var(--spacing-xs);
-  //   }
-  // }
-
-  // &--row-reverse {
-  //   .card__media {
-  //     order: 1;
-  //   }
-  //   .card__body {
-  //     order: 2;
-  //   }
-  // }
 }
 
 // ─── Vidéo hover ─────────────────────────────────────────────────────────────
@@ -688,7 +546,6 @@
         }
 
         &:is(:hover, :focus-within) .card__footer {
-          // max-block-size: 24rem;
           max-block-size: var(--footer-max-height);
           opacity: 1;
           transition:

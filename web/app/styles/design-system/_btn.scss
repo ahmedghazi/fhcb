@@ -24,6 +24,7 @@ a.btn,
     opacity 0.3s ease;
   &:hover {
     background-color: transparent;
+    overflow: unset;
     &::before {
       opacity: 1;
     }

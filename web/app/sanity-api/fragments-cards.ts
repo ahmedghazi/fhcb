@@ -16,6 +16,7 @@ export const cardRefExhibition = `
   },
   artists[]->{
     _id,
+    last_name,
     name
   },
   tags[]->{
@@ -74,6 +75,7 @@ export const cardRefFeuilletage = `
   artists[]->{
     _id,
     name,
+    last_name,
     slug
   },
   tags[]->{
@@ -111,7 +113,8 @@ export const cardRefProduct = `
   },
   artists[]->{
     _id,
-    name
+    name,
+    last_name
   },
   artistName
 `;
@@ -140,6 +143,7 @@ export const cardRefImageImages = `
   artists[]->{
     _id,
     name,
+    last_name,
     slug
   },
   "imageCover": coalesce(imageCover, image){
@@ -164,6 +168,7 @@ export const cardRefConversation = `
   artists[]->{
     _id,
     name,
+    last_name,
     slug
   },
   "imageCover": coalesce(imageCover, image){
@@ -186,6 +191,7 @@ export const cardRefSerieThematique = `
   artists[]->{
     _id,
     name,
+    last_name,
     slug
   },
   "imageCover": coalesce(imageCover, image){

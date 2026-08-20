@@ -13,6 +13,7 @@ export type CardAction = {
   label: string;
   href: string;
   variant?: "primary" | "secondary";
+  type?: "linkExternal";
 };
 
 export type CardBadgeProps = {
@@ -69,13 +70,17 @@ const CardBadge = ({ label }: CardBadgeProps) => {
 };
 
 // The primary action's href already covers the whole card via
-// `CardLinkOverlay`, so a visible button for it is only needed when it's the
-// sole action — otherwise it'd be a redundant duplicate of the overlay link.
+// `CardLinkOverlay` (see `primaryAction` below, always `actions[0]`), so once
+// there's more than one action, only `linkExternal` actions get a visible
+// button — internal ones are redundant with the overlay. A lone action is
+// always shown, since then it's the only affordance on the card.
 const withoutRedundantPrimary = (
   actions: CardAction[],
   actionsNode?: ReactNode,
 ) =>
-  actions.length > 1 || actionsNode !== undefined ? actions.slice(1) : actions;
+  actions.length > 1 || actionsNode !== undefined
+    ? actions.filter((action) => action.type === "linkExternal")
+    : actions;
 
 // ─── CardFooter (mode detached — rendu par le parent) ────────────────────────
 
@@ -87,19 +92,21 @@ export const CardFooter = ({
   actionsNode?: ReactNode;
 }) => (
   <div className='card__footer'>
-    <div className='card__btns'>
-      {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
-        <Link
-          key={i}
-          href={action.href}
-          className={clsx(
-            "btn",
-            action.variant === "secondary" && "btn--secondary",
-          )}>
-          {action.label}
-        </Link>
-      ))}
-      {actionsNode}
+    <div className='card_footer-content'>
+      <div className='card__btns'>
+        {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
+          <Link
+            key={i}
+            href={action.href}
+            className={clsx(
+              "btn",
+              action.variant === "secondary" && "btn--secondary",
+            )}>
+            {action.label}
+          </Link>
+        ))}
+        {actionsNode}
+      </div>
     </div>
   </div>
 );
@@ -285,12 +292,14 @@ const CardBase = ({
           {headerSlot}
           {(infoNode || actions.length > 0 || actionsNode) && (
             <div className='card__footer'>
-              {infoNode && (
-                <div className='card__info c-body-xs'>{infoNode}</div>
-              )}
-              {(actions.length > 0 || actionsNode) && (
-                <ActionButtons actions={actions} actionsNode={actionsNode} />
-              )}
+              <div className='card_footer-content'>
+                {infoNode && (
+                  <div className='card__info c-body-xs'>{infoNode}</div>
+                )}
+                {(actions.length > 0 || actionsNode) && (
+                  <ActionButtons actions={actions} actionsNode={actionsNode} />
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -317,7 +326,9 @@ const CardBase = ({
             <div className='card__footer'>
               <div className='card__footer-content'>
                 {description && (
-                  <div className='card__description c-body-xs'>{description}</div>
+                  <div className='card__description c-body-xs'>
+                    {description}
+                  </div>
                 )}
                 {infoNode && (
                   <div className='card__info c-body-xs'>{infoNode}</div>
@@ -334,7 +345,9 @@ const CardBase = ({
               {description && (
                 <div className='card__description c-body-xs'>{description}</div>
               )}
-              {infoNode && <div className='card__info c-body-xs'>{infoNode}</div>}
+              {infoNode && (
+                <div className='card__info c-body-xs'>{infoNode}</div>
+              )}
             </div>
           </div>
         )}
@@ -358,12 +371,17 @@ const CardBase = ({
             )}
             {(infoNode || actions.length > 0 || actionsNode) && (
               <div className='card__footer'>
-                {infoNode && (
-                  <div className='card__info c-body-xs'>{infoNode}</div>
-                )}
-                {(actions.length > 0 || actionsNode) && (
-                  <ActionButtons actions={actions} actionsNode={actionsNode} />
-                )}
+                <div className='card_footer-content'>
+                  {infoNode && (
+                    <div className='card__info c-body-xs'>{infoNode}</div>
+                  )}
+                  {(actions.length > 0 || actionsNode) && (
+                    <ActionButtons
+                      actions={actions}
+                      actionsNode={actionsNode}
+                    />
+                  )}
+                </div>
               </div>
             )}
           </div>
