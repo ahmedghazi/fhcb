@@ -9,7 +9,6 @@ type Props = {
 
 const NavMedia = ({ input }: Props) => {
   if (!input?.images?.length) return null;
-
   return (
     <div className='nav-media'>
       <div className='flex items-end gap-gutter'>

@@ -1,163 +1,15 @@
-// ARCHIVE — pre-split monolith, kept for reference only. Not imported by anything;
-// the live component lives in ./index.tsx (split into CardHeader/CardMedia/CardFooter/etc).
 "use client";
-import React, { ReactNode, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import clsx from "clsx";
-import { Link } from "next-view-transitions";
-import Figure from "../../Figure";
-import { SanityImageAssetFull } from "@/app/sanity-api/types/sanity-expanded.types";
+import { CardBaseProps } from "./types";
+import { CardBadge } from "./CardBadge";
+import { CardHeader } from "./CardHeader";
+import { CardMedia } from "./CardMedia";
+import { CardLinkOverlay } from "./CardLinkOverlay";
+import { ActionButtons } from "./CardFooter";
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-
-export type CardLayout = "col" | "row" | "row-reverse";
-
-export type CardAction = {
-  label: string;
-  href: string;
-  variant?: "primary" | "secondary";
-  type?: "linkExternal";
-};
-
-export type CardBadgeProps = {
-  label: string;
-  // colorVar?: string;
-};
-
-export type CardBaseProps = {
-  layout?: CardLayout;
-  colorVar?: string;
-  badge?: CardBadgeProps;
-  images?: SanityImageAssetFull[];
-  videoUrl?: string;
-  videoBehavior?: "inline" | "hover";
-  tags?: ReactNode;
-  supTitle?: string;
-  title: string;
-  subTitle?: string;
-  description?: ReactNode;
-  infoNode?: ReactNode;
-  actionsNode?: ReactNode;
-  actions?: CardAction[];
-  footerPlacement?: "auto" | "detached";
-  imagePlacement?: "auto" | "top";
-  noPadding?: boolean;
-  mediaSlot?: ReactNode;
-  contentCount?: number;
-  className?: string;
-  style?: React.CSSProperties;
-  _type?: string;
-  imageSizes?: string;
-};
-
-// ─── Badge ───────────────────────────────────────────────────────────────────
-
-const CardBadge = ({ label }: CardBadgeProps) => {
-  return !label ? undefined : (
-    <div className='card__badge c-tag'>
-      <svg
-        width='103'
-        height='111'
-        viewBox='0 0 103 111'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'>
-        <path
-          d='M87.7593 -0.000772777C96.0435 -0.000787134 102.759 6.71495 102.759 14.9992L102.759 110.629L0.000430541 -0.000660476L87.7593 -0.000772777Z'
-          fill='white'
-        />
-      </svg>
-
-      <div className='inner'>{label}</div>
-    </div>
-  );
-};
-
-// The primary action's href already covers the whole card via
-// `CardLinkOverlay` (see `primaryAction` below, always `actions[0]`), so once
-// there's more than one action, only `linkExternal` actions get a visible
-// button — internal ones are redundant with the overlay. A lone action is
-// always shown, since then it's the only affordance on the card.
-const withoutRedundantPrimary = (
-  actions: CardAction[],
-  actionsNode?: ReactNode,
-) =>
-  actions.length > 1 || actionsNode !== undefined
-    ? actions.filter((action) => action.type === "linkExternal")
-    : actions;
-
-// ─── CardFooter (mode detached — rendu par le parent) ────────────────────────
-
-export const CardFooter = ({
-  actions,
-  actionsNode,
-}: {
-  actions: CardAction[];
-  actionsNode?: ReactNode;
-}) => (
-  <div className='card__footer'>
-    <div className='card_footer-content'>
-      <div className='card__btns'>
-        <div className='card__btns-conntent'>
-          {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
-            <Link
-              key={i}
-              href={action.href}
-              className={clsx(
-                "btn",
-                action.variant === "secondary" && "btn--secondary",
-              )}>
-              {action.label}
-            </Link>
-          ))}
-          {actionsNode}
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-// ─── ActionButtons ────────────────────────────────────────────────────────────
-
-const ActionButtons = ({
-  actions,
-  actionsNode,
-}: {
-  actions: CardAction[];
-  actionsNode?: ReactNode;
-}) => (
-  <div className='card__btns'>
-    <div className='card__btns-conntent'>
-      {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
-        <Link
-          key={i}
-          href={action.href}
-          className={clsx(
-            "btn",
-            action.variant === "secondary" && "btn--secondary",
-          )}>
-          {action.label}
-        </Link>
-      ))}
-      {actionsNode}
-    </div>
-  </div>
-);
-
-// ─── CardLinkOverlay ──────────────────────────────────────────────────────────
-// Rend toute la carte cliquable vers l'action primaire (premier lien de `actions`).
-// Les boutons visibles (dont un éventuel bouton secondaire) restent cliquables
-// individuellement grâce au z-index appliqué sur `.card__btns` en CSS.
-
-const CardLinkOverlay = ({ href }: { href: string }) => (
-  <Link
-    href={href}
-    className='card__link-overlay'
-    aria-hidden
-    tabIndex={-1}
-    draggable={false}
-  />
-);
-
-// ─── CardBase ────────────────────────────────────────────────────────────────
+export type { CardLayout, CardAction, CardBadgeProps, CardBaseProps } from "./types";
+export { CardFooter } from "./CardFooter";
 
 const CardBase = ({
   layout = "col",
@@ -215,53 +67,24 @@ const CardBase = ({
       : customMediaSlot;
 
   const mediaBlock = (
-    <div className='card__media'>
-      {hoverableMediaSlot ??
-        (hasVideo && videoBehavior === "inline" ? (
-          <div className='card__video-wrap'>
-            <video
-              ref={videoRef}
-              src={videoUrl}
-              controls
-              playsInline
-              preload='metadata'
-              className='card__video'
-            />
-          </div>
-        ) : hasVideo && videoBehavior === "hover" ? (
-          <video
-            ref={videoRef}
-            src={videoUrl}
-            loop
-            muted
-            playsInline
-            preload='none'
-            className='card__video card__video--hover'
-          />
-        ) : (
-          images.map((asset, i) => (
-            <Figure key={i} asset={asset} width={1000} sizes={imageSizes} />
-          ))
-        ))}
-    </div>
+    <CardMedia
+      images={images}
+      videoUrl={videoUrl}
+      videoBehavior={videoBehavior}
+      videoRef={videoRef}
+      customMediaSlot={hoverableMediaSlot}
+      imageSizes={imageSizes}
+    />
   );
 
   const headerSlot = (
-    <div className='card__header'>
-      {tags && <div className='card__tags c-tag'>{tags}</div>}
-      {supTitle && (
-        <div className='card__sup-title c-body'>
-          {contentCount !== undefined
-            ? `[${contentCount}] ${supTitle}`
-            : supTitle}
-        </div>
-      )}
-      {contentCount !== undefined && !supTitle && (
-        <div className='card__sup-title c-body'>[{contentCount}]</div>
-      )}
-      <h3 className='card__title c-h2'>{title}</h3>
-      {subTitle && <div className='card__subtitle c-h3'>{subTitle}</div>}
-    </div>
+    <CardHeader
+      tags={tags}
+      supTitle={supTitle}
+      contentCount={contentCount}
+      title={title}
+      subTitle={subTitle}
+    />
   );
 
   const cardInnerClass = clsx(

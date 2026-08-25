@@ -30,9 +30,7 @@ const NavModal = ({ settings }: Props) => {
     dispatchModalType(null);
   };
   return (
-    <div
-      className={clsx("nav-modal", modalType && `nav-modal--${modalType}`)}
-      data-lenis-prevent>
+    <div className={clsx("nav-modal", modalType && `nav-modal--${modalType}`)}>
       <div className='container-fluid h-full'>
         <div className='inner'>
           <aside>

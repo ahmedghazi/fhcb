@@ -25,17 +25,23 @@ const NavGroup = ({ input }: NavGroupProps) => {
   } = useHeader();
   const { isMobile } = useDeviceDetect();
   const hasSubmenu = input._type === "linkInternal" && input.subMenu;
-  const displayChildrenMedia =
+  const displaySubMenuImages =
     input._type === "linkInternal" && input.withSubmenuImages;
 
   const _onMouseEnter = () => {
     if (isMobile) return;
     dispatchCurrentMenuMessage(null);
-    if (input._type === "linkInternal" && input.withMessage) {
+
+    if (input._type !== "linkInternal") {
+      dispatchModalType("menu");
+      return;
+    }
+
+    if (input.withMessage) {
       dispatchCurrentMenuMessage(input.navMessage || null);
     }
 
-    if (input._type === "linkInternal" && input.imageCover) {
+    if (input.imageCover) {
       dispatchCurrentMenuItem({
         ...input,
         images: [input.imageCover],
@@ -49,8 +55,10 @@ const NavGroup = ({ input }: NavGroupProps) => {
     <li
       className={clsx(hasSubmenu && "has-submenu")}
       onMouseLeave={() => {
-        if (currentMenuItem) return;
-        dispatchCurrentMenuItem(null);
+        // if (currentMenuItem) return;
+        // dispatchCurrentMenuItem(null);
+        // dispatchCurrentMenuMessage(null);
+        // dispatchModalType("menu");
       }}
       onMouseEnter={() => {
         _onMouseEnter();
@@ -77,7 +85,7 @@ const NavGroup = ({ input }: NavGroupProps) => {
               className=''
               onMouseEnter={() => {
                 if (isMobile) return;
-                if (displayChildrenMedia && subItem._type === "linkInternal") {
+                if (displaySubMenuImages && subItem._type === "linkInternal") {
                   const images = subItem.imageCover
                     ? [subItem.imageCover]
                     : _collectFirstImagesFromNavItem(subItem.link as any);

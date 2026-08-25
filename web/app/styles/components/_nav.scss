@@ -126,11 +126,18 @@ nav {
       position: absolute;
       left: 2em;
       left: 0;
-      padding: 1.5rem 2rem var(--spacing-lg);
+      // padding: 1.5rem 2rem var(--spacing-lg);
+      padding-top: 1.5rem;
+      padding-bottom: var(--spacing-lg);
       display: none;
       // padding-top: 1.5rem;
       // padding-bottom: var(--spacing-lg);
       font-weight: 200;
+      a {
+        padding: 0em 2em 0.5em;
+        line-height: 1;
+        display: inline-block;
+      }
     }
   }
 }

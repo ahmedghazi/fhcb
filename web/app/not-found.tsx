@@ -4,7 +4,6 @@ import Text from "./components/ui/Text";
 
 async function NotFoundPage() {
   const settings = await getSettings();
-  console.log(settings?.message404);
   return (
     <div className='template template--page-404' data-template='404'>
       <div className='container-fluid'>
