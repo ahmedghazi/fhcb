@@ -7227,6 +7227,22 @@
         },
         "optional": true
       },
+      "urlSupport": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "linkExternal"
+        },
+        "optional": true
+      },
+      "urlNewsletter": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "linkExternal"
+        },
+        "optional": true
+      },
       "bandeauContextuel": {
         "type": "objectAttribute",
         "value": {

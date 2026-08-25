@@ -200,6 +200,18 @@ export default defineType({
       type: 'linkInternal',
       group: 'footer',
     }),
+    defineField({
+      name: 'urlSupport',
+      title: 'URL page nous soutenir',
+      type: 'linkExternal',
+      group: 'footer',
+    }),
+    defineField({
+      name: 'urlNewsletter',
+      title: 'URL newsletter',
+      type: 'linkExternal',
+      group: 'footer',
+    }),
 
     defineField({
       name: 'bandeauContextuel',

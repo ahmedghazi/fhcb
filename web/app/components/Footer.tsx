@@ -100,7 +100,8 @@ const Footer = ({ settings }: Props) => {
                         (acc: any, curr: any) => [...acc, curr, ",  "],
                         [],
                       )
-                      .slice(0, -1)}
+                    // .slice(0, -1)
+                    }
                     {/* {settings.urlLegals?.link && (
                       <>
                         {"  "}
@@ -129,11 +130,34 @@ const Footer = ({ settings }: Props) => {
                     </button>
                   </div>
                   <ul className='nav-actions flex gap-2xs items-center'>
+                    {settings.urlSupport && (
+                      <li>
+                        <a
+                          className='btn btn--accent'
+                          href={settings.urlSupport?.link}
+                          target='_blank'
+                          rel='noopener noreferrer'>
+                          {_localizeField(settings.urlSupport?.label) ||
+                            _localizeText("nousSoutenir")}
+                        </a>
+                      </li>
+                    )}
+                    {settings.urlNewsletter && (
+                      <li>
+                        <a
+                          className='btn btn--accent'
+                          href={settings.urlNewsletter?.link}
+                          target='_blank'
+                          rel='noopener noreferrer'>
+                          {_localizeField(settings.urlNewsletter?.label) ||
+                            _localizeText("nousSoutenir")}
+                        </a>
+                      </li>
+                    )}
                     <li>
-                      <button className='btn btn--accent'>Nous soutenir</button>
-                    </li>
-                    <li>
-                      <button className='btn btn--accent'>Newsletter</button>
+                      <button className='btn btn--accent'>
+                        Newsletter (wip)
+                      </button>
                     </li>
                     {settings.navSocial?.map((item) => (
                       <li key={item.label}>

@@ -106,6 +106,9 @@ export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
   },
   urlPrivacy{
     ${linkInternal}
+  },
+  urlSupport{
+    ...
   }
 }`;
 
