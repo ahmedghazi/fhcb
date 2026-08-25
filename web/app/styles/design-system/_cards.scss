@@ -8,7 +8,7 @@
   container-type: inline-size;
   display: flex;
   flex-direction: column;
-  &:hover .btn {
+  &:hover .btn:not(.btn--secondary) {
     background-color: transparent;
     &::before {
       opacity: 1;
