@@ -9,7 +9,13 @@ export default defineField({
   icon: MdFormatListBulleted,
   fields: [
     defineField({
+      name: 'titleh2',
+      title: 'titre de section',
+      type: 'localeString',
+    }),
+    defineField({
       name: 'title',
+      description: 'Titre de liste',
       type: 'localeString',
     }),
     defineField({

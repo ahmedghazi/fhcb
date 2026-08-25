@@ -9,14 +9,20 @@ type Props = {
 };
 
 const ModuleListUI = ({ input }: Props) => {
+  const { titleh2, title, items } = input;
   return (
     <section className='module module--list-ui'>
+      {titleh2 && (
+        <div className='container-fluid'>
+          <h2 className='module__title c-h1_5 '>{_localizeField(titleh2)}</h2>
+        </div>
+      )}
       <div className='container-fluid'>
         <div className='module__inner'>
-          <h3 className='c-h4'>{_localizeField(input.title)}</h3>
-          {input.items && (
+          <h3 className='c-h4'>{_localizeField(title)}</h3>
+          {items && (
             <div className='module__list'>
-              {input.items.map((item: any, i: number) => (
+              {items.map((item: any, i: number) => (
                 <ListItemComponent input={item} key={i} />
               ))}
             </div>

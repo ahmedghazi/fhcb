@@ -2090,6 +2090,14 @@
             "value": "listUI"
           }
         },
+        "titleh2": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "localeString"
+          },
+          "optional": true
+        },
         "title": {
           "type": "objectAttribute",
           "value": {
