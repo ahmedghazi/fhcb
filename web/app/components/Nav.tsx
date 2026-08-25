@@ -31,22 +31,26 @@ const NavGroup = ({ input }: NavGroupProps) => {
   const _onMouseEnter = () => {
     if (isMobile) return;
     dispatchCurrentMenuMessage(null);
+    dispatchCurrentMenuItem(null);
 
     if (input._type !== "linkInternal") {
       dispatchModalType("menu");
       return;
     }
-
+    console.log(input.withMessage);
+    console.log(input.imageCover);
     if (input.withMessage) {
       dispatchCurrentMenuMessage(input.navMessage || null);
     }
-
     if (input.imageCover) {
       dispatchCurrentMenuItem({
         ...input,
         images: [input.imageCover],
       } as NavMenuItem);
-    } else {
+    }
+    if (!input.withMessage && !input.imageCover) {
+      dispatchCurrentMenuItem(input as NavMenuItem);
+
       dispatchModalType("menu");
     }
   };
@@ -176,8 +180,8 @@ const Nav = ({ navPrimary, settings }: Props) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    dispatchCurrentMenuItem(null);
-    dispatchModalType(null);
+    // dispatchCurrentMenuItem(null);
+    // dispatchModalType(null);
   }, [pathname]);
 
   const menuStyle: React.CSSProperties = {
@@ -189,8 +193,7 @@ const Nav = ({ navPrimary, settings }: Props) => {
       className={clsx(modalType != null && "is-open")}
       onMouseLeave={() => {
         // return;
-
-        dispatchCurrentMenuItem(null);
+        // dispatchCurrentMenuItem(null);
         dispatchModalType(null);
       }}>
       <ul className='menu' style={menuStyle}>

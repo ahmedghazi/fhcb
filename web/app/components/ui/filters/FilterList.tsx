@@ -62,7 +62,6 @@ const FilterList = ({
     if (typeof field === "string") return field;
     return field[locale] ?? field["fr"] ?? "";
   };
-  console.log(opts);
   const letters = Array.from(
     new Set(
       opts.map((o) =>

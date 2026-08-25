@@ -97,11 +97,11 @@ nav {
   }
 
   ul.menu {
-    // display: flex;
-    // justify-content: space-between;
+    display: flex;
+    justify-content: space-around;
 
-    display: grid;
-    grid-template-columns: repeat(var(--nav-len), minmax(0, 1fr));
+    // display: grid;
+    // grid-template-columns: repeat(var(--nav-len), minmax(0, 1fr));
     // gap: var(--spacing-md);
 
     .menu-label {

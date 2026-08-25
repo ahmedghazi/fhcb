@@ -2,11 +2,8 @@
 import React from "react";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 import useHeader from "../context/HeaderContext";
-import Figure from "./ui/Figure";
 import SearchForm from "./ui/SearchForm";
 import { _localizeField } from "../sanity-api/utils";
-import { PortableText } from "@portabletext/react";
-import portableTextComponents from "../sanity-api/portableTextComponents";
 import NavMessage from "./NavMessage";
 import NavMedia from "./NavMedia";
 import clsx from "clsx";

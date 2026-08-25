@@ -48,10 +48,8 @@ export const HeaderContextProvider = ({ children }: HeaderContextProps) => {
     if (currentMenuItem) {
       dispatchModalType("menu");
     } else {
-      dispatchModalType(null);
+      // dispatchModalType(null);
     }
-    // console.log(currentMenuItem);
-    // document.body.classList.toggle("nav-open", !!currentMenuItem);
   }, [currentMenuItem]);
 
   useEffect(() => {

@@ -24,8 +24,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
   // Filters are mutually exclusive — selecting one clears every other
   // active filter. "sort" is ordering, not filtering, so it's kept as-is.
-  const _base = (): ActiveFilters =>
-    active.sort ? { sort: active.sort } : {};
+  const _base = (): ActiveFilters => (active.sort ? { sort: active.sort } : {});
 
   const _update = (key: string, value: string) => {
     const next = key === "sort" ? { ...active } : _base();
@@ -37,7 +36,6 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     setActive(next);
     onChange(next);
   };
-  console.log(active);
 
   const _toggle = (key: string, value: string) => {
     const next = _base();

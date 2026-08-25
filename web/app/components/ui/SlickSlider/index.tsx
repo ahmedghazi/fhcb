@@ -68,7 +68,7 @@ const SlickSlider = ({
     <div
       className='slick-slider-container'
       ref={containerRef}
-      data-isSingle={isSingle}>
+      data-issingle={isSingle}>
       <Slider ref={sliderRef} {...settings}>
         {children}
       </Slider>
