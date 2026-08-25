@@ -29,6 +29,17 @@ export const seo = `
   }
 `;
 
+export const cta = `
+  ...,
+   internal {
+    label,
+    link->{
+      _type,
+      slug
+    }
+  },
+`;
+
 const blockContentMarkDefs = `
 markDefs[]{
   ...,
@@ -49,17 +60,25 @@ const blockcontentKeyValGroup = `
       }
     }
 `;
+const blockcontentCta = `
+  _type == "blockContentCta" => {
+      ${cta}
+    }
+`;
+
 export const blockContent = `
   ...,
   fr[]{
     ...,
      ${blockContentMarkDefs},
-     ${blockcontentKeyValGroup}
+     ${blockcontentKeyValGroup},
+     ${blockcontentCta}
   },
   en[]{
     ...,
     ${blockContentMarkDefs},
-    ${blockcontentKeyValGroup}
+    ${blockcontentKeyValGroup},
+    ${blockcontentCta}
   }
 `;
 
@@ -116,17 +135,6 @@ link->{
     }
   }
 */
-
-export const cta = `
-  ...,
-   internal {
-    label,
-    link->{
-      _type,
-      slug
-    }
-  },
-`;
 
 export const linkInternal = `
   ...,
