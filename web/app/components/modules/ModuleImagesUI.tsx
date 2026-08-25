@@ -79,9 +79,7 @@ const ModuleImagesUI = ({ input }: Props) => {
       const availableWidth = mosaic.clientWidth - gap * (ratios.length - 1);
       const totalRatio = ratios.reduce((sum, ratio) => sum + ratio, 0);
 
-      setHeight(
-        Math.min(availableWidth / totalRatio, _getMaxImgHeight()),
-      );
+      setHeight(Math.min(availableWidth / totalRatio, _getMaxImgHeight()));
       setActive(true);
     };
 
@@ -118,13 +116,18 @@ const ModuleImagesUI = ({ input }: Props) => {
                   height && "img-resized",
                 )}
                 style={
-                  height
-                    ? {
-                        height,
-                        width: ratios[i] * height,
-                        flex: "0 0 auto",
-                      }
-                    : undefined
+                  {
+                    "--height": height ? `${height}px` : undefined,
+                    "--width": height ? `${ratios[i] * height}px` : undefined,
+                    "--flex": "0 0 auto",
+                  } as React.CSSProperties
+                  // height
+                  //   ? {
+                  //       height,
+                  //       width: ratios[i] * height,
+                  //       flex: "0 0 auto",
+                  //     }
+                  //   : undefined
                 }>
                 <Figure
                   asset={item.image!.asset}

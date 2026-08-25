@@ -1,17 +1,17 @@
 @use "../variables";
 
-.img-resized {
-  figure,
-  div,
-  img {
-    height: 100%;
-    max-height: var(--max-img-h) !important;
-  }
-  img {
-    // max-height: var(--h-app) !important;
-    // width: auto !important;
-  }
-}
+// .img-resized {
+//   figure,
+//   div,
+//   img {
+//     height: 100%;
+//     max-height: var(--max-img-h) !important;
+//   }
+//   img {
+//     // max-height: var(--h-app) !important;
+//     // width: auto !important;
+//   }
+// }
 
 .hero .hero__figure {
   // display: flex;

@@ -96,6 +96,9 @@
       h2 {
         margin-bottom: var(--spacing-lg);
       }
+      .text {
+        max-width: unset;
+      }
 
       @media (min-width: 768px) {
         .images-ui__item,
@@ -139,10 +142,16 @@
       }
     }
     &--images-ui {
-      padding-bottom: 3.438rem; /* 3 lignes de caption */
+      // padding-bottom: 3.438rem; /* 3 lignes de caption */
       h2 {
         text-align: center;
         margin-bottom: var(--spacing-gutter);
+      }
+      .img-resized figure {
+        height: var(--height) !important;
+        max-height: var(--max-img-h) !important;
+        width: var(--width) !important;
+        flex: var(--flex);
       }
     }
     .list-item {
