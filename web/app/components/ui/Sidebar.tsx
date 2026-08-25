@@ -54,9 +54,9 @@ const Sidebar = ({ input }: Props) => {
                     </div>
                   )}
                   {item?._type === "partenaire" &&
-                    item?.image &&
-                    item?.image?.asset && (
-                      <Figure asset={item.image.asset} sizes='96px' />
+                    item?.imageCover &&
+                    item?.imageCover?.asset && (
+                      <Figure asset={item.imageCover.asset} sizes='96px' />
                     )}
                 </>
               </li>

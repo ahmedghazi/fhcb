@@ -307,13 +307,13 @@ export const textSidebarUI = `
       coProduction[]{
         _type == "reference" => @->{
           ...,
-          "image": imageCover{
+          imageCover{
             ${imageAsset}
           }
         },
         _type == "keyVal" => {
           ...,
-          "image": image{
+           image{
             ${imageAsset}
           }
         }
