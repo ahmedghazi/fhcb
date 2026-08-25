@@ -20,7 +20,7 @@ type Props = {
 
 const Rebonds = ({ input, title, items, layout = "grid" }: Props) => {
   if (!input || input.length === 0) return null;
-  const resolvedTitle = _localizeField(title) || "discoverToo";
+  const resolvedTitle = _localizeField(title) || "";
   const orderedInput = items ? _orderRebondsByItems(items, input) : input;
   return (
     <section className='rebonds mb-lg'>

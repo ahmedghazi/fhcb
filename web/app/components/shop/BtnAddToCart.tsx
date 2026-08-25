@@ -13,46 +13,7 @@ import {
 import { artistsToString } from "@/app/lib/utils";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-
-type VariantsListProps = {
-  input: Array<
-    {
-      _key: string;
-    } & ProductVariant
-  >;
-  onChange: (variant: ProductVariant) => void;
-};
-const VariantsList = ({ input, onChange }: VariantsListProps) => {
-  const _onToggle = (value: ProductVariant) => {
-    onChange(value);
-  };
-  useEffect(() => {
-    if (input.length === 1) {
-      _onToggle(input[0]);
-    }
-  }, [input]);
-
-  return (
-    <ul className='variants-list'>
-      {input?.map((item, i) => (
-        <li key={i}>
-          <label className='ui-filter__checkbox'>
-            <input
-              className='ui-checkbox'
-              type='radio'
-              name={"language"}
-              value={item.title}
-              checked={input.length === 1}
-              // checked={activeValues.includes(opt._id)}
-              onChange={() => _onToggle(item || "")}
-            />
-            <span>{item.title}</span>
-          </label>
-        </li>
-      ))}
-    </ul>
-  );
-};
+import VariantsList from "./VariantsList";
 
 type Props = {
   input: ProductExpanded;
