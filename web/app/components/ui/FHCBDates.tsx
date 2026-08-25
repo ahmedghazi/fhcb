@@ -13,12 +13,12 @@ type Props = {
 
 const LocationSlot = ({ location }: { location: Location }) => {
   const localizedTitle: string = _localizeField(location.title);
-  if (localizedTitle.toLowerCase().indexOf("tube") > -1) {
-    return null;
-  }
-  if (localizedTitle.toLowerCase().indexOf("cube") > -1) {
-    return null;
-  }
+  // if (localizedTitle.toLowerCase().indexOf("tube") > -1) {
+  //   return null;
+  // }
+  // if (localizedTitle.toLowerCase().indexOf("cube") > -1) {
+  //   return null;
+  // }
 
   return (
     <div className={clsx("location", location.inSite && "location--is-insite")}>
@@ -64,6 +64,7 @@ const FHCBDates = ({ input }: Props) => {
                 <time dateTime={date.du ?? undefined}>
                   {fmt.du} → {fmt.au} {fmt.year}
                 </time>
+                {/* <pre>{JSON.stringify(date, null, 2)}</pre> */}
                 {date.location && (
                   <LocationSlot
                     location={date.location as unknown as Location}
