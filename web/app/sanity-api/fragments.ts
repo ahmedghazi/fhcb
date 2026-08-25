@@ -352,11 +352,18 @@ export const textSidebarUI = `
   }
 `;
 
+const listItem = `
+  ...,
+  text{
+    ${blockContent}
+  }
+`;
+
 export const listUI = `
   _type == "listUI" => {
     ...,
     items[]{
-      ...
+      ${listItem}
     },
     cta{
       ${cta}
@@ -368,7 +375,7 @@ export const listsUI = `
   _type == "listsUI" => {
     ...,
     items[]{
-      ...
+      ${listItem}
     }
   }
 `;

@@ -101,7 +101,7 @@ const Footer = ({ settings }: Props) => {
                         [],
                       )
                       .slice(0, -1)}
-                    {settings.urlLegals?.link && (
+                    {/* {settings.urlLegals?.link && (
                       <>
                         {"  "}
                         <Link href={_linkResolver(settings.urlLegals.link)}>
@@ -119,6 +119,7 @@ const Footer = ({ settings }: Props) => {
                         </Link>
                       </>
                     )}
+                     */}
                     {"  "}
                     <button
                       type='button'
