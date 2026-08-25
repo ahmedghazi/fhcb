@@ -61,24 +61,6 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
           )}
 
           {visibleItems.length > 0 && (
-            // <GridMasonryDessandro>
-            //   {visibleItems.map((item: ExhibitionExpanded, index: number) => (
-            //     <Fragment key={`--${index}`}>
-            //       <div
-            //         style={{
-            //           width: isMobile
-            //             ? "var(--gridder-4_4)"
-            //             : "var(--gridder-1_4)",
-            //         }}>
-            //         <CardExhibition
-            //           input={item}
-            //           size={"sm"}
-            //           footerHover={true}
-            //         />
-            //       </div>
-            //     </Fragment>
-            //   ))}
-            // </GridMasonryDessandro>
             <GridMasonryColumns items={visibleItems} />
           )}
 

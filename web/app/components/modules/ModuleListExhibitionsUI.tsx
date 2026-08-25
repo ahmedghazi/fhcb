@@ -5,7 +5,11 @@ import CardExhibition from "../ui/cards/CardExhibition";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ListExhibitionsUI, Tag } from "@/app/sanity-api/types/sanity.types";
 import { _isPast } from "@/app/lib/utils";
-import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
+import {
+  _linkResolver,
+  _localizeField,
+  _localizeText,
+} from "@/app/sanity-api/utils";
 
 type Props = {
   input: Omit<ListExhibitionsUI, "filterTags"> & {
@@ -18,7 +22,15 @@ type Props = {
 const ModuleListExhibitionsUI = ({ input }: Props) => {
   const { resolvedItems, filterTags, linkFallback } = input;
   const __isPast = (item: ExhibitionExpanded) => _isPast(item);
-
+  const isExhibCurrent = filterTags?.some(
+    (el) => el.slug?.current === "exposition-en-cours",
+  );
+  const isExhibUpcoming = filterTags?.some(
+    (el) => el.slug?.current === "exposition-a-venir",
+  );
+  const isExhibOffSite = filterTags?.some(
+    (el) => el.slug?.current === "hors-les-murs",
+  );
   return (
     <section className='module module--list-exhibitions'>
       <div className='container-fluid'>
@@ -46,14 +58,11 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
             {resolvedItems?.length === 0 && (
               <div className='text-center'>
                 <p>
-                  Il n&apos;y a pas d&apos;
-                  {filterTags?.map((tag) => (
-                    <span key={tag._id} className='tag'>
-                      {_localizeField(tag.title)}{" "}
-                    </span>
-                  ))}{" "}
-                  actuellement.
+                  {isExhibCurrent && _localizeText("noResultExhibCurrent")}
+                  {isExhibUpcoming && _localizeText("noResultExhibUpcoming")}
+                  {isExhibOffSite && _localizeText("noResultExhibOffSite")}
                 </p>
+
                 {linkFallback?.internal && (
                   <Link
                     className='btn'

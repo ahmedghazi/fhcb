@@ -71,6 +71,11 @@ const ModuleListProductUI = ({ input }: Props) => {
             <GridMasonryColumns items={visibleItems} />
           )}
 
+          {filteredItems.length === 0 &&
+            Object.keys(activeFilters).length > 0 && (
+              <p className='text-center'>{_localizeText("noResultShop")}</p>
+            )}
+
           {hasMore && (
             <div className='load-more'>
               <button

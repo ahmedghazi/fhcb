@@ -134,7 +134,7 @@ export default defineType({
     }),
     defineArrayMember({
       type: 'image',
-      options: {hotspot: true},
+      // options: {hotspot: true},
     }),
 
     defineArrayMember({

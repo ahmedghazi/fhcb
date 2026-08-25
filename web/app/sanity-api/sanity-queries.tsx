@@ -18,6 +18,7 @@ import {
   relatedRessourcesByArtists,
   randomRessources,
   linkInternal,
+  blockContent,
 } from "./fragments";
 import { rebondsResolver } from "./fragments-rebonds";
 import { _shuffle } from "../lib/utils";
@@ -95,6 +96,9 @@ export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
   },
   baseline{
     ...
+  },
+  message404{
+    ${blockContent}
   },
   messageCookies,
   urlLegals{

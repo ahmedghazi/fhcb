@@ -40,6 +40,8 @@ const i18n = {
     futurExhibition: "Exposition à venir",
     search: "Rechercher",
     mostSearched: "Recherches fréquentes",
+    noResults:
+      "Aucun résultat pour cette recherche. Essayez avec un autre terme.",
     allRightsReserved: "Tous droits réservés",
     contactTeam: "Contacter l'équipe",
     all: "Tous",
@@ -107,13 +109,17 @@ const i18n = {
     cookieApprove: "OK",
     cookieApproveAllModal: "Tout accepter",
     orderSuccessTitle: "Merci pour votre commande",
-    orderSuccessSubtitle: "Votre commande a bien été enregistrée. Un email de confirmation vous a été envoyé.",
+    orderSuccessSubtitle:
+      "Votre commande a bien été enregistrée. Un email de confirmation vous a été envoyé.",
     orderProcessingTitle: "Commande en cours de traitement",
-    orderProcessingSubtitle: "Nous confirmons votre paiement, cela ne prendra qu'un instant.",
+    orderProcessingSubtitle:
+      "Nous confirmons votre paiement, cela ne prendra qu'un instant.",
     orderFailureTitle: "Le paiement n'a pas abouti",
-    orderFailureSubtitle: "Une erreur est survenue lors du paiement. Aucune somme n'a été débitée.",
+    orderFailureSubtitle:
+      "Une erreur est survenue lors du paiement. Aucune somme n'a été débitée.",
     orderNotFoundTitle: "Commande introuvable",
-    orderNotFoundSubtitle: "Nous n'avons pas retrouvé cette commande. Vérifiez le lien reçu par email ou contactez-nous.",
+    orderNotFoundSubtitle:
+      "Nous n'avons pas retrouvé cette commande. Vérifiez le lien reçu par email ou contactez-nous.",
     orderNumber: "Numéro de commande",
     orderDate: "Date de commande",
     orderStatus: "Statut",
@@ -130,6 +136,18 @@ const i18n = {
     shippingCost: "Livraison",
     backHome: "Retour à l'accueil",
     backToShop: "Retour à la librairie",
+    noResultExhibCurrent:
+      "La Fondation est actuellement fermée. Découvrez nos prochaines expositions.",
+    noResultExhibUpcoming:
+      "Aucune exposition n’est actuellement annoncée. Découvrez les expositions en cours.",
+    noResultExhibOffSite:
+      "Aucune exposition hors les murs n’est actuellement annoncée.",
+    noResultEventFutur:
+      "Aucun événement n’est actuellement annoncé. Consultez prochainement notre programmation.",
+    noResultEventTour:
+      "Aucune visite guidée n’est actuellement proposée. Consultez prochainement notre programmation.",
+    noResultShop:
+      "Aucun ouvrage ne correspond à votre recherche. Essayez avec un autre terme.",
   },
   en: {
     default: false,
@@ -170,7 +188,7 @@ const i18n = {
     futurExhibition: "Futur exhibition",
     search: "Search",
     mostSearched: "Most searched",
-    noResults: "No result found",
+    noResults: "No results for this search. Please try another search term.",
     allRightsReserved: "All rights reserved",
     contactTeam: "Contact the team",
     all: "All",
@@ -233,13 +251,17 @@ const i18n = {
     cookieApprove: "OK",
     cookieApproveAllModal: "Accept all",
     orderSuccessTitle: "Thank you for your order",
-    orderSuccessSubtitle: "Your order has been placed. A confirmation email has been sent to you.",
+    orderSuccessSubtitle:
+      "Your order has been placed. A confirmation email has been sent to you.",
     orderProcessingTitle: "Your order is being processed",
-    orderProcessingSubtitle: "We're confirming your payment, this will only take a moment.",
+    orderProcessingSubtitle:
+      "We're confirming your payment, this will only take a moment.",
     orderFailureTitle: "Payment unsuccessful",
-    orderFailureSubtitle: "Something went wrong with your payment. You have not been charged.",
+    orderFailureSubtitle:
+      "Something went wrong with your payment. You have not been charged.",
     orderNotFoundTitle: "Order not found",
-    orderNotFoundSubtitle: "We couldn't find this order. Please check the link from your email or contact us.",
+    orderNotFoundSubtitle:
+      "We couldn't find this order. Please check the link from your email or contact us.",
     orderNumber: "Order number",
     orderDate: "Order date",
     orderStatus: "Status",
@@ -256,6 +278,17 @@ const i18n = {
     shippingCost: "Shipping",
     backHome: "Back to home",
     backToShop: "Back to the shop",
+    noResultExhibCurrent:
+      "The Foundation is currently closed. Discover our upcoming exhibitions.",
+    noResultExhibUpcoming:
+      "There are currently no upcoming exhibitions. Discover our exhibitions on view.",
+    noResultExhibOffSite:
+      "There are currently no off-site exhibitions announced.",
+    noResultEventFutur:
+      "There are currently no upcoming events. Please check back soon for our programme.",
+    noResultEventTour:
+      "There are currently no guided tours available. Please check back soon for our programme.",
+    noResultShop: "No books match your search. Please try another search term.",
   },
 };
 

@@ -9,7 +9,6 @@ export function useFooterMaxHeight<T extends HTMLElement = HTMLDivElement>() {
       const footerContent = ref.current?.querySelector(".card__footer-content");
       if (footerContent) {
         const footerContentBounding = footerContent.getBoundingClientRect();
-        console.log(footerContentBounding);
         setStyle(
           (prev) =>
             ({

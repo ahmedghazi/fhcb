@@ -112,7 +112,8 @@ p,
     display: inline-block;
     width: auto;
   }
-  .blockquote {
+  .blockquote,
+  figure {
     margin-bottom: 1em;
   }
   .embed {

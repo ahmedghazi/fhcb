@@ -51,34 +51,42 @@ markDefs[]{
 `;
 const blockcontentKeyValGroup = `
   _type == "keyValGroup" => {
+    ...,
+    items[]{
       ...,
-      items[]{
-        ...,
-        image{
-          ${imageAsset}
-        }
+      image{
+        ${imageAsset}
       }
     }
+  }
 `;
 const blockcontentCta = `
   _type == "blockContentCta" => {
-      ${cta}
-    }
+    ${cta}
+  }
+`;
+const blockcontentImage = `
+  _type == "image" => {
+    ...,
+    ${imageAsset}
+  }
+`;
+
+export const blockContentItem = `
+  ...,
+  ${blockContentMarkDefs},
+  ${blockcontentKeyValGroup},
+  ${blockcontentCta},
+  ${blockcontentImage}
 `;
 
 export const blockContent = `
   ...,
   fr[]{
-    ...,
-     ${blockContentMarkDefs},
-     ${blockcontentKeyValGroup},
-     ${blockcontentCta}
+    ${blockContentItem}
   },
   en[]{
-    ...,
-    ${blockContentMarkDefs},
-    ${blockcontentKeyValGroup},
-    ${blockcontentCta}
+    ${blockContentItem}
   }
 `;
 
@@ -617,7 +625,7 @@ export const listExhibitionsUI = `
       ...
     },
     filterTags[]->{
-      title
+      title, slug
     },
     "resolvedItems": *[
       _type == "exhibition"

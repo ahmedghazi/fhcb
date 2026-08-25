@@ -188,7 +188,7 @@ const SearchForm = ({ settings }: Props) => {
                     <CardType input={item} context='search' />
                   </Fragment>
                 ))}
-                {searchResult.length === 0 && term && (
+                {searchResult.length === 0 && term !== "" && (
                   <div className='col-span-full'>
                     <p>{_localizeText("noResults")}</p>
                   </div>

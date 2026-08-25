@@ -4,7 +4,11 @@ import Link from "next/link";
 import CardEvent from "../ui/cards/CardEvent";
 import { EventExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ListEventsUI, Tag } from "@/app/sanity-api/types/sanity.types";
-import { _linkResolver, _localizeField } from "@/app/sanity-api/utils";
+import {
+  _linkResolver,
+  _localizeField,
+  _localizeText,
+} from "@/app/sanity-api/utils";
 
 type Props = {
   input: Omit<ListEventsUI, "filterTags"> & {
@@ -16,9 +20,14 @@ type Props = {
 
 const ModuleListEventsUI = ({ input }: Props) => {
   const { cardSize, resolvedItems, filterTags, linkFallback } = input;
+  const isEventTour = filterTags?.some(
+    (el) => el.slug?.current === "visite-commentee",
+  );
   return (
     <section className='module module--list-events'>
       <div className='container-fluid'>
+        {/* <pre>{JSON.stringify(filterTags, null, 2)}</pre> */}
+
         <div className='module__inner'>
           {(resolvedItems?.length ?? 0) > 0 && (
             <div
@@ -47,13 +56,9 @@ const ModuleListEventsUI = ({ input }: Props) => {
           {resolvedItems?.length === 0 && (
             <div className='text-center'>
               <p>
-                Il n&apos;y a pas d&apos;
-                {filterTags?.map((tag) => (
-                  <span key={tag._id} className='tag'>
-                    {_localizeField(tag.title)}
-                  </span>
-                ))}{" "}
-                actuellement.
+                {isEventTour
+                  ? _localizeText("noResultEventTour")
+                  : _localizeText("noResultEventFutur")}
               </p>
               {linkFallback?.internal && (
                 <Link

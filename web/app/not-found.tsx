@@ -1,18 +1,25 @@
 import Link from "next/link";
+import { getSettings } from "./sanity-api/sanity-queries";
+import Text from "./components/ui/Text";
 
-function NotFoundPage() {
+async function NotFoundPage() {
+  const settings = await getSettings();
+  console.log(settings?.message404);
   return (
-    <div className="page-404" style={{ padding: "4rem", textAlign: "center" }}>
-      <div className="inner">
-        <h1 style={{ marginBottom: "1.5rem" }}>Page introuvable</h1>
-        <div style={{ marginBottom: "2rem" }}>
-          <p>
-            Cette page n&apos;existe pas ou a été déplacée.
-          </p>
-        </div>
-        <Link href="/">
-          Retour à l&apos;accueil
-        </Link>
+    <div className='template template--page-404' data-template='404'>
+      <div className='container-fluid'>
+        {settings && settings.message404 && (
+          <Text input={settings?.message404} />
+        )}
+        {!settings && (
+          <>
+            <h1 style={{ marginBottom: "1.5rem" }}>Page introuvable</h1>
+            <div style={{ marginBottom: "2rem" }}>
+              <p>Cette page n&apos;existe pas ou a été déplacée.</p>
+              <Link href='/'>Retour à l&apos;accueil</Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
