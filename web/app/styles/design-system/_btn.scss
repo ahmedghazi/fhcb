@@ -24,7 +24,7 @@ a.btn,
     opacity 0.3s ease;
   &:hover {
     background-color: transparent;
-    overflow: unset;
+    // overflow: unset;
     &::before {
       opacity: 1;
     }
@@ -44,6 +44,13 @@ a.btn,
   &--accent {
     background-color: var(--color-accent);
     color: var(--color-white);
+    &:hover {
+      background-color: transparent;
+      color: var(--color-accent);
+      &::before {
+        border-color: var(--color-accent);
+      }
+    }
   }
 }
 a.btn-library,
@@ -60,17 +67,32 @@ button.btn--menu-toggle {
   display: inline-block;
   text-transform: uppercase;
   position: relative;
-  &:hover::before {
-    opacity: 0.2;
-  }
   &::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background-color: var(--color-gris-100);
+    color: var(--color-accent);
+    border: var(--border);
     opacity: 0;
+    transition: opacity 0.3s ease;
   }
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+  // &:hover::before {
+  //   opacity: 0.2;
+  // }
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   inset: 0;
+  //   border-radius: inherit;
+  //   background-color: var(--color-gris-100);
+  //   opacity: 0;
+  // }
 
   @media all and (max-width: variables.$md) {
     font-size: var(--text-xl);
@@ -99,16 +121,33 @@ button.btn--menu-toggle {
 .btn--cart-toggle {
   position: relative;
   &:hover .shade {
-    opacity: 0.2;
+    // opacity: 0.2;
   }
-  .shade {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background-color: var(--color-gris-50);
-    opacity: 0;
+  // .shade {
+  //   position: absolute;
+  //   inset: 0;
+  //   border-radius: 50%;
+  //   background-color: var(--color-gris-50);
+  //   opacity: 0;
+  // }
+  .fill--white,
+  .fill--accent {
+    transition: fill 0.3s ease;
+  }
+  .btn--cart-toggle__count {
+    transition: color 0.3s ease;
   }
   &:hover {
+    // background-color: var(--color-white);
+    .fill--white {
+      fill: var(--color-accent);
+    }
+    .fill--accent {
+      fill: var(--color-white);
+    }
+    .btn--cart-toggle__count {
+      color: var(--color-accent);
+    }
   }
   &__count {
     position: absolute;

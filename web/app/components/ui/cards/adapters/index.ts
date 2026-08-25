@@ -314,7 +314,6 @@ export function articleToCard(
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
-  console.log(title, size);
   return {
     _type: _type,
     layout: size === "md" && isLandscape ? "col" : "row",

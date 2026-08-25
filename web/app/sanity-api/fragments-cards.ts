@@ -85,6 +85,7 @@ export const cardRefFeuilletage = `
   chercheur->{
     _id,
     name,
+    last_name,
     slug
   }
 `;
@@ -138,6 +139,7 @@ export const cardRefImageImages = `
   chercheur->{
     _id,
     name,
+    last_name,
     slug
   },
   artists[]->{
@@ -163,6 +165,7 @@ export const cardRefConversation = `
   chercheur->{
     _id,
     name,
+    last_name,
     slug
   },
   artists[]->{
@@ -186,6 +189,7 @@ export const cardRefSerieThematique = `
   chercheur->{
     _id,
     name,
+    last_name,
     slug
   },
   artists[]->{
