@@ -4,13 +4,13 @@ import { FormUI, LocaleString } from "@/app/sanity-api/types/sanity.types";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import clsx from "clsx";
 
-type SubjectProps = Array<{
+type Subject = {
   to?: string;
   title?: LocaleString;
   description?: LocaleString;
   _type: "subectItem";
   _key: string;
-}>;
+};
 
 type Props = {
   input: FormUI;
@@ -18,21 +18,44 @@ type Props = {
 
 const ModuleFormUI = ({ input }: Props) => {
   const { title, subject } = input;
-  const [selectedSubject, setSelectedSubject] = useState<SubjectProps | null>(
-    null,
+  const [selectedSubject, setSelectedSubject] = useState<Subject | null>(
+    subject?.[0] ?? null,
   );
   const [data, setData] = useState({});
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+  const selectedSubjectTitle = _localizeField(selectedSubject?.title);
   const _update = (key: string, val: any) => {
-    // console.log(val);
     if (key === "subject") {
-      setSelectedSubject(val);
+      setSelectedSubject(subject?.find((opt) => opt._key === val) ?? null);
+      return;
     }
     setData((pre) => ({ ...pre, [key]: val }));
   };
-  const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const _onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(selectedSubject);
+    setStatus("sending");
+    console.log(selectedSubjectTitle);
     console.log(data);
+    try {
+      const res = await fetch("/api/contact-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: selectedSubject?.to,
+          subject: selectedSubjectTitle,
+          data,
+        }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+      setTimeout(() => {
+        setStatus("idle");
+      }, 5000);
+    }
   };
   const fields = [
     {
@@ -87,14 +110,11 @@ const ModuleFormUI = ({ input }: Props) => {
                   <label>{_localizeText("Motif de contact *")}</label>
                   <select
                     className='ui-filters ui-filters__select'
-                    // value={data["subject"] ?? ""}
+                    value={selectedSubject?._key ?? ""}
                     onChange={(e) => _update("subject", e.target.value)}
                     aria-label={_localizeText("Motif de contact *")}>
-                    {/* <option value=''>
-                      {_localizeText("Motif de contact")}
-                    </option> */}
-                    {subject?.map((opt) => (
-                      <option key={opt._key} value={`${opt}`}>
+                    {subject?.map((opt, i) => (
+                      <option key={opt._key + "--" + i} value={opt._key}>
                         {_localizeField(opt.title)}{" "}
                         {_localizeField(opt.description)}
                       </option>
@@ -103,6 +123,7 @@ const ModuleFormUI = ({ input }: Props) => {
                 </div>
                 {fields.map((item, i) => (
                   <div
+                    key={i}
                     className={clsx(
                       "form-row",
                       item.type !== "textarea" && "form-row--half",
@@ -134,9 +155,21 @@ const ModuleFormUI = ({ input }: Props) => {
                   </div>
                 ))}
                 <div className='form-row'>
-                  <button className='btn' type='submit'>
-                    {_localizeText("send")}
-                  </button>
+                  {status === "idle" ? (
+                    <button className='btn' type='submit'>
+                      {_localizeText("send")}
+                    </button>
+                  ) : (
+                    <p
+                      className={clsx(
+                        "form-row__message",
+                        status === "error" && "form-row__message--error",
+                      )}>
+                      {status === "sending" && _localizeText("loading")}
+                      {status === "sent" && _localizeText("success")}
+                      {status === "error" && _localizeText("error")}
+                    </p>
+                  )}
                 </div>
               </form>
             </div>
