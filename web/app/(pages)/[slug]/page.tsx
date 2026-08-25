@@ -83,6 +83,7 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
             input={input}
             title={rebond?.title || undefined}
             items={rebond?.items}
+            className='rebonds-auto'
           />
         );
       })}

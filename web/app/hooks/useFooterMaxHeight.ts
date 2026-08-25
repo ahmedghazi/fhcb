@@ -6,7 +6,9 @@ export function useFooterMaxHeight<T extends HTMLElement = HTMLDivElement>() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const footerContent = ref.current?.querySelector(".card__footer-content");
+      const footerContent = ref.current?.querySelector(
+        ".card__footer-content .card__btns .card__btns-conntent",
+      );
       if (footerContent) {
         const footerContentBounding = footerContent.getBoundingClientRect();
         setStyle(

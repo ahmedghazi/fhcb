@@ -70,6 +70,7 @@ const CardType = ({ input, context, size }: Props) => {
     else if (isCurrent) return "lg";
     else return SIZES["exhibition"][context];
   };
+
   return (
     <>
       {input._type === "event" && (

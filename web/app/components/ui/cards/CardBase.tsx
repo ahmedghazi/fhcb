@@ -94,18 +94,20 @@ export const CardFooter = ({
   <div className='card__footer'>
     <div className='card_footer-content'>
       <div className='card__btns'>
-        {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
-          <Link
-            key={i}
-            href={action.href}
-            className={clsx(
-              "btn",
-              action.variant === "secondary" && "btn--secondary",
-            )}>
-            {action.label}
-          </Link>
-        ))}
-        {actionsNode}
+        <div className='card__btns-conntent'>
+          {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
+            <Link
+              key={i}
+              href={action.href}
+              className={clsx(
+                "btn",
+                action.variant === "secondary" && "btn--secondary",
+              )}>
+              {action.label}
+            </Link>
+          ))}
+          {actionsNode}
+        </div>
       </div>
     </div>
   </div>
@@ -121,18 +123,20 @@ const ActionButtons = ({
   actionsNode?: ReactNode;
 }) => (
   <div className='card__btns'>
-    {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
-      <Link
-        key={i}
-        href={action.href}
-        className={clsx(
-          "btn",
-          action.variant === "secondary" && "btn--secondary",
-        )}>
-        {action.label}
-      </Link>
-    ))}
-    {actionsNode}
+    <div className='card__btns-conntent'>
+      {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
+        <Link
+          key={i}
+          href={action.href}
+          className={clsx(
+            "btn",
+            action.variant === "secondary" && "btn--secondary",
+          )}>
+          {action.label}
+        </Link>
+      ))}
+      {actionsNode}
+    </div>
   </div>
 );
 

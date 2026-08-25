@@ -6,6 +6,7 @@ import {
   _orderRebondsByItems,
 } from "../sanity-api/utils";
 import SliderCards from "./ui/SliderCards";
+import clsx from "clsx";
 
 type Props = {
   // input: NonNullable<FEUILLETAGE_QUERY_RESULT>["related"];
@@ -16,14 +17,21 @@ type Props = {
   // instead of rebondsResolver's fixed GROQ concatenation order (grouped by document type)
   items?: string[] | null;
   layout?: "grid" | "slider";
+  className?: string;
 };
 
-const Rebonds = ({ input, title, items, layout = "grid" }: Props) => {
+const Rebonds = ({
+  input,
+  title,
+  items,
+  layout = "grid",
+  className = "",
+}: Props) => {
   if (!input || input.length === 0) return null;
   const resolvedTitle = _localizeField(title) || "";
   const orderedInput = items ? _orderRebondsByItems(items, input) : input;
   return (
-    <section className='rebonds mb-lg'>
+    <section className={clsx("rebonds mb-lg", className)}>
       <div className='container-fluid'>
         <h2 className='c-h1_5'>{_localizeText(resolvedTitle)}</h2>
         {layout === "grid" && (
