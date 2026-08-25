@@ -9,7 +9,7 @@ import EmbedVideo from "../components/ui/EmbedVideo";
 const portableTextComponents: PortableTextComponents = {
   block: {
     h2: ({ children }) => <h2>{children}</h2>,
-    h3: ({ children }) => <h3>{children}</h3>,
+    h3: ({ children }) => <h3 className='c-h3-alt'>{children}</h3>,
     "c-chapo": ({ children }) => <p className='c-chapo'>{children}</p>,
   },
   types: {

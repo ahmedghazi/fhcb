@@ -49,6 +49,7 @@
   --text-xl: 1.25rem; /* 20px — p */
   --text-2xl: 1.3125rem; /* 21px — titre card */
   --text-3xl: 1.5625rem; /* 25px — chapo, title expo */
+  --text-3xl-alt: 1.5625rem; /* 30px — text h3 (intertitre) */
   --text-4xl: 2.375rem; /* 38px — quote */
   --text-5xl: 2.5rem; /* 40px — h2 */
   --text-6xl: 4.375rem; /* 70px */

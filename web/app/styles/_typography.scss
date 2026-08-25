@@ -95,7 +95,9 @@ p,
   }
   max-width: 41rem;
   margin: 0 auto;
-
+  h3 {
+    text-align: center;
+  }
   ul {
     list-style: initial;
     padding-left: 0.8em;
@@ -170,7 +172,12 @@ ul {
     font-weight: 800;
     line-height: 1;
   }
-
+  .c-h3-alt {
+    /* 30px */
+    font-size: var(--text-3xl-alt);
+    font-weight: 800;
+    line-height: 1;
+  }
   .c-h3 {
     /* 17px */
     font-size: var(--text-md);

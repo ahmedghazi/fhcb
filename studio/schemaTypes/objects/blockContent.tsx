@@ -3,6 +3,7 @@ import {defineType, defineArrayMember} from 'sanity'
 import {LinkIcon} from '@sanity/icons'
 import {FiExternalLink} from 'react-icons/fi'
 import linkInternalTypes from '../misc/linkInternalTypes'
+import {JSX} from 'react'
 /**
  * This is the schema definition for the rich text fields used for
  * for this blog studio. When you import it in schemas.js it can be
@@ -13,26 +14,11 @@ import linkInternalTypes from '../misc/linkInternalTypes'
  *    type: 'blockContent'
  *  }
  */
-const TextL = (props: any): JSX.Element => (
-  <p style={{fontSize: '2rem', marginTop: 0}}> {props.children} </p>
+const TextH3 = (props: any): JSX.Element => (
+  <span style={{fontSize: '2rem', marginTop: 0, display: 'block', textAlign: 'center'}}>
+    {props.children}
+  </span>
 )
-// const TextIndent = (props: any): JSX.Element => (
-//   <div className="indent">
-//     <p style={{paddingLeft: '1rem', marginTop: 0}}> {props.children} </p>
-//   </div>
-// )
-const TextIndent = (props: any): JSX.Element => (
-  <span style={{paddingLeft: '1rem', marginTop: 0, display: 'inline-block'}}>{props.children}</span>
-)
-const Underline = (props: any): JSX.Element => (
-  <span style={{textDecoration: 'underline'}}> {props.children} </span>
-)
-const Outline = (props: any): JSX.Element => (
-  <span style={{border: '1px solid ', borderRadius: '100%'}}> {props.children} </span>
-)
-// const TextXL = (props: any): JSX.Element => (
-//   <p style={{fontSize: '3rem', marginTop: 0}}> {props.children} </p>
-// )
 
 export default defineType({
   title: 'Block Content',
@@ -49,7 +35,7 @@ export default defineType({
       styles: [
         {title: 'Normal', value: 'normal'},
         // { title: "Titre H2", value: "h2" },
-        // { title: "Titre H3", value: "h3" },
+        {title: 'Titre H3', value: 'h3', component: TextH3},
         // {title: 'H4', value: 'h4'},
         // {title: 'Quote', value: 'blockquote'},
         // {
