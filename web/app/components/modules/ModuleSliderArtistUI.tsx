@@ -18,7 +18,7 @@ type Props = {
 };
 
 const ModuleSliderArtistUI = ({ input, limit = 10 }: Props) => {
-  const { artist, items, cta } = input;
+  const { artist, title, items, cta } = input;
   // start with the original (server-rendered) order, already capped to `limit`, to avoid a
   // hydration mismatch, then shuffle (and re-cap) client-side after mount
   const [shuffledItems, setShuffledItems] = useState(items?.slice(0, limit));
@@ -30,9 +30,14 @@ const ModuleSliderArtistUI = ({ input, limit = 10 }: Props) => {
   return (
     <section className='module module--slider-artist-ui'>
       <div className='module__inner'>
-        <div className='container-fluid'>
-          {artist && <h2 className='module__title c-h1_5'>{artist.name}</h2>}
-        </div>
+        {/*     <div className='container-fluid'>
+   //       {artist && <h2 className='module__title c-h1_5'>{artist.name}</h2>}
+        </div>*/}
+        {title && (
+          <div className='container-fluid'>
+            <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
+          </div>
+        )}
         {shuffledItems && (
           <SlickSlider
             settings={{

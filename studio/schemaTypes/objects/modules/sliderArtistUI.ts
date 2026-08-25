@@ -1,5 +1,6 @@
 import {defineField} from 'sanity'
 import {MdOutlineSlideshow} from 'react-icons/md'
+import {baseLanguage} from '../../locale/supportedLanguages'
 
 export default defineField({
   name: 'sliderArtistUI',
@@ -7,6 +8,8 @@ export default defineField({
   type: 'object',
   icon: MdOutlineSlideshow,
   fields: [
+    defineField({name: 'title', type: 'localeString', title: 'Titre'}),
+
     defineField({
       name: 'artist',
       title: 'Artist',
@@ -20,7 +23,10 @@ export default defineField({
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),
   ],
   preview: {
-    select: {title: `artist.name`},
+    select: {
+      title: `title.${baseLanguage}`,
+      artist: `artist.name`,
+    },
     prepare(selection) {
       return {title: selection.title || 'Slider Artiste UI', subtitle: 'Slider Artiste UI'}
     },
