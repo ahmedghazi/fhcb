@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {TbArticle} from 'react-icons/tb'
+import rebondsAutoField from '../misc/rebondsAutoField'
 
 export default defineType({
   type: 'document',
@@ -99,6 +100,7 @@ export default defineType({
       ],
       group: 'editorial',
     }),
+    rebondsAutoField,
   ],
 
   preview: {

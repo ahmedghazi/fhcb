@@ -4809,6 +4809,36 @@
     }
   },
   {
+    "type": "type",
+    "name": "rebond.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "rebond"
+    }
+  },
+  {
     "name": "conversation",
     "type": "document",
     "attributes": {
@@ -5447,6 +5477,28 @@
           }
         },
         "optional": true
+      },
+      "rebondsAuto": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
+            }
+          }
+        },
+        "optional": true
       }
     }
   },
@@ -5756,6 +5808,28 @@
             "rest": {
               "type": "inline",
               "name": "imageImages.reference"
+            }
+          }
+        },
+        "optional": true
+      },
+      "rebondsAuto": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
             }
           }
         },
@@ -7234,36 +7308,6 @@
         },
         "optional": true
       }
-    }
-  },
-  {
-    "type": "type",
-    "name": "rebond.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "rebond"
     }
   },
   {
@@ -11928,6 +11972,28 @@
             "rest": {
               "type": "inline",
               "name": "imageImages.reference"
+            }
+          }
+        },
+        "optional": true
+      },
+      "rebondsAuto": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "rebond.reference"
             }
           }
         },

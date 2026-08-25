@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSettings } from "./sanity-api/sanity-queries";
+import { LocaleBlockContent } from "./sanity-api/types/sanity.types";
 import Text from "./components/ui/Text";
 
 async function NotFoundPage() {
@@ -8,7 +9,7 @@ async function NotFoundPage() {
     <div className='template template--page-404' data-template='404'>
       <div className='container-fluid'>
         {settings && settings.message404 && (
-          <Text input={settings?.message404} />
+          <Text input={settings.message404 as LocaleBlockContent} />
         )}
         {!settings && (
           <>

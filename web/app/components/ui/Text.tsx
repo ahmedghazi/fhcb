@@ -6,16 +6,18 @@ import { PortableText } from "@portabletext/react";
 import React from "react";
 
 type Props = {
-  input: LocaleBlockContent;
+  input?: LocaleBlockContent;
 };
 
 const Text = ({ input }: Props) => {
   return (
     <div className='text'>
-      <PortableText
-        value={_localizeField(input)}
-        components={portableTextComponents}
-      />
+      {input && (
+        <PortableText
+          value={_localizeField(input)}
+          components={portableTextComponents}
+        />
+      )}
     </div>
   );
 };

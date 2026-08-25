@@ -231,17 +231,17 @@
         margin-bottom: var(--spacing-lg);
       }
 
-      .arrow {
-        // left: calc(50% - var(--spacing-gutter) * 0.5);
-        &--left {
-        }
-        &--right {
-        }
-      }
-      .slick-track {
-        // display: flex;
-        // align-items: stretch;
-      }
+      // .arrow {
+      //   // left: calc(50% - var(--spacing-gutter) * 0.5);
+      //   &--left {
+      //   }
+      //   &--right {
+      //   }
+      // }
+      // .slick-track {
+      //   // display: flex;
+      //   // align-items: stretch;
+      // }
       .slick-slide {
         height: auto !important;
         display: flex !important;

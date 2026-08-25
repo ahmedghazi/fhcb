@@ -4,6 +4,7 @@ import slug from '../fields/slug'
 import {TbMessageCircle} from 'react-icons/tb'
 import modulesList from '../objects/modules/modulesList'
 import linkInternalTypes from '../misc/linkInternalTypes'
+import rebondsAutoField from '../misc/rebondsAutoField'
 
 export default defineType({
   type: 'document',
@@ -132,6 +133,7 @@ export default defineType({
       ],
       group: 'editorial',
     }),
+    rebondsAutoField,
   ],
 
   preview: {

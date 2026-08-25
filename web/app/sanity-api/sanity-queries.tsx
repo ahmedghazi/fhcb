@@ -367,6 +367,9 @@ export const IMAGE_IMAGES_QUERY = groq`*[_type == "imageImages" && slug.current 
     ${cardRefImageImages}
   },
   "related": ${relatedRessourcesByArtists},
+  rebondsAuto[]->{
+    ${rebondsResolver}
+  }
 }`;
 
 export async function getImageImages(
@@ -433,7 +436,10 @@ export const SERIE_THEMATIQUE_QUERY = groq`*[_type == "serieThematique" && slug.
   rebonds[]->{
     ${cardTypes}
   },
-  "related": ${relatedByArtists}
+  "related": ${relatedByArtists},
+  rebondsAuto[]->{
+    ${rebondsResolver}
+  }
 }`;
 
 export async function getSerieThematique(
@@ -466,7 +472,10 @@ export const CONVERSATION_QUERY = groq`*[_type == "conversation" && slug.current
   rebonds[]->{
     ${cardTypes}
   },
-  "related": ${relatedByArtists}
+  "related": ${relatedByArtists},
+  rebondsAuto[]->{
+    ${rebondsResolver}
+  }
 }`;
 
 export async function getConversation(
