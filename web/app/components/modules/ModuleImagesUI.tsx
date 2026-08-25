@@ -16,6 +16,23 @@ type Props = {
 
 const GUTTER = 20; // même valeur que ta variable CSS gap-gutter
 
+// Le module a sa propre limite de hauteur (CSS --max-img-h, appliquée via la
+// classe .img-resized). On mesure sa valeur résolue en px plutôt que de
+// recopier la formule ici, pour ne jamais désynchroniser le calcul JS des
+// largeurs et le max-height CSS (sinon le ratio largeur/hauteur casse quand
+// le CSS écrase une hauteur plus grande que celle qu'on a calculée).
+const _getMaxImgHeight = () => {
+  const probe = document.createElement("div");
+  probe.style.position = "absolute";
+  probe.style.visibility = "hidden";
+  probe.style.pointerEvents = "none";
+  probe.style.height = "var(--max-img-h)";
+  document.body.appendChild(probe);
+  const value = probe.getBoundingClientRect().height;
+  document.body.removeChild(probe);
+  return value || window.innerHeight;
+};
+
 const ModuleImagesUI = ({ input }: Props) => {
   const { title, items, gridSize } = input;
   const { isMobile } = useDeviceDetect();
@@ -62,7 +79,9 @@ const ModuleImagesUI = ({ input }: Props) => {
       const availableWidth = mosaic.clientWidth - gap * (ratios.length - 1);
       const totalRatio = ratios.reduce((sum, ratio) => sum + ratio, 0);
 
-      setHeight(availableWidth / totalRatio);
+      setHeight(
+        Math.min(availableWidth / totalRatio, _getMaxImgHeight()),
+      );
       setActive(true);
     };
 
@@ -102,7 +121,8 @@ const ModuleImagesUI = ({ input }: Props) => {
                   height
                     ? {
                         height,
-                        flex: `${ratios[i]} 1 0`,
+                        width: ratios[i] * height,
+                        flex: "0 0 auto",
                       }
                     : undefined
                 }>
