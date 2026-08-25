@@ -3,7 +3,7 @@ import { urlFor } from "@/app/sanity-api/sanity-utils";
 import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
-import ImagePixelated from "./ImagePixelated";
+// import ImagePixelated from "./ImagePixelated";
 import ImageDarkroom from "./ImageDarkRoom4";
 
 type Props = {
@@ -39,7 +39,7 @@ const Figure = ({
         withCaption && "figure--with-caption",
       )}>
       <ImageDarkroom
-        duration={500}
+        duration={200}
         src={urlFor(asset, width)}
         width={asset?.metadata?.dimensions?.width || width}
         height={asset?.metadata?.dimensions?.height || width}
