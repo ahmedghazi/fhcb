@@ -8,6 +8,11 @@
   container-type: inline-size;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+  &:hover {
+    transform: scale(1.01);
+  }
   &:hover .btn:not(.btn--secondary) {
     background-color: transparent;
     &::before {
