@@ -152,18 +152,22 @@ nav {
       & > li .menu-label,
       & > li > a .menu-label {
         font-weight: 600;
-        font-size: var(--text-sm-6xl);
+        font-size: calc(var(--text-sm-6xl) * 0.8);
         padding: 0;
         line-height: 1;
       }
+
       .sub-menu {
         position: initial;
         padding: calc(var(--spacing-sm) * 0.9) 0;
         a {
+          padding: 0;
+
           .menu-label {
             font-size: var(--text-sm-md);
             font-weight: 200;
             line-height: 1.8;
+            line-height: 1.3;
           }
         }
       }

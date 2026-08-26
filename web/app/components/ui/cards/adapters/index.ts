@@ -316,7 +316,7 @@ export function articleToCard(
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return {
     _type: _type,
-    layout: size === "md" && isLandscape ? "col" : "row",
+    layout: size === "md" && isLandscape ? "row" : "col",
     colorVar: "var(--color-article)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),

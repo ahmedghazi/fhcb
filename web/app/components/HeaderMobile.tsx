@@ -59,7 +59,7 @@ const HeaderMobile = ({ settings }: Props) => {
       <div className={clsx("header__modal", open && "header__modal--open")}>
         <div className='scroll-y'>
           <div className='header__modal-content'>
-            <div className='header__group'>
+            {/* <div className='header__group'>
               {settings?.btnTickets && (
                 <a
                   target='_blank'
@@ -72,7 +72,7 @@ const HeaderMobile = ({ settings }: Props) => {
               <button onClick={() => setOpen(false)}>
                 <Icon name='close' />
               </button>
-            </div>
+            </div> */}
             <div className='header__group'>
               {settings?.navPrimary && (
                 <Nav

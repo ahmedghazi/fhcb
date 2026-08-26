@@ -50,7 +50,7 @@ const SIZES = {
   exhibitionPast: { grid: "sm", slider: "sm", rebonds: "sm", search: "md" },
   exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md", search: "lg" },
   product: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
-  article: { grid: "md", slider: "md", rebonds: "md", search: "md" },
+  article: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
   artist: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
   imageImages: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   feuilletage: { grid: "md", slider: "md", rebonds: "md", search: "md" },
