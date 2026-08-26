@@ -4,6 +4,9 @@
   width: 100%;
   section.module {
     margin-bottom: var(--spacing-lg);
+    &:last-child {
+      margin-bottom: 0;
+    }
     &--list-product-ui,
     &--list-conversation-ui,
     &--list-exhibitions-past-ui,
@@ -207,6 +210,12 @@
       margin-bottom: var(--spacing-sm);
       &:not(:has(+ .module--list-ui)) {
         margin-bottom: var(--spacing-lg);
+        &:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      &:last-child {
+        margin-bottom: 0 !important;
       }
       h3,
       .list-item {
@@ -352,12 +361,13 @@
         flex-direction: column;
         justify-content: space-between;
         gap: var(--spacing-gutter);
+        flex: 2;
         h2 {
           margin-bottom: var(--spacing-xs);
         }
         .btn {
-          display: inline-block;
-          width: auto;
+          display: block;
+          // width: auto;
         }
       }
       img {
@@ -390,12 +400,14 @@
         flex-direction: column;
         justify-content: space-between;
         gap: var(--spacing-gutter);
+        flex: 2;
+
         h2 {
           margin-bottom: var(--spacing-xs);
         }
         .btn {
-          display: inline-block;
-          width: auto;
+          display: block;
+          // width: auto;
         }
       }
       img {

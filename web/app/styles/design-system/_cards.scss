@@ -8,10 +8,11 @@
   container-type: inline-size;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease;
+  transition: transform 0.35s ease;
   transform-origin: center;
+  will-change: transform;
   &:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
   }
   &:hover .btn:not(.btn--secondary) {
     background-color: transparent;
@@ -545,21 +546,21 @@
       }
       @media (hover: hover) {
         .card__footer .card__btns {
-          max-block-size: 0;
-          overflow: hidden;
-          opacity: 0;
-          transition:
-            max-block-size 180ms cubic-bezier(0.4, 0, 1, 1),
-            opacity 100ms linear;
+          // max-block-size: 0;
+          // overflow: hidden;
+          // opacity: 0;
+          // transition:
+          //   max-block-size 180ms cubic-bezier(0.4, 0, 1, 1),
+          //   opacity 100ms linear;
         }
 
-        &:is(:hover, :focus-within) .card__footer .card__btns {
-          max-block-size: var(--footer-max-height);
-          opacity: 1;
-          transition:
-            max-block-size 500ms cubic-bezier(0.16, 1, 0.3, 1),
-            opacity 220ms ease-out;
-        }
+        // &:is(:hover, :focus-within) .card__footer .card__btns {
+        //   max-block-size: var(--footer-max-height);
+        //   opacity: 1;
+        //   transition:
+        //     max-block-size 500ms cubic-bezier(0.16, 1, 0.3, 1),
+        //     opacity 220ms ease-out;
+        // }
       }
 
       // Keep the footer available when hover is not supported (for example,

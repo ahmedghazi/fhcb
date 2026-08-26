@@ -33,7 +33,9 @@ const Rebonds = ({
   return (
     <section className={clsx("rebonds mb-lg", className)}>
       <div className='container-fluid'>
-        <h2 className='c-h1_5'>{_localizeText(resolvedTitle)}</h2>
+        {resolvedTitle && (
+          <h2 className='c-h1_5'>{_localizeText(resolvedTitle)}</h2>
+        )}
         {layout === "grid" && (
           <div className='grid--centered'>
             {orderedInput?.map((item: any, i: number) => (

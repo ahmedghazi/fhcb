@@ -66,7 +66,7 @@ const ModuleNewsCardUI = ({ input }: Props) => {
               <CardArticle
                 key={`article-${item._id}-${index}`}
                 input={item}
-                size='md'
+                size='sm'
               />
             ))}
             {exhibitions.map((item, index: number) => (
