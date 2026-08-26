@@ -50,6 +50,12 @@
         }
       }
 
+      @media all and (max-width: variables.$md) {
+        .featured-cards-grid,
+        .featured-cards-grid__secondary {
+          gap: var(--spacing-sm);
+        }
+      }
       @media all and (min-width: variables.$md) {
         .featured-cards-grid {
           display: grid;

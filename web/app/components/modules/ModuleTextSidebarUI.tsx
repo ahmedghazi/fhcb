@@ -30,7 +30,7 @@ const ModuleTextSidebarUI = ({ input }: Props) => {
           </div>
           <div className='grid md:grid-cols-12 gap-gutter'>
             {sidebar && (
-              <div className='md:col-span-3 module__aside'>
+              <div className='md:col-span-3 module__aside order-2 md:order-1'>
                 <Sidebar input={sidebar} />
               </div>
             )}
