@@ -7,6 +7,7 @@
 - fix anime boutons, plus de bouton primaire
 - hover effect sur carte video home featured
 - scenario rebonds en cours sinon à venir PAS et à venir
-- dans expos > 2e rebonds auto expo en cours ou à venir
+- # dans expos > 2e rebonds auto expo en cours ou à venir
 - rebonds scenario HCB + MF qui limite les résultats
-- scenario rebonds tags-related + exhibition-current-or-futur
+- scenario rebonds auto tags-related
+- # scenario rebonds auto exhibition-current-or-futur
