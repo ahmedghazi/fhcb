@@ -4,7 +4,7 @@ import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 import { _localizeField, _localizeText } from "../sanity-api/utils";
 import LocalesSwitcher from "./ui/LocaleSwitcher";
 import SearchToggle from "./ui/SearchToggle";
-import Nav from "./Nav";
+import NavMobile from "./NavMobile";
 import Link from "next/link";
 import LogoFHCB from "./LogoFHCB";
 import clsx from "clsx";
@@ -59,29 +59,15 @@ const HeaderMobile = ({ settings }: Props) => {
       <div className={clsx("header__modal", open && "header__modal--open")}>
         <div className='scroll-y'>
           <div className='header__modal-content'>
-            {/* <div className='header__group'>
-              {settings?.btnTickets && (
-                <a
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  href={settings.btnTickets.link}
-                  className='btn-tickets'>
-                  {_localizeField(settings.btnTickets.label)}
-                </a>
-              )}
-              <button onClick={() => setOpen(false)}>
-                <Icon name='close' />
-              </button>
-            </div> */}
             <div className='header__group'>
               {settings?.navPrimary && (
-                <Nav
+                <NavMobile
                   navPrimary={(settings.navPrimary ?? undefined) as any}
                   settings={settings}
                 />
               )}
             </div>
-            <div className='header__group'>
+            <div className='header__group text-xl'>
               <div className='flex justify-between'>
                 <SearchToggle />
                 <LocalesSwitcher />

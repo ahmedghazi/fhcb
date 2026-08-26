@@ -256,11 +256,11 @@
             max-width: var(--gridder-4_4) !important;
           }
           @media all and (max-width: variables.$md) {
-            width: calc(var(--gridder-4_4) * 0.7) !important;
-            max-width: calc(var(--gridder-4_4) * 0.7) !important;
+            width: calc(var(--gridder-4_4) * 0.9) !important;
+            max-width: calc(var(--gridder-4_4) * 0.9) !important;
             &--md {
-              width: calc(var(--gridder-4_4) * 0.7) !important;
-              max-width: calc(var(--gridder-4_4) * 0.7) !important;
+              width: calc(var(--gridder-4_4) * 0.9) !important;
+              max-width: calc(var(--gridder-4_4) * 0.9) !important;
             }
           }
         }

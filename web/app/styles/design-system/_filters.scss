@@ -39,6 +39,14 @@ header.is-up ~ main .filters {
         display: none;
       }
     }
+    &:not(.is-open) .filters__controls {
+      padding: 0;
+      button {
+        width: 100%;
+        height: 100%;
+        padding: var(--spacing-xs);
+      }
+    }
     .filters__controls {
       text-align: center;
       display: block;
@@ -231,6 +239,9 @@ header.is-up ~ main .filters {
       overflow: auto;
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; /* IE et ancien Edge */
+      @media all and (max-width: variables.$md) {
+        padding-bottom: var(--spacing-sm);
+      }
       &::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera */
       }
@@ -239,19 +250,23 @@ header.is-up ~ main .filters {
         position: relative;
         &:hover,
         &:has(input:checked) {
-          padding-left: 1.5rem;
-          input {
-            opacity: 1;
+          @media all and (min-width: variables.$md) {
+            padding-left: 1.5rem;
+            input {
+              opacity: 1;
+            }
           }
         }
         &:has(input:checked) {
           color: var(--color-secondary);
         }
         input {
-          position: absolute;
-          left: 0;
-          opacity: 0;
-          transition: opacity 0.2s ease;
+          @media all and (min-width: variables.$md) {
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+          }
         }
       }
     }

@@ -46,7 +46,7 @@ const i18n = {
     contactTeam: "Contacter l'équipe",
     all: "Tous",
     sort: "Trier par",
-    filters: "Filtres",
+    filters: "Filtrer",
     resetFilters: "Effacer les filtres",
     sortIndexAsc: "N° croissant",
     sortIndexDesc: "N° décroissant",

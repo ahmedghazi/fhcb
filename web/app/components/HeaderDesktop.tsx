@@ -2,7 +2,7 @@ import React from "react";
 import { SETTINGS_QUERY_RESULT } from "../sanity-api/types/sanity.types";
 import Link from "next/link";
 import LogoFHCB from "./LogoFHCB";
-import Nav from "./Nav";
+import NavDesktop from "./NavDesktop";
 import LocalesSwitcher from "./ui/LocaleSwitcher";
 import SearchToggle from "./ui/SearchToggle";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
@@ -24,7 +24,7 @@ const HeaderDesktop = ({ settings }: Props) => {
             </Link>
           </div>
 
-          <Nav navPrimary={(settings.navPrimary ?? undefined) as any} />
+          <NavDesktop navPrimary={(settings.navPrimary ?? undefined) as any} />
           <div className='header__meta-nav'>
             <LocalesSwitcher />
             <SearchToggle />

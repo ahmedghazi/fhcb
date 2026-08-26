@@ -1,6 +1,6 @@
 "use client";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActiveFilters, SanityFilterDef } from "./filters.types";
 import FilterList from "./FilterList";
 import FilterRadio from "./FilterRadio";
@@ -35,6 +35,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     }
     setActive(next);
     onChange(next);
+    setOpen(false);
   };
 
   const _toggle = (key: string, value: string) => {
@@ -44,6 +45,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     }
     setActive(next);
     onChange(next);
+    setOpen(false);
   };
 
   const _reset = () => {
