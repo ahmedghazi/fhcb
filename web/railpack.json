@@ -5,7 +5,7 @@
       "inputs": [
         {
           "local": true,
-          "include": ["package.json", "pnpm-lock.yaml"]
+          "include": ["package.json", "pnpm-lock.yaml", ".railpack-cache-bust"]
         }
       ],
       "commands": [
