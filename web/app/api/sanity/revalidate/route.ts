@@ -13,8 +13,12 @@ const FANOUT_TAGS: Record<string, string[]> = {
   product: ["library"],
   tagProduct: ["product", "library"],
   pageModulaire: ["home"],
-  exhibition: ["home"],
-  event: ["home"],
+  // pageModulaire/programme: several of each embed an exhibition-derived rebond block (e.g. the
+  // "current exhibitions, else upcoming" block on missions/equipe/histoire/... and on the
+  // "expositions-en-cours" programme page) — an exhibition/event flipping current<->past/upcoming
+  // needs those revalidated too, not just its own page and the home page.
+  exhibition: ["home", "pageModulaire", "programme"],
+  event: ["home", "pageModulaire", "programme"],
 };
 
 export async function POST(req: NextRequest) {
