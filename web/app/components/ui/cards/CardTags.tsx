@@ -7,7 +7,7 @@ type Props = {
 };
 
 const CardTags = ({ input }: Props) => {
-  const tagsList = input?.map((tag) => _localizeField(tag.title)).join(", ");
+  const tagsList = input?.map((tag) => _localizeField(tag.title)).join(" · ");
   return <div className='card__tag c-tag'>{tagsList}</div>;
 };
 

@@ -102,9 +102,11 @@ nav {
   //   font-size: 16px !important;
   //   color: blue !important;
   // }
-  ul.menu > li > .menu-label,
-  .locale-switcher button {
-    font-size: 1rem !important;
+  @media all and (min-width: variables.$md) {
+    ul.menu > li > .menu-label,
+    .locale-switcher button {
+      font-size: 1rem !important;
+    }
   }
   ul.menu {
     display: flex;
@@ -164,7 +166,7 @@ nav {
       & > li .menu-label,
       & > li > a .menu-label {
         font-weight: 600;
-        font-size: calc(var(--text-sm-6xl) * 0.8);
+        font-size: calc(var(--text-sm-6xl) * 0.8) !important;
         padding: 0;
         line-height: 1;
       }

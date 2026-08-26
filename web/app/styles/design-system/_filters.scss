@@ -237,14 +237,16 @@ header.is-up ~ main .filters {
     &-items {
       max-height: 13rem;
       overflow: auto;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE et ancien Edge */
+      scrollbar-track-color: var(--color-bg);
+      scrollbar-face-color: red;
+      // scrollbar-width: none; /* Firefox */
+      // -ms-overflow-style: none; /* IE et ancien Edge */
       @media all and (max-width: variables.$md) {
         padding-bottom: var(--spacing-sm);
       }
-      &::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-      }
+      // &::-webkit-scrollbar {
+      //   display: none; /* Chrome, Safari, Opera */
+      // }
       .ui-filter__checkbox {
         transition: padding-left 0.2s ease;
         position: relative;
