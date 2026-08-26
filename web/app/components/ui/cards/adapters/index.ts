@@ -161,18 +161,8 @@ export function productToCard(
   input: ProductExpanded,
   size: "sm" | "md" | "lg" = "md",
 ): CardBaseProps {
-  const {
-    imageCover,
-    tags,
-    price,
-    artists,
-    artistName,
-    variants,
-    languages,
-    totalInventory,
-    pastille,
-    publicationDate,
-  } = input;
+  const { imageCover, tags, price, artists, artistName, variants, pastille } =
+    input;
   const artistsName = artistsToString(artists);
 
   const title = (_localizeField(input.title) as string) || "";

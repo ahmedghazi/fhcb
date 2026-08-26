@@ -32,13 +32,12 @@ const HeaderDesktop = ({ settings }: Props) => {
             <ul className='meta-nav'>
               {settings.btnLibrary && (
                 <li className='flex'>
+                  <BtnCart />
                   <Link
                     href={_linkResolver(settings.btnLibrary.link)}
                     className='btn-library'>
                     {_localizeField(settings.btnLibrary.label)}
                   </Link>
-
-                  <BtnCart />
                 </li>
               )}
               {settings.btnTickets && (

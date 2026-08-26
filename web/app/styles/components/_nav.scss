@@ -80,6 +80,7 @@ nav {
   flex: 2;
   // padding: 0 var(--spacing-lg);
   // padding: 0;
+
   &.is-open {
     li.has-submenu:hover .sub-menu {
       display: block;
@@ -89,6 +90,7 @@ nav {
     white-space: nowrap;
     line-height: 1.8;
     width: 100%;
+
     &:hover {
       text-decoration: underline;
       text-decoration-thickness: 0.04em;
@@ -96,6 +98,14 @@ nav {
     }
   }
 
+  // .menu-label {
+  //   font-size: 16px !important;
+  //   color: blue !important;
+  // }
+  ul.menu > li > .menu-label,
+  .locale-switcher button {
+    font-size: 1rem !important;
+  }
   ul.menu {
     display: flex;
     justify-content: space-around;
@@ -114,6 +124,8 @@ nav {
     & > li {
       // flex: 1;
       position: relative;
+      & > .menu-label {
+      }
       & > .menu-label,
       & > a > .menu-label {
         padding: 0em 2em 0;

@@ -68,31 +68,22 @@ button.btn--menu-toggle {
   text-transform: uppercase;
   position: relative;
   &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    color: var(--color-accent);
-    border: var(--border);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    // content: "";
+    // position: absolute;
+    // inset: 0;
+    // border-radius: inherit;
+    // color: var(--color-accent);
+    // border: var(--border);
+    // opacity: 0;
+    // transition: opacity 0.3s ease;
   }
   &:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
     &::before {
       opacity: 1;
     }
   }
-  // &:hover::before {
-  //   opacity: 0.2;
-  // }
-  // &::before {
-  //   content: "";
-  //   position: absolute;
-  //   inset: 0;
-  //   border-radius: inherit;
-  //   background-color: var(--color-gris-100);
-  //   opacity: 0;
-  // }
 
   @media all and (max-width: variables.$md) {
     font-size: var(--text-xl);

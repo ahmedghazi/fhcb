@@ -1,6 +1,6 @@
 "use client";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ActiveFilters, SanityFilterDef } from "./filters.types";
 import FilterList from "./FilterList";
 import FilterRadio from "./FilterRadio";
@@ -27,7 +27,6 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   const _base = (): ActiveFilters => (active.sort ? { sort: active.sort } : {});
 
   const _update = (key: string, value: string) => {
-    console.log(key, value);
     const next = key === "sort" ? { ...active } : _base();
     if (value) {
       next[key] = value;
