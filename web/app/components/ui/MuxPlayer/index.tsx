@@ -1,6 +1,6 @@
 "use client";
 import MuxPlayer from "@mux/mux-player-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useConsent } from "react-hook-consent";
 import Controls from "./controls";
 import "./_index.scss";
@@ -41,6 +41,13 @@ const MuxVideoPlayer = ({
   const playerRef = useRef<React.ComponentRef<typeof MuxPlayer>>(null);
   const { hasConsent } = useConsent();
 
+  // Stable identity so the mux-player custom element doesn't see a "changed"
+  // prop (and re-diff/re-init) on every unrelated parent re-render.
+  const metadata = useMemo(
+    () => (title ? { video_title: title } : undefined),
+    [title],
+  );
+
   useEffect(() => {
     setReady(true);
   }, []);
@@ -57,19 +64,23 @@ const MuxVideoPlayer = ({
     if (player) player.currentTime = 0;
   }, [hoverPlay, hovered]);
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = useCallback(() => {
     if (!hoverPlay || isControlled) return;
     setInternalHovered(true);
-  };
-  const handleMouseLeave = () => {
+  }, [hoverPlay, isControlled]);
+  const handleMouseLeave = useCallback(() => {
     if (!hoverPlay || isControlled) return;
     setInternalHovered(false);
-  };
+  }, [hoverPlay, isControlled]);
+  const handleClick = useCallback(() => {
+    if (hoverPlay) return;
+    setMuted((m) => !m);
+  }, [hoverPlay]);
 
   return (
     <div
       className='mux-player-container'
-      onClick={hoverPlay ? undefined : () => setMuted(!muted)}
+      onClick={hoverPlay ? undefined : handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       {ready && (
@@ -77,7 +88,7 @@ const MuxVideoPlayer = ({
           <MuxPlayer
             ref={playerRef}
             playbackId={playbackId}
-            metadata={title ? { video_title: title } : undefined}
+            metadata={metadata}
             disableTracking={!hasConsent("mux-data")}
             autoPlay={hoverPlay ? false : "muted"}
             muted={muted}
@@ -98,4 +109,4 @@ const MuxVideoPlayer = ({
   );
 };
 
-export default MuxVideoPlayer;
+export default React.memo(MuxVideoPlayer);

@@ -35,7 +35,7 @@ const ModuleTextSidebarUI = ({ input }: Props) => {
               </div>
             )}
 
-            <div className='module__text md:col-span-7'>
+            <div className='module__text md:col-span-7 order-1 md:order-2'>
               {text && (
                 <div className='text'>
                   <PortableText

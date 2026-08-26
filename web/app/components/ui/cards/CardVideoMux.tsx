@@ -1,4 +1,4 @@
-import { CSSProperties, forwardRef } from "react";
+import { CSSProperties, forwardRef, memo } from "react";
 import { MuxVideo } from "@/app/sanity-api/types/sanity.types";
 import MuxVideoPlayer from "../MuxPlayer";
 import BtnCta from "../btns/BtnCta";
@@ -8,7 +8,7 @@ type Props = {
   style?: CSSProperties;
 };
 
-const CardVideoMux = forwardRef<HTMLDivElement, Props>(
+const CardVideoMux = memo(forwardRef<HTMLDivElement, Props>(
   ({ input, style }, ref) => {
     const { video, cta } = input;
     return (
@@ -26,7 +26,7 @@ const CardVideoMux = forwardRef<HTMLDivElement, Props>(
       </div>
     );
   },
-);
+));
 
 CardVideoMux.displayName = "CardVideoMux";
 
