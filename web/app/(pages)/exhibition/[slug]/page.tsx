@@ -90,6 +90,13 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
           />
         );
       })}
+      {/* <pre>{JSON.stringify(data.exhibCurrentOrFutur, null, 2)}</pre> */}
+      {data.exhibCurrentOrFutur && (
+        <RebondsExhibition
+          title='À découvrir en ce moment'
+          input={data.exhibCurrentOrFutur}
+        />
+      )}
     </div>
   );
 };

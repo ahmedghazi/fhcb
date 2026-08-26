@@ -52,9 +52,13 @@ export default defineType({
               },
               {title: 'Article(s) lié(s)', value: 'articles-related'},
               {title: 'Ressource(s) lié(s)', value: 'ressources-related'},
+              {title: 'Tag(s) lié(s)', value: 'tags-related'},
+              {title: 'Doc(s) HCB', value: 'docs-hcb-related'},
+              {title: 'Doc(s) MF', value: 'docs-mf-related'},
 
               {title: 'Expo(s) à venir', value: 'exhibition-futur'},
               {title: 'Expo(s) en cours', value: 'exhibition-current'},
+              {title: 'Expo(s) en cours OU à venir', value: 'exhibition-current-or-futur'},
               {title: 'Expo(s) passés', value: 'exhibition-past'},
               {title: 'Expo(s) du même artiste', value: 'exhibition-related-by-artist'},
               {title: 'Événement(s) à venir', value: 'event-futur'},
@@ -64,8 +68,7 @@ export default defineType({
                 value: 'exhibition-discover-past',
               },
               {
-                title:
-                  'Expo(s) en cours/à venir à découvrir (prio. fondation, complété au hasard)',
+                title: 'Expo(s) en cours/à venir à découvrir (prio. fondation, complété au hasard)',
                 value: 'exhibition-discover-current-or-futur',
               },
             ],

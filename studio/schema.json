@@ -4629,6 +4629,59 @@
     }
   },
   {
+    "name": "prix",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "prix"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
+        },
+        "optional": true
+      },
+      "slug": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "slug"
+        },
+        "optional": true
+      }
+    }
+  },
+  {
     "name": "rebond",
     "type": "document",
     "attributes": {
@@ -4719,11 +4772,27 @@
               },
               {
                 "type": "string",
+                "value": "tags-related"
+              },
+              {
+                "type": "string",
+                "value": "docs-hcb-related"
+              },
+              {
+                "type": "string",
+                "value": "docs-mf-related"
+              },
+              {
+                "type": "string",
                 "value": "exhibition-futur"
               },
               {
                 "type": "string",
                 "value": "exhibition-current"
+              },
+              {
+                "type": "string",
+                "value": "exhibition-current-or-futur"
               },
               {
                 "type": "string",
@@ -6667,6 +6736,13 @@
           "name": "slug"
         },
         "optional": true
+      },
+      "visible": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
       }
     }
   },
@@ -7970,6 +8046,36 @@
     }
   },
   {
+    "type": "type",
+    "name": "prix.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "prix"
+    }
+  },
+  {
     "name": "artist",
     "type": "document",
     "attributes": {
@@ -8083,6 +8189,28 @@
                 "type": "string",
                 "value": "image"
               }
+            }
+          }
+        },
+        "optional": true
+      },
+      "prix": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "prix.reference"
             }
           }
         },
@@ -8696,6 +8824,28 @@
             "rest": {
               "type": "inline",
               "name": "artist.reference"
+            }
+          }
+        },
+        "optional": true
+      },
+      "prix": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "prix.reference"
             }
           }
         },

@@ -29,6 +29,16 @@ import {
  * document, "futur"/"past" filters by date; either qualifier is optional.
  */
 
+// scenarios: "docs-hcb-related" / "docs-mf-related" — everything connected to one specific founding
+// artist (Henri Cartier-Bresson / Martine Franck), picked by slug rather than by reference so editors
+// don't need to hold the artist document's _id. Unlike "artist-related" (pivots on the HOST's own
+// artist(s)), this pivots on a fixed artist regardless of what the host document is — usable on any
+// page to pull in "everything about HCB/MF" specifically. \`references()\` checks the whole candidate
+// document for a match, so this works across every type-shape fragment below without needing to name
+// each one's \`artists[]\` field individually.
+const HCB_ARTIST_ID = `*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id`;
+const MF_ARTIST_ID = `*[_type == "artist" && slug.current == "martine-franck"][0]._id`;
+
 // scenario: "artist" (self, via host's \`artists[]\`) — also fires for "artist-related": editors expect
 // artist-related to include the host's own artist(s) directly (e.g. a book's own listed artist), not
 // only other, separately-connected artists (that part is rebondArtistRelated below). Kept as its own
@@ -75,18 +85,23 @@ export const rebondArtistRelated = `
   }
 `;
 
-// scenario: "book-related" — books directly linked to the host (via product.exhibition, etc.), not
+// scenarios: "book-related" — books directly linked to the host (via product.exhibition, etc.), not
 // broadened via the host's artist(s): otherwise a prolific artist's entire catalog shows up instead
 // of just the book tied to this specific exhibition/content. Exception: a pageModulaire whose whole
 // purpose is representing an artist (e.g. a tribute page with no exhibition/event of its own to
 // distinguish itself from) has nothing that would ever reference it directly — broadened via its own
 // \`artists[]\` there instead (added specifically for that case, see pageModulaire.ts's \`artists\` field).
+// "docs-hcb-related" / "docs-mf-related" — books tied to that fixed artist (see HCB_ARTIST_ID /
+// MF_ARTIST_ID above).
 export const rebondBooks = `
   *[
     _type == "product" &&
     _id != ^.^._id &&
-    "book-related" in ^.items &&
-    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
+    (
+      ("book-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
+      || ("docs-hcb-related" in ^.items && references(${HCB_ARTIST_ID}))
+      || ("docs-mf-related" in ^.items && references(${MF_ARTIST_ID}))
+    )
   ] | order(_createdAt desc) {
     ${cardRefProduct}
   }
@@ -101,8 +116,23 @@ export const rebondBooks = `
 // the whole exhibition's run has ended doesn't depend on where any one leg of it took place.
 const IN_SITE_DATE = `(!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])`;
 
+// scenario: "exhibition-current-or-futur" (global, any exhibition) — currently-running exhibitions if
+// any exist anywhere at the Foundation, else upcoming ones; never both together (a block shouldn't mix
+// a show that's already open with one that hasn't opened yet — pick one state and stick to it). Exported
+// so any other GROQ query needing this same "what's on / what's next" rule (e.g. a listing page, not
+// just rebondsResolver below) reuses this exact condition instead of reimplementing the fallback.
+export const EXHIBITION_CURRENT_OR_FUTUR = `
+  select(
+    count(*[_type == "exhibition" && count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0]) > 0 =>
+      count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0,
+    count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0
+  )
+`;
+
 // scenarios: "exhibition-related", "exhibition-related-current-or-futur", "exhibition-related-past" (filtered to
-// the host) and "exhibition-futur", "exhibition-past" (global, any exhibition)
+// the host), "exhibition-futur", "exhibition-past", "exhibition-current", "exhibition-current-or-futur" (global,
+// any exhibition), "tags-related" (any exhibition sharing a tag with the host), and "docs-hcb-related" /
+// "docs-mf-related" (any exhibition tied to that fixed artist, see HCB_ARTIST_ID / MF_ARTIST_ID above)
 // NB: \`au\` (end date) is intentionally left blank for single-day exhibitions/events (see
 // studio/schemaTypes/objects/fhcbDate.ts) — always fall back to \`du\` via coalesce(), otherwise
 // single-day entries never match "futur" (au undefined >= now() is false) and always match "past".
@@ -117,6 +147,10 @@ export const rebondExhibitions = `
       || ("exhibition-futur" in ^.items && count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-past" in ^.items && count(dates[coalesce(au, du) >= now()]) == 0)
       || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
+      || ("exhibition-current-or-futur" in ^.items && ${EXHIBITION_CURRENT_OR_FUTUR})
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("docs-hcb-related" in ^.items && references(${HCB_ARTIST_ID}))
+      || ("docs-mf-related" in ^.items && references(${MF_ARTIST_ID}))
     )
   ] | order(dates[0].du desc) {
     ${cardRefExhibition}
@@ -138,7 +172,9 @@ export const rebondExhibitionsByArtist = `
   }
 `;
 
-// scenarios: "event-related-current-or-futur" (filtered to the host) and "event-futur" (global, any event)
+// scenarios: "event-related-current-or-futur" (filtered to the host), "event-futur" (global, any event),
+// "tags-related" (any event sharing a tag with the host), and "docs-hcb-related" / "docs-mf-related"
+// (any event tied to that fixed artist, see HCB_ARTIST_ID / MF_ARTIST_ID above)
 export const rebondEvents = `
   *[
     _type == "event" &&
@@ -146,6 +182,9 @@ export const rebondEvents = `
     (
       ("event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("docs-hcb-related" in ^.items && references(${HCB_ARTIST_ID}))
+      || ("docs-mf-related" in ^.items && references(${MF_ARTIST_ID}))
     )
   ] | order(dates[0].du asc) {
     ${cardRefEvent}
@@ -186,28 +225,42 @@ export const rebondExhibitionsDiscoverCurrent = `
   } | order(dates[0].du asc) [0...12]
 `;
 
-// scenario: "articles-related" — articles directly linked to the host, not broadened via the host's
-// artist(s), except for a pageModulaire artist page (see rebondBooks above for why).
+// scenarios: "articles-related" — articles directly linked to the host, not broadened via the host's
+// artist(s), except for a pageModulaire artist page (see rebondBooks above for why) — "tags-related" —
+// articles sharing a tag with the host — and "docs-hcb-related" / "docs-mf-related" — articles tied to
+// that fixed artist (see HCB_ARTIST_ID / MF_ARTIST_ID above).
 export const rebondArticles = `
   *[
     _type == "article" &&
     _id != ^.^._id &&
-    "articles-related" in ^.items &&
-    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
+    (
+      ("articles-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("docs-hcb-related" in ^.items && references(${HCB_ARTIST_ID}))
+      || ("docs-mf-related" in ^.items && references(${MF_ARTIST_ID}))
+    )
   ] | order(_createdAt desc) {
     ${cardRefArticle}
   }
 `;
 
-// scenario: "ressources-related" — imageImages / feuilletage / serieThematique / conversation
+// scenarios: "ressources-related" — imageImages / feuilletage / serieThematique / conversation
 // directly linked to the host, not broadened via the host's artist(s), except for a pageModulaire
-// artist page (see rebondBooks above for why).
+// artist page (see rebondBooks above for why) — "tags-related" — feuilletage / conversation
+// sharing a tag with the host (imageImages / serieThematique have no \`tags\` field, so
+// \`tags[]._ref\` is empty for them and this branch never matches those two) — and "docs-hcb-related" /
+// "docs-mf-related" — any of the four types tied to that fixed artist (see HCB_ARTIST_ID / MF_ARTIST_ID
+// above), all four have an \`artists[]\` field.
 export const rebondRessources = `
   *[
     _id != ^.^._id &&
     _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&
-    "ressources-related" in ^.items &&
-    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
+    (
+      ("ressources-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("docs-hcb-related" in ^.items && references(${HCB_ARTIST_ID}))
+      || ("docs-mf-related" in ^.items && references(${MF_ARTIST_ID}))
+    )
   ] | order(_createdAt desc) {
     ${cardTypesRessources}
   }

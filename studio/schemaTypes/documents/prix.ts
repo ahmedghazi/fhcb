@@ -4,8 +4,8 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 
 export default defineType({
-  name: 'tag',
-  title: 'Tag',
+  name: 'prix',
+  title: 'Prix',
   type: 'document',
   icon: TagIcon,
   groups: [
@@ -15,9 +15,6 @@ export default defineType({
       title: 'Editorial',
     },
   ],
-  initialValue: {
-    visible: true,
-  },
   fields: [
     defineField({
       name: 'title',
@@ -26,12 +23,6 @@ export default defineType({
       group: 'editorial',
     }),
     slug,
-    defineField({
-      name: 'visible',
-      title: 'Visible',
-      type: 'boolean',
-      group: 'editorial',
-    }),
   ],
   preview: {
     select: {

@@ -7,19 +7,27 @@ import CardArtist from "./ui/cards/CardArtist";
 
 type Props = {
   input: any;
-  artists: ArtistExpanded[];
+  title: string;
 };
 
-const RebondsExhibition = ({ input, artists }: Props) => {
+const RebondsExhibition = ({ input, title }: Props) => {
   return (
     <section className='rebonds rebonds--exhibition'>
-      <div className='container-fluid'>
+      {/* <div className='container-fluid'>
         <h2 className='c-h1_5'>{_localizeText("aroundTheExhibition")}</h2>
         <div className='grid--centered'>
-          {/* <pre>{JSON.stringify(artists, null, 2)}</pre> */}
           {artists?.map((item: any, i: number) => (
             <CardType key={i} input={item} context='rebonds' />
           ))}
+          {input?.map((item: any, i: number) => (
+            <CardType key={i} input={item} context='rebonds' />
+          ))}
+        </div>
+      </div > */}
+      <div className='container-fluid'>
+        {title && <h2 className='c-h1_5'>{_localizeText(title)}</h2>}
+
+        <div className='grid--centered'>
           {input?.map((item: any, i: number) => (
             <CardType key={i} input={item} context='rebonds' />
           ))}

@@ -16,6 +16,7 @@ import feuilletage from './documents/feuilletage'
 import chercheur from './documents/chercheur'
 import location from './documents/location'
 import rebond from './documents/rebond'
+import prix from './documents/prix'
 
 import {seoSchema} from './features/seo'
 
@@ -103,6 +104,7 @@ export const schemaTypes = [
   chercheur,
   location,
   rebond,
+  prix,
 
   localeString,
   localeText,

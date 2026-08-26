@@ -73,6 +73,13 @@ export default defineType({
 
       group: 'editorial',
     }),
+    defineField({
+      name: 'prix',
+      title: 'Prix',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'prix'}]}],
+      group: 'editorial',
+    }),
 
     defineField({
       name: 'text',

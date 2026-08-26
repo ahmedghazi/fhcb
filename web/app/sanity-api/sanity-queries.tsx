@@ -20,7 +20,10 @@ import {
   linkInternal,
   blockContent,
 } from "./fragments";
-import { rebondsResolver } from "./fragments-rebonds";
+import {
+  EXHIBITION_CURRENT_OR_FUTUR,
+  rebondsResolver,
+} from "./fragments-rebonds";
 import { _shuffle } from "../lib/utils";
 import {
   ARTICLE_QUERY_RESULT,
@@ -41,6 +44,7 @@ import {
 import CardProduct from "../components/ui/cards/CardProduct";
 import {
   cardRefArtist,
+  cardRefExhibition,
   cardRefImageImages,
   cardRefProduct,
   cardTypes,
@@ -251,9 +255,15 @@ export const EXPHIBITION_QUERY = groq`*[_type == "exhibition" && slug.current ==
     aroundTheExhibition[]->{
       ${cardTypes}
     },
-
     rebondsAuto[]->{
       ${rebondsResolver}
+    },
+    "exhibCurrentOrFutur": *[
+      _type == "exhibition" &&
+      _id != ^._id &&
+      ${EXHIBITION_CURRENT_OR_FUTUR}
+    ] | order(dates[0].du asc) {
+      ${cardRefExhibition}
     }
   }`;
 

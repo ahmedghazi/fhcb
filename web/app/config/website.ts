@@ -18,7 +18,7 @@ const website = {
   instagram: "",
   twitter: "",
   facebook: "",
-  googleAnalyticsID: process.env.NEXT_PUBLIC_GA_ID || "G-xxx",
+  googleAnalyticsID: process.env.NEXT_PUBLIC_GA_ID || "G-52484966",
 
   skipNavId: "reach-skip-nav",
 };

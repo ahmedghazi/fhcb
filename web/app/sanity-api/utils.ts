@@ -107,6 +107,8 @@ const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = 
     item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
   "exhibition-current": (item) =>
     item._type === "exhibition" && _isCurrentByDates(item.dates || []),
+  "exhibition-current-or-futur": (item) =>
+    item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
   "exhibition-past": (item) =>
     item._type === "exhibition" && _isPastByDates(item.dates || []),
   "exhibition-discover-past": (item) =>
@@ -119,6 +121,22 @@ const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = 
   "articles-related": (item) => item._type === "article",
   "ressources-related": (item) =>
     !!item._type && REBOND_RESSOURCES_TYPES.includes(item._type),
+  // tags-related fires across every candidate type that has a `tags` field (see rebondExhibitions /
+  // rebondEvents / rebondArticles / rebondRessources in fragments-rebonds.ts) — there's no per-card
+  // signal here for *why* a card matched, so this is a best-effort type check like the other
+  // "-related" matchers above, not a true tag-overlap check.
+  "tags-related": (item) =>
+    !!item._type &&
+    ["exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
+  // docs-hcb-related / docs-mf-related fire across every candidate type-shape (product, exhibition,
+  // event, article, ressources — see rebondBooks / rebondExhibitions / rebondEvents / rebondArticles /
+  // rebondRessources in fragments-rebonds.ts), same best-effort caveat as tags-related above.
+  "docs-hcb-related": (item) =>
+    !!item._type &&
+    ["product", "exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
+  "docs-mf-related": (item) =>
+    !!item._type &&
+    ["product", "exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
 };
 
 // rebondsResolver's GROQ concatenates resolvedItems grouped by document type in a fixed order
