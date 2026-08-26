@@ -78,6 +78,9 @@ export const applyFilters = <T extends Record<string, any>>(
           } else if (field === "_createdAt") {
             valA = a._createdAt ?? "";
             valB = b._createdAt ?? "";
+          } else if (field === "publicationDate") {
+            valA = a.publicationDate ?? "";
+            valB = b.publicationDate ?? "";
           } else if (field === "speaker") {
             valA = a.speaker ?? "";
             valB = b.speaker ?? "";

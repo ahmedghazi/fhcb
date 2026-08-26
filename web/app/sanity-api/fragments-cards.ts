@@ -117,7 +117,8 @@ export const cardRefProduct = `
     name,
     last_name
   },
-  artistName
+  artistName,
+  publicationDate
 `;
 
 export const cardRefArtist = `

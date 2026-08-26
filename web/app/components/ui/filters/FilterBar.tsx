@@ -27,6 +27,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   const _base = (): ActiveFilters => (active.sort ? { sort: active.sort } : {});
 
   const _update = (key: string, value: string) => {
+    console.log(key, value);
     const next = key === "sort" ? { ...active } : _base();
     if (value) {
       next[key] = value;

@@ -171,6 +171,7 @@ export function productToCard(
     languages,
     totalInventory,
     pastille,
+    publicationDate,
   } = input;
   const artistsName = artistsToString(artists);
 
