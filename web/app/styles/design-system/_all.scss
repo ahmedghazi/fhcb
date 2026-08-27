@@ -37,6 +37,35 @@
   div {
     display: inline-block;
   }
+
+  .figure {
+    display: inline-flex; /* shrink-wraps to content width */
+    flex-direction: column;
+    max-width: 100%; /* never overflow the column */
+    max-height: calc(var(--vh) * 100 - (var(--header-h) + var(--spacing-md)));
+  }
+
+  .darkroom-wrapper {
+    width: auto !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: inherit !important;
+    // aspect-ratio: 3543 / 3543; /* now determines width from height */
+  }
+  .figure--is-portrait {
+    align-items: flex-start; /* stop the wrapper stretching past the photo's real width */
+  }
+  .figure img {
+    width: auto !important;
+    height: 100% !important;
+    max-height: inherit !important;
+    display: block !important;
+  }
+
+  figcaption {
+    width: 100%; /* 100% of the now shrink-wrapped .figure — i.e. the image's own width */
+    max-width: var(--fig-img-w);
+  }
 }
 .page-header {
   text-align: center;

@@ -2,7 +2,7 @@ import website from "@/app/config/website";
 import { urlFor } from "@/app/sanity-api/sanity-utils";
 import clsx from "clsx";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 // import ImagePixelated from "./ImagePixelated";
 import ImageDarkroom from "./ImageDarkRoom4";
 
@@ -28,10 +28,28 @@ const Figure = ({
   const isLandscape =
     asset?.metadata?.dimensions?.width > asset?.metadata?.dimensions?.height;
   const src = urlFor(asset, width);
-  if (!src) return null;
   const withCaption = caption || author || copyright;
+  const figureRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const figureEl = figureRef.current;
+    const wrapper = figureEl?.querySelector(".darkroom-wrapper");
+    if (!figureEl || !wrapper) return;
+    const sync = () =>
+      figureEl.style.setProperty(
+        "--fig-img-w",
+        wrapper.getBoundingClientRect().width + "px",
+      );
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(wrapper);
+    return () => observer.disconnect();
+  }, [src]);
+
+  if (!src) return null;
   return (
     <figure
+      ref={figureRef}
       className={clsx(
         "figure",
         isLandscape && "figure--is-landscape",
