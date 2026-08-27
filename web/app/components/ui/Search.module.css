@@ -12,26 +12,9 @@
   :global(input) {
     color: white;
     font-size: var(--text-md);
-    /* flex: 2; */
-    /* width: 100%;
-    &:focus {
-      outline: none;
-    }
-    &::placeholder {
-      color: white;
-    }
-    &::-webkit-search-cancel-button {
-      -webkit-appearance: none;
-      cursor: pointer;
-      height: 1em;
-      width: 1em;
-      border-radius: 50em;
-      background: url(data:image/svg+xml,%3Csvg%20%20viewBox%3D%220%200%2028%2028%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cline%20x1%3D%220.739675%22%20y1%3D%220.246653%22%20x2%3D%2227.7397%22%20y2%3D%2227.2467%22%20stroke%3D%22white%22%20stroke-width%3D%221%22%2F%3E%3Cline%20x1%3D%220.2447%22%20y1%3D%2227.2467%22%20x2%3D%2227.2447%22%20y2%3D%220.246654%22%20stroke%3D%22white%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E)
-        no-repeat 50% 50%;
-      background-size: contain;
-      position: absolute;
-      right: 0;
-    } */
+  }
+  :global(input)::placeholder {
+    color: white !important;
   }
   :global(button.btn) {
     color: var(--color-primary);

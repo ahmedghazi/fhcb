@@ -147,16 +147,6 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                   <div className='c-body--tight'>{isbn}</div>
                 </li>
               )}
-
-              {metas?.map((item: KeyVal, i: number) => (
-                <li className='sidebar__item' key={i}>
-                  {item && (
-                    <div className='c-body--tight'>
-                      {_localizeField(item.text)}
-                    </div>
-                  )}
-                </li>
-              ))}
             </ul>
           </div>
           {images && (
