@@ -55,8 +55,13 @@ type SanityDates =
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-const toInfoNode = (dates: SanityDates) =>
-  dates?.length ? React.createElement(FHCBDates, { input: dates }) : undefined;
+const toInfoNode = (dates: SanityDates, displayLocations: boolean) =>
+  dates?.length
+    ? React.createElement(FHCBDates, {
+        input: dates,
+        displayLocations: displayLocations,
+      })
+    : undefined;
 
 const toTags = (tags: SanityTags) =>
   tags?.length ? React.createElement(CardTags, { input: tags }) : undefined;
@@ -146,7 +151,7 @@ export function exhibitionToCard(
     // subTitle: artistList,
     title: (artistList as string) || "",
     subTitle: (_localizeField(title) as string) || "",
-    infoNode: toInfoNode(dates),
+    infoNode: toInfoNode(dates, false),
     actions: actions,
     badge:
       pastille && pastille.fr
@@ -225,9 +230,9 @@ export function eventToCard(
     pastille,
   } = input;
   const isPast = _isPastByDates(dates || []);
-  const isHorsLeMurs = tags?.some(
-    (tag: Tag) => tag.slug?.current === "hors-les-murs",
-  );
+  // const isHorsLeMurs = tags?.some(
+  //   (tag: Tag) => tag.slug?.current === "hors-les-murs",
+  // );
   const isVisite = tags?.some(
     (tag: Tag) => tag.slug?.current === "visite-commentee",
   );
@@ -259,7 +264,7 @@ export function eventToCard(
     title: (_localizeField(title) as string) || "",
     subTitle: _localizeField(subTitle),
     description: _localizeField(description),
-    infoNode: toInfoNode(dates),
+    infoNode: toInfoNode(dates, false),
     actions: actions,
     badge:
       pastille && pastille.fr

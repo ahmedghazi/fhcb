@@ -4,41 +4,40 @@ import { Link } from "next-view-transitions";
 import { CardAction } from "./types";
 
 // The primary action's href already covers the whole card via
-// `CardLinkOverlay` (see `primaryAction` in index.tsx, always `actions[0]`), so once
-// there's more than one action, only `linkExternal` actions get a visible
-// button — internal ones are redundant with the overlay. A lone action is
-// always shown, since then it's the only affordance on the card.
-const withoutRedundantPrimary = (
-  actions: CardAction[],
-  actionsNode?: ReactNode,
-) =>
-  actions.length > 1 || actionsNode !== undefined
-    ? actions.filter((action) => action.type === "linkExternal")
-    : actions;
+// `CardLinkOverlay` (see `primaryAction` in index.tsx, always `actions[0]`),
+// so it's redundant with the overlay and never gets a visible button —
+// only `linkExternal` actions do.
+const withoutRedundantPrimary = (actions: CardAction[]) =>
+  actions.filter((action) => action.type === "linkExternal");
 
 type ActionButtonsProps = {
   actions: CardAction[];
   actionsNode?: ReactNode;
 };
 
-export const ActionButtons = ({ actions, actionsNode }: ActionButtonsProps) => (
-  <div className='card__btns'>
-    <div className='card__btns-conntent'>
-      {withoutRedundantPrimary(actions, actionsNode).map((action, i) => (
-        <Link
-          key={i}
-          href={action.href}
-          className={clsx(
-            "btn",
-            action.variant === "secondary" && "btn--secondary",
-          )}>
-          {action.label}
-        </Link>
-      ))}
-      {actionsNode}
+export const ActionButtons = ({ actions, actionsNode }: ActionButtonsProps) => {
+  const visibleActions = withoutRedundantPrimary(actions);
+  if (visibleActions.length === 0 && actionsNode === undefined) return null;
+
+  return (
+    <div className='card__btns'>
+      <div className='card__btns-conntent'>
+        {visibleActions.map((action, i) => (
+          <Link
+            key={i}
+            href={action.href}
+            className={clsx(
+              "btn",
+              action.variant === "secondary" && "btn--secondary",
+            )}>
+            {action.label}
+          </Link>
+        ))}
+        {actionsNode}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Rendu par le parent lorsque `footerPlacement="detached"` — voir les usages
 // de <CardFooter> dans CardExhibition, CardProduct, CardFeuilletage, etc.

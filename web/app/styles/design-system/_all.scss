@@ -242,10 +242,12 @@ textarea {
       }
     }
 
-    .slick-slide .card {
-      width: var(--gridder-3_12) !important;
-      &--md {
-        width: var(--gridder-6_12) !important;
+    .slick-slide {
+      .card {
+        width: var(--gridder-3_12) !important;
+        &--md {
+          width: var(--gridder-6_12) !important;
+        }
       }
     }
   }

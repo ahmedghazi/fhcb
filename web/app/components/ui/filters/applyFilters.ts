@@ -3,6 +3,7 @@ import {
   isLanguageOptionName,
   normalizeLanguageValue,
 } from "./collectFilterOptions";
+import { _parseJsonStringArray } from "@/app/sanity-api/utils";
 
 const localize = (field: any, locale: string): string => {
   if (!field) return "";
@@ -34,13 +35,18 @@ const matchesSearch = (
       );
     }
     if (field === "artists") {
-      return (
+      const matchesArtistRef =
         item.artists?.some((a: any) =>
           String(a.last_name ?? a.name ?? "")
             .toLowerCase()
             .includes(lower),
-        ) ?? false
-      );
+        ) ?? false;
+      // Some products have no linked artist page and store the name(s) as
+      // free text in artistName instead — a Shopify-synced JSON-array string.
+      const matchesArtistName = _parseJsonStringArray(item.artistName)
+        .toLowerCase()
+        .includes(lower);
+      return matchesArtistRef || matchesArtistName;
     }
     return false;
   });

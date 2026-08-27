@@ -9,6 +9,7 @@ import clsx from "clsx";
 
 type Props = {
   input: FhcbDate[];
+  displayLocations?: boolean;
 };
 
 const LocationSlot = ({ location }: { location: Location }) => {
@@ -27,10 +28,11 @@ const LocationSlot = ({ location }: { location: Location }) => {
   );
 };
 
-const FHCBDates = ({ input }: Props) => {
+const FHCBDates = ({ input, displayLocations = true }: Props) => {
   const { locale } = useLocale();
   const dates = input || [];
   const hasSeveralDates = dates.length > 1;
+  // console.log("displayLocations", displayLocations);
   return (
     <div
       className={clsx("fhcb-dates", hasSeveralDates && "fhcb-dates--multiple")}>
@@ -52,7 +54,7 @@ const FHCBDates = ({ input }: Props) => {
                 <br />
 
                 <time dateTime={date.au ?? undefined}>→ {fmt.au}</time>
-                {date.location && (
+                {date.location && displayLocations && (
                   <LocationSlot
                     location={date.location as unknown as Location}
                   />
@@ -65,7 +67,7 @@ const FHCBDates = ({ input }: Props) => {
                   {fmt.du} → {fmt.au} {fmt.year}
                 </time>
                 {/* <pre>{JSON.stringify(date, null, 2)}</pre> */}
-                {date.location && (
+                {date.location && displayLocations && (
                   <LocationSlot
                     location={date.location as unknown as Location}
                   />
@@ -78,7 +80,7 @@ const FHCBDates = ({ input }: Props) => {
                   {fmt.date} | {fmt.timeStart}
                   {fmt.timeEnd ? `–${fmt.timeEnd}` : ""}
                 </time>
-                {date.location && (
+                {date.location && displayLocations && (
                   <LocationSlot
                     location={date.location as unknown as Location}
                   />
@@ -90,7 +92,7 @@ const FHCBDates = ({ input }: Props) => {
               fmt.type !== "different-years" && (
                 <>
                   <time dateTime={date.du ?? undefined}>{fmt.date}</time>
-                  {date.location && (
+                  {date.location && displayLocations && (
                     <LocationSlot
                       location={date.location as unknown as Location}
                     />

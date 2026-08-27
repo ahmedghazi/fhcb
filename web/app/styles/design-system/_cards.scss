@@ -136,6 +136,9 @@
     .card__inner + .card__footer {
       padding: var(--spacing-xs);
       padding-top: 0;
+      &:has(.card_footer-content:empty) {
+        padding: 0;
+      }
     }
   }
 
