@@ -23,7 +23,7 @@ import { _isCurrentByDates, _isPast, _isPastByDates } from "@/app/lib/utils";
 import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
 type Context = "grid" | "slider" | "rebonds" | "search";
-type Size = "sm" | "md" | "lg";
+type Size = "sm" | "md" | "md-alt" | "lg";
 type SizeAlt = "sm" | "md";
 
 type Props = {
@@ -39,7 +39,7 @@ type Props = {
     | ConversationExpanded;
   context: Context;
   // editor-configurable size from the GridCardUI module (only used for product in grid context)
-  size?: Size | null;
+  size?: "sm" | "md" | "lg" | null;
 };
 
 // default size per card type, per usage context (mirrors the per-context sizes that
@@ -48,18 +48,28 @@ const SIZES = {
   event: { grid: "sm", slider: "md", rebonds: "sm", search: "sm" },
   exhibition: { grid: "sm", slider: "md", rebonds: "md", search: "md" },
   exhibitionPast: { grid: "sm", slider: "sm", rebonds: "sm", search: "md" },
-  exhibitionFeatured: { grid: "sm", slider: "md", rebonds: "md", search: "lg" },
+  exhibitionFeatured: {
+    grid: "sm",
+    slider: "md",
+    rebonds: "md-alt",
+    search: "lg",
+  },
   product: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
   article: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
   artist: { grid: "sm", slider: "sm", rebonds: "sm", search: "sm" },
   imageImages: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   feuilletage: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   conversation: { grid: "md", slider: "md", rebonds: "md", search: "md" },
-} satisfies Record<string, Record<Context, Size>>;
+} as const satisfies Record<string, Record<Context, Size>>;
 
 const CardType = ({ input, context, size }: Props) => {
   if (!input) return null;
-  const sizeFor = (type: keyof typeof SIZES) => SIZES[type][context];
+  function sizeFor(
+    type: "event" | "product" | "article" | "artist" | "imageImages" | "feuilletage"
+  ): "sm" | "md" | "lg";
+  function sizeFor(type: keyof typeof SIZES) {
+    return SIZES[type][context];
+  }
 
   const sizeForExhibition = (input: ExhibitionExpanded) => {
     if (!input.dates) return SIZES["exhibition"][context];
@@ -67,7 +77,7 @@ const CardType = ({ input, context, size }: Props) => {
     const isCurrent = _isCurrentByDates(input.dates);
     let size = "sm";
     if (isPast) return SIZES["exhibitionPast"][context];
-    else if (isCurrent) return "lg";
+    else if (isCurrent) return "md";
     else return SIZES["exhibition"][context];
   };
 

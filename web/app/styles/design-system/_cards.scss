@@ -251,9 +251,22 @@
         }
       }
     }
-    &.card--md.card--is-landscape {
-      & > .card__footer {
-        display: none;
+    &.card--md {
+      .card__inner--col {
+        gap: 0;
+      }
+      .card__inner--row {
+        display: block;
+      }
+      &.card--is-landscape {
+        align-self: flex-start;
+        .card__body {
+          align-self: stretch;
+          height: auto;
+        }
+        & > .card__footer {
+          display: none;
+        }
       }
     }
 
@@ -285,6 +298,7 @@
         line-height: 1;
       }
     }
+
     &.card--md-alt {
       .card__inner .grid {
         display: flex;
