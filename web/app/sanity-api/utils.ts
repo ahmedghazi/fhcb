@@ -128,10 +128,10 @@ const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = 
   "tags-related": (item) =>
     !!item._type &&
     ["exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
-  // prize-related fires across every candidate type that carries a `prix` field (artist, exhibition —
-  // see rebondArtistRelated / rebondExhibitions in fragments-rebonds.ts), same best-effort caveat as
-  // tags-related above.
-  "prize-related": (item) => !!item._type && ["artist", "exhibition"].includes(item._type),
+  // prize-related fires across every candidate type that carries a `prix` field (artist, exhibition,
+  // article — see rebondArtistRelated / rebondExhibitions / rebondArticles in fragments-rebonds.ts),
+  // same best-effort caveat as tags-related above.
+  "prize-related": (item) => !!item._type && ["artist", "exhibition", "article"].includes(item._type),
   // docs-hcb-related / docs-mf-related fire across every candidate type-shape (product, exhibition,
   // event, article, ressources — see rebondBooks / rebondExhibitions / rebondEvents / rebondArticles /
   // rebondRessources in fragments-rebonds.ts), same best-effort caveat as tags-related above.

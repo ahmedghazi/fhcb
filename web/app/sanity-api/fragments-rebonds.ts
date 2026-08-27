@@ -308,8 +308,10 @@ export const rebondExhibitionsDiscoverCurrent = `
 `;
 
 // scenarios: "articles-related" — articles directly linked to the host, not broadened via the host's
-// artist(s), except for a pageModulaire artist page (see rebondBooks above for why) — and
-// "tags-related" — articles sharing a tag with the host.
+// artist(s), except for a pageModulaire artist page (see rebondBooks above for why) — "tags-related" —
+// articles sharing a tag with the host — and "prize-related" — articles sharing a `prix` with the host
+// (article also carries a `prix` field, alongside artist/exhibition/pageModulaire — see
+// studio/schemaTypes/documents/article.ts).
 export const rebondArticles = `
   *[
     _type == "article" &&
@@ -317,6 +319,7 @@ export const rebondArticles = `
     (
       ("articles-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
+      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)
     )
   ] | order(_createdAt desc) {
     ${cardRefArticle}
