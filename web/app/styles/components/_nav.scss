@@ -82,7 +82,7 @@ nav {
   // padding: 0;
 
   &.is-open {
-    li.has-submenu:hover .sub-menu {
+    li.has-submenu:hover > .sub-menu {
       display: block;
     }
   }
@@ -115,26 +115,35 @@ nav {
     // display: grid;
     // grid-template-columns: repeat(var(--nav-len), minmax(0, 1fr));
     // gap: var(--spacing-md);
-
+    li {
+      position: relative;
+    }
     .menu-label {
       cursor: pointer;
-      // padding-left: 2em;
       &.is-active + .sub-menu {
         display: block;
       }
     }
-    & > li {
-      // flex: 1;
-      position: relative;
-      & > .menu-label {
-      }
-      & > .menu-label,
-      & > a > .menu-label {
-        padding: 0em 2em 0;
-        display: inline-block;
-        font-weight: 450;
-      }
+    .menu-label--depth-1,
+    a {
+      display: block;
+      padding: 0em 2em 0;
     }
+    .menu-label--depth-1 {
+      font-weight: 450;
+    }
+    // & > li {
+    //   // flex: 1;
+    //   position: relative;
+    //   & > .menu-label {
+    //   }
+    //   & > .menu-label,
+    //   & > a > .menu-label {
+    //     padding: 0em 2em 0;
+    //     display: inline-block;
+    //     font-weight: 450;
+    //   }
+    // }
 
     .sub-menu {
       position: absolute;
@@ -142,15 +151,33 @@ nav {
       left: 0;
       // padding: 1.5rem 2rem var(--spacing-lg);
       padding-top: 1.5rem;
+      // padding-top: 0;
+      // transform: translateY(-0.5rem);
       padding-bottom: var(--spacing-lg);
       display: none;
       // padding-top: 1.5rem;
       // padding-bottom: var(--spacing-lg);
       font-weight: 200;
-      a {
-        padding: 0em 2em 0.5em;
-        line-height: 1;
-        display: inline-block;
+      & > li > a {
+        padding-left: calc(2em + 2px);
+      }
+      // a {
+      //   padding: 0em 2em 0.5em;
+      //   line-height: 1;
+      //   display: inline-block;
+      // }
+
+      li.has-submenu {
+        position: relative;
+      }
+
+      .sub-menu {
+        left: 100%;
+        top: 0;
+        padding-top: 0em;
+        position: relative;
+        display: block;
+        left: 2em;
       }
     }
   }

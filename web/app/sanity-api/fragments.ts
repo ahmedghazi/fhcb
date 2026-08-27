@@ -217,7 +217,9 @@ export const nav = `
       ...,
       _type == 'linkInternal' => {
         ${linkInternalWithImages},
-
+        subMenu[]{
+          ${linkInternal}
+        }
       }
     },
     withMessage,
