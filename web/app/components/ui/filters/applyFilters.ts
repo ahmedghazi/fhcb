@@ -36,7 +36,7 @@ const matchesSearch = (
     if (field === "artists") {
       return (
         item.artists?.some((a: any) =>
-          String(a.name ?? "")
+          String(a.last_name ?? a.name ?? "")
             .toLowerCase()
             .includes(lower),
         ) ?? false
