@@ -82,15 +82,25 @@ export const rebondArtistSelf = `
 // links and generic multi-exhibition events (guided tours, etc.) are both too weak/noisy a signal.
 // The exclusion of the host's OWN artist(s) from the result must go through the same coalesce() —
 // comparing directly against ^.^._id (the host DOCUMENT's id) never matches an artist's _id.
+//
+// Also carries "prize-related": other artists sharing a `prix` with the host — same idea as
+// "tags-related" in rebondExhibitions/rebondEvents/rebondArticles/rebondRessources below, but `prix` is
+// only a field on artist/exhibition/pageModulaire (see studio/schemaTypes/documents/prix.ts), so it only
+// applies here (candidate _type == "artist") and in rebondExhibitions, not in every "-related" fragment.
+// NB the extra \`^\` in \`^.^.^.prix\`: the \`[@ in ...]\` array-membership filter is its own scope, same as
+// any \`*[]\` filter (see the file-level comment above on hop counting), so reaching the host from inside
+// it needs one more hop than the surrounding \`*[]\` filter's own conditions (which only need \`^.^\`).
 export const rebondArtistRelated = `
   *[
     _type == "artist" &&
     !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&
-    "artist-related" in ^.items &&
-    _id in *[
-      _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
-      references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))
-    ].artists[]._ref
+    (
+      ("artist-related" in ^.items && _id in *[
+        _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
+        references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))
+      ].artists[]._ref)
+      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)
+    )
   ] | order(name asc) {
     ${cardRefArtist}
   }
@@ -160,7 +170,9 @@ export const EXHIBITION_CURRENT_OR_FUTUR = `
 
 // scenarios: "exhibition-related", "exhibition-related-current-or-futur", "exhibition-related-past" (filtered to
 // the host), "exhibition-futur", "exhibition-past", "exhibition-current", "exhibition-current-or-futur" (global,
-// any exhibition), and "tags-related" (any exhibition sharing a tag with the host)
+// any exhibition), "tags-related" (any exhibition sharing a tag with the host), and "prize-related" (any
+// exhibition sharing a `prix` with the host — see rebondArtistRelated above for why only artist/exhibition
+// carry this branch)
 // NB: \`au\` (end date) is intentionally left blank for single-day exhibitions/events (see
 // studio/schemaTypes/objects/fhcbDate.ts) — always fall back to \`du\` via coalesce(), otherwise
 // single-day entries never match "futur" (au undefined >= now() is false) and always match "past".
@@ -176,7 +188,8 @@ export const rebondExhibitions = `
       || ("exhibition-past" in ^.items && count(dates[coalesce(au, du) >= now()]) == 0)
       || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-current-or-futur" in ^.items && ${EXHIBITION_CURRENT_OR_FUTUR})
-      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
+      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)
     )
   ] | order(dates[0].du desc) {
     ${cardRefExhibition}
@@ -230,7 +243,7 @@ export const rebondEvents = `
     (
       ("event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
-      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
     )
   ] | order(dates[0].du asc) {
     ${cardRefEvent}
@@ -303,7 +316,7 @@ export const rebondArticles = `
     _id != ^.^._id &&
     (
       ("articles-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
-      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
     )
   ] | order(_createdAt desc) {
     ${cardRefArticle}
@@ -344,7 +357,7 @@ export const rebondRessources = `
     _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&
     (
       ("ressources-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
-      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.tags[]._ref]) > 0)
+      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
     )
   ] | order(_createdAt desc) {
     ${cardTypesRessources}

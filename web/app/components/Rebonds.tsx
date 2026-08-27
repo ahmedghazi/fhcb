@@ -32,6 +32,7 @@ const Rebonds = ({
   const orderedInput = items ? _orderRebondsByItems(items, input) : input;
   return (
     <section className={clsx("rebonds mb-lg", className)}>
+      {/* <pre>{JSON.stringify(items, null, 2)}</pre> */}
       <div className='container-fluid'>
         {resolvedTitle && (
           <h2 className='c-h1_5'>{_localizeText(resolvedTitle)}</h2>

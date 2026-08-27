@@ -55,6 +55,7 @@ export default defineType({
               {title: 'Tag(s) lié(s)', value: 'tags-related'},
               {title: 'Doc(s) HCB', value: 'docs-hcb-related'},
               {title: 'Doc(s) MF', value: 'docs-mf-related'},
+              {title: 'Prix liés', value: 'prize-related'},
 
               {title: 'Expo(s) à venir', value: 'exhibition-futur'},
               {title: 'Expo(s) en cours', value: 'exhibition-current'},
