@@ -11,10 +11,12 @@ import {
   SerieThematique,
 } from "@/app/sanity-api/types/sanity.types";
 import CardSerieThematique from "../ui/cards/CardSerieThematique";
-import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
+import { SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import FilterBar from "../ui/filters/FilterBar";
+import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
+import LoadMoreButton from "../ui/LoadMoreButton";
 import { _shuffle } from "@/app/lib/utils";
 
 type Props = {
@@ -27,7 +29,13 @@ type Props = {
 
 const ModuleListSerieThematiqueUI = ({ input }: Props) => {
   const { locale } = useLocale();
-  const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
+  const {
+    activeFilters,
+    visibleCount,
+    handleFilterChange,
+    resetVisibleCount,
+    loadMore,
+  } = usePaginatedFilters();
 
   const filterDefs = withResolvedOptions(
     input.filters ?? [],
@@ -47,20 +55,24 @@ const ModuleListSerieThematiqueUI = ({ input }: Props) => {
 
   useEffect(() => {
     setShuffledItems(_shuffle(filteredItems));
+    resetVisibleCount();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredItemsKey]);
+
+  const visibleItems = shuffledItems.slice(0, visibleCount);
+  const hasMore = visibleCount < shuffledItems.length;
 
   return (
     <section className='module module--list-serie-thematique-ui'>
       <div className='container-fluid'>
         <div className='module__inner'>
           {filterDefs.length > 0 && (
-            <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
+            <FilterBar filterDefs={filterDefs} onChange={handleFilterChange} />
           )}
 
-          {shuffledItems.length > 0 && (
+          {visibleItems.length > 0 && (
             <div className='grid md:grid-cols-12 items-start gap-gutter'>
-              {shuffledItems.map(
+              {visibleItems.map(
                 (item: SerieThematiqueExpanded, index: number) => (
                   <Fragment key={`${item._id}-${index}`}>
                     <CardSerieThematique input={item} size='md' />
@@ -69,6 +81,8 @@ const ModuleListSerieThematiqueUI = ({ input }: Props) => {
               )}
             </div>
           )}
+
+          {hasMore && <LoadMoreButton onClick={loadMore} />}
         </div>
       </div>
     </section>

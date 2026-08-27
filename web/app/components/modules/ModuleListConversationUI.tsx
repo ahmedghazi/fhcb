@@ -4,18 +4,13 @@ import useLocale from "@/app/context/LocaleContext";
 import CardConversation from "../ui/cards/CardConversation";
 import { ConversationExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ListConversationUI } from "@/app/sanity-api/types/sanity.types";
-import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
+import { SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import FilterBar from "../ui/filters/FilterBar";
+import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
+import LoadMoreButton from "../ui/LoadMoreButton";
 import { _shuffle } from "@/app/lib/utils";
-import { _localizeText } from "../../sanity-api/utils";
-
-// Filtering already runs over the full items set fetched at page-load (see applyFilters below) —
-// this just caps how many of the (possibly filtered) results get rendered into the DOM at once,
-// revealed via the "load more" button. Keeps the initial HTML small without ever limiting what
-// filters can match.
-const PAGE_SIZE = 24;
 
 type Props = {
   input: ListConversationUI & {
@@ -26,8 +21,13 @@ type Props = {
 
 const ModuleListConversationUI = ({ input }: Props) => {
   const { locale } = useLocale();
-  const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const {
+    activeFilters,
+    visibleCount,
+    handleFilterChange,
+    resetVisibleCount,
+    loadMore,
+  } = usePaginatedFilters();
 
   const filterDefs = withResolvedOptions(
     input.filters ?? [],
@@ -48,7 +48,7 @@ const ModuleListConversationUI = ({ input }: Props) => {
 
   useEffect(() => {
     setShuffledItems(_shuffle(filteredItems));
-    setVisibleCount(PAGE_SIZE);
+    resetVisibleCount();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredItemsKey]);
 
@@ -60,7 +60,7 @@ const ModuleListConversationUI = ({ input }: Props) => {
       <div className='container-fluid'>
         <div className='module__inner'>
           {filterDefs.length > 0 && (
-            <FilterBar filterDefs={filterDefs} onChange={setActiveFilters} />
+            <FilterBar filterDefs={filterDefs} onChange={handleFilterChange} />
           )}
 
           {visibleItems.length > 0 && (
@@ -75,16 +75,7 @@ const ModuleListConversationUI = ({ input }: Props) => {
             </div>
           )}
 
-          {hasMore && (
-            <div className='load-more'>
-              <button
-                type='button'
-                className='btn'
-                onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>
-                {_localizeText("loadMore")}
-              </button>
-            </div>
-          )}
+          {hasMore && <LoadMoreButton onClick={loadMore} />}
         </div>
       </div>
     </section>

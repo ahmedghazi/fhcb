@@ -1,20 +1,15 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
 import { FeuilletageExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ListFeuilletageUI } from "@/app/sanity-api/types/sanity.types";
 import FilterBar from "../ui/filters/FilterBar";
-import { ActiveFilters, SanityFilterDef } from "../ui/filters/filters.types";
+import { SanityFilterDef } from "../ui/filters/filters.types";
 import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
-import { _localizeText } from "../../sanity-api/utils";
-
-// Filtering already runs over the full items set fetched at page-load (see applyFilters below) —
-// this just caps how many of the (possibly filtered) results get rendered into the DOM at once,
-// revealed via the "load more" button. Keeps the initial HTML small without ever limiting what
-// filters can match.
-const PAGE_SIZE = 24;
+import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
+import LoadMoreButton from "../ui/LoadMoreButton";
 
 type Props = {
   input: ListFeuilletageUI & {
@@ -25,8 +20,8 @@ type Props = {
 
 const ModuleListFeuilletageUI = ({ input }: Props) => {
   const { locale } = useLocale();
-  const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const { activeFilters, visibleCount, handleFilterChange, loadMore } =
+    usePaginatedFilters();
 
   const filterDefs = withResolvedOptions(
     input.filters ?? [],
@@ -40,11 +35,6 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
   );
   const visibleItems = filteredItems.slice(0, visibleCount);
   const hasMore = visibleCount < filteredItems.length;
-
-  const handleFilterChange = (next: ActiveFilters) => {
-    setActiveFilters(next);
-    setVisibleCount(PAGE_SIZE);
-  };
 
   return (
     <section className='module module--list-feuilletage-ui'>
@@ -63,16 +53,7 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
             </div>
           )}
 
-          {hasMore && (
-            <div className='load-more'>
-              <button
-                type='button'
-                className='btn'
-                onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>
-                {_localizeText("loadMore")}
-              </button>
-            </div>
-          )}
+          {hasMore && <LoadMoreButton onClick={loadMore} />}
         </div>
       </div>
     </section>
