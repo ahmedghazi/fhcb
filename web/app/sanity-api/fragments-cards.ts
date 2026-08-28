@@ -104,9 +104,9 @@ export const cardRefProduct = `
   variants,
   inStock,
   languages,
-  tags[]->{
-    title
-  },
+  // tags[]->{
+  //   title
+  // },
   tagsProduct[]->{
     order,
     _id, title, slug, handle

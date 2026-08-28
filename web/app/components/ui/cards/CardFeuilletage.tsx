@@ -4,7 +4,6 @@ import { FeuilletageExpanded } from "@/app/sanity-api/types/sanity-expanded.type
 import clsx from "clsx";
 import { feuilletageToCard } from "./adapters";
 import CardBase, { CardFooter } from "./CardBase";
-import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: FeuilletageExpanded;
@@ -20,11 +19,9 @@ const CardFeuilletage = ({ input, size = "md" }: Props) => {
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const props = feuilletageToCard(input);
-  const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
 
   return (
     <div
-      ref={ref}
       className={clsx(
         "card card--feuilletage",
         `card--${size}`,
@@ -32,7 +29,7 @@ const CardFeuilletage = ({ input, size = "md" }: Props) => {
         // isLandscape ? "card--is-landscape" : "card--is-portrait",
         // tagsClassList,
       )}>
-      <CardBase {...props} style={style ?? undefined} />
+      <CardBase {...props} />
       {size === "md" && !!props.actions?.length && (
         <CardFooter actions={props.actions} />
       )}

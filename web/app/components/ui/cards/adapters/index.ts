@@ -81,6 +81,10 @@ export function exhibitionToCard(
   const imagePortrait = !isLandscape;
   // const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
+  // const hasOffsite =
+  //   input.dates?.filter(
+  //     (el) => el.locationType === "offSite" || el.locationType === "travelling",
+  //   ).length > 0;
 
   let layout: CardBaseProps["layout"];
   let imagePlacement: CardBaseProps["imagePlacement"] | undefined;
@@ -142,7 +146,7 @@ export function exhibitionToCard(
     // subTitle: artistList,
     title: (artistList as string) || "",
     subTitle: (_localizeField(title) as string) || "",
-    infoNode: toInfoNode(dates, false),
+    infoNode: toInfoNode(dates, true),
     actions: actions,
     // badge:
     //   pastille && pastille.fr
@@ -157,13 +161,23 @@ export function productToCard(
   input: ProductExpanded,
   size: "sm" | "md" | "lg" = "md",
 ): CardBaseProps {
-  const { imageCover, tags, price, artists, artistName, variants, pastille } =
-    input;
+  const {
+    imageCover,
+    tags,
+    tagsProduct,
+    price,
+    artists,
+    artistName,
+    variants,
+    pastille,
+  } = input;
+  console.log(tagsProduct);
   const artistsName = artistsToString(artists);
 
   const title = (_localizeField(input.title) as string) || "";
   const pathname = usePathname();
-  const isOffShop = pathname.indexOf("librairie") === -1;
+  const isOffShop =
+    pathname.indexOf("librairie") === -1 || pathname.indexOf("product") === -1;
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
@@ -381,7 +395,7 @@ export function brancheToCard(
   if (moduleText) {
     moduleText.forEach((el) => {
       text = toPlainText(_localizeField(el?.text || "no text"));
-      text = text.split(".")[0] + "...";
+      // text = text.split(".")[0] + "...";
     });
   }
 

@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { productToCard } from "./adapters";
 import CardBase, { CardFooter } from "./CardBase";
-import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ProductExpanded;
@@ -10,19 +9,16 @@ type Props = {
 };
 
 const CardProduct = ({ input, size = "md" }: Props) => {
-  const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
-
   const props = productToCard(input, size);
   return (
     <div
-      ref={ref}
       className={clsx(
         "card card--product",
         `card--${size}`,
         props.layout && `card--${props.layout}`,
         size === "sm" ? "card--footer-hover" : "",
       )}>
-      <CardBase {...props} style={style ?? undefined} />
+      <CardBase {...props} />
       {size === "md" &&
         (!!props.actions?.length || props.actionsNode) &&
         props.layout === "row" && (

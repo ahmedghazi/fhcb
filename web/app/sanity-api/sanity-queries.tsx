@@ -16,7 +16,12 @@ import {
   linkInternal,
   blockContent,
 } from "./fragments";
-import { modules, sliderCardUI, gridCardUI, listProductUI } from "./fragments-modules";
+import {
+  modules,
+  sliderCardUI,
+  gridCardUI,
+  listProductUI,
+} from "./fragments-modules";
 import {
   EXHIBITION_CURRENT_OR_FUTUR,
   rebondsResolver,
@@ -564,11 +569,11 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   },
   "relatedProductsByArtist": ${relatedProductsByArtist},
   "relatedProductsByTag": ${relatedProductsByTag},
-  "related": ${relatedByArtists},
   rebondsAuto[]->{
     ${rebondsResolver}
   }
 }`;
+// "related": ${relatedByArtists},
 
 export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
   return sanityFetch({
@@ -584,7 +589,7 @@ export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && !(_id in path("
   ${cardRefProduct}
 }`;
 
-export async function getRandomProductss(excludeSlug: string, count = 4) {
+export async function getRandomProducts(excludeSlug: string, count = 4) {
   const all = await sanityFetch({
     query: RANDOM_PRODUCT_QUERY,
     tags: ["product"],

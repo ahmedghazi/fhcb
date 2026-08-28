@@ -19,7 +19,7 @@ import BtnAddToCart from "./shop/BtnAddToCart";
 import { ProductExpanded } from "../sanity-api/types/sanity-expanded.types";
 import { PortableText } from "@portabletext/react";
 import portableTextComponents from "../sanity-api/portableTextComponents";
-import { _date, artistsToString } from "../lib/utils";
+import { _date, _pickRelatedWithQuota, artistsToString } from "../lib/utils";
 import useLocale from "../context/LocaleContext";
 import SlickSlider from "./ui/SlickSlider";
 
@@ -39,7 +39,6 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     artists,
     artistName,
     images,
-    metas,
     publicationDate,
     rebondsAuto,
     relatedProductsByArtist,
@@ -59,6 +58,11 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     ...(relatedProductsByTag || []),
     ...(randomProducts || []),
   ].slice(0, 4);
+  const related = _pickRelatedWithQuota(
+    [relatedProductsByArtist, relatedProductsByTag, randomProducts],
+    [2, 1, 1],
+    4,
+  );
 
   const isLowStock = totalInventory && totalInventory < 10;
 
@@ -82,7 +86,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
             <BtnAddToCart input={input as unknown as ProductExpanded} />
 
             <ul className='sidebar'>
-              {artists && (
+              {/* {artists && (
                 <li className='sidebar__item'>
                   <div className='c-tag underline'>
                     {_localizeText("artist_s")}
@@ -93,13 +97,21 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                     ))}
                   </div>
                 </li>
-              )}
+              )} */}
               {editeur && (
                 <li className='sidebar__item'>
                   <div className='c-tag underline'>
                     {_localizeText("editor")}
                   </div>
                   <div className='c-body--tight'>{editeur}</div>
+                </li>
+              )}
+              {direction_editoriale && (
+                <li className='sidebar__item'>
+                  <div className='c-tag underline'>
+                    {_localizeText("direction_editoriale")}
+                  </div>
+                  <div className='c-body--tight'>{direction_editoriale}</div>
                 </li>
               )}
               {auteurs && (
@@ -112,6 +124,14 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                   </div>
                 </li>
               )}
+              {traducteurs && (
+                <li className='sidebar__item'>
+                  <div className='c-tag underline'>
+                    {_localizeText("traducteurs")}
+                  </div>
+                  <div className='c-body--tight'>{traducteurs}</div>
+                </li>
+              )}
               {publicationDate && (
                 <li className='sidebar__item'>
                   <div className='c-tag underline'>
@@ -122,7 +142,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                   </div>
                 </li>
               )}
-              {isbn && (
+              {(dimensions || nombre_de_pages || reliure) && (
                 <li className='sidebar__item'>
                   {dimensions && (
                     <div className='c-body--tight'>{dimensions}</div>
@@ -133,14 +153,15 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                   {reliure && <div className='c-body--tight'>{reliure}</div>}
                   {/* {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>} */}
 
-                  {traducteurs && (
+                  {/* {traducteurs && (
                     <div className='c-body--tight'>{traducteurs}</div>
                   )}
                   {direction_editoriale && (
                     <div className='c-body--tight'>{direction_editoriale}</div>
-                  )}
+                  )} */}
                 </li>
               )}
+
               {isbn && (
                 <li className='sidebar__item'>
                   <div className='c-tag underline'>{_localizeText("isbn")}</div>
@@ -219,8 +240,8 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
         />
       ))}
 
-      {mergedRelated && mergedRelated.length > 0 && (
-        <Rebonds input={mergedRelated} title='discoverToo' />
+      {related && related.length > 0 && (
+        <Rebonds input={related} title='discoverToo' />
       )}
     </div>
   );

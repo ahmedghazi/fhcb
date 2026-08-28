@@ -45,6 +45,38 @@ export const _pickWithPriorityFill = <T>(
 export const _isSameArtistFlag = <T>(item: T) =>
   Boolean((item as { isSameArtist?: boolean | null }).isSameArtist);
 
+// Picks up to `quotas[i]` unique (by _id) items from each `sources[i]` in order, then backfills
+// from the combined pool (still deduped) if the quotas didn't add up to `total`.
+// Sources are allowed to be differently-shaped (e.g. distinct GROQ projections), hence `{ _id }[]`
+// rather than a single generic — they're only ever consumed as opaque "related item" cards.
+export const _pickRelatedWithQuota = (
+  sources: ({ _id: string }[] | null | undefined)[],
+  quotas: number[],
+  total: number,
+): { _id: string }[] => {
+  const usedIds = new Set<string>();
+  const pickUnique = (items: { _id: string }[] = [], count: number) => {
+    const picked: { _id: string }[] = [];
+    for (const item of items) {
+      if (picked.length >= count) break;
+      if (item && !usedIds.has(item._id)) {
+        picked.push(item);
+        usedIds.add(item._id);
+      }
+    }
+    return picked;
+  };
+  const picked = sources.flatMap((items, i) =>
+    pickUnique(items || [], quotas[i] ?? 0),
+  );
+  if (picked.length < total) {
+    picked.push(
+      ...pickUnique(sources.flatMap((items) => items || []), total - picked.length),
+    );
+  }
+  return picked;
+};
+
 export const artistsToString = (
   artists?: Array<{ name?: string | null }> | null,
 ): string => {

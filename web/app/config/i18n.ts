@@ -73,7 +73,7 @@ const i18n = {
     serieThematique: "Série thématique",
     editor: "ÉDITEUR·ICE·(S)",
     auteurs: "AUTEUR·ICE·(S)",
-    traducteurs: "Traducteurs",
+    traducteurs: "TRADUCTEUR·ICE·(S)",
     direction_editoriale: "Direction éditoriale",
     isbn: "ISBN",
     reliure: "Reliure",

@@ -281,3 +281,12 @@ textarea {
     }
   }
 }
+
+.fhcb-dates {
+  .location {
+    display: none;
+  }
+  &--with-offsite .location {
+    display: block;
+  }
+}

@@ -5,7 +5,7 @@ import { draftMode } from "next/headers";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import {
   getProduct,
-  getRandomProductss,
+  getRandomProducts,
   PRODUCT_QUERY,
 } from "@/app/sanity-api/sanity-queries";
 import { notFound } from "next/navigation";
@@ -45,7 +45,7 @@ const ProductPage: NextPage<PageProps> = async ({ params }) => {
     : await getProduct(slug);
 
   if (!data) return notFound();
-  const randomProducts = await getRandomProductss(slug);
+  const randomProducts = await getRandomProducts(slug);
 
   return (
     <div className='template template--product' data-template='product'>

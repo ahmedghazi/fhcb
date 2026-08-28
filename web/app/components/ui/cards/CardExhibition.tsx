@@ -10,7 +10,6 @@ import {
 } from "@/app/lib/utils";
 import { exhibitionToCard } from "./adapters";
 import CardBase, { CardFooter } from "./CardBase";
-import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ExhibitionExpanded;
@@ -30,7 +29,6 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
   const isCurrent = _isCurrentByDates(dates || []);
   const isFutur = _isFuturByDates(dates || []);
 
-  const { ref, style: footerStyle } = useFooterMaxHeight<HTMLDivElement>();
   const [colorStyle, setColorStyle] = useState<React.CSSProperties | null>(
     null,
   );
@@ -43,12 +41,10 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
     }
   }, [isCurrent, color]);
 
-  const style = { ...footerStyle, ...colorStyle } as React.CSSProperties;
   const props = exhibitionToCard(input, size, isCurrent);
 
   return (
     <div
-      ref={ref}
       className={clsx(
         "card card--exhibition",
         `card--${size}`,
@@ -61,9 +57,7 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
         isFutur && "card--is-futur",
         location && `card--is-${location}`,
       )}
-      // style={style}
-      style={style ?? undefined}>
-      {/* <pre>{JSON.stringify({ isPast, isCurrent, isFutur }, null, 2)}</pre> */}
+      style={colorStyle ?? undefined}>
       <CardBase {...props} />
       {size === "md" && !!props.actions?.length && (
         <CardFooter actions={props.actions} />

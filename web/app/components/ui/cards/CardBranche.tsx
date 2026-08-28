@@ -4,7 +4,6 @@ import { PageModulaireExpanded } from "@/app/sanity-api/types/sanity-expanded.ty
 import { usePageContext } from "@/app/context/PageContext";
 import { brancheToCard } from "./adapters";
 import CardBase from "./CardBase";
-import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: PageModulaireExpanded;
@@ -15,7 +14,6 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
   if (!input) return null;
   const { slug } = input;
   const { settings } = usePageContext();
-  const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
   let supTitle = "";
   if (slug?.current?.includes("image")) {
     supTitle = `[${settings?.totalImageImages}]`;
@@ -36,13 +34,12 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
   const props = brancheToCard(input, supTitle);
   return (
     <div
-      ref={ref}
       className={clsx(
         "card card--branche card--page-modulaire",
         `card--${size}`,
         size === "sm" ? "card--footer-hover" : "",
       )}>
-      <CardBase {...props} style={style ?? undefined} />
+      <CardBase {...props} />
     </div>
   );
 };

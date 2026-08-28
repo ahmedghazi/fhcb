@@ -18,6 +18,7 @@ type Props = {
   items?: string[] | null;
   layout?: "grid" | "slider";
   className?: string;
+  // orderType: "unset" | "two_by_types" | "three_by_types";
 };
 
 const Rebonds = ({
@@ -32,7 +33,7 @@ const Rebonds = ({
   const orderedInput = items ? _orderRebondsByItems(items, input) : input;
   return (
     <section className={clsx("rebonds mb-lg", className)}>
-      {/* <pre>{JSON.stringify(items, null, 2)}</pre> */}
+      <pre>{JSON.stringify(items, null, 2)}</pre>
       <div className='container-fluid'>
         {resolvedTitle && (
           <h2 className='c-h1_5'>{_localizeText(resolvedTitle)}</h2>

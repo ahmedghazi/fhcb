@@ -21,6 +21,8 @@ import CardArticle from "./CardArticle";
 import CardConversation from "./CardConversation";
 import { _isCurrentByDates, _isPast, _isPastByDates } from "@/app/lib/utils";
 import CardExhibitionFeatured from "./CardExhibitionFeatured";
+import { PageModulaire } from "@/app/sanity-api/types/sanity.types";
+import CardBranche from "./CardBranche";
 
 type Context = "grid" | "slider" | "rebonds" | "search";
 type Size = "sm" | "md" | "md-alt" | "lg";
@@ -66,6 +68,7 @@ const CardType = ({ input, context, size }: Props) => {
   if (!input) return null;
   function sizeFor(
     type:
+      | "exhibition"
       | "event"
       | "product"
       | "article"
@@ -86,6 +89,13 @@ const CardType = ({ input, context, size }: Props) => {
     else if (isCurrent) return "md";
     else return SIZES["exhibition"][context];
   };
+  const _isBrancheRessources = (_input: PageModulaireExpanded) => {
+    const is = _input.tags?.some(
+      (el) => el?.slug?.current === "branches-ressources",
+    );
+
+    return is;
+  };
 
   return (
     <>
@@ -93,7 +103,8 @@ const CardType = ({ input, context, size }: Props) => {
         <CardEvent input={input} size={sizeFor("event")} />
       )}
       {input._type === "exhibition" && (
-        <CardExhibition input={input} size={sizeForExhibition(input)} />
+        // <CardExhibition input={input} size={sizeForExhibition(input)} />
+        <CardExhibition input={input} size={sizeFor("exhibition")} />
       )}
 
       {input._type === "product" && (
@@ -102,7 +113,13 @@ const CardType = ({ input, context, size }: Props) => {
           size={context === "grid" ? size || "sm" : sizeFor("product")}
         />
       )}
-      {input._type === "pageModulaire" && (
+      {input._type === "pageModulaire" && _isBrancheRessources(input) && (
+        <CardBranche
+          input={input as unknown as PageModulaireExpanded}
+          size='sm'
+        />
+      )}
+      {input._type === "pageModulaire" && !_isBrancheRessources(input) && (
         <CardPageModulaire input={input} size='md' />
       )}
       {input._type === "article" && (

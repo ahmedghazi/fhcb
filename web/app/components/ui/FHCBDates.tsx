@@ -13,13 +13,11 @@ type Props = {
 };
 
 const LocationSlot = ({ location }: { location: Location }) => {
-  const localizedTitle: string = _localizeField(location.title);
-  // if (localizedTitle.toLowerCase().indexOf("tube") > -1) {
-  //   return null;
-  // }
-  // if (localizedTitle.toLowerCase().indexOf("cube") > -1) {
-  //   return null;
-  // }
+  const localizedTitle: string = _localizeField(location.title)
+    .replace(/, cube/gi, "")
+    .replace(/, tube/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
 
   return (
     <div className={clsx("location", location.inSite && "location--is-insite")}>
@@ -32,10 +30,18 @@ const FHCBDates = ({ input, displayLocations = true }: Props) => {
   const { locale } = useLocale();
   const dates = input || [];
   const hasSeveralDates = dates.length > 1;
+  const ossSiteLocations = ["offSite", "travelling"];
+  const hasDatesOffSite = dates.some(
+    (el) => !!el.locationType && ossSiteLocations.includes(el.locationType),
+  );
   // console.log("displayLocations", displayLocations);
   return (
     <div
-      className={clsx("fhcb-dates", hasSeveralDates && "fhcb-dates--multiple")}>
+      className={clsx(
+        "fhcb-dates",
+        hasSeveralDates && "fhcb-dates--multiple",
+        hasDatesOffSite && "fhcb-dates--with-offsite",
+      )}>
       {dates.map((date: FhcbDate, index) => {
         if (!date) return null;
         const fmt = _fhcbDates(date, locale);
@@ -54,7 +60,7 @@ const FHCBDates = ({ input, displayLocations = true }: Props) => {
                 <br />
 
                 <time dateTime={date.au ?? undefined}>→ {fmt.au}</time>
-                {date.location && displayLocations && (
+                {date.location && (
                   <LocationSlot
                     location={date.location as unknown as Location}
                   />
@@ -67,7 +73,7 @@ const FHCBDates = ({ input, displayLocations = true }: Props) => {
                   {fmt.du} → {fmt.au} {fmt.year}
                 </time>
                 {/* <pre>{JSON.stringify(date, null, 2)}</pre> */}
-                {date.location && displayLocations && (
+                {date.location && (
                   <LocationSlot
                     location={date.location as unknown as Location}
                   />
@@ -80,7 +86,7 @@ const FHCBDates = ({ input, displayLocations = true }: Props) => {
                   {fmt.date} | {fmt.timeStart}
                   {fmt.timeEnd ? `–${fmt.timeEnd}` : ""}
                 </time>
-                {date.location && displayLocations && (
+                {date.location && (
                   <LocationSlot
                     location={date.location as unknown as Location}
                   />
@@ -92,7 +98,7 @@ const FHCBDates = ({ input, displayLocations = true }: Props) => {
               fmt.type !== "different-years" && (
                 <>
                   <time dateTime={date.du ?? undefined}>{fmt.date}</time>
-                  {date.location && displayLocations && (
+                  {date.location && (
                     <LocationSlot
                       location={date.location as unknown as Location}
                     />

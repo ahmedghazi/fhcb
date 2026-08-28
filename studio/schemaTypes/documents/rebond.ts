@@ -72,6 +72,10 @@ export default defineType({
                 title: 'Expo(s) en cours/à venir à découvrir (prio. fondation, complété au hasard)',
                 value: 'exhibition-discover-current-or-futur',
               },
+              {
+                title: 'Branches Ressources',
+                value: 'page-branche-ressources',
+              },
             ],
           },
         },

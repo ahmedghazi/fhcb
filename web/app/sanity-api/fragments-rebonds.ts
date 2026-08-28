@@ -3,6 +3,7 @@ import {
   cardRefArtist,
   cardRefEvent,
   cardRefExhibition,
+  cardRefPageModulaire,
   cardRefProduct,
   cardTypesRessources,
 } from "./fragments-cards";
@@ -39,6 +40,13 @@ import {
 const HCB_ARTIST_ID = `*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id`;
 const MF_ARTIST_ID = `*[_type == "artist" && slug.current == "martine-franck"][0]._id`;
 
+// scenario: "page-branche-ressources" — same fixed-pivot idea as HCB_ARTIST_ID/MF_ARTIST_ID above,
+// but for the "branches ressources" tag (studio/schemaTypes/documents/pageModulaire.ts also hardcodes
+// this same tag's _id, as BRANCHES_RESSOURCES_TAG_ID, to toggle imageCover/videoCover visibility) —
+// picked by slug so editors don't need to hold the tag document's _id. This tag is only ever put on
+// the 4 "branche" landing pageModulaire docs (images, feuilletages, focus, paroles).
+const BRANCHES_RESSOURCES_TAG_ID = `*[_type == "tag" && slug.current == "branches-ressources"][0]._id`;
+
 // "docs-hcb-related" / "docs-mf-related" are capped per type-shape (2 each) rather than folded as an
 // OR branch into the shared rebondBooks/rebondExhibitions/rebondEvents/rebondArticles/rebondRessources
 // filters below — same reasoning as rebondExhibitionsByArtist's [0...4] cap further down: the cap must
@@ -48,7 +56,14 @@ const MF_ARTIST_ID = `*[_type == "artist" && slug.current == "martine-franck"][0
 // a helper function: \`sanity typegen\`'s query extractor statically inlines top-level \`const\` string
 // bindings, it doesn't evaluate function calls, so a parametrized helper fails with "Could not find
 // binding for node" for the function's own parameters.
-const DOCS_RELATED_CAP = 4;
+const DOCS_RELATED_CAP = 2;
+
+// "prize-related" is capped per type-shape (2 each), same reasoning as DOCS_RELATED_CAP above: pulled
+// out into its own fragment per type rather than left as an OR branch inside the shared
+// rebondArtistRelated/rebondExhibitions/rebondArticles filters, so the cap applies only to THIS
+// scenario's own matches (e.g. combining "prize-related" with "tags-related" on the same exhibition
+// filter shouldn't let one scenario's cap constrain the other).
+const PRIZE_RELATED_CAP = 2;
 
 // scenario: "artist" (self, via host's \`artists[]\`) — also fires for "artist-related": editors expect
 // artist-related to include the host's own artist(s) directly (e.g. a book's own listed artist), not
@@ -82,26 +97,34 @@ export const rebondArtistSelf = `
 // links and generic multi-exhibition events (guided tours, etc.) are both too weak/noisy a signal.
 // The exclusion of the host's OWN artist(s) from the result must go through the same coalesce() —
 // comparing directly against ^.^._id (the host DOCUMENT's id) never matches an artist's _id.
-//
-// Also carries "prize-related": other artists sharing a `prix` with the host — same idea as
-// "tags-related" in rebondExhibitions/rebondEvents/rebondArticles/rebondRessources below, but `prix` is
-// only a field on artist/exhibition/pageModulaire (see studio/schemaTypes/documents/prix.ts), so it only
-// applies here (candidate _type == "artist") and in rebondExhibitions, not in every "-related" fragment.
-// NB the extra \`^\` in \`^.^.^.prix\`: the \`[@ in ...]\` array-membership filter is its own scope, same as
-// any \`*[]\` filter (see the file-level comment above on hop counting), so reaching the host from inside
-// it needs one more hop than the surrounding \`*[]\` filter's own conditions (which only need \`^.^\`).
 export const rebondArtistRelated = `
   *[
     _type == "artist" &&
     !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&
-    (
-      ("artist-related" in ^.items && _id in *[
-        _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
-        references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))
-      ].artists[]._ref)
-      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)
-    )
+    "artist-related" in ^.items && _id in *[
+      _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&
+      references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))
+    ].artists[]._ref
   ] | order(name asc) {
+    ${cardRefArtist}
+  }
+`;
+
+// "prize-related" — other artists sharing a \`prix\` with the host, capped (see PRIZE_RELATED_CAP
+// above) — same idea as "tags-related" in rebondExhibitions/rebondEvents/rebondArticles/rebondRessources
+// below, but \`prix\` is only a field on artist/exhibition/pageModulaire (see
+// studio/schemaTypes/documents/prix.ts), so it only applies here (candidate _type == "artist") and in
+// rebondExhibitionsPrizeRelated/rebondArticlesPrizeRelated, not in every "-related" fragment.
+// NB the extra \`^\` in \`^.^.^.prix\`: the \`[@ in ...]\` array-membership filter is its own scope, same as
+// any \`*[]\` filter (see the file-level comment above on hop counting), so reaching the host from inside
+// it needs one more hop than the surrounding \`*[]\` filter's own conditions (which only need \`^.^\`).
+export const rebondArtistPrizeRelated = `
+  *[
+    _type == "artist" &&
+    !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&
+    "prize-related" in ^.items &&
+    count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0
+  ] | order(name asc) [0...${PRIZE_RELATED_CAP}] {
     ${cardRefArtist}
   }
 `;
@@ -189,7 +212,6 @@ export const rebondExhibitions = `
       || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-current-or-futur" in ^.items && ${EXHIBITION_CURRENT_OR_FUTUR})
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
-      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)
     )
   ] | order(dates[0].du desc) {
     ${cardRefExhibition}
@@ -230,6 +252,19 @@ export const rebondExhibitionsByArtist = `
     "exhibition-related-by-artist" in ^.items &&
     references(^.^.artists[]._ref)
   ] | order(dates[0].du desc) [0...4] {
+    ${cardRefExhibition}
+  }
+`;
+
+// "prize-related" — other exhibitions sharing a \`prix\` with the host, capped (see
+// PRIZE_RELATED_CAP above; see rebondArtistPrizeRelated for why this is its own fragment).
+export const rebondExhibitionsPrizeRelated = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    "prize-related" in ^.items &&
+    count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0
+  ] | order(dates[0].du desc) [0...${PRIZE_RELATED_CAP}] {
     ${cardRefExhibition}
   }
 `;
@@ -308,10 +343,8 @@ export const rebondExhibitionsDiscoverCurrent = `
 `;
 
 // scenarios: "articles-related" — articles directly linked to the host, not broadened via the host's
-// artist(s), except for a pageModulaire artist page (see rebondBooks above for why) — "tags-related" —
-// articles sharing a tag with the host — and "prize-related" — articles sharing a `prix` with the host
-// (article also carries a `prix` field, alongside artist/exhibition/pageModulaire — see
-// studio/schemaTypes/documents/article.ts).
+// artist(s), except for a pageModulaire artist page (see rebondBooks above for why) — and
+// "tags-related" — articles sharing a tag with the host.
 export const rebondArticles = `
   *[
     _type == "article" &&
@@ -319,7 +352,6 @@ export const rebondArticles = `
     (
       ("articles-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
-      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)
     )
   ] | order(_createdAt desc) {
     ${cardRefArticle}
@@ -345,6 +377,20 @@ export const rebondArticlesMf = `
     "docs-mf-related" in ^.items &&
     references(${MF_ARTIST_ID})
   ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+    ${cardRefArticle}
+  }
+`;
+
+// "prize-related" — other articles sharing a \`prix\` with the host (article also carries a \`prix\`
+// field, alongside artist/exhibition/pageModulaire — see studio/schemaTypes/documents/article.ts),
+// capped (see PRIZE_RELATED_CAP above; see rebondArtistPrizeRelated for why this is its own fragment).
+export const rebondArticlesPrizeRelated = `
+  *[
+    _type == "article" &&
+    _id != ^.^._id &&
+    "prize-related" in ^.items &&
+    count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0
+  ] | order(_createdAt desc) [0...${PRIZE_RELATED_CAP}] {
     ${cardRefArticle}
   }
 `;
@@ -391,6 +437,21 @@ export const rebondRessourcesMf = `
   }
 `;
 
+// scenario: "page-branche-ressources" — the 4 fixed "branche" pageModulaire landing pages (images,
+// feuilletages, focus, paroles — see CardBranche.tsx) tagged with BRANCHES_RESSOURCES_TAG_ID above.
+// A fixed pivot like docs-hcb-related/docs-mf-related, not a shared-field comparison against the
+// host, so no \`^.^.^\` hop-counting gotcha here: \`references()\` just takes a literal id.
+export const rebondPageBrancheRessources = `
+  *[
+    _type == "pageModulaire" &&
+    _id != ^.^._id &&
+    "page-branche-ressources" in ^.items &&
+    references(${BRANCHES_RESSOURCES_TAG_ID})
+  ] | order(_createdAt asc) {
+    ${cardRefPageModulaire}
+  }
+`;
+
 // body of a \`rebondsAuto[]->{ ... }\` projection — resolves \`items\` (the scenario keys picked by
 // the editor on each \`rebond\` document in the host's \`rebondsAuto\` array) into a single array of
 // cards, grouped by document type. Used the same way from any host document type — see rebondsAuto
@@ -409,11 +470,13 @@ export const rebondsResolver = `
   "resolvedItems":
     ${rebondArtistSelf}
     + ${rebondArtistRelated}
+    + ${rebondArtistPrizeRelated}
     + ${rebondBooks}
     + ${rebondExhibitions}
     + ${rebondExhibitionsHcb}
     + ${rebondExhibitionsMf}
     + ${rebondExhibitionsByArtist}
+    + ${rebondExhibitionsPrizeRelated}
     + ${rebondExhibitionsDiscoverPast}
     + ${rebondExhibitionsDiscoverCurrent}
     + ${rebondEvents}
@@ -422,9 +485,11 @@ export const rebondsResolver = `
     + ${rebondArticles}
     + ${rebondArticlesHcb}
     + ${rebondArticlesMf}
+    + ${rebondArticlesPrizeRelated}
     + ${rebondRessources}
     + ${rebondRessourcesHcb}
     + ${rebondRessourcesMf}
+    + ${rebondPageBrancheRessources}
     + ${rebondBooksHcb}
     + ${rebondBooksMf}
 `;

@@ -3,6 +3,7 @@
   z-index: 0;
   font-size: var(--text-sm);
   color: white;
+  padding-top: var(--spacing-lg);
   :global(.inner) {
     display: flex;
     align-items: center;
@@ -12,6 +13,7 @@
   :global(input) {
     color: white;
     font-size: var(--text-md);
+    border-bottom: var(--border);
   }
   :global(input)::placeholder {
     color: white !important;

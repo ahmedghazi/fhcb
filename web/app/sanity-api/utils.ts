@@ -141,6 +141,7 @@ const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = 
   "docs-mf-related": (item) =>
     !!item._type &&
     ["product", "exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
+  "page-branche-ressources": (item) => item._type === "pageModulaire",
 };
 
 // rebondsResolver's GROQ concatenates resolvedItems grouped by document type in a fixed order

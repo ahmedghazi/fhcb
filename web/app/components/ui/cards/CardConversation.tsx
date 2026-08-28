@@ -3,7 +3,6 @@ import { ConversationExpanded } from "@/app/sanity-api/types/sanity-expanded.typ
 import clsx from "clsx";
 import { conversationToCard } from "./adapters";
 import CardBase from "./CardBase";
-import { useFooterMaxHeight } from "@/app/hooks/useFooterMaxHeight";
 
 type Props = {
   input: ConversationExpanded;
@@ -12,17 +11,15 @@ type Props = {
 
 const CardConversation = ({ input, size = "md" }: Props) => {
   const props = conversationToCard(input);
-  const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
 
   return (
     <div
-      ref={ref}
       className={clsx(
         "card card--conversation",
         `card--${size}`,
         "card--footer-hover",
       )}>
-      <CardBase {...props} style={style ?? undefined} />
+      <CardBase {...props} />
     </div>
   );
 };

@@ -4821,6 +4821,10 @@
               {
                 "type": "string",
                 "value": "exhibition-discover-current-or-futur"
+              },
+              {
+                "type": "string",
+                "value": "page-branche-ressources"
               }
             ]
           }

@@ -53,7 +53,7 @@ header.header {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-sm);
     z-index: 1;
     .header__meta-nav {
       display: flex;

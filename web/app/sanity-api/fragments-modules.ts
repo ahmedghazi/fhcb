@@ -287,9 +287,12 @@ export const newsCardUI = `
     "articles": *[_type == "article"] | order(_createdAt desc)[0...3]{
       ${cardRefArticle}
     },
-    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 && defined(countdown) && countdown > 15 && countdown <= 30] | order(dates[0].du asc) {
+    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 ] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
+    // "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 && defined(countdown) && countdown > 15 && countdown <= 30] | order(dates[0].du asc) {
+    //   ${cardRefExhibition}
+    // },
   }
 `;
 
@@ -421,7 +424,14 @@ export const listExhibitionsUI = `
       && !(_id in path("drafts.**"))
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
-    ] | order(dates[0].du asc) {
+    ] | order(
+      select(
+        count(dates[locationType == "inSite-cube"]) > 0 => 0,
+        count(dates[locationType == "inSite-tube"]) > 0 => 1,
+        2
+      ) asc,
+      dates[0].du asc
+    ) {
       ${cardRefExhibition}
     },
     cta{
