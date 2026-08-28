@@ -61,6 +61,7 @@ export default defineType({
     }),
     defineField({
       name: 'pastille',
+      title: 'Pastille de statut',
       type: 'localeString',
       group: 'editorial',
     }),
@@ -100,7 +101,15 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'tag'}]}],
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'tag'}],
+          options: {
+            filter: 'tagType == "event"',
+          },
+        },
+      ],
       group: 'editorial',
     }),
     defineField({

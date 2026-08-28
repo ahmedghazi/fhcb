@@ -27,6 +27,31 @@ export default defineType({
     }),
     slug,
     defineField({
+      name: 'tagType',
+      type: 'string',
+      group: 'editorial',
+      options: {
+        list: [
+          {
+            title: 'Exposition',
+            value: 'exhibition',
+          },
+          {
+            title: 'Événement',
+            value: 'event',
+          },
+          {
+            title: 'Page',
+            value: 'pageModulaire',
+          },
+          {
+            title: 'Ressource',
+            value: 'ressource',
+          },
+        ],
+      },
+    }),
+    defineField({
       name: 'visible',
       title: 'Visible',
       type: 'boolean',
@@ -36,18 +61,19 @@ export default defineType({
   preview: {
     select: {
       title: `title.${baseLanguage}`,
+      subtitle: 'tagType',
     },
   },
-  // orderings: [
-  //   {
-  //     title: 'Trier par theme ASC',
-  //     name: 'themeAsc',
-  //     by: [{field: 'tagType', direction: 'asc'}],
-  //   },
-  //   {
-  //     title: 'Trier par theme DESC',
-  //     name: 'themeDesc',
-  //     by: [{field: 'tagType', direction: 'desc'}],
-  //   },
-  // ],
+  orderings: [
+    {
+      title: 'Trier par theme ASC',
+      name: 'themeAsc',
+      by: [{field: 'tagType', direction: 'asc'}],
+    },
+    {
+      title: 'Trier par theme DESC',
+      name: 'themeDesc',
+      by: [{field: 'tagType', direction: 'desc'}],
+    },
+  ],
 })

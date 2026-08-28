@@ -6793,6 +6793,31 @@
         },
         "optional": true
       },
+      "tagType": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "exhibition"
+            },
+            {
+              "type": "string",
+              "value": "event"
+            },
+            {
+              "type": "string",
+              "value": "pageModulaire"
+            },
+            {
+              "type": "string",
+              "value": "ressource"
+            }
+          ]
+        },
+        "optional": true
+      },
       "visible": {
         "type": "objectAttribute",
         "value": {
@@ -8848,13 +8873,6 @@
         },
         "optional": true
       },
-      "linkTickets": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "artists": {
         "type": "objectAttribute",
         "value": {
@@ -8921,6 +8939,13 @@
         },
         "optional": true
       },
+      "linkTickets": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "countdown": {
         "type": "objectAttribute",
         "value": {
@@ -8976,14 +9001,6 @@
               "name": "tag.reference"
             }
           }
-        },
-        "optional": true
-      },
-      "pastille": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "localeString"
         },
         "optional": true
       },

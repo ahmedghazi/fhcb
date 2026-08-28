@@ -67,12 +67,6 @@ export default defineType({
       group: 'editorial',
       hidden: true,
     }),
-    defineField({
-      name: 'linkTickets',
-      title: 'Lien de billetterie',
-      type: 'url',
-      group: 'editorial',
-    }),
 
     defineField({
       name: 'artists',
@@ -83,7 +77,7 @@ export default defineType({
     }),
     defineField({
       name: 'prix',
-      title: 'Prix',
+      title: "Prix si associé à l'exposition",
       type: 'array',
       of: [{type: 'reference', to: [{type: 'prix'}]}],
       group: 'editorial',
@@ -97,11 +91,18 @@ export default defineType({
       of: [{type: 'fhcbDate'}],
     }),
     defineField({
+      name: 'linkTickets',
+      title: 'Lien de billetterie',
+      type: 'url',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'countdown',
       title: 'Compte à rebours',
       description: 'Sert en homePage pour faire passer une expo en zone actu ou zone mise en avant',
       type: 'number',
       group: 'editorial',
+      readOnly: true,
     }),
     defineField({
       name: 'location',
@@ -123,15 +124,23 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'tag'}]}],
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'tag'}],
+          options: {
+            filter: 'tagType == "exhibition"',
+          },
+        },
+      ],
       group: 'editorial',
     }),
 
-    defineField({
-      name: 'pastille',
-      type: 'localeString',
-      group: 'editorial',
-    }),
+    // defineField({
+    //   name: 'pastille',
+    //   type: 'localeString',
+    //   group: 'editorial',
+    // }),
     defineField({
       name: 'color',
       type: 'color',

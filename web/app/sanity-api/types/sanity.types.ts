@@ -1281,6 +1281,7 @@ export type Tag = {
   _rev: string;
   title?: LocaleString;
   slug?: Slug;
+  tagType?: "exhibition" | "event" | "pageModulaire" | "ressource";
   visible?: boolean;
 };
 
@@ -1671,7 +1672,6 @@ export type Exhibition = {
       _key: string;
     } & LinkExternal
   >;
-  linkTickets?: string;
   artists?: Array<
     {
       _key: string;
@@ -1687,6 +1687,7 @@ export type Exhibition = {
       _key: string;
     } & FhcbDate
   >;
+  linkTickets?: string;
   countdown?: number;
   location?: "inside" | "inside-cube" | "inside-tube" | "outside" | "itinerant";
   tags?: Array<
@@ -1694,7 +1695,6 @@ export type Exhibition = {
       _key: string;
     } & TagReference
   >;
-  pastille?: LocaleString;
   color?: Color;
   modules?: Array<
     | ({
@@ -2691,7 +2691,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/app/sanity-api/sanity-queries.tsx
 // Variable: SETTINGS_QUERY
-// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{     ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navSecondary[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navTertiary[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navQuaternary[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navLegals[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navSocial[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  mostSearched[]->{    _type,    slug,    "title": coalesce(title, name)  },  bandeauContextuel{    ...,    cta{        ...,   internal {    label,    link->{      _type,      slug    }  },    }  },  siteDescription{    ...  },  baseline{    ...  },  message404{      ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }  },  messageCookies,  urlLegals{      ...,  link->{    _type,    slug  }  },  urlPrivacy{      ...,  link->{    _type,    slug  }  },  urlSupport{    ...  }}
+// Query: *[_type == "settings"][0]{  ...,  navPrimary[]{     ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },        subMenu[]{            ...,  link->{    _type,    slug  }        }      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navSecondary[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },        subMenu[]{            ...,  link->{    _type,    slug  }        }      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navTertiary[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },        subMenu[]{            ...,  link->{    _type,    slug  }        }      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navQuaternary[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },        subMenu[]{            ...,  link->{    _type,    slug  }        }      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navLegals[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },        subMenu[]{            ...,  link->{    _type,    slug  }        }      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  navSocial[]{      ...,  _type == 'linkInternal' => {      ...,    ...,  link->{    _type,    slug  },  imageCover{      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  },  withSubmenuImages,    subMenu[]{      ...,      _type == 'linkInternal' => {          ...,  link->{    _type,    slug,    modules[]{      ...,      _type == "listExhibitionsUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listExhibitionsPastUI" => {        "items": *[          _type == "exhibition"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },      _type == "listEventsUI" => {        "items": *[          _type == "event"          && !(_id in path("drafts.**"))          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)        ] | order(dates[0].du asc) {          "imageCover": imageCover{              asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }          }        }      },    }  },        subMenu[]{            ...,  link->{    _type,    slug  }        }      }    },    withMessage,    navMessage{        ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }    }  },  _type == 'linkIcon' => {    ...,    icon{      asset->{        _id,        url      }    }  }  },  btnLibrary{    ...,    link->{      _type,      slug    }  },  btnTickets{    ...  },  mostSearched[]->{    _type,    slug,    "title": coalesce(title, name)  },  bandeauContextuel{    ...,    cta{        ...,   internal {    label,    link->{      _type,      slug    }  },    }  },  siteDescription{    ...  },  baseline{    ...  },  message404{      ...,  fr[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  },  en[]{      ...,  markDefs[]{  ...,  _type == "linkInternal" => {    ...,    reference->  }},    _type == "keyValGroup" => {    ...,    items[]{      ...,      image{          asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }      }    }  },    _type == "blockContentCta" => {      ...,   internal {    label,    link->{      _type,      slug    }  },  },    _type == "image" => {    ...,      asset->{    _id,    assetId,    title,    altText,    description,    creditLine,    metadata {      lqip,      dimensions {        width,        height,      }    }  }  }  }  },  messageCookies,  urlLegals{      ...,  link->{    _type,    slug  }  },  urlPrivacy{      ...,  link->{    _type,    slug  }  },  urlSupport{    ...  }}
 export type SETTINGS_QUERY_RESULT = {
   _id: string;
   _type: "settings";
@@ -4822,14 +4822,76 @@ export type SETTINGS_QUERY_RESULT = {
               };
               withSubmenuImages?: boolean;
               withSubmenu?: boolean;
-              subMenu?: Array<
-                | ({
+              subMenu: Array<
+                | {
                     _key: string;
-                  } & LinkExternal)
-                | ({
+                    _type: "linkExternal";
+                    label?: LocaleString;
+                    link: null;
+                  }
+                | {
                     _key: string;
-                  } & LinkInternal)
-              >;
+                    _type: "linkInternal";
+                    label?: LocaleString;
+                    link:
+                      | {
+                          _type: "artist";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "event";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "exhibition";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "feuilletage";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "imageImages";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "library";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "pageModulaire";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "product";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "programme";
+                          slug: Slug | null;
+                        }
+                      | null;
+                    imageCover?: {
+                      asset?: SanityImageAssetReference;
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    withSubmenuImages?: boolean;
+                    withSubmenu?: boolean;
+                    subMenu?: Array<
+                      | ({
+                          _key: string;
+                        } & LinkExternal)
+                      | ({
+                          _key: string;
+                        } & LinkInternal)
+                    >;
+                    withMessage?: boolean;
+                    navMessage?: LocaleBlockContent;
+                  }
+              > | null;
               withMessage?: boolean;
               navMessage?: LocaleBlockContent;
             }
@@ -5055,7 +5117,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -5071,6 +5132,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -5083,7 +5145,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -6106,7 +6167,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -6122,6 +6182,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -6134,7 +6195,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -9178,14 +9238,76 @@ export type SETTINGS_QUERY_RESULT = {
               };
               withSubmenuImages?: boolean;
               withSubmenu?: boolean;
-              subMenu?: Array<
-                | ({
+              subMenu: Array<
+                | {
                     _key: string;
-                  } & LinkExternal)
-                | ({
+                    _type: "linkExternal";
+                    label?: LocaleString;
+                    link: null;
+                  }
+                | {
                     _key: string;
-                  } & LinkInternal)
-              >;
+                    _type: "linkInternal";
+                    label?: LocaleString;
+                    link:
+                      | {
+                          _type: "artist";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "event";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "exhibition";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "feuilletage";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "imageImages";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "library";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "pageModulaire";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "product";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "programme";
+                          slug: Slug | null;
+                        }
+                      | null;
+                    imageCover?: {
+                      asset?: SanityImageAssetReference;
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    withSubmenuImages?: boolean;
+                    withSubmenu?: boolean;
+                    subMenu?: Array<
+                      | ({
+                          _key: string;
+                        } & LinkExternal)
+                      | ({
+                          _key: string;
+                        } & LinkInternal)
+                    >;
+                    withMessage?: boolean;
+                    navMessage?: LocaleBlockContent;
+                  }
+              > | null;
               withMessage?: boolean;
               navMessage?: LocaleBlockContent;
             }
@@ -9411,7 +9533,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -9427,6 +9548,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -9439,7 +9561,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -10462,7 +10583,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -10478,6 +10598,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -10490,7 +10611,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -13421,14 +13541,76 @@ export type SETTINGS_QUERY_RESULT = {
               };
               withSubmenuImages?: boolean;
               withSubmenu?: boolean;
-              subMenu?: Array<
-                | ({
+              subMenu: Array<
+                | {
                     _key: string;
-                  } & LinkExternal)
-                | ({
+                    _type: "linkExternal";
+                    label?: LocaleString;
+                    link: null;
+                  }
+                | {
                     _key: string;
-                  } & LinkInternal)
-              >;
+                    _type: "linkInternal";
+                    label?: LocaleString;
+                    link:
+                      | {
+                          _type: "artist";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "event";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "exhibition";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "feuilletage";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "imageImages";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "library";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "pageModulaire";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "product";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "programme";
+                          slug: Slug | null;
+                        }
+                      | null;
+                    imageCover?: {
+                      asset?: SanityImageAssetReference;
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    withSubmenuImages?: boolean;
+                    withSubmenu?: boolean;
+                    subMenu?: Array<
+                      | ({
+                          _key: string;
+                        } & LinkExternal)
+                      | ({
+                          _key: string;
+                        } & LinkInternal)
+                    >;
+                    withMessage?: boolean;
+                    navMessage?: LocaleBlockContent;
+                  }
+              > | null;
               withMessage?: boolean;
               navMessage?: LocaleBlockContent;
             }
@@ -13654,7 +13836,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -13670,6 +13851,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -13682,7 +13864,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -14705,7 +14886,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -14721,6 +14901,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -14733,7 +14914,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -17664,14 +17844,76 @@ export type SETTINGS_QUERY_RESULT = {
               };
               withSubmenuImages?: boolean;
               withSubmenu?: boolean;
-              subMenu?: Array<
-                | ({
+              subMenu: Array<
+                | {
                     _key: string;
-                  } & LinkExternal)
-                | ({
+                    _type: "linkExternal";
+                    label?: LocaleString;
+                    link: null;
+                  }
+                | {
                     _key: string;
-                  } & LinkInternal)
-              >;
+                    _type: "linkInternal";
+                    label?: LocaleString;
+                    link:
+                      | {
+                          _type: "artist";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "event";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "exhibition";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "feuilletage";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "imageImages";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "library";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "pageModulaire";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "product";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "programme";
+                          slug: Slug | null;
+                        }
+                      | null;
+                    imageCover?: {
+                      asset?: SanityImageAssetReference;
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    withSubmenuImages?: boolean;
+                    withSubmenu?: boolean;
+                    subMenu?: Array<
+                      | ({
+                          _key: string;
+                        } & LinkExternal)
+                      | ({
+                          _key: string;
+                        } & LinkInternal)
+                    >;
+                    withMessage?: boolean;
+                    navMessage?: LocaleBlockContent;
+                  }
+              > | null;
               withMessage?: boolean;
               navMessage?: LocaleBlockContent;
             }
@@ -17897,7 +18139,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -17913,6 +18154,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -17925,7 +18167,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -18948,7 +19189,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -18964,6 +19204,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -18976,7 +19217,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -21907,14 +22147,76 @@ export type SETTINGS_QUERY_RESULT = {
               };
               withSubmenuImages?: boolean;
               withSubmenu?: boolean;
-              subMenu?: Array<
-                | ({
+              subMenu: Array<
+                | {
                     _key: string;
-                  } & LinkExternal)
-                | ({
+                    _type: "linkExternal";
+                    label?: LocaleString;
+                    link: null;
+                  }
+                | {
                     _key: string;
-                  } & LinkInternal)
-              >;
+                    _type: "linkInternal";
+                    label?: LocaleString;
+                    link:
+                      | {
+                          _type: "artist";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "event";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "exhibition";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "feuilletage";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "imageImages";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "library";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "pageModulaire";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "product";
+                          slug: Slug | null;
+                        }
+                      | {
+                          _type: "programme";
+                          slug: Slug | null;
+                        }
+                      | null;
+                    imageCover?: {
+                      asset?: SanityImageAssetReference;
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    withSubmenuImages?: boolean;
+                    withSubmenu?: boolean;
+                    subMenu?: Array<
+                      | ({
+                          _key: string;
+                        } & LinkExternal)
+                      | ({
+                          _key: string;
+                        } & LinkInternal)
+                    >;
+                    withMessage?: boolean;
+                    navMessage?: LocaleBlockContent;
+                  }
+              > | null;
               withMessage?: boolean;
               navMessage?: LocaleBlockContent;
             }
@@ -22140,7 +22442,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -22156,6 +22457,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -22168,7 +22470,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -23191,7 +23492,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -23207,6 +23507,7 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -23219,7 +23520,6 @@ export type SETTINGS_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -24457,7 +24757,6 @@ export type SETTINGS_QUERY_RESULT = {
                           _key: string;
                         } & LinkExternal
                       >;
-                      linkTickets?: string;
                       artists?: Array<
                         {
                           _key: string;
@@ -24473,6 +24772,7 @@ export type SETTINGS_QUERY_RESULT = {
                           _key: string;
                         } & FhcbDate
                       >;
+                      linkTickets?: string;
                       countdown?: number;
                       location?:
                         | "inside-cube"
@@ -24485,7 +24785,6 @@ export type SETTINGS_QUERY_RESULT = {
                           _key: string;
                         } & TagReference
                       >;
-                      pastille?: LocaleString;
                       color?: Color;
                       modules?: Array<
                         | ({
@@ -25508,7 +25807,6 @@ export type SETTINGS_QUERY_RESULT = {
                           _key: string;
                         } & LinkExternal
                       >;
-                      linkTickets?: string;
                       artists?: Array<
                         {
                           _key: string;
@@ -25524,6 +25822,7 @@ export type SETTINGS_QUERY_RESULT = {
                           _key: string;
                         } & FhcbDate
                       >;
+                      linkTickets?: string;
                       countdown?: number;
                       location?:
                         | "inside-cube"
@@ -25536,7 +25835,6 @@ export type SETTINGS_QUERY_RESULT = {
                           _key: string;
                         } & TagReference
                       >;
-                      pastille?: LocaleString;
                       color?: Color;
                       modules?: Array<
                         | ({
@@ -26485,7 +26783,7 @@ export type HOME_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -26779,7 +27077,7 @@ export type HOME_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -26852,6 +27150,7 @@ export type HOME_QUERY_RESULT = {
             _rev: string;
             title?: LocaleString;
             slug?: Slug;
+            tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
             visible?: boolean;
           }> | null;
           modules: Array<
@@ -27249,6 +27548,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
     _rev: string;
     title?: LocaleString;
     slug?: Slug;
+    tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
     visible?: boolean;
   }> | null;
   modules: Array<
@@ -27376,7 +27676,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -27782,7 +28082,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -27819,6 +28118,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -27831,7 +28131,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -27864,6 +28163,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -28107,6 +28407,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -29034,7 +29336,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -29210,7 +29512,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -30014,7 +30316,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -30030,6 +30331,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -30042,7 +30344,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -31065,7 +31366,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -31081,6 +31381,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -31093,7 +31394,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -32232,7 +32532,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -32352,6 +32652,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             _rev: string;
             title?: LocaleString;
             slug?: Slug;
+            tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
             visible?: boolean;
           }> | null;
           modules: Array<
@@ -33265,7 +33566,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -33302,6 +33602,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -33314,7 +33615,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -33347,6 +33647,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -33590,6 +33891,8 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -34160,7 +34463,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -34176,6 +34478,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -34188,7 +34491,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -35211,7 +35513,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -35227,6 +35528,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -35239,7 +35541,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -36271,7 +36572,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -36287,6 +36587,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -36299,7 +36600,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -37322,7 +37622,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -37338,6 +37637,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -37350,7 +37650,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -38605,7 +38904,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -38621,6 +38919,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -38633,7 +38932,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -39656,7 +39954,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -39672,6 +39969,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -39684,7 +39982,6 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -40655,7 +40952,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
           title: LocaleString | null;
           slug: Slug | null;
         }> | null;
-        pastille: LocaleString | null;
+        pastille: null;
         countdown: number | null;
         links: Array<{
           _key: string;
@@ -40699,6 +40996,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
           _rev: string;
           title?: LocaleString;
           slug?: Slug;
+          tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
           visible?: boolean;
         }> | null;
         modules: Array<
@@ -41083,7 +41381,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -41152,7 +41450,7 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -41707,7 +42005,7 @@ export type ARTIST_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -41776,7 +42074,7 @@ export type ARTIST_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -42033,7 +42331,6 @@ export type EXPHIBITION_QUERY_RESULT = {
       _key: string;
     } & LinkExternal
   >;
-  linkTickets?: string;
   artists: Array<{
     _type: "artist";
     _id: string;
@@ -42084,6 +42381,7 @@ export type EXPHIBITION_QUERY_RESULT = {
     timeStart?: string;
     timeEnd?: string;
   }> | null;
+  linkTickets?: string;
   countdown?: number;
   location?: "inside-cube" | "inside-tube" | "inside" | "itinerant" | "outside";
   tags: Array<{
@@ -42091,7 +42389,6 @@ export type EXPHIBITION_QUERY_RESULT = {
     title: LocaleString | null;
     slug: Slug | null;
   }> | null;
-  pastille?: LocaleString;
   color?: Color;
   modules: Array<
     | {
@@ -42352,7 +42649,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -42368,6 +42664,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -42380,7 +42677,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -43403,7 +43699,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -43419,6 +43714,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -43431,7 +43727,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -44686,7 +44981,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -44702,6 +44996,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -44714,7 +45009,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -45737,7 +46031,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -45753,6 +46046,7 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -45765,7 +46059,6 @@ export type EXPHIBITION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -46814,6 +47107,7 @@ export type EXPHIBITION_QUERY_RESULT = {
           _rev: string;
           title?: LocaleString;
           slug?: Slug;
+          tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
           visible?: boolean;
         }> | null;
         modules: Array<
@@ -47225,7 +47519,7 @@ export type EXPHIBITION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -47294,7 +47588,7 @@ export type EXPHIBITION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -47534,7 +47828,7 @@ export type EXPHIBITION_QUERY_RESULT = {
       title: LocaleString | null;
       slug: Slug | null;
     }> | null;
-    pastille: LocaleString | null;
+    pastille: null;
     countdown: number | null;
     links: Array<{
       _key: string;
@@ -47883,7 +48177,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -47899,6 +48192,7 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -47911,7 +48205,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -48934,7 +49227,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -48950,6 +49242,7 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -48962,7 +49255,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -50217,7 +50509,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -50233,6 +50524,7 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -50245,7 +50537,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -51268,7 +51559,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -51284,6 +51574,7 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -51296,7 +51587,6 @@ export type EVENT_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -52386,7 +52676,7 @@ export type EVENT_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -52455,7 +52745,7 @@ export type EVENT_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -52823,7 +53113,7 @@ export type PROGRAMME_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -53229,7 +53519,6 @@ export type PROGRAMME_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -53266,6 +53555,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -53278,7 +53568,6 @@ export type PROGRAMME_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -53311,6 +53600,7 @@ export type PROGRAMME_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -53554,6 +53844,8 @@ export type PROGRAMME_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -54481,7 +54773,7 @@ export type PROGRAMME_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -54657,7 +54949,7 @@ export type PROGRAMME_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -55461,7 +55753,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -55477,6 +55768,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -55489,7 +55781,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -56512,7 +56803,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -56528,6 +56818,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -56540,7 +56831,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -57679,7 +57969,7 @@ export type PROGRAMME_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -57799,6 +58089,7 @@ export type PROGRAMME_QUERY_RESULT = {
             _rev: string;
             title?: LocaleString;
             slug?: Slug;
+            tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
             visible?: boolean;
           }> | null;
           modules: Array<
@@ -58712,7 +59003,6 @@ export type PROGRAMME_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -58749,6 +59039,7 @@ export type PROGRAMME_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -58761,7 +59052,6 @@ export type PROGRAMME_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -58794,6 +59084,7 @@ export type PROGRAMME_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -59037,6 +59328,8 @@ export type PROGRAMME_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -59607,7 +59900,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -59623,6 +59915,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -59635,7 +59928,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -60658,7 +60950,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -60674,6 +60965,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -60686,7 +60978,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -61718,7 +62009,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -61734,6 +62024,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -61746,7 +62037,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -62769,7 +63059,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -62785,6 +63074,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -62797,7 +63087,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -64052,7 +64341,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -64068,6 +64356,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -64080,7 +64369,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -65103,7 +65391,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -65119,6 +65406,7 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -65131,7 +65419,6 @@ export type PROGRAMME_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -66409,7 +66696,6 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -66425,6 +66711,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -66437,7 +66724,6 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -67460,7 +67746,6 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -67476,6 +67761,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -67488,7 +67774,6 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -68796,7 +69081,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -68865,7 +69150,7 @@ export type IMAGE_IMAGES_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -69393,7 +69678,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -69799,7 +70084,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -69836,6 +70120,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -69848,7 +70133,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -69881,6 +70165,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -70124,6 +70409,8 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -71051,7 +71338,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -71227,7 +71514,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -72031,7 +72318,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -72047,6 +72333,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -72059,7 +72346,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -73082,7 +73368,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -73098,6 +73383,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -73110,7 +73396,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -74249,7 +74534,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -74369,6 +74654,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
             _rev: string;
             title?: LocaleString;
             slug?: Slug;
+            tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
             visible?: boolean;
           }> | null;
           modules: Array<
@@ -75282,7 +75568,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -75319,6 +75604,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -75331,7 +75617,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -75364,6 +75649,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -75607,6 +75893,8 @@ export type FEUILLETAGE_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -76177,7 +76465,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -76193,6 +76480,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -76205,7 +76493,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -77228,7 +77515,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -77244,6 +77530,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -77256,7 +77543,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -78288,7 +78574,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -78304,6 +78589,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -78316,7 +78602,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -79339,7 +79624,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -79355,6 +79639,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -79367,7 +79652,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -80622,7 +80906,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -80638,6 +80921,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -80650,7 +80934,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -81673,7 +81956,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -81689,6 +81971,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -81701,7 +81984,6 @@ export type FEUILLETAGE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -82685,7 +82967,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
           title: LocaleString | null;
           slug: Slug | null;
         }> | null;
-        pastille: LocaleString | null;
+        pastille: null;
         countdown: number | null;
         links: Array<{
           _key: string;
@@ -82814,6 +83096,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
           _rev: string;
           title?: LocaleString;
           slug?: Slug;
+          tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
           visible?: boolean;
         }> | null;
         modules: Array<
@@ -83189,7 +83472,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -83258,7 +83541,7 @@ export type FEUILLETAGE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -83902,7 +84185,6 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -83918,6 +84200,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -83930,7 +84213,6 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -84953,7 +85235,6 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -84969,6 +85250,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -84981,7 +85263,6 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -86289,7 +86570,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -86358,7 +86639,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -86725,7 +87006,7 @@ export type SERIE_THEMATIQUE_QUERY_RESULT = {
           title: LocaleString | null;
           slug: Slug | null;
         }> | null;
-        pastille: LocaleString | null;
+        pastille: null;
         countdown: number | null;
         links: Array<{
           _key: string;
@@ -87089,7 +87370,7 @@ export type CONVERSATION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -87495,7 +87776,6 @@ export type CONVERSATION_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -87532,6 +87812,7 @@ export type CONVERSATION_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -87544,7 +87825,6 @@ export type CONVERSATION_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -87577,6 +87857,7 @@ export type CONVERSATION_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -87820,6 +88101,8 @@ export type CONVERSATION_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -88747,7 +89030,7 @@ export type CONVERSATION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -88923,7 +89206,7 @@ export type CONVERSATION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -89727,7 +90010,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -89743,6 +90025,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -89755,7 +90038,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -90778,7 +91060,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -90794,6 +91075,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -90806,7 +91088,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -91945,7 +92226,7 @@ export type CONVERSATION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -92065,6 +92346,7 @@ export type CONVERSATION_QUERY_RESULT = {
             _rev: string;
             title?: LocaleString;
             slug?: Slug;
+            tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
             visible?: boolean;
           }> | null;
           modules: Array<
@@ -92978,7 +93260,6 @@ export type CONVERSATION_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -93015,6 +93296,7 @@ export type CONVERSATION_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -93027,7 +93309,6 @@ export type CONVERSATION_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -93060,6 +93341,7 @@ export type CONVERSATION_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -93303,6 +93585,8 @@ export type CONVERSATION_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -93873,7 +94157,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -93889,6 +94172,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -93901,7 +94185,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -94924,7 +95207,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -94940,6 +95222,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -94952,7 +95235,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -95984,7 +96266,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -96000,6 +96281,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -96012,7 +96294,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -97035,7 +97316,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -97051,6 +97331,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -97063,7 +97344,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -98318,7 +98598,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -98334,6 +98613,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -98346,7 +98626,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -99369,7 +99648,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -99385,6 +99663,7 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -99397,7 +99676,6 @@ export type CONVERSATION_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -100381,7 +100659,7 @@ export type CONVERSATION_QUERY_RESULT = {
           title: LocaleString | null;
           slug: Slug | null;
         }> | null;
-        pastille: LocaleString | null;
+        pastille: null;
         countdown: number | null;
         links: Array<{
           _key: string;
@@ -100510,6 +100788,7 @@ export type CONVERSATION_QUERY_RESULT = {
           _rev: string;
           title?: LocaleString;
           slug?: Slug;
+          tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
           visible?: boolean;
         }> | null;
         modules: Array<
@@ -100885,7 +101164,7 @@ export type CONVERSATION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -100954,7 +101233,7 @@ export type CONVERSATION_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -101321,7 +101600,7 @@ export type CONVERSATION_QUERY_RESULT = {
           title: LocaleString | null;
           slug: Slug | null;
         }> | null;
-        pastille: LocaleString | null;
+        pastille: null;
         countdown: number | null;
         links: Array<{
           _key: string;
@@ -101682,7 +101961,7 @@ export type ARTICLE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -102088,7 +102367,6 @@ export type ARTICLE_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -102125,6 +102403,7 @@ export type ARTICLE_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -102137,7 +102416,6 @@ export type ARTICLE_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -102170,6 +102448,7 @@ export type ARTICLE_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -102413,6 +102692,8 @@ export type ARTICLE_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -103340,7 +103621,7 @@ export type ARTICLE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -103516,7 +103797,7 @@ export type ARTICLE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -104320,7 +104601,6 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -104336,6 +104616,7 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -104348,7 +104629,6 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -105371,7 +105651,6 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & LinkExternal
                               >;
-                              linkTickets?: string;
                               artists?: Array<
                                 {
                                   _key: string;
@@ -105387,6 +105666,7 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & FhcbDate
                               >;
+                              linkTickets?: string;
                               countdown?: number;
                               location?:
                                 | "inside-cube"
@@ -105399,7 +105679,6 @@ export type ARTICLE_QUERY_RESULT = {
                                   _key: string;
                                 } & TagReference
                               >;
-                              pastille?: LocaleString;
                               color?: Color;
                               modules?: Array<
                                 | ({
@@ -106538,7 +106817,7 @@ export type ARTICLE_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -106658,6 +106937,7 @@ export type ARTICLE_QUERY_RESULT = {
             _rev: string;
             title?: LocaleString;
             slug?: Slug;
+            tagType?: "event" | "exhibition" | "pageModulaire" | "ressource";
             visible?: boolean;
           }> | null;
           modules: Array<
@@ -107571,7 +107851,6 @@ export type ARTICLE_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -107608,6 +107887,7 @@ export type ARTICLE_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -107620,7 +107900,6 @@ export type ARTICLE_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -107653,6 +107932,7 @@ export type ARTICLE_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -107896,6 +108176,8 @@ export type ARTICLE_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -108466,7 +108748,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -108482,6 +108763,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -108494,7 +108776,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -109517,7 +109798,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -109533,6 +109813,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -109545,7 +109826,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -110577,7 +110857,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -110593,6 +110872,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -110605,7 +110885,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -111628,7 +111907,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -111644,6 +111922,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -111656,7 +111935,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -112911,7 +113189,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -112927,6 +113204,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -112939,7 +113217,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -113962,7 +114239,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & LinkExternal
                             >;
-                            linkTickets?: string;
                             artists?: Array<
                               {
                                 _key: string;
@@ -113978,6 +114254,7 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & FhcbDate
                             >;
+                            linkTickets?: string;
                             countdown?: number;
                             location?:
                               | "inside-cube"
@@ -113990,7 +114267,6 @@ export type ARTICLE_QUERY_RESULT = {
                                 _key: string;
                               } & TagReference
                             >;
-                            pastille?: LocaleString;
                             color?: Color;
                             modules?: Array<
                               | ({
@@ -114979,7 +115255,7 @@ export type ARTICLE_QUERY_RESULT = {
           title: LocaleString | null;
           slug: Slug | null;
         }> | null;
-        pastille: LocaleString | null;
+        pastille: null;
         countdown: number | null;
         links: Array<{
           _key: string;
@@ -115514,7 +115790,6 @@ export type LIBRARY_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -115551,6 +115826,7 @@ export type LIBRARY_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -115563,7 +115839,6 @@ export type LIBRARY_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -115596,6 +115871,7 @@ export type LIBRARY_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -115839,6 +116115,8 @@ export type LIBRARY_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -116750,7 +117028,6 @@ export type LIBRARY_QUERY_RESULT = {
                 label?: LocaleString;
                 link?: string;
               }> | null;
-              linkTickets?: string;
               artists: Array<{
                 _id: string;
                 last_name: string | null;
@@ -116787,6 +117064,7 @@ export type LIBRARY_QUERY_RESULT = {
                 timeStart?: string;
                 timeEnd?: string;
               }> | null;
+              linkTickets?: string;
               countdown: number | null;
               location?:
                 | "inside-cube"
@@ -116799,7 +117077,6 @@ export type LIBRARY_QUERY_RESULT = {
                 title: LocaleString | null;
                 slug: Slug | null;
               }> | null;
-              pastille: LocaleString | null;
               color: Color | null;
               modules?: Array<
                 | ({
@@ -116832,6 +117109,7 @@ export type LIBRARY_QUERY_RESULT = {
                   _key: string;
                 } & RebondReference
               >;
+              pastille: null;
             }
           | {
               _id: string;
@@ -117075,6 +117353,8 @@ export type LIBRARY_QUERY_RESULT = {
                 _rev: string;
                 title?: LocaleString;
                 slug?: Slug;
+                tagType?:
+                  "event" | "exhibition" | "pageModulaire" | "ressource";
                 visible?: boolean;
               }> | null;
               modules: Array<
@@ -117971,7 +118251,7 @@ export type PRODUCT_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -118040,7 +118320,7 @@ export type PRODUCT_QUERY_RESULT = {
             title: LocaleString | null;
             slug: Slug | null;
           }> | null;
-          pastille: LocaleString | null;
+          pastille: null;
           countdown: number | null;
           links: Array<{
             _key: string;
@@ -118511,7 +118791,7 @@ export type PRODUCT_QUERY_RESULT = {
           title: LocaleString | null;
           slug: Slug | null;
         }> | null;
-        pastille: LocaleString | null;
+        pastille: null;
         countdown: number | null;
         links: Array<{
           _key: string;
@@ -118757,7 +119037,7 @@ export type RANDOM_PRODUCT_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "settings"][0]{\n  ...,\n  navPrimary[]{\n   \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSecondary[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navTertiary[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navQuaternary[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navLegals[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSocial[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  mostSearched[]->{\n    _type,\n    slug,\n    "title": coalesce(title, name)\n  },\n  bandeauContextuel{\n    ...,\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  },\n\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n  message404{\n    \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n  },\n  messageCookies,\n  urlLegals{\n    \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n  },\n  urlPrivacy{\n    \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n  },\n  urlSupport{\n    ...\n  }\n}': SETTINGS_QUERY_RESULT;
+    '*[_type == "settings"][0]{\n  ...,\n  navPrimary[]{\n   \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n        subMenu[]{\n          \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n        }\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSecondary[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n        subMenu[]{\n          \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n        }\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navTertiary[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n        subMenu[]{\n          \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n        }\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navQuaternary[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n        subMenu[]{\n          \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n        }\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navLegals[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n        subMenu[]{\n          \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n        }\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  navSocial[]{\n    \n  ...,\n  _type == \'linkInternal\' => {\n    \n  ...,\n  \n  ...,\n  link->{\n    _type,\n    slug\n  }\n,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  withSubmenuImages\n,\n    subMenu[]{\n      ...,\n      _type == \'linkInternal\' => {\n        \n  ...,\n  link->{\n    _type,\n    slug,\n    modules[]{\n      ...,\n      _type == "listExhibitionsUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      _type == "listExhibitionsPastUI" => {\n        "items": *[\n          _type == "exhibition"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      _type == "listEventsUI" => {\n        "items": *[\n          _type == "event"\n          && !(_id in path("drafts.**"))\n          && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n          && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n        ] | order(dates[0].du asc) {\n          "imageCover": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n    }\n  }\n\n,\n        subMenu[]{\n          \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n        }\n      }\n    },\n    withMessage,\n    navMessage{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  },\n  _type == \'linkIcon\' => {\n    ...,\n    icon{\n      asset->{\n        _id,\n        url\n      }\n    }\n  }\n\n  },\n  btnLibrary{\n    ...,\n    link->{\n      _type,\n      slug\n    }\n  },\n  btnTickets{\n    ...\n  },\n  mostSearched[]->{\n    _type,\n    slug,\n    "title": coalesce(title, name)\n  },\n  bandeauContextuel{\n    ...,\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  },\n\n  siteDescription{\n    ...\n  },\n  baseline{\n    ...\n  },\n  message404{\n    \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n  },\n  messageCookies,\n  urlLegals{\n    \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n  },\n  urlPrivacy{\n    \n  ...,\n  link->{\n    _type,\n    slug\n  }\n\n  },\n  urlSupport{\n    ...\n  }\n}': SETTINGS_QUERY_RESULT;
     '\n*[_type == "home"][0]{\n  ...,\n  seo{\n    \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n  },\n  modules[]{\n    \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]{\n        _type == "reference" => @->{\n          ...,\n          imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        },\n        _type == "keyVal" => {\n          ...,\n           image{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenairesMedia[]{\n        _type == "reference" => @->{\n          ...,\n          "image": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        },\n        _type == "keyVal" => {\n          ...,\n          "image": image{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      products[]->{\n        \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n      },\n      keyVal[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      \n  ...,\n  text{\n    \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      \n  ...,\n  text{\n    \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n  },\n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n  },\n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && !(_id in path("drafts.**")) && (\n      count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0\n      || (count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0 && defined(countdown) && countdown <= 15)\n    )] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    cardVideoMux{\n      ...,\n      video{\n        \n  asset->{\n    playbackId\n  }\n\n      },\n      cta{\n        \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n      }\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    "events": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current != "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    "eventsVisite": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    "product": *[ _type == "product" && !(_id in path("drafts.**")) && count(tagsProduct[_ref in *[_type == "tagProduct" && slug.current == "livre-du-mois"]._id]) > 0 ] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n    },\n    "articles": *[_type == "article"] | order(_createdAt desc)[0...3]{\n      \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0 && defined(countdown) && countdown > 15 && countdown <= 30] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n  }\n,\n  \n  _type == "ressourcesUI" => {\n    ...,\n    "imageImages": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    "feuilletage": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n    },\n    "serieThematique": *[_type == "serieThematique" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n    },\n    "conversation": *[_type == "conversation" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    branches[]->{\n      \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "serieThematique" && !(_id in path("drafts.**"))] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listConversationUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "conversation" && !(_id in path("drafts.**"))] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filterTags[]->{\n      title, slug\n    },\n    "resolvedItems": *[\n      _type == "exhibition"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    },\n    linkFallback{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": *[\n      _type == "exhibition"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(dates[0].du desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listExhibitionsEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filterTags[]->{\n      title\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "exhibitions": *[\n      _type == "exhibition"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    "events": *[\n      _type == "event"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(coalesce(dates[0].du, _createdAt) asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    cardSize,\n    filterTags[]->{\n      slug\n    },\n    "resolvedItems": *[\n      _type == "event"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(coalesce(dates[0].du, _createdAt) asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    },\n    linkFallback{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "supportUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "newsletterUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "formUI" => {\n    ...\n  }\n,\n  \n  _type == "blockquoteUI" => {\n    ...\n  }\n,\n  \n  _type == "sliderArtistUI" => {\n    ...,\n    artist->{\n      _id,\n      name,\n      slug\n    },\n    "items": *[\n      _id != ^._id &&\n      !(_id in path("drafts.**")) &&\n      (\n        (\n          _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&\n          references(^.artist._ref)\n        )\n        ||\n        (\n          _type == "artist" &&\n          _id == ^.artist._ref\n        )\n      )\n    ] | order(dates[0].du asc)[0...20] {\n      \n _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n  },\n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n\n\n  }\n}': HOME_QUERY_RESULT;
     '*[_type == "pageModulaire" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    tags[]->,\n    modules[]{\n      \n  ...,\n  \n  _type == "textUI" => {\n    ...,\n    title{\n      ...\n    },\n    text{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    }\n  }\n,\n  \n  _type == "imagesUI" => {\n    ...,\n    title,\n    items[]{\n      \n  ...,\n  image{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "videoUI" => {\n    ...,\n    video{\n      ...,\n      placeholder{\n        asset->\n      }\n    }\n  }\n,\n  \n  _type == "textImageUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    },\n    direction\n  }\n,\n  \n  _type == "textSidebarUI" => {\n    ...,\n    text{\n      \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n    },\n    sidebar{\n      commissariat,\n      coProduction[]{\n        _type == "reference" => @->{\n          ...,\n          imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        },\n        _type == "keyVal" => {\n          ...,\n           image{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n\n      partenaires[]->{\n        ...,\n        imageCover{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      },\n      partenairesMedia[]{\n        _type == "reference" => @->{\n          ...,\n          "image": imageCover{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        },\n        _type == "keyVal" => {\n          ...,\n          "image": image{\n            \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n          }\n        }\n      },\n      products[]->{\n        \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n      },\n      keyVal[]{\n        ...,\n        image{\n          \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n  \n  _type == "listUI" => {\n    ...,\n    items[]{\n      \n  ...,\n  text{\n    \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listsUI" => {\n    ...,\n    items[]{\n      \n  ...,\n  text{\n    \n  ...,\n  fr[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  },\n  en[]{\n    \n  ...,\n  \nmarkDefs[]{\n  ...,\n  _type == "linkInternal" => {\n    ...,\n    reference->\n  }\n}\n,\n  \n  _type == "keyValGroup" => {\n    ...,\n    items[]{\n      ...,\n      image{\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n  \n  _type == "blockContentCta" => {\n    \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n  }\n,\n  \n  _type == "image" => {\n    ...,\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  }\n\n\n  }\n\n  }\n\n    }\n  }\n,\n  \n  _type == "sliderCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n  },\n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "gridCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      ...,\n      \n _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n  },\n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "programmeUI" => {\n    ...,\n    title{\n      ...\n    },\n    items[]->{\n      _type,\n      _id,\n      title,\n      slug,\n      "imageCover": coalesce(imageCover, image){\n        \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n      },\n      dateStart,\n      dateEnd,\n      dates\n    }\n  }\n,\n  \n  _type == "featuredCardsUI" => {\n    ...,\n    title,\n    gridSize,\n    "items": *[_type == "exhibition" && !(_id in path("drafts.**")) && (\n      count(tags[_ref in *[_type == "tag" && slug.current == "exposition-en-cours"]._id]) > 0\n      || (count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0 && defined(countdown) && countdown <= 15)\n    )] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    cardVideoMux{\n      ...,\n      video{\n        \n  asset->{\n    playbackId\n  }\n\n      },\n      cta{\n        \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n      }\n    }\n  }\n,\n  \n  _type == "newsCardUI" => {\n    ...,\n    title{\n      ...\n    },\n    "events": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current != "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    "eventsVisite": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "visite-commentee"]._id]) > 0] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    "product": *[ _type == "product" && !(_id in path("drafts.**")) && count(tagsProduct[_ref in *[_type == "tagProduct" && slug.current == "livre-du-mois"]._id]) > 0 ] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n    },\n    "articles": *[_type == "article"] | order(_createdAt desc)[0...3]{\n      \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n    },\n    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "exposition-a-venir"]._id]) > 0 && defined(countdown) && countdown > 15 && countdown <= 30] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n  }\n,\n  \n  _type == "ressourcesUI" => {\n    ...,\n    "imageImages": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    "feuilletage": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n    },\n    "serieThematique": *[_type == "serieThematique" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n    },\n    "conversation": *[_type == "conversation" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {\n      \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    branches[]->{\n      \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listFeuilletageUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(index asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listImageImages" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listSerieThematiqueUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "serieThematique" && !(_id in path("drafts.**"))] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listConversationUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "items": *[_type == "conversation" && !(_id in path("drafts.**"))] | order(_createdAt desc) {\n      \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listExhibitionsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filterTags[]->{\n      title, slug\n    },\n    "resolvedItems": *[\n      _type == "exhibition"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    },\n    linkFallback{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listExhibitionsPastUI" => {\n    ...,\n    title{\n      ...\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "resolvedItems": *[\n      _type == "exhibition"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(dates[0].du desc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listExhibitionsEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    filterTags[]->{\n      title\n    },\n    filters[]{\n      ...,\n      \n  _type == "filterList" => {\n    ...,\n    "filterOptions": select(\n      filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n      filterKey == "tagProduct" => *[_type == "tagProduct"] | order(order asc) { order, _id, _type, title, slug },\n      filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n      filterKey == "language" => array::unique(*[_type == "product"].variants[].selectedOptions[name match "*lang*" || name match "*lingu*"].value)[defined(@)] | order(@ asc),\n      []\n    )\n  }\n,\n      \n  _type == "filterCheckbox" => {\n    ...,\n    // "filterOptions": select(\n    //   filterKey == "artist" => *[_type == "artist"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   filterKey == "tag" => *[_type == "tag"] | order(coalesce(title.fr, title.en) asc) { _id, _type, title, slug },\n    //   filterKey == "chercheur" => *[_type == "chercheur"] | order(name asc) { _id, _type, name, last_name, slug },\n    //   []\n    // )\n    filterOptions[]->{ _id, _type, name, title, slug }\n  }\n\n    },\n    "exhibitions": *[\n      _type == "exhibition"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(dates[0].du asc) {\n      \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n    },\n    "events": *[\n      _type == "event"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(coalesce(dates[0].du, _createdAt) asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "listEventsUI" => {\n    ...,\n    title{\n      ...\n    },\n    cardSize,\n    filterTags[]->{\n      slug\n    },\n    "resolvedItems": *[\n      _type == "event"\n      && !(_id in path("drafts.**"))\n      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)\n      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)\n    ] | order(coalesce(dates[0].du, _createdAt) asc) {\n      \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    },\n    linkFallback{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "supportUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n,\n  \n  _type == "newsletterUI" => {\n    ...,\n    image{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    }\n  }\n,\n  \n  _type == "formUI" => {\n    ...\n  }\n,\n  \n  _type == "blockquoteUI" => {\n    ...\n  }\n,\n  \n  _type == "sliderArtistUI" => {\n    ...,\n    artist->{\n      _id,\n      name,\n      slug\n    },\n    "items": *[\n      _id != ^._id &&\n      !(_id in path("drafts.**")) &&\n      (\n        (\n          _type in ["feuilletage", "imageImages", "serieThematique", "conversation"] &&\n          references(^.artist._ref)\n        )\n        ||\n        (\n          _type == "artist" &&\n          _id == ^.artist._ref\n        )\n      )\n    ] | order(dates[0].du asc)[0...20] {\n      \n _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n  },\n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    cta{\n      \n  ...,\n   internal {\n    label,\n    link->{\n      _type,\n      slug\n    }\n  },\n\n    }\n  }\n\n\n    },\n    rebonds[]->{\n      \n _type == "pageModulaire" => {\n    \n  _type,\n  _id,\n  "title": coalesce(title, name),\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  videoCover{\n    \n  asset->{\n    playbackId\n  }\n\n  },\n  tags[]->,\n  modules[]{\n    _type,\n    _type == "textUI" => {\n      text\n    }\n  }\n\n  },\n  _type == "exhibition" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "product" => {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  },\n  _type == "artist" => {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  },\n  _type == "event" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  },\n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "article" => {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n    },\n    rebondsAuto[]->{\n      \n  title,\n  items,\n  "resolvedItems":\n    \n  *[\n    _type == "artist" &&\n    _id != ^.^._id &&\n    ("artist" in ^.items || "artist-related" in ^.items) &&\n    _id in ^.^.artists[]._ref\n  ] {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  }\n\n    + \n  *[\n    _type == "artist" &&\n    !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&\n    (\n      ("artist-related" in ^.items && _id in *[\n        _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&\n        references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))\n      ].artists[]._ref)\n      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)\n    )\n  ] | order(name asc) {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  }\n\n    + \n  *[\n    _type == "product" &&\n    _id != ^.^._id &&\n    "book-related" in ^.items &&\n    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))\n  ] | order(_createdAt desc) {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    (\n      ("exhibition-related" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)))\n      || ("exhibition-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0)\n      || ("exhibition-related-past" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) == 0)\n      || ("exhibition-futur" in ^.items && count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0)\n      || ("exhibition-past" in ^.items && count(dates[coalesce(au, du) >= now()]) == 0)\n      || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0)\n      || ("exhibition-current-or-futur" in ^.items && \n  select(\n    count(*[_type == "exhibition" && count(dates[du <= now() && coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0]) > 0 =>\n      count(dates[du <= now() && coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0,\n    count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0\n  )\n)\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)\n    )\n  ] | order(dates[0].du desc) {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(dates[0].du desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(dates[0].du desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "exhibition-related-by-artist" in ^.items &&\n    references(^.^.artists[]._ref)\n  ] | order(dates[0].du desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "exhibition-discover-past" in ^.items &&\n    count(dates[coalesce(au, du) >= now()]) == 0\n  ] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n,\n    "isSameArtist": count(artists[@._ref in ^.^.artists[]._ref]) > 0\n  } | order(isSameArtist desc, dates[0].du desc) [0...12]\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "exhibition-discover-current-or-futur" in ^.items &&\n    count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0\n  ] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  } | order(dates[0].du asc) [0...12]\n\n    + \n  *[\n    _type == "event" &&\n    _id != ^.^._id &&\n    (\n      ("event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)\n      || ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n    )\n  ] | order(dates[0].du asc) {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "event" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(dates[0].du asc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "event" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(dates[0].du asc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "article" &&\n    _id != ^.^._id &&\n    (\n      ("articles-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)\n    )\n  ] | order(_createdAt desc) {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  }\n\n    + \n  *[\n    _type == "article" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  }\n\n    + \n  *[\n    _type == "article" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  }\n\n    + \n  *[\n    _id != ^.^._id &&\n    _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&\n    (\n      ("ressources-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n    )\n  ] | order(_createdAt desc) {\n    \n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n  }\n\n    + \n  *[\n    _id != ^.^._id &&\n    _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n  }\n\n    + \n  *[\n    _id != ^.^._id &&\n    _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n  }\n\n    + \n  *[\n    _type == "product" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  }\n\n    + \n  *[\n    _type == "product" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  }\n\n\n    }\n  }': PAGE_MODULAIRE_QUERY_RESULT;
     '*[_type == "artist" && slug.current == $slug][0]{\n    ...,\n    seo{\n      \n  ...,\n  metaImage{\n    asset->{\n      url\n    }\n  }\n\n    },\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    text,\n    links,\n    rebondsAuto[]->{\n      \n  title,\n  items,\n  "resolvedItems":\n    \n  *[\n    _type == "artist" &&\n    _id != ^.^._id &&\n    ("artist" in ^.items || "artist-related" in ^.items) &&\n    _id in ^.^.artists[]._ref\n  ] {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  }\n\n    + \n  *[\n    _type == "artist" &&\n    !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&\n    (\n      ("artist-related" in ^.items && _id in *[\n        _type in ["product", "feuilletage", "imageImages", "serieThematique", "conversation"] &&\n        references(coalesce(^.^.^.artists[]._ref, [^.^.^._id]))\n      ].artists[]._ref)\n      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)\n    )\n  ] | order(name asc) {\n    \n  _type,\n  _id,\n  name,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n\n  }\n\n    + \n  *[\n    _type == "product" &&\n    _id != ^.^._id &&\n    "book-related" in ^.items &&\n    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))\n  ] | order(_createdAt desc) {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    (\n      ("exhibition-related" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)))\n      || ("exhibition-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0)\n      || ("exhibition-related-past" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) == 0)\n      || ("exhibition-futur" in ^.items && count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0)\n      || ("exhibition-past" in ^.items && count(dates[coalesce(au, du) >= now()]) == 0)\n      || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0)\n      || ("exhibition-current-or-futur" in ^.items && \n  select(\n    count(*[_type == "exhibition" && count(dates[du <= now() && coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0]) > 0 =>\n      count(dates[du <= now() && coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0,\n    count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0\n  )\n)\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)\n    )\n  ] | order(dates[0].du desc) {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(dates[0].du desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(dates[0].du desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "exhibition-related-by-artist" in ^.items &&\n    references(^.^.artists[]._ref)\n  ] | order(dates[0].du desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "exhibition-discover-past" in ^.items &&\n    count(dates[coalesce(au, du) >= now()]) == 0\n  ] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n,\n    "isSameArtist": count(artists[@._ref in ^.^.artists[]._ref]) > 0\n  } | order(isSameArtist desc, dates[0].du desc) [0...12]\n\n    + \n  *[\n    _type == "exhibition" &&\n    _id != ^.^._id &&\n    "exhibition-discover-current-or-futur" in ^.items &&\n    count(dates[coalesce(au, du) >= now() && (!defined(locationType) || locationType in ["inSite", "inSite-cube", "inSite-tube"])]) > 0\n  ] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  color,\n  dates[]{\n    ...,\n    location->\n  },\n  artists[]->{\n    _id,\n    last_name,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  countdown,\n  links[]{\n    ...\n  }\n\n  } | order(dates[0].du asc) [0...12]\n\n    + \n  *[\n    _type == "event" &&\n    _id != ^.^._id &&\n    (\n      ("event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)\n      || ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n    )\n  ] | order(dates[0].du asc) {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "event" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(dates[0].du asc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "event" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(dates[0].du asc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  dates[]{\n    ...,\n    location->\n  },\n  description,\n  artists[]->{\n    _id,\n    name\n  },\n  tags[]->{\n    _id,\n    title,\n    slug\n  },\n  pastille,\n  links[]{\n    ...\n  }\n\n  }\n\n    + \n  *[\n    _type == "article" &&\n    _id != ^.^._id &&\n    (\n      ("articles-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n      || ("prize-related" in ^.items && count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0)\n    )\n  ] | order(_createdAt desc) {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  }\n\n    + \n  *[\n    _type == "article" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  }\n\n    + \n  *[\n    _type == "article" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n    _type,\n    _id,\n    title,\n    subTitle,\n    slug,\n    imageCover{\n      \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n    },\n    tags[]->{\n      title,\n      slug\n    }\n  \n  }\n\n    + \n  *[\n    _id != ^.^._id &&\n    _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&\n    (\n      ("ressources-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))\n      || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)\n    )\n  ] | order(_createdAt desc) {\n    \n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n  }\n\n    + \n  *[\n    _id != ^.^._id &&\n    _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n  }\n\n    + \n  *[\n    _id != ^.^._id &&\n    _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type == "imageImages" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "feuilletage" => {\n    \n  _type,\n  _id,\n  title,\n  subTitle,\n  index,\n  slug,\n  imageCover{\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video,\n  dates,\n  description,\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  tags[]->{\n    title,\n    slug\n  },\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  }\n\n  },\n  _type == "serieThematique" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  },\n  _type == "conversation" => {\n    \n  _type,\n  _id,\n  index,\n  title,\n  subTitle,\n  description,\n  slug,\n  chercheur->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name,\n    slug\n  },\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  video\n\n  }\n\n  }\n\n    + \n  *[\n    _type == "product" &&\n    _id != ^.^._id &&\n    "docs-hcb-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "henri-cartier-bresson"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  }\n\n    + \n  *[\n    _type == "product" &&\n    _id != ^.^._id &&\n    "docs-mf-related" in ^.items &&\n    references(*[_type == "artist" && slug.current == "martine-franck"][0]._id)\n  ] | order(_createdAt desc) [0...4] {\n    \n  _type,\n  _id,\n  title,\n  slug,\n  "imageCover": coalesce(imageCover, image){\n    \n  asset->{\n    _id,\n    assetId,\n    title,\n    altText,\n    description,\n    creditLine,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height,\n      }\n    }\n  }\n\n  },\n  pastille,\n  shopifyId,\n  shopifyHandle,\n  price,\n  totalInventory,\n  variants,\n  inStock,\n  languages,\n  tags[]->{\n    title\n  },\n  tagsProduct[]->{\n    order,\n    _id, title, slug, handle\n  },\n  artists[]->{\n    _id,\n    name,\n    last_name\n  },\n  artistName,\n  publicationDate\n\n  }\n\n\n    }\n  }': ARTIST_QUERY_RESULT;
