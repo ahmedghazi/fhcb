@@ -455,8 +455,10 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
       ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
       : undefined,
     tags: tagsLabel ? tagsLabel : _localizeText(input._type),
-    title: (_localizeField(input.title) as string) || "",
-    subTitle,
+    // title: (_localizeField(input.title) as string) || "",
+    // subTitle,
+    title: subTitle || "",
+    subTitle: (_localizeField(input.title) as string) || "",
     description: (_localizeField(description) as string) || undefined,
     // infoNode: toInfoNode(dates),
     actions: [

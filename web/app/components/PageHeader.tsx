@@ -9,7 +9,7 @@ import { _localizeField } from "../sanity-api/utils";
 
 type Props = {
   tag?: LocaleString | string;
-  h1?: LocaleString | string;
+  h1?: LocaleString | LocaleText | string;
   name?: string;
   subTitle?: LocaleString | LocaleText | string;
 };
@@ -21,7 +21,7 @@ const PageHeader = ({ tag, h1, name, subTitle }: Props) => {
         <div className='flex flex-col'>
           {tag && <div className='c-tag'>{_localizeField(tag)}</div>}
           <h1 className='c-h1-lg'>
-            {h1 && _localizeField(h1)}
+            {h1 && typeof h1 === "object" ? _localizeField(h1) : h1}
             {name && name}
           </h1>
           {subTitle && (

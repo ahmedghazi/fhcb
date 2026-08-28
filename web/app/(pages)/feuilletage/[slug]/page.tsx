@@ -65,8 +65,8 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       data-slug={data.slug?.current || ""}>
       <PageHeader
         tag={`FEUILLETAGE #${data.index}`}
-        h1={data.title}
-        subTitle={data.subTitle}
+        h1={data.subTitle || ""}
+        subTitle={data.title}
       />
       <div className='container-fluid'>
         {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
