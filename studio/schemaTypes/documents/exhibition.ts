@@ -136,11 +136,12 @@ export default defineType({
       group: 'editorial',
     }),
 
-    // defineField({
-    //   name: 'pastille',
-    //   type: 'localeString',
-    //   group: 'editorial',
-    // }),
+    defineField({
+      name: 'pastille',
+      type: 'localeString',
+      group: 'editorial',
+      hidden: true,
+    }),
     defineField({
       name: 'color',
       type: 'color',

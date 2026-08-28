@@ -9004,6 +9004,14 @@
         },
         "optional": true
       },
+      "pastille": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
+        },
+        "optional": true
+      },
       "color": {
         "type": "objectAttribute",
         "value": {

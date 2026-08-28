@@ -11,3 +11,4 @@
 - # rebonds scenario HCB + MF qui limite les résultats
 - scenario rebonds auto tags-related
 - # scenario rebonds auto exhibition-current-or-futur
+- home actu afficher les expos à venir, max 3 filtré cube en 1, tube en 2, hors les murs en 3
