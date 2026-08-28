@@ -169,7 +169,7 @@ const SearchForm = ({ settings }: Props) => {
           <h2 className='c-h2'>{_localizeText("mostSearched")}</h2>
           <ul className=''>
             {(mostSearched as unknown as MostSearchedItem[]).map((item, i) => (
-              <li key={i}>
+              <li key={i} className='ellipsis'>
                 <Link href={_linkResolver(item)}>
                   {_localizeField(item.title)}
                 </Link>

@@ -64,4 +64,20 @@
     font-size: var(--text-md);
     font-weight: 200;
   }
+  li {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 1024px) {
+  /* .mostSearched {
+    ul {
+      a {
+        hyphens: auto;
+        overflow-wrap: break-word;
+        white-space: unset;
+      }
+    }
+  } */
 }
