@@ -7,6 +7,9 @@ type Props = {
 };
 
 const CardTags = ({ input }: Props) => {
+  /*
+  TO DO : filter tags that can be visible
+  */
   const tagsList = input?.map((tag) => _localizeField(tag.title)).join(" · ");
   return <div className='card__tag c-tag'>{tagsList}</div>;
 };

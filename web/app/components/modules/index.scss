@@ -460,3 +460,20 @@
 .module {
   width: 100%;
 }
+
+.module--list-product-ui,
+.module--list-conversation-ui,
+.module--list-exhibitions-past-ui,
+.module--list-image-images,
+.module--list-feuilletage-ui {
+  .grid-masonry-columns > div:first-child {
+    .card {
+      transform-origin: left;
+    }
+  }
+  .grid-masonry-columns > div:last-child {
+    .card {
+      transform-origin: left;
+    }
+  }
+}

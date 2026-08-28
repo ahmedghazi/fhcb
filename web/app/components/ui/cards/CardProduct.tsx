@@ -31,6 +31,13 @@ const CardProduct = ({ input, size = "md" }: Props) => {
             actionsNode={props.actionsNode}
           />
         )}
+
+      {/* {(!!props.actions?.length || props.actionsNode) && (
+        <CardFooter
+          actions={props.actions ?? []}
+          actionsNode={props.actionsNode}
+        />
+      )} */}
     </div>
   );
 };

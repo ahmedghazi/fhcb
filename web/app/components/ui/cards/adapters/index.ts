@@ -191,8 +191,15 @@ export function productToCard(
       ? _localizeText("chooseOptions")
       : (_localizeText("discover") as string),
     href: _linkResolver(input),
-    variant: "primary",
+    variant: "secondary",
   });
+  // actions.push({
+  //   label: isSimpleProduct
+  //     ? _localizeText("chooseOptions")
+  //     : (_localizeText("discover") as string),
+  //   href: _linkResolver(input),
+  //   variant: "secondary",
+  // });
   return {
     _type: input._type,
     layout: layout,

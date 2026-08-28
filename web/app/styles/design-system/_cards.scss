@@ -281,6 +281,9 @@
 
   &--product {
     background-color: var(--color-beige);
+    .add-to-cart.btn {
+      background-color: var(--color-white-0_5);
+    }
     @media all and (max-width: variables.$md) {
       .card__inner--col {
         gap: var(--spacing-xs);
@@ -563,7 +566,7 @@
       }
       @media (hover: hover) {
         .card__footer .card__btns {
-          .btn:not(.btn--secondary) {
+          .btn:not(.btn--secondary):not(.add-to-cart) {
             display: none;
           }
           // max-block-size: 0;
