@@ -334,17 +334,80 @@ export function pageModulaireToCard(
   input: PageModulaireExpanded,
   size?: "sm" | "md",
 ): CardBaseProps {
-  const { imageCover, tags } = input;
+  const { imageCover, tags, videoCover } = input;
+  console.log(imageCover);
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  const playbackId = videoCover?.asset?.playbackId;
   return {
     _type: input._type,
-    layout: isLandscape ? "row" : "col",
+    // layout: isLandscape ? "row" : "col",
+    layout: isLandscape ? "col" : "row",
     colorVar: "var(--color-white)",
-    images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    images:
+      !playbackId && imageCover?.asset
+        ? [imageCover.asset as SanityImageAssetFull]
+        : [],
+    mediaSlot: playbackId
+      ? React.createElement(MuxVideoPlayer, {
+          playbackId,
+          loop: true,
+          hoverPlay: true,
+        })
+      : undefined,
     title: (_localizeField(input.title) as string) || "",
     tags: toTags(tags),
+    actions: [
+      {
+        label: _localizeText("discover") as string,
+        href: _linkResolver(input),
+        variant: "primary",
+      },
+    ],
+  };
+}
+
+// ─── Branche (PageModulaire) ──────────────────────────────────────────────────
+
+export function brancheToCard(
+  input: PageModulaireExpanded,
+  supTitle?: string,
+  contentCount?: number,
+): CardBaseProps {
+  const { imageCover, videoCover } = input;
+  const playbackId = videoCover?.asset?.playbackId;
+  let text = null;
+  const moduleText = input.modules?.filter((el) => el._type === "textUI");
+  if (moduleText) {
+    moduleText.forEach((el) => {
+      text = toPlainText(_localizeField(el?.text || "no text"));
+      text = text.split(".")[0] + "...";
+    });
+  }
+
+  return {
+    _type: input._type,
+    layout: "col",
+    colorVar: "var(--color-white)",
+    // La vidéo de couverture prime sur l'image de couverture quand elle est présente.
+    images:
+      !playbackId && imageCover?.asset
+        ? [imageCover.asset as SanityImageAssetFull]
+        : [],
+    mediaSlot: playbackId
+      ? React.createElement(MuxVideoPlayer, {
+          playbackId,
+          loop: true,
+          hoverPlay: true,
+        })
+      : undefined,
+    supTitle,
+    title: (_localizeField(input.title) as string) || "",
+    infoNode: text ? text : undefined,
+
+    contentCount,
     actions: [
       {
         label: _localizeText("discover") as string,
@@ -472,55 +535,6 @@ export function serieThematiqueToCard(
       : _localizeText(input._type),
     title: (_localizeField(input.title) as string) || "",
     subTitle: chercheur?.name || undefined,
-    actions: [
-      {
-        label: _localizeText("discover") as string,
-        href: _linkResolver(input),
-        variant: "primary",
-      },
-    ],
-  };
-}
-
-// ─── Branche (PageModulaire) ──────────────────────────────────────────────────
-
-export function brancheToCard(
-  input: PageModulaireExpanded,
-  supTitle?: string,
-  contentCount?: number,
-): CardBaseProps {
-  const { imageCover, videoCover } = input;
-  const playbackId = videoCover?.asset?.playbackId;
-  let text = null;
-  const moduleText = input.modules?.filter((el) => el._type === "textUI");
-  if (moduleText) {
-    moduleText.forEach((el) => {
-      text = toPlainText(_localizeField(el?.text || "no text"));
-      text = text.split(".")[0] + "...";
-    });
-  }
-
-  return {
-    _type: input._type,
-    layout: "col",
-    colorVar: "var(--color-white)",
-    // La vidéo de couverture prime sur l'image de couverture quand elle est présente.
-    images:
-      !playbackId && imageCover?.asset
-        ? [imageCover.asset as SanityImageAssetFull]
-        : [],
-    mediaSlot: playbackId
-      ? React.createElement(MuxVideoPlayer, {
-          playbackId,
-          loop: true,
-          hoverPlay: true,
-        })
-      : undefined,
-    supTitle,
-    title: (_localizeField(input.title) as string) || "",
-    infoNode: text ? text : undefined,
-
-    contentCount,
     actions: [
       {
         label: _localizeText("discover") as string,
