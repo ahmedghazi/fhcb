@@ -74,8 +74,13 @@ const Sidebar = ({ input }: Props) => {
           <ul>
             {partenaires.map((item, i) => (
               <li key={i}>
-                <div className='c-body--tight'>{_localizeField(item.text)}</div>
-                {item._type === "partenaire" &&
+                {item && item.text && (
+                  <div className='c-body--tight'>
+                    {_localizeField(item.text)}
+                  </div>
+                )}
+                {item &&
+                  item._type === "partenaire" &&
                   item.imageCover &&
                   item.imageCover.asset && (
                     <Figure
