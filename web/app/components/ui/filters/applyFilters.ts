@@ -48,6 +48,14 @@ const matchesSearch = (
         .includes(lower);
       return matchesArtistRef || matchesArtistName;
     }
+    if (field === "chercheur") {
+      const c = item.chercheur;
+      return c
+        ? String(c.last_name ?? c.name ?? "")
+            .toLowerCase()
+            .includes(lower)
+        : false;
+    }
     return false;
   });
 };

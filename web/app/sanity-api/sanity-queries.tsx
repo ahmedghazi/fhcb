@@ -2,14 +2,10 @@ import { groq } from "next-sanity";
 import { sanityFetch } from "./sanity.client";
 import {
   imageAsset,
-  modules,
   seo,
   nav,
   relatedByTag,
-  sliderCardUI,
-  gridCardUI,
   relatedByArtists,
-  listProductUI,
   cta,
   relatedByExhibition,
   relatedByArtist,
@@ -20,6 +16,7 @@ import {
   linkInternal,
   blockContent,
 } from "./fragments";
+import { modules, sliderCardUI, gridCardUI, listProductUI } from "./fragments-modules";
 import {
   EXHIBITION_CURRENT_OR_FUTUR,
   rebondsResolver,

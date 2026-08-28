@@ -1,4 +1,3 @@
-import { blockContent, textUI } from "./fragments";
 import { imageAsset, videoAsset } from "./fragments-assets";
 
 export const cardRefExhibition = `
