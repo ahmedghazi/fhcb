@@ -532,6 +532,9 @@
       flex: 1;
     }
   }
+  .mux-player-container mux-player {
+    aspect-ratio: 1;
+  }
 }
 
 .card {

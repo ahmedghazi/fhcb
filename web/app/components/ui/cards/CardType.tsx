@@ -65,7 +65,13 @@ const SIZES = {
 const CardType = ({ input, context, size }: Props) => {
   if (!input) return null;
   function sizeFor(
-    type: "event" | "product" | "article" | "artist" | "imageImages" | "feuilletage"
+    type:
+      | "event"
+      | "product"
+      | "article"
+      | "artist"
+      | "imageImages"
+      | "feuilletage",
   ): "sm" | "md" | "lg";
   function sizeFor(type: keyof typeof SIZES) {
     return SIZES[type][context];

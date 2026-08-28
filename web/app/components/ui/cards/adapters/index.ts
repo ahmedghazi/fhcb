@@ -342,15 +342,15 @@ export function pageModulaireToCard(
   size?: "sm" | "md",
 ): CardBaseProps {
   const { imageCover, tags, videoCover } = input;
-  console.log(imageCover);
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const playbackId = videoCover?.asset?.playbackId;
+  console.log(size);
   return {
     _type: input._type,
     // layout: isLandscape ? "row" : "col",
-    layout: isLandscape ? "col" : "row",
+    layout: isLandscape || videoCover ? "col" : "row",
     colorVar: "var(--color-white)",
     // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     images:
