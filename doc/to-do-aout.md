@@ -9,10 +9,10 @@
 - scenario rebonds en cours sinon à venir PAS et à venir
 - # dans expos > 2e rebonds auto expo en cours ou à venir
 - # rebonds scenario HCB + MF qui limite les résultats
-- scenario rebonds auto tags-related
+- # scenario rebonds auto tags-related
 - # scenario rebonds auto exhibition-current-or-futur
 - # home actu afficher les expos à venir, max 3 filtré cube en 1, tube en 2, hors les murs en 3
-- rebonds 2 auto
+- rebonds 2 auto sur toutes les autres page, en attente des scenarios
 - sync produit champs multilingue
 - # pb list exhibition hors les murs, ne s'affichent pas
 - list expos à venir, cube en prems, tube en deuze
@@ -21,7 +21,7 @@
 - # rebonds scenario rebond-branche
 - # rebonds auto livre pb de shuffle + même artiste
 - rebonds produit lettre d'amour pb des events s'y retrouve
-  -- ces events on daido en artiste
+  -- ces events referencent Daido en artiste
 - autour de l'ouvrage pb radio ballast
   -- me souviens pas du pb ici
 - # rebonds prix; limite à 8 (sort by \_createdAt) (\_orderRebondsByItems)

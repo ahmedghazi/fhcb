@@ -44,6 +44,10 @@ export type LocaleData = {
   descriptionHtml: string;
   category?: { id: string; name: string } | null;
   collections?: { id: string; handle: string; title: string }[];
+  reliure?: string;
+  dimensions?: string;
+  nombre_de_pages?: string;
+  version_linguistique?: string;
 };
 
 // ─── GraphQL queries ──────────────────────────────────────────────────────────
@@ -99,13 +103,23 @@ const PRODUCTS_UPDATED_QUERY = `
   }
 `;
 
+// Locale-sensitive fields shared by the locale batch/updated queries below
+const PRODUCT_LOCALE_FIELDS = `
+  id title descriptionHtml category { id name }
+  collections(first: 10) { nodes { id handle title } }
+  reliure: metafield(namespace: "custom", key: "reliure") { value }
+  dimensions: metafield(namespace: "custom", key: "dimensions") { value }
+  version_linguistique: metafield(namespace: "custom", key: "version_linguistique") { value }
+  nombre_de_pages: metafield(namespace: "custom", key: "nombre_de_pages") { value }
+`;
+
 // Batch locale query — only locale-sensitive fields, with @inContext
 const PRODUCTS_LOCALE_BATCH_QUERY = `
   query getProductsLocale($cursor: String, $language: LanguageCode!, $country: CountryCode!)
   @inContext(language: $language, country: $country) {
     products(first: 50, after: $cursor) {
       pageInfo { hasNextPage endCursor }
-      edges { node { id title descriptionHtml category { id name } collections(first: 10) { nodes { id handle title } } } }
+      edges { node { ${PRODUCT_LOCALE_FIELDS} } }
     }
   }
 `;
@@ -115,7 +129,7 @@ const PRODUCTS_UPDATED_LOCALE_QUERY = `
   query getProductsUpdatedLocale($first: Int!, $language: LanguageCode!, $country: CountryCode!)
   @inContext(language: $language, country: $country) {
     products(first: $first, sortKey: UPDATED_AT, reverse: true) {
-      edges { node { id title descriptionHtml category { id name } collections(first: 10) { nodes { id handle title } } } }
+      edges { node { ${PRODUCT_LOCALE_FIELDS} } }
     }
   }
 `;
@@ -174,6 +188,10 @@ export async function fetchShopifyProduct(id: string): Promise<{
         descriptionHtml: data?.descriptionHtml ?? "",
         category: data?.category ?? null,
         collections: data?.collections?.nodes ?? [],
+        reliure: data?.reliure?.value,
+        dimensions: data?.dimensions?.value,
+        nombre_de_pages: data?.nombre_de_pages?.value,
+        version_linguistique: data?.version_linguistique?.value,
       },
     ]),
   ) as Record<LocaleKey, LocaleData>;
@@ -230,6 +248,10 @@ export async function fetchShopifyProducts(
             descriptionHtml: node.descriptionHtml ?? "",
             category: node.category ?? null,
             collections: node.collections?.nodes ?? [],
+            reliure: node.reliure?.value,
+            dimensions: node.dimensions?.value,
+            nombre_de_pages: node.nombre_de_pages?.value,
+            version_linguistique: node.version_linguistique?.value,
           });
         }
       }
@@ -250,6 +272,10 @@ export async function fetchShopifyProducts(
               descriptionHtml: node.descriptionHtml ?? "",
               category: node.category ?? null,
               collections: node.collections?.nodes ?? [],
+              reliure: node.reliure?.value,
+              dimensions: node.dimensions?.value,
+              nombre_de_pages: node.nombre_de_pages?.value,
+              version_linguistique: node.version_linguistique?.value,
             });
           }
         }
@@ -270,6 +296,10 @@ export async function fetchShopifyProducts(
       descriptionHtml: base.descriptionHtml ?? "",
       category: base.category ?? null,
       collections: base.collections?.nodes ?? [],
+      reliure: base.reliure?.value,
+      dimensions: base.dimensions?.value,
+      nombre_de_pages: base.nombre_de_pages?.value,
+      version_linguistique: base.version_linguistique?.value,
     };
     const locale = Object.fromEntries(
       LOCALES.map(({ key }) => [
@@ -344,6 +374,21 @@ export function parseMetafieldList(value: string): string[] {
 
 // ─── Build Sanity product document ───────────────────────────────────────────
 
+// Builds a `localeString`-shaped object ({ fr, en, ... }) from a per-locale
+// metafield, falling back to the primary locale's value for locales where
+// the metafield wasn't translated. Returns undefined if no locale has a value.
+function buildLocalizedMetafield(
+  localeData: Record<LocaleKey, LocaleData>,
+  field: "reliure" | "dimensions" | "nombre_de_pages" | "version_linguistique",
+): Record<LocaleKey, string> | undefined {
+  const primaryKey = LOCALES[0].key;
+  const primaryValue = localeData[primaryKey][field];
+  if (!primaryValue) return undefined;
+  return Object.fromEntries(
+    LOCALES.map(({ key }) => [key, localeData[key][field] || primaryValue]),
+  ) as Record<LocaleKey, string>;
+}
+
 /**
  * `synced` fields are owned by Shopify and overwritten on every sync.
  * `initial` fields are editorial — pre-filled from Shopify on first creation
@@ -371,6 +416,14 @@ export async function buildProductFields(
     images;
 
   const matchedArtist = matchArtist(base, artists);
+
+  const reliure = buildLocalizedMetafield(localeData, "reliure");
+  const dimensions = buildLocalizedMetafield(localeData, "dimensions");
+  const versionLinguistique = buildLocalizedMetafield(
+    localeData,
+    "version_linguistique",
+  );
+  const nombreDePages = buildLocalizedMetafield(localeData, "nombre_de_pages");
 
   // Build localized portable text blocks from each locale's descriptionHtml
   const blocksByLocale = Object.fromEntries(
@@ -401,15 +454,12 @@ export async function buildProductFields(
       ? { direction_editoriale: base.direction_editoriale.value }
       : {}),
     ...(base.editeur?.value ? { editeur: base.editeur.value } : {}),
-    ...(base.reliure?.value ? { reliure: base.reliure.value } : {}),
-    ...(base.dimensions?.value ? { dimensions: base.dimensions.value } : {}),
-    ...(base.version_linguistique?.value
-      ? { version_linguistique: base.version_linguistique.value }
+    ...(reliure ? { reliure } : {}),
+    ...(dimensions ? { dimensions } : {}),
+    ...(versionLinguistique
+      ? { version_linguistique: versionLinguistique }
       : {}),
-
-    ...(base.nombre_de_pages?.value
-      ? { nombre_de_pages: base.nombre_de_pages.value }
-      : {}),
+    ...(nombreDePages ? { nombre_de_pages: nombreDePages } : {}),
     ...(base.publicationDate?.value
       ? { publicationDate: base.publicationDate.value.slice(0, 10) }
       : {}),

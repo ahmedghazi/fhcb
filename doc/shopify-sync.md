@@ -73,7 +73,7 @@ Products are fetched in all configured locales (see `LOCALES` in `_utils.ts`).
 
 Default: `FR` (store default, no `@inContext`) and `EN` (`@inContext(language: EN, country: GB)`).
 
-**Localized Sanity fields:** `title`, `text` (description), `metas[].text`, image `alt`.
+**Localized Sanity fields:** `title`, `text` (description), `metas[].text`, image `alt`, `reliure`, `dimensions`, `nombre_de_pages`, `version_linguistique`.
 
 **SEO fields** use the primary locale (`LOCALES[0]` = `fr`) as the source.
 
@@ -100,11 +100,17 @@ Adding a new locale only requires adding an entry to `LOCALES`:
 | `metafield custom.editeur` | `editeur` | overwritten on every sync |
 | `metafield custom.date_de_publication` | `publicationDate` | overwritten on every sync |
 | `metafield custom.fiche_technique` | `metas[]` | overwritten on every sync |
+| `metafield custom.reliure` | `reliure.fr / .en` | localized, overwritten on every sync |
+| `metafield custom.dimensions` | `dimensions.fr / .en` | localized, overwritten on every sync |
+| `metafield custom.nombre_de_pages` | `nombre_de_pages.fr / .en` | localized, overwritten on every sync |
+| `metafield custom.version_linguistique` | `version_linguistique.fr / .en` | localized, overwritten on every sync |
 | `images[0]` | `imageCover` | uploaded to Sanity, `setIfMissing` |
 | `images[1…]` | `images[]` | uploaded to Sanity, `setIfMissing` |
 | `auteurs` metafield / `title` | `artists[]` | matched by name against Sanity artists, `setIfMissing` |
 
-**`synced` fields** (overwritten on every sync): `shopifyId`, `shopifyHandle`, `price`, `compareAtPrice`, `inStock`, `totalInventory`, `syncedAt`, `isbn`, `editeur`, `publicationDate`, `languages`, `metas`, `variants`.
+Localized metafields (`reliure`, `dimensions`, `nombre_de_pages`, `version_linguistique`) fall back to the primary locale's (`fr`) value for any locale where the metafield isn't translated in Shopify.
+
+**`synced` fields** (overwritten on every sync): `shopifyId`, `shopifyHandle`, `price`, `compareAtPrice`, `inStock`, `totalInventory`, `syncedAt`, `isbn`, `editeur`, `publicationDate`, `languages`, `metas`, `variants`, `reliure`, `dimensions`, `nombre_de_pages`, `version_linguistique`.
 
 **`initial` / editorial fields** (`setIfMissing` — set once, never overwritten): `title`, `slug`, `text`, `artists`, `seo`, `imageCover`, `images`.
 

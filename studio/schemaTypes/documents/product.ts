@@ -168,21 +168,21 @@ export default defineType({
     defineField({
       title: 'Reliure',
       name: 'reliure',
-      type: 'string',
+      type: 'localeString',
       readOnly: true,
       group: 'metas',
     }),
     defineField({
       title: 'Dimensions',
       name: 'dimensions',
-      type: 'string',
+      type: 'localeString',
       readOnly: true,
       group: 'metas',
     }),
     defineField({
       title: 'Nombre de pages',
       name: 'nombre_de_pages',
-      type: 'string',
+      type: 'localeString',
       readOnly: true,
       group: 'metas',
     }),
@@ -204,8 +204,9 @@ export default defineType({
     }),
     defineField({
       name: 'version_linguistique',
-      type: 'string',
+      type: 'localeString',
       title: 'Version linguistique',
+      readOnly: true,
       group: 'metas',
     }),
 

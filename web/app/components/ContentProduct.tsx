@@ -51,6 +51,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     reliure,
     dimensions,
     nombre_de_pages,
+    version_linguistique,
     totalInventory,
   } = input;
   const mergedRelated = [
@@ -142,15 +143,31 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
                   </div>
                 </li>
               )}
-              {(dimensions || nombre_de_pages || reliure) && (
+              {(dimensions ||
+                nombre_de_pages ||
+                reliure ||
+                version_linguistique) && (
                 <li className='sidebar__item'>
                   {dimensions && (
-                    <div className='c-body--tight'>{dimensions}</div>
+                    <div className='c-body--tight'>
+                      {_localizeField(dimensions)}
+                    </div>
                   )}
                   {nombre_de_pages && (
-                    <div className='c-body--tight'>{nombre_de_pages}</div>
+                    <div className='c-body--tight'>
+                      {_localizeField(nombre_de_pages)}
+                    </div>
                   )}
-                  {reliure && <div className='c-body--tight'>{reliure}</div>}
+                  {reliure && (
+                    <div className='c-body--tight'>
+                      {_localizeField(reliure)}
+                    </div>
+                  )}
+                  {version_linguistique && (
+                    <div className='c-body--tight'>
+                      {_localizeField(version_linguistique)}
+                    </div>
+                  )}
                   {/* {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>} */}
 
                   {/* {traducteurs && (
