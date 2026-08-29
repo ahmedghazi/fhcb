@@ -13,7 +13,7 @@
 - # scenario rebonds auto exhibition-current-or-futur
 - # home actu afficher les expos à venir, max 3 filtré cube en 1, tube en 2, hors les murs en 3
 - rebonds 2 auto sur toutes les autres page, en attente des scenarios
-- sync produit champs multilingue
+- # sync produit champs multilingue
 - # pb list exhibition hors les murs, ne s'affichent pas
 - list expos à venir, cube en prems, tube en deuze
 - # date off site à gérer (afficher le lieu ou pas)
@@ -24,4 +24,5 @@
   -- ces events referencent Daido en artiste
 - autour de l'ouvrage pb radio ballast
   -- me souviens pas du pb ici
+  -- Y’a un feuilletage qui n'a rien à voir (Grégory Halpern). J’ai vérifié en back office dans la page du produit et dans la page de la ressource et y’a rien de louche...
 - # rebonds prix; limite à 8 (sort by \_createdAt) (\_orderRebondsByItems)

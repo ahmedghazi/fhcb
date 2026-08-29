@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import {
-  KeyVal,
   Product,
   PRODUCT_QUERY_RESULT,
 } from "../sanity-api/types/sanity.types";
@@ -11,8 +10,8 @@ import {
   _localizeText,
   _parseJsonStringArray,
 } from "../sanity-api/utils";
-import { urlFor } from "../sanity-api/sanity-utils";
-import useCart from "../context/CartContext";
+// import { urlFor } from "../sanity-api/sanity-utils";
+// import useCart from "../context/CartContext";
 import Figure from "./ui/Figure";
 import Rebonds from "./Rebonds";
 import BtnAddToCart from "./shop/BtnAddToCart";
@@ -25,10 +24,9 @@ import SlickSlider from "./ui/SlickSlider";
 
 type Props = {
   input: PRODUCT_QUERY_RESULT;
-  randomProducts?: Product[];
 };
 
-const ContentProduct = ({ input, randomProducts }: Props) => {
+const ContentProduct = ({ input }: Props) => {
   if (!input) return null;
   const { locale } = useLocale();
   const {
@@ -54,16 +52,16 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
     version_linguistique,
     totalInventory,
   } = input;
-  const mergedRelated = [
-    ...(relatedProductsByArtist || []),
-    ...(relatedProductsByTag || []),
-    ...(randomProducts || []),
-  ].slice(0, 4);
-  const related = _pickRelatedWithQuota(
-    [relatedProductsByArtist, relatedProductsByTag, randomProducts],
-    [2, 1, 1],
-    4,
-  );
+  // const mergedRelated = [
+  //   ...(relatedProductsByArtist || []),
+  //   ...(relatedProductsByTag || []),
+  //   ...(randomProducts || []),
+  // ].slice(0, 4);
+  // const related = _pickRelatedWithQuota(
+  //   [relatedProductsByArtist, relatedProductsByTag, randomProducts],
+  //   [2, 1, 1],
+  //   4,
+  // );
 
   const isLowStock = totalInventory && totalInventory < 10;
 
@@ -248,7 +246,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
       {/* <pre>{JSON.stringify(mergedRelated[0], null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(rebondsAuto, null, 2)}</pre> */}
 
-      {rebondsAuto?.map((rebond, i) => (
+      {/* {rebondsAuto?.map((rebond, i) => (
         <Rebonds
           key={i}
           input={rebond?.resolvedItems}
@@ -259,7 +257,7 @@ const ContentProduct = ({ input, randomProducts }: Props) => {
 
       {related && related.length > 0 && (
         <Rebonds input={related} title='discoverToo' />
-      )}
+      )} */}
     </div>
   );
 };

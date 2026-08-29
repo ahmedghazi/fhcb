@@ -135,12 +135,19 @@ export const rebondArtistPrizeRelated = `
 // purpose is representing an artist (e.g. a tribute page with no exhibition/event of its own to
 // distinguish itself from) has nothing that would ever reference it directly — broadened via its own
 // \`artists[]\` there instead (added specifically for that case, see pageModulaire.ts's \`artists\` field).
+//
+// Checks the candidate product's own \`exhibition\` and \`rebonds[]\` fields rather than a blanket
+// \`references(^.^._id)\` — a blanket scan also matches incidental references like
+// \`modules[].sidebar.products\` (product pages have the same \`modules\`/sidebarGenerique shape as
+// resources), which has no editorial "these books are related" meaning. \`exhibition\` covers the
+// "via product.exhibition" case named above (host is the exhibition); \`rebonds\` covers a book curated
+// as related to another book/event/pageModulaire host.
 export const rebondBooks = `
   *[
     _type == "product" &&
     _id != ^.^._id &&
     "book-related" in ^.items &&
-    (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
+    (exhibition._ref == ^.^._id || ^.^._id in rebonds[]._ref || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
   ] | order(_createdAt desc) {
     ${cardRefProduct}
   }
@@ -400,12 +407,21 @@ export const rebondArticlesPrizeRelated = `
 // artist page (see rebondBooks above for why) — and "tags-related" — feuilletage / conversation
 // sharing a tag with the host (imageImages / serieThematique have no \`tags\` field, so
 // \`tags[]._ref\` is empty for them and this branch never matches those two).
+//
+// NB: the "ressources-related" branch checks the candidate's own \`exhibition\`/\`rebonds[]\` fields
+// rather than a blanket \`references(^.^._id)\`. A blanket scan also matches incidental, non-editorial
+// references buried elsewhere in the candidate's document — e.g. \`modules[].sidebar.products\` (see
+// studio/schemaTypes/objects/sidebarGenerique.ts), a "shop this product" cross-sell widget with no
+// relation to "this resource is about that book" — which is what let an unrelated feuilletage show up
+// as "related" on a product page it merely cross-sold from a sidebar. \`exhibition\` covers the (most
+// common) case of the host being the exhibition a resource belongs to; \`rebonds\` covers a resource
+// curated as related to a product/pageModulaire/event host directly.
 export const rebondRessources = `
   *[
     _id != ^.^._id &&
     _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&
     (
-      ("ressources-related" in ^.items && (references(^.^._id) || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
+      ("ressources-related" in ^.items && (exhibition._ref == ^.^._id || ^.^._id in rebonds[]._ref || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
     )
   ] | order(_createdAt desc) {

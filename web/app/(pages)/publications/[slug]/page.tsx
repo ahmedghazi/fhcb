@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import ContentProduct from "@/app/components/ContentProduct";
 import RebondsProducts from "@/app/components/RebondsProducts";
 import Rebonds from "@/app/components/Rebonds";
+import { _pickRelatedWithQuota } from "@/app/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -46,11 +47,27 @@ const ProductPage: NextPage<PageProps> = async ({ params }) => {
 
   if (!data) return notFound();
   const randomProducts = await getRandomProducts(slug);
-
+  const related = _pickRelatedWithQuota(
+    [data.relatedProductsByArtist, data.relatedProductsByTag, randomProducts],
+    [2, 1, 1],
+    4,
+  );
   return (
     <div className='template template--product' data-template='product'>
       {/* <PageHeader h1={data.title} /> */}
-      <ContentProduct input={data} randomProducts={randomProducts} />
+      <ContentProduct input={data} />
+      {data.rebondsAuto?.map((rebond: any, i: number) => (
+        <Rebonds
+          key={i}
+          input={rebond?.resolvedItems}
+          title={rebond?.title || undefined}
+          items={rebond?.items}
+        />
+      ))}
+
+      {related && related.length > 0 && (
+        <Rebonds input={related} title='discoverToo' />
+      )}
       {/* <RebondsProducts input={randomProducts} /> */}
       {/* <pre>{JSON.stringify(data.rebondsType?.items, null, 2)}</pre> */}
       {/* <Rebonds
