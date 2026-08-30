@@ -135,7 +135,7 @@ const Sidebar = ({ input }: Props) => {
                   <div className='flex flex-col gap-xs'>
                     <Figure
                       asset={item?.imageCover?.asset}
-                      width={96}
+                      // width={200}
                       sizes='(max-width: 767px) 100vw, 25vw'
                     />
                     <Link className='btn' href={_linkResolver(item)}>
