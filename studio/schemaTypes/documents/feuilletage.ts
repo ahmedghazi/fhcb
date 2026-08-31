@@ -91,6 +91,7 @@ export default defineType({
       type: 'reference',
       to: [{type: 'chercheur'}],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -137,6 +138,7 @@ export default defineType({
         },
       ],
       group: 'editorial',
+      hidden: true,
     }),
 
     rebondsAutoField,

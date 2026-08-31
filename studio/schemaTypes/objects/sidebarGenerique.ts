@@ -12,25 +12,25 @@ export default defineType({
     // Groups
     defineField({
       name: 'commissariat',
-      title: 'Commissariat',
+      title: 'COMMISSAIRE(S)',
       type: 'array',
       of: [{type: 'keyVal'}],
     }),
     defineField({
       name: 'coProduction',
-      title: 'CO-production',
+      title: 'CO-PRODUCTEUR(S)',
       type: 'array',
       of: [{type: 'keyVal'}, {type: 'reference', to: [{type: 'partenaire'}]}],
     }),
     defineField({
       name: 'partenaires',
-      title: 'Mécénat',
+      title: 'PARTENAIRE(S)',
       type: 'array',
       of: [{type: 'keyVal'}, {title: 'Mécène', type: 'reference', to: [{type: 'partenaire'}]}],
     }),
     defineField({
       name: 'partenairesMedia',
-      title: 'Partenaire media',
+      title: 'PARTENAIRE(S) MÉDIA',
       type: 'array',
       of: [{type: 'keyVal'}, {title: 'Mécène', type: 'reference', to: [{type: 'partenaire'}]}],
     }),

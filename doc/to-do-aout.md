@@ -6,16 +6,16 @@
 
 - # fix anime boutons, plus de bouton primaire
 - # hover effect sur carte video home featured
-- scenario rebonds en cours sinon à venir PAS et à venir
+- # scenario rebonds en cours sinon à venir PAS et à venir
 - # dans expos > 2e rebonds auto expo en cours ou à venir
 - # rebonds scenario HCB + MF qui limite les résultats
 - # scenario rebonds auto tags-related
 - # scenario rebonds auto exhibition-current-or-futur
 - # home actu afficher les expos à venir, max 3 filtré cube en 1, tube en 2, hors les murs en 3
-- rebonds 2 auto sur toutes les autres page, en attente des scenarios
+- # rebonds 2 auto sur toutes les autres page, en attente des scenarios
 - # sync produit champs multilingue
 - # pb list exhibition hors les murs, ne s'affichent pas
-- list expos à venir, cube en prems, tube en deuze
+- # list expos à venir, cube en prems, tube en deuze
 - # date off site à gérer (afficher le lieu ou pas)
 - rebonds carte expo featured comme expos, mais garde le code couleur
 - # rebonds scenario rebond-branche
@@ -27,7 +27,7 @@
 - # autour de l'ouvrage pb radio ballast
 - # rebonds prix; limite à 8 (sort by \_createdAt) (\_orderRebondsByItems)
 - # modules support > lien interne à afficher
-- ressources scenario livre lié > ajout un champs livre dans feuilletage
+- # ressources scenario livre lié > ajout un champs livre dans feuilletage
 - - livre a expos > afficher l'expo lié
 - - livre a artiste > afficher l'artiste
 - - event a expo > afficher l'event

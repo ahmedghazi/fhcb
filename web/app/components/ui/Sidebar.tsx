@@ -42,7 +42,7 @@ const Sidebar = ({ input }: Props) => {
       )}
       {coProduction && (
         <div className='sidebar__item sidebar__coproduction'>
-          <h3 className='c-tag underline'>Co-production</h3>
+          <h3 className='c-tag underline'>{_localizeText("coProduction")}</h3>
           {/* <pre>{JSON.stringify(coProduction, null, 2)}</pre> */}
           <ul>
             {coProduction.map((item, i) => (
@@ -70,7 +70,7 @@ const Sidebar = ({ input }: Props) => {
       )}
       {partenaires && (
         <div className='sidebar__item sidebar__partenaires'>
-          <h3 className='c-tag underline'>Partenaires</h3>
+          <h3 className='c-tag underline'>{_localizeText("partenaires")}</h3>
           <ul>
             {partenaires.map((item, i) => (
               <li key={i}>
@@ -96,7 +96,9 @@ const Sidebar = ({ input }: Props) => {
       )}
       {partenairesMedia && (
         <div className='sidebar__item'>
-          <h3 className='c-tag underline'>Partenaires media</h3>
+          <h3 className='c-tag underline'>
+            {_localizeText("partenairesMedia")}
+          </h3>
           {/* <pre>{JSON.stringify(partenairesMedia, null, 2)}</pre> */}
           <ul>
             {partenairesMedia.map((item: any, i: number) => (

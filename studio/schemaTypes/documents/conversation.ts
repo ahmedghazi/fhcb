@@ -132,6 +132,7 @@ export default defineType({
         },
       ],
       group: 'editorial',
+      hidden: true,
     }),
     rebondsAutoField,
   ],

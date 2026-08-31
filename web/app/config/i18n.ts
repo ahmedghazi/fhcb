@@ -153,7 +153,10 @@ const i18n = {
       "Aucune visite guidée n’est actuellement proposée. Consultez prochainement notre programmation.",
     noResultShop:
       "Aucun ouvrage ne correspond à votre recherche. Essayez avec un autre terme.",
-    commissariat: "Commissariat",
+    commissariat: "COMMISSAIRE(S)",
+    coProduction: "CO-PRODUCTEUR(S)",
+    partenaires: "PARTENAIRE(S)",
+    partenairesMedia: "PARTENAIRE(S) MÉDIA",
   },
   en: {
     default: false,
@@ -302,7 +305,10 @@ const i18n = {
     noResultEventTour:
       "There are currently no guided tours available. Please check back soon for our programme.",
     noResultShop: "No books match your search. Please try another search term.",
-    commissariat: "Curator",
+    commissariat: "CURATOR(S)",
+    coProduction: "CO-PRODUCER(S)",
+    partenaires: "PARTNER(S)",
+    partenairesMedia: "PARTNER(S) MÉDIA",
   },
 };
 
