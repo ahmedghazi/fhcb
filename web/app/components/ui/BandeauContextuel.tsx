@@ -22,6 +22,7 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
     const endDate = new Date(dateExpiration);
     const now = new Date();
     setOpen(now < endDate);
+    // setOpen(true);
   }, []);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
   }, [open]);
 
   const localizedText = _localizeField(text);
-  const localizedClose = _localizeText("closeBanner");
+  // const localizedClose = _localizeText("closeBanner");
 
   return !open ? null : (
     <div className='bandeau-contextuel'>

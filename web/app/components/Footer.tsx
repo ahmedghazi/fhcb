@@ -102,26 +102,6 @@ const Footer = ({ settings }: Props) => {
                       )
                     // .slice(0, -1)
                     }
-                    {/* {settings.urlLegals?.link && (
-                      <>
-                        {"  "}
-                        <Link href={_linkResolver(settings.urlLegals.link)}>
-                          {_localizeField(settings.urlLegals.label) ||
-                            _localizeText("mentionsLegales")}
-                        </Link>
-                      </>
-                    )}
-                    {settings.urlPrivacy?.link && (
-                      <>
-                        {"  "}
-                        <Link href={_linkResolver(settings.urlPrivacy.link)}>
-                          {_localizeField(settings.urlPrivacy.label) ||
-                            _localizeText("politiqueConfidentialite")}
-                        </Link>
-                      </>
-                    )}
-                     */}
-                    {"  "}
                     <button
                       type='button'
                       className='footer__cookie-settings'
@@ -161,7 +141,8 @@ const Footer = ({ settings }: Props) => {
                     </li>
                     {settings.navSocial?.map((item) => (
                       <li key={item.label}>
-                        <Link href={_linkResolver(item.link)}>
+                        {/* <pre>{JSON.stringify(item, null, 2)}</pre> */}
+                        <a target='_blank' href={item.link}>
                           {item.icon?.asset?.url && (
                             <Image
                               src={item.icon.asset.url}
@@ -170,7 +151,7 @@ const Footer = ({ settings }: Props) => {
                               alt={item.label || ""}
                             />
                           )}
-                        </Link>
+                        </a>
                       </li>
                     ))}
                   </ul>
