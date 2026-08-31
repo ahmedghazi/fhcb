@@ -291,7 +291,7 @@ export const newsCardUI = `
     "articles": *[_type == "article"] | order(_createdAt desc)[0...3]{
       ${cardRefArticle}
     },
-    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 ] | order(dates[0].du asc) {
+    "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 ] | order(dates[locationType == "inSite-cube"][0].du asc) {
       ${cardRefExhibition}
     },
 
