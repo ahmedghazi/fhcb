@@ -17,7 +17,7 @@ const CardConversation = ({ input, size = "md" }: Props) => {
       className={clsx(
         "card card--conversation",
         `card--${size}`,
-        "card--footer-hover",
+        // "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

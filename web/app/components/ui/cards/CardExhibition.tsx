@@ -52,7 +52,7 @@ const CardExhibition = ({ input, size = "md", footerHover = false }: Props) => {
         isLandscape ? "card--is-landscape" : "card--is-portrait",
         isPast && "card--is-past",
         // isPast && size === "sm" && "card--footer-hover",
-        (footerHover || isPast) && "card--footer-hover",
+        // (footerHover || isPast) && "card--footer-hover",
         isCurrent && "card--is-current",
         isFutur && "card--is-futur",
         location && `card--is-${location}`,

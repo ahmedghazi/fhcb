@@ -23,7 +23,7 @@ const CardEvent = ({ input, size = "md" }: Props) => {
         "card card--event",
         `card--${size}`,
         tagsClassList,
-        size !== "lg" && "card--footer-hover",
+        // size !== "lg" && "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

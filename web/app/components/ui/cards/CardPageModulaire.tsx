@@ -17,7 +17,7 @@ const CardPageModulaire = ({ input, size = "md" }: Props) => {
         "card card--page-modulaire",
         `card--${size}`,
         `card--${size}-alt`,
-        "card--footer-hover",
+        // "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

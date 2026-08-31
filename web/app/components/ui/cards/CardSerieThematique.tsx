@@ -20,7 +20,7 @@ const CardSerieThematique = ({ input, size = "md" }: Props) => {
       className={clsx(
         "card card--article",
         `card--${size}`,
-        "card--footer-hover",
+        // "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

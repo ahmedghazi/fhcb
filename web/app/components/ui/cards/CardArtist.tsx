@@ -22,7 +22,7 @@ const CardArtist = ({ input, size = "md" }: Props) => {
         `card--${size}`,
         `card--${props.layout}`,
         isLandscape ? "card--is-landscape" : "card--is-portrait",
-        "card--footer-hover",
+        // "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

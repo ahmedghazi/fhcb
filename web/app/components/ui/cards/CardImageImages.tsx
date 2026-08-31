@@ -16,7 +16,7 @@ const CardImageImages = ({ input, size = "md" }: Props) => {
       className={clsx(
         "card card--image-images",
         `card--${size}`,
-        "card--footer-hover",
+        // "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

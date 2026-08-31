@@ -25,7 +25,7 @@ const CardFeuilletage = ({ input, size = "md" }: Props) => {
       className={clsx(
         "card card--feuilletage",
         `card--${size}`,
-        "card--footer-hover",
+        // "card--footer-hover",
         // isLandscape ? "card--is-landscape" : "card--is-portrait",
         // tagsClassList,
       )}>

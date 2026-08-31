@@ -23,7 +23,7 @@ const CardArticle = ({ input, size = "md" }: Props) => {
         "card card--article",
         `card--${size}`,
         tagsClassList,
-        "card--footer-hover",
+        // "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

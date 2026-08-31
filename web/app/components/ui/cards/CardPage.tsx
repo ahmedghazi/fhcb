@@ -15,7 +15,7 @@ const CardPage = ({ input, size = "md" }: Props) => {
       className={clsx(
         "card card--page",
         `card--${size}`,
-        "card--footer-hover",
+        // "card--footer-hover",
       )}>
       <CardBase {...props} />
     </div>

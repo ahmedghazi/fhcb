@@ -586,25 +586,25 @@
         --footer-max-height: 9rem;
       }
       @media (hover: hover) {
-        .card__footer .card__btns {
-          .btn:not(.btn--secondary):not(.add-to-cart) {
-            display: none;
-          }
-          // max-block-size: 0;
-          // overflow: hidden;
-          // opacity: 0;
-          // transition:
-          //   max-block-size 180ms cubic-bezier(0.4, 0, 1, 1),
-          //   opacity 100ms linear;
+        .card__footer .card__footer-content {
+          // .btn:not(.btn--secondary):not(.add-to-cart) {
+          //   display: none;
+          // }
+          max-block-size: 0;
+          overflow: hidden;
+          opacity: 0;
+          transition:
+            max-block-size 180ms cubic-bezier(0.4, 0, 1, 1),
+            opacity 100ms linear;
         }
 
-        // &:is(:hover, :focus-within) .card__footer .card__btns {
-        //   max-block-size: var(--footer-max-height);
-        //   opacity: 1;
-        //   transition:
-        //     max-block-size 500ms cubic-bezier(0.16, 1, 0.3, 1),
-        //     opacity 220ms ease-out;
-        // }
+        &:is(:hover, :focus-within) .card__footer .card__footer-content {
+          max-block-size: var(--footer-max-height);
+          opacity: 1;
+          transition:
+            max-block-size 500ms cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 220ms ease-out;
+        }
       }
 
       // Keep the footer available when hover is not supported (for example,

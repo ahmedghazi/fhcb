@@ -16,7 +16,7 @@ const CardProduct = ({ input, size = "md" }: Props) => {
         "card card--product",
         `card--${size}`,
         props.layout && `card--${props.layout}`,
-        size === "sm" ? "card--footer-hover" : "",
+        // size === "sm" ? "card--footer-hover" : "",
       )}>
       <CardBase {...props} />
       {size === "md" &&
