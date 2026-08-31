@@ -11,7 +11,7 @@ import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
 import LoadMoreButton from "../ui/LoadMoreButton";
 import { publish } from "pubsub-js";
-import { _localizeText } from "../../sanity-api/utils";
+import { _localizeField, _localizeText } from "../../sanity-api/utils";
 
 const GridMasonryColumns = dynamic(() =>
   import("../ui/GridMasonryColumns").then((mod) => mod.GridMasonryColumns),
@@ -52,6 +52,11 @@ const ModuleListProductUI = ({ input }: Props) => {
     <section className='module module--list-product-ui'>
       <div className='container-fluid'>
         <div className='module__inner'>
+          {input.title && (
+            <h2 className='module__title c-h1_5'>
+              {_localizeField(input.title)}
+            </h2>
+          )}
           {filterDefs.length > 0 && (
             <FilterBar filterDefs={filterDefs} onChange={handleFilterChange} />
           )}

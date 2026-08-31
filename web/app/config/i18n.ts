@@ -32,6 +32,7 @@ const i18n = {
 
     discoverTheExhibition: "Découvrir l'exposition",
     aroundTheExhibition: "Autour de l'exposition",
+    currentlyOnView: "À découvrir en ce moment",
 
     discoverTheEvent: "Découvrir l'événement",
 
@@ -148,6 +149,7 @@ const i18n = {
       "Aucune visite guidée n’est actuellement proposée. Consultez prochainement notre programmation.",
     noResultShop:
       "Aucun ouvrage ne correspond à votre recherche. Essayez avec un autre terme.",
+    commissariat: "Commissariat",
   },
   en: {
     default: false,
@@ -176,11 +178,14 @@ const i18n = {
     loadMore: "Load more results",
     readMore: "Read more",
     discover: "Discover",
-    discoverToo: "Discover too",
+
+    discoverToo: "Explore more",
     toDiscoverToo: "To discover too",
     discoverTheArtist: "Discover the artist",
     discoverTheExhibition: "Discover the exhibition",
     aroundTheExhibition: "About the exhibition",
+    currentlyOnView: "Currently on view",
+
     discoverTheEvent: "Discover the event",
     readTheArticle: "read the article",
     currentExhibition: "Current exhibition",
@@ -289,6 +294,7 @@ const i18n = {
     noResultEventTour:
       "There are currently no guided tours available. Please check back soon for our programme.",
     noResultShop: "No books match your search. Please try another search term.",
+    commissariat: "Curator",
   },
 };
 
