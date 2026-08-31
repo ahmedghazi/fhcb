@@ -81,6 +81,7 @@ const i18n = {
     dimensions: "Dimensions",
     nombre_de_pages: "Nombre de pages",
     isLowStock: "Derniers examplaires",
+    outOfStock: "Épuisé",
     chooseOptions: "Choisir les options",
     publicationDate: "Date de parution",
     rebondArtist: "L'artiste",
@@ -95,6 +96,9 @@ const i18n = {
     mentionsLegales: "Mentions légales",
     politiqueConfidentialite: "Politique de confidentialité",
     manageCookies: "Gérer les cookies",
+    cookieServiceNecessaryName: "Cookies nécessaires",
+    cookieServiceNecessaryDescription:
+      "Cookies indispensables au fonctionnement du site, par exemple pour mémoriser la langue choisie.",
     cookieServiceAnalyticsName: "Mesure d'audience",
     cookieServiceAnalyticsDescription:
       "Google Analytics nous aide à comprendre comment le site est utilisé, de manière anonyme, afin de l'améliorer.",
@@ -226,6 +230,7 @@ const i18n = {
     artist_s: "Artists",
     serieThematique: "Thematic series",
     isLowStock: "Last items",
+    outOfStock: "Out of stock",
     chooseOptions: "Choose options",
     editor: "Editor",
     publicationDate: "Publication date",
@@ -241,6 +246,9 @@ const i18n = {
     mentionsLegales: "Legal notice",
     politiqueConfidentialite: "Privacy policy",
     manageCookies: "Manage cookies",
+    cookieServiceNecessaryName: "Necessary cookies",
+    cookieServiceNecessaryDescription:
+      "Cookies required for the site to function, for example to remember your chosen language.",
     cookieServiceAnalyticsName: "Audience measurement",
     cookieServiceAnalyticsDescription:
       "Google Analytics helps us understand how the site is used, anonymously, so we can improve it.",

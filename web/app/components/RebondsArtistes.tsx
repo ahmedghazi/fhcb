@@ -16,7 +16,7 @@ const RebondsArtistes = ({ input }: Props) => {
   return (
     <section className='rebonds rebonds--image-images'>
       <div className='container-fluid'>
-        <h2 className='c-h1_5'>{_localizeText("discoverToo")}</h2>
+        <h2 className='c-h1_5'>{_localizeText("toDiscoverToo")}</h2>
         <div className='grid--centered'>
           {input?.map((item, i) => (
             <CardArtist key={i} input={item} size='sm' />

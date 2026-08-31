@@ -299,6 +299,11 @@
 
   &--product {
     background-color: var(--color-beige);
+    .form-add-to-cart {
+      .variants-list--single {
+        display: none;
+      }
+    }
     .add-to-cart.btn {
       background-color: var(--color-white-0_5);
     }

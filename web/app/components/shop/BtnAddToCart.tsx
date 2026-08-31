@@ -39,7 +39,9 @@ const BtnAddToCart = ({ input }: Props) => {
       price: activeVariant?.price ?? price ?? 0,
       image: imageCover?.asset ? urlFor(imageCover.asset, 200) : undefined,
       href: _linkResolver(input),
-      artists: artistsToString(input.artists),
+      artists: input.artistName
+        ? input.artistName
+        : artistsToString(input.artists),
     });
   };
 

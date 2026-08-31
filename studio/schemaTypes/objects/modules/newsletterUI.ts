@@ -29,7 +29,10 @@ export default defineField({
       name: 'newsletterUrl',
       title: 'Newsletter URL',
       type: 'url',
+      hidden: true,
     }),
+    defineField({name: 'cta', type: 'cta', title: 'CTA'}),
+
     // defineField({name: 'cta', type: 'cta', title: 'CTA'}),
   ],
   preview: {

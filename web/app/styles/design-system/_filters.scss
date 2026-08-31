@@ -302,22 +302,7 @@ header.is-up ~ main .filters {
 .ui-filter__checkbox {
   transition: padding-left 0.2s ease;
   position: relative;
-  &:hover,
-  &:has(input:checked) {
-    color: var(--color-secondary);
-    input {
-      background-color: var(--color-secondary);
-    }
-    @media all and (min-width: variables.$md) {
-      padding-left: 1.5rem;
-      input {
-        opacity: 1;
-      }
-    }
-  }
-  &:has(input:checked) {
-    color: var(--color-secondary);
-  }
+
   input {
     @media all and (min-width: variables.$md) {
       position: absolute;
@@ -325,5 +310,23 @@ header.is-up ~ main .filters {
       opacity: 0;
       transition: opacity 0.2s ease;
     }
+  }
+
+  &:hover,
+  &:has(input:checked),
+  &-checked {
+    color: var(--color-secondary);
+    input {
+      background-color: var(--color-secondary);
+    }
+    @media all and (min-width: variables.$md) {
+      padding-left: 1.5rem;
+      input {
+        opacity: 1 !important;
+      }
+    }
+  }
+  &:has(input:checked) {
+    color: var(--color-secondary);
   }
 }

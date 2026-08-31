@@ -3,17 +3,18 @@ import React from "react";
 import Figure from "@/app/components/ui/Figure";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { NewsletterUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import BtnCta from "../ui/btns/BtnCta";
+import BtnCtaExternal from "../ui/btns/BtnCtaExternal";
 
 type Props = {
   input: NewsletterUIExpanded;
 };
 
 const ModuleNewsletterUI = ({ input }: Props) => {
-  const { title, subtitle, image, newsletterUrl } = input;
+  const { title, subtitle, image, newsletterUrl, cta } = input;
 
   const localizedTitle = _localizeField(title);
   const localizedSubtitle = _localizeField(subtitle);
-
   return (
     <section className='module module--newsletter-ui'>
       <div className='container-fluid'>
@@ -30,7 +31,7 @@ const ModuleNewsletterUI = ({ input }: Props) => {
               )}
             </div>
             <div className='footer'>
-              {newsletterUrl && (
+              {/* {newsletterUrl && (
                 <a
                   href={newsletterUrl}
                   className='module__cta btn'
@@ -38,7 +39,9 @@ const ModuleNewsletterUI = ({ input }: Props) => {
                   rel='noopener noreferrer'>
                   {localizedTitle || "Newsletter"}
                 </a>
-              )}
+              )} */}
+              {cta?.internal && <BtnCta input={cta.internal} />}
+              {cta?.external && <BtnCtaExternal input={cta.external} />}
             </div>
           </div>
           {image?.asset && (

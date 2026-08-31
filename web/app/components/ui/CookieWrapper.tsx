@@ -11,6 +11,7 @@ import website from "@/app/config/website";
 import { _linkResolver, _localizeText } from "@/app/sanity-api/utils";
 import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 import { SETTINGS_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import { LOCALE_COOKIE_NAME } from "@/app/config/cookies";
 
 type Props = {
   children: ReactNode;
@@ -22,6 +23,10 @@ const CookieWrapper = ({ children, settings }: Props) => {
   const privacyHref = settings?.urlPrivacy?.link
     ? _linkResolver(settings.urlPrivacy.link)
     : null;
+  const tNecessaryName = _localizeText("cookieServiceNecessaryName");
+  const tNecessaryDescription = _localizeText(
+    "cookieServiceNecessaryDescription",
+  );
   const tAnalyticsName = _localizeText("cookieServiceAnalyticsName");
   const tAnalyticsDescription = _localizeText(
     "cookieServiceAnalyticsDescription",
@@ -39,6 +44,13 @@ const CookieWrapper = ({ children, settings }: Props) => {
 
   const consentOptions: ConsentOptions = {
     services: [
+      {
+        id: "necessary",
+        name: tNecessaryName,
+        description: tNecessaryDescription,
+        mandatory: true,
+        cookies: [{ pattern: new RegExp(`^${LOCALE_COOKIE_NAME}$`) }],
+      },
       {
         id: "analytics",
         name: tAnalyticsName,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { ProductVariant } from "@/app/sanity-api/types/sanity.types";
+import clsx from "clsx";
 
 type VariantsListProps = {
   input: Array<
@@ -25,10 +26,18 @@ const VariantsList = ({ input, onChange }: VariantsListProps) => {
   }, [input]);
 
   return (
-    <ul className='variants-list'>
+    <ul
+      className={clsx(
+        "variants-list",
+        input.length === 1 && "variants-list--single",
+      )}>
       {input?.map((item, i) => (
         <li key={i}>
-          <label className='ui-filter__checkbox'>
+          <label
+            className={clsx(
+              "ui-filter__checkbox",
+              item._key === selectedKey && "ui-filter__checkbox-checked",
+            )}>
             <input
               className='ui-checkbox'
               type='radio'

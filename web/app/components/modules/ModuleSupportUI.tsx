@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import Figure from "@/app/components/ui/Figure";
+import BtnCta from "@/app/components/ui/btns/BtnCta";
+import BtnCtaExternal from "@/app/components/ui/btns/BtnCtaExternal";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { SupportUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 
@@ -13,11 +15,6 @@ const ModuleSupportUI = ({ input }: Props) => {
 
   const localizedTitle = _localizeField(title);
   const localizedSubtitle = _localizeField(subtitle);
-
-  const ctaLabel = cta?.internal?.label
-    ? _localizeField(cta.internal.label)
-    : _localizeField(cta?.external?.label);
-  const ctaHref = cta?.external?.link || null;
 
   return (
     <section className='module module--support-ui'>
@@ -35,15 +32,8 @@ const ModuleSupportUI = ({ input }: Props) => {
               )}
             </div>
             <div className='footer'>
-              {ctaLabel && ctaHref && (
-                <a
-                  href={ctaHref}
-                  className='module__cta btn'
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  {ctaLabel}
-                </a>
-              )}
+              {cta?.internal && <BtnCta input={cta.internal} />}
+              {cta?.external && <BtnCtaExternal input={cta.external} />}
             </div>
           </div>
           {image?.asset && (

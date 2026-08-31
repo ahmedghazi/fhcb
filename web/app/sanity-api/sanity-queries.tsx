@@ -569,9 +569,9 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   },
   "relatedProductsByArtist": ${relatedProductsByArtist},
   "relatedProductsByTag": ${relatedProductsByTag},
-  rebondsAuto[]->{
-    ${rebondsResolver}
-  }
+  // rebondsAuto[]->{
+  //   ${rebondsResolver}
+  // }
 }`;
 // "related": ${relatedByArtists},
 
@@ -585,7 +585,7 @@ export async function getProduct(slug: string): Promise<PRODUCT_QUERY_RESULT> {
 
 // capped at 30 (not `count`) so there's an actual pool to shuffle — capping in GROQ before
 // shuffling always returned the same [0...count] products in a merely-reordered pair/trio
-export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && !(_id in path("drafts.**")) && slug.current != $slug] | order(_createdAt desc) [0...30]{
+export const RANDOM_PRODUCT_QUERY = groq`*[_type == "product" && !(_id in path("drafts.**")) && slug.current != $slug] | order(_createdAt desc) [0...100]{
   ${cardRefProduct}
 }`;
 

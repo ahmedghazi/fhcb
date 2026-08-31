@@ -161,11 +161,11 @@ const ContentProduct = ({ input }: Props) => {
                       {_localizeField(reliure)}
                     </div>
                   )}
-                  {version_linguistique && (
+                  {/* {version_linguistique && (
                     <div className='c-body--tight'>
                       {_localizeField(version_linguistique)}
                     </div>
-                  )}
+                  )} */}
                   {/* {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>} */}
 
                   {/* {traducteurs && (

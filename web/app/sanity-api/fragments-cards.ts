@@ -56,7 +56,8 @@ export const cardRefEvent = `
   pastille,
   links[]{
     ...
-  }
+  },
+  linkTickets
 `;
 export const cardRefFeuilletage = `
   _type,

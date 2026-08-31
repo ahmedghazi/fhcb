@@ -5,7 +5,7 @@
 - # list text
 
 - # fix anime boutons, plus de bouton primaire
-- hover effect sur carte video home featured
+- # hover effect sur carte video home featured
 - scenario rebonds en cours sinon à venir PAS et à venir
 - # dans expos > 2e rebonds auto expo en cours ou à venir
 - # rebonds scenario HCB + MF qui limite les résultats
@@ -20,9 +20,20 @@
 - rebonds carte expo featured comme expos, mais garde le code couleur
 - # rebonds scenario rebond-branche
 - # rebonds auto livre pb de shuffle + même artiste
-- rebonds produit lettre d'amour pb des events s'y retrouve
-  -- ces events referencent Daido en artiste
+- # rebonds produit lettre d'amour pb des events s'y retrouve
+  # -- ces events referencent Daido en artiste
+- # card product: tag produit à afficher sur les pages shop
+- # afficher le bouton atc même si une seule variation
 - # autour de l'ouvrage pb radio ballast
-  -- me souviens pas du pb ici
-  -- Y’a un feuilletage qui n'a rien à voir (Grégory Halpern). J’ai vérifié en back office dans la page du produit et dans la page de la ressource et y’a rien de louche...
 - # rebonds prix; limite à 8 (sort by \_createdAt) (\_orderRebondsByItems)
+- # modules support > lien interne à afficher
+- ressources scenario livre lié > ajout un champs livre dans feuilletage
+- - livre a expos > afficher l'expo lié
+- - livre a artiste > afficher l'artiste
+- - event a expo > afficher l'event
+- # pb carte rebond http://localhost:3000/martine-franck
+- # produit épuisé (check figma)
+- # expo location debug quel champs affiche le lieu
+- # event liens billeterie comme sur expos
+- # cookie lang
+- # panier afficher l'artiste Name

@@ -74,12 +74,17 @@ const PRIZE_RELATED_CAP = 2;
 // arrays concatenated with \`+\` don't have that problem — an invalid/never operand is just dropped
 // from the union. rebondArtistRelated excludes the host's own artist(s) from its own results, so
 // there's no duplicate card when both scenarios are selected together.
+// "product-related" — the artist(s) of the host's own linked `product` (e.g. a feuilletage's
+// `product` field, see studio/schemaTypes/documents/feuilletage.ts) — pivots through that reference
+// rather than the host's own `artists[]` field, unlike the "artist"/"artist-related" branch above.
 export const rebondArtistSelf = `
   *[
     _type == "artist" &&
     _id != ^.^._id &&
-    ("artist" in ^.items || "artist-related" in ^.items) &&
-    _id in ^.^.artists[]._ref
+    (
+      (("artist" in ^.items || "artist-related" in ^.items) && _id in ^.^.artists[]._ref)
+      || ("product-related" in ^.items && _id in ^.^.product->artists[]._ref)
+    )
   ] {
     ${cardRefArtist}
   }
@@ -142,12 +147,16 @@ export const rebondArtistPrizeRelated = `
 // resources), which has no editorial "these books are related" meaning. \`exhibition\` covers the
 // "via product.exhibition" case named above (host is the exhibition); \`rebonds\` covers a book curated
 // as related to another book/event/pageModulaire host.
+// "product-related" — the host's own linked \`product\` itself (e.g. a feuilletage's embedded book,
+// see studio/schemaTypes/documents/feuilletage.ts), displayed as a card in its own right.
 export const rebondBooks = `
   *[
     _type == "product" &&
     _id != ^.^._id &&
-    "book-related" in ^.items &&
-    (exhibition._ref == ^.^._id || ^.^._id in rebonds[]._ref || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
+    (
+      ("book-related" in ^.items && (exhibition._ref == ^.^._id || ^.^._id in rebonds[]._ref || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
+      || ("product-related" in ^.items && _id == ^.^.product._ref)
+    )
   ] | order(_createdAt desc) {
     ${cardRefProduct}
   }
@@ -200,9 +209,9 @@ export const EXHIBITION_CURRENT_OR_FUTUR = `
 
 // scenarios: "exhibition-related", "exhibition-related-current-or-futur", "exhibition-related-past" (filtered to
 // the host), "exhibition-futur", "exhibition-past", "exhibition-current", "exhibition-current-or-futur" (global,
-// any exhibition), "tags-related" (any exhibition sharing a tag with the host), and "prize-related" (any
+// any exhibition), "tags-related" (any exhibition sharing a tag with the host), "prize-related" (any
 // exhibition sharing a `prix` with the host — see rebondArtistRelated above for why only artist/exhibition
-// carry this branch)
+// carry this branch), and "product-related" (the exhibition of the host's own linked `product`)
 // NB: \`au\` (end date) is intentionally left blank for single-day exhibitions/events (see
 // studio/schemaTypes/objects/fhcbDate.ts) — always fall back to \`du\` via coalesce(), otherwise
 // single-day entries never match "futur" (au undefined >= now() is false) and always match "past".
@@ -219,6 +228,7 @@ export const rebondExhibitions = `
       || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-current-or-futur" in ^.items && ${EXHIBITION_CURRENT_OR_FUTUR})
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
+      || ("product-related" in ^.items && defined(^.^.product) && _id == ^.^.product->exhibition._ref)
     )
   ] | order(dates[0].du desc) {
     ${cardRefExhibition}
@@ -277,7 +287,8 @@ export const rebondExhibitionsPrizeRelated = `
 `;
 
 // scenarios: "event-related-current-or-futur" (filtered to the host), "event-futur" (global, any event),
-// and "tags-related" (any event sharing a tag with the host)
+// "tags-related" (any event sharing a tag with the host), and "product-related" (events tied to the same
+// exhibition as the host's own linked `product`)
 export const rebondEvents = `
   *[
     _type == "event" &&
@@ -286,6 +297,7 @@ export const rebondEvents = `
       ("event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
+      || ("product-related" in ^.items && defined(^.^.product->exhibition._ref) && exhibition._ref == ^.^.product->exhibition._ref)
     )
   ] | order(dates[0].du asc) {
     ${cardRefEvent}

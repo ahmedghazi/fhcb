@@ -473,6 +473,7 @@
 .module--list-exhibitions-past-ui,
 .module--list-image-images,
 .module--list-feuilletage-ui {
+  padding-bottom: var(--spacing-lg);
   .grid-masonry-columns > div:first-child {
     .card {
       transform-origin: left;

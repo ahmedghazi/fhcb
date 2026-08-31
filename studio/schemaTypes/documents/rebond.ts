@@ -76,6 +76,10 @@ export default defineType({
                 title: 'Branches Ressources',
                 value: 'page-branche-ressources',
               },
+              {
+                title: 'Contenu lié (via livre)',
+                value: 'product-related',
+              },
             ],
           },
         },

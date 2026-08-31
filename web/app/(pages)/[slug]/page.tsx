@@ -51,10 +51,10 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
   }
 
   if (!data) return notFound();
-  // const isBranch = data?.tags?.some(
-  //   (tag) => tag.slug?.current === "branches-ressources",
-  // );
-  // const isRessource = data.tags ? _isRessource(data?.tags) : false;
+  const isBranch = data?.tags?.some(
+    (tag) => tag.slug?.current === "branches-ressources",
+  );
+  const isRessource = data.tags ? _isRessource(data?.tags) : false;
   return (
     <div
       className='template template--page'
@@ -65,9 +65,9 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
       {/* {isRessource && data.rebonds && (
         <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} />
       )} */}
-      {/* {data.rebonds && (
+      {data.rebonds && (
         <Rebonds input={data.rebonds} title={data.rebondsLabel || ""} />
-      )} */}
+      )}
       {/* <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} /> */}
       {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
       {data.rebondsAuto?.map((rebond, i) => {

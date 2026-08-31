@@ -22,6 +22,7 @@ import {
   FhcbDate,
   LinkExternal,
   Tag,
+  TagProduct,
 } from "@/app/sanity-api/types/sanity.types";
 import {
   _linkResolver,
@@ -47,7 +48,7 @@ import { toPlainText } from "@portabletext/react";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
-type SanityTags = Array<Tag> | null | undefined;
+type SanityTags = Array<Tag | TagProduct> | null | undefined;
 type SanityDates =
   | ExhibitionExpanded["dates"]
   | EventExpanded["dates"]
@@ -126,7 +127,7 @@ export function exhibitionToCard(
   }
   if (linkTickets) {
     actions.push({
-      label: _localizeText("bookTickets") as string,
+      label: _localizeText("bookTicket") as string,
       href: linkTickets,
       variant: "primary",
       type: "linkExternal",
@@ -170,13 +171,14 @@ export function productToCard(
     artistName,
     variants,
     pastille,
+    totalInventory,
   } = input;
   const artistsName = artistsToString(artists);
 
   const title = (_localizeField(input.title) as string) || "";
   const pathname = usePathname();
   const isOffShop =
-    pathname.indexOf("librairie") === -1 || pathname.indexOf("product") === -1;
+    !pathname.includes("librairie") && !pathname.includes("publications");
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
@@ -187,7 +189,7 @@ export function productToCard(
   }
   const isSimpleProduct = !variants || variants.length === 0;
   // const isProductVariable = languages && languages?.length > 1;
-  // const isLowStock = totalInventory && totalInventory < 10;
+  const isOutOfStock = totalInventory === 0;
 
   const actions: CardAction[] = [];
   actions.push({
@@ -197,28 +199,31 @@ export function productToCard(
     href: _linkResolver(input),
     variant: "secondary",
   });
-  // actions.push({
-  //   label: isSimpleProduct
-  //     ? _localizeText("chooseOptions")
-  //     : (_localizeText("discover") as string),
-  //   href: _linkResolver(input),
-  //   variant: "secondary",
-  // });
+
   return {
     _type: input._type,
+    className: isOutOfStock ? "is-out-of-stock" : undefined,
     layout: layout,
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+
     tags: isOffShop
-      ? `${_localizeText("book")} ${tags ? toTags(tags) : ""}`
-      : toTags(tags),
+      ? _localizeText("book")
+      : tagsProduct
+        ? toTags(tagsProduct)
+        : "",
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
     subTitle: artistName ? _parseJsonStringArray(artistName) : artistsName,
-    infoNode: price ? `${price} €` : undefined,
-    actionsNode: isSimpleProduct
-      ? React.createElement(BtnAddToCart, { input: input as any })
-      : undefined,
+    // infoNode: isOutOfStock ? _localizeText("outOfStock") : price ? `${price} €` : undefined : undefined,
+    infoNode: isOutOfStock
+      ? _localizeText("outOfStock")
+      : price
+        ? `${price} €`
+        : undefined,
+    actionsNode: isOutOfStock
+      ? undefined
+      : React.createElement(BtnAddToCart, { input: input as any }),
     actions: actions,
     badge: pastille ? { label: _localizeField(pastille) as string } : undefined,
   };
@@ -238,6 +243,7 @@ export function eventToCard(
     dates,
     tags,
     links,
+    linkTickets,
     pastille,
   } = input;
   const isPast = _isPastByDates(dates || []);
@@ -256,16 +262,25 @@ export function eventToCard(
     });
   }
 
-  if (links && !isPast) {
-    links.forEach((link: LinkExternal) => {
-      actions.push({
-        label: (_localizeField(link.label) as string) || "",
-        href: link.link ?? "",
-        variant: actions.length === 0 && isVisite ? "primary" : "secondary",
-        type: link._type,
-      });
+  // if (links && !isPast) {
+  //   links.forEach((link: LinkExternal) => {
+  //     actions.push({
+  //       label: (_localizeField(link.label) as string) || "",
+  //       href: link.link ?? "",
+  //       variant: actions.length === 0 && isVisite ? "primary" : "secondary",
+  //       type: link._type,
+  //     });
+  //   });
+  // }
+  if (linkTickets) {
+    actions.push({
+      label: _localizeText("bookTicket") as string,
+      href: linkTickets,
+      variant: "primary",
+      type: "linkExternal",
     });
   }
+
   return {
     _type: input._type,
     layout: size === "lg" ? "row" : "col",
@@ -350,10 +365,12 @@ export function pageModulaireToCard(
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const playbackId = videoCover?.asset?.playbackId;
+
   return {
     _type: input._type,
     // layout: isLandscape ? "row" : "col",
-    layout: isLandscape || videoCover ? "col" : "row",
+    // layout: isLandscape || videoCover ? "col" : "row",
+    layout: "col",
     colorVar: "var(--color-white)",
     // images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     images:

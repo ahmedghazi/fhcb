@@ -6,7 +6,8 @@ import website from "./config/website";
 import { PageContextProvider } from "./context/PageContext";
 import { getSettings } from "./sanity-api/sanity-queries";
 import { LocaleContextProvider } from "./context/LocaleContext";
-import { draftMode } from "next/headers";
+import { LOCALE_COOKIE_NAME } from "./config/cookies";
+import { cookies, draftMode } from "next/headers";
 import VisualEditing from "./components/ui/VisualEditingLazy";
 import localFont from "next/font/local";
 import clsx from "clsx";
@@ -91,13 +92,17 @@ export default async function RootLayout({
   const settings = await getSettings();
   const bandeauContextuel = settings?.bandeauContextuel;
   const { isEnabled } = await draftMode();
+  const localeCookie = (await cookies()).get(LOCALE_COOKIE_NAME)?.value;
+  const initialLocale = localeCookie === "en" ? "en" : "fr";
   return (
-    <html lang='fr' className={clsx("is-loading", PPRightGrotesk.className)}>
+    <html
+      lang={initialLocale}
+      className={clsx("is-loading", PPRightGrotesk.className)}>
       <body className={clsx("is-loading")} data-theme='theme-fhcb'>
         <NavigationProgressBar />
         <div id='page'>
           <Gridder />
-          <LocaleContextProvider>
+          <LocaleContextProvider initialLocale={initialLocale}>
             <CookieWrapper settings={settings}>
               <PageContextProvider settings={settings}>
                 <CartContextProvider>

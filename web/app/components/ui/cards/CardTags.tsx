@@ -1,9 +1,9 @@
-import { Tag } from "@/app/sanity-api/types/sanity.types";
+import { Tag, TagProduct } from "@/app/sanity-api/types/sanity.types";
 import { _localizeField } from "@/app/sanity-api/utils";
 import React from "react";
 
 type Props = {
-  input: Tag[];
+  input: Array<Tag | TagProduct>;
 };
 
 const CardTags = ({ input }: Props) => {

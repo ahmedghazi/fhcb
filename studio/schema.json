@@ -396,6 +396,14 @@
             "type": "string"
           },
           "optional": true
+        },
+        "cta": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "cta"
+          },
+          "optional": true
         }
       }
     }
@@ -4825,6 +4833,10 @@
               {
                 "type": "string",
                 "value": "page-branche-ressources"
+              },
+              {
+                "type": "string",
+                "value": "product-related"
               }
             ]
           }
@@ -10258,6 +10270,13 @@
         },
         "optional": true
       },
+      "linkTickets": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "artists": {
         "type": "objectAttribute",
         "value": {
@@ -11510,6 +11529,14 @@
         "value": {
           "type": "inline",
           "name": "exhibition.reference"
+        },
+        "optional": true
+      },
+      "product": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "product.reference"
         },
         "optional": true
       },

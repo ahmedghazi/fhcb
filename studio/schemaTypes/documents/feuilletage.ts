@@ -77,6 +77,13 @@ export default defineType({
       to: [{type: 'exhibition'}],
       group: 'editorial',
     }),
+    defineField({
+      name: 'product',
+      title: 'Livre lié',
+      type: 'reference',
+      to: [{type: 'product'}],
+      group: 'editorial',
+    }),
 
     defineField({
       name: 'chercheur',

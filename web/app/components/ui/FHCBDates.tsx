@@ -19,7 +19,7 @@ const LocationSlot = ({ location }: { location: Location }) => {
     .trim();
   return (
     <div className={clsx("location", location.inSite && "location--is-insite")}>
-      {localizedTitle}
+      {localizedTitle} zfzrfz
     </div>
   );
 };

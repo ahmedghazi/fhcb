@@ -72,6 +72,13 @@ export default defineType({
       type: 'array',
       of: [{type: 'linkExternal'}],
       group: 'editorial',
+      hidden: true,
+    }),
+    defineField({
+      name: 'linkTickets',
+      title: 'Lien de billetterie',
+      type: 'url',
+      group: 'editorial',
     }),
 
     defineField({

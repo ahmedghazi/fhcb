@@ -142,6 +142,11 @@ const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = 
     !!item._type &&
     ["product", "exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
   "page-branche-ressources": (item) => item._type === "pageModulaire",
+  // product-related fires across every candidate type-shape pulled through the host's own linked
+  // `product` (artist, exhibition, event, and the product itself — see rebondArtistSelf / rebondBooks /
+  // rebondExhibitions / rebondEvents in fragments-rebonds.ts), same best-effort caveat as tags-related above.
+  "product-related": (item) =>
+    !!item._type && ["artist", "product", "exhibition", "event"].includes(item._type),
 };
 
 // rebondsResolver's GROQ concatenates resolvedItems grouped by document type in a fixed order

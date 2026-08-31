@@ -20,8 +20,6 @@ import CardProduct from "./CardProduct";
 import CardArticle from "./CardArticle";
 import CardConversation from "./CardConversation";
 import { _isCurrentByDates, _isPast, _isPastByDates } from "@/app/lib/utils";
-import CardExhibitionFeatured from "./CardExhibitionFeatured";
-import { PageModulaire } from "@/app/sanity-api/types/sanity.types";
 import CardBranche from "./CardBranche";
 
 type Context = "grid" | "slider" | "rebonds" | "search";
@@ -62,6 +60,7 @@ const SIZES = {
   imageImages: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   feuilletage: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   conversation: { grid: "md", slider: "md", rebonds: "md", search: "md" },
+  pageModulaire: { grid: "md", slider: "md", rebonds: "sm", search: "sm" },
 } as const satisfies Record<string, Record<Context, Size>>;
 
 const CardType = ({ input, context, size }: Props) => {
@@ -74,21 +73,22 @@ const CardType = ({ input, context, size }: Props) => {
       | "article"
       | "artist"
       | "imageImages"
-      | "feuilletage",
+      | "feuilletage"
+      | "pageModulaire",
   ): "sm" | "md" | "lg";
   function sizeFor(type: keyof typeof SIZES) {
     return SIZES[type][context];
   }
 
-  const sizeForExhibition = (input: ExhibitionExpanded) => {
-    if (!input.dates) return SIZES["exhibition"][context];
-    const isPast = input.dates && _isPastByDates(input.dates);
-    const isCurrent = _isCurrentByDates(input.dates);
-    let size = "sm";
-    if (isPast) return SIZES["exhibitionPast"][context];
-    else if (isCurrent) return "md";
-    else return SIZES["exhibition"][context];
-  };
+  // const sizeForExhibition = (input: ExhibitionExpanded) => {
+  //   if (!input.dates) return SIZES["exhibition"][context];
+  //   const isPast = input.dates && _isPastByDates(input.dates);
+  //   const isCurrent = _isCurrentByDates(input.dates);
+  //   let size = "sm";
+  //   if (isPast) return SIZES["exhibitionPast"][context];
+  //   else if (isCurrent) return "md";
+  //   else return SIZES["exhibition"][context];
+  // };
   const _isBrancheRessources = (_input: PageModulaireExpanded) => {
     const is = _input.tags?.some(
       (el) => el?.slug?.current === "branches-ressources",
@@ -120,7 +120,7 @@ const CardType = ({ input, context, size }: Props) => {
         />
       )}
       {input._type === "pageModulaire" && !_isBrancheRessources(input) && (
-        <CardPageModulaire input={input} size='md' />
+        <CardPageModulaire input={input} size={"md"} />
       )}
       {input._type === "article" && (
         <CardArticle input={input} size={sizeFor("article")} />
