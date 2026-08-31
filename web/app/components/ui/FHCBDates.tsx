@@ -14,11 +14,9 @@ type Props = {
 
 const LocationSlot = ({ location }: { location: Location }) => {
   const localizedTitle: string = _localizeField(location.title)
-    .replace(/, cube/gi, "")
-    .replace(/, tube/gi, "")
+    .replace(/,?\s*\b(cube|tube)\b/gi, "")
     .replace(/\s+/g, " ")
     .trim();
-
   return (
     <div className={clsx("location", location.inSite && "location--is-insite")}>
       {localizedTitle}

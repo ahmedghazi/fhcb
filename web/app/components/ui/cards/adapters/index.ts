@@ -171,7 +171,6 @@ export function productToCard(
     variants,
     pastille,
   } = input;
-  console.log(tagsProduct);
   const artistsName = artistsToString(artists);
 
   const title = (_localizeField(input.title) as string) || "";
@@ -351,7 +350,6 @@ export function pageModulaireToCard(
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const playbackId = videoCover?.asset?.playbackId;
-  console.log(size);
   return {
     _type: input._type,
     // layout: isLandscape ? "row" : "col",
