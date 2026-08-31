@@ -2,6 +2,7 @@
 
 import { useState, type CSSProperties } from "react";
 import Image, { type ImageProps } from "next/image";
+import clsx from "clsx";
 
 type ImageDarkroomProps = Omit<ImageProps, "placeholder"> & {
   /** LQIP brut en base64, optionnel — juste pour combler le tout petit
@@ -39,13 +40,17 @@ export default function ImageDarkroom({
 
   return (
     <div
-      className={`darkroom-wrapper${wrapperClassName ? ` ${wrapperClassName}` : ""}`}
+      className={clsx(
+        `darkroom-wrapper`,
+        wrapperClassName ? wrapperClassName : "",
+        isLoaded && "is-developed",
+      )}
       style={{
         position: "relative",
         overflow: "hidden",
         width: "100%",
         aspectRatio: width && height ? `${width} / ${height}` : undefined,
-        backgroundColor: "rgba(245, 245, 245, 1)",
+        backgroundColor: isLoaded ? "transparent" : "rgba(245, 245, 245, 1)",
         // backgroundImage: blurDataURL ? `url(${blurDataURL})` : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
