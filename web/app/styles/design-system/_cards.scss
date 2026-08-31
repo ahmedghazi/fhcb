@@ -13,16 +13,34 @@
   will-change: transform;
   &:hover {
     transform: scale(1.02);
-  }
-  &:hover .btn:not(.btn--secondary) {
-    background-color: transparent;
-    &::before {
-      opacity: 1;
+
+    .btn:not(.btn--secondary),
+    .btn {
+      background-color: transparent !important;
+      // backdrop-filter: blur(1rem);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &.card--video-mux:hover .btn {
+      background-color: var(--color-white-0_5) !important;
+      backdrop-filter: blur(1rem);
     }
   }
-  &--video-mux:hover .btn {
-    background-color: white !important;
-  }
+  // &:hover .btn:not(.btn--secondary) {
+  //   background-color: transparent;
+  //   // backdrop-filter: blur(1rem);
+
+  //   &::before {
+  //     opacity: 1;
+  //   }
+  // }
+  // &--video-mux:hover .btn {
+  //   background-color: var(--color-white-0_5) !important;
+  //   backdrop-filter: blur(1rem);
+  // }
   .card__inner {
     position: relative;
     display: flex;
