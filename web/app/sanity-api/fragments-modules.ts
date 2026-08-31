@@ -122,7 +122,11 @@ export const textSidebarUI = `
         }
       },
       products[]->{
-        ${cardRefProduct}
+        ${cardRefProduct},
+        exhibition->{
+          _type,
+          slug
+        },
       },
       keyVal[]{
         ...,
