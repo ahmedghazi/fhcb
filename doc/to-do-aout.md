@@ -22,7 +22,7 @@
 - # rebonds auto livre pb de shuffle + même artiste
 - rebonds produit lettre d'amour pb des events s'y retrouve
   -- ces events referencent Daido en artiste
-- autour de l'ouvrage pb radio ballast
+- # autour de l'ouvrage pb radio ballast
   -- me souviens pas du pb ici
   -- Y’a un feuilletage qui n'a rien à voir (Grégory Halpern). J’ai vérifié en back office dans la page du produit et dans la page de la ressource et y’a rien de louche...
 - # rebonds prix; limite à 8 (sort by \_createdAt) (\_orderRebondsByItems)

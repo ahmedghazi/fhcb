@@ -281,7 +281,7 @@ export const newsCardUI = `
     "eventsVisite": *[_type == "event" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_VISITE_COMMENTEE_SLUG}"]._id]) > 0] | order(dates[0].du asc) {
       ${cardRefEvent}
     },
-    "product": *[ _type == "product" && !(_id in path("drafts.**")) && count(tagsProduct[_ref in *[_type == "tagProduct" && slug.current == "${TAG_PRODUCT_LIVRE_DU_MOIS_SLUG}"]._id]) > 0 ] | order(_createdAt desc)[0] {
+    "product": *[ _type == "product" && !(_id in path("drafts.**")) && count(tagsProduct[_ref in *[_type == "tagProduct" && slug.current == "${TAG_PRODUCT_LIVRE_DU_MOIS_SLUG}"]._id]) > 0 ] | order(coalesce(date, _createdAt) desc)[0] {
       ${cardRefProduct}
     },
     "articles": *[_type == "article"] | order(_createdAt desc)[0...3]{
@@ -290,9 +290,7 @@ export const newsCardUI = `
     "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 ] | order(dates[0].du asc) {
       ${cardRefExhibition}
     },
-    // "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 && defined(countdown) && countdown > 15 && countdown <= 30] | order(dates[0].du asc) {
-    //   ${cardRefExhibition}
-    // },
+
   }
 `;
 
