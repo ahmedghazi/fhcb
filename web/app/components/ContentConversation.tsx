@@ -37,9 +37,6 @@ const ContentConversation = ({ input }: Props) => {
             <div className='md:col-span-1'></div>
           </div>
         )}
-
-        {input?.related && <Rebonds input={input?.related} />}
-        {input?.rebonds && <Rebonds input={input?.rebonds} />}
       </div>
     </div>
   );

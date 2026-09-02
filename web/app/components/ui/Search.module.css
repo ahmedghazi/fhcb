@@ -20,6 +20,10 @@
   }
   :global(button.btn) {
     color: var(--color-primary);
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
     /* flex: 0; */
   }
 }

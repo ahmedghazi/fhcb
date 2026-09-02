@@ -19,6 +19,7 @@ import CardFeuilletage from "./cards/CardFeuilletage";
 import CardPageModulaire from "./cards/CardPageModulaire";
 import CardEvent from "./cards/CardEvent";
 import CardType from "./cards/CardType";
+import Icon from "./Icon";
 
 /*
   | PageModulaire
@@ -89,6 +90,7 @@ const SearchForm = ({ settings }: Props) => {
       case "error":
         return _localizeText("error");
       default:
+        // return "⌕";
         return _localizeText("search");
     }
   };
@@ -159,7 +161,8 @@ const SearchForm = ({ settings }: Props) => {
               }
               type='submit'
               aria-label='submit'>
-              <span>{getButtonMsg()}</span>
+              {status != "" && <span>{getButtonMsg()}</span>}
+              {status === "" && <Icon name='search' />}
             </button>
           </div>
         </div>

@@ -27,6 +27,9 @@ const HeaderMobile = ({ settings }: Props) => {
     document.body.classList.toggle("nav-open", open);
   }, [open]);
 
+  const closeLabel = _localizeText("close");
+  const ticketsLabel = _localizeField(settings?.btnTickets?.label);
+
   return (
     <div className='header--mobile'>
       <div className='header__inner'>
@@ -43,7 +46,7 @@ const HeaderMobile = ({ settings }: Props) => {
                 rel='noopener noreferrer'
                 href={settings.btnTickets.link}
                 className='btn-tickets'>
-                {_localizeField(settings.btnTickets.label)}
+                {ticketsLabel}
               </a>
             </li>
           )}
@@ -51,7 +54,7 @@ const HeaderMobile = ({ settings }: Props) => {
             <button
               className='btn btn--menu-toggle'
               onClick={() => setOpen(!open)}>
-              {open ? _localizeText("close") : "MENU"}
+              {open ? closeLabel : "MENU"}
             </button>
           </li>
         </ul>

@@ -12,13 +12,12 @@
   transform-origin: center;
   will-change: transform;
   &:hover {
-    transform: scale(1.02);
-
+    @media all and (min-width: variables.$md) {
+      transform: scale(1.02);
+    }
     .btn:not(.btn--secondary),
     .btn {
       background-color: transparent !important;
-      // backdrop-filter: blur(1rem);
-
       &::before {
         opacity: 1;
       }
@@ -29,18 +28,7 @@
       backdrop-filter: blur(1rem);
     }
   }
-  // &:hover .btn:not(.btn--secondary) {
-  //   background-color: transparent;
-  //   // backdrop-filter: blur(1rem);
 
-  //   &::before {
-  //     opacity: 1;
-  //   }
-  // }
-  // &--video-mux:hover .btn {
-  //   background-color: var(--color-white-0_5) !important;
-  //   backdrop-filter: blur(1rem);
-  // }
   .card__inner {
     position: relative;
     display: flex;

@@ -21,6 +21,8 @@ import CardArticle from "./CardArticle";
 import CardConversation from "./CardConversation";
 import { _isCurrentByDates, _isPast, _isPastByDates } from "@/app/lib/utils";
 import CardBranche from "./CardBranche";
+import { FhcbDate } from "@/app/sanity-api/types/sanity.types";
+import CardExhibitionFeatured from "./CardExhibitionFeatured";
 
 type Context = "grid" | "slider" | "rebonds" | "search";
 type Size = "sm" | "md" | "md-alt" | "lg";
@@ -68,6 +70,7 @@ const CardType = ({ input, context, size }: Props) => {
   function sizeFor(
     type:
       | "exhibition"
+      | "exhibitionFeatured"
       | "event"
       | "product"
       | "article"
@@ -102,10 +105,15 @@ const CardType = ({ input, context, size }: Props) => {
       {input._type === "event" && (
         <CardEvent input={input} size={sizeFor("event")} />
       )}
-      {input._type === "exhibition" && (
-        // <CardExhibition input={input} size={sizeForExhibition(input)} />
-        <CardExhibition input={input} size={sizeFor("exhibition")} />
-      )}
+      {input._type === "exhibition" &&
+        _isCurrentByDates(input.dates as FhcbDate[]) && (
+          <CardExhibitionFeatured input={input} />
+        )}
+      {input._type === "exhibition" &&
+        !_isCurrentByDates(input.dates as FhcbDate[]) && (
+          // <CardExhibition input={input} size={sizeForExhibition(input)} />
+          <CardExhibition input={input} size={sizeFor("exhibition")} />
+        )}
 
       {input._type === "product" && (
         <CardProduct

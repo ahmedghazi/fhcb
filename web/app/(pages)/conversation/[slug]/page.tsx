@@ -12,6 +12,7 @@ import PageHeader from "@/app/components/PageHeader";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { CONVERSATION_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import ContentConversation from "@/app/components/ContentConversation";
+import Rebonds from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
 
@@ -58,6 +59,8 @@ const ConversationTemplate: NextPage<PageProps> = async ({ params }) => {
         {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
       </div> */}
       <ContentConversation input={data} />
+      {data?.related && <Rebonds input={data?.related} />}
+      {data?.rebonds && <Rebonds input={data?.rebonds} />}
       {/* <ContentModulaire input={data} /> */}
       {/* {data.related && <Rebonds input={data.related} />}
       {data.rebonds && <Rebonds input={data.rebonds} />} */}
