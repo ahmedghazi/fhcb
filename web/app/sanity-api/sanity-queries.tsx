@@ -514,7 +514,7 @@ export const ARTICLE_QUERY = groq`*[_type == "article" && slug.current == $slug]
   modules[]{
     ${modules}
   },
-  "related": ${relatedByTag}
+  // "related": ${relatedByTag}
 }`;
 
 export async function getArticle(slug: string): Promise<ARTICLE_QUERY_RESULT> {
@@ -569,9 +569,9 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   },
   "relatedProductsByArtist": ${relatedProductsByArtist},
   "relatedProductsByTag": ${relatedProductsByTag},
-  // rebondsAuto[]->{
-  //   ${rebondsResolver}
-  // }
+  rebondsAuto[]->{
+    ${rebondsResolver}
+  }
 }`;
 // "related": ${relatedByArtists},
 

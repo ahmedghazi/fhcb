@@ -16,12 +16,12 @@
       transform: scale(1.02);
     }
     .btn:not(.btn--secondary),
-    .btn {
-      background-color: transparent !important;
-      &::before {
-        opacity: 1;
-      }
-    }
+    // .btn {
+    //   background-color: transparent !important;
+    //   &::before {
+    //     opacity: 1;
+    //   }
+    // }
 
     &.card--video-mux:hover .btn {
       background-color: var(--color-white-0_5) !important;

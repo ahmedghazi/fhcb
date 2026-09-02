@@ -72,12 +72,14 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
         {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
       </div>
       <ContentModulaire input={data} />
-      {data.rebonds && (
+      {/* {data.rebonds && (
         <RelatedImageImages
           input={data.rebonds as unknown as ImageImagesExpanded[]}
         />
+      )} */}
+      {data.related && (
+        <Rebonds input={data.related} layout='slider' title={"discoverToo"} />
       )}
-      {data.related && <Rebonds input={data.related} layout='slider' />}
     </div>
   );
 };

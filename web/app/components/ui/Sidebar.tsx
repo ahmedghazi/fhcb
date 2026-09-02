@@ -7,6 +7,7 @@ import {
 import React from "react";
 import Figure from "./Figure";
 import Link from "next/link";
+import BtnAddToCart from "../shop/BtnAddToCart";
 
 type Props = {
   input: SidebarGeneriqueExpanded;
@@ -140,9 +141,11 @@ const Sidebar = ({ input }: Props) => {
                       // width={200}
                       sizes='(max-width: 767px) 100vw, 25vw'
                     />
-                    <Link className='btn' href={_linkResolver(item)}>
+
+                    <BtnAddToCart input={item} />
+                    {/* <Link className='btn' href={_linkResolver(item)}>
                       {_localizeText("buy")}
-                    </Link>
+                    </Link> */}
                     {item.exhibition && (
                       <Link
                         className='btn'

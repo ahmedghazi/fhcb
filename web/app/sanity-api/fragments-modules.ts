@@ -372,7 +372,7 @@ export const listImageImages = `
       ${filterList},
       ${filterCheckbox}
     },
-    "items": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc) {
+    "items": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(index desc) {
       ${cardRefImageImages}
     },
     cta{

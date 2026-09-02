@@ -64,7 +64,7 @@ const ContentProduct = ({ input }: Props) => {
   // );
 
   const isLowStock = totalInventory && totalInventory < 10;
-
+  const isOutOfStock = totalInventory === 0;
   return (
     <div className='content content--product'>
       <div className='container-fluid'>
@@ -81,9 +81,9 @@ const ContentProduct = ({ input }: Props) => {
             {/* <div className='stock'>
               {isLowStock ? _localizeText("isLowStock") : ""}
             </div> */}
-
-            <BtnAddToCart input={input as unknown as ProductExpanded} />
-
+            {!isOutOfStock && (
+              <BtnAddToCart input={input as unknown as ProductExpanded} />
+            )}
             <ul className='sidebar'>
               {/* {artists && (
                 <li className='sidebar__item'>
