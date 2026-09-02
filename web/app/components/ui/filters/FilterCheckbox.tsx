@@ -14,7 +14,7 @@ const FilterCheckbox = ({ def, activeValue, onToggle }: Props) => {
   const opts = def.filterOptions ?? [];
 
   return (
-    <div className='ui-filters ui-filter__wrapper ui-filter__checkbox'>
+    <div className='ui-filters ui-filter__wrapper ui-filter__checkbox-group'>
       <div className='ui-filters__summary uppercase'>
         {/* {def.radioLabel && (
         <span className='ui-filter__label'>
@@ -24,7 +24,7 @@ const FilterCheckbox = ({ def, activeValue, onToggle }: Props) => {
         {/* <pre>{JSON.stringify(opts)}</pre> */}
         <fieldset className='ui-filters__radio'>
           {opts?.map((opt) => (
-            <label key={opt._id}>
+            <label key={opt._id} className='ui-filter__checkbox'>
               <input
                 className='ui-checkbox'
                 type='checkbox'

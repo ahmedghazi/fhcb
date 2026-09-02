@@ -323,7 +323,7 @@ const filterCheckbox = `
 const filterRadio = `
   _type == "filterRadio" => {
     ...,
-    filterOptions[]->{ _id, _type, name, title, slug }
+    "filterOptions": radioOptions[]->{ _id, _type, name, title, slug }
   }
 `;
 

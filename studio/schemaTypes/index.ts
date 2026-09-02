@@ -70,6 +70,8 @@ import filterSort from './objects/filterSort'
 import filterSearch from './objects/filterSearch'
 import filterList from './objects/filterList'
 import filterCheckbox from './objects/filterCheckbox'
+import filterRadio from './objects/filterRadio'
+
 import filterToggle from './objects/filterToggle'
 import messageContextuel from './objects/messageContextuel'
 import fhcbDate from './objects/fhcbDate'
@@ -129,6 +131,7 @@ export const schemaTypes = [
   filterSearch,
   filterList,
   filterCheckbox,
+  filterRadio,
   filterToggle,
   messageContextuel,
   fhcbDate,

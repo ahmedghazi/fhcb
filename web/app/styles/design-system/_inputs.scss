@@ -6,8 +6,27 @@
   cursor: pointer;
   user-select: none;
 }
-.ui-radio,
+// `.ui-checkbox` and `.ui-radio` are kept fully independent on purpose —
+// each is its own dot, styled on its own, even though today they happen to
+// look alike. Don't merge them back into a shared selector: any hide/reveal
+// or label-shift animation lives on the wrapper (`.ui-filter__checkbox` /
+// `.ui-filter__radio` in _filters.scss), never here.
 .ui-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  border: var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease;
+  &:checked {
+    background-color: currentColor;
+  }
+}
+
+.ui-radio {
   appearance: none;
   -webkit-appearance: none;
   width: 0.875rem;

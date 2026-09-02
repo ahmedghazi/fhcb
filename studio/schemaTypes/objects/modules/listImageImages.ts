@@ -18,6 +18,7 @@ export default defineField({
         {type: 'filterSearch'},
         {type: 'filterList'},
         {type: 'filterCheckbox'},
+        {type: 'filterRadio'},
       ],
     }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),

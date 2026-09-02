@@ -291,6 +291,9 @@ export type ListImageImages = {
     | ({
         _key: string;
       } & FilterCheckbox)
+    | ({
+        _key: string;
+      } & FilterRadio)
   >;
   cta?: Cta;
 };
@@ -601,6 +604,13 @@ export type ChercheurReference = {
   _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "chercheur";
+};
+
+export type FilterRadio = {
+  _type: "filterRadio";
+  filterKey?: "artist" | "tag" | "chercheur";
+  filterLabel?: LocaleString;
+  radioOptions?: ArrayOf<ArtistReference | TagReference | ChercheurReference>;
 };
 
 export type FilterCheckbox = {
@@ -2625,6 +2635,7 @@ export type AllSanitySchemaTypes =
   | LocaleText
   | FilterToggle
   | ChercheurReference
+  | FilterRadio
   | FilterCheckbox
   | FilterList
   | FilterSearch
@@ -3027,6 +3038,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -3482,6 +3496,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -3943,6 +3960,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -4316,6 +4336,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -4687,6 +4710,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -7453,6 +7479,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -7906,6 +7935,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -8367,6 +8399,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -8740,6 +8775,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -9111,6 +9149,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -11764,6 +11805,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -12217,6 +12261,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -12678,6 +12725,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -13051,6 +13101,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -13422,6 +13475,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -16075,6 +16131,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -16528,6 +16587,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -16989,6 +17051,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -17362,6 +17427,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -17733,6 +17801,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -20386,6 +20457,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -20839,6 +20913,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -21300,6 +21377,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -21673,6 +21753,9 @@ export type SETTINGS_QUERY_RESULT = {
                               } & FilterList)
                             | ({
                                 _key: string;
+                              } & FilterRadio)
+                            | ({
+                                _key: string;
                               } & FilterSearch)
                             | ({
                                 _key: string;
@@ -22044,6 +22127,9 @@ export type SETTINGS_QUERY_RESULT = {
                             | ({
                                 _key: string;
                               } & FilterList)
+                            | ({
+                                _key: string;
+                              } & FilterRadio)
                             | ({
                                 _key: string;
                               } & FilterSearch)
@@ -29845,6 +29931,15 @@ export type PAGE_MODULAIRE_QUERY_RESULT = {
                   }>
                 | Array<never>
                 | Array<string>;
+            }
+          | {
+              _key: string;
+              _type: "filterRadio";
+              filterKey?: "artist" | "chercheur" | "tag";
+              filterLabel?: LocaleString;
+              radioOptions?: ArrayOf<
+                ArtistReference | ChercheurReference | TagReference
+              >;
             }
           | {
               _key: string;
@@ -55816,6 +55911,15 @@ export type PROGRAMME_QUERY_RESULT = {
             }
           | {
               _key: string;
+              _type: "filterRadio";
+              filterKey?: "artist" | "chercheur" | "tag";
+              filterLabel?: LocaleString;
+              radioOptions?: ArrayOf<
+                ArtistReference | ChercheurReference | TagReference
+              >;
+            }
+          | {
+              _key: string;
               _type: "filterSearch";
               searchIn?: Array<string>;
             }
@@ -72545,6 +72649,15 @@ export type FEUILLETAGE_QUERY_RESULT = {
                   }>
                 | Array<never>
                 | Array<string>;
+            }
+          | {
+              _key: string;
+              _type: "filterRadio";
+              filterKey?: "artist" | "chercheur" | "tag";
+              filterLabel?: LocaleString;
+              radioOptions?: ArrayOf<
+                ArtistReference | ChercheurReference | TagReference
+              >;
             }
           | {
               _key: string;
@@ -90516,6 +90629,15 @@ export type CONVERSATION_QUERY_RESULT = {
             }
           | {
               _key: string;
+              _type: "filterRadio";
+              filterKey?: "artist" | "chercheur" | "tag";
+              filterLabel?: LocaleString;
+              radioOptions?: ArrayOf<
+                ArtistReference | ChercheurReference | TagReference
+              >;
+            }
+          | {
+              _key: string;
               _type: "filterSearch";
               searchIn?: Array<string>;
             }
@@ -105257,6 +105379,15 @@ export type ARTICLE_QUERY_RESULT = {
                   }>
                 | Array<never>
                 | Array<string>;
+            }
+          | {
+              _key: string;
+              _type: "filterRadio";
+              filterKey?: "artist" | "chercheur" | "tag";
+              filterLabel?: LocaleString;
+              radioOptions?: ArrayOf<
+                ArtistReference | ChercheurReference | TagReference
+              >;
             }
           | {
               _key: string;

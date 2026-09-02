@@ -52,7 +52,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     setActive({});
     onChange({});
   };
-
+  console.log(filterDefs);
   return (
     <div
       className={clsx(

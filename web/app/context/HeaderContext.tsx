@@ -5,7 +5,9 @@ import React, {
   ReactNode,
   useState,
   useEffect,
+  useRef,
 } from "react";
+import { usePathname } from "next/navigation";
 import { SanityImageAssetFull } from "../sanity-api/types/sanity-expanded.types";
 import { publish } from "pubsub-js";
 import { LocaleBlockContent } from "../sanity-api/types/sanity.types";
@@ -43,6 +45,17 @@ export const HeaderContextProvider = ({ children }: HeaderContextProps) => {
   const [currentMenuMessage, dispatchCurrentMenuMessage] =
     useState<LocaleBlockContent | null>(null);
   const [modalType, dispatchModalType] = useState<MODAL_TYPES>(null);
+  const pathname = usePathname();
+  const isFirstPathname = useRef(true);
+
+  useEffect(() => {
+    if (isFirstPathname.current) {
+      isFirstPathname.current = false;
+      return;
+    }
+    dispatchModalType(null);
+    dispatchCurrentMenuItem(null);
+  }, [pathname]);
 
   useEffect(() => {
     if (currentMenuItem) {

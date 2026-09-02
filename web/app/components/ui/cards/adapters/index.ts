@@ -176,6 +176,10 @@ export function productToCard(
   const artistsName = artistsToString(artists);
 
   const title = (_localizeField(input.title) as string) || "";
+  const chooseOptionsLabel = _localizeText("chooseOptions") as string;
+  const discoverLabel = _localizeText("discover") as string;
+  const bookLabel = _localizeText("book");
+  const outOfStockLabel = _localizeText("outOfStock");
   const pathname = usePathname();
   const isOffShop =
     !pathname.includes("librairie") && !pathname.includes("publications");
@@ -193,9 +197,7 @@ export function productToCard(
 
   const actions: CardAction[] = [];
   actions.push({
-    label: !isSimpleProduct
-      ? _localizeText("chooseOptions")
-      : (_localizeText("discover") as string),
+    label: !isSimpleProduct ? chooseOptionsLabel : discoverLabel,
     href: _linkResolver(input),
     variant: "secondary",
   });
@@ -208,16 +210,15 @@ export function productToCard(
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
 
     tags: isOffShop
-      ? _localizeText("book")
+      ? bookLabel
       : tagsProduct
         ? toTags(tagsProduct)
         : "",
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
     subTitle: artistName ? _parseJsonStringArray(artistName) : artistsName,
-    // infoNode: isOutOfStock ? _localizeText("outOfStock") : price ? `${price} €` : undefined : undefined,
     infoNode: isOutOfStock
-      ? _localizeText("outOfStock")
+      ? outOfStockLabel
       : price
         ? `${price} €`
         : undefined,

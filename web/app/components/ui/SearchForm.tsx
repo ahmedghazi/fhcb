@@ -70,12 +70,22 @@ type Props = {
 const SearchForm = ({ settings }: Props) => {
   const [status, setStatus] = useState<string>("");
   const [term, setTerm] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<Array<any>>([]);
+  const [searchResult, setSearchResult] = useState<Array<any> | null>(null);
   const initialPlaceholder = "Exposition, artiste, événement...";
   const [placeholder, setPlaceholder] = useState<string>(initialPlaceholder);
   const inputRef = useRef<HTMLInputElement>(null);
   const { mostSearched } = settings;
-
+  const noResultLabel = _localizeText("noResults");
+  const mostSearchedLabel = _localizeText("mostSearched");
+  const searchingLabel = _localizeText("search");
+  const errorLabel = _localizeText("error");
+  const mostSearchedItems =
+    (mostSearched as unknown as MostSearchedItem[] | undefined)?.map(
+      (item) => ({
+        href: _linkResolver(item),
+        title: _localizeField(item.title),
+      }),
+    ) ?? [];
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -88,10 +98,10 @@ const SearchForm = ({ settings }: Props) => {
         return "...";
 
       case "error":
-        return _localizeText("error");
+        return errorLabel;
       default:
         // return "⌕";
-        return _localizeText("search");
+        return searchingLabel;
     }
   };
 
@@ -107,7 +117,7 @@ const SearchForm = ({ settings }: Props) => {
       });
       const data = await res.json();
       // if (setSearchResult)
-      setSearchResult(data);
+      setSearchResult(data || []);
       document.body.classList.remove("is-fetching");
       setStatus("");
       // setOpen(true);
@@ -123,7 +133,7 @@ const SearchForm = ({ settings }: Props) => {
     } else {
       setTerm("");
       // if (setSearchResult)
-      setSearchResult([]);
+      setSearchResult(null);
     }
   };
 
@@ -133,6 +143,8 @@ const SearchForm = ({ settings }: Props) => {
       _handleSearch();
     }
   };
+
+  console.log(searchResult);
 
   return (
     <div className={""}>
@@ -167,15 +179,13 @@ const SearchForm = ({ settings }: Props) => {
           </div>
         </div>
       </form>
-      {mostSearched && searchResult.length === 0 && (
+      {mostSearched && (!searchResult || searchResult.length === 0) && (
         <div className={styles.mostSearched}>
-          <h2 className='c-h2'>{_localizeText("mostSearched")}</h2>
+          <h2 className='c-h2'>{mostSearchedLabel}</h2>
           <ul className=''>
-            {(mostSearched as unknown as MostSearchedItem[]).map((item, i) => (
+            {mostSearchedItems.map(({ href, title }, i) => (
               <li key={i} className='ellipsis'>
-                <Link href={_linkResolver(item)}>
-                  {_localizeField(item.title)}
-                </Link>
+                <Link href={href}>{title}</Link>
               </li>
             ))}
           </ul>
@@ -191,9 +201,9 @@ const SearchForm = ({ settings }: Props) => {
                     <CardType input={item} context='search' />
                   </Fragment>
                 ))}
-                {searchResult.length === 0 && term !== "" && (
+                {searchResult && searchResult.length === 0 && (
                   <div className='col-span-full'>
-                    <p>{_localizeText("noResults")}</p>
+                    <p>{noResultLabel}</p>
                   </div>
                 )}
               </div>

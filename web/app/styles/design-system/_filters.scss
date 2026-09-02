@@ -161,7 +161,7 @@ header.is-up ~ main .filters {
       background-image: url("data:image/svg+xml,%3Csvg width=%228%22 height=%229%22 viewBox=%220 0 8 9%22 fill=%22none%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 4.0625H1.2124L3.12939 6.96973L3.23096 6.94434C3.19287 6.65658 3.1696 6.2736 3.16113 5.79541L3.16113 0L4.23389 1.35151e-08L4.24023 5.79541C4.24023 6.22282 4.21696 6.60579 4.17041 6.94434L4.27832 6.96973L6.19531 4.0625H7.40137L3.88477 8.88672H3.5166L0 4.0625Z%22 fill=%22%23ff5524%22/%3E%3C/svg%3E");
     }
   }
-  .ui-filter__checkbox,
+  .ui-filter__checkbox-group,
   .ui-filter__toggle {
     display: flex;
     gap: 8px;
@@ -175,6 +175,11 @@ header.is-up ~ main .filters {
     }
   }
 
+  // The radio look: input always visible, no hide/reveal or label-shift —
+  // fully self-contained, doesn't share rules with `.ui-filter__checkbox`.
+  // `.ui-filters__radio` (the nested fieldset) is always a descendant of
+  // `.ui-filter__radio` (the wrapper div), so these rules already cascade
+  // to it — no need to repeat them on both selectors.
   .ui-filter__radio {
     display: flex;
     gap: 8px;
@@ -185,8 +190,15 @@ header.is-up ~ main .filters {
       cursor: pointer;
       user-select: none;
       text-transform: uppercase;
+      transition: color 0.2s ease;
+      &:hover,
+      &:has(input:checked) {
+        color: var(--color-secondary);
+      }
     }
     input {
+      position: initial;
+      opacity: 1;
     }
   }
   .ui-filter__list {
@@ -328,5 +340,11 @@ header.is-up ~ main .filters {
   }
   &:has(input:checked) {
     color: var(--color-secondary);
+  }
+  &:has(input[type="radio"]) {
+    transition: none;
+    input {
+      transition: none;
+    }
   }
 }
