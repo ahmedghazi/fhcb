@@ -146,13 +146,13 @@ const Sidebar = ({ input }: Props) => {
                     {/* <Link className='btn' href={_linkResolver(item)}>
                       {_localizeText("buy")}
                     </Link> */}
-                    {item.exhibition && (
+                    {/* {item.exhibition && (
                       <Link
                         className='btn'
                         href={_linkResolver(item.exhibition)}>
                         {_localizeText("discoverTheExhibition")}
                       </Link>
-                    )}
+                    )} */}
                     {/* <pre>{JSON.stringify(item, null, 2)}</pre> */}
                   </div>
                 )}

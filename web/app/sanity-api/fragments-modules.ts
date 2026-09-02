@@ -288,7 +288,7 @@ export const newsCardUI = `
     "product": *[ _type == "product" && !(_id in path("drafts.**")) && count(tagsProduct[_ref in *[_type == "tagProduct" && slug.current == "${TAG_PRODUCT_LIVRE_DU_MOIS_SLUG}"]._id]) > 0 ] | order(coalesce(date, _createdAt) desc)[0] {
       ${cardRefProduct}
     },
-    "articles": *[_type == "article"] | order(_createdAt desc)[0...3]{
+    "articles": *[_type == "article"] | order(coalesce(date, _createdAt) desc)[0...3]{
       ${cardRefArticle}
     },
     "exhibitions": *[_type == "exhibition" && !(_id in path("drafts.**")) && count(tags[_ref in *[_type == "tag" && slug.current == "${TAG_UPCOMING_SLUG}"]._id]) > 0 ]

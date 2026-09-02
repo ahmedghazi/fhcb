@@ -20,6 +20,7 @@ import RelatedImageImages from "@/app/components/RebondsImageImages";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { ARTICLE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 import Related from "@/app/components/Rebonds";
+import Rebonds from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
 
@@ -65,8 +66,15 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       <PageHeader h1={data.title} />
       {/* <pre>{JSON.stringify(data.related, null, 2)}</pre> */}
       <ContentModulaire input={data} />
-
-      {data.related && <Related input={data.related} />}
+      {data.rebondsAuto?.map((rebond, i) => (
+        <Rebonds
+          key={i}
+          input={rebond?.resolvedItems}
+          title={rebond?.title || undefined}
+          items={rebond?.items}
+        />
+      ))}
+      {/* {data.related && <Related input={data.related} />} */}
 
       {/* {data.related && <Related input={data.related} />}
       {data.rebonds && <Related input={data.rebonds} />} */}

@@ -514,8 +514,11 @@ export const ARTICLE_QUERY = groq`*[_type == "article" && slug.current == $slug]
   modules[]{
     ${modules}
   },
-  // "related": ${relatedByTag}
+  rebondsAuto[]->{
+    ${rebondsResolver}
+  }
 }`;
+// "related": ${relatedByTag}
 
 export async function getArticle(slug: string): Promise<ARTICLE_QUERY_RESULT> {
   return sanityFetch({

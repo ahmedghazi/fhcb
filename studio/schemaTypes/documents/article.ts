@@ -3,6 +3,7 @@ import modulesList from '../objects/modules/modulesList'
 import {baseLanguage} from '../locale/supportedLanguages'
 import {IoPersonOutline} from 'react-icons/io5'
 import slug from '../fields/slug'
+import rebondsAutoField from '../misc/rebondsAutoField'
 
 export default defineType({
   type: 'document',
@@ -93,6 +94,7 @@ export default defineType({
       of: modulesList,
       group: 'editorial',
     }),
+    rebondsAutoField,
   ],
 
   preview: {
