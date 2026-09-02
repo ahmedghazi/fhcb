@@ -72,6 +72,7 @@ const ContentProduct = ({ input }: Props) => {
           <div className='header'>
             <div>
               <h1 className='c-h2'>{_localizeField(title)}</h1>
+
               <div className='subtitle c-chapo c-chapo--i'>
                 {artists && artists.length > 0 && artistsToString(artists)}
                 {!artists && <span>{_parseJsonStringArray(artistName)}</span>}

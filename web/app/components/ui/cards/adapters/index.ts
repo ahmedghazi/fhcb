@@ -164,7 +164,6 @@ export function productToCard(
 ): CardBaseProps {
   const {
     imageCover,
-    tags,
     tagsProduct,
     price,
     artists,

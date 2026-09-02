@@ -192,6 +192,7 @@ export const applyFilters = <T extends Record<string, any>>(
       if (checked) {
         result = result.filter((item) => {
           if (def.filterKey === "inStock") {
+            return item.totalInventory > 0;
             return !!item.inStock;
           }
           return true;
