@@ -161,7 +161,13 @@ export const listsUI = `
   _type == "listsUI" => {
     ...,
     items[]{
-      ${listItem}
+      ...,
+      items[]{
+        ${listItem}
+      },
+      cta{
+        ${cta}
+      }
     }
   }
 `;

@@ -209,19 +209,11 @@ export function productToCard(
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
 
-    tags: isOffShop
-      ? bookLabel
-      : tagsProduct
-        ? toTags(tagsProduct)
-        : "",
+    tags: isOffShop ? bookLabel : tagsProduct ? toTags(tagsProduct) : "",
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
     subTitle: artistName ? _parseJsonStringArray(artistName) : artistsName,
-    infoNode: isOutOfStock
-      ? outOfStockLabel
-      : price
-        ? `${price} €`
-        : undefined,
+    infoNode: isOutOfStock ? outOfStockLabel : price ? `${price} €` : undefined,
     actionsNode: isOutOfStock
       ? undefined
       : React.createElement(BtnAddToCart, { input: input as any }),
@@ -531,7 +523,7 @@ export function conversationToCard(input: ConversationExpanded): CardBaseProps {
     mediaSlot: video
       ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
       : undefined,
-    tags: _localizeText(_type),
+    tags: _localizeText("conversations"),
     title: (_localizeField(title) as string) || "",
     subTitle: subTitle
       ? _localizeField(subTitle)
@@ -560,9 +552,10 @@ export function serieThematiqueToCard(
     mediaSlot: video
       ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
       : undefined,
-    tags: index
-      ? `une image, des images #${index}`
-      : _localizeText(input._type),
+    // tags: index
+    //   ? `FOCUS`
+    //   : _localizeText(input._type),
+    tags: "FOCUS",
     title: (_localizeField(input.title) as string) || "",
     subTitle: chercheur?.name || undefined,
     actions: [

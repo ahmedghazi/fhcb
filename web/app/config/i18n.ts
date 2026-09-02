@@ -157,6 +157,7 @@ const i18n = {
     coProduction: "CO-PRODUCTEUR(S)",
     partenaires: "PARTENAIRE(S)",
     partenairesMedia: "PARTENAIRE(S) MÉDIA",
+    conversations: "Paroles",
   },
   en: {
     default: false,
@@ -235,7 +236,9 @@ const i18n = {
     isLowStock: "Last items",
     outOfStock: "Out of stock",
     chooseOptions: "Choose options",
-    editor: "Editor",
+    editor: "Publisher(s)",
+    auteurs: "AUTHOR(S)",
+    traducteurs: "Translator(S)",
     publicationDate: "Publication date",
     rebondArtist: "The artist",
     rebondArtistRelated: "Related artists",
@@ -309,6 +312,7 @@ const i18n = {
     coProduction: "CO-PRODUCER(S)",
     partenaires: "PARTNER(S)",
     partenairesMedia: "PARTNER(S) MÉDIA",
+    conversations: "Conversations",
   },
 };
 

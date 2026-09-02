@@ -54,7 +54,8 @@ main {
       padding-top: 0;
       section.hero-exhibition,
       section.hero-event {
-        padding-top: var(--header-h);
+        // padding-top: var(--header-h);
+        padding-top: calc(var(--header-h) + var(--spacing-lg));
       }
     }
   }
