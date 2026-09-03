@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import useLocale from "@/app/context/LocaleContext";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
 import { FeuilletageExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
@@ -10,6 +10,7 @@ import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
 import LoadMoreButton from "../ui/LoadMoreButton";
+import { _shuffle } from "@/app/lib/utils";
 
 type Props = {
   input: ListFeuilletageUI & {
@@ -20,8 +21,13 @@ type Props = {
 
 const ModuleListFeuilletageUI = ({ input }: Props) => {
   const { locale } = useLocale();
-  const { activeFilters, visibleCount, handleFilterChange, loadMore } =
-    usePaginatedFilters();
+  const {
+    activeFilters,
+    visibleCount,
+    handleFilterChange,
+    resetVisibleCount,
+    loadMore,
+  } = usePaginatedFilters();
 
   const filterDefs = withResolvedOptions(
     input.filters ?? [],
@@ -33,8 +39,20 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
     activeFilters,
     locale,
   );
-  const visibleItems = filteredItems.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredItems.length;
+
+  // start with the original (server-rendered) order to avoid a hydration
+  // mismatch, then shuffle client-side after mount / when filters change
+  const [shuffledItems, setShuffledItems] = useState(filteredItems);
+  const filteredItemsKey = filteredItems.map((item) => item._id).join(",");
+
+  useEffect(() => {
+    setShuffledItems(_shuffle(filteredItems));
+    resetVisibleCount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredItemsKey]);
+
+  const visibleItems = shuffledItems.slice(0, visibleCount);
+  const hasMore = visibleCount < shuffledItems.length;
 
   return (
     <section className='module module--list-feuilletage-ui'>

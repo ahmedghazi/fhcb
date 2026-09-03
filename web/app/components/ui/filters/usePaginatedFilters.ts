@@ -5,7 +5,7 @@ import { ActiveFilters } from "./filters.types";
 // (possibly filtered) results get rendered into the DOM at once, revealed via "load more". Keeps
 // the initial HTML small (React warns above ~512kB of un-Suspense'd document) without ever
 // limiting what filters can match.
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 14;
 
 // Owns the two bits of state every moduleList-with-FilterBar page needs: which filters are
 // active, and how many of the filtered results are currently revealed. Callers still run
