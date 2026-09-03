@@ -12,6 +12,7 @@ import { PortableText } from "@portabletext/react";
 import website from "../config/website";
 import Image from "next/image";
 import { useConsent } from "react-hook-consent";
+import BtnCta from "./ui/btns/BtnCta";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -49,7 +50,7 @@ const Footer = ({ settings }: Props) => {
             </Link>
           </div>
           <div className='navs'></div>
-          <div className='flex flex-col md:flex-row'>
+          <div className='flex flex-col md:flex-row gap-gutter'>
             <address
               className='c-h2-'
               style={{
@@ -130,15 +131,11 @@ const Footer = ({ settings }: Props) => {
                           target='_blank'
                           rel='noopener noreferrer'>
                           {_localizeField(settings.urlNewsletter?.label) ||
-                            _localizeText("nousSoutenir")}
+                            _localizeText("newsletter")}
                         </a>
                       </li>
                     )}
-                    <li>
-                      <button className='btn btn--accent'>
-                        Newsletter (wip)
-                      </button>
-                    </li>
+
                     {settings.navSocial?.map((item) => (
                       <li key={item.label}>
                         {/* <pre>{JSON.stringify(item, null, 2)}</pre> */}

@@ -104,6 +104,7 @@ export default defineType({
         },
       ],
       group: 'footer',
+      hidden: true,
     }),
     defineField({
       name: 'navQuaternary',
@@ -118,6 +119,7 @@ export default defineType({
         },
       ],
       group: 'footer',
+      hidden: true,
     }),
     defineField({
       name: 'navLegals',
@@ -157,12 +159,14 @@ export default defineType({
       title: 'Description du site',
       type: 'localeBlockContent',
       group: 'footer',
+      hidden: true,
     }),
     defineField({
       name: 'baseline',
       title: 'Baseline',
       type: 'localeBlockContent',
       group: 'footer',
+      hidden: true,
     }),
     defineField({
       name: 'contact',
@@ -175,12 +179,14 @@ export default defineType({
       title: 'Label newsletter',
       type: 'localeString',
       group: 'footer',
+      hidden: true,
     }),
     defineField({
       name: 'msgNewsletter',
       title: 'Message newsletter',
       type: 'localeText',
       group: 'footer',
+      hidden: true,
     }),
     defineField({
       name: 'messageCookies',

@@ -4,6 +4,12 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import linkInternalTypes from '../misc/linkInternalTypes'
 // import linkInternalTypes from '../misc/linkInternalTypes'
 
+// linkInternal is embedded all over the site (CTAs, block content, sidebars...),
+// but these fields only make sense for the settings header nav (navPrimary, btnLibrary).
+const headerNavFields = ['navPrimary', 'btnLibrary']
+const isSettingsHeaderNav = (document?: Record<string, unknown>, path?: readonly unknown[]) =>
+  document?._type === 'settings' && headerNavFields.includes(path?.[0] as string)
+
 export default defineField({
   title: 'Lien interne',
   name: 'linkInternal',
@@ -43,21 +49,19 @@ export default defineField({
       name: 'imageCover',
       title: 'Image clef',
       type: 'image',
-      hidden: ({document}) => document?._type !== 'settings',
+      hidden: ({document, path}) => !isSettingsHeaderNav(document, path),
     }),
     defineField({
       name: 'withSubmenuImages',
       title: 'Avec les images clef des sous menu',
       type: 'boolean',
-      hidden: ({document}) => document?._type !== 'settings',
+      hidden: ({document, path}) => !isSettingsHeaderNav(document, path),
     }),
     defineField({
       name: 'withSubmenu',
       type: 'boolean',
       title: 'Avec sous menu',
-      // linkInternal is embedded all over the site (CTAs, block content, sidebars...),
-      // but submenus only make sense in the settings page's nav fields.
-      hidden: ({document}) => document?._type !== 'settings',
+      hidden: ({document, path}) => !isSettingsHeaderNav(document, path),
     }),
     defineField({
       name: 'subMenu',
@@ -71,13 +75,13 @@ export default defineField({
           type: 'linkExternal',
         },
       ],
-      hidden: ({document, parent}) => document?._type !== 'settings' || !parent?.withSubmenu,
+      hidden: ({document, path, parent}) => !isSettingsHeaderNav(document, path) || !parent?.withSubmenu,
     }),
     defineField({
       name: 'withMessage',
       type: 'boolean',
       title: 'Avec message',
-      hidden: ({document}) => document?._type !== 'settings',
+      hidden: ({document, path}) => !isSettingsHeaderNav(document, path),
     }),
     defineField({
       name: 'navMessage',

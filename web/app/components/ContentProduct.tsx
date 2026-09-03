@@ -63,7 +63,7 @@ const ContentProduct = ({ input }: Props) => {
   //   4,
   // );
 
-  const isLowStock = totalInventory && totalInventory < 10;
+  // const isLowStock = totalInventory && totalInventory < 10;
   const isOutOfStock = totalInventory === 0;
   return (
     <div className='content content--product'>
