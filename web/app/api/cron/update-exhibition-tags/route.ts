@@ -185,11 +185,12 @@ export async function GET(request: Request) {
 
       const lastEnd = allEnds.sort().reverse()[0];
 
-      // "current"/"upcoming" (and their pastilles/countdown) only care about the Foundation's own
-      // dates — a touring/hors-les-murs leg shouldn't make an exhibition look "upcoming" once its
-      // Foundation run is over, or drive the countdown off a leg that isn't at the Foundation. Same
-      // rule as IN_SITE_DATE in web/app/sanity-api/fragments-rebonds.ts. "past" stays location-agnostic:
-      // whether the whole exhibition's run has ended doesn't depend on where any one leg took place.
+      // "current" (and its pastille) only cares about the Foundation's own dates — a touring/
+      // hors-les-murs leg shouldn't make an exhibition look "current" once its Foundation run is
+      // over. "past" stays location-agnostic: whether the whole exhibition's run has ended doesn't
+      // depend on where any one leg took place. "upcoming" is also location-agnostic: a future
+      // touring/hors-les-murs leg counts even after the Foundation run has ended, so the exhibition
+      // keeps surfacing in upcoming lists until its last leg (anywhere) is done.
       const inSiteDates = exhibition.dates.filter((d) =>
         isInSiteLocationType(d.locationType),
       );
@@ -208,11 +209,11 @@ export async function GET(request: Request) {
       );
       const isPast = lastEnd < nowDate;
 
-      const inSiteUpcomingStarts = inSiteDates
+      const upcomingStarts = exhibition.dates
         .filter((d) => d.du && d.du > nowDate)
         .map((d) => d.du as string)
         .sort();
-      const isUpcoming = inSiteUpcomingStarts.length > 0;
+      const isUpcoming = upcomingStarts.length > 0;
 
       // Compute pastille and countdown based on exhibition status
       const todayMs = new Date().setHours(0, 0, 0, 0);
@@ -235,9 +236,9 @@ export async function GET(request: Request) {
               : { fr: `J-${daysUntilEnd}`, en: `J-${daysUntilEnd}` };
         }
       } else if (isUpcoming) {
-        const nextInSiteStart = inSiteUpcomingStarts[0];
+        const nextStart = upcomingStarts[0];
         const daysUntilStart = Math.ceil(
-          (new Date(nextInSiteStart).setHours(0, 0, 0, 0) - todayMs) / 86400000,
+          (new Date(nextStart).setHours(0, 0, 0, 0) - todayMs) / 86400000,
         );
         if (daysUntilStart <= 30) {
           countdown = daysUntilStart;

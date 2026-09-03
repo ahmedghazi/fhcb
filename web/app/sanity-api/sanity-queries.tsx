@@ -362,6 +362,37 @@ export async function getAllPagesModulaire(): Promise<any[]> {
   });
 }
 
+const SITEMAP_CONTENT_TYPES = [
+  "exhibition",
+  "event",
+  "programme",
+  "artist",
+  "imageImages",
+  "feuilletage",
+  "serieThematique",
+  "conversation",
+  "article",
+  "product",
+  "library",
+];
+
+export const ALL_CONTENT_SITEMAP_QUERY = groq`*[
+  _type in ${JSON.stringify(SITEMAP_CONTENT_TYPES)}
+  && defined(slug.current)
+  && !(_id in path("drafts.**"))
+]{
+  _type,
+  slug,
+  _updatedAt
+}`;
+
+export async function getAllContentForSitemap(): Promise<any[]> {
+  return sanityFetch({
+    query: ALL_CONTENT_SITEMAP_QUERY,
+    tags: [...SITEMAP_CONTENT_TYPES],
+  });
+}
+
 /*****************************************************************************************************
  * IMAGE_IMAGES_QUERY
  */

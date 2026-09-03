@@ -302,7 +302,8 @@ export const newsCardUI = `
       select(
         count(dates[locationType == "inSite-cube"]) > 0 => 0,
         count(dates[locationType == "inSite-tube"]) > 0 => 1,
-        2
+        count(dates[locationType == "travelling"]) > 0 => 2,
+        count(dates[locationType == "offSite"]) > 0 => 3
       ) asc,
       dates[0].du asc
     )

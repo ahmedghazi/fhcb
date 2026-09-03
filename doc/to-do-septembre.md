@@ -1,3 +1,3 @@
-- home actu manque expo les européens
-- ordre des feuilletages (random)
+- # home actu manque expo les européens
+- # ordre des feuilletages (random)
 - # seo riche sur video : https://fhcb-preprod.vercel.app/image-images/gold-rush-de-shanghai-1948-de-henri-cartier-bresson
