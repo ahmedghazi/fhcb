@@ -1,4 +1,4 @@
 - # home actu manque expo les européens (fait 2026-09-03 : tag exposition-a-venir ajouté, logique cron update-exhibition-tags corrigée pour compter les dates hors-site à venir)
 - # ordre des feuilletages (random)
 - # seo riche sur video : https://fhcb-preprod.vercel.app/image-images/gold-rush-de-shanghai-1948-de-henri-cartier-bresson
-- # perf mobile PageSpeed (53/100) : TBT 870ms, 228 Kio JS inutilisé — lazy-load du mux player fait (2026-09-03), reste : cache headers images (14 Kio), taille/format images (125 Kio), JS legacy (12 Kio)
+- # perf mobile PageSpeed (53→65/100) : TBT 870ms→320ms — lazy-load du mux player fait (2026-09-03) + aspect-ratio réservé sur .mux-player-container (corrige un léger CLS 0→0.005 introduit par le lazy-load). Reste : cache headers images (14 Kio), taille/format images (125-277 Kio), JS legacy (12 Kio)

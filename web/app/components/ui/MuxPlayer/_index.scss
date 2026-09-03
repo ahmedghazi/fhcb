@@ -1,5 +1,6 @@
 .mux-player-container {
   position: relative;
+  aspect-ratio: 16 / 9;
   mux-player {
     // height: calc(100dvh - var(--header-h));
     /* Hide all controls at once */
