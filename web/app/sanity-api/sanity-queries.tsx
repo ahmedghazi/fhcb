@@ -378,14 +378,15 @@ export const IMAGE_IMAGES_QUERY = groq`*[_type == "imageImages" && slug.current 
   modules[]{
     ${modules}
   },
-  rebonds[]->{
-    ${cardRefImageImages}
-  },
+
   "related": ${relatedRessourcesByArtists},
   rebondsAuto[]->{
     ${rebondsResolver}
   }
 }`;
+// rebonds[]->{
+//   ${cardRefImageImages}
+// },
 
 export async function getImageImages(
   slug: string,

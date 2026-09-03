@@ -20,6 +20,8 @@ import CardImageImages from "@/app/components/ui/cards/CardImageImages";
 import RelatedImageImages from "@/app/components/RebondsImageImages";
 import { ImageImagesExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import EmbedVideo from "@/app/components/ui/EmbedVideo";
+import VideoJsonLd from "@/app/components/ui/VideoJsonLd";
+import { getYouTubeNoCookieUrl, getYouTubeThumbnails } from "@/app/lib/utils";
 import Rebonds from "@/app/components/Rebonds";
 
 type Params = Promise<{ slug: string }>;
@@ -71,6 +73,17 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       <div className='container-fluid'>
         {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
       </div>
+      {data.video?.embedUrl && (
+        <VideoJsonLd
+          name={`Une image, des images #${data.index} — ${_localizeField(data.title)}`}
+          description={data.seo?.metaDescription}
+          thumbnailUrl={getYouTubeThumbnails(data.video.embedUrl)}
+          uploadDate={data._createdAt}
+          embedUrl={
+            getYouTubeNoCookieUrl(data.video.embedUrl) || data.video.embedUrl
+          }
+        />
+      )}
       <ContentModulaire input={data} />
       {/* {data.rebonds && (
         <RelatedImageImages

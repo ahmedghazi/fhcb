@@ -21,6 +21,8 @@ import { FEUILLETAGE_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
 // import Related from "@/app/components/Rebonds";
 import Rebonds from "@/app/components/Rebonds";
 import EmbedVideo from "@/app/components/ui/EmbedVideo";
+import VideoJsonLd from "@/app/components/ui/VideoJsonLd";
+import { getYouTubeNoCookieUrl, getYouTubeThumbnails } from "@/app/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -71,6 +73,17 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       <div className='container-fluid'>
         {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
       </div>
+      {data.video?.embedUrl && (
+        <VideoJsonLd
+          name={`FEUILLETAGE #${data.index} — ${_localizeField(data.title)}`}
+          description={data.seo?.metaDescription}
+          thumbnailUrl={getYouTubeThumbnails(data.video.embedUrl)}
+          uploadDate={data._createdAt}
+          embedUrl={
+            getYouTubeNoCookieUrl(data.video.embedUrl) || data.video.embedUrl
+          }
+        />
+      )}
       <ContentModulaire input={data} />
       {/* {/* {data.related && <Rebonds input={data.related} />} */}
       {data.rebonds && <Rebonds input={data.rebonds} />}
