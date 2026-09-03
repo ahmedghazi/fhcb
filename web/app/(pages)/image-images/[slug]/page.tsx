@@ -75,7 +75,7 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       </div>
       {data.video?.embedUrl && (
         <VideoJsonLd
-          name={`Une image, des images #${data.index} — ${_localizeField(data.title)}`}
+          name={`Une image, des images #${data.index} — ${data.title?.fr}`}
           description={data.seo?.metaDescription}
           thumbnailUrl={getYouTubeThumbnails(data.video.embedUrl)}
           uploadDate={data._createdAt}

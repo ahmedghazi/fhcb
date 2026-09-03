@@ -75,7 +75,7 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       </div>
       {data.video?.embedUrl && (
         <VideoJsonLd
-          name={`FEUILLETAGE #${data.index} — ${_localizeField(data.title)}`}
+          name={`FEUILLETAGE #${data.index} — ${data.title?.fr}`}
           description={data.seo?.metaDescription}
           thumbnailUrl={getYouTubeThumbnails(data.video.embedUrl)}
           uploadDate={data._createdAt}

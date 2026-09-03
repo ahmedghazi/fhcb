@@ -69,7 +69,7 @@ const SerieThematiqueTemplate: NextPage<PageProps> = async ({ params }) => {
       </div>
       {data.video?.embedUrl && (
         <VideoJsonLd
-          name={_localizeField(data.title)}
+          name={data.title?.fr}
           description={data.seo?.metaDescription}
           thumbnailUrl={getYouTubeThumbnails(data.video.embedUrl)}
           uploadDate={data._createdAt}
