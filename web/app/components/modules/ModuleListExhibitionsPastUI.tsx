@@ -13,8 +13,6 @@ import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
 import LoadMoreButton from "../ui/LoadMoreButton";
-import GridMasonryDessandro from "../ui/GridMasonryDessandro";
-import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 import { GridMasonryColumns } from "../ui/GridMasonryColumns";
 
 type Props = {
@@ -28,7 +26,6 @@ const ModuleListExhibitionsPastUI = ({ input }: Props) => {
   const { locale } = useLocale();
   const { activeFilters, visibleCount, handleFilterChange, loadMore } =
     usePaginatedFilters();
-  const { isMobile } = useDeviceDetect();
   const filterDefs = withResolvedOptions(
     input.filters ?? [],
     input.resolvedItems ?? [],

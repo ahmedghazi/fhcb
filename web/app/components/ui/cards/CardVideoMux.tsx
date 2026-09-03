@@ -1,7 +1,13 @@
+"use client";
 import { CSSProperties, forwardRef, memo } from "react";
+import dynamic from "next/dynamic";
 import { MuxVideo } from "@/app/sanity-api/types/sanity.types";
-import MuxVideoPlayer from "../MuxPlayer";
 import BtnCta from "../btns/BtnCta";
+
+// Code-split the mux-player-react bundle (custom elements + Hls.js) out of
+// the initial page chunk — this card isn't the LCP element, so there's no
+// reason its player library needs to parse/execute during first hydration.
+const MuxVideoPlayer = dynamic(() => import("../MuxPlayer"), { ssr: false });
 
 type Props = {
   input: MuxVideo | any;
