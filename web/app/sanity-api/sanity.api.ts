@@ -14,4 +14,4 @@ export const token = process.env.SANITY_API_READ_TOKEN!;
 
 export const studioUrl: string =
   process.env.NEXT_PUBLIC_SANITY_STUDIO_URL! ||
-  "https://backoffice-fhcb.sanity.studio";
+  "https://backoffice--fhcb.sanity.studio";

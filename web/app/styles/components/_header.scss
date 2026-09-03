@@ -173,7 +173,7 @@ body.nav-open {
         color: var(--color-secondary);
       }
     }
-    @media all and (max-width: variables.$md) {
+    @media all and (max-width: variables.$md) and (hover: hover) {
       .header--mobile {
         button.btn:hover,
         button.btn:active {

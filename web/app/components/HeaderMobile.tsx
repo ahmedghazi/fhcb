@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import Icon from "./ui/Icon";
 import website from "../config/website";
+import useHeader from "../context/HeaderContext";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -19,6 +20,8 @@ type Props = {
 const HeaderMobile = ({ settings }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const pathname = usePathname();
+  const { modalType } = useHeader();
+
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -26,6 +29,12 @@ const HeaderMobile = ({ settings }: Props) => {
   useEffect(() => {
     document.body.classList.toggle("nav-open", open);
   }, [open]);
+
+  // closing another modal (e.g. search, opened from within the hamburger
+  // nav) resets modalType to null - close the hamburger nav along with it
+  useEffect(() => {
+    if (modalType === null) setOpen(false);
+  }, [modalType]);
 
   const closeLabel = _localizeText("close");
   const ticketsLabel = _localizeField(settings?.btnTickets?.label);
