@@ -8,6 +8,9 @@
     border-bottom: var(--border);
     padding-bottom: 1rem;
     margin-bottom: 1rem;
+    &:last-child {
+      margin: 0;
+    }
     li {
       margin-bottom: 1rem;
       &:last-child {

@@ -59,7 +59,10 @@ export const _localizeText = (text: string) => {
 // Shopify-synced list fields are stored as a JSON-stringified array, and can
 // pack multiple comma-separated values into a single array element (with a
 // trailing ", ") instead of one value per element — split and trim both levels.
-export const _parseJsonStringArray = (value: string | undefined | null, separator = ", "): string => {
+export const _parseJsonStringArray = (
+  value: string | undefined | null,
+  separator = ", ",
+): string => {
   if (!value) return "";
   try {
     const parsed = JSON.parse(value);
@@ -86,68 +89,91 @@ type RebondCard = {
   dates?: FhcbDate[] | null;
 };
 
-const REBOND_RESSOURCES_TYPES = ["imageImages", "feuilletage", "serieThematique", "conversation"];
+const REBOND_RESSOURCES_TYPES = [
+  "imageImages",
+  "feuilletage",
+  "serieThematique",
+  "conversation",
+];
 
 // Keep in sync with fragments-rebonds.ts (rebondsResolver): whether a resolved card could have been
 // produced by a given `rebond.items` scenario. Needed (not just a _type check) because several
 // scenarios targeting the same _type are mutually exclusive by date — e.g. "exhibition-current" vs
 // "exhibition-futur" — and rebondsResolver's GROQ concatenates all exhibition scenarios into one
 // date-sorted array, so a plain type-based group can't tell an editor's "current" pick from "futur".
-const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> = {
-  artist: (item) => item._type === "artist",
-  "artist-related": (item) => item._type === "artist",
-  "book-related": (item) => item._type === "product",
-  "exhibition-related": (item) => item._type === "exhibition",
-  "exhibition-related-by-artist": (item) => item._type === "exhibition",
-  "exhibition-related-current-or-futur": (item) =>
-    item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
-  "exhibition-related-past": (item) =>
-    item._type === "exhibition" && _isPastByDates(item.dates || []),
-  "exhibition-futur": (item) =>
-    item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
-  "exhibition-current": (item) =>
-    item._type === "exhibition" && _isCurrentByDates(item.dates || []),
-  "exhibition-current-or-futur": (item) =>
-    item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
-  "exhibition-past": (item) =>
-    item._type === "exhibition" && _isPastByDates(item.dates || []),
-  "exhibition-discover-past": (item) =>
-    item._type === "exhibition" && _isPastByDates(item.dates || []),
-  "exhibition-discover-current-or-futur": (item) =>
-    item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
-  "event-related-current-or-futur": (item) =>
-    item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),
-  "event-futur": (item) => item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),
-  "articles-related": (item) => item._type === "article",
-  "ressources-related": (item) =>
-    !!item._type && REBOND_RESSOURCES_TYPES.includes(item._type),
-  // tags-related fires across every candidate type that has a `tags` field (see rebondExhibitions /
-  // rebondEvents / rebondArticles / rebondRessources in fragments-rebonds.ts) — there's no per-card
-  // signal here for *why* a card matched, so this is a best-effort type check like the other
-  // "-related" matchers above, not a true tag-overlap check.
-  "tags-related": (item) =>
-    !!item._type &&
-    ["exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
-  // prize-related fires across every candidate type that carries a `prix` field (artist, exhibition,
-  // article — see rebondArtistRelated / rebondExhibitions / rebondArticles in fragments-rebonds.ts),
-  // same best-effort caveat as tags-related above.
-  "prize-related": (item) => !!item._type && ["artist", "exhibition", "article"].includes(item._type),
-  // docs-hcb-related / docs-mf-related fire across every candidate type-shape (product, exhibition,
-  // event, article, ressources — see rebondBooks / rebondExhibitions / rebondEvents / rebondArticles /
-  // rebondRessources in fragments-rebonds.ts), same best-effort caveat as tags-related above.
-  "docs-hcb-related": (item) =>
-    !!item._type &&
-    ["product", "exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
-  "docs-mf-related": (item) =>
-    !!item._type &&
-    ["product", "exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(item._type),
-  "page-branche-ressources": (item) => item._type === "pageModulaire",
-  // product-related fires across every candidate type-shape pulled through the host's own linked
-  // `product` (artist, exhibition, event, and the product itself — see rebondArtistSelf / rebondBooks /
-  // rebondExhibitions / rebondEvents in fragments-rebonds.ts), same best-effort caveat as tags-related above.
-  "product-related": (item) =>
-    !!item._type && ["artist", "product", "exhibition", "event"].includes(item._type),
-};
+const REBOND_SCENARIO_MATCHERS: Record<string, (item: RebondCard) => boolean> =
+  {
+    artist: (item) => item._type === "artist",
+    "artist-related": (item) => item._type === "artist",
+    "book-related": (item) => item._type === "product",
+    "exhibition-related": (item) => item._type === "exhibition",
+    "exhibition-related-by-artist": (item) => item._type === "exhibition",
+    "exhibition-related-current-or-futur": (item) =>
+      item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
+    "exhibition-related-past": (item) =>
+      item._type === "exhibition" && _isPastByDates(item.dates || []),
+    "exhibition-futur": (item) =>
+      item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
+    "exhibition-current": (item) =>
+      item._type === "exhibition" && _isCurrentByDates(item.dates || []),
+    "exhibition-current-or-futur": (item) =>
+      item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
+    "exhibition-past": (item) =>
+      item._type === "exhibition" && _isPastByDates(item.dates || []),
+    "exhibition-discover-past": (item) =>
+      item._type === "exhibition" && _isPastByDates(item.dates || []),
+    "exhibition-discover-current-or-futur": (item) =>
+      item._type === "exhibition" && _isCurrentOrFuturByDates(item.dates || []),
+    "event-related-current-or-futur": (item) =>
+      item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),
+    "event-futur": (item) =>
+      item._type === "event" && _isCurrentOrFuturByDates(item.dates || []),
+    "articles-related": (item) => item._type === "article",
+    "ressources-related": (item) =>
+      !!item._type && REBOND_RESSOURCES_TYPES.includes(item._type),
+    // tags-related fires across every candidate type that has a `tags` field (see rebondExhibitions /
+    // rebondEvents / rebondArticles / rebondRessources in fragments-rebonds.ts) — there's no per-card
+    // signal here for *why* a card matched, so this is a best-effort type check like the other
+    // "-related" matchers above, not a true tag-overlap check.
+    "tags-related": (item) =>
+      !!item._type &&
+      ["exhibition", "event", "article", ...REBOND_RESSOURCES_TYPES].includes(
+        item._type,
+      ),
+    // prize-related fires across every candidate type that carries a `prix` field (artist, exhibition,
+    // article — see rebondArtistRelated / rebondExhibitions / rebondArticles in fragments-rebonds.ts),
+    // same best-effort caveat as tags-related above.
+    "prize-related": (item) =>
+      !!item._type && ["artist", "exhibition", "article"].includes(item._type),
+    // docs-hcb-related / docs-mf-related fire across every candidate type-shape (product, exhibition,
+    // event, article, ressources — see rebondBooks / rebondExhibitions / rebondEvents / rebondArticles /
+    // rebondRessources in fragments-rebonds.ts), same best-effort caveat as tags-related above.
+    "docs-hcb-related": (item) =>
+      !!item._type &&
+      [
+        "product",
+        "exhibition",
+        "event",
+        "article",
+        ...REBOND_RESSOURCES_TYPES,
+      ].includes(item._type),
+    "docs-mf-related": (item) =>
+      !!item._type &&
+      [
+        "product",
+        "exhibition",
+        "event",
+        "article",
+        ...REBOND_RESSOURCES_TYPES,
+      ].includes(item._type),
+    "page-branche-ressources": (item) => item._type === "pageModulaire",
+    // product-related fires across every candidate type-shape pulled through the host's own linked
+    // `product` (artist, exhibition, event, and the product itself — see rebondArtistSelf / rebondBooks /
+    // rebondExhibitions / rebondEvents in fragments-rebonds.ts), same best-effort caveat as tags-related above.
+    "product-related": (item) =>
+      !!item._type &&
+      ["artist", "product", "exhibition", "event"].includes(item._type),
+  };
 
 // rebondsResolver's GROQ concatenates resolvedItems grouped by document type in a fixed order
 // (artist, book, exhibition, event, article, ressources) — this re-sorts to match the order the
@@ -160,7 +186,9 @@ export const _orderRebondsByItems = <T extends RebondCard>(
 ): T[] | null | undefined => {
   if (!items || !resolvedItems) return resolvedItems;
   const rankOf = (item: T) => {
-    const index = items.findIndex((scenario) => REBOND_SCENARIO_MATCHERS[scenario]?.(item));
+    const index = items.findIndex((scenario) =>
+      REBOND_SCENARIO_MATCHERS[scenario]?.(item),
+    );
     return index === -1 ? items.length : index;
   };
   return resolvedItems
