@@ -7,6 +7,7 @@ import useLocale from "@/app/context/LocaleContext";
 import { GridCardUI } from "@/app/sanity-api/types/sanity.types";
 import { PostTypes } from "@/app/sanity-api/types/extra-types";
 import CardType from "../ui/cards/CardType";
+import BtnCta from "../ui/btns/BtnCta";
 
 type Props = {
   input: GridCardUI | any;
@@ -34,9 +35,10 @@ const ModuleGridCardUI = ({ input }: Props) => {
           {cta && (
             <div className='footer'>
               {cta.internal && (
-                <Link className='btn' href={_linkResolver(cta.internal.link)}>
-                  {_localizeField(cta.internal.label)}
-                </Link>
+                // <Link className='btn' href={_linkResolver(cta.internal.link)}>
+                //   {_localizeField(cta.internal.label)}
+                // </Link>
+                <BtnCta input={cta.internal} />
               )}
             </div>
           )}

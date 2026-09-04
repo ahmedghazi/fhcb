@@ -17,6 +17,7 @@ import CardSerieThematique from "../ui/cards/CardSerieThematique";
 import CardType from "../ui/cards/CardType";
 import CardConversation from "../ui/cards/CardConversation";
 import Link from "next/link";
+import BtnCta from "../ui/btns/BtnCta";
 
 type Props = {
   input: RessourcesUI & {
@@ -84,9 +85,10 @@ const ModuleRessourcesUI = ({ input }: Props) => {
           {cta && (
             <div className='footer pt-md'>
               {cta.internal && (
-                <Link className='btn' href={_linkResolver(cta.internal.link)}>
-                  {_localizeField(cta.internal.label)}
-                </Link>
+                // <Link className='btn' href={_linkResolver(cta.internal.link)}>
+                //   {_localizeField(cta.internal.label)}
+                // </Link>
+                <BtnCta input={cta.internal} />
               )}
             </div>
           )}

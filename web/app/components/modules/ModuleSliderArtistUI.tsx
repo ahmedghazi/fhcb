@@ -11,6 +11,7 @@ import { Link } from "next-view-transitions";
 import CardSerieThematique from "../ui/cards/CardSerieThematique";
 import CardConversation from "../ui/cards/CardConversation";
 import CardType from "../ui/cards/CardType";
+import BtnCta from "../ui/btns/BtnCta";
 
 type Props = {
   input: SliderArtistUI | any;
@@ -55,9 +56,10 @@ const ModuleSliderArtistUI = ({ input, limit = 10 }: Props) => {
         {cta && (
           <div className='footer'>
             {cta.internal && (
-              <Link className='btn' href={_linkResolver(cta.internal.link)}>
-                {_localizeField(cta.internal.label)}
-              </Link>
+              // <Link className='btn' href={_linkResolver(cta.internal.link)}>
+              //   {_localizeField(cta.internal.label)}
+              // </Link>
+              <BtnCta input={cta.internal} />
             )}
           </div>
         )}

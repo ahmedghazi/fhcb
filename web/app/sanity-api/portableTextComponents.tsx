@@ -5,6 +5,8 @@ import Figure from "../components/ui/Figure";
 import Embed from "../components/ui/Embed";
 import { KeyVal } from "./types/sanity.types";
 import EmbedVideo from "../components/ui/EmbedVideo";
+import BtnCta from "../components/ui/btns/BtnCta";
+import BtnCtaExternal from "../components/ui/btns/BtnCtaExternal";
 
 const portableTextComponents: PortableTextComponents = {
   block: {
@@ -28,20 +30,22 @@ const portableTextComponents: PortableTextComponents = {
       return (
         <div className={`text-${align} `}>
           {value.internal && (
-            <Link
-              className='btn btn--cta'
-              href={_linkResolver(value.internal.link)}>
-              {_localizeField(value.internal.label)}
-            </Link>
+            // <Link
+            //   className='btn btn--cta'
+            //   href={_linkResolver(value.internal.link)}>
+            //   {_localizeField(value.internal.label)}
+            // </Link>
+            <BtnCta input={value.internal} />
           )}
           {value.external && (
-            <a
-              className='btn btn--cta'
-              href={value.external.link}
-              target='_blank'
-              rel='noopener noreferrer'>
-              {_localizeField(value.external.label)}
-            </a>
+            // <a
+            //   className='btn btn--cta'
+            //   href={value.external.link}
+            //   target='_blank'
+            //   rel='noopener noreferrer'>
+            //   {_localizeField(value.external.label)}
+            // </a>
+            <BtnCtaExternal input={value.external} className='btn--cta' />
           )}
         </div>
       );

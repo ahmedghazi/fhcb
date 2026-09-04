@@ -6,6 +6,7 @@ import { PostTypes } from "@/app/sanity-api/types/extra-types";
 import SlickSlider from "../ui/SlickSlider";
 import { Link } from "next-view-transitions";
 import CardType from "../ui/cards/CardType";
+import BtnCta from "../ui/btns/BtnCta";
 
 type Props = {
   input: SliderCardUI | any;
@@ -54,9 +55,10 @@ const ModuleSliderCardUI = ({ input }: Props) => {
         {cta && (
           <div className='footer'>
             {cta.internal && (
-              <Link className='btn' href={_linkResolver(cta.internal.link)}>
-                {_localizeField(cta.internal.label)}
-              </Link>
+              // <Link className='btn' href={_linkResolver(cta.internal.link)}>
+              //   {_localizeField(cta.internal.label)}
+              // </Link>
+              <BtnCta input={cta.internal} />
             )}
           </div>
         )}
