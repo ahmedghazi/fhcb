@@ -12,7 +12,7 @@ import { PortableText } from "@portabletext/react";
 import website from "../config/website";
 import Image from "next/image";
 import { useConsent } from "react-hook-consent";
-import BtnCta from "./ui/btns/BtnCta";
+import BtnCtaExternal from "./ui/btns/BtnCtaExternal";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -113,33 +113,28 @@ const Footer = ({ settings }: Props) => {
                   <ul className='nav-actions flex gap-2xs items-center'>
                     {settings.urlSupport && (
                       <li>
-                        <a
-                          className='btn btn--accent'
-                          href={settings.urlSupport?.link}
-                          target='_blank'
-                          rel='noopener noreferrer'>
-                          {_localizeField(settings.urlSupport?.label) ||
-                            _localizeText("nousSoutenir")}
-                        </a>
+                        <BtnCtaExternal
+                          input={settings.urlSupport}
+                          accent
+                        />
                       </li>
                     )}
                     {settings.urlNewsletter && (
                       <li>
-                        <a
-                          className='btn btn--accent'
-                          href={settings.urlNewsletter?.link}
-                          target='_blank'
-                          rel='noopener noreferrer'>
-                          {_localizeField(settings.urlNewsletter?.label) ||
-                            _localizeText("newsletter")}
-                        </a>
+                        <BtnCtaExternal
+                          input={settings.urlNewsletter}
+                          accent
+                        />
                       </li>
                     )}
 
                     {settings.navSocial?.map((item) => (
                       <li key={item.label}>
                         {/* <pre>{JSON.stringify(item, null, 2)}</pre> */}
-                        <a target='_blank' href={item.link}>
+                        <a
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          href={item.link}>
                           {item.icon?.asset?.url && (
                             <Image
                               src={item.icon.asset.url}

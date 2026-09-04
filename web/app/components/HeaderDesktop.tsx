@@ -8,6 +8,7 @@ import SearchToggle from "./ui/SearchToggle";
 import { _linkResolver, _localizeField } from "../sanity-api/utils";
 import BtnCart from "./shop/BtnCart";
 import website from "../config/website";
+import BtnCtaExternal from "./ui/btns/BtnCtaExternal";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -49,6 +50,10 @@ const HeaderDesktop = ({ settings }: Props) => {
                     className='btn-tickets'>
                     {_localizeField(settings.btnTickets.label)}
                   </a>
+                  {/* <BtnCtaExternal
+                    input={settings.btnTickets}
+                    className='btn-tickets'
+                  /> */}
                 </li>
               )}
             </ul>

@@ -12,6 +12,7 @@ import {
 } from "../lib/utils";
 import CardTags from "./ui/cards/CardTags";
 import { usePageContext } from "../context/PageContext";
+import BtnCtaExternal from "./ui/btns/BtnCtaExternal";
 
 type Props = {
   input: ExhibitionExpanded;
@@ -60,28 +61,6 @@ const HeroExhibition = ({ input }: Props) => {
                 {_localizeField(title)}
               </div>
             </div>
-
-            {/* <div className='bottom'>
-              {dates && (
-                <div className='hero__info'>
-                  <FHCBDates input={dates} />
-                </div>
-              )}
-              {!isPast && links && (
-                <div className='pt-sm'>
-                  {links?.map((item, i: number) => (
-                    <a
-                      key={i}
-                      className='btn '
-                      href={item.link}
-                      target='_blank'
-                      rel='noopener noreferrer'>
-                      {_localizeField(item.label)}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div> */}
           </div>
           <div className='hero__footer'>
             {dates && (
@@ -92,14 +71,15 @@ const HeroExhibition = ({ input }: Props) => {
             {!isPast && links && (
               <div className='pt-sm-'>
                 {links?.map((item, i: number) => (
-                  <a
-                    key={i}
-                    className='btn '
-                    href={item.link}
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    {_localizeField(item.label)}
-                  </a>
+                  // <a
+                  //   key={i}
+                  //   className='btn '
+                  //   href={item.link}
+                  //   target='_blank'
+                  //   rel='noopener noreferrer'>
+                  //   {_localizeField(item.label)}
+                  // </a>
+                  <BtnCtaExternal key={i} input={item} />
                 ))}
               </div>
             )}

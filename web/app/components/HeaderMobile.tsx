@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import Icon from "./ui/Icon";
 import website from "../config/website";
 import useHeader from "../context/HeaderContext";
+import BtnCtaExternal from "./ui/btns/BtnCtaExternal";
 
 type Props = {
   settings: SETTINGS_QUERY_RESULT;
@@ -57,6 +58,10 @@ const HeaderMobile = ({ settings }: Props) => {
                 className='btn-tickets'>
                 {ticketsLabel}
               </a>
+              {/* <BtnCtaExternal
+                input={settings.btnTickets}
+                className='btn-tickets'
+              /> */}
             </li>
           )}
           <li className='flex '>

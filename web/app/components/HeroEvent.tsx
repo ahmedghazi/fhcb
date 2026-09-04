@@ -13,6 +13,7 @@ import {
   artistsToString,
 } from "../lib/utils";
 import CardTags from "./ui/cards/CardTags";
+import BtnCtaExternal from "./ui/btns/BtnCtaExternal";
 
 type Props = {
   input: EventExpanded;
@@ -72,14 +73,15 @@ const HeroEvent = ({ input }: Props) => {
             {!isPast && (
               <div className='pt-sm'>
                 {links?.map((item, i: number) => (
-                  <a
-                    key={i}
-                    className='btn '
-                    href={item.link}
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    {_localizeField(item.label)}
-                  </a>
+                  // <a
+                  //   key={i}
+                  //   className='btn '
+                  //   href={item.link}
+                  //   target='_blank'
+                  //   rel='noopener noreferrer'>
+                  //   {_localizeField(item.label)}
+                  // </a>
+                  <BtnCtaExternal key={i} input={item} />
                 ))}
               </div>
             )}
