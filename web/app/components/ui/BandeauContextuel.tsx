@@ -21,9 +21,12 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
     if (!dateExpiration) return;
     const endDate = new Date(dateExpiration);
     const now = new Date();
+    // console.log(now, endDate);
     setOpen(now < endDate);
     // setOpen(true);
   }, []);
+
+  // console.log({ open });
 
   useEffect(() => {
     document.body.classList.toggle("has-bandeau", open);
@@ -50,7 +53,6 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
           aria-label='Fermer le bandeau'
           className='underline btn-close'
           onClick={() => setOpen(false)}>
-          {/* {localizedClose} */}
           <Icon name='close' />
         </button>
       </div>

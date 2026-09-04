@@ -7538,7 +7538,7 @@
               "type": "objectAttribute",
               "value": {
                 "type": "inline",
-                "name": "localeString"
+                "name": "localeText"
               },
               "optional": true
             },

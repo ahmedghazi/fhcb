@@ -377,7 +377,7 @@ const SITEMAP_CONTENT_TYPES = [
 ];
 
 export const ALL_CONTENT_SITEMAP_QUERY = groq`*[
-  _type in ${JSON.stringify(SITEMAP_CONTENT_TYPES)}
+  _type in ["exhibition", "event", "programme", "artist", "imageImages", "feuilletage", "serieThematique", "conversation", "article", "product", "library"]
   && defined(slug.current)
   && !(_id in path("drafts.**"))
 ]{

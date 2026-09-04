@@ -16,6 +16,9 @@
     max-width: 52rem;
     margin: 0 auto;
   }
+  p {
+    white-space: pre;
+  }
   .footer {
     display: flex;
     flex-direction: column;

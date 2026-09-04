@@ -239,7 +239,7 @@ export default defineType({
         defineField({
           name: 'text',
           title: 'Texte',
-          type: 'localeString',
+          type: 'localeText',
         }),
         defineField({
           name: 'cta',
