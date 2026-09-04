@@ -76,6 +76,7 @@ export default defineType({
     defineField({
       name: 'prix',
       title: 'Prix',
+      description: "Si l'artiste est lauréat d'un Prix ou bourse de la Fondation",
       type: 'array',
       of: [{type: 'reference', to: [{type: 'prix'}]}],
       group: 'editorial',
@@ -83,6 +84,7 @@ export default defineType({
 
     defineField({
       name: 'text',
+      title: 'Biographie',
       type: 'localeBlockContent',
       group: 'editorial',
     }),

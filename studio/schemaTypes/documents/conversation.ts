@@ -5,11 +5,12 @@ import {TbMessageCircle} from 'react-icons/tb'
 import modulesList from '../objects/modules/modulesList'
 import linkInternalTypes from '../misc/linkInternalTypes'
 import rebondsAutoField from '../misc/rebondsAutoField'
+import modulesListConversationParoles from '../objects/modules/modulesListConversationParoles'
 
 export default defineType({
   type: 'document',
   name: 'conversation',
-  title: 'Conversation',
+  title: 'Paroles (Conversation)',
   icon: TbMessageCircle,
   groups: [
     {
@@ -56,6 +57,7 @@ export default defineType({
       title: 'Texte',
       type: 'localeBlockContent',
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -64,6 +66,7 @@ export default defineType({
       type: 'reference',
       to: [{type: 'chercheur'}],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -102,6 +105,7 @@ export default defineType({
       title: 'Dates',
       group: 'editorial',
       of: [{type: 'fhcbDate'}],
+      hidden: true,
     }),
 
     defineField({
@@ -110,6 +114,7 @@ export default defineType({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -117,7 +122,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes)',
       type: 'array',
-      of: modulesList,
+      of: modulesListConversationParoles,
       group: 'editorial',
     }),
 

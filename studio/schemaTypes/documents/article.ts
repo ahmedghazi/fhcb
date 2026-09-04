@@ -4,6 +4,7 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import {IoPersonOutline} from 'react-icons/io5'
 import slug from '../fields/slug'
 import rebondsAutoField from '../misc/rebondsAutoField'
+import modulesListArticle from '../objects/modules/modulesListArticle'
 
 export default defineType({
   type: 'document',
@@ -66,21 +67,21 @@ export default defineType({
     }),
     defineField({
       name: 'artists',
-      title: 'Artiste(s)',
+      title: 'Artiste(s) lié(s)',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',
     }),
     defineField({
       name: 'exhibitions',
-      title: 'Exposition(s)',
+      title: 'Exposition(s) liée(s)',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'exhibition'}]}],
       group: 'editorial',
     }),
     defineField({
       name: 'prix',
-      title: 'Prix',
+      title: 'Prix et bourse lié(s)',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'prix'}]}],
       group: 'editorial',
@@ -91,7 +92,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes, embed)',
       type: 'array',
-      of: modulesList,
+      of: modulesListArticle,
       group: 'editorial',
     }),
     rebondsAutoField,

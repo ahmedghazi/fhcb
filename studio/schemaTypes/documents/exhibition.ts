@@ -86,7 +86,7 @@ export default defineType({
     defineField({
       name: 'dates',
       type: 'array',
-      title: 'Dates',
+      title: 'Date(s) et lieu(x)',
       group: 'editorial',
       of: [{type: 'fhcbDate'}],
     }),

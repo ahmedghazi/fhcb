@@ -6,6 +6,7 @@ import slug from '../fields/slug'
 import {SiElasticstack} from 'react-icons/si'
 import rebondsLabels from '../misc/rebondsLabels'
 import rebondsAutoField from '../misc/rebondsAutoField'
+import modulesListPageModulaire from '../objects/modules/modulesListPageModulaire'
 
 const BRANCHES_RESSOURCES_TAG_ID = 'e9f34dd4-cc69-4ef2-83a7-71b38a79741f'
 
@@ -93,7 +94,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes, embed)',
       type: 'array',
-      of: modulesList,
+      of: modulesListPageModulaire,
       group: 'editorial',
     }),
 
@@ -134,6 +135,7 @@ export default defineType({
     defineField({
       name: 'prix',
       title: 'Prix',
+      description: 'prix associé le cas échéant',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'prix'}]}],
       group: 'editorial',

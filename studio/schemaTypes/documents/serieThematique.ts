@@ -3,11 +3,12 @@ import {baseLanguage} from '../locale/supportedLanguages'
 import slug from '../fields/slug'
 import {TbArticle} from 'react-icons/tb'
 import rebondsAutoField from '../misc/rebondsAutoField'
+import modulesListSerieThematiqueFocus from '../objects/modules/modulesListSerieThematiqueFocus'
 
 export default defineType({
   type: 'document',
   name: 'serieThematique',
-  title: 'Série thématique',
+  title: 'Focus (Série thématique)',
   icon: TbArticle,
   groups: [
     {
@@ -40,13 +41,19 @@ export default defineType({
       group: 'editorial',
     }),
     slug,
-
+    defineField({
+      name: 'subTitle',
+      title: 'Sous titre',
+      type: 'localeText',
+      group: 'editorial',
+    }),
     defineField({
       name: 'chercheur',
       title: 'Chercheur',
       type: 'reference',
       to: [{type: 'chercheur'}],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -62,6 +69,7 @@ export default defineType({
       type: 'video',
       title: 'Vidéo',
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -73,7 +81,7 @@ export default defineType({
     }),
     defineField({
       name: 'exhibition',
-      title: 'Exposition',
+      title: 'Exposition liée',
       type: 'reference',
       to: [{type: 'exhibition'}],
       group: 'editorial',
@@ -84,7 +92,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes)',
       type: 'array',
-      of: [{type: 'imagesUI'}, {type: 'textSidebarUI'}],
+      of: modulesListSerieThematiqueFocus,
       group: 'editorial',
     }),
 

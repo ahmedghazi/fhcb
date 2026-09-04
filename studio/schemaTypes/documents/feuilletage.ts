@@ -5,6 +5,7 @@ import {FiBookOpen} from 'react-icons/fi'
 import modulesList from '../objects/modules/modulesList'
 import linkInternalTypes from '../misc/linkInternalTypes'
 import rebondsAutoField from '../misc/rebondsAutoField'
+import modulesListFeuilletage from '../objects/modules/modulesListFeuilletage'
 
 export default defineType({
   type: 'document',
@@ -37,12 +38,19 @@ export default defineType({
     }),
     slug,
     defineField({
+      name: 'subTitle',
+      title: 'Artiste invité',
+      type: 'localeText',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'imageCover',
       type: 'image',
       title: 'Image clef',
       // fields: imageFields,
       description: 'Visible sur les pages de liste (largeur 1400px)',
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -53,26 +61,21 @@ export default defineType({
     }),
 
     defineField({
-      name: 'subTitle',
-      title: 'Sous titre',
-      type: 'localeText',
-      group: 'editorial',
-    }),
-    defineField({
       name: 'description',
       type: 'localeText',
       group: 'editorial',
+      hidden: true,
     }),
     defineField({
       name: 'artists',
-      title: 'Artiste(s)',
+      title: 'Artiste(s) lié(s)',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'artist'}]}],
       group: 'editorial',
     }),
     defineField({
       name: 'exhibition',
-      title: 'Exposition',
+      title: 'Exposition lié',
       type: 'reference',
       to: [{type: 'exhibition'}],
       group: 'editorial',
@@ -114,7 +117,7 @@ export default defineType({
       name: 'index',
       type: 'string',
       title: 'Index',
-      description: 'Réservé aux événements avec le tag Feuilletage',
+      description: '(numéro du Feuilletage)',
       group: 'editorial',
     }),
 
@@ -123,7 +126,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes, embed)',
       type: 'array',
-      of: modulesList,
+      of: modulesListFeuilletage,
       group: 'editorial',
     }),
 

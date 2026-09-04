@@ -1,0 +1,28 @@
+export default [
+  {type: 'textUI'},
+  {type: 'textSidebarUI'},
+  {type: 'textImageUI'},
+  // {type: 'blockquoteUI'},
+  {type: 'imagesUI'},
+  // {type: 'listUI'},
+  // {type: 'listsUI'},
+  // {type: 'gridCardUI'},
+  // {type: 'listEventsUI'},
+  // {type: 'listExhibitionsPastUI'},
+  // {type: 'listExhibitionsUI'},
+  // {type: 'listFeuilletageUI'},
+  // {type: 'listImageImages'},
+  // {type: 'listSerieThematiqueUI'},
+  // {type: 'listConversationUI'},
+
+  // {type: 'featuredCardsUI'},
+  // {type: 'newsCardUI'},
+  // {type: 'programmeUI'},
+  // {type: 'ressourcesUI'},
+  // {type: 'sliderArtistUI'},
+  // {type: 'sliderCardUI'},
+
+  // {type: 'formUI'},
+  // {type: 'videoUI'},
+  {type: 'hrUI'},
+]

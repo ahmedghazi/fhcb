@@ -29,7 +29,7 @@ export default defineType({
     defineField({
       name: 'index',
       type: 'string',
-      title: 'Index',
+      title: "Index (numéro de l'épisode))",
       group: 'editorial',
     }),
     defineField({
@@ -55,6 +55,7 @@ export default defineType({
       title: 'Image de couverture',
       options: {hotspot: true},
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -77,6 +78,7 @@ export default defineType({
       type: 'reference',
       to: [{type: 'exhibition'}],
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({

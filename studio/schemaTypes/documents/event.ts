@@ -4,6 +4,7 @@ import {BsCalendar2Event} from 'react-icons/bs'
 import slug from '../fields/slug'
 import modulesListExhibitionEvent from '../objects/modules/modulesListExhibitionEvent'
 import rebondsAutoField from '../misc/rebondsAutoField'
+import modulesListEvent from '../objects/modules/modulesListEvent'
 
 export default defineType({
   type: 'document',
@@ -62,6 +63,7 @@ export default defineType({
     defineField({
       name: 'pastille',
       title: 'Pastille de statut',
+      description: "type 'COMPLET'",
       type: 'localeString',
       group: 'editorial',
     }),
@@ -90,7 +92,7 @@ export default defineType({
     }),
     defineField({
       name: 'exhibition',
-      title: 'Exposition',
+      title: 'Exposition liée',
       type: 'reference',
       to: [{type: 'exhibition'}],
       group: 'editorial',
@@ -125,6 +127,7 @@ export default defineType({
       title: 'Index',
       description: 'Réservé aux événements avec le tag Feuilletage',
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({
@@ -132,7 +135,7 @@ export default defineType({
       title: 'Modules',
       description: 'Zone de contenu Modulaire (images, textes, embed)',
       type: 'array',
-      of: modulesListExhibitionEvent,
+      of: modulesListEvent,
       group: 'editorial',
     }),
 
