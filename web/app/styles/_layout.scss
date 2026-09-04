@@ -48,13 +48,11 @@ main {
   z-index: 1;
   .template {
     padding-top: calc(var(--header-h) + var(--spacing-lg));
-    // padding-bottom: var(--header-h);
     &--exhibition,
     &--event {
       padding-top: 0;
       section.hero-exhibition,
       section.hero-event {
-        // padding-top: var(--header-h);
         padding-top: calc(var(--header-h) + var(--spacing-lg));
       }
     }
@@ -101,6 +99,10 @@ main {
       &--exhibition,
       &--event {
         padding-top: 0;
+        section.hero-exhibition,
+        section.hero-event {
+          padding-top: var(--header-h);
+        }
       }
     }
   }

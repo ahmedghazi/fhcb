@@ -98,16 +98,12 @@ nav {
     }
   }
 
-  // .menu-label {
-  //   font-size: 16px !important;
-  //   color: blue !important;
+  // @media all and (min-width: variables.$md) {
+  //   ul.menu > li > .menu-label,
+  //   .locale-switcher button {
+  //     font-size: 1rem !important;
+  //   }
   // }
-  @media all and (min-width: variables.$md) {
-    ul.menu > li > .menu-label,
-    .locale-switcher button {
-      font-size: 1rem !important;
-    }
-  }
   ul.menu {
     display: flex;
     justify-content: space-around;
@@ -132,18 +128,6 @@ nav {
     .menu-label--depth-1 {
       font-weight: 450;
     }
-    // & > li {
-    //   // flex: 1;
-    //   position: relative;
-    //   & > .menu-label {
-    //   }
-    //   & > .menu-label,
-    //   & > a > .menu-label {
-    //     padding: 0em 2em 0;
-    //     display: inline-block;
-    //     font-weight: 450;
-    //   }
-    // }
 
     .sub-menu {
       position: absolute;
@@ -161,11 +145,6 @@ nav {
       & > li > a {
         padding-left: calc(2em + 2px);
       }
-      // a {
-      //   padding: 0em 2em 0.5em;
-      //   line-height: 1;
-      //   display: inline-block;
-      // }
 
       li.has-submenu {
         position: relative;
@@ -190,6 +169,11 @@ nav {
       display: flex;
       flex-direction: column;
 
+      // & > li > .menu-label,
+      // .locale-switcher button {
+      //   font-size: 1rem !important;
+      // }
+
       & > li .menu-label,
       & > li a,
       & > li > a .menu-label {
@@ -202,6 +186,7 @@ nav {
       .sub-menu {
         position: initial;
         padding: calc(var(--spacing-sm) * 0.9) 0;
+        padding-top: 0.5em;
         li a {
           padding: 0;
           text-decoration-thickness: 0.02em;
@@ -215,7 +200,5 @@ nav {
         }
       }
     }
-  }
-  .nav-modal {
   }
 }

@@ -43,6 +43,9 @@
     flex-direction: column;
     max-width: 100%; /* never overflow the column */
     max-height: calc(var(--vh) * 100 - (var(--header-h) + var(--spacing-md)));
+    max-height: calc(
+      100dvh - (var(--header-h) + calc(var(--spacing-lg) + var(--spacing-sm)))
+    );
   }
 
   .darkroom-wrapper {
