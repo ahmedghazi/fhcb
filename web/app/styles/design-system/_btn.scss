@@ -52,6 +52,22 @@ a.btn,
       }
     }
   }
+  &.btn.btn--with-icon {
+    // display: flex;
+    // justify-content: center;
+    padding-left: 2.5em;
+    .icon {
+      position: absolute;
+      left: 1em;
+      top: 0.65em;
+      //   display: inline;
+      //   max-width: 1rem;
+      svg {
+        width: 0.7rem;
+        height: 0.7rem;
+      }
+    }
+  }
 }
 a.btn-library,
 a.btn-tickets,
