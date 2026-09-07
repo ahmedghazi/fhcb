@@ -286,7 +286,7 @@ export const relatedByArtists = `
         _id in ^.artists[]._ref
       )
     )
-  ] | order(dates[0].du asc) {
+  ][0...4] | order(dates[0].du asc) {
     ${cardTypes}
   }
 `;

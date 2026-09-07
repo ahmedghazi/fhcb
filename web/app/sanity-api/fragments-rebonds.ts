@@ -58,6 +58,16 @@ const BRANCHES_RESSOURCES_TAG_ID = `*[_type == "tag" && slug.current == "branche
 // binding for node" for the function's own parameters.
 const DOCS_RELATED_CAP = 2;
 
+// GROQ has no random(), and rebondBooksHcb/Mf, rebondExhibitionsHcb/Mf, rebondEventsHcb/Mf,
+// rebondArticlesHcb/Mf, and rebondRessourcesHcb/Mf below order by a fixed date field — capping those
+// directly at DOCS_RELATED_CAP would deterministically return the exact same "2 newest" items on every
+// request, for every host that references HCB/MF (that's everything). So those fragments instead pull a
+// wider, still-bounded CANDIDATE POOL at this cap, and each host page (\`_pickDocsRelated\`, see
+// app/lib/utils.ts) randomly picks DOCS_RELATED_CAP of them server-side per type-shape, re-rolled on
+// every request — same fetch-a-pool-then-shuffle idea as rebondExhibitionsDiscoverPast/Current further
+// down and rebondExhibitionsByArtist's \`_pickWithPriorityFill\` caller.
+const DOCS_RELATED_POOL_CAP = 8;
+
 // "prize-related" is capped per type-shape (2 each), same reasoning as DOCS_RELATED_CAP above: pulled
 // out into its own fragment per type rather than left as an OR branch inside the shared
 // rebondArtistRelated/rebondExhibitions/rebondArticles filters, so the cap applies only to THIS
@@ -65,27 +75,53 @@ const DOCS_RELATED_CAP = 2;
 // filter shouldn't let one scenario's cap constrain the other).
 const PRIZE_RELATED_CAP = 2;
 
-// scenario: "artist" (self, via host's \`artists[]\`) — also fires for "artist-related": editors expect
-// artist-related to include the host's own artist(s) directly (e.g. a book's own listed artist), not
-// only other, separately-connected artists (that part is rebondArtistRelated below). Kept as its own
-// fragment rather than merged into rebondArtistRelated's filter: merging them into one OR'd filter
-// makes the whole filter's inferred type collapse to \`never\` on host types without an \`artists\` field
-// (e.g. artist itself), which then poisons the entire concatenated resolvedItems type. Two same-shape
-// arrays concatenated with \`+\` don't have that problem — an invalid/never operand is just dropped
-// from the union. rebondArtistRelated excludes the host's own artist(s) from its own results, so
-// there's no duplicate card when both scenarios are selected together.
-// "product-related" — the artist(s) of the host's own linked `product` (e.g. a feuilletage's
-// `product` field, see studio/schemaTypes/documents/feuilletage.ts) — pivots through that reference
-// rather than the host's own `artists[]` field, unlike the "artist"/"artist-related" branch above.
+// scenario: "artist-related" (self, via host's \`artists[]\`) — editors expect artist-related to include
+// the host's own artist(s) directly (e.g. a book's own listed artist), not only other,
+// separately-connected artists (that part is rebondArtistRelated below). Kept as its own fragment
+// rather than merged into rebondArtistRelated's filter: merging them into one OR'd filter makes the
+// whole filter's inferred type collapse to \`never\` on host types without an \`artists\` field (e.g.
+// artist itself), which then poisons the entire concatenated resolvedItems type. Two same-shape arrays
+// concatenated with \`+\` don't have that problem — an invalid/never operand is just dropped from the
+// union. rebondArtistRelated excludes the host's own artist(s) from its own results, so there's no
+// duplicate card when both scenarios are selected together.
+//
+// "artist" (same match condition as "artist-related" above) and "product-related" (pivoting through
+// the host's own linked \`product\`) are capped (see DOCS_RELATED_CAP above) and split out below as
+// rebondArtistScenario / rebondArtistProductRelated, same reasoning as rebondExhibitionsByArtist's cap
+// further down: the cap must apply only to THAT scenario's own matches, not to the combined result of
+// every scenario sharing the artist type-shape.
 export const rebondArtistSelf = `
   *[
     _type == "artist" &&
     _id != ^.^._id &&
-    (
-      (("artist" in ^.items || "artist-related" in ^.items) && _id in ^.^.artists[]._ref)
-      || ("product-related" in ^.items && _id in ^.^.product->artists[]._ref)
-    )
+    "artist-related" in ^.items && _id in ^.^.artists[]._ref
   ] {
+    ${cardRefArtist}
+  }
+`;
+
+// scenario: "artist" — the host's own artist(s), same match condition as rebondArtistSelf's
+// "artist-related" branch above, capped (see DOCS_RELATED_CAP above).
+export const rebondArtistScenario = `
+  *[
+    _type == "artist" &&
+    _id != ^.^._id &&
+    "artist" in ^.items && _id in ^.^.artists[]._ref
+  ] [0...${DOCS_RELATED_CAP}] {
+    ${cardRefArtist}
+  }
+`;
+
+// "product-related" — the artist(s) of the host's own linked \`product\` (e.g. a feuilletage's
+// \`product\` field, see studio/schemaTypes/documents/feuilletage.ts) — pivots through that reference
+// rather than the host's own \`artists[]\` field, unlike rebondArtistSelf/rebondArtistScenario above.
+// Capped (see DOCS_RELATED_CAP above) since a book can list several artists.
+export const rebondArtistProductRelated = `
+  *[
+    _type == "artist" &&
+    _id != ^.^._id &&
+    "product-related" in ^.items && _id in ^.^.product->artists[]._ref
+  ] [0...${DOCS_RELATED_CAP}] {
     ${cardRefArtist}
   }
 `;
@@ -147,30 +183,41 @@ export const rebondArtistPrizeRelated = `
 // resources), which has no editorial "these books are related" meaning. \`exhibition\` covers the
 // "via product.exhibition" case named above (host is the exhibition); \`rebonds\` covers a book curated
 // as related to another book/event/pageModulaire host.
-// "product-related" — the host's own linked \`product\` itself (e.g. a feuilletage's embedded book,
-// see studio/schemaTypes/documents/feuilletage.ts), displayed as a card in its own right.
+// "product-related" — the host's own linked \`product\` itself — is capped (see DOCS_RELATED_CAP
+// above) and split out below as rebondBookProductRelated, same reasoning as rebondArtistScenario above.
 export const rebondBooks = `
   *[
     _type == "product" &&
     _id != ^.^._id &&
-    (
-      ("book-related" in ^.items && (exhibition._ref == ^.^._id || ^.^._id in rebonds[]._ref || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref))))
-      || ("product-related" in ^.items && _id == ^.^.product._ref)
-    )
+    "book-related" in ^.items && (exhibition._ref == ^.^._id || ^.^._id in rebonds[]._ref || (^.^._type == "pageModulaire" && references(^.^.artists[]._ref)))
   ] | order(_createdAt desc) {
     ${cardRefProduct}
   }
 `;
 
-// "docs-hcb-related" / "docs-mf-related" — books tied to that fixed artist, capped (see
-// DOCS_RELATED_CAP above).
+// "product-related" — the host's own linked \`product\` itself (e.g. a feuilletage's embedded book, see
+// studio/schemaTypes/documents/feuilletage.ts), displayed as a card in its own right. Capped (see
+// DOCS_RELATED_CAP above) for consistency with the other "product-related" branches — a host only ever
+// links one product, so the cap is a no-op in practice.
+export const rebondBookProductRelated = `
+  *[
+    _type == "product" &&
+    _id != ^.^._id &&
+    "product-related" in ^.items && _id == ^.^.product._ref
+  ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+    ${cardRefProduct}
+  }
+`;
+
+// "docs-hcb-related" / "docs-mf-related" — books tied to that fixed artist. Pool, not a final pick
+// (see DOCS_RELATED_POOL_CAP above) — \`_pickDocsRelated\` randomly narrows this to DOCS_RELATED_CAP.
 export const rebondBooksHcb = `
   *[
     _type == "product" &&
     _id != ^.^._id &&
     "docs-hcb-related" in ^.items &&
     references(${HCB_ARTIST_ID})
-  ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(_createdAt desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefProduct}
   }
 `;
@@ -180,7 +227,7 @@ export const rebondBooksMf = `
     _id != ^.^._id &&
     "docs-mf-related" in ^.items &&
     references(${MF_ARTIST_ID})
-  ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(_createdAt desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefProduct}
   }
 `;
@@ -207,43 +254,69 @@ export const EXHIBITION_CURRENT_OR_FUTUR = `
   )
 `;
 
-// scenarios: "exhibition-related", "exhibition-related-current-or-futur", "exhibition-related-past" (filtered to
+// scenarios: "exhibition-related-current-or-futur", "exhibition-related-past" (filtered to
 // the host), "exhibition-futur", "exhibition-past", "exhibition-current", "exhibition-current-or-futur" (global,
-// any exhibition), "tags-related" (any exhibition sharing a tag with the host), "prize-related" (any
+// any exhibition), "tags-related" (any exhibition sharing a tag with the host), and "prize-related" (any
 // exhibition sharing a `prix` with the host — see rebondArtistRelated above for why only artist/exhibition
-// carry this branch), and "product-related" (the exhibition of the host's own linked `product`)
+// carry this branch).
 // NB: \`au\` (end date) is intentionally left blank for single-day exhibitions/events (see
 // studio/schemaTypes/objects/fhcbDate.ts) — always fall back to \`du\` via coalesce(), otherwise
 // single-day entries never match "futur" (au undefined >= now() is false) and always match "past".
+//
+// "exhibition-related" and "product-related" (the exhibition of the host's own linked \`product\`) are
+// capped (see DOCS_RELATED_CAP above) and split out below as rebondExhibitionRelated /
+// rebondExhibitionProductRelated, same reasoning as rebondArtistScenario above.
 export const rebondExhibitions = `
   *[
     _type == "exhibition" &&
     _id != ^.^._id &&
     (
-      ("exhibition-related" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)))
-      || ("exhibition-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
+      ("exhibition-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-related-past" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) == 0)
       || ("exhibition-futur" in ^.items && count(dates[coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-past" in ^.items && count(dates[coalesce(au, du) >= now()]) == 0)
       || ("exhibition-current" in ^.items && count(dates[du <= now() && coalesce(au, du) >= now() && ${IN_SITE_DATE}]) > 0)
       || ("exhibition-current-or-futur" in ^.items && ${EXHIBITION_CURRENT_OR_FUTUR})
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
-      || ("product-related" in ^.items && defined(^.^.product) && _id == ^.^.product->exhibition._ref)
     )
   ] | order(dates[0].du desc) {
     ${cardRefExhibition}
   }
 `;
 
-// "docs-hcb-related" / "docs-mf-related" — exhibitions tied to that fixed artist, capped (see
-// DOCS_RELATED_CAP above).
+// "exhibition-related" — capped (see DOCS_RELATED_CAP above).
+export const rebondExhibitionRelated = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    "exhibition-related" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref))
+  ] | order(dates[0].du desc) [0...${DOCS_RELATED_CAP}] {
+    ${cardRefExhibition}
+  }
+`;
+
+// "product-related" — the exhibition of the host's own linked \`product\`. Capped (see DOCS_RELATED_CAP
+// above) for consistency with the other "product-related" branches — a product only ever links one
+// exhibition, so the cap is a no-op in practice.
+export const rebondExhibitionProductRelated = `
+  *[
+    _type == "exhibition" &&
+    _id != ^.^._id &&
+    "product-related" in ^.items && defined(^.^.product) && _id == ^.^.product->exhibition._ref
+  ] | order(dates[0].du desc) [0...${DOCS_RELATED_CAP}] {
+    ${cardRefExhibition}
+  }
+`;
+
+// "docs-hcb-related" / "docs-mf-related" — exhibitions tied to that fixed artist. Pool, not a final
+// pick (see DOCS_RELATED_POOL_CAP above) — \`_pickDocsRelated\` randomly narrows this to DOCS_RELATED_CAP.
 export const rebondExhibitionsHcb = `
   *[
     _type == "exhibition" &&
     _id != ^.^._id &&
     "docs-hcb-related" in ^.items &&
     references(${HCB_ARTIST_ID})
-  ] | order(dates[0].du desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(dates[0].du desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefExhibition}
   }
 `;
@@ -253,7 +326,7 @@ export const rebondExhibitionsMf = `
     _id != ^.^._id &&
     "docs-mf-related" in ^.items &&
     references(${MF_ARTIST_ID})
-  ] | order(dates[0].du desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(dates[0].du desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefExhibition}
   }
 `;
@@ -286,33 +359,58 @@ export const rebondExhibitionsPrizeRelated = `
   }
 `;
 
-// scenarios: "event-related-current-or-futur" (filtered to the host), "event-futur" (global, any event),
-// "tags-related" (any event sharing a tag with the host), and "product-related" (events tied to the same
-// exhibition as the host's own linked `product`)
+// scenarios: "event-futur" (global, any event) and "tags-related" (any event sharing a tag with the
+// host).
+//
+// "event-related-current-or-futur" (filtered to the host) and "product-related" (events tied to the
+// same exhibition as the host's own linked \`product\`) are capped (see DOCS_RELATED_CAP above) and
+// split out below as rebondEventRelated / rebondEventProductRelated, same reasoning as
+// rebondArtistScenario above.
 export const rebondEvents = `
   *[
     _type == "event" &&
     _id != ^.^._id &&
     (
-      ("event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0)
-      || ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
+      ("event-futur" in ^.items && count(dates[coalesce(au, du) >= now()]) > 0)
       || ("tags-related" in ^.items && count((tags[]._ref)[@ in ^.^.^.tags[]._ref]) > 0)
-      || ("product-related" in ^.items && defined(^.^.product->exhibition._ref) && exhibition._ref == ^.^.product->exhibition._ref)
     )
   ] | order(dates[0].du asc) {
     ${cardRefEvent}
   }
 `;
 
-// "docs-hcb-related" / "docs-mf-related" — events tied to that fixed artist, capped (see
-// DOCS_RELATED_CAP above).
+// "event-related-current-or-futur" — capped (see DOCS_RELATED_CAP above).
+export const rebondEventRelated = `
+  *[
+    _type == "event" &&
+    _id != ^.^._id &&
+    "event-related-current-or-futur" in ^.items && (references(^.^._id) || references(^.^.artists[]._ref)) && count(dates[coalesce(au, du) >= now()]) > 0
+  ] | order(dates[0].du asc) [0...${DOCS_RELATED_CAP}] {
+    ${cardRefEvent}
+  }
+`;
+
+// "product-related" — events tied to the same exhibition as the host's own linked \`product\`. Capped
+// (see DOCS_RELATED_CAP above) since an exhibition can have several events.
+export const rebondEventProductRelated = `
+  *[
+    _type == "event" &&
+    _id != ^.^._id &&
+    "product-related" in ^.items && defined(^.^.product->exhibition._ref) && exhibition._ref == ^.^.product->exhibition._ref
+  ] | order(dates[0].du asc) [0...${DOCS_RELATED_CAP}] {
+    ${cardRefEvent}
+  }
+`;
+
+// "docs-hcb-related" / "docs-mf-related" — events tied to that fixed artist. Pool, not a final pick
+// (see DOCS_RELATED_POOL_CAP above) — \`_pickDocsRelated\` randomly narrows this to DOCS_RELATED_CAP.
 export const rebondEventsHcb = `
   *[
     _type == "event" &&
     _id != ^.^._id &&
     "docs-hcb-related" in ^.items &&
     references(${HCB_ARTIST_ID})
-  ] | order(dates[0].du asc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(dates[0].du asc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefEvent}
   }
 `;
@@ -322,7 +420,7 @@ export const rebondEventsMf = `
     _id != ^.^._id &&
     "docs-mf-related" in ^.items &&
     references(${MF_ARTIST_ID})
-  ] | order(dates[0].du asc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(dates[0].du asc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefEvent}
   }
 `;
@@ -377,15 +475,15 @@ export const rebondArticles = `
   }
 `;
 
-// "docs-hcb-related" / "docs-mf-related" — articles tied to that fixed artist, capped (see
-// DOCS_RELATED_CAP above).
+// "docs-hcb-related" / "docs-mf-related" — articles tied to that fixed artist. Pool, not a final pick
+// (see DOCS_RELATED_POOL_CAP above) — \`_pickDocsRelated\` randomly narrows this to DOCS_RELATED_CAP.
 export const rebondArticlesHcb = `
   *[
     _type == "article" &&
     _id != ^.^._id &&
     "docs-hcb-related" in ^.items &&
     references(${HCB_ARTIST_ID})
-  ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(_createdAt desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefArticle}
   }
 `;
@@ -395,7 +493,7 @@ export const rebondArticlesMf = `
     _id != ^.^._id &&
     "docs-mf-related" in ^.items &&
     references(${MF_ARTIST_ID})
-  ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(_createdAt desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardRefArticle}
   }
 `;
@@ -442,15 +540,17 @@ export const rebondRessources = `
 `;
 
 // "docs-hcb-related" / "docs-mf-related" — imageImages / feuilletage / serieThematique / conversation
-// tied to that fixed artist, capped (see DOCS_RELATED_CAP above); all four types have an
-// \`artists[]\` field.
+// tied to that fixed artist; all four types have an \`artists[]\` field. Pool, not a final pick (see
+// DOCS_RELATED_POOL_CAP above) — \`_pickDocsRelated\` randomly narrows this to DOCS_RELATED_CAP, treating
+// all four ressource types as ONE shape (same REBOND_RESSOURCES_TYPES grouping as REBOND_SCENARIO_MATCHERS
+// in utils.ts), not 4 separately-capped types.
 export const rebondRessourcesHcb = `
   *[
     _id != ^.^._id &&
     _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&
     "docs-hcb-related" in ^.items &&
     references(${HCB_ARTIST_ID})
-  ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(_createdAt desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardTypesRessources}
   }
 `;
@@ -460,7 +560,7 @@ export const rebondRessourcesMf = `
     _type in ["imageImages", "feuilletage", "serieThematique", "conversation"] &&
     "docs-mf-related" in ^.items &&
     references(${MF_ARTIST_ID})
-  ] | order(_createdAt desc) [0...${DOCS_RELATED_CAP}] {
+  ] | order(_createdAt desc) [0...${DOCS_RELATED_POOL_CAP}] {
     ${cardTypesRessources}
   }
 `;
@@ -487,37 +587,52 @@ export const rebondPageBrancheRessources = `
 //
 // Concatenation order here is also the DISPLAY order for a given scenario's own results: Rebonds.tsx's
 // _orderRebondsByItems (sanity-api/utils.ts) re-sorts resolvedItems by the position of each card's
-// matching scenario in the editor's \`items[]\` picklist, but "docs-hcb-related" / "docs-mf-related"
-// span every type-shape under that SAME single picklist entry, so they all tie on that rank — and ties
-// break by this GROQ-side order. Hence rebondExhibitionsHcb/Mf sit right after rebondExhibitions
-// (exhibitions first) while rebondBooksHcb/Mf are pushed to the very end (books last), instead of
-// sitting next to rebondBooks like every other type-shape pair above.
+// matching scenario in the editor's \`items[]\` picklist.
+//
+// "docs-hcb-related" / "docs-mf-related" are deliberately NOT folded into resolvedItems above, unlike
+// every other scenario: their fragments (rebondBooksHcb/Mf, rebondExhibitionsHcb/Mf, rebondEventsHcb/Mf,
+// rebondArticlesHcb/Mf, rebondRessourcesHcb/Mf) return a wide CANDIDATE POOL, not a final pick (see
+// DOCS_RELATED_POOL_CAP above) — mixing that pool into resolvedItems would make it indistinguishable
+// from every other scenario sharing the same type-shape (e.g. "exhibition-related"'s own precisely-capped
+// 2 exhibitions), and \`_pickDocsRelated\`'s random narrowing would then risk shuffling/dropping THOSE
+// too. Kept in its own \`docsRelatedPool\` field instead so each host page can run \`_pickDocsRelated\`
+// (app/lib/utils.ts) on exactly this pool and merge the random pick into resolvedItems itself before
+// rendering — see any page.tsx mapping over \`rebondsAuto\` for the call site.
 export const rebondsResolver = `
   title,
   items,
   "resolvedItems":
     ${rebondArtistSelf}
+    + ${rebondArtistScenario}
+    + ${rebondArtistProductRelated}
     + ${rebondArtistRelated}
     + ${rebondArtistPrizeRelated}
     + ${rebondBooks}
+    + ${rebondBookProductRelated}
     + ${rebondExhibitions}
-    + ${rebondExhibitionsHcb}
-    + ${rebondExhibitionsMf}
+    + ${rebondExhibitionRelated}
+    + ${rebondExhibitionProductRelated}
     + ${rebondExhibitionsByArtist}
     + ${rebondExhibitionsPrizeRelated}
     + ${rebondExhibitionsDiscoverPast}
     + ${rebondExhibitionsDiscoverCurrent}
     + ${rebondEvents}
-    + ${rebondEventsHcb}
-    + ${rebondEventsMf}
+    + ${rebondEventRelated}
+    + ${rebondEventProductRelated}
     + ${rebondArticles}
-    + ${rebondArticlesHcb}
-    + ${rebondArticlesMf}
     + ${rebondArticlesPrizeRelated}
     + ${rebondRessources}
+    + ${rebondPageBrancheRessources}
+  ,
+  "docsRelatedPool":
+    ${rebondBooksHcb}
+    + ${rebondBooksMf}
+    + ${rebondExhibitionsHcb}
+    + ${rebondExhibitionsMf}
+    + ${rebondEventsHcb}
+    + ${rebondEventsMf}
+    + ${rebondArticlesHcb}
+    + ${rebondArticlesMf}
     + ${rebondRessourcesHcb}
     + ${rebondRessourcesMf}
-    + ${rebondPageBrancheRessources}
-    + ${rebondBooksHcb}
-    + ${rebondBooksMf}
 `;

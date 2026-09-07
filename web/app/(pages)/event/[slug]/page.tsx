@@ -14,6 +14,7 @@ import {
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import Rebonds from "@/app/components/Rebonds";
 import HeroEvent from "@/app/components/HeroEvent";
+import { _pickDocsRelated } from "@/app/sanity-api/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -60,14 +61,25 @@ const EventTemplate: NextPage<PageProps> = async ({ params }) => {
       <ContentModulaire input={data} />
       {/* {data.related && <Rebonds input={data.related} />} */}
       {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
-      {data.rebondsAuto?.map((rebond, i) => (
-        <Rebonds
-          key={i}
-          input={rebond?.resolvedItems}
-          title={rebond?.title || undefined}
-          items={rebond?.items}
-        />
-      ))}
+      {data.rebondsAuto?.map((rebond, i) => {
+        const isDocsRelated =
+          rebond?.items?.includes("docs-hcb-related") ||
+          rebond?.items?.includes("docs-mf-related");
+        const input: any = isDocsRelated
+          ? [
+              ...(rebond?.resolvedItems ?? []),
+              ..._pickDocsRelated(rebond?.docsRelatedPool),
+            ]
+          : rebond?.resolvedItems;
+        return (
+          <Rebonds
+            key={i}
+            input={input}
+            title={rebond?.title || undefined}
+            items={rebond?.items}
+          />
+        );
+      })}
     </div>
   );
 };

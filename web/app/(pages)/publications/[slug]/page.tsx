@@ -13,6 +13,7 @@ import ContentProduct from "@/app/components/ContentProduct";
 import RebondsProducts from "@/app/components/RebondsProducts";
 import Rebonds from "@/app/components/Rebonds";
 import { _pickRelatedWithQuota } from "@/app/lib/utils";
+import { _pickDocsRelated } from "@/app/sanity-api/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -56,14 +57,25 @@ const ProductPage: NextPage<PageProps> = async ({ params }) => {
     <div className='template template--product' data-template='product'>
       {/* <PageHeader h1={data.title} /> */}
       <ContentProduct input={data} />
-      {data.rebondsAuto?.map((rebond: any, i: number) => (
-        <Rebonds
-          key={i}
-          input={rebond?.resolvedItems}
-          title={rebond?.title || undefined}
-          items={rebond?.items}
-        />
-      ))}
+      {data.rebondsAuto?.map((rebond: any, i: number) => {
+        const isDocsRelated =
+          rebond?.items?.includes("docs-hcb-related") ||
+          rebond?.items?.includes("docs-mf-related");
+        const input = isDocsRelated
+          ? [
+              ...(rebond?.resolvedItems ?? []),
+              ..._pickDocsRelated(rebond?.docsRelatedPool),
+            ]
+          : rebond?.resolvedItems;
+        return (
+          <Rebonds
+            key={i}
+            input={input}
+            title={rebond?.title || undefined}
+            items={rebond?.items}
+          />
+        );
+      })}
 
       {related && related.length > 0 && (
         <Rebonds input={related} title='discoverToo' />

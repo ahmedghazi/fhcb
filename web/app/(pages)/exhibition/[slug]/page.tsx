@@ -18,6 +18,7 @@ import {
 import Rebonds from "@/app/components/Rebonds";
 import RebondsExhibition from "@/app/components/RebondsExhibition";
 import { _isSameArtistFlag, _pickWithPriorityFill } from "@/app/lib/utils";
+import { _pickDocsRelated } from "@/app/sanity-api/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -78,9 +79,18 @@ const Exhibitiontemplate: NextPage<PageProps> = async ({ params }) => {
         const isDiscoverPast = rebond?.items?.includes(
           "exhibition-discover-past",
         );
-        const input = isDiscoverPast
-          ? _pickWithPriorityFill(rebond?.resolvedItems, _isSameArtistFlag, 2)
-          : rebond?.resolvedItems;
+        const isDocsRelated =
+          rebond?.items?.includes("docs-hcb-related") ||
+          rebond?.items?.includes("docs-mf-related");
+        let input: any = rebond?.resolvedItems;
+        if (isDiscoverPast) {
+          input = _pickWithPriorityFill(rebond?.resolvedItems, _isSameArtistFlag, 2);
+        } else if (isDocsRelated) {
+          input = [
+            ...(rebond?.resolvedItems ?? []),
+            ..._pickDocsRelated(rebond?.docsRelatedPool),
+          ];
+        }
         return (
           <Rebonds
             key={i}

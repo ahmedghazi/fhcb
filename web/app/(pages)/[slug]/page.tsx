@@ -15,6 +15,7 @@ import Rebonds from "@/app/components/Rebonds";
 import RebondsBranche from "@/app/components/RebondsBranche";
 import { PageModulaireExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import { _isRessource, _shuffle } from "@/app/lib/utils";
+import { _pickDocsRelated } from "@/app/sanity-api/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -71,12 +72,19 @@ const PageModulaireTemplate: NextPage<PageProps> = async ({ params }) => {
       {/* <RebondsBranche input={data.rebonds as PageModulaireExpanded[]} /> */}
       {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
       {data.rebondsAuto?.map((rebond, i) => {
-        const isDiscoverCurrent = rebond?.items?.includes(
-          "exhibition-discover-current-or-futur",
-        );
-        const input = isDiscoverCurrent
-          ? _shuffle(rebond?.resolvedItems ?? []).slice(0, 2)
-          : rebond?.resolvedItems;
+        let input: any = rebond?.resolvedItems;
+        if (rebond?.items?.includes("exhibition-discover-current-or-futur")) {
+          input = _shuffle(rebond?.resolvedItems ?? []).slice(0, 2);
+        }
+        if (
+          rebond?.items?.includes("docs-hcb-related") ||
+          rebond?.items?.includes("docs-mf-related")
+        ) {
+          input = [
+            ...(rebond?.resolvedItems ?? []),
+            ..._pickDocsRelated(rebond?.docsRelatedPool),
+          ];
+        }
         return (
           <Rebonds
             key={i}

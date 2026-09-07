@@ -12,7 +12,11 @@ import { notFound } from "next/navigation";
 import ContentModulaire from "@/app/components/ContentModulaire";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import PageHeader from "@/app/components/PageHeader";
-import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
+import {
+  _localizeField,
+  _localizeText,
+  _pickDocsRelated,
+} from "@/app/sanity-api/utils";
 import Embed from "@/app/components/ui/Embed";
 // import CardImageImages from "@/app/components/ui/cards/CardImageImages";
 // import RelatedImageImages from "@/app/components/RebondsImageImages";
@@ -89,14 +93,25 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       {data.rebonds && <Rebonds input={data.rebonds} />}
       {/* {data.related && <Rebonds input={data.related} />} */}
       {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
-      {data.rebondsAuto?.map((rebond, i) => (
-        <Rebonds
-          key={i}
-          input={rebond?.resolvedItems}
-          title={rebond?.title || undefined}
-          items={rebond?.items}
-        />
-      ))}
+      {data.rebondsAuto?.map((rebond, i) => {
+        const isDocsRelated =
+          rebond?.items?.includes("docs-hcb-related") ||
+          rebond?.items?.includes("docs-mf-related");
+        const input: any = isDocsRelated
+          ? [
+              ...(rebond?.resolvedItems ?? []),
+              ..._pickDocsRelated(rebond?.docsRelatedPool),
+            ]
+          : rebond?.resolvedItems;
+        return (
+          <Rebonds
+            key={i}
+            input={input}
+            title={rebond?.title || undefined}
+            items={rebond?.items}
+          />
+        );
+      })}
     </div>
   );
 };

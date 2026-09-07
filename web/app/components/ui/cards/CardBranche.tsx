@@ -17,6 +17,13 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
   const { settings } = usePageContext();
   const { ref, style } = useFooterMaxHeight<HTMLDivElement>();
   let supTitle = "";
+
+  if (
+    slug?.current?.includes("series-thematique") ||
+    slug?.current?.includes("focus")
+  ) {
+    return null;
+  }
   if (slug?.current?.includes("image")) {
     supTitle = `[${settings?.totalImageImages}]`;
   } else if (slug?.current?.includes("feuilletage")) {
@@ -40,7 +47,7 @@ const CardBranche = ({ input, size = "sm" }: Props) => {
       className={clsx(
         "card card--branche card--page-modulaire",
         `card--${size}`,
-        size === "sm" ? "card--footer-hover " : "",
+        // size === "sm" ? "card--footer-hover " : "",
       )}>
       <CardBase {...props} style={style ?? undefined} />
     </div>

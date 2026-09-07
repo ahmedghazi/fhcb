@@ -4,6 +4,7 @@ import {
   _isCurrentByDates,
   _isCurrentOrFuturByDates,
   _isPastByDates,
+  _shuffle,
 } from "../lib/utils";
 import {
   Artist,
@@ -84,7 +85,7 @@ export const _localizeField = (field: any) => {
   return field[locale] ? field[locale] : field["fr"];
 };
 
-type RebondCard = {
+export type RebondCard = {
   _type?: string;
   dates?: FhcbDate[] | null;
 };
@@ -95,6 +96,54 @@ const REBOND_RESSOURCES_TYPES = [
   "serieThematique",
   "conversation",
 ];
+
+// "docs-hcb-related" / "docs-mf-related" candidate type-shapes (see rebondBooksHcb/Mf,
+// rebondExhibitionsHcb/Mf, rebondEventsHcb/Mf, rebondArticlesHcb/Mf, rebondRessourcesHcb/Mf in
+// fragments-rebonds.ts) — no artist pair exists for these two scenarios.
+const DOCS_RELATED_CANDIDATE_TYPES = [
+  "product",
+  "exhibition",
+  "event",
+  "article",
+  ...REBOND_RESSOURCES_TYPES,
+];
+
+// Groups a docs-hcb-related/docs-mf-related candidate for `_pickDocsRelated` below: the four
+// REBOND_RESSOURCES_TYPES count as ONE shape (imageImages/feuilletage/serieThematique/conversation
+// share a single rebondRessourcesHcb/Mf fragment, capped together — see DOCS_RELATED_POOL_CAP in
+// fragments-rebonds.ts), everything else groups by its own `_type`. Returns null for a card that isn't
+// a docs-hcb-related/docs-mf-related candidate at all, so `_pickDocsRelated` leaves it untouched.
+// Only reads `_type` — deliberately NOT typed via RebondCard (which also carries `dates`, and each
+// query's own generated card projection is a structurally distinct type from FhcbDate, e.g. null vs
+// undefined on nested fields), so any resolved card shape can be passed through untouched.
+const _docsRelatedShapeKey = (item: { _type?: string }): string | null => {
+  if (!item._type) return null;
+  if (REBOND_RESSOURCES_TYPES.includes(item._type)) return "ressources";
+  if (DOCS_RELATED_CANDIDATE_TYPES.includes(item._type)) return item._type;
+  return null;
+};
+
+// GROQ has no random() (see DOCS_RELATED_POOL_CAP in fragments-rebonds.ts): a rebond's
+// `docsRelatedPool` field (rebondsResolver) holds a wide, still date-ordered candidate pool per
+// type-shape rather than a final pick. Called from each host page.tsx (server-rendered, so this
+// re-rolls on every request) to randomly narrow that pool to `cap` per shape and merge the result into
+// `resolvedItems` before handing both off to <Rebonds items={rebond.items} input={...} /> — its own
+// _orderRebondsByItems then ranks the merged list same as any other scenario's cards.
+export const _pickDocsRelated = <T extends { _type?: string }>(
+  pool: T[] | null | undefined,
+  cap = 2,
+): T[] => {
+  if (!pool || pool.length === 0) return [];
+  const groups = new Map<string, T[]>();
+  for (const item of pool) {
+    const key = _docsRelatedShapeKey(item);
+    if (!key) continue;
+    groups.set(key, [...(groups.get(key) ?? []), item]);
+  }
+  return Array.from(groups.values()).flatMap((group) =>
+    _shuffle(group).slice(0, cap),
+  );
+};
 
 // Keep in sync with fragments-rebonds.ts (rebondsResolver): whether a resolved card could have been
 // produced by a given `rebond.items` scenario. Needed (not just a _type check) because several

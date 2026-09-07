@@ -14,6 +14,7 @@ import RebondsArtistes from "@/app/components/RebondsArtistes";
 import HeroArtist from "@/app/components/HeroArtist";
 import Rebonds from "@/app/components/Rebonds";
 import { ARTIST_QUERY_RESULT } from "@/app/sanity-api/types/sanity.types";
+import { _pickDocsRelated } from "@/app/sanity-api/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -62,14 +63,25 @@ const ArtistTemplate: NextPage<PageProps> = async ({ params }) => {
       <HeroArtist input={data} />
       {/* {data.relatedByArtist && <Rebonds input={data.relatedByArtist} />} */}
       {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
-      {data.rebondsAuto?.map((rebond, i) => (
-        <Rebonds
-          key={i}
-          input={rebond?.resolvedItems}
-          title={rebond?.title || undefined}
-          items={rebond?.items}
-        />
-      ))}
+      {data.rebondsAuto?.map((rebond, i) => {
+        const isDocsRelated =
+          rebond?.items?.includes("docs-hcb-related") ||
+          rebond?.items?.includes("docs-mf-related");
+        const input: any = isDocsRelated
+          ? [
+              ...(rebond?.resolvedItems ?? []),
+              ..._pickDocsRelated(rebond?.docsRelatedPool),
+            ]
+          : rebond?.resolvedItems;
+        return (
+          <Rebonds
+            key={i}
+            input={input}
+            title={rebond?.title || undefined}
+            items={rebond?.items}
+          />
+        );
+      })}
       <RebondsArtistes input={randomArtists} />
     </div>
   );
