@@ -14,9 +14,6 @@
 // }
 
 .hero .hero__figure {
-  // display: flex;
-  // justify-content: flex-end;
-
   .figure {
     width: 100%;
     &--is-landscape {
@@ -68,6 +65,12 @@
   figcaption {
     width: 100%; /* 100% of the now shrink-wrapped .figure — i.e. the image's own width */
     max-width: var(--fig-img-w);
+  }
+
+  @media all and (max-width: variables.$md) {
+    .darkroom-wrapper {
+      width: 100% !important;
+    }
   }
 }
 .page-header {
