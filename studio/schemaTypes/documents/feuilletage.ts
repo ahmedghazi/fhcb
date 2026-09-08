@@ -29,7 +29,20 @@ export default defineType({
       type: 'seo',
       group: 'seo',
     }),
+    defineField({
+      name: 'index',
+      type: 'number',
+      title: 'Index',
+      description: '(numéro du Feuilletage)',
+      group: 'editorial',
+    }),
 
+    defineField({
+      name: 'date',
+      type: 'date',
+      title: 'Date de publication',
+      group: 'editorial',
+    }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -97,27 +110,20 @@ export default defineType({
       hidden: true,
     }),
 
-    defineField({
-      name: 'dates',
-      type: 'array',
-      title: 'Dates',
-      group: 'editorial',
-      of: [{type: 'fhcbDate'}],
-      hidden: true,
-    }),
+    // defineField({
+    //   name: 'dates',
+    //   type: 'array',
+    //   title: 'Dates',
+    //   group: 'editorial',
+    //   of: [{type: 'fhcbDate'}],
+    //   hidden: true,
+    // }),
 
     defineField({
       name: 'tags',
       title: 'Tags',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'tag'}]}],
-      group: 'editorial',
-    }),
-    defineField({
-      name: 'index',
-      type: 'string',
-      title: 'Index',
-      description: '(numéro du Feuilletage)',
       group: 'editorial',
     }),
 

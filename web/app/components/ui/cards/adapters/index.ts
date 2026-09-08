@@ -49,10 +49,8 @@ import { toPlainText } from "@portabletext/react";
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
 type SanityTags = Array<Tag | TagProduct> | null | undefined;
-type SanityDates =
-  | ExhibitionExpanded["dates"]
-  | EventExpanded["dates"]
-  | FeuilletageExpanded["dates"];
+type SanityDates = ExhibitionExpanded["dates"] | EventExpanded["dates"];
+// | FeuilletageExpanded["dates"];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

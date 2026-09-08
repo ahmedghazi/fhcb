@@ -602,7 +602,7 @@ export const ressourcesUI = `
     "imageImages": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {
       ${cardRefImageImages}
     },
-    "feuilletage": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {
+    "feuilletage": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(coalesce(date, index, _createdAt) desc)[0] {
       ${cardRefFeuilletage}
     },
     "serieThematique": *[_type == "serieThematique" && !(_id in path("drafts.**"))] | order(_createdAt desc)[0] {

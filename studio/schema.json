@@ -11163,6 +11163,20 @@
         },
         "optional": true
       },
+      "index": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "date": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "title": {
         "type": "objectAttribute",
         "value": {
@@ -11296,28 +11310,6 @@
         },
         "optional": true
       },
-      "dates": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
-              "name": "fhcbDate"
-            }
-          }
-        },
-        "optional": true
-      },
       "tags": {
         "type": "objectAttribute",
         "value": {
@@ -11337,13 +11329,6 @@
               "name": "tag.reference"
             }
           }
-        },
-        "optional": true
-      },
-      "index": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },
