@@ -1,3 +1,5 @@
+@use "../../variables";
+
 .cart-modal {
   position: fixed;
   inset: 0;
@@ -148,5 +150,12 @@
     justify-content: space-between;
     margin-bottom: var(--spacing-xs);
     font-weight: 450;
+  }
+
+  @media all and (max-width: variables.$md) {
+    &__inner {
+      max-width: calc(100dvw - var(--spacing-sm));
+      padding: var(--spacing-md) var(--spacing-sm);
+    }
   }
 }

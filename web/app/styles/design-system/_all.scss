@@ -264,17 +264,22 @@ textarea {
     }
   }
 
+  .slick-list {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .slick-slide .card {
+    // width: var(--gridder-3_12) !important;
+    // &--md {
+    //   width: var(--gridder-6_12) !important;
+    // }
+    width: calc(var(--gridder-4_4) * 0.9) !important;
+    max-width: calc(var(--gridder-4_4) * 0.9) !important;
+  }
   @media all and (min-width: variables.$md) {
     overflow: hidden;
     .slick-list {
       padding: 0 var(--edge-w);
-    }
-
-    .slick-list {
-      // margin: 0 calc(var(--spacing-gutter) * -0.5);
-      .slick-slide {
-        // padding: 0 calc(var(--spacing-gutter) * 0.5);
-      }
     }
 
     .slick-slide {
