@@ -11,7 +11,6 @@ type Props = {
 };
 
 const FilterToggle = ({ def, active, onChange }: Props) => {
-  console.log(def, active);
   return (
     <div className='ui-filters ui-filter__wrapper ui-filter__toggle'>
       <div className='ui-filters__summary uppercase'>

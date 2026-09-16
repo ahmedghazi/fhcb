@@ -107,11 +107,13 @@ const FilterList = ({
           </svg>
           <span>{_localizeField(def.filterLabel)}</span>
         </label>
-        <div className='filters__value sm-only flex flex-col gap-0.5'>
+        <div className='filters__value sm-only flex flex-col gap-0.5 ellipsis'>
           {opts
             .filter((o) => o._id === activeValue)
             .map((opt) => (
-              <span key={opt._id}>{loc(opt.name ?? opt.title)}</span>
+              <span className='ellipsis' key={opt._id}>
+                {loc(opt.name ?? opt.title)}
+              </span>
             ))}
         </div>
       </div>
