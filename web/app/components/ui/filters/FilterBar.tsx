@@ -35,7 +35,9 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     }
     setActive(next);
     onChange(next);
-    setOpen(false);
+    if (key !== "search") {
+      setOpen(false);
+    }
   };
 
   const _toggle = (key: string, value: string) => {
@@ -45,12 +47,16 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
     }
     setActive(next);
     onChange(next);
-    setOpen(false);
+    // setOpen(false);
+    if (key !== "search") {
+      setOpen(false);
+    }
   };
 
   const _reset = () => {
     setActive({});
     onChange({});
+    setOpen(false);
   };
   return (
     <div
