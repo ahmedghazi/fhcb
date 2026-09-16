@@ -42,8 +42,9 @@
       }
       .hero__footer {
         order: 3;
+        align-items: unset;
       }
-      .hero__header .bottom .btn {
+      .hero__footer .btn {
         width: 100%;
       }
     }

@@ -68,6 +68,13 @@ a.btn,
       }
     }
   }
+
+  @media all and (max-width: variables.$md) {
+    &--cta {
+      display: block;
+      width: 100%;
+    }
+  }
 }
 a.btn-library,
 a.btn-tickets,

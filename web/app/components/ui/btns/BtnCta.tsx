@@ -9,7 +9,7 @@ type Props = {
 
 const BtnCta = ({ input }: Props) => {
   return (
-    <Link className='btn' href={_linkResolver(input.link)}>
+    <Link className='btn btn--cta' href={_linkResolver(input.link)}>
       {_localizeField(input.label)}
     </Link>
   );

@@ -69,16 +69,8 @@ const HeroExhibition = ({ input }: Props) => {
               </div>
             )}
             {!isPast && links && (
-              <div className='pt-sm-'>
+              <div className=''>
                 {links?.map((item, i: number) => (
-                  // <a
-                  //   key={i}
-                  //   className='btn '
-                  //   href={item.link}
-                  //   target='_blank'
-                  //   rel='noopener noreferrer'>
-                  //   {_localizeField(item.label)}
-                  // </a>
                   <BtnCtaExternal key={i} input={item} />
                 ))}
               </div>

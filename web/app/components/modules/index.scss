@@ -446,6 +446,14 @@
           width: auto;
         }
       }
+
+      @media all and (max-width: variables.$md) {
+        .footer {
+          .btn {
+            width: 100%;
+          }
+        }
+      }
     }
     &--form-ui {
       form {

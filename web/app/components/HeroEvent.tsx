@@ -53,11 +53,6 @@ const HeroEvent = ({ input }: Props) => {
             <div className='top'>
               <CardTags input={tags || []} />
 
-              {/* <h2 className='hero__title c-h1'>{artistList}</h2>
-              <div className='hero__subtitle c-title-expo'>
-                {_localizeField(title)}
-              </div> */}
-
               <h2 className='hero__title c-h1'>{_localizeField(title)}</h2>
               <div className='hero__subtitle c-title-expo'>
                 {_localizeField(subTitle)}
@@ -71,16 +66,8 @@ const HeroEvent = ({ input }: Props) => {
               </div>
             )}
             {!isPast && (
-              <div className='pt-sm'>
+              <div className=''>
                 {links?.map((item, i: number) => (
-                  // <a
-                  //   key={i}
-                  //   className='btn '
-                  //   href={item.link}
-                  //   target='_blank'
-                  //   rel='noopener noreferrer'>
-                  //   {_localizeField(item.label)}
-                  // </a>
                   <BtnCtaExternal key={i} input={item} />
                 ))}
               </div>

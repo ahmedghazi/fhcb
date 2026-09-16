@@ -104,11 +104,13 @@ header.header {
       .menu a,
       & {
         color: white;
-        hyphens: auto;
-        overflow-wrap: break-word;
-        white-space: unset;
+        // hyphens: auto;
+        // overflow-wrap: break-word;
+        // white-space: unset;
+        // overflow-wrap: break-all;
+        white-space: initial;
         &:not(::first-line) {
-          background-color: red;
+          // background-color: red;
         }
       }
 

@@ -1,3 +1,5 @@
+@use "../variables";
+
 .template--artist {
   .hero-artist {
     margin-bottom: var(--spacing-lg);
@@ -24,6 +26,13 @@
         width: auto;
         display: inline-block;
       }
+    }
+  }
+
+  @media all and (max-width: variables.$md) {
+    .hero-artist {
+      padding: 0;
+      margin: 0;
     }
   }
 }
