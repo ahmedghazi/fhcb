@@ -15,7 +15,7 @@
     @media all and (min-width: variables.$md) {
       transform: scale(1.02);
     }
-    .btn:not(.btn--secondary),
+    // .btn:not(.btn--secondary),
     // .btn {
     //   background-color: transparent !important;
     //   &::before {
@@ -23,10 +23,13 @@
     //   }
     // }
 
-    &.card--video-mux:hover .btn {
+    &.card--video-mux .btn {
       background-color: var(--color-white-0_5) !important;
       backdrop-filter: blur(1rem);
     }
+    // &.card--product:hover .btn.add-to-cart {
+    //   background-color: transparent;
+    // }
   }
 
   .card__inner {
@@ -294,6 +297,9 @@
     }
     .add-to-cart.btn {
       background-color: var(--color-white-0_5);
+      &:hover {
+        background-color: transparent;
+      }
     }
     @media all and (max-width: variables.$md) {
       .card__inner--col {

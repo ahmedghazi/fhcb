@@ -29,7 +29,12 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
   // console.log({ open });
 
   useEffect(() => {
-    document.body.classList.toggle("has-bandeau", open);
+    if (open) {
+      document.body.classList.add("has-bandeau");
+    } else {
+      document.body.classList.remove("has-bandeau");
+    }
+    console.log(open);
   }, [open]);
 
   const localizedText = _localizeField(text);

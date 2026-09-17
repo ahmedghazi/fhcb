@@ -20,11 +20,22 @@
   }
   :global(button.btn) {
     color: var(--color-primary);
+    &::before {
+      border-color: white;
+    }
+    &:hover {
+      svg path {
+        stroke: white;
+      }
+    }
     svg {
       width: 1rem;
       height: 1rem;
     }
+
     /* flex: 0; */
+  }
+  :global(button.btn):hover {
   }
 }
 .toggle {

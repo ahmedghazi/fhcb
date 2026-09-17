@@ -11,13 +11,14 @@ header.header {
   z-index: 50;
   transition: transform 0.2s var(--cubic);
   color: var(--color-secondary);
+  background-color: var(--color-bg);
   font-weight: 450;
   &.is-up {
     transform: translateY(-100%);
     opacity: 0;
   }
   &.is-down {
-    background-color: var(--color-bg);
+    // background-color: var(--color-bg);
   }
   a,
   button,
