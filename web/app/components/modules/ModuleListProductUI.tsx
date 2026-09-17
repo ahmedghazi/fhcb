@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import useLocale from "@/app/context/LocaleContext";
 import { ProductExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
@@ -50,7 +50,8 @@ const toCatalogEntry = (
   locale: string,
 ): ProductCatalogEntry => {
   const artists =
-    artistsToString(product.artists) || _parseJsonStringArray(product.artistName);
+    artistsToString(product.artists) ||
+    _parseJsonStringArray(product.artistName);
 
   return {
     id: product._id,
@@ -68,7 +69,9 @@ const toCatalogEntry = (
       .map((tag) => localizeField(tag.title, locale))
       .filter(Boolean),
     url: `${website.url}${_linkResolver(product)}`,
-    image: product.imageCover?.asset ? urlFor(product.imageCover.asset, 800) : "",
+    image: product.imageCover?.asset
+      ? urlFor(product.imageCover.asset, 800)
+      : "",
     editeur: product.editeur,
     isbn: product.isbn,
   };
@@ -86,6 +89,7 @@ type Props = {
 };
 
 const ModuleListProductUI = ({ input }: Props) => {
+  const ref = useRef<HTMLDivElement | null>(null);
   const { locale } = useLocale();
   const { activeFilters, visibleCount, handleFilterChange, loadMore } =
     usePaginatedFilters();
@@ -107,6 +111,11 @@ const ModuleListProductUI = ({ input }: Props) => {
   useEffect(() => {
     const hasFilters = Object.keys(activeFilters).length > 0;
     publish("IS_FILTERING", hasFilters);
+    if (hasFilters) {
+      ref.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   }, [activeFilters]);
 
   const resolvedItems = input.resolvedItems;
@@ -153,7 +162,13 @@ const ModuleListProductUI = ({ input }: Props) => {
         if (query) {
           const term = query.toLowerCase();
           entries = entries.filter((entry) =>
-            [entry.title, entry.subTitle, entry.artists, ...entry.tags, ...entry.categories]
+            [
+              entry.title,
+              entry.subTitle,
+              entry.artists,
+              ...entry.tags,
+              ...entry.categories,
+            ]
               .join(" ")
               .toLowerCase()
               .includes(term),
@@ -164,8 +179,10 @@ const ModuleListProductUI = ({ input }: Props) => {
           entries = entries.filter((entry) => entry.inStock);
         }
 
-        if (sort === "title_asc") entries.sort((a, b) => a.title.localeCompare(b.title));
-        if (sort === "title_desc") entries.sort((a, b) => b.title.localeCompare(a.title));
+        if (sort === "title_asc")
+          entries.sort((a, b) => a.title.localeCompare(b.title));
+        if (sort === "title_desc")
+          entries.sort((a, b) => b.title.localeCompare(a.title));
         if (sort === "price_asc")
           entries.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
         if (sort === "price_desc")
@@ -182,7 +199,7 @@ const ModuleListProductUI = ({ input }: Props) => {
   }, [resolvedItems, locale]);
 
   return (
-    <section className='module module--list-product-ui'>
+    <section className='module module--list-product-ui' ref={ref}>
       <div className='container-fluid'>
         <div className='module__inner'>
           {input.title && (
