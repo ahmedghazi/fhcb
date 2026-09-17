@@ -1,9 +1,17 @@
 "use client";
 import MuxPlayer from "@mux/mux-player-react";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useConsent } from "react-hook-consent";
 import Controls from "./controls";
 import "./_index.scss";
+import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 type Props = {
   playbackId: string;
   title?: string;
@@ -32,15 +40,17 @@ const MuxVideoPlayer = ({
   hoverPlay = false,
   hovered: hoveredProp,
 }: Props) => {
+  const { isMobile } = useDeviceDetect();
+  const ref = useRef<HTMLDivElement | null>(null);
   const [ready, setReady] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [muted, setMuted] = useState<boolean>(true);
   const [internalHovered, setInternalHovered] = useState<boolean>(false);
   const isControlled = hoveredProp !== undefined;
-  const hovered = isControlled ? hoveredProp : internalHovered;
+  const hovered = isControlled && !isMobile ? hoveredProp : internalHovered;
   const playerRef = useRef<React.ComponentRef<typeof MuxPlayer>>(null);
   const { hasConsent } = useConsent();
-
+  console.log(hovered);
   // Stable identity so the mux-player custom element doesn't see a "changed"
   // prop (and re-diff/re-init) on every unrelated parent re-render.
   const metadata = useMemo(
@@ -51,6 +61,24 @@ const MuxVideoPlayer = ({
   useEffect(() => {
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log(entry);
+          setInternalHovered(true);
+        } else {
+          setInternalHovered(false);
+        }
+      });
+    });
+    observer.observe(playerRef.current!);
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
   useEffect(() => {
     // console.log("progress", progress);
@@ -79,6 +107,7 @@ const MuxVideoPlayer = ({
 
   return (
     <div
+      ref={ref}
       className='mux-player-container'
       onClick={hoverPlay ? undefined : handleClick}
       onMouseEnter={handleMouseEnter}

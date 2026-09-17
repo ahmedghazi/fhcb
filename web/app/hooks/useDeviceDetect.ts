@@ -15,11 +15,11 @@ export default function useDeviceDetect() {
       typeof window.navigator === "undefined" ? "" : navigator.userAgent;
     const mobileUA = Boolean(
       userAgent.match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-      )
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i,
+      ),
     );
     const isSmallDevice = window.innerWidth <= 1080;
-    // console.log(isSmallDevice, mobileUA)
+    // console.log(isSmallDevice, mobileUA);
     setMobile(isSmallDevice ? true : mobileUA);
   };
   // console.log(isMobile)
