@@ -71,7 +71,10 @@ export const _pickRelatedWithQuota = (
   );
   if (picked.length < total) {
     picked.push(
-      ...pickUnique(sources.flatMap((items) => items || []), total - picked.length),
+      ...pickUnique(
+        sources.flatMap((items) => items || []),
+        total - picked.length,
+      ),
     );
   }
   return picked;
@@ -297,7 +300,13 @@ export const _isCurrentOrFuturByDates = (dates: FhcbDate[]): boolean => {
   return isCurrent || isFutur;
 };
 export const _isHorsLesMurs = (tags: Tag[]): boolean => {
-  return tags.filter((tag) => tag.slug?.current === "hors-les-murs").length > 0;
+  return (
+    tags.filter(
+      (tag) =>
+        tag.slug?.current === "hors-les-murs" ||
+        tag.slug?.current === "exposition-itinerante",
+    ).length > 0
+  );
 };
 
 export const _isPast = (item: ExhibitionExpanded) => {

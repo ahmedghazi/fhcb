@@ -38,6 +38,7 @@ import Embed from "../../Embed";
 import MuxVideoPlayer from "../../MuxPlayer";
 import {
   _isCurrentOrFuturByDates,
+  _isHorsLesMurs,
   _isPast,
   _isPastByDates,
   artistsToString,
@@ -80,8 +81,9 @@ export function exhibitionToCard(
   const imagePortrait = !isLandscape;
   // const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
+  const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
   // const hasOffsite =
-  //   input.dates?.filter(
+  //   input?.dates?.filter(
   //     (el) => el.locationType === "offSite" || el.locationType === "travelling",
   //   ).length > 0;
 
@@ -98,13 +100,19 @@ export function exhibitionToCard(
     if (size === "lg") {
       layout = "row";
     }
-  } else if (size === "lg") {
+  } else if (size === "lg" && !isHorsLesMurs) {
     layout = "row";
+  } else if (isHorsLesMurs) {
+    layout = imagePortrait ? "col" : "row";
   } else if (size === "md") {
     layout = imagePortrait ? "row" : "col";
   } else {
     layout = "col";
   }
+  // console.log({ size });
+  // console.log({ imagePortrait });
+  // console.log({ isHorsLesMurs });
+  // console.log({ layout });
 
   const actions: CardAction[] = [];
   actions.push({

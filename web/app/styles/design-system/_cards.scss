@@ -563,6 +563,9 @@
           width: 100%;
         }
       }
+      .card__inner--col {
+        gap: var(--spacing-xs);
+      }
     }
     img {
       width: 100% !important;

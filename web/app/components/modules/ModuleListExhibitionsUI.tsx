@@ -44,7 +44,7 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
               ))}
             </div>
           )} */}
-          <div className='grid gap-sm md:gap-gutter'>
+          <div className='grid gap-sm md:gap-gutter '>
             {resolvedItems?.map((item: ExhibitionExpanded, index: number) => (
               <Fragment key={`${item._id}-${index}`}>
                 <div className={`md:col-span-${__isPast(item) ? 1 : 4}`}>

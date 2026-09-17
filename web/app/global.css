@@ -21,6 +21,7 @@
   --color-taupe: rgba(187, 173, 160, 1);
   --color-coquille: rgba(248, 236, 223, 1);
 
+  --color-red: red;
   /* =====================
      SPACING
   ===================== */
@@ -120,6 +121,8 @@
   --color-orange: var(--color-orange);
   --color-taupe: var(--color-taupe);
   --color-coquille: var(--color-coquille);
+
+  --color-red: var(--color-red);
 
   --spacing-2xs: var(--spacing-2xs);
   --spacing-xs: var(--spacing-xs);
