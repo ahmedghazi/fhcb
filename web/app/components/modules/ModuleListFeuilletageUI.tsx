@@ -62,7 +62,7 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
             <FilterBar filterDefs={filterDefs} onChange={handleFilterChange} />
           )}
           {visibleItems.length > 0 && (
-            <div className='grid md:grid-cols-12 items-start gap-gutter'>
+            <div className='grid md:grid-cols-12 items-start gap-sm md:gap-gutter'>
               {visibleItems.map((item: FeuilletageExpanded, index: number) => (
                 <Fragment key={`${item._id}-${index}`}>
                   <CardFeuilletage input={item} size='md' />

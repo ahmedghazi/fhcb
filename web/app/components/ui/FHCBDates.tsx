@@ -55,9 +55,9 @@ const FHCBDates = ({ input, displayLocations = true }: Props) => {
             {fmt.type === "different-years" && (
               <>
                 <time dateTime={date.du ?? undefined}>{fmt.du}</time>
-                <br />
+                {/* <br /> */}
 
-                <time dateTime={date.au ?? undefined}>→ {fmt.au}</time>
+                <time dateTime={date.au ?? undefined}> → {fmt.au}</time>
                 {date.location && (
                   <LocationSlot
                     location={date.location as unknown as Location}

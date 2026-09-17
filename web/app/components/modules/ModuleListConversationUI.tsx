@@ -64,14 +64,12 @@ const ModuleListConversationUI = ({ input }: Props) => {
           )}
 
           {visibleItems.length > 0 && (
-            <div className='grid md:grid-cols-12 items-start gap-gutter'>
-              {visibleItems.map(
-                (item: ConversationExpanded, index: number) => (
-                  <Fragment key={`${item._id}-${index}`}>
-                    <CardConversation input={item} size='md' />
-                  </Fragment>
-                ),
-              )}
+            <div className='grid md:grid-cols-12 items-start gap-sm md:gap-gutter'>
+              {visibleItems.map((item: ConversationExpanded, index: number) => (
+                <Fragment key={`${item._id}-${index}`}>
+                  <CardConversation input={item} size='md' />
+                </Fragment>
+              ))}
             </div>
           )}
 

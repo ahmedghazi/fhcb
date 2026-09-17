@@ -71,7 +71,7 @@ const ModuleListSerieThematiqueUI = ({ input }: Props) => {
           )}
 
           {visibleItems.length > 0 && (
-            <div className='grid md:grid-cols-12 items-start gap-gutter'>
+            <div className='grid md:grid-cols-12 items-start gap-sm md:gap-gutter'>
               {visibleItems.map(
                 (item: SerieThematiqueExpanded, index: number) => (
                   <Fragment key={`${item._id}-${index}`}>

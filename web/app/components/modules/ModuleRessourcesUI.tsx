@@ -60,7 +60,7 @@ const ModuleRessourcesUI = ({ input }: Props) => {
             <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           )}
           {/* <pre>{JSON.stringify(items)}</pre> */}
-          <div className='grid--centered mb-gutter'>
+          <div className='grid--centered mb-sm md:mb-gutter'>
             {itemsFlatten.map((item, i) => (
               <Fragment key={i}>
                 {item?._type === "feuilletage" && (
