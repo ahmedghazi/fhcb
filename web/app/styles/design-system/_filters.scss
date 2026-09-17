@@ -149,6 +149,9 @@ header.is-up ~ main .filters {
     }
   }
   .ui-filter__search {
+    input {
+      font-size: 16px;
+    }
     input:focus {
       outline: 1px solid var(--color-accent);
     }

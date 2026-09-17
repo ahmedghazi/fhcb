@@ -46,6 +46,7 @@ import {
 import { usePathname } from "next/navigation";
 import EmbedVideo from "../../EmbedVideo";
 import { toPlainText } from "@portabletext/react";
+import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -82,6 +83,7 @@ export function exhibitionToCard(
   // const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
   const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
+  const {isMobile} = useDeviceDetect()
   // const hasOffsite =
   //   input?.dates?.filter(
   //     (el) => el.locationType === "offSite" || el.locationType === "travelling",
@@ -102,7 +104,10 @@ export function exhibitionToCard(
     }
   } else if (size === "lg" && !isHorsLesMurs) {
     layout = "row";
-  } else if (isHorsLesMurs) {
+  }else if (size === "lg" && isHorsLesMurs && !isMobile) {
+    layout = "row";
+  }
+  else if (isHorsLesMurs && isMobile) {
     layout = imagePortrait ? "col" : "row";
   } else if (size === "md") {
     layout = imagePortrait ? "row" : "col";
