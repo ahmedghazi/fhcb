@@ -39,7 +39,7 @@ header.is-up ~ main .filters {
   }
   @media all and (max-width: variables.$md) {
     position: fixed;
-    bottom: 0;
+    bottom: -1px;
     left: 0;
     right: 0;
     top: unset;
@@ -111,8 +111,8 @@ header.is-up ~ main .filters {
       }
 
       select.ui-filter__select {
-        padding-left: 1rem;
-        background-position: left 0em center;
+        padding-left: calc(var(--spacing-xs) + 1rem);
+        background-position: left var(--spacing-xs) center;
       }
       &.ui-filter__list.is-open {
         padding: 0;
