@@ -235,6 +235,15 @@ header.is-up ~ main .filters {
       position: initial;
       opacity: 1;
     }
+
+    @media all and (max-width: variables.$md) {
+      fieldset {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        padding: var(--spacing-sm);
+      }
+    }
   }
   .ui-filter__list {
     transition: padding-bottom 0.3s ease;
