@@ -550,7 +550,8 @@
     }
   }
   .mux-player-container mux-player {
-    aspect-ratio: 1;
+    aspect-ratio: 1 !important;
+    height: 100%;
   }
 }
 
