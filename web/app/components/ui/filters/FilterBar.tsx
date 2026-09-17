@@ -7,6 +7,7 @@ import FilterRadio from "./FilterRadio";
 import clsx from "clsx";
 import FilterCheckbox from "./FilterCheckbox";
 import FilterToggle from "./FilterToggle";
+import Icon from "../Icon";
 
 type Props = {
   filterDefs: SanityFilterDef[];
@@ -117,11 +118,17 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                       placeholder={_localizeText("search")}
                       className='ui-filters__search uppercase'
                     />
-                    {active["search"] && (
+                    <button
+                      type='button'
+                      className='ui-filters__search__submit sm-only'
+                      onClick={() => setOpen(false)}>
+                      <Icon name='search' />
+                    </button>
+                    {/* {active["search"] && (
                       <div className='filters__value sm-only'>
                         {active["search"]}
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               );

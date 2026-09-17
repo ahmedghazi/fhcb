@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  name: "close" | "search" | "dl" | null;
+  name: "close" | "search" | "dl" | "search" | null;
 };
 
 const Icon = ({ name }: Props) => {

@@ -121,6 +121,16 @@ header.is-up ~ main .filters {
         .ui-filters__summary {
           color: var(--color-accent);
         }
+        .container-fluid {
+          padding: 0;
+        }
+        .ui-filter__list-alpha,
+        .ui-filter__list-items {
+          padding: 0 var(--spacing-sm);
+        }
+        .ui-filter__list-items {
+          padding-bottom: var(--spacing-sm);
+        }
         .ui-filter__detail {
           position: initial;
           padding: 0;
@@ -151,12 +161,21 @@ header.is-up ~ main .filters {
   .ui-filter__search {
     input {
       font-size: 16px;
+      &::-webkit-search-cancel-button {
+        visibility: hidden;
+      }
     }
     input:focus {
-      outline: 1px solid var(--color-accent);
+      // outline: 1px solid var(--color-accent);
     }
     input::placeholder {
       color: var(--color-primary);
+    }
+    button {
+      padding: var(--spacing-xs);
+      svg path {
+        stroke: var(--color-primary);
+      }
     }
   }
   select.ui-filter__select {
