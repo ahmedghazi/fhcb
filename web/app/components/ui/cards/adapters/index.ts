@@ -83,7 +83,7 @@ export function exhibitionToCard(
   // const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
   const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
-  const {isMobile} = useDeviceDetect()
+  const { isMobile } = useDeviceDetect();
   // const hasOffsite =
   //   input?.dates?.filter(
   //     (el) => el.locationType === "offSite" || el.locationType === "travelling",
@@ -104,10 +104,9 @@ export function exhibitionToCard(
     }
   } else if (size === "lg" && !isHorsLesMurs) {
     layout = "row";
-  }else if (size === "lg" && isHorsLesMurs && !isMobile) {
+  } else if (size === "lg" && isHorsLesMurs && !isMobile) {
     layout = "row";
-  }
-  else if (isHorsLesMurs && isMobile) {
+  } else if (isHorsLesMurs && isMobile) {
     layout = imagePortrait ? "col" : "row";
   } else if (size === "md") {
     layout = imagePortrait ? "row" : "col";
@@ -279,7 +278,7 @@ export function eventToCard(
     actions.push({
       label: _localizeText("bookTicket") as string,
       href: linkTickets,
-      variant: "primary",
+      variant: "secondary",
       type: "linkExternal",
     });
   }
