@@ -107,6 +107,8 @@ header.is-up ~ main .filters {
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
+          width: 100%;
+          text-align: right;
         }
       }
 
