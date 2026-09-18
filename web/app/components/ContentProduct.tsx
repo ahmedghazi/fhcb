@@ -68,25 +68,26 @@ const ContentProduct = ({ input }: Props) => {
   return (
     <div className='content content--product'>
       <div className='container-fluid'>
-        <div className='grid md:grid-cols-4 gap-gutter mb-lg items-start'>
+        <div className='grid md:grid-cols-4 gap-gutter mb-lg items-start-'>
           <div className='header'>
-            <div>
-              <h1 className='c-h2'>{_localizeField(title)}</h1>
+            <div className='md:sticky'>
+              <div>
+                <h1 className='c-h2'>{_localizeField(title)}</h1>
 
-              <div className='subtitle c-chapo c-chapo--i'>
-                {artists && artists.length > 0 && artistsToString(artists)}
-                {!artists && <span>{_parseJsonStringArray(artistName)}</span>}
+                <div className='subtitle c-chapo c-chapo--i'>
+                  {artists && artists.length > 0 && artistsToString(artists)}
+                  {!artists && <span>{_parseJsonStringArray(artistName)}</span>}
+                </div>
               </div>
-            </div>
-            <div className='price c-h2'>{price} €</div>
-            {/* <div className='stock'>
+              <div className='price c-h2'>{price} €</div>
+              {/* <div className='stock'>
               {isLowStock ? _localizeText("isLowStock") : ""}
             </div> */}
-            {!isOutOfStock && (
-              <BtnAddToCart input={input as unknown as ProductExpanded} />
-            )}
-            <ul className='sidebar'>
-              {/* {artists && (
+              {!isOutOfStock && (
+                <BtnAddToCart input={input as unknown as ProductExpanded} />
+              )}
+              <ul className='sidebar'>
+                {/* {artists && (
                 <li className='sidebar__item'>
                   <div className='c-tag underline'>
                     {_localizeText("artist_s")}
@@ -98,93 +99,96 @@ const ContentProduct = ({ input }: Props) => {
                   </div>
                 </li>
               )} */}
-              {editeur && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>
-                    {_localizeText("editor")}
-                  </div>
-                  <div className='c-body--tight'>{editeur}</div>
-                </li>
-              )}
-              {direction_editoriale && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>
-                    {_localizeText("direction_editoriale")}
-                  </div>
-                  <div className='c-body--tight'>{direction_editoriale}</div>
-                </li>
-              )}
-              {auteurs && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>
-                    {_localizeText("auteurs")}
-                  </div>
-                  <div className='c-body--tight'>
-                    {_parseJsonStringArray(auteurs)}
-                  </div>
-                </li>
-              )}
-              {traducteurs && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>
-                    {_localizeText("traducteurs")}
-                  </div>
-                  <div className='c-body--tight'>{traducteurs}</div>
-                </li>
-              )}
-              {publicationDate && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>
-                    {_localizeText("publicationDate")}
-                  </div>
-                  <div className='c-body--tight'>
-                    {_date(publicationDate, locale)}
-                  </div>
-                </li>
-              )}
-              {(dimensions ||
-                nombre_de_pages ||
-                reliure ||
-                version_linguistique) && (
-                <li className='sidebar__item'>
-                  {dimensions && (
-                    <div className='c-body--tight'>
-                      {_localizeField(dimensions)}
+                {editeur && (
+                  <li className='sidebar__item'>
+                    <div className='c-tag underline'>
+                      {_localizeText("editor")}
                     </div>
-                  )}
-                  {nombre_de_pages && (
-                    <div className='c-body--tight'>
-                      {_localizeField(nombre_de_pages)}
+                    <div className='c-body--tight'>{editeur}</div>
+                  </li>
+                )}
+                {direction_editoriale && (
+                  <li className='sidebar__item'>
+                    <div className='c-tag underline'>
+                      {_localizeText("direction_editoriale")}
                     </div>
-                  )}
-                  {reliure && (
-                    <div className='c-body--tight'>
-                      {_localizeField(reliure)}
+                    <div className='c-body--tight'>{direction_editoriale}</div>
+                  </li>
+                )}
+                {auteurs && (
+                  <li className='sidebar__item'>
+                    <div className='c-tag underline'>
+                      {_localizeText("auteurs")}
                     </div>
-                  )}
-                  {/* {version_linguistique && (
+                    <div className='c-body--tight'>
+                      {_parseJsonStringArray(auteurs)}
+                    </div>
+                  </li>
+                )}
+                {traducteurs && (
+                  <li className='sidebar__item'>
+                    <div className='c-tag underline'>
+                      {_localizeText("traducteurs")}
+                    </div>
+                    <div className='c-body--tight'>{traducteurs}</div>
+                  </li>
+                )}
+                {publicationDate && (
+                  <li className='sidebar__item'>
+                    <div className='c-tag underline'>
+                      {_localizeText("publicationDate")}
+                    </div>
+                    <div className='c-body--tight'>
+                      {_date(publicationDate, locale)}
+                    </div>
+                  </li>
+                )}
+                {(dimensions ||
+                  nombre_de_pages ||
+                  reliure ||
+                  version_linguistique) && (
+                  <li className='sidebar__item'>
+                    {dimensions && (
+                      <div className='c-body--tight'>
+                        {_localizeField(dimensions)}
+                      </div>
+                    )}
+                    {nombre_de_pages && (
+                      <div className='c-body--tight'>
+                        {_localizeField(nombre_de_pages)}
+                      </div>
+                    )}
+                    {reliure && (
+                      <div className='c-body--tight'>
+                        {_localizeField(reliure)}
+                      </div>
+                    )}
+                    {/* {version_linguistique && (
                     <div className='c-body--tight'>
                       {_localizeField(version_linguistique)}
                     </div>
                   )} */}
-                  {/* {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>} */}
+                    {/* {isbn && <div className='c-body--tight'>ISBN: {isbn}</div>} */}
 
-                  {/* {traducteurs && (
+                    {/* {traducteurs && (
                     <div className='c-body--tight'>{traducteurs}</div>
                   )}
                   {direction_editoriale && (
                     <div className='c-body--tight'>{direction_editoriale}</div>
                   )} */}
-                </li>
-              )}
+                  </li>
+                )}
 
-              {isbn && (
-                <li className='sidebar__item'>
-                  <div className='c-tag underline'>{_localizeText("isbn")}</div>
-                  <div className='c-body--tight'>{isbn}</div>
-                </li>
-              )}
-            </ul>
+                {isbn && (
+                  <li className='sidebar__item'>
+                    <div className='c-tag underline'>
+                      {_localizeText("isbn")}
+                    </div>
+                    <div className='c-body--tight'>{isbn}</div>
+                  </li>
+                )}
+              </ul>
+            </div>
           </div>
           {images && (
             <div className='slider md:col-span-3 '>
