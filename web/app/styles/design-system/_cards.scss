@@ -574,6 +574,11 @@
         gap: var(--spacing-xs);
       }
     }
+    &--branche {
+      .mux-player-container {
+        aspect-ratio: 1 / 1;
+      }
+    }
     img {
       width: 100% !important;
       max-width: 100%;
