@@ -50,6 +50,14 @@ header.is-up ~ main .filters {
     z-index: 51;
     margin: 0;
 
+    &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      bottom: -3em;
+      background: var(--color-bg);
+      z-index: -1;
+    }
     .filters__inner {
       display: none;
       .reset {
@@ -72,6 +80,12 @@ header.is-up ~ main .filters {
       background-color: var(--color-bg);
       display: flex;
       justify-content: center;
+      position: relative;
+      button:nth-child(2) {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
     &.is-open {
       .filters__inner {
