@@ -23,7 +23,6 @@ export default defineField({
     },
     prepare(selection) {
       const {label, _type, withSubmenu, media} = selection
-      console.log(label, _type)
       return {
         title: label,
         subtitle: withSubmenu ? 'Avec sous-menu' : _type,
@@ -75,7 +74,8 @@ export default defineField({
           type: 'linkExternal',
         },
       ],
-      hidden: ({document, path, parent}) => !isSettingsHeaderNav(document, path) || !parent?.withSubmenu,
+      hidden: ({document, path, parent}) =>
+        !isSettingsHeaderNav(document, path) || !parent?.withSubmenu,
     }),
     defineField({
       name: 'withMessage',

@@ -12,6 +12,8 @@ import {frFRLocale} from '@sanity/locale-fr-fr'
 import {customPublishAction} from './src/actions/countDocs'
 import {references} from 'sanity-plugin-references'
 import {CustomDetails} from './src/components/CustomDetails'
+import {resolveProductionUrlAction} from './src/actions/resolveProductionUrlAction'
+import resolveProductionUrl from './src/actions/resolveProductionUrl'
 
 const remoteURL = 'https://fhcb-preprod.vercel.app'
 const localURL = 'http://localhost:3000'
@@ -68,12 +70,16 @@ export default defineConfig({
       const allowedDocs = ['feuilletage', 'imageImages', 'serieThematique', 'conversation']
       if (allowedDocs.includes(context.schemaType)) {
         // console.log(context)
-        return prev.map((originalAction) =>
-          originalAction.action === 'publish' ? customPublishAction : originalAction,
-        )
+        return [
+          ...prev.map((originalAction) =>
+            originalAction.action === 'publish' ? customPublishAction : originalAction,
+          ),
+          resolveProductionUrlAction,
+        ]
       }
 
-      return prev
+      return [...prev, resolveProductionUrlAction]
     },
+    productionUrl: resolveProductionUrl,
   },
 })

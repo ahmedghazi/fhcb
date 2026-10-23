@@ -32,7 +32,7 @@ export function customPublishAction(props: DocumentActionProps) {
 
   return {
     label: 'Publier',
-    disabled: publish.disabled,
+    disabled: Boolean(publish.disabled),
     onHandle: () => {
       publish.execute()
       props.onComplete()

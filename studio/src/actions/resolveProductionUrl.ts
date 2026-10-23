@@ -1,21 +1,10 @@
-const remoteURL = 'https://combo-factory.vercel.app/api/preview'
-const localURL = 'http://localhost:3000/api/preview'
-const previewURL = window.location.hostname === 'localhost' ? localURL : remoteURL
+import type {DocumentPluginOptions} from 'sanity'
+import {SITE_URL, _linkResolver} from './resolveProductionUrlAction'
 
-// const baseURL = 'http://localhost:3000/api/preview'
-// const baseURL = 'http://localhost:8000/'
-export function resolveProductionUrl(props: any) {
-  // console.log(props)
-  const _onHandle = async () => {
-    const {_type, slug} = props.published
-    // console.log(location.origin)
-    let pagePath = `?slug=${slug.current}&type=${_type}`
+const resolveProductionUrl: DocumentPluginOptions['productionUrl'] = async (prev, {document}) => {
+  const slug = (document as any)?.slug?.current
+  if (!slug) return prev
 
-    if (window) window.open(`${previewURL}/${pagePath}`, '_blank')
-  }
-
-  return {
-    label: 'Open Preview',
-    onHandle: _onHandle,
-  }
+  return `${SITE_URL}${_linkResolver(slug, document._type)}`
 }
+export default resolveProductionUrl

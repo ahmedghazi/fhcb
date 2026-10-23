@@ -47,13 +47,6 @@ export const structure = (S: any) =>
       S.divider(),
 
       S.listItem().title('Artistes').schemaType('artist').child(S.documentTypeList('artist')),
-      S.listItem().title('Lieux').schemaType('location').child(S.documentTypeList('location')),
-      S.listItem()
-        .title('Partenaires')
-        .schemaType('partenaire')
-        .child(S.documentTypeList('partenaire')),
-
-      S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),
       S.divider(),
 
       S.listItem()
@@ -112,6 +105,14 @@ export const structure = (S: any) =>
       S.divider(),
 
       S.listItem().title('Rebonds').schemaType('rebond').child(S.documentTypeList('rebond')),
+      S.listItem().title('Lieux').schemaType('location').child(S.documentTypeList('location')),
+      S.listItem()
+        .title('Partenaires')
+        .schemaType('partenaire')
+        .child(S.documentTypeList('partenaire')),
+
+      S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),
+      // S.divider(),
       S.listItem().title('Prix').schemaType('prix').child(S.documentTypeList('prix')),
       // S.listItem().title('Série Thématique').schemaType('serie').child(S.documentTypeList('serie')),
 
