@@ -5,9 +5,6 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [{ hostname: "cdn.sanity.io" }],

@@ -50,6 +50,10 @@ const Figure = ({
   return (
     <figure
       ref={figureRef}
+      onContextMenu={(e) => {
+        e.preventDefault();
+      }}
+      onDragStart={(e) => e.preventDefault()}
       className={clsx(
         "figure",
         isLandscape && "figure--is-landscape",
@@ -73,10 +77,22 @@ const Figure = ({
       />
       {withCaption && (
         <figcaption>
-          <span className='c-caption caption'>{caption}</span>
-          {author && <span className='c-caption'>, {author}</span>}
-          {author && copyright && <span className='c-credits'> | </span>}
-          {copyright && <span className='c-credits'> © {copyright}</span>}
+          {author && (
+            <span className='c-caption figcaption--author'>{author}, </span>
+          )}
+          <span className='c-caption caption figcaption--caption'>
+            {caption}
+          </span>
+
+          {author && copyright && (
+            <span className='c-credits figcaption--separator'> | </span>
+          )}
+          {copyright && (
+            <span className='c-credits figcaption--copyright'>
+              {" "}
+              © {copyright}
+            </span>
+          )}
         </figcaption>
       )}
     </figure>

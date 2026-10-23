@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     }
 
     const tags = [body._type, ...(FANOUT_TAGS[body._type] ?? [])];
-    tags.forEach((tag) => revalidateTag(tag));
+    tags.forEach((tag) => revalidateTag(tag, { expire: 0 }));
 
     return NextResponse.json({ revalidated: true, tags, now: Date.now() });
   } catch (err) {

@@ -11,6 +11,7 @@ import {media} from 'sanity-plugin-media'
 import {frFRLocale} from '@sanity/locale-fr-fr'
 import {customPublishAction} from './src/actions/countDocs'
 import {references} from 'sanity-plugin-references'
+import {CustomDetails} from './src/components/CustomDetails'
 
 const remoteURL = 'https://fhcb-preprod.vercel.app'
 const localURL = 'http://localhost:3000'
@@ -38,8 +39,9 @@ const plugins = [
       // string | string[] - when used with 3rd party asset sources, you may
       // wish to prevent users overwriting the creditLine based on the `source.name`
     },
+    components: {details: CustomDetails},
     locales: [
-      {id: 'fr', title: 'French'},
+      {id: 'fr', title: 'Français'},
       {id: 'en', title: 'English'},
     ],
   }),

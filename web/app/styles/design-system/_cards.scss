@@ -353,6 +353,9 @@
     }
     &.card--is-past {
       position: relative;
+      .card__tags {
+        display: none;
+      }
       &:hover {
         overflow: unset;
         .card__footer {

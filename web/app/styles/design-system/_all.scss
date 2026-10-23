@@ -194,9 +194,24 @@ figure {
     text-align: right;
     padding: 0.4em 0 0;
     line-height: 1.1;
-    .caption {
+    .figcaption--caption {
       font-style: italic;
     }
+    .figcaption--author {
+      font-style: unset;
+      margin-right: 0.3em;
+      display: inline-block;
+    }
+    .figcaption--separator {
+      // opacity: 0.5;
+    }
+    .figcaption--copyright {
+      // opacity: 0.5;
+      font-style: italic;
+    }
+    // .caption {
+    //   font-style: italic;
+    // }
     .c-credits {
       opacity: 0.5;
     }
