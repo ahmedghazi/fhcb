@@ -383,6 +383,11 @@ export const ALL_CONTENT_SITEMAP_QUERY = groq`*[
 ]{
   _type,
   slug,
+  title,
+  seo{
+    metaTitle,
+    metaDescription
+  },
   _updatedAt
 }`;
 

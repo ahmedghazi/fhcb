@@ -67,6 +67,30 @@ const toInfoNode = (dates: SanityDates, displayLocations: boolean) =>
 const toTags = (tags: SanityTags) =>
   tags?.length ? React.createElement(CardTags, { input: tags }) : undefined;
 
+type CardSize = "sm" | "md" | "lg";
+type ImageWithDimensions =
+  | {
+      asset?: {
+        metadata?: { dimensions?: { width?: number; height?: number } | null };
+      } | null;
+    }
+  | null
+  | undefined;
+
+const isLandscapeImage = (image: ImageWithDimensions) =>
+  (image?.asset?.metadata?.dimensions?.width ?? 0) >
+  (image?.asset?.metadata?.dimensions?.height ?? 0);
+
+// Layout par défaut : sm = col, md = portrait ? row : col, lg = row
+const toLayout = (
+  size: CardSize | undefined,
+  image: ImageWithDimensions,
+): CardBaseProps["layout"] => {
+  if (size === "lg") return "row";
+  if (size === "md") return isLandscapeImage(image) ? "col" : "row";
+  return "col";
+};
+
 // ─── Exhibition ───────────────────────────────────────────────────────────────
 
 export function exhibitionToCard(
@@ -76,10 +100,7 @@ export function exhibitionToCard(
 ): CardBaseProps {
   const { title, artists, imageCover, dates, tags, links, linkTickets } = input;
   const artistList = artistsToString(artists);
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
-  const imagePortrait = !isLandscape;
+  const imagePortrait = !isLandscapeImage(imageCover);
   // const _isCurrentOrFutur = _isCurrentOrFuturByDates(dates || []);
   const isPast = _isPastByDates(dates || []);
   const isHorsLesMurs = tags ? _isHorsLesMurs(tags) : false;
@@ -102,16 +123,10 @@ export function exhibitionToCard(
     if (size === "lg") {
       layout = "row";
     }
-  } else if (size === "lg" && !isHorsLesMurs) {
-    layout = "row";
-  } else if (size === "lg" && isHorsLesMurs && !isMobile) {
-    layout = "row";
   } else if (isHorsLesMurs && isMobile) {
     layout = imagePortrait ? "col" : "row";
-  } else if (size === "md") {
-    layout = imagePortrait ? "row" : "col";
   } else {
-    layout = "col";
+    layout = toLayout(size, imageCover);
   }
   // console.log({ size });
   // console.log({ imagePortrait });
@@ -192,14 +207,7 @@ export function productToCard(
   const pathname = usePathname();
   const isOffShop =
     !pathname.includes("librairie") && !pathname.includes("publications");
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
-  const imagePortrait = !isLandscape;
-  let layout: CardBaseProps["layout"];
-  if (size === "md") {
-    layout = imagePortrait ? "row" : "col";
-  }
+  const imagePortrait = !isLandscapeImage(imageCover);
   const isSimpleProduct = !variants || variants.length === 0;
   // const isProductVariable = languages && languages?.length > 1;
   const isOutOfStock = totalInventory === 0;
@@ -214,7 +222,7 @@ export function productToCard(
   return {
     _type: input._type,
     className: isOutOfStock ? "is-out-of-stock" : undefined,
-    layout: layout,
+    layout: toLayout(size, imageCover),
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
 
@@ -248,9 +256,7 @@ export function eventToCard(
     linkTickets,
     pastille,
   } = input;
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  const isLandscape = isLandscapeImage(imageCover);
   // const isPast = _isPastByDates(dates || []);
   // const isHorsLeMurs = tags?.some(
   //   (tag: Tag) => tag.slug?.current === "hors-les-murs",
@@ -313,13 +319,10 @@ export function artistToCard(
   size: "sm" | "md" | "lg",
 ): CardBaseProps {
   const { imageCover } = input;
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return {
     tags: _localizeText("artist"),
     _type: input._type,
-    layout: size === "md" && !isLandscape ? "row" : "col",
+    layout: toLayout(size, imageCover),
     colorVar: "var(--color-artist)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     title: (input.name as string) || "",
@@ -340,12 +343,9 @@ export function articleToCard(
   size: "sm" | "md" | "lg",
 ): CardBaseProps {
   const { _type, title, subTitle, imageCover, tags } = input;
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   return {
     _type: _type,
-    layout: size === "md" && !isLandscape ? "row" : "col",
+    layout: toLayout(size, imageCover),
     colorVar: "var(--color-article)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
@@ -368,9 +368,6 @@ export function pageModulaireToCard(
   size?: "sm" | "md",
 ): CardBaseProps {
   const { imageCover, tags, videoCover } = input;
-  const isLandscape =
-    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
-    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
   const playbackId = videoCover?.asset?.playbackId;
 
   return {
