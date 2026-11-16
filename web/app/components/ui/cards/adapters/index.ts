@@ -248,7 +248,10 @@ export function eventToCard(
     linkTickets,
     pastille,
   } = input;
-  const isPast = _isPastByDates(dates || []);
+  const isLandscape =
+    (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
+    (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
+  // const isPast = _isPastByDates(dates || []);
   // const isHorsLeMurs = tags?.some(
   //   (tag: Tag) => tag.slug?.current === "hors-les-murs",
   // );
@@ -283,9 +286,11 @@ export function eventToCard(
     });
   }
 
+  const layout = size === "lg" ? "row" : isLandscape ? "col" : "row";
+
   return {
     _type: input._type,
-    layout: size === "lg" ? "row" : "col",
+    layout: layout,
     colorVar: "var(--color-event)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     tags: toTags(tags),
