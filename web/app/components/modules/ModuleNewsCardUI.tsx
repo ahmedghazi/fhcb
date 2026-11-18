@@ -15,6 +15,7 @@ import { _localizeField } from "@/app/sanity-api/utils";
 import CardExhibition from "../ui/cards/CardExhibition";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
 import CardArticle from "../ui/cards/CardArticle";
+import { _isPastByDates } from "@/app/lib/utils";
 
 type NewsCardUIResolved = NewsCardUI & {
   events?: EventExpanded[];
@@ -28,13 +29,17 @@ type Props = {
   input: NewsCardUIResolved;
 };
 
+// N'affiche que les contenus en cours ou à venir
+const isCurrentOrFutur = (item: { dates?: EventExpanded["dates"] }) =>
+  !_isPastByDates(item.dates || []);
+
 const ModuleNewsCardUI = ({ input }: Props) => {
   const { title } = input;
-  const events = input.events || [];
-  const eventsVisite = input.eventsVisite || [];
+  const events = (input.events || []).filter(isCurrentOrFutur);
+  const eventsVisite = (input.eventsVisite || []).filter(isCurrentOrFutur);
   const product = input.product;
   const articles = input.articles || [];
-  const exhibitions = input.exhibitions || [];
+  const exhibitions = (input.exhibitions || []).filter(isCurrentOrFutur);
   // const feuilletages = input.feuilletage || [];
   return (
     <section className='module module--news-card-ui'>
