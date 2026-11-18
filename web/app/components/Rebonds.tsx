@@ -30,7 +30,13 @@ const Rebonds = ({
 }: Props) => {
   if (!input || input.length === 0) return null;
   const resolvedTitle = _localizeField(title) || "";
-  const orderedInput = items ? _orderRebondsByItems(items, input) : input;
+  const sortedInput = items ? _orderRebondsByItems(items, input) : input;
+  // Plusieurs scénarios peuvent remonter le même document (ex. "artist" + "product-related"
+  // sur un feuilletage dont le livre a le même artiste) : on garde la première occurrence.
+  const orderedInput = sortedInput?.filter(
+    (item: any, i: number, arr: any[]) =>
+      !item?._id || arr.findIndex((el: any) => el?._id === item._id) === i,
+  );
   return (
     <section className={clsx("rebonds mb-lg-", className)}>
       {/* <pre>{JSON.stringify(items, null, 2)}</pre> */}

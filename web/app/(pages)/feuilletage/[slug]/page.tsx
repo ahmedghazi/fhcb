@@ -93,6 +93,7 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
       {data.rebonds && <Rebonds input={data.rebonds} />}
       {/* {data.related && <Rebonds input={data.related} />} */}
       {/* <pre>{JSON.stringify(data.rebondsAuto, null, 2)}</pre> */}
+      ici
       {data.rebondsAuto?.map((rebond, i) => {
         const isDocsRelated =
           rebond?.items?.includes("docs-hcb-related") ||
