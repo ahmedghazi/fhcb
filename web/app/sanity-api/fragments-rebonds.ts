@@ -165,10 +165,11 @@ export const rebondArtistPrizeRelated = `
     !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&
     "prize-related" in ^.items &&
     count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0
-  ] | order(name asc) [0...${PRIZE_RELATED_CAP}] {
-    ${cardRefArtist}
-  }
-`;
+    ] | order(_createdAt asc) [0...3] {
+      ${cardRefArtist}
+      }
+      `;
+// ] | order(name asc) [0...${PRIZE_RELATED_CAP}] {
 
 // scenarios: "book-related" — books directly linked to the host (via product.exhibition, etc.), not
 // broadened via the host's artist(s): otherwise a prolific artist's entire catalog shows up instead

@@ -18,21 +18,22 @@ const ModuleFeaturedCardsUI = ({ input }: Props) => {
       <div className='container-fluid'>
         <div className='module__inner'>
           <div className='featured-cards-grid'>
-            {primary && (
-              <div className='featured-cards-grid__primary'>
-                <CardExhibitionFeatured
-                  input={primary}
-                  imageSizes='(max-width: 767px) 90vw, 35vw'
-                />
-              </div>
+            {secondary && (
+              <CardExhibitionFeatured
+                input={secondary}
+                imageSizes='(max-width: 767px) 90vw, 50vw'
+              />
             )}
             <div className='featured-cards-grid__secondary'>
               {video && <CardVideoMux input={video} />}
-              {secondary && (
-                <CardExhibitionFeatured
-                  input={secondary}
-                  imageSizes='(max-width: 767px) 90vw, 50vw'
-                />
+
+              {primary && (
+                <div className='featured-cards-grid__primary'>
+                  <CardExhibitionFeatured
+                    input={primary}
+                    imageSizes='(max-width: 767px) 90vw, 35vw'
+                  />
+                </div>
               )}
             </div>
           </div>
