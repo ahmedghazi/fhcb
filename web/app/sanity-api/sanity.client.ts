@@ -12,6 +12,9 @@ const config: ClientConfig = {
   apiVersion,
   useCdn: process.env.NODE_ENV === "development" ? true : false,
   token,
+  // with a token the default "raw" perspective also returns drafts (duplicates
+  // in unfiltered *[] queries); preview overrides this with "previewDrafts"
+  perspective: "published",
 };
 
 export const sanityConfig = {
