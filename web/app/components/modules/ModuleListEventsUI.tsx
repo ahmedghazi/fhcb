@@ -38,7 +38,7 @@ const ModuleListEventsUI = ({ input }: Props) => {
   return (
     <section className='module module--list-events'>
       <div className='container-fluid'>
-        {/* <pre>{JSON.stringify(resolvedItems, null, 2)}</pre> */}
+        {/* <pre>{JSON.stringify(filterTags, null, 2)}</pre> */}
         <div className='module__inner'>
           {(resolvedItems?.length ?? 0) > 0 && (
             <div

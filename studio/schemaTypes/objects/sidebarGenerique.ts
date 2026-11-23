@@ -47,6 +47,11 @@ export default defineType({
       type: 'array',
       of: [{type: 'keyVal'}],
     }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+    }),
   ],
   preview: {
     select: {

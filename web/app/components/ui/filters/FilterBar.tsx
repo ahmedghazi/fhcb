@@ -18,6 +18,8 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [active, setActive] = useState<ActiveFilters>({});
   const [openListKey, setOpenListKey] = useState<string | null>(null);
+  // typed text, only applied as the "search" filter on submit
+  const [searchDraft, setSearchDraft] = useState<string>("");
   const isFiltering = Object.keys(active).length != 0;
   const localizedResetFilters = _localizeText("resetFilters");
   const localizedClose = _localizeText("close");
@@ -29,6 +31,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
   const _update = (key: string, value: string) => {
     const next = key === "sort" ? { ...active } : _base();
+    if (key !== "sort" && key !== "search") setSearchDraft("");
     if (value) {
       next[key] = value;
     } else {
@@ -43,6 +46,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
 
   const _toggle = (key: string, value: string) => {
     const next = _base();
+    setSearchDraft("");
     if (active[key] !== value) {
       next[key] = value;
     }
@@ -55,6 +59,7 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
   };
 
   const _reset = () => {
+    setSearchDraft("");
     setActive({});
     onChange({});
     setOpen(false);
@@ -110,26 +115,31 @@ const FilterBar = ({ filterDefs, onChange }: Props) => {
                 <div
                   className='ui-filters ui-filter__wrapper ui-filter__search'
                   key={def._key}>
-                  <div className='ui-filters__summary uppercase'>
-                    <input
-                      type='search'
-                      value={active["search"] ?? ""}
-                      onChange={(e) => _update("search", e.target.value)}
-                      placeholder={_localizeText("search")}
-                      className='ui-filters__search uppercase'
-                    />
-                    <button
-                      type='button'
-                      className='ui-filters__search__submit sm-only'
-                      onClick={() => setOpen(false)}>
-                      <Icon name='search' />
-                    </button>
-                    {/* {active["search"] && (
-                      <div className='filters__value sm-only'>
-                        {active["search"]}
-                      </div>
-                    )} */}
-                  </div>
+                  <form
+                    role='search'
+                    className='flex'
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      _update("search", searchDraft.trim());
+                      setOpen(false);
+                    }}>
+                    <div className='ui-filters__summary uppercase'>
+                      <input
+                        type='search'
+                        value={searchDraft}
+                        onChange={(e) => setSearchDraft(e.target.value)}
+                        placeholder={_localizeText("search")}
+                        aria-label={_localizeText("search")}
+                        className='ui-filters__search uppercase'
+                      />
+                      <button
+                        type='submit'
+                        className='ui-filters__search__submit sm-only-'
+                        aria-label={_localizeText("search")}>
+                        <Icon name='search' />
+                      </button>
+                    </div>
+                  </form>
                 </div>
               );
             }

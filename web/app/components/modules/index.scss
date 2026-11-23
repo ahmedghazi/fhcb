@@ -520,3 +520,16 @@
     }
   }
 }
+
+.module--list-image-images,
+.module--list-feuilletage-ui,
+.module--list-conversation-ui {
+  .card {
+    &:nth-child(odd) {
+      transform-origin: left;
+    }
+    &:nth-child(even) {
+      transform-origin: right;
+    }
+  }
+}

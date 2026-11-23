@@ -18,8 +18,7 @@ https://fhcb-preprod.vercel.app/programme/visites-commentees
 
 - [x] Module List Feuilletage ajouter max items
 
-Home News articles que now ou future
-Home News
+- [x] Home nx module > listCards
 
 - [x] CardProduct si livre du mois afficher livre du mois
 

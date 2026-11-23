@@ -175,6 +175,14 @@ header.is-up ~ main .filters {
     }
   }
   .ui-filter__search {
+    form {
+      width: 100%;
+    }
+    .ui-filters__summary {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
     input {
       font-size: 16px;
       &::-webkit-search-cancel-button {
@@ -188,7 +196,9 @@ header.is-up ~ main .filters {
       color: var(--color-primary);
     }
     button {
-      padding: var(--spacing-xs);
+      @media all and (max-width: variables.$md) {
+        padding: var(--spacing-xs);
+      }
       svg path {
         stroke: var(--color-primary);
       }
