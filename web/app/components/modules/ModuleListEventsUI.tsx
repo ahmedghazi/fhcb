@@ -20,9 +20,20 @@ type Props = {
 
 const ModuleListEventsUI = ({ input }: Props) => {
   const { cardSize, resolvedItems, filterTags, linkFallback } = input;
-  const isEventTour = filterTags?.some(
-    (el) => el.slug?.current === "visite-commentee",
-  );
+  const hasTag = (slug: string) =>
+    filterTags?.some((el) => el.slug?.current === slug);
+  const isEventTour = hasTag("visite-commentee");
+  // status tags maintained by /api/cron/update-event-tags
+  const isEventCurrent = hasTag("evenement-en-cours");
+  const isEventPast = hasTag("evenement-passe");
+
+  const noResultText = isEventTour
+    ? _localizeText("noResultEventTour")
+    : isEventCurrent
+      ? _localizeText("noResultEventCurrent")
+      : isEventPast
+        ? _localizeText("noResultEventPast")
+        : _localizeText("noResultEventFutur");
   // console.log(cardSize);
   return (
     <section className='module module--list-events'>
@@ -52,11 +63,7 @@ const ModuleListEventsUI = ({ input }: Props) => {
           )}
           {resolvedItems?.length === 0 && (
             <div className='text-center'>
-              <p>
-                {isEventTour
-                  ? _localizeText("noResultEventTour")
-                  : _localizeText("noResultEventFutur")}
-              </p>
+              <p>{noResultText}</p>
               {linkFallback?.internal && (
                 <Link
                   className='btn'

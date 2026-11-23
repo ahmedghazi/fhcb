@@ -159,10 +159,14 @@ export const rebondArtistRelated = `
 // NB the extra \`^\` in \`^.^.^.prix\`: the \`[@ in ...]\` array-membership filter is its own scope, same as
 // any \`*[]\` filter (see the file-level comment above on hop counting), so reaching the host from inside
 // it needs one more hop than the surrounding \`*[]\` filter's own conditions (which only need \`^.^\`).
+// Only the host itself is excluded, NOT the host's own \`artists[]\`: a prize page (e.g.
+// /programme-latitudes) lists its laureates in \`artists[]\`, and those are exactly the artists
+// "Autour du Prix" must surface.
 export const rebondArtistPrizeRelated = `
   *[
     _type == "artist" &&
-    !(_id in coalesce(^.^.artists[]._ref, [^.^._id])) &&
+    !(_id in path("drafts.**")) &&
+    _id != ^.^._id &&
     "prize-related" in ^.items &&
     count((prix[]._ref)[@ in ^.^.^.prix[]._ref]) > 0
     ] | order(_createdAt asc) [0...3] {

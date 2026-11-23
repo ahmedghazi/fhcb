@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@sanity/client";
-import nodemailer from "nodemailer";
-import { projectId, dataset } from "@/app/sanity-api/sanity.api";
 import { isInSiteLocationType } from "@/app/lib/utils";
+import {
+  getWriteClient,
+  randomKey,
+  sendCronReport as sendReport,
+  writeAndPublish,
+} from "@/app/lib/cron";
 
 /**
  * curl -H "Authorization: Bearer TEST" http://localhost:3000/api/cron/update-exhibition-tags
@@ -15,77 +18,12 @@ const TAG_HORS_LES_MURS_SLUG = "hors-les-murs";
 
 const OFF_SITE_LOCATION_TYPES = ["offSite", "travelling"];
 
-// Actions API requires apiVersion >= 2023-08-04
-function getWriteClient() {
-  const writeToken = process.env.SANITY_API_WRITE_TOKEN;
-  if (!writeToken) throw new Error("SANITY_API_WRITE_TOKEN is not set");
-  return createClient({
-    projectId,
-    dataset,
-    apiVersion: "2024-10-01",
-    useCdn: false,
-    token: writeToken,
-  });
-}
-
-function randomKey() {
-  return Math.random().toString(36).slice(2, 10);
-}
-
-async function sendCronReport({
-  updated,
-  log,
-  error,
-}: {
+const sendCronReport = (args: {
   updated: number;
   log: string[];
   error?: string;
-}) {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT ?? 587),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-
-  const subject = error
-    ? `[CRON] update-exhibition-tags — ERREUR`
-    : `[CRON] update-exhibition-tags — ${updated} doc(s) mis à jour`;
-
-  const bodyLines = error
-    ? [`<p style="color:red"><strong>Erreur :</strong> ${error}</p>`]
-    : [
-        `<p><strong>${updated}</strong> exposition(s) mise(s) à jour.</p>`,
-        updated > 0
-          ? `<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-family:monospace;font-size:13px">
-              <thead><tr><th>Document ID</th><th>Tags assignés</th></tr></thead>
-              <tbody>${log
-                .map(
-                  (l) =>
-                    `<tr>${l
-                      .split(": ")
-                      .map((c) => `<td>${c}</td>`)
-                      .join("")}</tr>`,
-                )
-                .join("")}</tbody>
-            </table>`
-          : `<p>Aucun document modifié.</p>`,
-      ];
-
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
-    to: "hello@ahmedghazi.com",
-    subject,
-    html: `
-      <h2>Rapport CRON — update-exhibition-tags</h2>
-      <p>Date : ${new Date().toISOString()}</p>
-      ${bodyLines.join("\n")}
-    `,
-  });
-}
+}) =>
+  sendReport({ job: "update-exhibition-tags", label: "exposition(s)", ...args });
 
 export const dynamic = "force-dynamic";
 
@@ -265,37 +203,12 @@ export async function GET(request: Request) {
         _ref: t._ref,
       }));
 
-      const draftId = `drafts.${exhibition._id}`;
-
-      // Fetch the full published document to seed the draft
-      const fullDoc = await client.getDocument<Record<string, unknown>>(
-        exhibition._id,
-      );
-      if (!fullDoc) continue;
-
-      // Write a draft with updated tags (create or replace)
-      await client.createOrReplace({
-        ...fullDoc,
-        _id: draftId,
+      const written = await writeAndPublish(client, exhibition._id, {
         tags: tagRefs,
         pastille: pastilleText,
         countdown,
       });
-
-      // Publish the draft immediately via Actions API (bypasses direct-mutation ACL)
-      await client.request({
-        method: "POST",
-        url: `/data/actions/${dataset}`,
-        body: {
-          actions: [
-            {
-              actionType: "sanity.action.document.publish",
-              draftId,
-              publishedId: exhibition._id,
-            },
-          ],
-        },
-      });
+      if (!written) continue;
 
       updated++;
       log.push(

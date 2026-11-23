@@ -146,6 +146,9 @@ const i18n = {
       "Aucune exposition hors les murs n’est actuellement annoncée.",
     noResultEventFutur:
       "Aucun événement n’est actuellement annoncé. Consultez prochainement notre programmation.",
+    noResultEventCurrent:
+      "Aucun événement n’a lieu en ce moment. Découvrez nos prochains événements.",
+    noResultEventPast: "Aucun événement passé à afficher.",
     noResultEventTour:
       "Aucune visite guidée n’est actuellement proposée. Consultez prochainement notre programmation.",
     noResultShop:
@@ -306,6 +309,9 @@ const i18n = {
       "There are currently no off-site exhibitions announced.",
     noResultEventFutur:
       "There are currently no upcoming events. Please check back soon for our programme.",
+    noResultEventCurrent:
+      "There are no events taking place right now. Discover our upcoming events.",
+    noResultEventPast: "There are no past events to display.",
     noResultEventTour:
       "There are currently no guided tours available. Please check back soon for our programme.",
     noResultShop: "No books match your search. Please try another search term.",

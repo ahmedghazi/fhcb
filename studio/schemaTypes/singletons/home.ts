@@ -57,6 +57,7 @@ export default defineType({
         {type: 'supportUI'},
         {type: 'ressourcesUI'},
         {type: 'textUI'},
+        {type: 'gridCardUI'},
       ],
       group: 'editorial',
     }),

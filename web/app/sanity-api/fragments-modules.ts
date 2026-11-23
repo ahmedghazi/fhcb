@@ -18,6 +18,7 @@ const TAG_CURRENT_SLUG = "exposition-en-cours";
 const TAG_UPCOMING_SLUG = "exposition-a-venir";
 const TAG_VISITE_COMMENTEE_SLUG = "visite-commentee";
 const TAG_PRODUCT_LIVRE_DU_MOIS_SLUG = "livre-du-mois";
+const TAG_EVENT_PAST_SLUG = "evenement-passe";
 
 export const imageInGrid = `
   ...,
@@ -544,14 +545,25 @@ export const listEventsUI = `
     filterTags[]->{
       slug
     },
-    "resolvedItems": *[
-      _type == "event"
-      && !(_id in path("drafts.**"))
-      && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
-      && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
-    ] | order(coalesce(dates[0].du, _createdAt) asc) {
-      ${cardRefEvent}
-    },
+    // past events (tagged by /api/cron/update-event-tags): most recent first
+    "resolvedItems": select(
+      "${TAG_EVENT_PAST_SLUG}" in filterTags[]->slug.current => *[
+        _type == "event"
+        && !(_id in path("drafts.**"))
+        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+      ] | order(coalesce(dates[0].du, _createdAt) desc) {
+        ${cardRefEvent}
+      },
+      *[
+        _type == "event"
+        && !(_id in path("drafts.**"))
+        && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
+        && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
+      ] | order(coalesce(dates[0].du, _createdAt) asc) {
+        ${cardRefEvent}
+      }
+    ),
     cta{
       ${cta}
     },
