@@ -59,7 +59,7 @@ const Sidebar = ({ input }: Props) => {
                     item?.imageCover?.asset && (
                       <Figure
                         asset={item.imageCover.asset}
-                        width={96}
+                        width={288}
                         sizes='96px'
                       />
                     )}
@@ -86,7 +86,7 @@ const Sidebar = ({ input }: Props) => {
                   item.imageCover.asset && (
                     <Figure
                       asset={item.imageCover.asset}
-                      width={96}
+                      width={288}
                       sizes='96px'
                     />
                   )}
@@ -118,7 +118,7 @@ const Sidebar = ({ input }: Props) => {
                     {item.image && item.image.asset && (
                       <Figure
                         asset={item.image.asset}
-                        width={96}
+                        width={288}
                         sizes='96px'
                       />
                     )}
@@ -184,7 +184,7 @@ const Sidebar = ({ input }: Props) => {
                     {item.image && item.image.asset && (
                       <Figure
                         asset={item.image.asset}
-                        width={96}
+                        width={288}
                         sizes='96px'
                       />
                     )}

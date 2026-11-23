@@ -50,7 +50,6 @@ const MuxVideoPlayer = ({
   const hovered = isControlled && !isMobile ? hoveredProp : internalHovered;
   const playerRef = useRef<React.ComponentRef<typeof MuxPlayer>>(null);
   const { hasConsent } = useConsent();
-  console.log(hovered);
   // Stable identity so the mux-player custom element doesn't see a "changed"
   // prop (and re-diff/re-init) on every unrelated parent re-render.
   const metadata = useMemo(

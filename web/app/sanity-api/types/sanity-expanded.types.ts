@@ -58,6 +58,9 @@ import type {
   MuxVideo,
   MuxVideoAsset,
   TagProduct,
+  CardPress,
+  LinkInternal,
+  LinkExternal,
 } from "./sanity.types";
 
 export type SanityImageAssetFull = SanityImageAsset & {
@@ -167,6 +170,23 @@ export type ExhibitionExpanded = Omit<
         asset?: SanityImageAssetFull | null;
       })
     | null;
+};
+
+// inline object (no _id / slug) — buttons[].link is dereferenced to { _type, slug }
+export type CardPressExpanded = Omit<CardPress, "imageCover" | "buttons"> & {
+  _key?: string;
+  imageCover?:
+    | (Omit<NonNullable<CardPress["imageCover"]>, "asset"> & {
+        asset?: SanityImageAssetFull | null;
+      })
+    | null;
+  buttons?: Array<
+    | (Omit<LinkInternal, "link"> & {
+        _key: string;
+        link?: { _type: string; slug?: { current?: string } | null } | null;
+      })
+    | (LinkExternal & { _key: string })
+  > | null;
 };
 
 export type ProductExpanded = Omit<

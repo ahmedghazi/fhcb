@@ -6,9 +6,9 @@ import { CardAction } from "./types";
 // The primary action's href already covers the whole card via
 // `CardLinkOverlay` (see `primaryAction` in index.tsx, always `actions[0]`),
 // so it's redundant with the overlay and never gets a visible button —
-// only `linkExternal` actions do.
+// unless it's a `linkExternal`. Every following action is always visible.
 const withoutRedundantPrimary = (actions: CardAction[]) =>
-  actions.filter((action) => action.type === "linkExternal");
+  actions.filter((action, i) => i > 0 || action.type === "linkExternal");
 
 type ActionButtonsProps = {
   actions: CardAction[];

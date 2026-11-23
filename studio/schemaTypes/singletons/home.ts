@@ -56,6 +56,7 @@ export default defineType({
         {type: 'newsletterUI'},
         {type: 'supportUI'},
         {type: 'ressourcesUI'},
+        {type: 'textUI'},
       ],
       group: 'editorial',
     }),

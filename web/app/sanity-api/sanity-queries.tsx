@@ -447,6 +447,9 @@ export const FEUILLETAGE_QUERY = groq`*[_type == "feuilletage" && slug.current =
     name,
     slug
   },
+  imageCover{
+    ${imageAsset}
+  },
   modules[]{
     ${modules}
   },

@@ -8,6 +8,7 @@ import React from "react";
 import {
   ArticleExpanded,
   ArtistExpanded,
+  CardPressExpanded,
   ConversationExpanded,
   EventExpanded,
   ExhibitionExpanded,
@@ -47,6 +48,7 @@ import { usePathname } from "next/navigation";
 import EmbedVideo from "../../EmbedVideo";
 import { toPlainText } from "@portabletext/react";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
+import { urlFor } from "@/app/sanity-api/sanity-utils";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -190,6 +192,39 @@ export function exhibitionToCard(
   };
 }
 
+// ─── Press ────────────────────────────────────────────────────────────────────
+// Objet inline (pas de page de détail) : même rendu que CardExhibition,
+// buttons[0] = primary (lien de la carte), buttons[1] = secondary.
+
+export function pressToCard(
+  input: CardPressExpanded,
+  size: "sm" | "md" | "lg" = "sm",
+): CardBaseProps {
+  const { title, subtitle, imageCover, text, buttons } = input;
+
+  const actions: CardAction[] = (buttons ?? []).map((button, i) => ({
+    label: (_localizeField(button.label) as string) || "",
+    href:
+      button._type === "linkExternal"
+        ? (button.link ?? "")
+        : _linkResolver(button.link),
+    variant: i === 0 ? "primary" : "secondary",
+    type: button._type === "linkExternal" ? "linkExternal" : undefined,
+  }));
+
+  return {
+    _type: input._type,
+    layout: toLayout(size, imageCover),
+    footerPlacement: size === "md" ? "detached" : undefined,
+    colorVar: "var(--color-exhibition)",
+    images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
+    title: (_localizeField(title) as string) || "",
+    subTitle: (_localizeField(subtitle) as string) || undefined,
+    description: _localizeField(text),
+    actions: actions,
+  };
+}
+
 // ─── Product ─────────────────────────────────────────────────────────────────
 
 export function productToCard(
@@ -216,6 +251,10 @@ export function productToCard(
   const pathname = usePathname();
   const isOffShop =
     !pathname.includes("librairie") && !pathname.includes("publications");
+  console.log(tagsProduct);
+  const isBookOfTheMonth = tagsProduct?.some(
+    (tag) => tag.slug && tag.slug.current === "livre-du-mois",
+  );
   const isLandscape =
     (imageCover?.asset?.metadata?.dimensions?.width ?? 0) >
     (imageCover?.asset?.metadata?.dimensions?.height ?? 0);
@@ -242,7 +281,12 @@ export function productToCard(
     colorVar: "var(--color-beige)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
 
-    tags: isOffShop ? bookLabel : tagsProduct ? toTags(tagsProduct) : "",
+    tags:
+      isOffShop && !isBookOfTheMonth
+        ? bookLabel
+        : tagsProduct
+          ? toTags(tagsProduct)
+          : "",
     footerPlacement: size === "md" && imagePortrait ? "detached" : undefined,
     title: title,
     subTitle: artistName ? _parseJsonStringArray(artistName) : artistsName,
@@ -495,7 +539,11 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     [_localizeField(input.subTitle), chercheur?.name]
       .filter(Boolean)
       .join(" — ") || undefined;
-
+  let placeholderUrl: string | undefined;
+  if (video && video?.placeholder) {
+    console.log(video.placeholder);
+    placeholderUrl = urlFor(video.placeholder.asset);
+  }
   return {
     _type: input._type,
     layout: "col",
@@ -503,7 +551,10 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
     colorVar: "var(--color-gris-100)",
     images: imageCover?.asset ? [imageCover.asset as SanityImageAssetFull] : [],
     mediaSlot: video
-      ? React.createElement(EmbedVideo, { embedUrl: video.embedUrl })
+      ? React.createElement(EmbedVideo, {
+          embedUrl: video.embedUrl,
+          placeholderUrl: placeholderUrl,
+        })
       : undefined,
     tags: tagsLabel ? tagsLabel : _localizeText(input._type),
     // title: (_localizeField(input.title) as string) || "",

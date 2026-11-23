@@ -9,6 +9,7 @@ export default defineField({
   icon: FiBookOpen,
   fields: [
     defineField({name: 'title', type: 'localeString', title: 'Titre'}),
+    defineField({name: 'maxItems', type: 'number', title: "Nombre maximum d'éléments"}),
     defineField({
       name: 'filters',
       title: 'Filtres',

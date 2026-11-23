@@ -360,6 +360,26 @@
         background-color: var(--color-secondary);
       }
     }
+
+    &--newsletter-ui,
+    &--support-ui {
+      .module__image {
+        max-width: 50%;
+        figure {
+          position: relative;
+          &.figure--is-landscape img {
+            height: auto !important;
+            min-height: unset !important;
+          }
+          &.figure--with-caption {
+            figcaption {
+              position: absolute;
+              right: 0;
+            }
+          }
+        }
+      }
+    }
     &--support-ui {
       background-color: var(--color-rose-50);
       margin: 0;

@@ -29,6 +29,26 @@ export const cardRefExhibition = `
     ...
   }
 `;
+// inline object (not a reference) — added straight into gridCardUI / sliderCardUI items
+export const cardPress = `
+  _type,
+  _key,
+  title,
+  subtitle,
+  imageCover{
+    ${imageAsset}
+  },
+  text,
+  buttons[]{
+    ...,
+    _type == "linkInternal" => {
+      link->{
+        _type,
+        slug
+      }
+    }
+  }
+`;
 export const cardRefEvent = `
   _type,
   _id,
@@ -69,7 +89,12 @@ export const cardRefFeuilletage = `
   imageCover{
     ${imageAsset}
   },
-  video,
+  video{
+    ...,
+    placeholder{
+      ${imageAsset}
+    }
+  },
   dates,
   description,
   artists[]->{

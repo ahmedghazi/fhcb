@@ -19,6 +19,7 @@ export default defineField({
           type: 'reference',
           to: listPostTypes,
         },
+        {type: 'cardPress'},
       ],
     }),
     defineField({name: 'cta', type: 'cta', title: 'CTA'}),

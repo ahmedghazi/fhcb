@@ -15,6 +15,7 @@ import {
   ProductExpanded,
   ArticleExpanded,
   ConversationExpanded,
+  CardPressExpanded,
 } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardProduct from "./CardProduct";
 import CardArticle from "./CardArticle";
@@ -23,6 +24,7 @@ import { _isCurrentByDates, _isPast, _isPastByDates } from "@/app/lib/utils";
 import CardBranche from "./CardBranche";
 import { FhcbDate } from "@/app/sanity-api/types/sanity.types";
 import CardExhibitionFeatured from "./CardExhibitionFeatured";
+import CardPress from "./CardPress";
 
 type Context = "grid" | "slider" | "rebonds" | "search";
 type Size = "sm" | "md" | "md-alt" | "lg";
@@ -38,7 +40,8 @@ type Props = {
     | ImageImagesExpanded
     | FeuilletageExpanded
     | ArticleExpanded
-    | ConversationExpanded;
+    | ConversationExpanded
+    | CardPressExpanded;
   context: Context;
   // editor-configurable size from the GridCardUI module (only used for product in grid context)
   size?: "sm" | "md" | "lg" | null;
@@ -63,6 +66,7 @@ const SIZES = {
   feuilletage: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   conversation: { grid: "md", slider: "md", rebonds: "md", search: "md" },
   pageModulaire: { grid: "md", slider: "md", rebonds: "sm", search: "sm" },
+  press: { grid: "sm", slider: "md", rebonds: "md", search: "md" },
 } as const satisfies Record<string, Record<Context, Size>>;
 
 const CardType = ({ input, context, size }: Props) => {
@@ -77,7 +81,8 @@ const CardType = ({ input, context, size }: Props) => {
       | "artist"
       | "imageImages"
       | "feuilletage"
-      | "pageModulaire",
+      | "pageModulaire"
+      | "press",
   ): "sm" | "md" | "lg";
   function sizeFor(type: keyof typeof SIZES) {
     return SIZES[type][context];
@@ -143,6 +148,9 @@ const CardType = ({ input, context, size }: Props) => {
         <CardFeuilletage input={input} size={sizeFor("feuilletage")} />
       )}
       {input._type === "conversation" && <CardConversation input={input} />}
+      {input._type === "cardPress" && (
+        <CardPress input={input} size={sizeFor("press")} />
+      )}
     </>
   );
 };

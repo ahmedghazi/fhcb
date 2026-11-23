@@ -27,6 +27,7 @@ import Rebonds from "@/app/components/Rebonds";
 import EmbedVideo from "@/app/components/ui/EmbedVideo";
 import VideoJsonLd from "@/app/components/ui/VideoJsonLd";
 import { getYouTubeNoCookieUrl, getYouTubeThumbnails } from "@/app/lib/utils";
+import { urlFor } from "@/app/sanity-api/sanity-utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -64,6 +65,15 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
 
   if (!data) return notFound();
 
+  let placeholderUrl: string | undefined;
+  if (data.video) {
+    if (data.imageCover) {
+      placeholderUrl = urlFor(data.imageCover.asset);
+    } else if (data.video.placeholder) {
+      placeholderUrl = urlFor(data.video.placeholder.asset);
+    }
+  }
+
   return (
     <div
       className='template template--image-images'
@@ -75,7 +85,12 @@ const FeuilletageTemplate: NextPage<PageProps> = async ({ params }) => {
         subTitle={data.title}
       />
       <div className='container-fluid'>
-        {data.video && <EmbedVideo embedUrl={data.video.embedUrl} />}
+        {data.video && (
+          <EmbedVideo
+            embedUrl={data.video.embedUrl}
+            placeholderUrl={placeholderUrl}
+          />
+        )}
       </div>
       {data.video?.embedUrl && (
         <VideoJsonLd

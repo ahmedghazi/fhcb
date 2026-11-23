@@ -9,6 +9,7 @@ import {
   cardRefProduct,
   cardRefSerieThematique,
   cardTypes,
+  cardPress,
 } from "./fragments-cards";
 import { imageAsset, videoAsset } from "./fragments-assets";
 import { blockContent, cta } from "./fragments";
@@ -178,9 +179,14 @@ export const sliderCardUI = `
     title{
       ...
     },
-    items[]->{
-      ...,
-      ${cardTypes}
+    items[]{
+      _type == "reference" => @->{
+        ...,
+        ${cardTypes}
+      },
+      _type == "cardPress" => {
+        ${cardPress}
+      }
     },
     cta{
       ${cta}
@@ -225,9 +231,14 @@ export const gridCardUI = `
     title{
       ...
     },
-    items[]->{
-      ...,
-      ${cardTypes}
+    items[]{
+      _type == "reference" => @->{
+        ...,
+        ${cardTypes}
+      },
+      _type == "cardPress" => {
+        ${cardPress}
+      }
     },
     cta{
       ${cta}

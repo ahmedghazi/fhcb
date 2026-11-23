@@ -61,9 +61,9 @@ export default defineType({
       type: 'image',
       title: 'Image clef',
       // fields: imageFields,
-      description: 'Visible sur les pages de liste (largeur 1400px)',
+      description: 'Visible sur la pages de détail (largeur 1400px)',
       group: 'editorial',
-      hidden: true,
+      // hidden: true,
     }),
 
     defineField({

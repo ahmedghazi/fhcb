@@ -16,7 +16,7 @@ const ModuleFeaturedCardsUI = ({ input }: Props) => {
   const primary = items?.find((item) => isIn(item, "inSite-cube"));
   const secondary = items?.find((item) => isIn(item, "inSite-tube"));
   //cube : gauche, tube : droite
-  console.log(primary, secondary);
+  // console.log(primary, secondary);
   return (
     <section className='module module--featured-cards-ui'>
       <div className='container-fluid'>

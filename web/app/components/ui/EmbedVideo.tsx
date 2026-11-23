@@ -17,7 +17,6 @@ const EmbedVideo = ({ embedUrl, placeholderUrl }: Props) => {
   if (!embedUrl) return null;
   const src = getYouTubeNoCookieUrl(embedUrl) || embedUrl;
   const light = placeholderUrl || getYouTubeThumbnailUrl(embedUrl) || true;
-
   return (
     <div className='embed-video'>
       <div
