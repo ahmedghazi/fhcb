@@ -365,6 +365,7 @@ export const listFeuilletageUI = `
     title{
       ...
     },
+    maxItems,
     filters[]{
       ...,
       ${filterList},

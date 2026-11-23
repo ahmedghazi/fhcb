@@ -14,6 +14,7 @@ import { _shuffle } from "@/app/lib/utils";
 
 type Props = {
   input: ListFeuilletageUI & {
+    maxItems?: number;
     items?: FeuilletageExpanded[];
     filters?: SanityFilterDef[];
   };
@@ -51,8 +52,10 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredItemsKey]);
 
-  const visibleItems = shuffledItems.slice(0, visibleCount);
-  const hasMore = visibleCount < shuffledItems.length;
+  // maxItems caps the list (no pagination), otherwise paginate with load more
+  const limit = input.maxItems || visibleCount;
+  const visibleItems = shuffledItems.slice(0, limit);
+  const hasMore = !input.maxItems && visibleCount < shuffledItems.length;
 
   return (
     <section className='module module--list-feuilletage-ui'>

@@ -34,7 +34,6 @@ const BandeauContextuel = ({ text, cta, dateExpiration }: Props) => {
     } else {
       document.body.classList.remove("has-bandeau");
     }
-    console.log(open);
   }, [open]);
 
   const localizedText = _localizeField(text);

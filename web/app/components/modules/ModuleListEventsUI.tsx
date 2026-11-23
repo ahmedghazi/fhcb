@@ -23,11 +23,11 @@ const ModuleListEventsUI = ({ input }: Props) => {
   const isEventTour = filterTags?.some(
     (el) => el.slug?.current === "visite-commentee",
   );
+  // console.log(cardSize);
   return (
     <section className='module module--list-events'>
       <div className='container-fluid'>
-        {/* <pre>{JSON.stringify(filterTags, null, 2)}</pre> */}
-
+        {/* <pre>{JSON.stringify(resolvedItems, null, 2)}</pre> */}
         <div className='module__inner'>
           {(resolvedItems?.length ?? 0) > 0 && (
             <div
@@ -36,10 +36,7 @@ const ModuleListEventsUI = ({ input }: Props) => {
               }>
               {resolvedItems?.map((item: EventExpanded, index: number) => (
                 <Fragment key={`${item._id}-${index}`}>
-                  <CardEvent
-                    input={item}
-                    size={cardSize === "lg" ? "lg" : "sm"}
-                  />
+                  <CardEvent input={item} size={cardSize || "sm"} />
                 </Fragment>
               ))}
             </div>

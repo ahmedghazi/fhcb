@@ -31,7 +31,7 @@ import {
   _localizeText,
   _parseJsonStringArray,
 } from "@/app/sanity-api/utils";
-import { CardAction, CardBaseProps } from "../CardBase";
+import { CardAction, CardBaseProps, CardLayout } from "../CardBase";
 import BtnAddToCart from "../../../shop/BtnAddToCart";
 import CardTags from "../CardTags";
 import FHCBDates from "../../FHCBDates";
@@ -251,7 +251,6 @@ export function productToCard(
   const pathname = usePathname();
   const isOffShop =
     !pathname.includes("librairie") && !pathname.includes("publications");
-  console.log(tagsProduct);
   const isBookOfTheMonth = tagsProduct?.some(
     (tag) => tag.slug && tag.slug.current === "livre-du-mois",
   );
@@ -354,7 +353,13 @@ export function eventToCard(
     });
   }
 
-  const layout = size === "lg" ? "row" : isLandscape ? "col" : "row";
+  let layout: CardLayout = "col";
+  if (size === "lg") {
+    layout = "row";
+  } else if (size === "md") {
+    layout = isLandscape ? "col" : "row";
+  }
+  // const layout = size === "lg" ? "row" : isLandscape ? "col" : "row";
 
   return {
     _type: input._type,
@@ -541,7 +546,6 @@ export function feuilletageToCard(input: FeuilletageExpanded): CardBaseProps {
       .join(" — ") || undefined;
   let placeholderUrl: string | undefined;
   if (video && video?.placeholder) {
-    console.log(video.placeholder);
     placeholderUrl = urlFor(video.placeholder.asset);
   }
   return {
