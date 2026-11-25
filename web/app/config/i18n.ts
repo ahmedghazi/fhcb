@@ -147,7 +147,7 @@ const i18n = {
     noResultEventFutur:
       "Aucun événement n’est actuellement annoncé. Consultez prochainement notre programmation.",
     noResultEventCurrent:
-      "Aucun événement n’a lieu en ce moment. Découvrez nos prochains événements.",
+      "Les événements à venir seront annoncés prochainement. Découvrez nos événements passés.",
     noResultEventPast: "Aucun événement passé à afficher.",
     noResultEventTour:
       "Aucune visite guidée n’est actuellement proposée. Consultez prochainement notre programmation.",

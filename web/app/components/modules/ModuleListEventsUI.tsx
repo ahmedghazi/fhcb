@@ -52,7 +52,7 @@ const ModuleListEventsUI = ({ input }: Props) => {
               ))}
             </div>
           )}
-          {resolvedItems?.length === 0 && linkFallback?.internal && (
+          {/* {resolvedItems?.length === 0 && linkFallback?.internal && (
             <div className='text-center'>
               <Link
                 className='btn'
@@ -60,17 +60,19 @@ const ModuleListEventsUI = ({ input }: Props) => {
                 {_localizeField(linkFallback.internal.label)}
               </Link>
             </div>
-          )}
+          )} */}
           {resolvedItems?.length === 0 && (
             <div className='text-center'>
               <p>{noResultText}</p>
-              {linkFallback?.internal && (
-                <Link
-                  className='btn'
-                  href={_linkResolver(linkFallback.internal.link)}>
-                  {_localizeField(linkFallback.internal.label)}
-                </Link>
-              )}
+              <div className='text-center'>
+                {linkFallback?.internal && (
+                  <Link
+                    className='btn !w-auto !inline-block'
+                    href={_linkResolver(linkFallback.internal.link)}>
+                    {_localizeField(linkFallback.internal.label)}
+                  </Link>
+                )}
+              </div>
             </div>
           )}
         </div>

@@ -372,7 +372,7 @@ export const listFeuilletageUI = `
       ${filterList},
       ${filterCheckbox}
     },
-    "items": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(index asc) {
+    "items": *[_type == "feuilletage" && !(_id in path("drafts.**"))] | order(length(index) desc, index desc) {
       ${cardRefFeuilletage}
     },
     cta{
@@ -392,7 +392,7 @@ export const listImageImages = `
       ${filterList},
       ${filterCheckbox}
     },
-    "items": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(index desc) {
+    "items": *[_type == "imageImages" && !(_id in path("drafts.**"))] | order(length(index) desc, index desc) {
       ${cardRefImageImages}
     },
     cta{

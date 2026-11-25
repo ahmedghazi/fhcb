@@ -43,19 +43,19 @@ const ModuleListFeuilletageUI = ({ input }: Props) => {
 
   // start with the original (server-rendered) order to avoid a hydration
   // mismatch, then shuffle client-side after mount / when filters change
-  const [shuffledItems, setShuffledItems] = useState(filteredItems);
+  // const [shuffledItems, setShuffledItems] = useState(filteredItems);
   const filteredItemsKey = filteredItems.map((item) => item._id).join(",");
 
   useEffect(() => {
-    setShuffledItems(_shuffle(filteredItems));
+    // setShuffledItems(_shuffle(filteredItems));
     resetVisibleCount();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredItemsKey]);
 
   // maxItems caps the list (no pagination), otherwise paginate with load more
   const limit = input.maxItems || visibleCount;
-  const visibleItems = shuffledItems.slice(0, limit);
-  const hasMore = !input.maxItems && visibleCount < shuffledItems.length;
+  const visibleItems = filteredItems.slice(0, limit);
+  const hasMore = !input.maxItems && visibleCount < filteredItems.length;
 
   return (
     <section className='module module--list-feuilletage-ui'>
