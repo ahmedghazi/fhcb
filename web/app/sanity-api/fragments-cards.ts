@@ -34,6 +34,7 @@ export const cardPress = `
   _type,
   _key,
   title,
+  cardType,
   subtitle,
   imageCover{
     ${imageAsset}

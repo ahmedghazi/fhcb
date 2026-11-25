@@ -15,6 +15,19 @@ export default defineField({
       type: 'localeString',
     }),
     defineField({
+      name: 'cardType',
+      title: 'Type de carte',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Exposition', value: 'exhibition'},
+          {title: 'Événement', value: 'event'},
+          {title: 'Info', value: 'info'},
+          {title: 'Produit', value: 'product'},
+        ],
+      },
+    }),
+    defineField({
       name: 'subtitle',
       title: 'Sous-titre',
       type: 'localeString',

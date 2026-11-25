@@ -18,7 +18,9 @@ type ActionButtonsProps = {
 export const ActionButtons = ({ actions, actionsNode }: ActionButtonsProps) => {
   const visibleActions = withoutRedundantPrimary(actions);
   if (visibleActions.length === 0 && actionsNode === undefined) return null;
-
+  const isExternalLink = visibleActions.some(
+    (action) => action.type === "linkExternal",
+  );
   return (
     <div className='card__btns'>
       <div className='card__btns-conntent'>
@@ -26,6 +28,7 @@ export const ActionButtons = ({ actions, actionsNode }: ActionButtonsProps) => {
           <Link
             key={i}
             href={action.href}
+            target={isExternalLink ? "_blank" : undefined}
             className={clsx(
               "btn",
               action.variant === "secondary" && "btn--secondary",

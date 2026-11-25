@@ -3702,6 +3702,31 @@
           },
           "optional": true
         },
+        "cardType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "exhibition"
+              },
+              {
+                "type": "string",
+                "value": "event"
+              },
+              {
+                "type": "string",
+                "value": "info"
+              },
+              {
+                "type": "string",
+                "value": "product"
+              }
+            ]
+          },
+          "optional": true
+        },
         "subtitle": {
           "type": "objectAttribute",
           "value": {

@@ -6,13 +6,13 @@
   "license": "UNLICENSED",
   "scripts": {
     "typegen": "NODE_OPTIONS=--max-old-space-size=8192 sanity typegen generate",
-    "preDev": "pnpm run typegen",
+    "predev": "pnpm run typegen",
     "dev": "sanity dev",
     "start": "sanity start",
-    "preBuild": "pnpm run typegen",
+    "prebuild": "pnpm run typegen",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "postDeploy": "pnpm run typegen",
+    "postdeploy": "pnpm run typegen",
     "deploy-graphql": "sanity graphql deploy",
     "d": "pnpm run deploy && pnpm run typegen"
   },

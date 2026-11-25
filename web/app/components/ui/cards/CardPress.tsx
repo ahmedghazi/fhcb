@@ -16,13 +16,15 @@ const CardPress = ({ input, size = "md" }: Props) => {
   return (
     <div
       className={clsx(
-        "card card--exhibition card--press",
+        "card card--press",
+        `card--${input.cardType}`,
         `card--${size}`,
         `card--${props.layout}`,
         isLandscapeImage(input.imageCover)
           ? "card--is-landscape"
           : "card--is-portrait",
       )}>
+      {/* cardType : {input.cardType} */}
       <CardBase {...props} />
       {size === "md" && !!props.actions?.length && (
         <CardFooter actions={props.actions} />
