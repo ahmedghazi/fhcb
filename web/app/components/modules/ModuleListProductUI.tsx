@@ -97,6 +97,7 @@ const ModuleListProductUI = ({ input }: Props) => {
   const filterDefs = withResolvedOptions(
     rawFilterDefs,
     input.resolvedItems ?? [],
+    { withArtistName: true },
   );
 
   const filteredItems = applyFilters(

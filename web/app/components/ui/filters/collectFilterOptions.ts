@@ -1,5 +1,10 @@
 import { ArtistExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
-import { SanityFilterDef } from "./filters.types";
+import {
+  FilterCheckboxOption,
+  FilterRadioOption,
+  SanityFilterDef,
+} from "./filters.types";
+import { _parseJsonStringArray } from "@/app/sanity-api/utils";
 import {
   Chercheur,
   ProductVariant,
@@ -34,6 +39,44 @@ export const collectArtists = <T extends HasArtists>(
     });
   });
   return Array.from(seen.values());
+};
+
+// Some products have no linked artist page and store the name(s) as free text
+// in artistName instead — a Shopify-synced JSON-array string. Those names get
+// a synthetic option id so the artist filter can match them too.
+export const ARTIST_NAME_ID_PREFIX = "artistName:";
+
+export const parseArtistNames = (value?: string | null): string[] =>
+  _parseJsonStringArray(value, "\n").split("\n").filter(Boolean);
+
+type HasArtistName = { artistName?: string | null };
+
+// Valid for every filter def shape (list, checkbox, radio)
+type ArtistOption = FilterRadioOption & FilterCheckboxOption;
+
+// Linked artists plus free-text artistName entries, deduped — a free-text
+// name matching a linked artist's name (case-insensitive) is dropped.
+export const collectArtistsWithNames = <T extends HasArtists & HasArtistName>(
+  items: T[],
+): ArtistOption[] => {
+  const artists = collectArtists(items);
+  const seenNames = new Set(
+    artists.map((artist) => artist.name?.toLowerCase()).filter(Boolean),
+  );
+  const freeText: ArtistOption[] = [];
+  items.forEach((item) => {
+    parseArtistNames(item.artistName).forEach((name) => {
+      const key = name.toLowerCase();
+      if (seenNames.has(key)) return;
+      seenNames.add(key);
+      freeText.push({
+        _id: `${ARTIST_NAME_ID_PREFIX}${name}`,
+        _type: "artist",
+        name,
+      });
+    });
+  });
+  return [...(artists as ArtistOption[]), ...freeText];
 };
 
 type HasTags = { tags?: Tag[] | null };
@@ -100,11 +143,18 @@ export const collectChercheur = <T extends HasChercheur>(
 
 // Overrides filterOptions on artist-keyed filter defs with options actually
 // present in `items`, so pickers only ever show values that can return results.
+// `withArtistName` also collects free-text artistName entries (products only).
 export const withResolvedOptions = <
-  T extends HasArtists & HasTags & HasTagsProduct & HasChercheur & HasVariants,
+  T extends HasArtists &
+    HasArtistName &
+    HasTags &
+    HasTagsProduct &
+    HasChercheur &
+    HasVariants,
 >(
   filterDefs: SanityFilterDef[],
   items: T[],
+  { withArtistName = false }: { withArtistName?: boolean } = {},
 ): SanityFilterDef[] =>
   filterDefs.map((def) => {
     if (
@@ -113,7 +163,12 @@ export const withResolvedOptions = <
       def._type === "filterRadio"
     ) {
       if (def.filterKey === "artist") {
-        return { ...def, filterOptions: collectArtists(items) };
+        return {
+          ...def,
+          filterOptions: withArtistName
+            ? collectArtistsWithNames(items)
+            : (collectArtists(items) as ArtistOption[]),
+        };
       }
       if (def.filterKey === "tag") {
         return { ...def, filterOptions: collectTags(items) };

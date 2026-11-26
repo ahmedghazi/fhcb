@@ -1,7 +1,9 @@
 import { ActiveFilters, SanityFilterDef } from "./filters.types";
 import {
+  ARTIST_NAME_ID_PREFIX,
   isLanguageOptionName,
   normalizeLanguageValue,
+  parseArtistNames,
 } from "./collectFilterOptions";
 import { _parseJsonStringArray } from "@/app/sanity-api/utils";
 
@@ -58,6 +60,18 @@ const matchesSearch = (
     }
     return false;
   });
+};
+
+// Matches a linked artist by _id, or a free-text artistName entry by its
+// synthetic id (see collectArtistsWithNames).
+const matchesArtist = (item: any, id: string): boolean => {
+  if (id.startsWith(ARTIST_NAME_ID_PREFIX)) {
+    const name = id.slice(ARTIST_NAME_ID_PREFIX.length).toLowerCase();
+    return parseArtistNames(item.artistName).some(
+      (n) => n.toLowerCase() === name,
+    );
+  }
+  return item.artists?.some((a: any) => a._id === id) ?? false;
 };
 
 export const applyFilters = <T extends Record<string, any>>(
@@ -122,7 +136,7 @@ export const applyFilters = <T extends Record<string, any>>(
       if (id) {
         result = result.filter((item) => {
           if (def.filterKey === "artist") {
-            return item.artists?.some((a: any) => a._id === id) ?? false;
+            return matchesArtist(item, id);
           }
           if (def.filterKey === "tag") {
             return item.tags?.some((t: any) => t._id === id) ?? false;
@@ -154,7 +168,7 @@ export const applyFilters = <T extends Record<string, any>>(
       if (id) {
         result = result.filter((item) => {
           if (def.filterKey === "artist") {
-            return item.artists?.some((a: any) => a._id === id) ?? false;
+            return matchesArtist(item, id);
           }
           if (def.filterKey === "tag") {
             return item.tags?.some((t: any) => t._id === id) ?? false;
@@ -173,7 +187,7 @@ export const applyFilters = <T extends Record<string, any>>(
       if (id) {
         result = result.filter((item) => {
           if (def.filterKey === "artist") {
-            return item.artists?.some((a: any) => a._id === id) ?? false;
+            return matchesArtist(item, id);
           }
           if (def.filterKey === "tag") {
             return item.tags?.some((t: any) => t._id === id) ?? false;
