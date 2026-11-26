@@ -20,10 +20,13 @@ type Props = {
 
 const ModuleSliderArtistUI = ({ input, limit = 10 }: Props) => {
   const { artist, title, items, cta } = input;
+  // console.log(artist);
   // start with the original (server-rendered) order, already capped to `limit`, to avoid a
   // hydration mismatch, then shuffle (and re-cap) client-side after mount
   const [shuffledItems, setShuffledItems] = useState(items?.slice(0, limit));
-
+  const shuffledItemsWithoutArtist = items?.filter(
+    (item: any) => item.artist?._id !== artist?._id,
+  );
   useEffect(() => {
     if (!items) return;
     setShuffledItems(_shuffle(items).slice(0, limit));
@@ -39,18 +42,20 @@ const ModuleSliderArtistUI = ({ input, limit = 10 }: Props) => {
             <h2 className='module__title c-h1_5'>{_localizeField(title)}</h2>
           </div>
         )}
-        {shuffledItems && (
+        {shuffledItemsWithoutArtist && (
           <SlickSlider
             settings={{
               infinite: true,
               // centerMode: true,
               variableWidth: true,
             }}>
-            {shuffledItems.map((item: PostTypes, index: number) => (
-              <div key={`${item && item._id}-${index}`}>
-                <CardType input={item} context='slider' />
-              </div>
-            ))}
+            {shuffledItemsWithoutArtist.map(
+              (item: PostTypes, index: number) => (
+                <div key={`${item && item._id}-${index}`}>
+                  <CardType input={item} context='slider' />
+                </div>
+              ),
+            )}
           </SlickSlider>
         )}
         {cta && (
