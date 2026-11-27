@@ -357,7 +357,7 @@
     &.card--is-past {
       position: relative;
       .card__tags {
-        display: none;
+        // display: none;
       }
       &:hover {
         overflow: unset;
