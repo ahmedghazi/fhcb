@@ -8,6 +8,7 @@ import { GridCardUI } from "@/app/sanity-api/types/sanity.types";
 import { PostTypes } from "@/app/sanity-api/types/extra-types";
 import CardType from "../ui/cards/CardType";
 import BtnCta from "../ui/btns/BtnCta";
+import "./ModuleGridCardUI.scss";
 
 type Props = {
   input: GridCardUI | any;

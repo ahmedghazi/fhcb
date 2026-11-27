@@ -5,6 +5,7 @@ import { _localizeField } from "@/app/sanity-api/utils";
 import { NewsletterUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import BtnCta from "../ui/btns/BtnCta";
 import BtnCtaExternal from "../ui/btns/BtnCtaExternal";
+import "./ModuleNewsletterUI.scss";
 
 type Props = {
   input: NewsletterUIExpanded;

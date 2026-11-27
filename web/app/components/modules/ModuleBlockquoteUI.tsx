@@ -1,6 +1,7 @@
 import { BlockquoteUI } from "@/app/sanity-api/types/sanity.types";
 import { _localizeField } from "@/app/sanity-api/utils";
 import React from "react";
+import "./ModuleBlockquoteUI.scss";
 
 type Props = {
   input: BlockquoteUI;

@@ -1,0 +1,7 @@
+@use "./shared";
+
+.modules section.module {
+  &--slider-card-ui {
+    @include shared.slider-cards;
+  }
+}

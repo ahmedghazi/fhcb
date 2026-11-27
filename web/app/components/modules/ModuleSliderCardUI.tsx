@@ -7,6 +7,7 @@ import SlickSlider from "../ui/SlickSlider";
 import { Link } from "next-view-transitions";
 import CardType from "../ui/cards/CardType";
 import BtnCta from "../ui/btns/BtnCta";
+import "./ModuleSliderCardUI.scss";
 
 type Props = {
   input: SliderCardUI | any;

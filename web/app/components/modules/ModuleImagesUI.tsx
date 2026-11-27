@@ -9,6 +9,7 @@ import {
 import { _localizeField } from "@/app/sanity-api/utils";
 import clsx from "clsx";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
+import "./ModuleImagesUI.scss";
 
 type Props = {
   input: ImagesUIExpanded;

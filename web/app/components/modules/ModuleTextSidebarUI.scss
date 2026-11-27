@@ -1,0 +1,31 @@
+@use "../../styles/variables";
+
+.modules section.module {
+  &--text-sidebar-ui {
+    .module__inner {
+      border-top: var(--border);
+      padding-top: var(--spacing-md);
+    }
+    h2 {
+      margin-bottom: var(--spacing-gutter);
+    }
+    .module__aside {
+      aside.sidebar {
+        position: sticky;
+        top: var(--header-h);
+      }
+    }
+    .module__text {
+      .text {
+        // max-width: unset;
+        margin: 0;
+      }
+    }
+
+    @media all and (max-width: variables.$md) {
+      .module__inner {
+        padding-top: var(--spacing-2xs);
+      }
+    }
+  }
+}

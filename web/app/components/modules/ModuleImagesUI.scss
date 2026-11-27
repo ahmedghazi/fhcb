@@ -1,0 +1,15 @@
+.modules section.module {
+  &--images-ui {
+    // padding-bottom: 3.438rem; /* 3 lignes de caption */
+    h2 {
+      text-align: center;
+      margin-bottom: var(--spacing-gutter);
+    }
+    .img-resized figure {
+      height: var(--height) !important;
+      max-height: var(--max-img-h) !important;
+      width: var(--width) !important;
+      flex: var(--flex);
+    }
+  }
+}

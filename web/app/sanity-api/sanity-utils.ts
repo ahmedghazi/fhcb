@@ -17,3 +17,20 @@ export function urlFor(source: any, maxWidth: number = 2000): any {
     .fit("max")
     .url();
 }
+
+export const sanityLoader = ({
+  src,
+  width,
+  quality,
+}: {
+  src: string;
+  width: number;
+  quality?: number;
+}) => {
+  if (!src.startsWith("https://cdn.sanity.io")) return src;
+  const url = new URL(src);
+  url.searchParams.set("w", String(width));
+  url.searchParams.set("q", String(quality || 75));
+  url.searchParams.delete("dpr");
+  return url.toString();
+};

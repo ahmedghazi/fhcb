@@ -3,6 +3,7 @@ import { FeaturedCardsUI } from "@/app/sanity-api/types/sanity.types";
 import { ExhibitionExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import CardExhibitionFeatured from "../ui/cards/CardExhibitionFeatured";
 import CardVideoMux from "../ui/cards/CardVideoMux";
+import "./ModuleFeaturedCardsUI.scss";
 
 type Props = {
   input: FeaturedCardsUI;

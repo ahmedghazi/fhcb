@@ -1,0 +1,22 @@
+@use "../../styles/variables";
+
+.modules section.module {
+  &--text-ui {
+    h2 {
+      // padding-left: 1em;
+      // padding-right: 1em;
+      text-align: center;
+      margin-bottom: var(--spacing-gutter);
+    }
+    p {
+      // max-width: 41rem;
+      // margin: 0 auto;
+      // padding-bottom: 1em;
+    }
+    &:has(.c-chapo) p {
+      // max-width: 60rem;
+    }
+    @media all and (max-width: variables.$md) {
+    }
+  }
+}

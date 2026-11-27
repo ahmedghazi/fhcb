@@ -1,0 +1,27 @@
+.modules section.module {
+  &--list-ui {
+    margin-bottom: var(--spacing-sm);
+    &:not(:has(+ .module--list-ui)) {
+      margin-bottom: var(--spacing-lg);
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+    h3,
+    .list-item {
+      border-bottom: var(--border);
+      padding: 0.5em 0;
+    }
+    h3 {
+      color: var(--color-secondary);
+      font-weight: 450;
+    }
+  }
+}

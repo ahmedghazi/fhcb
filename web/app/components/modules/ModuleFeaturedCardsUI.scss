@@ -1,0 +1,50 @@
+@use "../../styles/variables";
+
+.modules section.module {
+  &--featured-cards-ui {
+    .card--is-landscape {
+      grid-column: span 2 / span 2;
+      .card__inner {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        .card__body {
+          min-height: 100%;
+          justify-content: space-between;
+        }
+      }
+    }
+
+    // cards self-apply width modifiers (--sm-alt/--md-alt) meant for the
+    // old masonry layout; this module controls width via the grid instead.
+    .card {
+      width: 100% !important;
+    }
+
+    .featured-cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-gutter);
+
+      &__secondary {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-gutter);
+      }
+    }
+
+    @media all and (max-width: variables.$md) {
+      .featured-cards-grid,
+      .featured-cards-grid__secondary {
+        gap: var(--spacing-sm);
+      }
+    }
+    @media all and (min-width: variables.$md) {
+      .featured-cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 1fr 2fr;
+      }
+    }
+  }
+}

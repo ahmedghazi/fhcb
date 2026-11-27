@@ -11,6 +11,7 @@ import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
 import LoadMoreButton from "../ui/LoadMoreButton";
 import { _shuffle } from "@/app/lib/utils";
+import "./ModuleListFeuilletageUI.scss";
 
 type Props = {
   input: ListFeuilletageUI & {

@@ -3,6 +3,7 @@
 import { useState, type CSSProperties } from "react";
 import Image, { type ImageProps } from "next/image";
 import clsx from "clsx";
+import { sanityLoader } from "@/app/sanity-api/sanity-utils";
 
 type ImageDarkroomProps = Omit<ImageProps, "placeholder"> & {
   /** LQIP brut en base64, optionnel — juste pour combler le tout petit
@@ -60,6 +61,7 @@ export default function ImageDarkroom({
         {...rest}
         src={src}
         alt={alt}
+        loader={sanityLoader}
         width={width}
         height={height}
         onLoad={(e) => {

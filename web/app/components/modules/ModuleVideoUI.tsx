@@ -3,6 +3,7 @@ import React from "react";
 import { VideoUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
 import LogoFHCB from "../LogoFHCB";
 import EmbedVideo from "../ui/EmbedVideo";
+import "./ModuleVideoUI.scss";
 
 type Props = {
   input: VideoUIExpanded;

@@ -18,6 +18,7 @@ import CardType from "../ui/cards/CardType";
 import CardConversation from "../ui/cards/CardConversation";
 import Link from "next/link";
 import BtnCta from "../ui/btns/BtnCta";
+import "./ModuleRessourcesUI.scss";
 
 type Props = {
   input: RessourcesUI & {

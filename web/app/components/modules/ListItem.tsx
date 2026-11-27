@@ -5,6 +5,7 @@ import { _localizeField } from "@/app/sanity-api/utils";
 import { PortableText } from "@portabletext/react";
 import clsx from "clsx";
 import React from "react";
+import "./ListItem.scss";
 
 type Props = {
   input: ListItem;

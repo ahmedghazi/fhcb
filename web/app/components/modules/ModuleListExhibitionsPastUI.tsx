@@ -14,6 +14,7 @@ import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
 import LoadMoreButton from "../ui/LoadMoreButton";
 import { GridMasonryColumns } from "../ui/GridMasonryColumns";
+import "./ModuleListExhibitionsPastUI.scss";
 
 type Props = {
   input: ListExhibitionsPastUI & {

@@ -4,6 +4,7 @@ import React from "react";
 import ListItemComponent from "./ListItem";
 import ModuleListUI from "./ModuleListUI";
 import { _localizeField } from "@/app/sanity-api/utils";
+import "./ModuleListsUI.scss";
 
 type Props = {
   input: ListsUI;

@@ -1,0 +1,45 @@
+@use "../../styles/variables";
+@use "./shared";
+
+.modules section.module {
+  &--support-ui {
+    @include shared.promo-image;
+
+    background-color: var(--color-rose-50);
+    margin: 0;
+    padding: var(--spacing-md) 0;
+    .module__inner {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--spacing-xs);
+    }
+    .module__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--spacing-gutter);
+      flex: 2;
+      h2 {
+        margin-bottom: var(--spacing-xs);
+      }
+      .btn {
+        display: block;
+        // width: auto;
+      }
+    }
+    img {
+      // max-height: 32.5rem;
+      max-height: var(--max-img-h);
+      height: var(--max-img-h) !important;
+    }
+    @media all and (max-width: variables.$md) {
+      .module__inner {
+        flex-direction: column;
+      }
+      img {
+        min-height: unset;
+        height: auto !important;
+      }
+    }
+  }
+}

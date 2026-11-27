@@ -1,0 +1,32 @@
+.modules section.module {
+  &--text-image-ui {
+    &--reverse {
+      .module__image {
+        order: 2;
+      }
+      .module__text {
+        order: 1;
+      }
+    }
+    h2 {
+      margin-bottom: var(--spacing-lg);
+    }
+    .text {
+      max-width: unset;
+    }
+
+    @media (min-width: 768px) {
+      .images-ui__item,
+      .images-ui__item figure,
+      .images-ui__item picture,
+      .images-ui__item img {
+        height: 100%;
+      }
+
+      .images-ui__item img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}

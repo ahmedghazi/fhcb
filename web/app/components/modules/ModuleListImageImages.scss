@@ -1,0 +1,12 @@
+@use "./shared";
+
+.modules section.module {
+  &--list-image-images {
+    @include shared.load-more;
+  }
+}
+
+.module--list-image-images {
+  @include shared.masonry-columns-origin;
+  @include shared.alternate-card-origin;
+}

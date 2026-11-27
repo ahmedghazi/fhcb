@@ -1,0 +1,11 @@
+@use "./shared";
+
+.modules section.module {
+  &--list-product-ui {
+    @include shared.load-more;
+  }
+}
+
+.module--list-product-ui {
+  @include shared.masonry-columns-origin;
+}

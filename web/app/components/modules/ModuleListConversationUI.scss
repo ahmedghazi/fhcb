@@ -1,0 +1,12 @@
+@use "./shared";
+
+.modules section.module {
+  &--list-conversation-ui {
+    @include shared.load-more;
+  }
+}
+
+.module--list-conversation-ui {
+  @include shared.masonry-columns-origin;
+  @include shared.alternate-card-origin;
+}

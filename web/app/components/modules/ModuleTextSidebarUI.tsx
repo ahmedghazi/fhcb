@@ -5,6 +5,7 @@ import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 import { _localizeField } from "@/app/sanity-api/utils";
 import Sidebar from "../ui/Sidebar";
 import { TextSidebarUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import "./ModuleTextSidebarUI.scss";
 
 type Props = {
   input: TextSidebarUIExpanded;

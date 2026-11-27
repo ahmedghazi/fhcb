@@ -16,6 +16,7 @@ import CardExhibition from "../ui/cards/CardExhibition";
 import CardFeuilletage from "../ui/cards/CardFeuilletage";
 import CardArticle from "../ui/cards/CardArticle";
 import { _isPastByDates } from "@/app/lib/utils";
+import "./ModuleNewsCardUI.scss";
 
 type NewsCardUIResolved = NewsCardUI & {
   events?: EventExpanded[];

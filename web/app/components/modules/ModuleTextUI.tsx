@@ -5,6 +5,7 @@ import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 import useLocale from "@/app/context/LocaleContext";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { TextUI } from "@/app/sanity-api/types/sanity.types";
+import "./ModuleTextUI.scss";
 
 type Props = {
   input: TextUI;

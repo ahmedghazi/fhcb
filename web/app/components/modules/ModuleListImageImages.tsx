@@ -10,6 +10,7 @@ import { applyFilters } from "../ui/filters/applyFilters";
 import { withResolvedOptions } from "../ui/filters/collectFilterOptions";
 import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
 import LoadMoreButton from "../ui/LoadMoreButton";
+import "./ModuleListImageImages.scss";
 
 type Props = {
   input: ListImageImages & {

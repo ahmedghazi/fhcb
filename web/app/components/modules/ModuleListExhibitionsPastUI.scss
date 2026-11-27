@@ -1,0 +1,11 @@
+@use "./shared";
+
+.modules section.module {
+  &--list-exhibitions-past-ui {
+    @include shared.load-more;
+  }
+}
+
+.module--list-exhibitions-past-ui {
+  @include shared.masonry-columns-origin;
+}

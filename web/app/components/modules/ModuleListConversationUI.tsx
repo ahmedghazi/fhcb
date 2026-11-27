@@ -11,6 +11,7 @@ import FilterBar from "../ui/filters/FilterBar";
 import { usePaginatedFilters } from "../ui/filters/usePaginatedFilters";
 import LoadMoreButton from "../ui/LoadMoreButton";
 import { _shuffle } from "@/app/lib/utils";
+import "./ModuleListConversationUI.scss";
 
 type Props = {
   input: ListConversationUI & {

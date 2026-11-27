@@ -21,6 +21,7 @@ import { urlFor } from "../../sanity-api/sanity-utils";
 import { artistsToString } from "@/app/lib/utils";
 import { registerWebMCPTool, jsonResult } from "@/app/lib/webmcp";
 import website from "@/app/config/website";
+import "./ModuleListProductUI.scss";
 
 type ProductCatalogEntry = {
   id: string;

@@ -12,6 +12,7 @@ import SlickSlider from "../ui/SlickSlider";
 // import CardConversation from "../ui/cards/CardConversation";
 import CardType from "../ui/cards/CardType";
 import BtnCta from "../ui/btns/BtnCta";
+import "./ModuleSliderArtistUI.scss";
 
 type Props = {
   input: SliderArtistUI | any;

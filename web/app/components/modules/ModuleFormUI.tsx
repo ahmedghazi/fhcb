@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FormUI, LocaleString } from "@/app/sanity-api/types/sanity.types";
 import { _localizeField, _localizeText } from "@/app/sanity-api/utils";
 import clsx from "clsx";
+import "./ModuleFormUI.scss";
 
 type Subject = {
   to?: string;

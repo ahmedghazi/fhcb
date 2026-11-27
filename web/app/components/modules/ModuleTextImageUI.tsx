@@ -7,6 +7,7 @@ import useLocale from "@/app/context/LocaleContext";
 import clsx from "clsx";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { TextImageUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import "./ModuleTextImageUI.scss";
 
 type Props = {
   input: TextImageUIExpanded;

@@ -1,0 +1,13 @@
+@use "./shared";
+
+.modules section.module {
+  &--slider-artist-ui {
+    @include shared.slider-cards;
+
+    padding: var(--spacing-lg) 0;
+    margin: 0;
+    .footer {
+      padding-bottom: 0;
+    }
+  }
+}

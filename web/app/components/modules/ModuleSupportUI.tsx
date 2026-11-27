@@ -5,6 +5,7 @@ import BtnCta from "@/app/components/ui/btns/BtnCta";
 import BtnCtaExternal from "@/app/components/ui/btns/BtnCtaExternal";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { SupportUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
+import "./ModuleSupportUI.scss";
 
 type Props = {
   input: SupportUIExpanded;

@@ -1,0 +1,8 @@
+.modules section.module {
+  &--news-card-ui {
+    .module__title {
+      margin-bottom: var(--spacing-gutter);
+      text-align: center;
+    }
+  }
+}
