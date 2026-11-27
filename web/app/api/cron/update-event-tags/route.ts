@@ -93,10 +93,8 @@ export async function GET(request: Request) {
     const nowDate = new Date().toISOString().slice(0, 10);
 
     for (const event of events) {
-      // Already marked as past: it stays past forever, no need to re-tag it
-      const alreadyPast = (event.tags || []).some((t) => t._ref === pastTagId);
-      if (alreadyPast) continue;
-
+      // No "already past" shortcut: an editor may add new dates to a past
+      // event, and unchanged ones are skipped by the managed-tags check below.
       // "au" is left empty for single-day events: the range ends on "du"
       const ranges = (event.dates || [])
         .filter((d) => d.du)

@@ -35,6 +35,7 @@ const ModuleListExhibitionsUI = ({ input }: Props) => {
     <section className='module module--list-exhibitions'>
       <div className='container-fluid'>
         <div className='module__inner'>
+          {/* <pre>{JSON.stringify(filterTags, null, 2)}</pre> */}
           {/* {filterTags && filterTags.length > 0 && (
             <div className='module__tags'>
               {filterTags.map((tag) => (

@@ -49,6 +49,7 @@ import EmbedVideo from "../../EmbedVideo";
 import { toPlainText } from "@portabletext/react";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 import { urlFor } from "@/app/sanity-api/sanity-utils";
+import { log } from "console";
 
 // ─── Types partagés extraits des types Sanity ─────────────────────────────────
 
@@ -169,7 +170,7 @@ export function exhibitionToCard(
       type: "linkExternal",
     });
   }
-
+  console.log({ tags });
   return {
     _type: input._type,
     layout,

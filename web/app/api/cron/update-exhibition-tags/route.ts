@@ -87,12 +87,14 @@ export async function GET(request: Request) {
       _id: string;
       dates: { du?: string; au?: string; locationType?: string }[] | null;
       tags: { _key: string; _ref: string }[] | null;
+      pastille: { fr?: string; en?: string } | null;
       countdown: number | null;
     }[] = await client.fetch(
       `*[_type == "exhibition" && !(_id in path("drafts.**"))] {
       _id,
       "dates": dates[]{ du, au, locationType },
       "tags": tags[]{ _key, _ref },
+      pastille,
       countdown
     }`,
     );
@@ -112,12 +114,6 @@ export async function GET(request: Request) {
     for (const exhibition of exhibitions) {
       if (!exhibition.dates?.length) continue;
 
-      // Already marked as past: it stays past forever, no need to re-tag it
-      const alreadyPast = (exhibition.tags || []).some(
-        (t) => t._ref === pastTagId,
-      );
-      if (alreadyPast) continue;
-
       const allEnds = exhibition.dates
         .map((d) => d.au)
         .filter(Boolean) as string[];
@@ -125,6 +121,15 @@ export async function GET(request: Request) {
       if (!anyStart || !allEnds.length) continue;
 
       const lastEnd = allEnds.sort().reverse()[0];
+      const isPast = lastEnd < nowDate;
+
+      // Already marked as past and still past: nothing to re-tag. An editor
+      // may add a new (touring/hors-les-murs) leg later, so a past-tagged
+      // exhibition with a future end date must be re-evaluated.
+      const alreadyPast = (exhibition.tags || []).some(
+        (t) => t._ref === pastTagId,
+      );
+      if (alreadyPast && isPast) continue;
 
       // "current" (and its pastille) only cares about the Foundation's own dates — a touring/
       // hors-les-murs leg shouldn't make an exhibition look "current" once its Foundation run is
@@ -148,7 +153,6 @@ export async function GET(request: Request) {
           d.du <= nowDate &&
           d.au >= nowDate,
       );
-      const isPast = lastEnd < nowDate;
 
       const upcomingStarts = exhibition.dates
         .filter((d) => d.du && d.du > nowDate)
@@ -189,6 +193,29 @@ export async function GET(request: Request) {
           };
         }
       }
+
+      const currentManaged = (exhibition.tags || [])
+        .filter((t) => managedIds.has(t._ref))
+        .map((t) => t._ref)
+        .sort()
+        .join(",");
+      const nextManaged = [
+        isCurrent && currentTagId,
+        isHorsLesMurs && horsLesMursTagId,
+        isPast && pastTagId,
+        isUpcoming && upcomingTagId,
+      ]
+        .filter(Boolean)
+        .sort()
+        .join(",");
+      // Nothing changed since the last run: skip the write/publish
+      if (
+        currentManaged === nextManaged &&
+        (exhibition.pastille?.fr ?? "") === pastilleText.fr &&
+        (exhibition.pastille?.en ?? "") === pastilleText.en &&
+        (exhibition.countdown ?? null) === countdown
+      )
+        continue;
 
       const otherTags = (exhibition.tags || []).filter(
         (t) => !managedIds.has(t._ref),

@@ -82,17 +82,20 @@ export async function sendCronReport({
 
 // Write the published doc + overrides as a draft, then publish it via the
 // Actions API (bypasses direct-mutation ACL). Returns false if the doc is gone.
+// An editor's unpublished draft is kept: it is restored afterwards with the
+// same overrides, so their pending changes are neither lost nor published.
 export async function writeAndPublish(
   client: ReturnType<typeof getWriteClient>,
   publishedId: string,
   overrides: Record<string, unknown>,
 ): Promise<boolean> {
-  const fullDoc = await client.getDocument<Record<string, unknown>>(
-    publishedId,
-  );
+  const draftId = `drafts.${publishedId}`;
+  const [fullDoc, editorDraft] = await Promise.all([
+    client.getDocument<Record<string, unknown>>(publishedId),
+    client.getDocument<Record<string, unknown>>(draftId),
+  ]);
   if (!fullDoc) return false;
 
-  const draftId = `drafts.${publishedId}`;
   await client.createOrReplace({ ...fullDoc, _id: draftId, ...overrides });
   await client.request({
     method: "POST",
@@ -107,5 +110,8 @@ export async function writeAndPublish(
       ],
     },
   });
+  if (editorDraft) {
+    await client.createOrReplace({ ...editorDraft, _id: draftId, ...overrides });
+  }
   return true;
 }

@@ -19,6 +19,9 @@ const TAG_UPCOMING_SLUG = "exposition-a-venir";
 const TAG_VISITE_COMMENTEE_SLUG = "visite-commentee";
 const TAG_PRODUCT_LIVRE_DU_MOIS_SLUG = "livre-du-mois";
 const TAG_EVENT_PAST_SLUG = "evenement-passe";
+// Off-site lists (eg. /programme/expositions-hors-les-murs): same slugs as
+// _isHorsLesMurs (app/lib/utils.ts) and the exhibition tags cron.
+const TAG_OFF_SITE_SLUGS = `["hors-les-murs", "exposition-itinerante"]`;
 
 export const imageInGrid = `
   ...,
@@ -450,21 +453,43 @@ export const listExhibitionsUI = `
     filterTags[]->{
       title, slug
     },
+    // Off-site lists are ordered current → upcoming → past, from the dates of
+    // every leg (any location) rather than the cron-managed status tags, so the
+    // order holds even before the nightly cron runs. Dates are "YYYY-MM-DD",
+    // compared as datetimes so the last day ("au") still counts as current.
     "resolvedItems": *[
       _type == "exhibition"
       && !(_id in path("drafts.**"))
       && (!defined(^.filterTags[0]) || count(^.filterTags[_ref in ^.tags[]._ref]) > 0)
       && (!defined(^.excludeTags[0]) || count(^.excludeTags[_ref in ^.tags[]._ref]) == 0)
-    ] | order(
+    ] {
+      ${cardRefExhibition},
+      "statusRank": select(
+        count(^.filterTags[@->slug.current in ${TAG_OFF_SITE_SLUGS}]) == 0 => 0,
+        count(dates[
+          dateTime(du + "T00:00:00Z") <= dateTime(now())
+          && dateTime(coalesce(au, du) + "T23:59:59Z") >= dateTime(now())
+        ]) > 0 => 0,
+        count(dates[dateTime(du + "T00:00:00Z") > dateTime(now())]) > 0 => 1,
+        2
+      )
+    } {
+      ...,
+      // Upcoming ones: next opening first. Null for every other item, so it
+      // leaves the current/past groups and the other lists' order untouched.
+      "nextStart": select(
+        statusRank == 1 => dates[dateTime(du + "T00:00:00Z") > dateTime(now())] | order(du asc)[0].du
+      )
+    } | order(
+      statusRank asc,
+      nextStart asc,
       select(
         count(dates[locationType == "inSite-cube"]) > 0 => 0,
         count(dates[locationType == "inSite-tube"]) > 0 => 1,
         2
       ) asc,
-      dates[0].du asc
-    ) {
-      ${cardRefExhibition}
-    },
+      dates[0].du desc
+    ),
     cta{
       ${cta}
     },
