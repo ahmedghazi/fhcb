@@ -57,6 +57,13 @@ export default defineType({
       group: 'editorial',
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      description: "Description visible sour l'image en pied de carte",
+      type: 'localeText',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'imageCover',
       type: 'image',
       title: 'Image clef',
@@ -73,12 +80,12 @@ export default defineType({
       group: 'editorial',
     }),
 
-    defineField({
-      name: 'description',
-      type: 'localeText',
-      group: 'editorial',
-      hidden: true,
-    }),
+    // defineField({
+    //   name: 'description',
+    //   type: 'localeText',
+    //   group: 'editorial',
+    //   hidden: true,
+    // }),
     defineField({
       name: 'artists',
       title: 'Artiste(s) lié(s)',

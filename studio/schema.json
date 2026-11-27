@@ -11479,6 +11479,14 @@
         },
         "optional": true
       },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeText"
+        },
+        "optional": true
+      },
       "imageCover": {
         "type": "objectAttribute",
         "value": {
@@ -11531,14 +11539,6 @@
         "value": {
           "type": "inline",
           "name": "video"
-        },
-        "optional": true
-      },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "localeText"
         },
         "optional": true
       },

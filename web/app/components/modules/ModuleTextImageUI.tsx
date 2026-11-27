@@ -3,7 +3,7 @@ import React from "react";
 import { PortableText } from "@portabletext/react";
 import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 import Figure from "@/app/components/ui/Figure";
-import useLocale from "@/app/context/LocaleContext";
+// import useLocale from "@/app/context/LocaleContext";
 import clsx from "clsx";
 import { _localizeField } from "@/app/sanity-api/utils";
 import { TextImageUIExpanded } from "@/app/sanity-api/types/sanity-expanded.types";
