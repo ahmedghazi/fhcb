@@ -26,7 +26,7 @@ const ModuleTextImageUI = ({ input }: Props) => {
         <div className='module__inner'>
           <div className='grid grid-cols-1 md:grid-cols-12 gap-gutter'>
             {image?.asset && (
-              <div className='module__image md:col-span-5'>
+              <div className='module__image md:col-span-4'>
                 <Figure
                   asset={image.asset}
                   caption={_localizeField(image.asset?.title) || ""}
@@ -37,7 +37,7 @@ const ModuleTextImageUI = ({ input }: Props) => {
               </div>
             )}
             {localizedText && (
-              <div className='module__text text md:col-span-7'>
+              <div className='module__text text md:col-span-8'>
                 {title && (
                   <h2 className='module__title c-h1_5'>
                     {_localizeField(title)}
