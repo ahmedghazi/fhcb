@@ -5,11 +5,11 @@ import { _shuffle } from "@/app/lib/utils";
 import { SliderArtistUI } from "@/app/sanity-api/types/sanity.types";
 import { PostTypes } from "@/app/sanity-api/types/extra-types";
 import SlickSlider from "../ui/SlickSlider";
-import CardImageImages from "../ui/cards/CardImageImages";
-import CardFeuilletage from "../ui/cards/CardFeuilletage";
-import { Link } from "next-view-transitions";
-import CardSerieThematique from "../ui/cards/CardSerieThematique";
-import CardConversation from "../ui/cards/CardConversation";
+// import CardImageImages from "../ui/cards/CardImageImages";
+// import CardFeuilletage from "../ui/cards/CardFeuilletage";
+// import { Link } from "next-view-transitions";
+// import CardSerieThematique from "../ui/cards/CardSerieThematique";
+// import CardConversation from "../ui/cards/CardConversation";
 import CardType from "../ui/cards/CardType";
 import BtnCta from "../ui/btns/BtnCta";
 

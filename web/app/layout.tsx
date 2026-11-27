@@ -9,6 +9,7 @@ import { LocaleContextProvider } from "./context/LocaleContext";
 import { LOCALE_COOKIE_NAME } from "./config/cookies";
 import { cookies, draftMode } from "next/headers";
 import VisualEditing from "./components/ui/VisualEditingLazy";
+import { SanityLive } from "./sanity-api/sanity.live";
 import localFont from "next/font/local";
 import clsx from "clsx";
 import { ViewTransitions } from "next-view-transitions";
@@ -122,7 +123,12 @@ export default async function RootLayout({
                     <CartModal />
                   </ViewTransitions>
                   {/* <Cursor color='black' size={20} /> */}
-                  {isEnabled && <VisualEditing zIndex={1000} />}
+                  {isEnabled && (
+                    <>
+                      <VisualEditing zIndex={1000} />
+                      <SanityLive includeDrafts />
+                    </>
+                  )}
                 </CartContextProvider>
               </PageContextProvider>
             </CookieWrapper>

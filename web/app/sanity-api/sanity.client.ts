@@ -13,7 +13,7 @@ const config: ClientConfig = {
   useCdn: process.env.NODE_ENV === "development" ? true : false,
   token,
   // with a token the default "raw" perspective also returns drafts (duplicates
-  // in unfiltered *[] queries); preview overrides this with "previewDrafts"
+  // in unfiltered *[] queries); preview overrides this with "drafts"
   perspective: "published",
 };
 
@@ -33,7 +33,7 @@ export function getClient(preview?: { token?: string }): SanityClient {
       token: preview.token,
       useCdn: false,
       ignoreBrowserTokenWarning: true,
-      perspective: "previewDrafts",
+      perspective: "drafts",
       stega: {
         enabled: true,
         studioUrl: studioUrl,
