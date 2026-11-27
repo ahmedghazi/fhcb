@@ -36,6 +36,13 @@ export default defineType({
       group: 'seo',
     }),
     defineField({
+      name: 'featured',
+      type: 'boolean',
+      title: 'Produit en avant',
+      description: 'Afficher ce produit en avant sur la page des produits',
+      group: 'editorial',
+    }),
+    defineField({
       name: 'date',
       type: 'date',
       title: 'Date de publication',

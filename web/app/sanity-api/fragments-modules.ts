@@ -610,11 +610,12 @@ export const listProductUI = `
       ${filterCheckbox}
     },
     "resolvedItems": *[_type == "product" && !(_id in path("drafts.**"))] | order(
+      select(featured == true => 1, 0) desc,
       select(
-      "${TAG_PRODUCT_LIVRE_DU_MOIS_SLUG}" in tagsProduct[]->slug.current => 1,
-      0
-    ) desc,
-      _createdAt asc
+        "${TAG_PRODUCT_LIVRE_DU_MOIS_SLUG}" in tagsProduct[]->slug.current => 1,
+        0
+      ) desc,
+      _createdAt desc
     ) {
       ${cardRefProduct}
     },
